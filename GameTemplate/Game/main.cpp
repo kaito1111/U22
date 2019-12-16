@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "system/system.h"
 #include "Player.h"
+#include "GameObjectManager.h"
 #include "level/Level.h"
 
 //来栖の確認
@@ -19,8 +20,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera3D.SetFar(10000.0f);
 	
 	//プレイヤー
-	Player player;
-
+	Player player = NewGO<Player>(0, "Player");
+	
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
