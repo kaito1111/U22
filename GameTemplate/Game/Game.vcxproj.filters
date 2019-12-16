@@ -191,4 +191,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
+  </ItemGroup>
 </Project>
