@@ -177,25 +177,44 @@ namespace myEngine {
 		return GameObjectManager::Instance();
 	}
 	/// <summary>
-	/// ゲームオブジェクト作成関数	後でコメント増やす
+	/// <para>オブジェクトの作成</para>
+	/// <para>この関数で作ったオブジェクトはDeleteGOで消すこと</para>
 	/// </summary>
+	// <remarks>
+	/// DeleteGOで消さなかった場合は、m_gameObjectListArrayからも消してね
+	/// </remarks>
+	/// <typeparam name="T"><para>新しく作るオブジェクト</para></typeparam>
+	/// <param name="prio">優先度</param>
+	/// <param name="objectName">オブジェクトの名前</param>
+	/// <returns>オブジェクト</returns>
 	template<class T>
 	static inline T* NewGO(int priority, const char* objectName = nullptr)
 	{
 		return gameObjectManager().NewGameObject<T>((GameObjectPrio)priority, objectName);
 	}
 	/// <summary>
-	/// ゲームオブジェクト検索関数  後でコメント増やす
+	/// ゲームオブジェクトの検索 重いよ！
+	/// <para>★エラーメッセージtrueにしても出ないので★</para>
+	/// <para>★ブレイクポイントで対応をお願いします。★</para>
 	/// </summary>
+	/// <typeparam name="T">検索したいオブジェクト</typeparam>
+	/// <param name="objectName">オブジェクトの名前</param>
+	/// <param name="enableErrorMessage">エラー表示</param>
 	template<class T>
 	static inline T* FindGO(const char* objectName, bool enableErrorMessage = true)
 	{
 		return gameObjectManager().FindGameObject<T>(objectName, enableErrorMessage);
 	}
 	/// <summary>
-	/// ゲームオブジェクト削除関数	後でコメント増やす
+	/// オブジェクトの削除
+	/// <para>オブジェクトを削除予定リストに積む</para>
 	/// </summary>
-	/// <param name="go"></param>
+	/// <remarks>
+	/// 実際にはここでオブジェクトを消しているわけではありません。
+	/// 毎フレームm_deleteObjectArrayに積まれてないか確認して
+	/// ExecuteDeleteGameObjectsという関数で削除処理を行います
+	/// </remarks>
+	///	<param name="IGameObject">消したいオブジェクトのクラス</param>
 	static inline void DeleteGO(IGameObject* go)
 	{
 		gameObjectManager().DeleteGameObject(go);
