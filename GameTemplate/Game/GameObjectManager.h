@@ -12,6 +12,9 @@ namespace myEngine {
 	public:
 		GameObjectManager()
 		{
+			m_gameObjectListArray.resize(10);
+			m_deleteObjectArray[0].resize(10);
+			m_deleteObjectArray[1].resize(10);
 		};
 		~GameObjectManager()
 		{
@@ -141,43 +144,22 @@ namespace myEngine {
 			return nullptr;
 		}
 
+	public:
 		void Start();
 		void Update();
 		void Draw();
-
 		/// <summary>
-		/// シングルトン　後でコメント増やします
+		/// ゲームオブジェクトマネージャーから呼ばれる各処理
 		/// </summary>
-		/// <returns></returns>
-		static inline GameObjectManager& gameObjectManager()
-		{
-			return GameObjectManager::Instance();
-		}
+		void ExecuteFromGameThread();
 		/// <summary>
-		/// ゲームオブジェクト作成関数	後でコメント増やす
+		/// オブジェクトを消す本物の処理
 		/// </summary>
-		template<class T>
-		static inline T* NewGO(int priority, const char* objectName = nullptr, typename T::IGameObjectIsBase* = nullptr)
-		{
-			return gameObjectManager().NewGameObject<T>((GameObjectPrio)priority, objectName);
-		}
-		/// <summary>
-		/// ゲームオブジェクト検索関数  後でコメント増やす
-		/// </summary>
-		template<class T>
-		static inline T* FindGO(const char* objectName, bool enableErrorMessage = true)
-		{
-			return gameObjectManager().FindGameObject<T>(objectName, enableErrorMessage);
-		}
-		/// <summary>
-		/// ゲームオブジェクト削除関数	後でコメント増やす
-		/// </summary>
-		/// <param name="go"></param>
-		static inline void DeleteGO(IGameObject* go)
-		{
-			gameObjectManager().DeleteGameObject(go);
-		}
-
+		/// <remarks>
+		/// DeleteGOは削除リストに積んでるだけだよ！
+		/// 本当にメモリの解放をする処理はこっち！
+		/// </remarks>
+		void ExcuteDeleteGameObject();
 
 	private:
 		typedef std::list<IGameObject*>	GameObjectList;						//名前変更
@@ -186,5 +168,38 @@ namespace myEngine {
 		int								m_currentDeleteObjectBufferNo = 0;	//削除中のバッファー番号
 
 	};
+	/// <summary>
+	/// シングルトン　後でコメント増やします
+	/// </summary>
+	/// <returns></returns>
+	static inline GameObjectManager& gameObjectManager()
+	{
+		return GameObjectManager::Instance();
+	}
+	/// <summary>
+	/// ゲームオブジェクト作成関数	後でコメント増やす
+	/// </summary>
+	template<class T>
+	static inline T* NewGO(int priority, const char* objectName = nullptr)
+	{
+		return gameObjectManager().NewGameObject<T>((GameObjectPrio)priority, objectName);
+	}
+	/// <summary>
+	/// ゲームオブジェクト検索関数  後でコメント増やす
+	/// </summary>
+	template<class T>
+	static inline T* FindGO(const char* objectName, bool enableErrorMessage = true)
+	{
+		return gameObjectManager().FindGameObject<T>(objectName, enableErrorMessage);
+	}
+	/// <summary>
+	/// ゲームオブジェクト削除関数	後でコメント増やす
+	/// </summary>
+	/// <param name="go"></param>
+	static inline void DeleteGO(IGameObject* go)
+	{
+		gameObjectManager().DeleteGameObject(go);
+	}
+
 }
 

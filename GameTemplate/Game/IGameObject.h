@@ -41,7 +41,7 @@ namespace myEngine {
 		/// <summary>
 		/// 更新処理
 		/// </summary>
-		void Update() {};
+		virtual void Update() {};
 		/// <summary>
 		/// 描画処理
 		/// </summary>
@@ -57,7 +57,37 @@ namespace myEngine {
 			return m_priority;
 		}
 
-		friend class CGameObjectManager;
+	public:
+		/// <summary>
+		/// 関数をラップしてるだけだよ
+		/// 各オブジェクトの関数の処理を開始させるよ
+		/// </summary>
+		
+		void StartWrapper()
+		{
+			if (m_isActive && !m_isStart)
+			{
+				if (Start()) {
+					//初期化終了
+					m_isStart = true;
+				}
+			}
+		}
+		void UpdateWrapper()
+		{
+			if (m_isActive && m_isStart)
+			{
+				Update();
+			}
+		}
+		void DrawWrapper()
+		{
+			if (m_isActive && m_isStart)
+			{
+				Draw();
+			}
+		}
+		friend class GameObjectManager;
 	protected:
 		GameObjPrio		m_priority;		//優先度
 		bool			m_isStart;		//Startフラグ
