@@ -1,7 +1,8 @@
 #pragma once
+#include "IGameObject.h"
 #include "character/CharacterController.h"
 
-class Player
+class Player : public IGameObject
 {
 public:
 	Player();
