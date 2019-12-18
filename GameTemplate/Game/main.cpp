@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "system/system.h"
 #include "Player.h"
+#include "GameObjectManager.h"
 #include "level/Level.h"
 
 //来栖の確認
@@ -19,8 +20,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera3D.SetFar(10000.0f);
 	
 	//プレイヤー
-	Player player;
-
+	Player* player = NewGO<Player>(0, "Player");
+	//DeleteGO(player);
+	
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
@@ -32,10 +34,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		}
 		//物理エンジンの更新。
 		g_physics.Update();
-		//プレイヤーの更新。
-		player.Update();
-		//プレイヤーの描画。
-		player.Draw();
+		//後でStart処理もtkEngineに合わせます
+		gameObjectManager().Start();
+		//ゲームオブジェクトマネージャーでする処理
+		gameObjectManager().ExecuteFromGameThread();
 		//カメラの更新。
 		g_camera3D.Update();
 		//描画終了。
