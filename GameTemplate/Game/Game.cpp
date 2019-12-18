@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "Game.h"
 #include "Player.h"
 
@@ -11,7 +13,7 @@ Game::~Game()
 
 bool Game::Start()
 {
-	Player* Player = NewGO<Player>("player");
+	Player* player = NewGO<Player>(1, "player");
 	return true;
 }
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "system/system.h"
 #include "level/Level.h"
+#include "Game.h"
 
 //来栖の確認
 
@@ -17,6 +18,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
 	g_camera3D.SetFar(10000.0f);
 	
+	NewGO<Game>(1, "game");
 	//DeleteGO(player);
 	
 	//ゲームループ。
