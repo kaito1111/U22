@@ -34,7 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		}
 		//物理エンジンの更新。
 		g_physics.Update();
-		//後でStart処理もtkEngineに合わせます
+		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
 		gameObjectManager().Start();
 		//ゲームオブジェクトマネージャーでする処理
 		gameObjectManager().ExecuteFromGameThread();

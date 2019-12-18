@@ -54,17 +54,15 @@ namespace myEngine {
 			static GameObjectManager instance;
 			return instance;
 		}
+	
+	public:
+		/*
+		ラップする前の本体の関数です インライン関数です。
+		*/
 		/// <summary>
 		/// <para>オブジェクトの作成</para>
 		/// <para>この関数で作ったオブジェクトはDeleteGOで消すこと</para>
 		/// </summary>
-		/// <remarks>
-		/// DeleteGOで消さなかった場合は、m_gameObjectListArrayからも消してね
-		/// </remarks>
-		/// <typeparam name="T"><para>新しく作るオブジェクト</para></typeparam>
-		/// <param name="prio">優先度</param>
-		/// <param name="objectName">オブジェクトの名前</param>
-		/// <returns>オブジェクト</returns>
 		template <class T>
 		T* NewGameObject(GameObjPrio prio, const char* objectName)
 		{
@@ -82,15 +80,8 @@ namespace myEngine {
 			return newObject;
 		}
 		/// <summary>
-		/// オブジェクトの削除
-		/// <para>オブジェクトを削除予定リストに積む</para>
+		/// オブジェクトの削除</para>
 		/// </summary>
-		/// <remarks>
-		/// 実際にはここでオブジェクトを消しているわけではありません。
-		/// 毎フレームm_deleteObjectArrayに積まれてないか確認して
-		/// ExecuteDeleteGameObjectsという関数で削除処理を行います
-		/// </remarks>
-		///	<param name="IGameObject">消したいオブジェクトのクラス</param>
 		void DeleteGameObject(IGameObject* gameObject)
 		{
 			if (gameObject != nullptr)
@@ -101,13 +92,8 @@ namespace myEngine {
 			}
 		}
 		/// <summary>
-		/// ゲームオブジェクトの検索 重いよ！
-		/// <para>★エラーメッセージtrueにしても出ないので★</para>
-		/// <para>★ブレイクポイントで対応をお願いします。★</para>
+		/// ゲームオブジェクトの検索
 		/// </summary>
-		/// <typeparam name="T">検索したいオブジェクト</typeparam>
-		/// <param name="objectName">オブジェクトの名前</param>
-		/// <param name="enableErrorMessage">エラー表示</param>
 		template<class T>
 		T* FindGameObject(const char* objectName, bool enableErrorMessage)
 		{
@@ -145,15 +131,22 @@ namespace myEngine {
 		}
 
 	public:
+		/*
+		メンバ関数定義です。
+		こいつらの処理はcppに書いてあります
+		*/
+		//初期化
 		void Start();
+		//更新
 		void Update();
+		//描画
 		void Draw();
 		/// <summary>
 		/// ゲームオブジェクトマネージャーから呼ばれる各処理
 		/// </summary>
 		void ExecuteFromGameThread();
 		/// <summary>
-		/// オブジェクトを消す本物の処理
+		/// オブジェクトのデーター開放処理
 		/// </summary>
 		/// <remarks>
 		/// DeleteGOは削除リストに積んでるだけだよ！
@@ -162,16 +155,24 @@ namespace myEngine {
 		void ExcuteDeleteGameObject();
 
 	private:
+		/*
+		メンバ変数です
+		*/
 		typedef std::list<IGameObject*>	GameObjectList;						//名前変更
 		std::vector<GameObjectList>		m_gameObjectListArray;				//ゲームオブジェクトの優先度付きリスト		
 		std::vector<GameObjectList>		m_deleteObjectArray[2];				//削除するオブジェクトのリスト	削除処理中に削除処理がよばれる可能性があるからダブルバッファ化
 		int								m_currentDeleteObjectBufferNo = 0;	//削除中のバッファー番号
 
 	};
+	/*
+	関数をラップしているだけです
+	ここで値の初期化をしてやるといちいち引数で渡さなくてもよくなります。
+	*/
 	/// <summary>
-	/// シングルトン　後でコメント増やします
+	/// シングルトン インスタンス返してるんだな程度の理解で多分大丈夫
+	/// <para>ゲームオブジェクトマネージャ関連の関数呼び出しをラップするのに使ってね</para>
 	/// </summary>
-	/// <returns></returns>
+	/// <returns>マネージャーのインスタンス</returns>
 	static inline GameObjectManager& gameObjectManager()
 	{
 		return GameObjectManager::Instance();
@@ -180,7 +181,7 @@ namespace myEngine {
 	/// <para>オブジェクトの作成</para>
 	/// <para>この関数で作ったオブジェクトはDeleteGOで消すこと</para>
 	/// </summary>
-	// <remarks>
+	/// <remarks>
 	/// DeleteGOで消さなかった場合は、m_gameObjectListArrayからも消してね
 	/// </remarks>
 	/// <typeparam name="T"><para>新しく作るオブジェクト</para></typeparam>

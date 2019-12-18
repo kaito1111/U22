@@ -7,6 +7,7 @@ namespace myEngine {
 	/// 優先度順(数字が若いほうが優先)で
 	/// 各オブジェクトの関数をここで一気に呼び出す処理
 	/// </summary>
+
 	void GameObjectManager::Start()
 	{
 		for (GameObjectList objList : m_gameObjectListArray) {
