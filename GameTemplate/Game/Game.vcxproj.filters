@@ -198,5 +198,6 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
+    <MeshContentTask Include="Assets\modelData\Player.FBX" />
   </ItemGroup>
 </Project>
