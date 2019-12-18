@@ -1,5 +1,5 @@
 #pragma once
-#include "IGameObject.h"
+#include "GameObject/IGameObject.h"
 #include "character/CharacterController.h"
 
 class Player : public IGameObject
