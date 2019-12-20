@@ -207,4 +207,15 @@
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
     <MeshContentTask Include="Assets\modelData\stage.FBX" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\modelData\metal_00078.jpg" />
+    <Image Include="Assets\modelData\metal_00001.jpg" />
+    <Image Include="Assets\modelData\metal_00005.jpg" />
+    <Image Include="Assets\modelData\metal_00007.jpg" />
+    <Image Include="Assets\modelData\huriko.jpg" />
+    <Image Include="Assets\modelData\CheckPoint2.png" />
+    <Image Include="Assets\modelData\CheckPoint.png" />
+    <Image Include="Assets\modelData\stage1.jpg" />
+    <Image Include="Assets\modelData\stone_00010.jpg" />
+  </ItemGroup>
 </Project>
