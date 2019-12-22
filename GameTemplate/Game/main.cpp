@@ -3,8 +3,6 @@
 #include "level/Level.h"
 #include "Game.h"
 
-//来栖の確認
-
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -34,7 +32,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		g_physics.Update();
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
 		gameObjectManager().Start();
-		//ゲームオブジェクトマネージャーでする処理
+		//ゲームオブジェクトマネージャーでする処理の呼び出し
 		gameObjectManager().ExecuteFromGameThread();
 		//カメラの更新。
 		g_camera3D.Update();

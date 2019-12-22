@@ -110,6 +110,8 @@
     <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="GPUView\ShaderResourceView.cpp" />
+    <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -201,6 +203,8 @@
     <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="GPUView\ShaderResourceView.h" />
+    <ClInclude Include="GPUView\UnorderedAccessView.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
