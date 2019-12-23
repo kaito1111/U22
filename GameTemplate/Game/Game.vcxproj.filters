@@ -110,6 +110,7 @@
     <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="GameCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -201,6 +202,7 @@
     <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="GameCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />

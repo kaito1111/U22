@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Camera.h"
 
-Camera g_camera3D;		//3Dカメラ。
+Camera g_camera3D;		//3Dカメラ。(のような2D)
 
 void Camera::Update()
 {
@@ -12,9 +12,9 @@ void Camera::Update()
 		m_up
 	);
 	//プロジェクション行列を計算。
-	m_projMatrix.MakeProjectionMatrix(
-		m_viewAngle,					//画角。
-		FRAME_BUFFER_W / FRAME_BUFFER_H,	//アスペクト比。
+	m_projMatrix.MakeOrthoProjectionMatrix(
+		FRAME_BUFFER_W,					//スクリーンの横
+		FRAME_BUFFER_H,	//スクリーンの高さ
 		m_near,
 		m_far
 	);
