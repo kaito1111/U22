@@ -13,6 +13,7 @@ namespace myEngine {
 		/// <remarks>
 		/// ---引数について---
 		/// pInitData::テクスチャです。どんな型でも入れれるようにvoid型
+		/// bufferDesc::
 		/// </remarks>
 		/// <param name="pInitData">初期データ</param>
 		/// <param name="bufferDesc">バッファ定義</param>
@@ -42,6 +43,7 @@ namespace myEngine {
 			return m_uav;
 		}
 	private:
+		ID3D11Device*			m_pd3dDevice;					//3D11Device
 		ID3D11Buffer*			m_sturcturedBuffer = nullptr;	//StructuredBuffer
 		ShaderResourceView		m_srv;							//SRV
 		UnorderedAccessView		m_uav;							//UAV
