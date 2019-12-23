@@ -14,8 +14,8 @@ void Camera::Update()
 	//プロジェクション行列を計算。
 	m_projMatrix.MakeProjectionMatrix(
 		m_viewAngle,					//スクリーンの横
-		FRAME_BUFFER_H/ FRAME_BUFFER_W,	//スクリーンの高さ
-		m_near,
+		FRAME_BUFFER_W / FRAME_BUFFER_H,	//スクリーンの高さ
+		m_near, 
 		m_far
 	);
 }

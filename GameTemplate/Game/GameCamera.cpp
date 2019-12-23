@@ -24,7 +24,7 @@ void GameCamera::Update()
 	CVector3 Target = m_Player->GetPosition();
 	Target.y += 100.0f;
 	CVector3 pos = Target;
-	pos.z += 100.0f;
+	pos.z += 500.0f;
 	g_camera3D.SetTarget(Target);
 	g_camera3D.SetPosition(pos);
 	//カメラの更新。
