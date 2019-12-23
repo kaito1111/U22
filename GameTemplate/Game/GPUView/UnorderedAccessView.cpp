@@ -5,8 +5,6 @@
 UnorderedAccessView::UnorderedAccessView()
 {
 }
-
-
 UnorderedAccessView::~UnorderedAccessView()
 {
 }

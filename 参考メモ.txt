@@ -1,0 +1,8 @@
+HRESULTクラスの挙動について
+要点
+○bool型よりエラーの原因を突き止めやすい
+○
+----説明----
+https://www.usefullcode.net/2007/03/hresult.html
+----返す値----
+jp/windows/win32/seccrypto/common-hresult-values?redirectedfrom=MSDN
