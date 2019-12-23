@@ -10,6 +10,10 @@ namespace myEngine {
 		/// <summary>
 		/// StructuredBufferを作成
 		/// </summary>
+		/// <remarks>
+		/// ---引数について---
+		/// pInitData::テクスチャです。どんな型でも入れれるようにvoid型
+		/// </remarks>
 		/// <param name="pInitData">初期データ</param>
 		/// <param name="bufferDesc">バッファ定義</param>
 		bool Create(const void* pInitData, D3D11_BUFFER_DESC& bufferDesc);
