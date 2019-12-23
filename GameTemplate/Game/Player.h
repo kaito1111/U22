@@ -8,13 +8,18 @@ public:
 	Player();
 	~Player();
 	CVector3 GetPosition() { 
-		return m_Position; 
+		return m_position; 
+	}
+	CVector3 GetForward() {
+		return m_forward;
 	}
 private:
 	void Update();
 	void Draw();
 	SkinModel m_model;									//スキンモデル。
-	CharacterController m_CharaCon;
-	CVector3 m_Position = CVector3::Zero();
+	CharacterController m_characon;
+	CVector3 m_position = CVector3::Zero();
+	CQuaternion m_rot = CQuaternion::Identity();
+	CVector3 m_forward = CVector3::Front();
 };
 

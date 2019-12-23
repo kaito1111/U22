@@ -6,7 +6,7 @@ Player::Player()
 {
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/unityChan.cmo");
-	m_CharaCon.Init(100.0f, 20.0f, m_Position);
+	m_characon.Init(100.0f, 20.0f, m_position);
 }
 
 
@@ -16,20 +16,34 @@ Player::~Player()
 
 void Player::Update()
 {
-	CVector3 MoveSpeed = CVector3::Zero();
+	CVector3 movespeed = CVector3::Zero();
 	if (g_pad->IsTrigger(enButtonB))
 	{
-		MoveSpeed.y = 100.0f;
+		movespeed.y = 100.0f;
 	}
-	MoveSpeed.y -= 1.0f;
-	m_Position = m_CharaCon.Execute(1.0f, MoveSpeed);
+	movespeed.x = g_pad->GetLStickXF();
+
+	movespeed.y -= 1.0f;
+	m_position = m_characon.Execute(1.0f, movespeed);
+	if (g_pad->GetLStickXF() < 0)
+	{
+		m_rot.SetRotationDeg(CVector3::AxisY(), -90.0f);
+	}
+	if (g_pad->GetLStickXF() > 0)
+	{
+		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
+	}
+	CMatrix mrot = CMatrix::Identity();
+	mrot.MakeRotationFromQuaternion(m_rot);
+	m_forward = { mrot.m[0][0],mrot.m[0][1],mrot.m[0][2] };
+	m_forward.Normalize();
 	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_Position, CQuaternion::Identity(), CVector3::One());
+	m_model.UpdateWorldMatrix(m_position, m_rot, CVector3::One());
 }
 void Player::Draw()
 {
 	m_model.Draw(
-		g_camera3D.GetViewMatrix(), 
+		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix()
 	);
 }
