@@ -160,7 +160,7 @@ namespace myEngine {
 		*/
 		typedef std::list<IGameObject*>	GameObjectList;						//名前変更
 		std::vector<GameObjectList>		m_gameObjectListArray;				//ゲームオブジェクトの優先度付きリスト		
-		std::vector<GameObjectList>		m_deleteObjectArray[2];				//削除するオブジェクトのリスト	削除処理中に削除処理がよばれる可能性があるからダブルバッファ化
+		std::vector<GameObjectList>		m_deleteObjectArray[2];				//削除するオブジェクトのリスト	削除処理中にDeleteGOがよばれる可能性があるからダブルバッファ化
 		int								m_currentDeleteObjectBufferNo = 0;	//削除中のバッファー番号
 
 	};

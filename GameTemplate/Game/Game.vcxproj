@@ -129,6 +129,7 @@
     <ClCompile Include="physics\CapsuleCollider.cpp" />
     <ClCompile Include="physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="GPUView\ShaderResourceView.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -136,6 +137,7 @@
     </ClCompile>
     <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="system\system.cpp" />
+    <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -169,10 +171,12 @@
     <ClInclude Include="physics\CollisionAttr.h" />
     <ClInclude Include="physics\PhysicsStaticObject.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
+    <ClInclude Include="GPUView\UnorderedAccessView.h" />
     <ClInclude Include="util\Util.h" />
   </ItemGroup>
   <ItemGroup>
