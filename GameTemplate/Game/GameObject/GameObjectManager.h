@@ -129,7 +129,23 @@ namespace myEngine {
 			//見つからなかった
 			return nullptr;
 		}
-
+		template<class T>
+		void FindGameObjects(const char* objectName, std::function<bool(T* go)> func)
+		{
+			unsigned int nameKey = Util::MakeHash(objectName);
+			for (auto goList : m_gameObjectListArray) {
+				for (auto go : goList) {
+					if (go->m_nameKey == nameKey) {
+						//見つけた。
+						T* p = dynamic_cast<T*>(go);
+						if (func(p) == false) {
+							//クエリ中断。
+							return;
+						}
+					}
+				}
+			}
+		}
 	public:
 		/*
 		メンバ関数定義です。
@@ -194,6 +210,16 @@ namespace myEngine {
 		return gameObjectManager().NewGameObject<T>((GameObjectPrio)priority, objectName);
 	}
 	/// <summary>
+	///	ゲームオブジェクトの複数検索
+	/// </summary>
+	/// <param name="objectName">オブジェクト名前</param>
+	/// <param name="enableErrorMessage">エラーメッセージの表示</param>
+	template<class T>
+	static inline void QueryGOs(const char* objectName, std::function<bool(T* go)> func)
+	{
+		return gameObjectManager().FindGameObjects<T>(objectName, func);
+	}
+	/// <summary>
 	/// ゲームオブジェクトの検索 重いよ！
 	/// <para>★エラーメッセージtrueにしても出ないので★</para>
 	/// <para>★ブレイクポイントで対応をお願いします。★</para>
@@ -206,6 +232,7 @@ namespace myEngine {
 	{
 		return gameObjectManager().FindGameObject<T>(objectName, enableErrorMessage);
 	}
+
 	/// <summary>
 	/// オブジェクトの削除
 	/// <para>オブジェクトを削除予定リストに積む</para>

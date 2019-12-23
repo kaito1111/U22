@@ -30,13 +30,26 @@ namespace myEngine {
 		Release();
 		//機能としてはbool型 参考メモにURL貼っときます。
 		HRESULT hr;
-		//nullポインタじゃないなら
+		//モデルがnullポインタじゃないなら
 		if (pInitData) {
 			//サブリソース
 			D3D11_SUBRESOURCE_DATA InitData;
-			//
+			//モデルの代入（初期化
 			InitData.pSysMem = pInitData;
+			//エラーがでないかの判定(こっちはS_OKを返す)
+			hr = m_pd3dDevice->CreateBuffer(&bufferDesc, &InitData, &m_sturcturedBuffer);
 		}
+		//モデルがNULLなら
+		else {
+			//エラーがでないかの判定(こっちはFAILEDを返す)
+			hr = m_pd3dDevice->CreateBuffer(&bufferDesc, NULL, &m_sturcturedBuffer);
+		}
+		//hrの値が失敗なら
+		if (FAILED(hr)) {
+			//処理終了
+			return false;
+		}
+
 		return true;
 	}
 }
