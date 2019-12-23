@@ -111,6 +111,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="GPUView\ShaderResourceView.cpp" />
+    <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -203,11 +205,12 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="GPUView\ShaderResourceView.h" />
+    <ClInclude Include="GPUView\UnorderedAccessView.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage.FBX" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
   </ItemGroup>
   <ItemGroup>
