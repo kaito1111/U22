@@ -13,6 +13,7 @@ namespace myEngine {
 		/// <remarks>
 		/// ---引数について---
 		/// pInitData::テクスチャです。どんな型でも入れれるようにvoid型
+		/// bufferDesc::
 		/// </remarks>
 		/// <param name="pInitData">初期データ</param>
 		/// <param name="bufferDesc">バッファ定義</param>

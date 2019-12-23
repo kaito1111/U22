@@ -32,9 +32,12 @@ namespace myEngine {
 		HRESULT hr;
 		//nullポインタじゃないなら
 		if (pInitData) {
+			//サブリソース
 			D3D11_SUBRESOURCE_DATA InitData;
+			//
 			InitData.pSysMem = pInitData;
 		}
+		return true;
 	}
 }
 
