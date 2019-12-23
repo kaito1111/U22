@@ -6,7 +6,6 @@ class Player : public IGameObject
 {
 public:
 	Player();
-	~Player();
 	CVector3 GetPosition() { 
 		return m_position; 
 	}
@@ -14,6 +13,7 @@ public:
 		return m_forward;
 	}
 private:
+	~Player();
 	void Update();
 	void Draw();
 	SkinModel m_model;									//スキンモデル。

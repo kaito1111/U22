@@ -1,12 +1,13 @@
 #pragma once
-class Player
+class Player;
 class SPole : public IGameObject
 {
 public:
-	SPole();
-	~SPole();
 
+	SPole();
 private:
+
+	~SPole();
 
 	bool Start()override;
 	void Update()override;

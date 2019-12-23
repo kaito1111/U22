@@ -4,9 +4,9 @@ class NPole : public IGameObject
 {
 public:
 	NPole();
-	~NPole();
-
 private:
+
+	~NPole();
 
 	bool Start()override;
 	void Update()override;
