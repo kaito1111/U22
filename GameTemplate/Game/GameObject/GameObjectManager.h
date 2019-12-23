@@ -97,7 +97,7 @@ namespace myEngine {
 		template<class T>
 		T* FindGameObject(const char* objectName, bool enableErrorMessage)
 		{
-			unsigned int nameKey = CUtil::MakeHash(objectName);
+			unsigned int nameKey = Util::MakeHash(objectName);
 			//goList‚ğm_gameObjectListArray‰ñA‰ñ‚·
 			for (auto goList : m_gameObjectListArray) {
 				//go‚ğgoList‰ñ

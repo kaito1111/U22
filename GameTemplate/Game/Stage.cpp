@@ -6,7 +6,7 @@
 Stage::Stage()
 {
 	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/stage.cmo");
+	m_model.Init(L"Assets/modelData/stage_00.cmo");
 }
 
 

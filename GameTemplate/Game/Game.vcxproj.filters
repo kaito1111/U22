@@ -110,8 +110,7 @@
     <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Stage.cpp" />
-    <ClCompile Include="GPUView\ShaderResourceView.cpp" />
-    <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
+    <ClCompile Include="GameCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -203,12 +202,23 @@
     <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Stage.h" />
-    <ClInclude Include="GPUView\ShaderResourceView.h" />
-    <ClInclude Include="GPUView\UnorderedAccessView.h" />
+    <ClInclude Include="GameCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
     <MeshContentTask Include="Assets\modelData\stage.FBX" />
+    <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\modelData\metal_00078.jpg" />
+    <Image Include="Assets\modelData\metal_00001.jpg" />
+    <Image Include="Assets\modelData\metal_00005.jpg" />
+    <Image Include="Assets\modelData\metal_00007.jpg" />
+    <Image Include="Assets\modelData\huriko.jpg" />
+    <Image Include="Assets\modelData\CheckPoint2.png" />
+    <Image Include="Assets\modelData\CheckPoint.png" />
+    <Image Include="Assets\modelData\stage1.jpg" />
+    <Image Include="Assets\modelData\stone_00010.jpg" />
   </ItemGroup>
 </Project>
