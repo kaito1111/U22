@@ -37,11 +37,11 @@ void Player::Update()
 	}
 	if (g_pad->IsTrigger(enButtonRB1))
 	{
-		NewGO< NPole>(1, "npole");
+		NewGO< NPole>(2, "npole");
 	}
 	if (g_pad->IsTrigger(enButtonLB1))
 	{
-		NewGO< SPole>(1, "spole");
+		NewGO< SPole>(2, "spole");
 	}
 	CMatrix mrot = CMatrix::Identity();
 	mrot.MakeRotationFromQuaternion(m_rot);
