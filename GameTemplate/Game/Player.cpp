@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
+#include "NPole.h"
+#include "SPole.h"
 
 
 Player::Player()
@@ -32,6 +34,14 @@ void Player::Update()
 	if (g_pad->GetLStickXF() > 0)
 	{
 		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
+	}
+	if (g_pad->IsTrigger(enButtonRB1))
+	{
+		NewGO< NPole>(1, "npole");
+	}
+	if (g_pad->IsTrigger(enButtonLB1))
+	{
+		NewGO< SPole>(1, "spole");
 	}
 	CMatrix mrot = CMatrix::Identity();
 	mrot.MakeRotationFromQuaternion(m_rot);

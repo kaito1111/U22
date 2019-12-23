@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "SPole.h"
 
+#include "Player.h"
+
 SPole::SPole()
 {
 	

@@ -1,6 +1,5 @@
 #pragma once
-#include "Player.h"
-
+class Player
 class SPole : public IGameObject
 {
 public:

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "NPole.h"
 
+#include "Player.h"
+
 NPole::NPole()
 {
 	m_model.Init(L"Assets/modelData/NPole.cmo");
