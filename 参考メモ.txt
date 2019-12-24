@@ -1,21 +1,35 @@
 D3D11系統のクラスの説明
 ----使い方について----
-左のタイトルでフィルターって部分にクラス入れて調べてね
-----説明----
+URLコピペしてとんで、左のタイトルでフィルターって部分にクラス入れて調べてね
+----説明URL----
 https://docs.microsoft.com/ja-jp/previous-versions/direct-x/ee416048(v=vs.85)
 
 
 HRESULTクラスの挙動について
 ○bool型よりエラーの原因を突き止めやすい
-----説明----
+----説明URL----
 https://www.usefullcode.net/2007/03/hresult.html
-----返す値----
+----返す値URL----
 jp/windows/win32/seccrypto/common-hresult-values?redirectedfrom=MSDN
 
 
 *&→間接参照演算子について
 ○ポインタを参照するんじゃなくて本体を参照
-----説明----
+----説明URL----
 //間接参照演算子*～説明があるよ
 https://www.cc.kyoto-su.ac.jp/~yamada/programming/pointer.html
+
+
+ZeroMemoryについて
+概要：メモリブロックをゼロで埋めます。
+構文：void ZeroMemory([in] PVOID  Destination,[in] SIZE_T Length);
+引数：宛先 [in] ゼロで埋めるためのメモリブロックの開始アドレスへのポインタ。
+      長さ [in] ゼロで埋めるメモリブロックのサイズ（バイト単位）。
+補足：sizeofはメモリサイズを調べてくれるやつだよ
+----説明URL----
+//英語ページしかなかったので和訳してみてね
+https://msdn.microsoft.com/ja-jp/windows/aa366920(v=vs.80)
+
+
+
 
