@@ -23,6 +23,8 @@ private:
 
 	void Draw();
 
-	void Move();
+	void Move();//“®‚©‚·‚¼
+
+	bool UpDown = false;
 };
 
