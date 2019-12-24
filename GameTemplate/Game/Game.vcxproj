@@ -131,6 +131,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GPUView\ShaderResourceView.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="stageObject1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -173,6 +174,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="stageObject1.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
