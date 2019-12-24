@@ -8,8 +8,6 @@ Stage::Stage()
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/stage_00.cmo");
 	m_phyStaticObuject.CreateMeshObject(m_model, CVector3::Zero(), CQuaternion::Identity());
-	//SkinModel& skinModel, CVector3 pos, CQuaternion rot
-	
 }
 
 
