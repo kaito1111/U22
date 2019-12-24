@@ -38,22 +38,16 @@ void Player::SpawnPole()
 	//NSpawn
 	if (g_pad->IsTrigger(enButtonRB1))
 	{
-		QueryGOs<NPole>("npole", [&](NPole* pole)->bool {
-			DeleteGO(pole);
-			return true;
-		});
 		NPole* m_pole = NewGO<NPole>(1, "npole");
 		m_pole->SetPosition(m_position);
+		m_pole->SetForward(CVector3::Left()*-1.0f);
 	}
 	//SSpawn
 	if (g_pad->IsTrigger(enButtonLB1))
 	{
-		QueryGOs<SPole>("spole", [&](SPole* pole)->bool {
-			DeleteGO(pole);
-			return true;
-		}); 
 		SPole* m_pole = NewGO< SPole>(1, "spole");
 		m_pole->SetPosition(m_position);
+		m_pole->SetForward(CVector3::Left());
 	}
 }
 
