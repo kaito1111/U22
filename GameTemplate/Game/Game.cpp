@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Player.h"
 #include"Stage.h"
+#include"stageObject1.h"
 #include "GameCamera.h"
 
 Game::Game()
@@ -18,6 +19,7 @@ bool Game::Start()
 	NewGO< GameCamera>(1, "camera");
 	Player* player = NewGO<Player>(1, "player");
 	Stage* stage = NewGO<Stage>(1, "stage");
+	stageObject1* UpDownToge = NewGO<stageObject1>(0, "upDownToge");
 	return true;
 }
 
