@@ -113,8 +113,13 @@
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="GPUView\ShaderResourceView.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="SPole.cpp" />
     <ClCompile Include="NPole.cpp" />
+=======
+    <ClCompile Include="NPole.cpp" />
+    <ClCompile Include="SPole.cpp" />
+>>>>>>> ee1be493a8a24a68bde14beb0b4bbd79cd340cce
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -209,8 +214,13 @@
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
+<<<<<<< HEAD
     <ClInclude Include="SPole.h" />
     <ClInclude Include="NPole.h" />
+=======
+    <ClInclude Include="NPole.h" />
+    <ClInclude Include="SPole.h" />
+>>>>>>> ee1be493a8a24a68bde14beb0b4bbd79cd340cce
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
