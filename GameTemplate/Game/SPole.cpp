@@ -5,10 +5,6 @@
 
 SPole::SPole()
 {
-	QueryGOs<SPole>("npole", [&](SPole* pole)->bool {
-		DeleteGO(pole);
-		return true;
-	});
 	m_model.Init(L"Assets/modelData/SPole.cmo");
 }
 
@@ -34,6 +30,7 @@ void SPole::Update()
 	if (pullDir.Length() < 50.0f)
 	{
 		pullDir.Normalize();
-		m_position -= pullDir * 0.1f;
+		CVector3 aftermove = m_player->GetPosition() - pullDir;
+		m_player->SetPosition(aftermove);
 	}
 }

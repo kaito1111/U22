@@ -9,6 +9,9 @@ public:
 	CVector3 GetPosition() { 
 		return m_position; 
 	}
+	void SetPosition(CVector3 pos) {
+		m_position = pos;
+	}
 	CVector3 GetForward() {
 		return m_forward;
 	}

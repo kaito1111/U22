@@ -5,10 +5,6 @@
 
 NPole::NPole()
 {
-	QueryGOs<NPole>("npole", [&](NPole* pole)->bool {
-		DeleteGO(pole); 
-		return true;
-	});
 	m_model.Init(L"Assets/modelData/NPole.cmo");
 }
 
