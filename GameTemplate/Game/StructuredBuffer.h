@@ -13,11 +13,25 @@ namespace myEngine {
 		/// <remarks>
 		/// ---引数について---
 		/// pInitData::テクスチャです。どんな型でも入れれるようにvoid型
-		/// bufferDesc::
+		/// bufferDesc::バッファーの情報とかがいろいろ入ってるやつです
+		/// D3D11系統のクラスの解説URL、参考メモに貼っときます
 		/// </remarks>
 		/// <param name="pInitData">初期データ</param>
 		/// <param name="bufferDesc">バッファ定義</param>
 		bool Create(const void* pInitData, D3D11_BUFFER_DESC& bufferDesc);
+		/// <summary>
+		/// ID3D11Buffer*の取得
+		/// </summary>
+		/// <returns>ストラクチャーバッファ</returns>
+		/// <remarks>
+		/// *&::間接参照演算子→ポインタをとったやつの本体を参照
+		/// ポインタを返すんじゃなくて本体を返す
+		/// 参考メモにURL貼っときます
+		/// </remarks>
+		ID3D11Buffer*& GetBody()
+		{
+			return m_sturcturedBuffer;
+		}
 		/// <summary>
 		///	データの開放処理
 		/// </summary>
