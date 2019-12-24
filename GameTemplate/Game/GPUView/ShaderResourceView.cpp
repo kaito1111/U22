@@ -24,10 +24,13 @@ namespace myEngine {
 	/// <summary>
 	/// 
 	/// </summary>
+	/*
 	bool ShaderResourceView::Create(StructuredBuffer& structuredBuffer)
 	{
 		//ƒf[ƒ^‚Ì‰ğ•ú(‰Šú‰»)
 		Release();
 		ID3D11Buffer* pBuf = structuredBuffer.GetBody();
+
 	}
+	*/
 }
