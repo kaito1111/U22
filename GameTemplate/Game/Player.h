@@ -9,6 +9,9 @@ public:
 	CVector3 GetPosition() { 
 		return m_position; 
 	}
+	void SetPosition(CVector3 pos) {
+		m_position = pos;
+	}
 	CVector3 GetForward() {
 		return m_forward;
 	}
@@ -21,5 +24,8 @@ private:
 	CVector3 m_position = CVector3::Zero();
 	CQuaternion m_rot = CQuaternion::Identity();
 	CVector3 m_forward = CVector3::Front();
+
+	void SpawnPole();
+	void Move();
 };
 

@@ -113,7 +113,13 @@
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="GPUView\ShaderResourceView.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
-    <ClCompile Include="stageObject1.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="SPole.cpp" />
+    <ClCompile Include="NPole.cpp" />
+=======
+    <ClCompile Include="NPole.cpp" />
+    <ClCompile Include="SPole.cpp" />
+>>>>>>> ee1be493a8a24a68bde14beb0b4bbd79cd340cce
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\Vector.h">
@@ -208,13 +214,20 @@
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
-    <ClInclude Include="stageObject1.h" />
+<<<<<<< HEAD
+    <ClInclude Include="SPole.h" />
+    <ClInclude Include="NPole.h" />
+=======
+    <ClInclude Include="NPole.h" />
+    <ClInclude Include="SPole.h" />
+>>>>>>> ee1be493a8a24a68bde14beb0b4bbd79cd340cce
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
+    <MeshContentTask Include="Assets\modelData\NPole.FBX" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\metal_00078.jpg" />
