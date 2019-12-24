@@ -25,7 +25,7 @@ bool SPole::Start()
 void SPole::Update()
 {
 	m_position += m_move;
-	CVector3 playerDir = m_player->GetPosition - m_position;
+	CVector3 playerDir = m_player->GetPosition() - m_position;
 	if (playerDir.Length() > 100.0f) {
 		DeleteGO(this);
 	}
