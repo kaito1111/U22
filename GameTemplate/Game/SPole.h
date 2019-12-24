@@ -5,6 +5,9 @@ class SPole : public IGameObject
 public:
 
 	SPole();
+	void SetForward(CVector3 forward) {
+		m_move = forward;
+	}
 private:
 
 	~SPole();
