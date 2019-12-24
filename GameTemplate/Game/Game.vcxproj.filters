@@ -38,6 +38,7 @@
     <ClCompile Include="math\Vector.cpp" />
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="StructuredBuffer.cpp" />
+    <ClCompile Include="stageObject1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -45,6 +46,7 @@
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
+    <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -87,6 +89,7 @@
     <ClInclude Include="system\system.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="StructuredBuffer.h" />
+    <ClInclude Include="stageObject1.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint.png" />

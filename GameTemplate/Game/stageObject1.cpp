@@ -20,7 +20,7 @@ stageObject1::~stageObject1()
 
 void stageObject1::Update()
 {
-	Move();//動かす奴.
+	//Move();//動かす奴.
 
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_position, CQuaternion::Identity(), CVector3::One());

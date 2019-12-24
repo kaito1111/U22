@@ -1,7 +1,8 @@
 #pragma once
 #include "GameObject/IGameObject.h"
 #include "character/CharacterController.h"
-class stageObject1 : IGameObject
+
+class stageObject1 : public IGameObject
 {
 	//ドッスン棘やで。
 public:
