@@ -18,37 +18,8 @@ Player::~Player()
 
 void Player::Update()
 {
-	CVector3 movespeed = CVector3::Zero();
-	if (g_pad->IsTrigger(enButtonB))
-	{
-		movespeed.y = 100.0f;
-	}
-	movespeed.x = g_pad->GetLStickXF();
-
-	movespeed.y -= 1.0f;
-	m_position = m_characon.Execute(1.0f, movespeed);
-	if (g_pad->GetLStickXF() < 0)
-	{
-		m_rot.SetRotationDeg(CVector3::AxisY(), -90.0f);
-	}
-	if (g_pad->GetLStickXF() > 0)
-	{
-		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
-	}
-	if (g_pad->IsTrigger(enButtonRB1))
-	{
-		NewGO< NPole>(2, "npole");
-	}
-	if (g_pad->IsTrigger(enButtonLB1))
-	{
-		NewGO< SPole>(2, "spole");
-	}
-	CMatrix mrot = CMatrix::Identity();
-	mrot.MakeRotationFromQuaternion(m_rot);
-	m_forward = { mrot.m[0][0],mrot.m[0][1],mrot.m[0][2] };
-	m_forward.Normalize();
-	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_position, m_rot, CVector3::One());
+	SpawnPole();
+	Move();
 }
 void Player::Draw()
 {
@@ -56,4 +27,55 @@ void Player::Draw()
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix()
 	);
+}
+
+void Player::SpawnPole()
+{
+	CMatrix mrot = CMatrix::Identity();
+	mrot.MakeRotationFromQuaternion(m_rot);
+	m_forward = { mrot.m[2][0],mrot.m[2][1],mrot.m[2][2] };
+	m_forward.Normalize();
+	//NSpawn
+	if (g_pad->IsTrigger(enButtonRB1))
+	{
+		QueryGOs<NPole>("npole", [&](NPole* pole)->bool {
+			DeleteGO(pole);
+			return true;
+		});
+		NewGO<NPole>(1, "npole");
+	}
+	//SSpawn
+	if (g_pad->IsTrigger(enButtonLB1))
+	{
+		QueryGOs<SPole>("spole", [&](SPole* pole)->bool {
+			DeleteGO(pole);
+			return true;
+		}); 
+		NewGO< SPole>(1, "spole");
+	}
+}
+
+void Player::Move()
+{
+	//ジャンプ判定
+	CVector3 movespeed = CVector3::Zero();
+	if (g_pad->IsTrigger(enButtonB))
+	{
+		movespeed.y = 100.0f;
+	}
+	movespeed.x = g_pad->GetLStickXF()*-1.0f;
+
+	//左右の移動
+	movespeed.y -= 1.0f;
+	m_position = m_characon.Execute(1.0f, movespeed);
+	if (g_pad->GetLStickXF() > 0.0f)
+	{
+		m_rot.SetRotationDeg(CVector3::AxisY(), -90.0f);
+	}
+	if (g_pad->GetLStickXF() < 0.0f)
+	{
+		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
+	}
+	//ワールド行列の更新。
+	m_model.UpdateWorldMatrix(m_position, m_rot, CVector3::One());
 }

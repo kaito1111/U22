@@ -4,6 +4,9 @@ class NPole : public IGameObject
 {
 public:
 	NPole();
+	void SetForward(CVector3 forward) {
+		m_move = forward;
+	}
 private:
 
 	~NPole();

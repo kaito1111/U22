@@ -5,6 +5,10 @@
 
 NPole::NPole()
 {
+	QueryGOs<NPole>("npole", [&](NPole* pole)->bool {
+		DeleteGO(pole); 
+		return true;
+	});
 	m_model.Init(L"Assets/modelData/NPole.cmo");
 }
 
@@ -14,8 +18,7 @@ NPole::~NPole()
 
 bool NPole::Start()
 {
-	m_player = FindGO<Player>("plaayer");
-	m_move = m_player->GetForward();
+	m_player = FindGO<Player>("player");
 	return true;
 }
 
@@ -33,5 +36,5 @@ void NPole::Update()
 		pullDir.Normalize();
 		m_position -= pullDir * 0.1f;
 	}
-	
+
 }
