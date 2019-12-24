@@ -42,7 +42,8 @@ void Player::SpawnPole()
 			DeleteGO(pole);
 			return true;
 		});
-		NewGO<NPole>(1, "npole");
+		NPole* m_pole = NewGO<NPole>(1, "npole");
+		m_pole->SetPosition(m_position);
 	}
 	//SSpawn
 	if (g_pad->IsTrigger(enButtonLB1))
@@ -51,7 +52,8 @@ void Player::SpawnPole()
 			DeleteGO(pole);
 			return true;
 		}); 
-		NewGO< SPole>(1, "spole");
+		SPole* m_pole = NewGO< SPole>(1, "spole");
+		m_pole->SetPosition(m_position);
 	}
 }
 
@@ -63,10 +65,10 @@ void Player::Move()
 	{
 		movespeed.y = 100.0f;
 	}
-	movespeed.x = g_pad->GetLStickXF()*-1.0f;
+	movespeed.y -= 1.0f;
 
 	//¶‰E‚ÌˆÚ“®
-	movespeed.y -= 1.0f;
+	movespeed.x = g_pad->GetLStickXF()*-1.0f;
 	m_position = m_characon.Execute(1.0f, movespeed);
 	if (g_pad->GetLStickXF() > 0.0f)
 	{
