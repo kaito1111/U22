@@ -15,7 +15,7 @@ private:
 
 	CharacterController m_characon;
 
-	CVector3 m_position = CVector3::Zero(); //座標。
+	CVector3 m_position = {0.0f,3200.0f,0.0f}; //座標。
 
 	CVector3 moveUpDown = CVector3::Zero();//上下に動かす。
 
