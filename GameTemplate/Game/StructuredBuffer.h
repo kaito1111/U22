@@ -57,7 +57,6 @@ namespace myEngine {
 			return m_uav;
 		}
 	private:
-		ID3D11Device*			m_pd3dDevice;					//3D11Device
 		ID3D11Buffer*			m_sturcturedBuffer = nullptr;	//StructuredBuffer
 		ShaderResourceView		m_srv;							//SRV
 		UnorderedAccessView		m_uav;							//UAV

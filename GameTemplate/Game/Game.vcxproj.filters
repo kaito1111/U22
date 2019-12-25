@@ -39,6 +39,8 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="stageObject1.cpp" />
+    <ClCompile Include="myEngine.cpp" />
+    <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -90,6 +92,8 @@
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="stageObject1.h" />
+    <ClInclude Include="myEngine.h" />
+    <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint.png" />
