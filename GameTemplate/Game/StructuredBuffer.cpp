@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "StructuredBuffer.h"
+#include "myEngine.h"
 /// <summary>
 /// StructuredBuffer
 /// </summary>
@@ -37,12 +38,12 @@ namespace myEngine {
 			//モデルの代入（初期化
 			InitData.pSysMem = pInitData;
 			//エラーがでないかの判定(こっちはS_OKを返す)
-			hr = m_pd3dDevice->CreateBuffer(&bufferDesc, &InitData, &m_sturcturedBuffer);
+			hr = graphicsEngine().GetD3DDevice()->CreateBuffer(&bufferDesc, &InitData, &m_sturcturedBuffer);
 		}
 		//モデルがNULLなら
 		else {
 			//エラーがでないかの判定(こっちはFAILEDを返す)
-			hr = m_pd3dDevice->CreateBuffer(&bufferDesc, NULL, &m_sturcturedBuffer);
+			hr = graphicsEngine().GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_sturcturedBuffer);
 		}
 		//hrの値が失敗なら
 		if (FAILED(hr)) {
