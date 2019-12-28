@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "ShaderResourceView.h"
-#include "StructuredBuffer.h"
+#include "GPUBuffer/StructuredBuffer.h"
 #include "myEngine.h"
 
 namespace myEngine {

@@ -20,6 +20,12 @@ namespace myEngine {
 	Sprite::~Sprite()
 	{
 	}
+	/// <summary>
+	/// SRVのロード
+	/// </summary>
+	/// <remarks>
+	/// SSimpleVertexは2Dが入る四角形の初期化？
+	/// </remarks>
 	void Sprite::Init(ShaderResourceView& tex, float w, float h)
 	{
 		//シェーダーをロード

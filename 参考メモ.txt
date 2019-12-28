@@ -1,6 +1,12 @@
+参考メモについて
+基本的にエンジン作ってる自分がわからなくなった時用に使うメモです。
+エンジン内部(今のところ2D関連のみ)の処理について見る時があればこれも一緒にみると恐らく役に立つのでは？
+英語ページとかもあるので翻訳して見てね。
+
+
 D3D11系統のクラスの説明
 ----使い方について----
-URLコピペしてとんで、左のタイトルでフィルターって部分にクラス入れて調べてね
+左のタイトルでフィルターって部分にクラス入れて調べてね
 ----説明URL----
 https://docs.microsoft.com/ja-jp/previous-versions/direct-x/ee416048(v=vs.85)
 
@@ -29,6 +35,21 @@ ZeroMemoryについて
 ----説明URL----
 //英語ページしかなかったので和訳してみてね
 https://msdn.microsoft.com/ja-jp/windows/aa366920(v=vs.80)
+
+
+D3D_PRIMITIVE_TOPOLOGY列挙について
+○バインドされた頂点データをどのように解釈するかを示す値
+----説明URL----
+https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology
+
+
+vertexStrideについて
+○ストライド→配列内要素の間隔
+----説明URL----
+//Answerのほうに説明があるよ もうちょいよさげな説明URLあったら教えてください
+https://stackoverflow.com/questions/27210032/what-is-vertex-stride
+
+
 
 
 
