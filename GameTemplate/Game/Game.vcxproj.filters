@@ -44,6 +44,9 @@
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
+    <ClCompile Include="RenderContext.cpp" />
+    <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -100,6 +103,9 @@
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
+    <ClInclude Include="RenderContext.h" />
+    <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="GPUBuffer\GPUBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint.png" />

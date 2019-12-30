@@ -52,9 +52,9 @@ namespace myEngine {
 			return m_indexType;
 		}
 		/// <summary>
-		/// 
+		/// インデックスバッファの取得
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>インデックス</returns>
 		ID3D11Buffer* GetBody() const
 		{
 			return m_indexBuffer;

@@ -22,7 +22,7 @@ namespace myEngine {
 		/// <summary>
 		/// プリミティブ作成
 		/// </summary>
-		/// <param name="topologe">トポロジー</param>
+		/// <param name="topologe">トポロジー(接続形態)</param>
 		/// <param name="numVertex">頂点の数</param>
 		/// <param name="vertexStride">頂点ストライド</param>
 		/// <param name="pSrcVertexBuffer">ソースとなる頂点バッファ</param>
@@ -60,6 +60,18 @@ namespace myEngine {
 		/// </summary>
 		/// <param name="numVertex"></param>
 		void Draw(int numVertex);
+		/// <summary>
+		/// 頂点バッファの取得
+		/// </summary>
+		/// <returns>頂点バッファ</returns>
+		VertexBuffer& GetVertexBuffer()
+		{
+			return m_vertexBuffer;
+		}
+	private:
+		VertexBuffer			m_vertexBuffer;		//頂点バッファ
+		IndexBuffer				m_indexBuffer;		//インデックスバッファ
+		D3D_PRIMITIVE_TOPOLOGY	m_toology;			//トポロジー
 	};
 }
 

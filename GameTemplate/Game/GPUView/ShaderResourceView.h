@@ -29,7 +29,7 @@ namespace myEngine {
 		/// </summary>
 		/// <param name="texture">テクスチャ</param>
 		/// <returns>クリエイトできるか</returns>
-		bool Create(ID3D11Texture2D* texture);
+		//bool Create(ID3D11Texture2D* texture);
 		/// <summary>
 		/// DDSファイルからテクスチャのSRVを作成
 		/// </summary>
@@ -43,6 +43,22 @@ namespace myEngine {
 		/// 明示的に開放する場合使用
 		/// </remarks>
 		void Release();
+		/// <summary>
+		/// SRVの取得
+		/// </summary>
+		/// <returns>SRV</returns>
+		ID3D11ShaderResourceView*& GetBody()
+		{
+			return m_srv;
+		}
+		/// <summary>
+		/// 有効なビューかどうか
+		/// </summary>
+		/// <returns>有効or無効</returns>
+		bool IsValid() const
+		{
+			return m_isValid;
+		}
 	private:
 		ID3D11ShaderResourceView*	m_srv = nullptr;		//SRV
 		bool						m_isValid = false;		//有効なデータ？
