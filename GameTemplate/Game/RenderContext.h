@@ -5,17 +5,6 @@
 
 #pragma once
 
-/*
-いるもの
-DrawIndexed
-Draw
-UpdateSubresource
-VSSetConstantBuffer
-PSSetConstantBuffer
-PSSetShaderResource
-PSSetShader
-VSSetShader
-*/
 #include "graphics/Shader.h"
 #include "GPUBuffer/VertexBuffer.h"
 #include "GPUBuffer/IndexBuffer.h"
@@ -116,6 +105,69 @@ namespace myEngine {
 		)
 		{
 			m_pD3DDeviceContext->PSSetConstantBuffers(slotNo, 1, &cb.GetBody());
+		}
+		void PSSetShaderResource(int slotNo, ShaderResourceView& srv)
+		{
+			m_pD3DDeviceContext->PSSetShaderResources(slotNo, 1, &srv.GetBody());
+		}
+		/// <summary>
+		/// ピクセルシェーダー
+		/// </summary>
+		/// <param name="shader">頂点シェーダー</param>
+		void PSSetShader(Shader& shader)
+		{
+			m_pD3DDeviceContext->PSSetShader((ID3D11PixelShader*)shader.GetBody(), NULL, 0);
+		}
+		/// <summary>
+		/// 頂点シェーダー設定
+		/// </summary>
+		/// <param name="shader">頂点シェーダー</param>
+		void VSSetShader(Shader& shader)
+		{
+			m_pD3DDeviceContext->VSSetShader((ID3D11VertexShader*)shader.GetBody(), NULL, 0);
+		}
+		/// <summary>
+		/// 描画
+		/// </summary>
+		/// <param name="vertexCount">頂点の数</param>
+		/// <param name="startVertexCount">描画を開始する頂点の位置 基本0</param>
+		void Draw(
+			unsigned int vertexCount,
+			unsigned int startVertexCount
+		)
+		{
+			m_pD3DDeviceContext->Draw(vertexCount, startVertexCount);
+		}
+		/// <summary>
+		/// インデックス付き描画
+		/// </summary>
+		/// <param name="IndexCount">インデックスの数</param>
+		/// <param name="StartIndexLocation">描画を開始するインデックスの位置 基本0</param>
+		/// <param name="BaseVertexLocation">ベース頂点インデックス。基本0</param>
+		void DrawIndexed(
+			//_In_って？　参考Memo参照
+			_In_ UINT IndexCount,
+			_In_ UINT StartIndexLocation,
+			_In_ UINT BaseVertexLocation
+		)
+		{
+			m_pD3DDeviceContext->DrawIndexed(IndexCount, StartIndexLocation, BaseVertexLocation);
+		}
+		template<class TBuffer, class SrcBuffer>
+		/// <summary>
+		/// サブリソース更新
+		/// </summary>
+		/// <param name="gpuBuffer">コピー先</param>
+		/// <param name="buffer">コピー元</param>
+		/// <remarks>
+		/// コメントが間違ってるかも　確認でき次第、書き換えます
+		/// ★バグ出る可能性あり
+		/// </remarks>
+		void UpdateSubResourse(TBuffer& gpuBuffer, const SrcBuffer* buffer)
+		{
+			if (gpuBuffer.GetBody() != nullptr) {
+				m_pD3DDeviceContext->UpdateSubresource(gpuBuffer.GetBody(), 0, NULL, buffer, 0, 0);
+			}
 		}
 	private:
 		ID3D11DeviceContext*			m_pD3DDeviceContext = nullptr;

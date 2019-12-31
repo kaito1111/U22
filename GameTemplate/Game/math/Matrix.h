@@ -10,6 +10,7 @@
 /*!
  * @brief	行列。
  */
+
 class CMatrix{
 public:
 
@@ -207,12 +208,15 @@ public:
 			DirectX::XMMatrixLookAtLH(position, target, up)
 		);
 	}
-	/*!
-	 *@brief	行列と行列の乗算
-	 *@details
-	 * *this = m0 * m1
-	 */
-	void Mul( const CMatrix& m0, const CMatrix& m1 )
+	/// <summary>
+	/// 行列と行列の乗算
+	/// </summary>
+	/// <param name="m0">行列1</param>
+	/// <param name="m1">行列2</param>
+	/// <remarks>
+	/// tkEngineを参考にしてもってきてるだけなのでバグがあるかも
+	/// </remarks>
+	void Multiply(const CMatrix& m0, const CMatrix& m1)
 	{
 		DirectX::XMFLOAT4X4 lm;
 		DirectX::XMStoreFloat4x4(
@@ -220,6 +224,25 @@ public:
 			DirectX::XMMatrixMultiply(m0, m1)
 		);
 		mat = lm;
+	}
+	/*!
+	 *@brief	行列と行列の乗算
+	 *@details
+	 * *this = m0 * m1
+	 */
+	void Mul( const CMatrix& m0, const CMatrix& m1 )
+	{
+		Multiply(m0, m1);
+	}
+	/// <summary>
+	/// 行列の代入演算子
+	/// </summary>
+	/// <param name="_m"></param>
+	/// <returns></returns>
+	const CMatrix& operator *=(const CMatrix& _m)
+	{
+		Multiply(*this, _m);
+		return *this;
 	}
 	/*!
 	 *@brief	逆行列を計算。
@@ -249,4 +272,17 @@ public:
 		);
 		return identity;
 	}
+	/// <summary>
+	/// 行列同士の乗算
+	/// </summary>
+	/// <param name="m1">行列1</param>
+	/// <param name="m2">行列2</param>
+	/// <returns>行列の積</returns>
 };
+
+static inline CMatrix operator*(const CMatrix& m1, const CMatrix m2)
+{
+	CMatrix mRet;
+	mRet.Multiply(m1, m2);
+	return mRet;
+}

@@ -47,6 +47,8 @@
     <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
+    <ClCompile Include="ex2D.cpp" />
+    <ClCompile Include="SpriteRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -106,9 +108,10 @@
     <ClInclude Include="RenderContext.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GPUBuffer\GPUBuffer.h" />
+    <ClInclude Include="ex2D.h" />
+    <ClInclude Include="SpriteRender.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\modelData\CheckPoint.png" />
     <Image Include="Assets\modelData\CheckPoint2.png" />
     <Image Include="Assets\modelData\huriko.jpg" />
     <Image Include="Assets\modelData\metal_00001.jpg" />
@@ -117,5 +120,8 @@
     <Image Include="Assets\modelData\metal_00078.jpg" />
     <Image Include="Assets\modelData\stage1.jpg" />
     <Image Include="Assets\modelData\stone_00010.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Assets\modelData\a.png" />
   </ItemGroup>
 </Project>

@@ -48,9 +48,24 @@ namespace myEngine {
 		return true;
 	}
 
-	void Primitive::Draw()
+	void Primitive::Draw(RenderContext& rc)
 	{
+		//頂点バッファ設定
+		rc.IASetVertexBuffer(m_vertexBuffer);
+		rc.IASetIndexBuffer(m_indexBuffer);
+		//プリミティブトポロジー
+		rc.IASetPrimitiveToporogy(m_toology);
+		//描画
+		rc.DrawIndexed(m_indexBuffer.GetNumIndex(), 0, 0);
+	}
 
+	void Primitive::Draw(RenderContext& rc, int numVertex)
+	{
+		rc.IASetVertexBuffer(m_vertexBuffer);
+		//トポロジー
+		rc.IASetPrimitiveToporogy(m_toology);
+		//描画
+		rc.Draw(numVertex, 0);
 	}
 }
 

@@ -2,6 +2,8 @@
 /// スプライト
 /// </summary>
 
+#include "Primitive.h"
+
 #pragma once
 
 namespace myEngine {
@@ -56,19 +58,27 @@ namespace myEngine {
 		/// <summary>
 		/// 描画
 		/// </summary>
+		/// <param name="rc">レンダーコンテキスト</param>
 		/// <param name="viewMatrix">カメラの位置</param>
 		/// <param name="projMatrix">画角とか</param>
-		void Draw(const CMatrix& viewMatrix, const CMatrix& projMatrix);
+		void Draw(RenderContext& rc,const CMatrix& viewMatrix, const CMatrix& projMatrix);
 
 	private:
+		struct SSpriteCB {
+			CMatrix WVP;			//ワールドビュープロジェクション行列
+			CVector4 m_mulColor;	//乗算カラー
+		};
 		CVector3			m_position = CVector3::Zero();			//座標
 		CQuaternion			m_rotation = CQuaternion::Identity();	//回転
 		CVector3			m_scale = CVector3::Zero();				//スケール
 		CMatrix				m_world = CMatrix::Identity();			//ワールド行列
+		Primitive			m_primitive;							//プリミティブ
 		Shader				m_ps;									//ピクセルシェーダー
 		Shader				m_vs;									//頂点シェーダー
+		ConstantBuffer		m_cb;									//定数バッファ
 		CVector4			m_mulColor = CVector4::White();			//乗算カラー
 		ShaderResourceView*	m_textureSRV = nullptr;					//テクスチャ
+		bool				m_isInited = false;						//初期化フラグ
 		CVector2			m_size = CVector2::Zero();				//サイズ(大きさ)
 	};
 }
