@@ -13,7 +13,7 @@ namespace myEngine {
 		/// <param name="texFilePath">テクスチャのファイルパス</param>
 		/// <param name="w">幅</param>
 		/// <param name="h">高さ</param>
-		void Init(const wchar_t* texFilePath, float w, float h);
+		void Init(const wchar_t* texFilePath, float w, float h, bool isDraw3D);
 		/// <summary>
 		/// 座標の設定
 		/// </summary>
@@ -74,6 +74,18 @@ namespace myEngine {
 		{
 			m_sprite.SetMulColor(mulColor);
 		}
+	public:
+		void Update() override final;
+		void ForwardRender(RenderContext& rc);
+		void PostRender(RenderContext& rc);
+	private:
+		bool m_isDraw3D = false;					//3D空間描画？
+		ShaderResourceView m_texture;				//テクスチャ
+		Sprite m_sprite;							//スプライト
+		CVector3 m_position;						//ポジション
+		CQuaternion m_rotation;						//回転
+		CVector3 m_scale = CVector3::Zero();		//拡大率
+		CVector2 m_pivot = Sprite::DEFAULT_PIVOT;	//ピボット
 	};
 }
 

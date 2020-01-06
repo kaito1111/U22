@@ -102,6 +102,7 @@ namespace {
  */
 ShaderResources::ShaderResources()
 {
+	//GraphicsEngine;
 }
 /*!
  *@brief	デストラクタ。

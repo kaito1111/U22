@@ -103,7 +103,7 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="ex2D.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
@@ -145,7 +145,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="SpriteRender.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stageObject1.cpp" />
@@ -162,7 +162,7 @@
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="ex2D.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
@@ -206,7 +206,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="SpriteRender.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stageObject1.h" />
@@ -228,6 +228,7 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\modelData\a.png" />
     <Image Include="Assets\modelData\CheckPoint2.png" />
+    <ImageContentTask Include="Assets\modelData\dummy.png" />
     <Image Include="Assets\modelData\huriko.jpg" />
     <Image Include="Assets\modelData\metal_00001.jpg" />
     <Image Include="Assets\modelData\metal_00005.jpg" />

@@ -19,7 +19,7 @@ public:
 	/*!
 	 *@brief	D3D11デバイスを取得。
 	 */
-	ID3D11Device* GetD3DDevice()
+	ID3D11Device* GetD3DDevice() const
 	{
 		return m_pd3dDevice;
 	}
@@ -40,7 +40,7 @@ public:
 	void EndRender();
 private:
 	D3D_FEATURE_LEVEL		m_featureLevel;				//Direct3D デバイスのターゲットとなる機能セット。
-	ID3D11Device*			m_pd3dDevice = NULL;		//D3D11デバイス。
+	ID3D11Device*			m_pd3dDevice = nullptr;		//D3D11デバイス。
 	IDXGISwapChain*			m_pSwapChain = NULL;		//スワップチェイン。
 	ID3D11DeviceContext*	m_pd3dDeviceContext = NULL;	//D3D11デバイスコンテキスト。
 	ID3D11RenderTargetView* m_backBuffer = NULL;		//バックバッファ。

@@ -123,5 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\modelData\a.png" />
+    <ImageContentTask Include="Assets\modelData\dummy.png" />
   </ItemGroup>
 </Project>

@@ -48,7 +48,7 @@ namespace myEngine {
 			IndexBuffer::EnIndexType type = indexBuffer.GetIndexType();
 			m_pD3DDeviceContext->IASetIndexBuffer(
 				indexBuffer.GetBody(),
-				//条件演算子 exp1 ? exp2:exp3	expが真ならexp2を、偽ならexp3を
+				//条件演算子 (exp1 ? exp2:exp3)	expが真ならexp2を、偽ならexp3を
 				//16型じゃないなら32型をフォーマット(初期化
 				type == IndexBuffer::enIndexType_16 ? DXGI_FORMAT_R16_UINT : DXGI_FORMAT_R32_UINT,
 				0
