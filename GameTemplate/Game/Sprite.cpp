@@ -126,5 +126,3 @@ namespace myEngine {
 		m_primitive.Draw(rc);
 	}
 }
-
-

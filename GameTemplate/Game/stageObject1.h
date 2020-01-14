@@ -9,7 +9,9 @@ public:
 	stageObject1();
 	~stageObject1();
 	void Update();
-
+	CVector3 GetTogePos() { //座標の取得。
+		return m_position;  //当たり判定とかで使う予定。
+	}
 private:
 	SkinModel m_model;  //スキンモデル
 
