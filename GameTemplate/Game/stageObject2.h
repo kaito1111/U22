@@ -16,6 +16,6 @@ private:
 
 	SkinModel* m_model = nullptr;			//スキンモデル
 	CVector3 m_position = CVector3::Zero();//座標
-
+	void Draw();
 
 };

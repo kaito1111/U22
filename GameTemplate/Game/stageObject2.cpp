@@ -15,10 +15,19 @@ stageObject2::~stageObject2()
 
 bool stageObject2::Start()
 {
-
+	
 	return true;
 }
 
 void stageObject2::Update()
 {
+	
+}
+
+void Stage::Draw()
+{
+	m_model.Draw(
+		g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix()
+	);
 }
