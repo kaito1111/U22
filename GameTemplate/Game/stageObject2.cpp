@@ -24,9 +24,9 @@ void stageObject2::Update()
 	
 }
 
-void Stage::Draw()
+void stageObject2::Draw()
 {
-	m_model.Draw(
+	m_model->Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix()
 	);

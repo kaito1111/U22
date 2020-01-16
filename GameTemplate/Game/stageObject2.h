@@ -1,6 +1,6 @@
 #pragma once
 class Player;
-class stageObject2:IGameObject
+class stageObject2: public IGameObject
 {
 public:
 	stageObject2();

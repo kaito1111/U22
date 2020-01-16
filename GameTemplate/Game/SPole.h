@@ -8,8 +8,8 @@ public:
 
 	SPole();
 	//i‚Ş•ûŒü‚ğŒˆ‚ß‚é
-	void SetForward(CVector3 forward) {
-		m_move = forward;
+	void SetMoveDir(CVector3 MoveDir) {
+		m_move = MoveDir;
 	}
 	void SetPosition(CVector3 pos) {
 		m_position=pos;
@@ -31,4 +31,8 @@ private:
 	Player* m_player = nullptr;
 	NPole* m_npole = nullptr;
 	CharacterController m_characon;
+
+	void deleteRange();
+	void magunetTask();
+	void idou();
 };
