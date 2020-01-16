@@ -59,6 +59,8 @@ void stageObject1::Move()
 		UpDown = false;
 	}
 	m_position = m_characon.Execute(1.0f, moveSpeed);
+
+	//ƒvƒŒƒCƒ„[‚ğE‚·ˆ—
 }
 
 void stageObject1::Draw()

@@ -21,8 +21,10 @@ bool stageObject2::Start()
 
 void stageObject2::Update()
 {
-	
+	//距離図ってプレイヤーを殺す。演出とかも付けたいな。
+	//出す場所も考えないと
 }
+
 
 void stageObject2::Draw()
 {
