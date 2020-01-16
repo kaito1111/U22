@@ -20,6 +20,8 @@ void Stage::Update()
 {
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
+
+	//バレットフィジックスが出来次第チェックポイントのシステムを作る
 }
 
 void Stage::Draw()
