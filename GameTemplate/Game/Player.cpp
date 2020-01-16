@@ -45,7 +45,7 @@ void Player::SpawnPole()
 		});
 		NPole* m_pole = NewGO<NPole>(1, "npole");
 		CVector3 SpawnDir = { g_pad->GetRStickXF(),g_pad->GetRStickYF(),0.0f };
-		if (SpawnDir.Length() > 0.01f){
+		if (SpawnDir.Length() < 0.01f){
 			SpawnDir = m_forward;
 		}
 		m_pole->SetPosition(m_position);
@@ -60,7 +60,7 @@ void Player::SpawnPole()
 		});
 		SPole* m_pole = NewGO< SPole>(1, "spole");
 		CVector3 SpawnDir = { g_pad->GetRStickXF(),g_pad->GetRStickYF(),0.0f };
-		if (SpawnDir.Length() > 0.01f) {
+		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = m_forward;
 		}
 		m_pole->SetPosition(m_position);
