@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject/IGameObject.h"
 #include "character/CharacterController.h"
-
+class Player;
 class stageObject1 : public IGameObject
 {
 	//ドッスン棘やで。
@@ -13,6 +13,8 @@ public:
 		return m_position;  //当たり判定とかで使う予定。
 	}
 private:
+	Player* player = nullptr;
+
 	SkinModel m_model;  //スキンモデル
 
 	CharacterController m_characon;
