@@ -34,6 +34,30 @@ namespace myEngine {
 			}
 		}
 	}
+	/// <summary>
+	/// 後でコメント追加　いろいろ書いてないから注意
+	/// </summary>
+	/// <param name="rc"></param>
+	void GameObjectManager::ForwardRender(RenderContext& rc)
+	{
+		for (GameObjectList objList : m_gameObjectListArray) {
+			for (IGameObject* obj : objList) {
+				obj->ForwardRenderWrapper(rc);
+			}
+		}
+	}
+	/// <summary>
+	/// 後でコメント追加　いろいろ書いてないから注意
+	/// </summary>
+	/// <param name="rc"></param>
+	void GameObjectManager::PostRender(RenderContext& rc)
+	{
+		for (GameObjectList objList : m_gameObjectListArray) {
+			for (IGameObject* obj : objList) {
+				obj->PostRenderWrapper(rc);
+			}
+		}
+	}
 
 	/// <summary>
 	/// 更新処理、描画処理をまとめてしてくれるやつ
@@ -46,7 +70,10 @@ namespace myEngine {
 		}
 		/// 描画系処理
 		{
+			//RenderContext& rc = g_graphicsEngine->GetRenderContext();
+			//ForwardRender(rc);
 			Draw();
+			//PostRender(rc);
 		}
 		//削除
 		ExcuteDeleteGameObject();

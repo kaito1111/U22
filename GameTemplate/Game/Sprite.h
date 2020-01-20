@@ -25,14 +25,22 @@ namespace myEngine {
 		/// <param name="tex">テクスチャ</param>
 		/// <param name="w">幅</param>
 		/// <param name="h">高さ</param>
-		void Init(ShaderResourceView& tex, float w, float h);
+		void Init(ID3D11ShaderResourceView* tex, float w, float h);
 		/// <summary>
 		/// テクスチャの設定
 		/// </summary>
 		/// <param name="tex">テクスチャ</param>
-		void SetTextrue(ShaderResourceView& tex)
+		void SetTextrue(ID3D11ShaderResourceView& tex)
 		{
 			m_textureSRV = &tex;
+		}
+		/// <summary>
+		/// 位置の設定
+		/// </summary>
+		/// <param name="pos"></param>
+		void SetPosition(const CVector3& pos)
+		{
+			m_position = pos;
 		}
 		/// <summary>
 		/// 乗算カラーを設定
@@ -61,13 +69,15 @@ namespace myEngine {
 		/// <param name="rc">レンダーコンテキスト</param>
 		/// <param name="viewMatrix">カメラの位置</param>
 		/// <param name="projMatrix">画角とか</param>
-		void Draw(RenderContext& rc,const CMatrix& viewMatrix, const CMatrix& projMatrix);
+		void Draw(const CMatrix& viewMatrix, const CMatrix& projMatrix);
 
 	private:
+		//構造体型スプライト用の定数バッファ
 		struct SSpriteCB {
 			CMatrix WVP;			//ワールドビュープロジェクション行列
 			CVector4 m_mulColor;	//乗算カラー
 		};
+		ID3D11BlendState* kjl;
 		CVector3			m_position = CVector3::Zero();			//座標
 		CQuaternion			m_rotation = CQuaternion::Identity();	//回転
 		CVector3			m_scale = CVector3::Zero();				//スケール
@@ -77,7 +87,8 @@ namespace myEngine {
 		Shader				m_vs;									//頂点シェーダー
 		ConstantBuffer		m_cb;									//定数バッファ
 		CVector4			m_mulColor = CVector4::White();			//乗算カラー
-		ShaderResourceView*	m_textureSRV = nullptr;					//テクスチャ
+		ID3D11ShaderResourceView*	m_textureSRV = nullptr;					//テクスチャ
+		ID3D11SamplerState* samp;
 		bool				m_isInited = false;						//初期化フラグ
 		CVector2			m_size = CVector2::Zero();				//サイズ(大きさ)
 	};

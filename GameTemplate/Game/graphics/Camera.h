@@ -1,7 +1,9 @@
 #pragma once
 class Camera
 {
+
 public:
+	Camera();
 	/*!
 	 * @brief	カメラ行列、プロジェクション行列の更新。
 	 *@details
@@ -96,6 +98,7 @@ private:
 	float m_viewAngle = CMath::DegToRad(60.0f);		//画角。
 	float m_far = 10000.0f;							//遠い平面までの距離。
 	float m_near = 1.0f;							//近平面までの距離。
+	float m_aspect = 1.0f;							//アスペクト比
 };
 
 extern Camera g_camera3D;		//!<3Dカメラ。

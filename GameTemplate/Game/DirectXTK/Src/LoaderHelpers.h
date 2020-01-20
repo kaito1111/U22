@@ -331,7 +331,7 @@ namespace DirectX
                 return E_FAIL;
             }
 
-            // Need at least enough data to fill the header and magic number to be a valid DDS
+            // Need at least enough data to fill the haeder and magic number to be a valid DDS
             if (fileInfo.EndOfFile.LowPart < (sizeof(DDS_HEADER) + sizeof(uint32_t)))
             {
                 return E_FAIL;
