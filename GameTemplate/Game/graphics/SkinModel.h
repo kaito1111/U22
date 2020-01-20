@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Skeleton.h"
+#include "ConstantBuffer.h"
 
 /*!
 *@brief	FBXの上方向。
@@ -103,6 +104,7 @@ private:
 	};
 	EnFbxUpAxis			m_enFbxUpAxis = enFbxUpAxisZ;	//!<FBXの上方向。
 	ID3D11Buffer*		m_cb = nullptr;					//!<定数バッファ。
+	//myEngine::ConstantBuffer		m_cb;				//定数バッファ
 	Skeleton			m_skeleton;						//!<スケルトン。
 	CMatrix				m_worldMatrix;					//!<ワールド行列。
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。

@@ -80,10 +80,10 @@ namespace myEngine {
 		void PostRender(RenderContext& rc);
 	private:
 		bool m_isDraw3D = false;					//3D空間描画？
-		ShaderResourceView m_texture;				//テクスチャ
+		//ID3D11ShaderResourceView m_texture;				//テクスチャ
 		Sprite m_sprite;							//スプライト
-		CVector3 m_position;						//ポジション
-		CQuaternion m_rotation;						//回転
+		CVector3 m_position= CVector3::Zero();						//ポジション
+		CQuaternion m_rotation = CQuaternion::Identity();						//回転
 		CVector3 m_scale = CVector3::Zero();		//拡大率
 		CVector2 m_pivot = Sprite::DEFAULT_PIVOT;	//ピボット
 	};

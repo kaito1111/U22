@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Primitive.h"
+#include "GPUBuffer/IndexBuffer.h"
 
 namespace myEngine {
 	Primitive::Primitive()
@@ -48,23 +49,43 @@ namespace myEngine {
 		return true;
 	}
 
-	void Primitive::Draw(RenderContext& rc)
+	//void Primitive::Draw(RenderContext& rc)
+	//{
+	//	//頂点バッファ設定
+	//	rc.IASetVertexBuffer(m_vertexBuffer);
+	//	rc.IASetIndexBuffer(m_indexBuffer);
+	//	//プリミティブトポロジー
+	//	rc.IASetPrimitiveToporogy(m_toology);
+	//	//描画
+	//	rc.DrawIndexed(m_indexBuffer.GetNumIndex(), 0, 0);
+	//}
+
+	void Primitive::Draw(ID3D11DeviceContext& dc)
 	{
-		//頂点バッファ設定
-		rc.IASetVertexBuffer(m_vertexBuffer);
-		rc.IASetIndexBuffer(m_indexBuffer);
-		//プリミティブトポロジー
-		rc.IASetPrimitiveToporogy(m_toology);
-		//描画
-		rc.DrawIndexed(m_indexBuffer.GetNumIndex(), 0, 0);
+		UINT ofset = 0;
+		UINT stride = m_vertexBuffer.GetStride();
+		dc.IASetVertexBuffers(0, 1, &m_vertexBuffer.GetBody(), &stride, &ofset);
+		auto type = m_indexBuffer.GetIndexType();
+		dc.IASetIndexBuffer(
+			m_indexBuffer.GetBody(),
+			type == IndexBuffer::enIndexType_16 ? DXGI_FORMAT_R16_UINT : DXGI_FORMAT_R32_UINT,
+			0
+		);
+		//プリミティブのトポロジーを設定。
+		dc.IASetPrimitiveTopology(m_toology);
+		//描画。
+		dc.DrawIndexed(m_indexBuffer.GetNumIndex(), 0, 0);
 	}
 
-	void Primitive::Draw(RenderContext& rc, int numVertex)
+	void Primitive::Draw(ID3D11DeviceContext& rc, int numVertex)
 	{
-		rc.IASetVertexBuffer(m_vertexBuffer);
-		//トポロジー
-		rc.IASetPrimitiveToporogy(m_toology);
-		//描画
+		//頂点バッファを設定。
+		UINT ofset = 0;
+		UINT stride = m_vertexBuffer.GetStride();
+		rc.IASetVertexBuffers(0, 1, &(m_vertexBuffer.GetBody()), &stride, &ofset);
+		//プリミティブのトポロジーを設定。
+		rc.IASetPrimitiveTopology(m_toology);
+		//描画。
 		rc.Draw(numVertex, 0);
 	}
 }

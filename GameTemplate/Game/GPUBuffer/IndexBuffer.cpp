@@ -49,7 +49,7 @@ namespace myEngine {
 		bd.ByteWidth = stride * numIndex;
 		//インデックスバッファフラグ
 		bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-		//よくわからんフラグ
+		//CPUへのアクセスの仕方フラグ
 		bd.CPUAccessFlags = 0;
 		
 		//サブリソース(テクスチャとか？)
@@ -60,7 +60,7 @@ namespace myEngine {
 		InitData.pSysMem = pSrcIndexBuffer;
 
 		//エラー検出しつつCreate
-		HRESULT hr = graphicsEngine().GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_indexBuffer);
+		HRESULT hr = g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_indexBuffer);
 		if (FAILED(hr)) {
 			//失敗
 			return false;

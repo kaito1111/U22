@@ -9,14 +9,18 @@ stageObject1::stageObject1()
 	//cmoファイルの読み込み
 	m_model.Init(L"Assets/modelData/TogeToge.cmo");
 	m_characon.Init(100.0f, 0.0f, m_position);
+	player = FindGO<Player>("player");
 }
 
 stageObject1::~stageObject1()
 {
+
 }
 
 void stageObject1::Update()
 {
+	
+
 	Move();//動かす奴.
 
 	//ワールド行列の更新
@@ -61,6 +65,20 @@ void stageObject1::Move()
 	m_position = m_characon.Execute(1.0f, moveSpeed);
 
 	//プレイヤーを殺す処理
+
+	//
+	CVector3 PPos = player->GetPosition();
+	CVector3 ToP = PPos - m_position;
+	if (ToP.y <= 50 && ToP.y-50			//プレイヤーからのベクトルYのみを取る
+		&&ToP.x >=-50 && ToP.x <= 50) {//     　　　　〃　　　　　Xのみを取る
+		//ここにプレイヤーを殺す処理かな
+		CVector3 CheckPoint = CVector3::Zero();
+
+		//後でチェックポイントを作る
+		player->SetPosition(CheckPoint);
+	}
+
+
 }
 
 void stageObject1::Draw()

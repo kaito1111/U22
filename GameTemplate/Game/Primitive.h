@@ -6,7 +6,6 @@
 
 #include "GPUBuffer/IndexBuffer.h"
 #include "GPUBuffer/vertexBuffer.h"
-#include "RenderContext.h"
 
 namespace myEngine {
 	class Primitive
@@ -55,12 +54,12 @@ namespace myEngine {
 		/// <summary>
 		/// 描画
 		/// </summary>
-		void Draw(RenderContext& rc);
+		void Draw(ID3D11DeviceContext& rc, int numVertex);
 		/// <summary>
 		/// 描画
 		/// </summary>
 		/// <param name="numVertex"></param>
-		void Draw(RenderContext& rc, int numVertex);
+		void Draw(ID3D11DeviceContext& rc);
 		/// <summary>
 		/// 頂点バッファの取得
 		/// </summary>

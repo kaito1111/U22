@@ -1,4 +1,6 @@
 #pragma once
+#include "graphics/RenderContext.h"
+
 /// <summary>
 /// ゲームオブジェクトの基底クラス
 /// オブジェクトマネージャーの関数を使う場合は継承してね！！
@@ -31,6 +33,25 @@ namespace myEngine {
 		{
 		};
 		/// <summary>
+		/// Render関数が実行される
+		/// </summary>
+		/// <param name="rc">レンダーコンテキスト</param>
+		virtual void ForwardRender(RenderContext& rc)
+		{
+			(void)rc;
+		}
+		/// <summary>
+		/// レンダー関数が実行された後で呼ばれる描画処理
+		/// </summary>
+		/// <remarks>
+		/// 機能が追加されたときに追記します
+		/// </remarks>
+		/// <param name="rc">レンダーコンテキスト</param>
+		virtual void PostRender(RenderContext& rc)
+		{
+			(void)rc;
+		}
+		/// <summary>
 		/// <para>Updateの直前に呼ばれる開始処理</para>
 		/// <para>trueが返されると更新処理(Update)が開始されるよ</para>
 		/// </summary>
@@ -62,7 +83,20 @@ namespace myEngine {
 		/// 関数をラップしてるだけだよ
 		/// 各オブジェクトの関数の処理を開始させるよ
 		/// </summary>
-		
+		void PostRenderWrapper(RenderContext& rc)
+		{
+			if (m_isActive && m_isStart && !m_isDead)
+			{
+				PostRender(rc);
+			}
+		}
+		void ForwardRenderWrapper(RenderContext& rc)
+		{
+			if (m_isActive && m_isStart && !m_isDead)
+			{
+				ForwardRender(rc);
+			}
+		}
 		void StartWrapper()
 		{
 			if (m_isActive && !m_isStart)

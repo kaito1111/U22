@@ -81,13 +81,13 @@ namespace myEngine {
 		//これも恐らく全部初期化
 		//DirectX...もHRESULT型だから通る
 		HRESULT hr = DirectX::CreateDDSTextureFromFileEx(
-			g_graphicsEngine->GetD3DDevice(),	//D3DDevice
+			g_graphicsEngine->GetD3DDevice(),	//D3DDevice tkEngineと少しインスタンスの取り方が違います
 			fileName,							//ファイル名
 			0,									//サイズ
 			D3D11_USAGE_DEFAULT,				//CPUがGPUがアクセス可能かどうかのフラグ
 			D3D11_BIND_SHADER_RESOURCE,			//バインドフラグ ex結び付け方のフラグ
 			0,									//？CPUアクセス回数？
-			0,									//？その他のアクセス回数？ miscがその他
+			0,									//？その他のアクセスフラグ？ miscがその他
 			false,								//？SRGBっていうカラースペース使うかどうか的な奴？
 			nullptr,							//テクスチャのポインタ
 			&m_srv								//srv

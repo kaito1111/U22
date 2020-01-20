@@ -44,12 +44,11 @@
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
-    <ClCompile Include="RenderContext.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
     <ClCompile Include="ex2D.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
-    <ClCompile Include="stageObject2.cpp" />
+    <ClCompile Include="graphics\RenderContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -58,7 +57,6 @@
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
-    <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -107,12 +105,11 @@
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
-    <ClInclude Include="RenderContext.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GPUBuffer\GPUBuffer.h" />
     <ClInclude Include="ex2D.h" />
     <ClInclude Include="SpriteRender.h" />
-    <ClInclude Include="stageObject2.h" />
+    <ClInclude Include="graphics\RenderContext.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
@@ -127,5 +124,7 @@
   <ItemGroup>
     <ImageContentTask Include="Assets\modelData\a.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />
+    <ImageContentTask Include="Assets\sprite\dummy.png" />
+    <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
   </ItemGroup>
 </Project>
