@@ -24,20 +24,10 @@ void Player::Update()
 }
 void Player::Draw()
 {
-	if (g_pad[0].IsPress(enButtonSelect)) {
-		m_model.Draw(
-			g_camera3D.GetViewMatrix(),
-			g_camera3D.GetProjectionMatrix()
-		);
-
-	}
-	else
-	{
-		//m_spriteRender = NewGO<SpriteRender>(1);
-		//m_spriteRender->Init(L"Assets/sprite/utc_all2.dds", 200, 200, false);
-		//m_spriteRender->SetScale(CVector3::One());
-		//m_spriteRender->SetPosition(CVector3::Zero());
-	}
+	m_model.Draw(
+		g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix()
+	);
 }
 
 void Player::SpawnPole()

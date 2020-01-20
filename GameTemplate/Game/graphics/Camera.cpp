@@ -23,23 +23,10 @@ void Camera::Update()
 		m_up
 	);
 
-	//プロジェクション行列を計算
-	m_projMatrix.MakeOrthoProjectionMatrix(
-		FRAME_BUFFER_W,
-		FRAME_BUFFER_H,
-		m_near,
+	m_projMatrix.MakeProjectionMatrix(
+		m_viewAngle,					//スクリーンの横
+		FRAME_BUFFER_W / FRAME_BUFFER_H,	//スクリーンの高さ
+		m_near, 
 		m_far
 	);
-
-	/*
-	↓なんか2D汚いのでMakeOrthoのやり方を採用↓
-	理由が分かり次第直してtkEngineの方に処理を合わせます
-	*/
-
-	//m_projMatrix.MakeProjectionMatrix(
-	//	m_viewAngle,					//スクリーンの横
-	//	FRAME_BUFFER_W / FRAME_BUFFER_H,	//スクリーンの高さ
-	//	m_near, 
-	//	m_far
-	//);
 }
