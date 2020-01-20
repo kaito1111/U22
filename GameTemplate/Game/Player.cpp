@@ -44,7 +44,7 @@ void Player::SpawnPole()
 			return true;
 		});
 		NPole* m_pole = NewGO<NPole>(1, "npole");
-		CVector3 SpawnDir = { g_pad->GetRStickXF(),g_pad->GetRStickYF(),0.0f };
+		CVector3 SpawnDir = { g_pad->GetRStickXF() * -1.0f , g_pad->GetRStickYF() , 0.0f };
 		if (SpawnDir.Length() < 0.01f){
 			SpawnDir = m_forward;
 		}
@@ -59,7 +59,7 @@ void Player::SpawnPole()
 			return true;
 		});
 		SPole* m_pole = NewGO< SPole>(1, "spole");
-		CVector3 SpawnDir = { g_pad->GetRStickXF(),g_pad->GetRStickYF(),0.0f };
+		CVector3 SpawnDir = { g_pad->GetRStickXF() * -1.0f , g_pad->GetRStickYF() , 0.0f };
 		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = m_forward;
 		}
@@ -95,19 +95,20 @@ void Player::Move()
 
 void Player::MyMagnet()
 {
-	int caseMax = 2;				//Ž¥—Í‚ÌÅ‘åƒpƒ^[ƒ“
+
 	if (g_pad->IsTrigger(enButtonY)) {
 		m_magnetSwich++;
-		if (m_magnetSwich == 1) {//S‹É
-			m_model.Init(L"Assets/modelData/Spole.cmo");
-		}
-		if (m_magnetSwich == 2) {
-			m_model.Init(L"Assets/modelData/Npole.cmo");
-		}
-		if (m_magnetSwich > caseMax)
+		switch (m_magnetSwich)
 		{
+		case 0:
+			break;
+		case 1:
+			break;
+		case 2:
+			break;
+		default:
 			m_magnetSwich = 0;
-			m_model.Init(L"Assets/modelData/unityChan.cmo");
+			break;
 		}
 	}
 }
