@@ -2,7 +2,7 @@
 /// スプライト
 /// </summary>
 
-#include "Primitive.h"
+#include "graphics/Primitive.h"
 
 #pragma once
 

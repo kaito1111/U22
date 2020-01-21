@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Skeleton.h"
-#include "ConstantBuffer.h"
 
 /*!
 *@brief	FBX‚Ìã•ûŒüB

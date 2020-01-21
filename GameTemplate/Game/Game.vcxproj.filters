@@ -39,16 +39,17 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="stageObject1.cpp" />
     <ClCompile Include="myEngine.cpp" />
-    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="GPUBuffer\StructuredBuffer.cpp" />
-    <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
-    <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
-    <ClCompile Include="ex2D.cpp" />
-    <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="graphics\RenderContext.cpp" />
+    <ClCompile Include="stageObject2.cpp" />
+    <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
+    <ClCompile Include="graphics\Primitive.cpp" />
+    <ClCompile Include="graphics\2D\SpriteRender.cpp" />
+    <ClCompile Include="graphics\2D\Sprite.cpp" />
+    <ClCompile Include="graphics\2D\ex2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -57,6 +58,7 @@
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
+    <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -100,16 +102,17 @@
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="stageObject1.h" />
     <ClInclude Include="myEngine.h" />
-    <ClInclude Include="Sprite.h" />
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
-    <ClInclude Include="Primitive.h" />
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
-    <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GPUBuffer\GPUBuffer.h" />
-    <ClInclude Include="ex2D.h" />
-    <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="graphics\RenderContext.h" />
+    <ClInclude Include="stageObject2.h" />
+    <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
+    <ClInclude Include="graphics\Primitive.h" />
+    <ClInclude Include="graphics\2D\SpriteRender.h" />
+    <ClInclude Include="graphics\2D\Sprite.h" />
+    <ClInclude Include="graphics\2D\ex2D.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

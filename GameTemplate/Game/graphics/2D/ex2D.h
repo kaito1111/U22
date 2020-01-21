@@ -1,6 +1,13 @@
+/// <summary>
+/// 2Dサンプルコードクラス
+/// </summary>
+/// <remarks>
+/// SpriteRender作ったら消します
+/// </remarks>
+
 #pragma once
 
-#include "Sprite.h"
+#include "graphics/2D/Sprite.h"
 #include "GPUView/ShaderResourceView.h"
 
 namespace myEngine{
