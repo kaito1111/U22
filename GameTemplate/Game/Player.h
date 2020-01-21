@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject/IGameObject.h"
 #include "character/CharacterController.h"
-#include "SpriteRender.h"
+#include "graphics/2D/SpriteRender.h"
 
 class Player : public IGameObject
 {
@@ -20,7 +20,7 @@ public:
 		return m_magnetSwich;
 	}
 private:
-	SpriteRender* m_spriteRender = nullptr;
+	//SpriteRender* m_spriteRender = nullptr;
 	~Player();
 	void Update();
 	void Draw();

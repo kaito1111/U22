@@ -100,8 +100,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
-    <ClCompile Include="ConstantBuffer.cpp" />
-    <ClCompile Include="ex2D.cpp">
+    <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
+    <ClCompile Include="graphics\2D\ex2D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
@@ -138,15 +138,15 @@
     <ClCompile Include="physics\PhysicsStaticObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GPUView\ShaderResourceView.cpp" />
-    <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="graphics\Primitive.cpp" />
     <ClCompile Include="graphics\RenderContext.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="SPole.cpp" />
-    <ClCompile Include="Sprite.cpp">
+    <ClCompile Include="graphics\2D\Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="SpriteRender.cpp">
+    <ClCompile Include="graphics\2D\SpriteRender.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Stage.cpp" />
@@ -163,8 +163,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
-    <ClInclude Include="ConstantBuffer.h" />
-    <ClInclude Include="ex2D.h">
+    <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
+    <ClInclude Include="graphics\2D\ex2D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Game.h" />
@@ -203,15 +203,15 @@
     <ClInclude Include="physics\PhysicsStaticObject.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
-    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="graphics\RenderContext.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="SPole.h" />
-    <ClInclude Include="Sprite.h">
+    <ClInclude Include="graphics\2D\Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="SpriteRender.h">
+    <ClInclude Include="graphics\2D\SpriteRender.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Stage.h" />

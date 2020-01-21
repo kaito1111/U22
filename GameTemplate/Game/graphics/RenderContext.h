@@ -9,7 +9,7 @@
 #include "GPUBuffer/VertexBuffer.h"
 #include "GPUBuffer/IndexBuffer.h"
 #include "GPUBuffer/StructuredBuffer.h"
-#include "ConstantBuffer.h"
+#include "GPUBuffer/ConstantBuffer.h"
 #include "GPUView/ShaderResourceView.h"
 #include "GPUView/UnorderedAccessView.h"
 
