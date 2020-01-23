@@ -77,18 +77,18 @@ namespace myEngine {
 			CMatrix WVP;			//ワールドビュープロジェクション行列
 			CVector4 m_mulColor;	//乗算カラー
 		};
-		ID3D11BlendState* kjl;
-		CVector3			m_position = CVector3::Zero();			//座標
-		CQuaternion			m_rotation = CQuaternion::Identity();	//回転
-		CVector3			m_scale = CVector3::Zero();				//スケール
-		CMatrix				m_world = CMatrix::Identity();			//ワールド行列
-		Primitive			m_primitive;							//プリミティブ
-		Shader				m_ps;									//ピクセルシェーダー
-		Shader				m_vs;									//頂点シェーダー
-		ConstantBuffer		m_cb;									//定数バッファ
-		CVector4			m_mulColor = CVector4::White();			//乗算カラー
+		CVector3					m_position = CVector3::Zero();			//座標
+		CQuaternion					m_rotation = CQuaternion::Identity();	//回転
+		CVector3					m_scale = CVector3::Zero();				//スケール
+		CMatrix						m_world = CMatrix::Identity();			//ワールド行列
+		Primitive					m_primitive;							//プリミティブ
+		Shader						m_ps;									//ピクセルシェーダー
+		Shader						m_vs;									//頂点シェーダー
+		ConstantBuffer				m_cb;									//定数バッファ
+		CVector4					m_mulColor = CVector4::White();			//乗算カラー
 		ID3D11ShaderResourceView*	m_textureSRV = nullptr;					//テクスチャ
-		ID3D11SamplerState* samp;
+		ID3D11SamplerState*			SamplerState;							//サンプルステート
+		ID3D11BlendState*			BlendState;								//ブレンドステート
 		bool				m_isInited = false;						//初期化フラグ
 		CVector2			m_size = CVector2::Zero();				//サイズ(大きさ)
 	};

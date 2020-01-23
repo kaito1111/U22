@@ -40,6 +40,7 @@ public:
 	 *@param[in]	filePath		ロードするシェーダーのファイルパス。
 	 *@param[in]	entryFuncName	エントリーポイントの関数名。
 	 *@param[in]	shaderType		シェーダータイプ。
+	 *@ex	shader::ロードしたシェーダーが何型なのか未定なのでvoid
 	 */
 	bool Load(
 		void*& shader, 

@@ -55,7 +55,7 @@ namespace myEngine {
 			}
 		};
 		short indices[] = { 0,1,2,3 };
-		//先輩の方ではSpriteData
+		//プリミティブの作成
 		m_primitive.Create(
 			D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
 			4,
@@ -66,43 +66,36 @@ namespace myEngine {
 			indices
 		);
 
+		//引数で入ってきたテクスチャの代入
 		m_textureSRV = tex;
+		//定数バッファの作成
 		m_cb.Create(nullptr, sizeof(SSpriteCB));
 		
+		//サンプラーステートの作成
 		D3D11_SAMPLER_DESC dese;
+		//サンプラーステート関連の初期化処理
 		ZeroMemory(&dese, sizeof(dese));
 		dese.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 		dese.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 		dese.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 		dese.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-		g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&dese, &samp);
+		//サンプラーステートの作成処理
+		//ここでSpriteクラスのサンプラーステートにポインタが入るよ！
+		g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&dese, &SamplerState);
 
 
+		//ブレンドステートの設定
 		CD3D11_DEFAULT drfault;
-
-
 		CD3D11_BLEND_DESC BLEND_DETE(drfault);
 		BLEND_DETE.RenderTarget[0].BlendEnable = true;
+		//2個を一回で初期化してるよ 同じ値なのでできる！
 		BLEND_DETE.RenderTarget[0].BlendOp = BLEND_DETE.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		BLEND_DETE.RenderTarget[0].DestBlend = BLEND_DETE.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
 		BLEND_DETE.RenderTarget[0].SrcBlend = BLEND_DETE.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
-		/*BLEND_DETE.AlphaToCoverageEnable = false;
-		BLEND_DETE.IndependentBlendEnable = false;
-		BLEND_DETE.RenderTarget[0].BlendEnable = true;
-		BLEND_DETE.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-		BLEND_DETE.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-		BLEND_DETE.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-		BLEND_DETE.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
-		BLEND_DETE.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
-		BLEND_DETE.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-		BLEND_DETE.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;*/
 
-		auto jjjj = g_graphicsEngine->GetD3DDevice(); 
-		jjjj->CreateBlendState(&BLEND_DETE, &kjl);
-
-
-		
-		//g_graphicsEngine->GetD3DDeviceContext()->OMSetBlendState(kjl, nullptr, 0xFFFFFFFF);
+		//ブレンドステートの作成 & 初期化
+		auto Device = g_graphicsEngine->GetD3DDevice(); 
+		Device->CreateBlendState(&BLEND_DETE, &BlendState);
 	}
 	void Sprite::Update(const CVector3& trans, const CQuaternion& rot, const CVector3& scale, const CVector2& pivot)
 	{
@@ -213,8 +206,8 @@ namespace myEngine {
 		//rc.VSSetShader(m_vs);
 
 		//g_graphicsEngine->GetD3DDeviceContext()->IASetInputLayout(m_vs.GetInputLayout());
-		g_graphicsEngine->GetD3DDeviceContext()->VSSetSamplers(0, 1, &samp);
-		g_graphicsEngine->GetD3DDeviceContext()->PSSetSamplers(0,1,&samp);
+		g_graphicsEngine->GetD3DDeviceContext()->VSSetSamplers(0, 1, &SamplerState);
+		g_graphicsEngine->GetD3DDeviceContext()->PSSetSamplers(0, 1, &SamplerState);
 
 		//ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
 		//g_graphicsEngine->GetD3DDeviceContext()->OMSetBlendState(kjl, nullptr, 0xFFFFFFFF);
