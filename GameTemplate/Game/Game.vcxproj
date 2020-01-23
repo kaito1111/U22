@@ -122,6 +122,7 @@
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="GameObject\IGameObject.cpp" />
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
+    <ClCompile Include="iwa.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
     <ClCompile Include="MagnetManager.cpp">
@@ -188,6 +189,7 @@
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="GameObject\IGameObject.h" />
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
+    <ClInclude Include="iwa.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
     <ClInclude Include="MagnetManager.h">
@@ -229,6 +231,7 @@
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
