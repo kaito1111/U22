@@ -51,8 +51,6 @@
     <ClCompile Include="iwa.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="Primitive.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -118,8 +116,6 @@
     <ClInclude Include="iwa.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Primitive.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteRender.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

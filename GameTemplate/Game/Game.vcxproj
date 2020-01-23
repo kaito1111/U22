@@ -145,8 +145,6 @@
     <ClCompile Include="graphics\2D\Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stageObject1.cpp" />
     <ClCompile Include="stageObject2.cpp" />
@@ -208,8 +206,6 @@
     <ClInclude Include="graphics\2D\Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stageObject1.h" />
     <ClInclude Include="stageObject2.h" />
