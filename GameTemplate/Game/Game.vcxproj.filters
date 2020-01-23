@@ -50,6 +50,7 @@
     <ClCompile Include="ex2D.cpp" />
     <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="stageObject2.cpp" />
+    <ClCompile Include="iwa.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -59,6 +60,7 @@
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
+    <MeshContentTask Include="Assets\modelData\iwa.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -113,6 +115,7 @@
     <ClInclude Include="ex2D.h" />
     <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="stageObject2.h" />
+    <ClInclude Include="iwa.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
