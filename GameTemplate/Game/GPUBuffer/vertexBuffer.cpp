@@ -32,7 +32,7 @@ namespace myEngine {
 		D3D11_SUBRESOURCE_DATA InitData;
 		InitData.pSysMem = pSrcVertexBuffer;
 
-		HRESULT hr = graphicsEngine().GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_vertexBuffer);
+		HRESULT hr = g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_vertexBuffer);
 		if (FAILED(hr)) {
 			return false;
 		}

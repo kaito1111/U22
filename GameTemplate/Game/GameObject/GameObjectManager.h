@@ -158,6 +158,16 @@ namespace myEngine {
 		//描画
 		void Draw();
 		/// <summary>
+		/// レンダー処理が呼ばれる前に呼ばれる描画処理
+		/// </summary>
+		/// <param name="rc">レンダーコンテキスト</param>
+		void ForwardRender(RenderContext& rc);
+		/// <summary>
+		/// 描画処理
+		/// </summary>
+		/// <param name="rc">レンダーコンテキスト</param>
+		void PostRender(RenderContext& rc);
+		/// <summary>
 		/// ゲームオブジェクトマネージャーから呼ばれる各処理
 		/// </summary>
 		void ExecuteFromGameThread();

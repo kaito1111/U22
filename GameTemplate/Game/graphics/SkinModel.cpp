@@ -20,7 +20,7 @@ void SkinModel::Init(const wchar_t* filePath, EnFbxUpAxis enFbxUpAxis)
 
 	//定数バッファの作成。
 	InitConstantBuffer();
-
+	  
 	//サンプラステートの初期化。
 	InitSamplerState();
 
@@ -106,10 +106,24 @@ void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVect
 }
 void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 {
-	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
 
 	ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
-
+ 	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
+	//D3D11_BLEND_DESC BLEND_DETE;
+	//BLEND_DETE.AlphaToCoverageEnable = false;
+	//BLEND_DETE.IndependentBlendEnable = false;
+	//BLEND_DETE.RenderTarget[0].BlendEnable = 1;
+	//BLEND_DETE.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+	//BLEND_DETE.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC1_ALPHA;
+	//BLEND_DETE.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+	//BLEND_DETE.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
+	//BLEND_DETE.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
+	//BLEND_DETE.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+	//BLEND_DETE.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
+	//ID3D11BlendState* kjl;
+	//d3dDeviceContext;
+	//g_graphicsEngine->GetD3DDevice()->CreateBlendState(&BLEND_DETE, &kjl);
+	//d3dDeviceContext->OMSetBlendState(kjl, nullptr, 0xFFFFFFFF);
 	//定数バッファの内容を更新。
 	SVSConstantBuffer vsCb;
 	vsCb.mWorld = m_worldMatrix;
@@ -125,7 +139,7 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 	m_skeleton.SendBoneMatrixArrayToGPU();
 
 	//描画。
-	m_modelDx->Draw(
+   	m_modelDx->Draw(
 		d3dDeviceContext,
 		state,
 		m_worldMatrix,
