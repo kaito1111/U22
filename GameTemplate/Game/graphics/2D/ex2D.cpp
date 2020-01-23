@@ -1,7 +1,7 @@
 /// <summary>
 /// 2Dサンプルコード
 /// </summary>
-
+///test
 #include "stdafx.h"
 #include "GameCamera.h"
 #include "ex2D.h"

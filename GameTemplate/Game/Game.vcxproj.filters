@@ -43,13 +43,16 @@
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
-    <ClCompile Include="graphics\RenderContext.cpp" />
     <ClCompile Include="stageObject2.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="graphics\Primitive.cpp" />
-    <ClCompile Include="graphics\2D\SpriteRender.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp" />
+    <ClCompile Include="iwa.cpp" />
+    <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="Primitive.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -59,6 +62,7 @@
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
+    <MeshContentTask Include="Assets\modelData\iwa.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -106,13 +110,16 @@
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
     <ClInclude Include="GPUBuffer\GPUBuffer.h" />
-    <ClInclude Include="graphics\RenderContext.h" />
     <ClInclude Include="stageObject2.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="graphics\Primitive.h" />
-    <ClInclude Include="graphics\2D\SpriteRender.h" />
     <ClInclude Include="graphics\2D\Sprite.h" />
     <ClInclude Include="graphics\2D\ex2D.h" />
+    <ClInclude Include="iwa.h" />
+    <ClInclude Include="ConstantBuffer.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteRender.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

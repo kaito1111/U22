@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
+    <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -122,9 +123,9 @@
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="GameObject\IGameObject.cpp" />
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
+    <ClCompile Include="iwa.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
-    <ClCompile Include="MagnetManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\kMath.cpp" />
     <ClCompile Include="math\Matrix.cpp" />
@@ -139,16 +140,13 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GPUView\ShaderResourceView.cpp" />
     <ClCompile Include="graphics\Primitive.cpp" />
-    <ClCompile Include="graphics\RenderContext.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="SPole.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="graphics\2D\SpriteRender.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteRender.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stageObject1.cpp" />
     <ClCompile Include="stageObject2.cpp" />
@@ -163,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
+    <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="graphics\2D\ex2D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -186,9 +185,9 @@
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="GameObject\IGameObject.h" />
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
+    <ClInclude Include="iwa.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
-    <ClInclude Include="MagnetManager.h" />
     <ClInclude Include="math\kMath.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
@@ -204,16 +203,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
-    <ClInclude Include="graphics\RenderContext.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Primitive.h" />
     <ClInclude Include="SPole.h" />
     <ClInclude Include="graphics\2D\Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="graphics\2D\SpriteRender.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteRender.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stageObject1.h" />
     <ClInclude Include="stageObject2.h" />
@@ -225,6 +221,7 @@
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
