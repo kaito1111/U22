@@ -50,6 +50,7 @@
     <ClCompile Include="graphics\2D\SpriteRender.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp" />
+    <ClCompile Include="MagnetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -113,6 +114,7 @@
     <ClInclude Include="graphics\2D\SpriteRender.h" />
     <ClInclude Include="graphics\2D\Sprite.h" />
     <ClInclude Include="graphics\2D\ex2D.h" />
+    <ClInclude Include="MagnetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
