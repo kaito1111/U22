@@ -30,9 +30,9 @@ namespace myEngine {
 		/// テクスチャの設定
 		/// </summary>
 		/// <param name="tex">テクスチャ</param>
-		void SetTextrue(ID3D11ShaderResourceView& tex)
+		void SetTextrue(ID3D11ShaderResourceView* tex)
 		{
-			m_textureSRV = &tex;
+			m_textureSRV = tex;
 		}
 		/// <summary>
 		/// 位置の設定

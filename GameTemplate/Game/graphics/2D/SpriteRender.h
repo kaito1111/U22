@@ -76,16 +76,17 @@ namespace myEngine {
 		}
 	public:
 		void Update() override final;
-		void ForwardRender(RenderContext& rc);
-		void PostRender(RenderContext& rc);
+		void ForwardRender();
+		void Draw();
+		void PostRender();
 	private:
-		bool m_isDraw3D = false;					//3D空間描画？
-		//ID3D11ShaderResourceView m_texture;				//テクスチャ
-		Sprite m_sprite;							//スプライト
-		CVector3 m_position= CVector3::Zero();						//ポジション
-		CQuaternion m_rotation = CQuaternion::Identity();						//回転
-		CVector3 m_scale = CVector3::Zero();		//拡大率
-		CVector2 m_pivot = Sprite::DEFAULT_PIVOT;	//ピボット
+		bool m_isDraw3D = false;							//3D空間描画？
+		ShaderResourceView m_texture;				//テクスチャ
+		Sprite m_sprite;									//スプライト
+		CVector3 m_position= CVector3::Zero();				//ポジション
+		CQuaternion m_rotation = CQuaternion::Identity();	//回転
+		CVector3 m_scale = CVector3::One();				//拡大率
+		CVector2 m_pivot = Sprite::DEFAULT_PIVOT;			//ピボット
 	};
 }
 

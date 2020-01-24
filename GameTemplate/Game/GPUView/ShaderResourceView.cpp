@@ -93,7 +93,13 @@ namespace myEngine {
 			&m_srv								//srv
 		);
 		if (FAILED(hr)) {
-			//エラーメッセージがでる予定
+			/*
+						////throw////
+				テクスチャのファイルパスあってる
+					ImageContent...にしてる？		
+						////throw////
+			*/
+			throw;
 			return false;
 		}
 		return true;

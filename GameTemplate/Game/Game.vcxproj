@@ -108,6 +108,7 @@
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
+    <ClCompile Include="graphics\2D\SpriteRender.cpp" />
     <ClCompile Include="graphics\animation\Animation.cpp" />
     <ClCompile Include="graphics\animation\AnimationClip.cpp" />
     <ClCompile Include="graphics\animation\AnimationPlayController.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="GameCamera.h" />
     <ClInclude Include="GameObject\GameObjectManager.h" />
     <ClInclude Include="GPUBuffer\GPUBuffer.h" />
+    <ClInclude Include="graphics\2D\SpriteRender.h" />
     <ClInclude Include="graphics\animation\Animation.h" />
     <ClInclude Include="graphics\animation\AnimationClip.h" />
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
@@ -224,7 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
-    <ImageContentTask Include="Assets\sprite\dummy.png" />
+    <Image Include="Assets\sprite\dummy.png" />
     <ImageContentTask Include="Assets\modelData\a.png" />
     <Image Include="Assets\modelData\CheckPoint2.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />

@@ -49,6 +49,7 @@
     <ClCompile Include="graphics\2D\Sprite.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp" />
     <ClCompile Include="iwa.cpp" />
+    <ClCompile Include="graphics\2D\SpriteRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -112,6 +113,7 @@
     <ClInclude Include="graphics\2D\Sprite.h" />
     <ClInclude Include="graphics\2D\ex2D.h" />
     <ClInclude Include="iwa.h" />
+    <ClInclude Include="graphics\2D\SpriteRender.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
@@ -122,11 +124,11 @@
     <Image Include="Assets\modelData\metal_00078.jpg" />
     <Image Include="Assets\modelData\stage1.jpg" />
     <Image Include="Assets\modelData\stone_00010.jpg" />
+    <Image Include="Assets\sprite\dummy.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\modelData\a.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />
-    <ImageContentTask Include="Assets\sprite\dummy.png" />
     <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
   </ItemGroup>
 </Project>
