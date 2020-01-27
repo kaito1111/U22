@@ -52,14 +52,15 @@ namespace myEngine {
 		/// </summary>
 		void Release();
 		/// <summary>
-		/// 描画
+		/// バーテックスバッファの描画
 		/// </summary>
-		void Draw(ID3D11DeviceContext& rc, int numVertex);
+		void Draw(ID3D11DeviceContext& dc, int numVertex);
 		/// <summary>
-		/// 描画
+		/// インデックスバッファの描画
 		/// </summary>
+		/// <param name="dc"></param>
 		/// <param name="numVertex"></param>
-		void Draw(ID3D11DeviceContext& rc);
+		void Draw(ID3D11DeviceContext& dc);
 		/// <summary>
 		/// 頂点バッファの取得
 		/// </summary>

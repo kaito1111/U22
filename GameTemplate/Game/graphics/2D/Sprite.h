@@ -35,22 +35,6 @@ namespace myEngine {
 			m_textureSRV = tex;
 		}
 		/// <summary>
-		/// 位置の設定
-		/// </summary>
-		/// <param name="pos"></param>
-		void SetPosition(const CVector3& pos)
-		{
-			m_position = pos;
-		}
-		/// <summary>
-		/// 乗算カラーを設定
-		/// </summary>
-		/// <param name="mulColor">乗算カラー</param>
-		void SetMulColor(const CVector4& mulColor)
-		{
-			m_mulColor = mulColor;
-		}
-		/// <summary>
 		/// 更新処理
 		/// </summary>
 		/// <param name="trans">平行移動</param>
@@ -66,10 +50,10 @@ namespace myEngine {
 		/// <summary>
 		/// 描画
 		/// </summary>
-		/// <param name="rc">レンダーコンテキスト</param>
 		/// <param name="viewMatrix">カメラの位置</param>
 		/// <param name="projMatrix">画角とか</param>
-		void Draw(const CMatrix& viewMatrix, const CMatrix& projMatrix);
+		/// <param name="w">透明度（書かなくてもOK）</param>
+		void Draw(const CMatrix& viewMatrix, const CMatrix& projMatrix, const float w = 1.0f);
 
 	private:
 		//構造体型スプライト用の定数バッファ
@@ -85,7 +69,7 @@ namespace myEngine {
 		Shader						m_ps;									//ピクセルシェーダー
 		Shader						m_vs;									//頂点シェーダー
 		ConstantBuffer				m_cb;									//定数バッファ
-		CVector4					m_mulColor = CVector4::White();			//乗算カラー
+		CVector4					m_mulColor = CVector4::White();			//乗算カラー								//透明度
 		ID3D11ShaderResourceView*	m_textureSRV = nullptr;					//テクスチャ
 		ID3D11SamplerState*			SamplerState;							//サンプルステート
 		ID3D11BlendState*			BlendState;								//ブレンドステート

@@ -17,6 +17,8 @@ namespace myEngine {
 		spriteRender = NewGO<SpriteRender>(0);
 		//ファイルパスの読み込み
 		spriteRender->Init(L"Assets/sprite/utc_all2.dds", 200.0f, 200.0f, false);
+		//透明度の設定
+		spriteRender->SetW(0.5f);
 	}
 
 

@@ -49,17 +49,6 @@ namespace myEngine {
 		return true;
 	}
 
-	//void Primitive::Draw(RenderContext& rc)
-	//{
-	//	//頂点バッファ設定
-	//	rc.IASetVertexBuffer(m_vertexBuffer);
-	//	rc.IASetIndexBuffer(m_indexBuffer);
-	//	//プリミティブトポロジー
-	//	rc.IASetPrimitiveToporogy(m_toology);
-	//	//描画
-	//	rc.DrawIndexed(m_indexBuffer.GetNumIndex(), 0, 0);
-	//}
-
 	void Primitive::Draw(ID3D11DeviceContext& dc)
 	{
 		UINT ofset = 0;
@@ -77,16 +66,16 @@ namespace myEngine {
 		dc.DrawIndexed(m_indexBuffer.GetNumIndex(), 0, 0);
 	}
 
-	void Primitive::Draw(ID3D11DeviceContext& rc, int numVertex)
+	void Primitive::Draw(ID3D11DeviceContext& dc, int numVertex)
 	{
 		//頂点バッファを設定。
 		UINT ofset = 0;
 		UINT stride = m_vertexBuffer.GetStride();
-		rc.IASetVertexBuffers(0, 1, &(m_vertexBuffer.GetBody()), &stride, &ofset);
+		dc.IASetVertexBuffers(0, 1, &(m_vertexBuffer.GetBody()), &stride, &ofset);
 		//プリミティブのトポロジーを設定。
-		rc.IASetPrimitiveTopology(m_toology);
+		dc.IASetPrimitiveTopology(m_toology);
 		//描画。
-		rc.Draw(numVertex, 0);
+		dc.Draw(numVertex, 0);
 	}
 }
 

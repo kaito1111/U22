@@ -9,6 +9,7 @@ namespace myEngine {
 	}
 	ShaderResourceView::~ShaderResourceView()
 	{
+		Release();
 	}
 	/// <summary>
 	/// ŠJ•ú
