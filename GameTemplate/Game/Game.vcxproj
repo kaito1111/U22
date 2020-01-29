@@ -126,6 +126,8 @@
     <ClCompile Include="iwa.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
+    <ClCompile Include="Magnet.cpp" />
+    <ClCompile Include="MagnetManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\kMath.cpp" />
     <ClCompile Include="math\Matrix.cpp" />
@@ -186,6 +188,8 @@
     <ClInclude Include="iwa.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
+    <ClInclude Include="Magnet.h" />
+    <ClInclude Include="MagnetManager.h" />
     <ClInclude Include="math\kMath.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />

@@ -47,8 +47,12 @@
     <ClCompile Include="graphics\2D\Sprite.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp" />
     <ClCompile Include="iwa.cpp" />
-    <ClCompile Include="MagnetManager.cpp" />
+    <ClCompile Include="graphics\2D\SpriteRender.cpp" />
+    <ClCompile Include="NPole.cpp" />
+    <ClCompile Include="SampleNetworkLogic.cpp" />
+    <ClCompile Include="SPole.cpp" />
     <ClCompile Include="Magnet.cpp" />
+    <ClCompile Include="MagnetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -109,9 +113,13 @@
     <ClInclude Include="graphics\2D\Sprite.h" />
     <ClInclude Include="graphics\2D\ex2D.h" />
     <ClInclude Include="iwa.h" />
-    <ClInclude Include="MagnetManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="graphics\2D\SpriteRender.h" />
+    <ClInclude Include="NPole.h" />
+    <ClInclude Include="SampleNetworkLogic.h" />
+    <ClInclude Include="SPole.h" />
     <ClInclude Include="Magnet.h" />
+    <ClInclude Include="MagnetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
@@ -122,12 +130,11 @@
     <Image Include="Assets\modelData\metal_00078.jpg" />
     <Image Include="Assets\modelData\stage1.jpg" />
     <Image Include="Assets\modelData\stone_00010.jpg" />
+    <Image Include="Assets\sprite\dummy.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Assets\modelData\a.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />
-    <ImageContentTask Include="Assets\sprite\dummy.png" />
     <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
-    <ImageContentTask Include="Assets\sprite\titletest.png" />
   </ItemGroup>
 </Project>

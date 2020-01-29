@@ -19,7 +19,7 @@ void Magnet::MagnetTask()
 			if (mag->GetMagnet() == Magnet::NMode) {
 
 			}
-			return;
+			return true;
 			}
 		);
 		break;
