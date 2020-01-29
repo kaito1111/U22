@@ -2,6 +2,7 @@
 #include "system/system.h"
 #include "level/Level.h"
 #include "Game.h"
+#include "MagnetManager.h"
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -10,11 +11,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 {
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
-
 	
-	NewGO<Game>(1, "game");
+	NewGO<Game>(9, "game");
 	//DeleteGO(player);
-	
+
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{

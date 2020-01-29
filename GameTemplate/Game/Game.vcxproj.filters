@@ -4,9 +4,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="NPole.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="SPole.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
@@ -49,6 +47,8 @@
     <ClCompile Include="graphics\2D\Sprite.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp" />
     <ClCompile Include="iwa.cpp" />
+    <ClCompile Include="MagnetManager.cpp" />
+    <ClCompile Include="Magnet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -63,9 +63,6 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
-    <ClInclude Include="NPole.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="SPole.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="character\CharacterController.h" />
@@ -112,6 +109,9 @@
     <ClInclude Include="graphics\2D\Sprite.h" />
     <ClInclude Include="graphics\2D\ex2D.h" />
     <ClInclude Include="iwa.h" />
+    <ClInclude Include="MagnetManager.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Magnet.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
@@ -128,5 +128,6 @@
     <ImageContentTask Include="Assets\modelData\dummy.png" />
     <ImageContentTask Include="Assets\sprite\dummy.png" />
     <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
+    <ImageContentTask Include="Assets\sprite\titletest.png" />
   </ItemGroup>
 </Project>

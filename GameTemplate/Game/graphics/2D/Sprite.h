@@ -76,6 +76,7 @@ namespace myEngine {
 		struct SSpriteCB {
 			CMatrix WVP;			//ワールドビュープロジェクション行列
 			CVector4 m_mulColor;	//乗算カラー
+			int kj;
 		};
 		CVector3					m_position = CVector3::Zero();			//座標
 		CQuaternion					m_rotation = CQuaternion::Identity();	//回転
