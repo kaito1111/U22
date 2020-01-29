@@ -22,7 +22,7 @@ namespace myEngine {
 	/// SRVのロード
 	/// </summary>
 	/// <remarks>
-	/// SSimpleVertexは2Dが入る四角形の初期化？
+	/// SSimpleVertexは2Dが入る四角形の初期化
 	/// </remarks>
 	void Sprite::Init(ID3D11ShaderResourceView* tex, float w, float h)
 	{
@@ -75,9 +75,12 @@ namespace myEngine {
 		D3D11_SAMPLER_DESC dese;
 		//サンプラーステート関連の初期化処理
 		ZeroMemory(&dese, sizeof(dese));
+		//UVWが1を超えるときのテクスチャの処理をどうするか
+		//D3D11_TEXTURE_ADDRESS_WRAPは普通に繰り返し　補足...ミラーとかもあったよ
 		dese.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 		dese.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 		dese.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+		//縮小、拡大、サンプリングに線形補間を使用
 		dese.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 		//サンプラーステートの作成処理
 		//ここでSpriteクラスのサンプラーステートにポインタが入るよ！
@@ -128,7 +131,7 @@ namespace myEngine {
 		m_world = m_world * mTrans;
 	}
 
-	void Sprite::Draw(const CMatrix& viewMatrix, const CMatrix& projMatrix)
+	void Sprite::Draw(const CMatrix& viewMatrix, const CMatrix& projMatrix, const float w)
 	{
 
 		CMatrix view;
@@ -142,32 +145,7 @@ namespace myEngine {
 		proj.MakeOrthoProjectionMatrix(1280.0f, 720.0f, 0.1f, 2.0f);
 
 		ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
-		/*
-		g_graphicsEngine->GetD3DDeviceContext()->OMSetBlendState(kjl, nullptr, 0xFFFFFFFF);
-		MemoryBarrier();
-		
-		ID3D11DepthStencilState* kkkkk;
-		D3D11_DEPTH_STENCIL_DESC desc;
-		ZeroMemory(&desc, sizeof(desc));
-		ID3D11Device* pd3d = g_graphicsEngine->GetD3DDevice();
-		desc.DepthEnable = true;
-		desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-		desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
-		desc.DepthFunc = D3D11_COMPARISON_LESS_EQUAL;
-		desc.StencilEnable = false;
-		desc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-		desc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-		desc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-		desc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
-		desc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
-		desc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
-		desc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
-		desc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-		pd3d->CreateDepthStencilState(&desc, &kkkkk);
-
-		g_graphicsEngine->GetD3DDeviceContext()->OMSetDepthStencilState(kkkkk, 0);
-		*/
 		/*
 		if (m_isInited == false) {
 			//未初期化
@@ -176,7 +154,8 @@ namespace myEngine {
 		*/
 		if (m_textureSRV == nullptr) {
 			//SRVがない
-			//tkEngineはここでエラーメッセージ
+			//なんかエンジンいじった？SRVのポインタ確認してね
+			throw;
 			return;
 		}
 		//定数バッファ
@@ -185,8 +164,8 @@ namespace myEngine {
 		cb.WVP = m_world;
 		cb.WVP = cb.WVP * view;
 		cb.WVP = cb.WVP * proj;
-		//乗算カラーの代入
-		cb.m_mulColor = m_mulColor;
+		//乗算カラーの代入 + 透明度の乗算
+		cb.m_mulColor = m_mulColor * w;
 
 		d3dDeviceContext->UpdateSubresource(m_cb.GetBody(), 0, NULL, &cb, 0, 0);
 
@@ -198,21 +177,9 @@ namespace myEngine {
 		d3dDeviceContext->VSSetShader((ID3D11VertexShader*)m_vs.GetBody(), NULL, 0);
 
 		d3dDeviceContext->IASetInputLayout(m_vs.GetInputLayout());
-		//rc.UpdateSubResourse(m_cb, &cb);
-		//rc.VSSetConstantBuffer(0, m_cb);
-		//rc.PSSetConstantBuffer(0, m_cb);
-		//g_graphicsEngine->GetD3DDeviceContext()->VSSetShaderResources(0, 1, &m_textureSRV->GetBody());
-		//g_graphicsEngine->GetD3DDeviceContext()->PSSetShaderResources(0, 1, &m_textureSRV->GetBody());
-		////rc.PSSetShaderResource(0, *m_textureSRV);
-		//rc.PSSetShader(m_ps);
-		//rc.VSSetShader(m_vs);
 
-		//g_graphicsEngine->GetD3DDeviceContext()->IASetInputLayout(m_vs.GetInputLayout());
 		g_graphicsEngine->GetD3DDeviceContext()->VSSetSamplers(0, 1, &SamplerState);
 		g_graphicsEngine->GetD3DDeviceContext()->PSSetSamplers(0, 1, &SamplerState);
-
-		//ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
-		//g_graphicsEngine->GetD3DDeviceContext()->OMSetBlendState(kjl, nullptr, 0xFFFFFFFF);
 
 		m_primitive.Draw(*d3dDeviceContext);
 	}

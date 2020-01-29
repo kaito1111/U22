@@ -70,22 +70,49 @@ namespace myEngine {
 		{
 			m_pivot = pivot;
 		}
-		void SetMulColor(const CVector4& mulColor)
+		/// <summary>
+		/// カラーの設定
+		/// </summary>
+		/// <param name="mulColor"></param>
+		//void SetMulColor(const CVector4& mulColor)
+		//{
+		//	color = mulColor;
+		//}
+
+		/// <summary>
+		/// 透明度の設定
+		/// </summary>
+		/// <param name="w">透明度</param>
+		void SetW(const float& w)
 		{
-			m_sprite.SetMulColor(mulColor);
+			m_w = w;
 		}
 	public:
+		/// <summary>
+		/// 更新処理
+		/// </summary>
 		void Update() override final;
-		void ForwardRender(RenderContext& rc);
-		void PostRender(RenderContext& rc);
+		/// <summary>
+		/// 呼ばれるのが早いDraw処理
+		/// </summary>
+		void ForwardRender();
+		/// <summary>
+		/// 最後に呼ばれるDraw処理
+		/// </summary>
+		void Draw();
+		/// <summary>
+		/// まだ実装されてないDraw処理
+		/// </summary>
+		void PostRender();
 	private:
-		bool m_isDraw3D = false;					//3D空間描画？
-		//ID3D11ShaderResourceView m_texture;				//テクスチャ
-		Sprite m_sprite;							//スプライト
-		CVector3 m_position= CVector3::Zero();						//ポジション
-		CQuaternion m_rotation = CQuaternion::Identity();						//回転
-		CVector3 m_scale = CVector3::Zero();		//拡大率
-		CVector2 m_pivot = Sprite::DEFAULT_PIVOT;	//ピボット
+		bool m_isDraw3D = false;							//3D空間描画？
+		ShaderResourceView m_texture;						//テクスチャ
+		Sprite m_sprite;									//スプライト
+		CVector3 m_position= CVector3::Zero();				//ポジション
+		CQuaternion m_rotation = CQuaternion::Identity();	//回転
+		CVector3 m_scale = CVector3::One();					//拡大率
+		CVector2 m_pivot = Sprite::DEFAULT_PIVOT;			//ピボット
+		float m_w = 1.0f;									//透明度
 	};
 }
 

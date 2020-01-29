@@ -109,10 +109,11 @@ namespace myEngine {
 						//型変換に失敗
 						if (p == nullptr && enableErrorMessage == true) {
 							/*
-							ここにブレークポイントを置いて止まった場合は
+							throw!!	下記を参考に直してね！
 							型変換が原因でFindGOできてない場合があるので
 							引数に渡したクラスの再確認をしてみてください。
 							*/
+							throw;
 						}
 						//Find成功
 						return p;
@@ -121,10 +122,11 @@ namespace myEngine {
 			}
 			if (enableErrorMessage == true) {
 				/*
-				ここにブレークポイントを置いて止まった場合は
+				throw!!	下記を参考に直してね！
 				FindGOに渡された名前が存在しないということなので
 				FindGOとNewGOのオブジェクトネームを再確認してみてください。
 				*/
+				throw;
 			}
 			//見つからなかった
 			return nullptr;
@@ -155,7 +157,9 @@ namespace myEngine {
 		void Start();
 		//更新
 		void Update();
-		//描画
+		/// <summary>
+		/// 描画
+		/// </summary>
 		void Draw();
 		/// <summary>
 		/// レンダー処理が呼ばれる前に呼ばれる描画処理
@@ -184,8 +188,9 @@ namespace myEngine {
 		/*
 		メンバ変数です
 		*/
-		typedef std::list<IGameObject*>	GameObjectList;						//名前変更
-		std::vector<GameObjectList>		m_gameObjectListArray;				//ゲームオブジェクトの優先度付きリスト		
+		
+		typedef std::list<IGameObject*>	GameObjectList;						//名前変更  IGameObjectのポインタが入った可変長配列
+		std::vector<GameObjectList>		m_gameObjectListArray;				//ゲームオブジェクトの優先度付きリスト	こっちは可変長配列じゃないから初期化してね	
 		std::vector<GameObjectList>		m_deleteObjectArray[2];				//削除するオブジェクトのリスト	削除処理中にDeleteGOがよばれる可能性があるからダブルバッファ化
 		int								m_currentDeleteObjectBufferNo = 0;	//削除中のバッファー番号
 
@@ -224,6 +229,8 @@ namespace myEngine {
 	/// </summary>
 	/// <param name="objectName">オブジェクト名前</param>
 	/// <param name="enableErrorMessage">エラーメッセージの表示</param>
+	/// <remarks>
+	/// </remarks>
 	template<class T>
 	static inline void QueryGOs(const char* objectName, std::function<bool(T* go)> func)
 	{
@@ -231,8 +238,8 @@ namespace myEngine {
 	}
 	/// <summary>
 	/// ゲームオブジェクトの検索 重いよ！
-	/// <para>★エラーメッセージtrueにしても出ないので★</para>
-	/// <para>★ブレイクポイントで対応をお願いします。★</para>
+	/// <para>エラーメッセージをtrueにするとFindGO失敗でthrowします。</para>
+	/// <para>コメントを参考にして直してください。</para>
 	/// </summary>
 	/// <typeparam name="T">検索したいオブジェクト</typeparam>
 	/// <param name="objectName">オブジェクトの名前</param>

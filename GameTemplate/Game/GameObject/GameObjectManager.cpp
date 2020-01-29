@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
+#include "Graphics/2D/Sprite.h"
 
 namespace myEngine {
 	/// <summary>
@@ -35,7 +36,7 @@ namespace myEngine {
 		}
 	}
 	/// <summary>
-	/// 後でコメント追加　いろいろ書いてないから注意
+	/// Drawの前に呼ばれる描画処理
 	/// </summary>
 	/// <param name="rc"></param>
 	void GameObjectManager::ForwardRender(RenderContext& rc)
@@ -47,7 +48,7 @@ namespace myEngine {
 		}
 	}
 	/// <summary>
-	/// 後でコメント追加　いろいろ書いてないから注意
+	/// Drawの後に呼ばれる描画処理
 	/// </summary>
 	/// <param name="rc"></param>
 	void GameObjectManager::PostRender(RenderContext& rc)
