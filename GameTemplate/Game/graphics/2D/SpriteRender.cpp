@@ -35,7 +35,7 @@ namespace myEngine {
 	void SpriteRender::ForwardRender()
 	{
 		if (m_isDraw3D == false) {
-			m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
+			m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), m_w);
 		}
 	}
 	void SpriteRender::Draw()

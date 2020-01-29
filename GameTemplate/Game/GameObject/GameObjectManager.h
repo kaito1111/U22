@@ -157,7 +157,9 @@ namespace myEngine {
 		void Start();
 		//更新
 		void Update();
-		//描画
+		/// <summary>
+		/// 描画
+		/// </summary>
 		void Draw();
 		/// <summary>
 		/// レンダー処理が呼ばれる前に呼ばれる描画処理
@@ -186,8 +188,9 @@ namespace myEngine {
 		/*
 		メンバ変数です
 		*/
-		typedef std::list<IGameObject*>	GameObjectList;						//名前変更
-		std::vector<GameObjectList>		m_gameObjectListArray;				//ゲームオブジェクトの優先度付きリスト		
+		
+		typedef std::list<IGameObject*>	GameObjectList;						//名前変更  IGameObjectのポインタが入った可変長配列
+		std::vector<GameObjectList>		m_gameObjectListArray;				//ゲームオブジェクトの優先度付きリスト	こっちは可変長配列じゃないから初期化してね	
 		std::vector<GameObjectList>		m_deleteObjectArray[2];				//削除するオブジェクトのリスト	削除処理中にDeleteGOがよばれる可能性があるからダブルバッファ化
 		int								m_currentDeleteObjectBufferNo = 0;	//削除中のバッファー番号
 

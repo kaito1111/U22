@@ -50,6 +50,7 @@
     <ClCompile Include="graphics\2D\ex2D.cpp" />
     <ClCompile Include="iwa.cpp" />
     <ClCompile Include="graphics\2D\SpriteRender.cpp" />
+    <ClCompile Include="SampleNetworkLogic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -114,6 +115,7 @@
     <ClInclude Include="graphics\2D\ex2D.h" />
     <ClInclude Include="iwa.h" />
     <ClInclude Include="graphics\2D\SpriteRender.h" />
+    <ClInclude Include="SampleNetworkLogic.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
