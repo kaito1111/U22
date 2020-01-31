@@ -10,6 +10,5 @@ public:
 private:
 	bool Start()override;
 	void Update()override;
-	void Draw()override;
 	SpriteRender* m_test=nullptr;
 };
