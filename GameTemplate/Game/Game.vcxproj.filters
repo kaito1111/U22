@@ -4,7 +4,9 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NPole.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SPole.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
@@ -46,13 +48,10 @@
     <ClCompile Include="graphics\Primitive.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp" />
-    <ClCompile Include="iwa.cpp" />
     <ClCompile Include="graphics\2D\SpriteRender.cpp" />
-    <ClCompile Include="NPole.cpp" />
     <ClCompile Include="SampleNetworkLogic.cpp" />
-    <ClCompile Include="SPole.cpp" />
-    <ClCompile Include="Magnet.cpp" />
-    <ClCompile Include="MagnetManager.cpp" />
+    <ClCompile Include="stageObjectJenerator.cpp" />
+    <ClCompile Include="Iwa.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -67,6 +66,9 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="NPole.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="SPole.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="character\CharacterController.h" />
@@ -112,14 +114,10 @@
     <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="graphics\2D\Sprite.h" />
     <ClInclude Include="graphics\2D\ex2D.h" />
-    <ClInclude Include="iwa.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="graphics\2D\SpriteRender.h" />
-    <ClInclude Include="NPole.h" />
     <ClInclude Include="SampleNetworkLogic.h" />
-    <ClInclude Include="SPole.h" />
-    <ClInclude Include="Magnet.h" />
-    <ClInclude Include="MagnetManager.h" />
+    <ClInclude Include="stageObjectJenerator.h" />
+    <ClInclude Include="Iwa.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
