@@ -1,9 +1,23 @@
 #include "stdafx.h"
 #include "stageObjectJenerator.h"
 #include "Iwa.h"
-
+#include"stageObject1.h"
+#include"stageObject2.h"
 
 stageObjectJenerator::stageObjectJenerator()
+{
+
+}
+
+
+stageObjectJenerator::~stageObjectJenerator()
+{
+	for (auto i : IwaList) {
+		delete i;
+	}
+}
+
+bool stageObjectJenerator::Start()
 {
 	level.Init(L"Assets/level/stage_iwa.tkl", [&](const auto& objData)
 	{
@@ -18,14 +32,11 @@ stageObjectJenerator::stageObjectJenerator()
 		}
 		return false;
 	});
-}
 
-
-stageObjectJenerator::~stageObjectJenerator()
-{
-	for (auto i : IwaList) {
-		delete i;
-	}
+	//オブジェクトのNewGO
+	object1 = NewGO<stageObject1>(1, "object1");
+	//object2 = NewGO<stageObject2>(1, "object2");
+	return true;
 }
 
 void stageObjectJenerator::Update()

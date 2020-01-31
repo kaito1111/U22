@@ -2,6 +2,7 @@
 #include "GameObject/IGameObject.h"
 #include "character/CharacterController.h"
 #include"physics/PhysicsStaticObject.h"
+class stageObjectJenerator;
 class Stage : public IGameObject
 {
 public:
@@ -10,8 +11,10 @@ public:
 	void Update();
 	void Draw();
 private:
-	SkinModel m_model;									//スキンモデル。
+
+	stageObjectJenerator* generator = nullptr;//ｼﾞｪﾈﾚｰﾀｰ
+	SkinModel m_model;						  //スキンモデル。
 	
-	PhysicsStaticObject m_phyStaticObuject; //静的物理オブジェクト
+	PhysicsStaticObject m_phyStaticObuject;   //静的物理オブジェクト
 	 
 };
