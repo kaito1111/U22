@@ -15,15 +15,11 @@ NPole::~NPole()
 bool NPole::Start()
 {
 	m_player = FindGO<Player>("player");
-	m_position.y += 20.0f;
-	m_characon.Init(10.0f, 10.0f, m_position);
 	return true;
 }
 
 void NPole::Update()
 {
-	m_position = m_characon.Execute(1.0f,m_move);
-
 	CVector3 pullDir = m_player->GetPosition() - m_position;
 	//if (pullDir.Length() > 100.0f) {
 	//	DeleteGO(this);

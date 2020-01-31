@@ -168,12 +168,14 @@ namespace myEngine {
 		cb.m_mulColor = m_mulColor * w;
 
 		d3dDeviceContext->UpdateSubresource(m_cb.GetBody(), 0, NULL, &cb, 0, 0);
+
 		d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb.GetBody());
 		d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb.GetBody());
 		d3dDeviceContext->VSSetShaderResources(0, 1, &m_textureSRV);
 		d3dDeviceContext->PSSetShaderResources(0, 1, &m_textureSRV);
 		d3dDeviceContext->PSSetShader((ID3D11PixelShader*)m_ps.GetBody(), NULL, 0);
 		d3dDeviceContext->VSSetShader((ID3D11VertexShader*)m_vs.GetBody(), NULL, 0);
+
 		d3dDeviceContext->IASetInputLayout(m_vs.GetInputLayout());
 
 		g_graphicsEngine->GetD3DDeviceContext()->VSSetSamplers(0, 1, &SamplerState);
