@@ -1,5 +1,6 @@
 #pragma once
 #include "graphics/2D/Sprite.h"
+#include "graphics/2D/SpriteRender.h"
 class Game : public IGameObject
 {
 public:
@@ -10,5 +11,5 @@ private:
 	bool Start()override;
 	void Update()override;
 	void Draw()override;
-	Sprite m_test;
+	SpriteRender* m_test=nullptr;
 };

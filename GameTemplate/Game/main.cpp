@@ -12,7 +12,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 	
-	NewGO<Game>(9, "game");
+	NewGO<Game>(0, "game");
 	//DeleteGO(player);
 
 	//ゲームループ。

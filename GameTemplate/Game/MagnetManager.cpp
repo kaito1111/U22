@@ -8,9 +8,10 @@ MagnetManager::~MagnetManager()
 {
 }
 
-void MagnetManager::LearnObject(Magnet* magnet)
+void MagnetManager::LearnObject(Magnet* magnet, CVector3 pos)
 {
 	m_MagnetList.push_back(magnet);
+	magnet->SetPosition(&pos);
 }
 
 void MagnetManager::FindObject(std::function < bool(Magnet*mag) > func)

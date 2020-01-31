@@ -6,7 +6,7 @@ private:
 	Magnet();
 	~Magnet();
 
-	void MagnetTask();
+	CVector3 MagnetTask();
 	enum State {
 		NMode,
 		SMode,
@@ -16,16 +16,18 @@ private:
 	State state = NoMode;
 
 	CVector3* m_Position = nullptr;
-	CQuaternion* m_Rot = nullptr;
 
 public:
 	const void SetState(State& s) {
 		state = s;
 	}
-	const State GetMagnet() {
+	const State GetState() {
 		return state;
 	}
 	const CVector3 GetPosition() {
 		return *m_Position;
+	}
+	const void SetPosition(CVector3* pos){
+		m_Position = pos;
 	}
 };

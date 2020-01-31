@@ -9,25 +9,60 @@ Magnet::~Magnet()
 {
 }
 
-void Magnet::MagnetTask()
+CVector3 Magnet::MagnetTask()
 {
-	switch (state)
+	float maganetLen = 50.0f;				//Ž¥—Í‚ª“­‚­‹——£
+	MagnetManeger().QueryObject([&](Magnet* mag)->bool
 	{
-	case Magnet::NMode:
-		MagnetManeger().QueryObject([&](Magnet* mag)->bool
-			{
-			if (mag->GetMagnet() == Magnet::NMode) {
-
+		CVector3 diff;
+		switch (state)
+		{
+		case Magnet::NMode:
+			switch (mag->GetState()) {
+			case Magnet::NMode:
+				diff = mag->GetPosition() - *m_Position;
+				if (diff.Length() > maganetLen) {
+					diff.Normalize();
+					*m_Position -= diff;
+				}
+				break;
+			case Magnet::SMode:
+				diff = mag->GetPosition() + *m_Position;
+				if (diff.Length() > maganetLen) {
+					diff.Normalize();
+					*m_Position += diff;
+				}
+				break;
+			default:
+				break;
 			}
-			return true;
+			break;
+		case Magnet::SMode:
+			switch (mag->GetState()) {
+			case Magnet::NMode:
+				diff = mag->GetPosition() + *m_Position;
+				if (diff.Length() > maganetLen) {
+					diff.Normalize();
+					*m_Position += diff;
+				}
+				break;
+			case Magnet::SMode:
+				diff = mag->GetPosition() - *m_Position;
+				if (diff.Length() > maganetLen) {
+					diff.Normalize();
+					*m_Position -= diff;
+				}
+				break;
+			default:
+				break;
+				return true;
 			}
-		);
-		break;
-	case Magnet::SMode:
-		break;
-	case Magnet::NoMode:
-		break;
-	default:
-		break;
+		case Magnet::NoMode:
+			break;
+		default:
+			break;
+		}
 	}
+	);
+	return *m_Position;
 }
