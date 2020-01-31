@@ -66,7 +66,6 @@ void stageObject1::Move()
 
 	//プレイヤーを殺す処理
 
-	//
 	CVector3 PPos = player->GetPosition();
 	CVector3 ToP = PPos - m_position;
 	if (ToP.y <= 50 && ToP.y-50			//プレイヤーからのベクトルYのみを取る

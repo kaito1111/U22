@@ -48,9 +48,10 @@
     <ClCompile Include="graphics\Primitive.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp" />
-    <ClCompile Include="iwa.cpp" />
     <ClCompile Include="graphics\2D\SpriteRender.cpp" />
     <ClCompile Include="SampleNetworkLogic.cpp" />
+    <ClCompile Include="stageObjectJenerator.cpp" />
+    <ClCompile Include="Iwa.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -113,9 +114,10 @@
     <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="graphics\2D\Sprite.h" />
     <ClInclude Include="graphics\2D\ex2D.h" />
-    <ClInclude Include="iwa.h" />
     <ClInclude Include="graphics\2D\SpriteRender.h" />
     <ClInclude Include="SampleNetworkLogic.h" />
+    <ClInclude Include="stageObjectJenerator.h" />
+    <ClInclude Include="Iwa.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

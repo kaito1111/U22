@@ -7,6 +7,7 @@
 #include "GameCamera.h"
 #include "graphics/Shader.h"
 #include "graphics/2D/ex2D.h"
+#include"stageObjectJenerator.h"
 
 Game::Game()
 {
@@ -23,6 +24,7 @@ bool Game::Start()
 	Stage* stage = NewGO<Stage>(1, "stage");
 	ex2D* ex2d = NewGO<ex2D>(1, "ex2D");
 	stageObject1* UpDownToge = NewGO<stageObject1>(1, "upDownToge");
+	stageObjectJenerator* jenerator = NewGO<stageObjectJenerator>(1, "generator");
 	return true;
 }
 
