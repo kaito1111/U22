@@ -48,10 +48,14 @@
     <ClCompile Include="graphics\Primitive.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp" />
-    <ClCompile Include="iwa.cpp" />
     <ClCompile Include="graphics\2D\SpriteRender.cpp" />
     <ClCompile Include="SampleNetworkLogic.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="myListener.cpp" />
+=======
+    <ClCompile Include="stageObjectJenerator.cpp" />
+    <ClCompile Include="Iwa.cpp" />
+>>>>>>> 4866722e335d1b016ee8b3e503c062b66dcfff24
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -114,10 +118,14 @@
     <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="graphics\2D\Sprite.h" />
     <ClInclude Include="graphics\2D\ex2D.h" />
-    <ClInclude Include="iwa.h" />
     <ClInclude Include="graphics\2D\SpriteRender.h" />
     <ClInclude Include="SampleNetworkLogic.h" />
+<<<<<<< HEAD
     <ClInclude Include="myListener.h" />
+=======
+    <ClInclude Include="stageObjectJenerator.h" />
+    <ClInclude Include="Iwa.h" />
+>>>>>>> 4866722e335d1b016ee8b3e503c062b66dcfff24
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

@@ -3,6 +3,7 @@
 #include "system/system.h"
 #include "level/Level.h"
 #include "Game.h"
+#include "MagnetManager.h"
 
 
 ///////////////////////////////////////////////////////////////////
@@ -12,12 +13,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 {
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
+<<<<<<< HEAD
 
 
 	//ExitGames::Common::Base* hoge;
 	NewGO<Game>(1, "game");
-	//DeleteGO(player);
+=======
 	
+	NewGO<Game>(0, "game");
+>>>>>>> 4866722e335d1b016ee8b3e503c062b66dcfff24
+	//DeleteGO(player);
+
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{

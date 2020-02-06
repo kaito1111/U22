@@ -95,6 +95,7 @@ namespace {
 			return 0.0f;
 		}
 	};
+	
 }
 
 
@@ -128,6 +129,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 		m_isOnGround = false;
 	}
 	//次の移動先となる座標を計算する。
+
 	CVector3 nextPosition = m_position;
 	//速度からこのフレームでの移動量を求める。オイラー積分。
 	CVector3 addPos = moveSpeed;
@@ -297,4 +299,3 @@ void CharacterController::RemoveRigidBoby()
 {
 	g_physics.RemoveRigidBody(m_rigidBody);
 }
-

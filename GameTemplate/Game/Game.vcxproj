@@ -124,9 +124,11 @@
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="GameObject\IGameObject.cpp" />
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
-    <ClCompile Include="iwa.cpp" />
+    <ClCompile Include="Iwa.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
+    <ClCompile Include="Magnet.cpp" />
+    <ClCompile Include="MagnetManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\kMath.cpp" />
     <ClCompile Include="math\Matrix.cpp" />
@@ -150,6 +152,7 @@
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stageObject1.cpp" />
     <ClCompile Include="stageObject2.cpp" />
+    <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -185,9 +188,11 @@
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="GameObject\IGameObject.h" />
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
-    <ClInclude Include="iwa.h" />
+    <ClInclude Include="Iwa.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
+    <ClInclude Include="Magnet.h" />
+    <ClInclude Include="MagnetManager.h" />
     <ClInclude Include="math\kMath.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
@@ -212,6 +217,7 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stageObject1.h" />
     <ClInclude Include="stageObject2.h" />
+    <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />

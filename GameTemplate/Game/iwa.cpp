@@ -1,24 +1,29 @@
 #include "stdafx.h"
-#include "iwa.h"
-#include "level/Level.h"
-#include "Player.h"
+#include "Iwa.h"
 
-iwa::iwa()
+
+Iwa::Iwa(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
 {
-	Level level;
-	level.Init(L"Aseets/level.stage_iwa", nullptr);
-	level.Draw();
-	m_characon.Init(70.0f, 70.0f, m_position);
-	player = FindGO<Player>("player");
+	m_model->Init(modelName);
+	m_pos = pos;
+	m_rot = rot;
 }
 
 
-iwa::~iwa()
+Iwa::~Iwa()
 {
 }
 
-void iwa::Update()
+void Iwa::Draw()
+{
+	m_model->Draw(
+		g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix()
+	);
+}
+
+void Iwa::Update()
 {
 
-	m_model.UpdateWorldMatrix(m_position, m_Rot, CVector3::One());
+	m_model->UpdateWorldMatrix(m_pos, m_rot, {5.0f,5.0f,5.0f});
 }
