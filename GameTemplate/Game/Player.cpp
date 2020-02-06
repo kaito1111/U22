@@ -18,9 +18,9 @@ Player::~Player()
 
 void Player::Update()
 {
+	MyMagnet();
 	SpawnPole();
 	Move();
-	MyMagnet();
 }
 void Player::Draw()
 {
@@ -45,10 +45,12 @@ void Player::SpawnPole()
 		});
 		NPole* m_pole = NewGO<NPole>(1, "npole");
 		CVector3 SpawnDir = { g_pad->GetRStickXF() * -1.0f , g_pad->GetRStickYF() , 0.0f };
-		if (SpawnDir.Length() < 0.01f){
+		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = m_forward;
 		}
-		m_pole->SetPosition(m_position);
+		CVector3 SpownPole = m_position;
+		SpownPole.y = 50.0f;
+		m_pole->SetPosition(SpownPole);
 		m_pole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
@@ -59,13 +61,15 @@ void Player::SpawnPole()
 			return true;
 		});
 		SPole* m_pole = NewGO< SPole>(1, "spole");
-		CVector3 SpawnDir = { g_pad->GetRStickXF() * -1.0f , g_pad->GetRStickYF() , 0.0f };
-		if (SpawnDir.Length() < 0.01f) {
-			SpawnDir = m_forward;
+		CVector3 MoveDir = { g_pad->GetRStickXF() * -1.0f , g_pad->GetRStickYF() , 0.0f };
+		if (MoveDir.Length() < 0.01f) {
+			MoveDir = m_forward;
 		}
-		SpawnDir.Normalize();
-		m_pole->SetMoveDir(SpawnDir);
-		m_pole->SetPosition(m_position);
+		MoveDir.Normalize();
+		m_pole->SetMoveDir(MoveDir);
+		CVector3 SpownPole = m_position;
+		SpownPole.y = 50.0f;
+		m_pole->SetPosition(SpownPole);
 	}
 }
 
@@ -73,7 +77,7 @@ void Player::Move()
 {
 	//ƒWƒƒƒ“ƒv”»’è
 	CVector3 movespeed = CVector3::Zero();
-	if ( g_pad->IsTrigger(enButtonB) && m_characon.IsOnGround() )
+	if (g_pad->IsTrigger(enButtonB) && m_characon.IsOnGround())
 	{
 		movespeed.y = 100.0f;
 	}
@@ -81,7 +85,7 @@ void Player::Move()
 
 	//¶‰E‚ÌˆÚ“®
 	movespeed.x = g_pad->GetLStickXF() * -20.0f;
-	m_position = m_characon.Execute( 1.0f, movespeed );
+	m_position = m_characon.Execute(1.0f, movespeed);
 	if (g_pad->GetLStickXF() > 0.0f)
 	{
 		m_rot.SetRotationDeg(CVector3::AxisY(), -90.0f);
@@ -99,17 +103,20 @@ void Player::MyMagnet()
 
 	if (g_pad->IsTrigger(enButtonY)) {
 		m_magnetSwich++;
-		switch (m_magnetSwich)
-		{
-		case 0:
-			break;
-		case 1:
-			break;
-		case 2:
-			break;
-		default:
-			m_magnetSwich = 0;
-			break;
-		}
+	}
+	switch (m_magnetSwich)
+	{
+	case 0:
+		SetState(State::SMode);
+		break;
+	case 1:
+		SetState(State::NMode);
+		break;
+	case 2:
+		SetState(State::NoMode);
+		break;
+	default:
+		m_magnetSwich = 0;
+		break;
 	}
 }

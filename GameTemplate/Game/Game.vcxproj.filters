@@ -54,6 +54,8 @@
     <ClCompile Include="Iwa.cpp" />
     <ClCompile Include="Magnet.cpp" />
     <ClCompile Include="MagnetManager.cpp" />
+    <ClCompile Include="myListener.cpp" />
+    <ClCompile Include="GamePad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -122,6 +124,8 @@
     <ClInclude Include="Iwa.h" />
     <ClInclude Include="Magnet.h" />
     <ClInclude Include="MagnetManager.h" />
+    <ClInclude Include="myListener.h" />
+    <ClInclude Include="GamePad.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

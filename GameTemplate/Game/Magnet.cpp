@@ -15,8 +15,7 @@ Magnet::~Magnet()
 CVector3 Magnet::MagnetMove()
 {
 	float maganetLen = 50.0f;				//Ž¥—Í‚ª“­‚­‹——£
-	QueryMO([&](Magnet* mag)->bool
-	{
+	QueryMO([&](Magnet* mag)->bool {
 		CVector3 diff;
 		switch (state)
 		{
@@ -67,7 +66,7 @@ CVector3 Magnet::MagnetMove()
 		default:
 			break;
 		}
-	}
-	);
+		return true;
+	});
 	return *m_Position;
 }

@@ -7,7 +7,7 @@ Iwa::Iwa(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
 	m_model->Init(modelName);
 	m_pos = pos;
 	m_rot = rot;
-	LearnMO(m_magnet, m_pos);
+	LearnMO(this, m_pos);
 }
 
 

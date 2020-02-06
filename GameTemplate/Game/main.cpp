@@ -17,8 +17,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//ExitGames::Common::Base* hoge;
 	NewGO<Game>(1, "game");
-	
-	NewGO<Game>(0, "game");
 	//DeleteGO(player);
 
 	//ゲームループ。

@@ -1,6 +1,6 @@
 #pragma once
 #include "Magnet.h"
-  
+
 namespace MyMagnet {
 	class MagnetManager
 	{
@@ -8,7 +8,7 @@ namespace MyMagnet {
 		MagnetList m_MagnetList;
 	public:
 		/*磁石と位置をマネージャーに登録*/
-		void LearnMagetObject(Magnet magnet, CVector3 pos);
+		void LearnMagetObject(Magnet* magnetObject,CVector3 pos);
 		/*IGameObjectのFindGOsと一緒*/
 		void FindMagnetObject(std::function<bool(Magnet* mag)>func);
 		/*IGameObjectと一緒*/
@@ -26,8 +26,8 @@ namespace MyMagnet {
 		return MagnetManager::Instance();
 	}
 
-	static inline void LearnMO(Magnet magnet, CVector3 pos) {
-		return MagnetManeger().LearnMagetObject( magnet,  pos);
+	static inline void LearnMO(Magnet* magnetObject,CVector3 pos) {
+		return MagnetManeger().LearnMagetObject(magnetObject , pos);
 	}
 
 	static inline void FindMO(std::function<bool(Magnet* mag)> func) {

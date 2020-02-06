@@ -3,7 +3,7 @@
 #include "character/CharacterController.h"
 #include "graphics/2D/SpriteRender.h"
 
-class Player : public IGameObject
+class Player : public IGameObject , public Magnet
 {
 public:
 	Player();

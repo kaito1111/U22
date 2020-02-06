@@ -21,6 +21,8 @@ bool Game::Start()
 {
 	NewGO< GameCamera>(1, "camera");
 	Player* player = NewGO<Player>(1, "player");
+	LearnMO(player, player->GetPosition());
+	//LearnMO(player, player->GetPosition());
 	Stage* stage = NewGO<Stage>(1, "stage");
 	ex2D* ex2d = NewGO<ex2D>(1, "ex2D");
 	return true;

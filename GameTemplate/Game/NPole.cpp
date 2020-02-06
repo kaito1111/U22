@@ -24,7 +24,7 @@ void NPole::Update()
 	//if (pullDir.Length() > 100.0f) {
 	//	DeleteGO(this);
 	//}
-
+	Move();
 	//if (pullDir.Length() < 50.0f){
 	//	pullDir.Normalize();
 	//	CVector3 aftermove = m_player->GetPosition() - pullDir;
@@ -55,6 +55,12 @@ void NPole::Draw()
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix()
 	);
+}
+
+void NPole::Move()
+{
+	m_move.Normalize();
+	m_position += m_move;
 }
 
 void NPole::SetNPole() {

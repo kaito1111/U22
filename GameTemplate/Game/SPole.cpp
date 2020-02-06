@@ -41,7 +41,7 @@ void SPole::Draw()
 void SPole::deleteRange()
 {
 	CVector3 playerDir = m_player->GetPosition() - m_position;
-	if (playerDir.Length() > 100.0f) {
+	if (playerDir.Length() > 10000.0f) {
 		DeleteGO(this);
 	}
 }
