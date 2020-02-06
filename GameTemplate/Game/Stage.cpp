@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Stage.h"
-
+#include "stageObjectJenerator.h"
 
 
 Stage::Stage()
@@ -8,6 +8,8 @@ Stage::Stage()
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/stage_00.cmo");
 	m_phyStaticObuject.CreateMeshObject(m_model, CVector3::Zero(), CQuaternion::Identity());
+	generator = NewGO<stageObjectJenerator>(0);
+
 }
 
 

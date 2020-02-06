@@ -28,7 +28,7 @@ namespace ExitGames
 		class Client : protected Photon::PhotonListener
 		{
 		public:
-			Client(LoadBalancing::Listener& listener, const Common::JString& applicationID, const Common::JString& appVersion, nByte connectionProtocol=Photon::ConnectionProtocol::DEFAULT, bool autoLobbyStats=false, nByte regionSelectionMode=RegionSelectionMode::DEFAULT, bool useAlternativePorts=false);
+			Client(Listener& listener, const Common::JString& applicationID, const Common::JString& appVersion, nByte connectionProtocol=Photon::ConnectionProtocol::DEFAULT, bool autoLobbyStats=false, nByte regionSelectionMode=RegionSelectionMode::DEFAULT, bool useAlternativePorts=false);
 			virtual ~Client(void);
 
 			virtual bool connect(const AuthenticationValues& authenticationValues=AuthenticationValues(), const Common::JString& username=L"", const Common::JString& serverAddress=M_NAMESERVER, nByte serverType=ServerType::NAME_SERVER);

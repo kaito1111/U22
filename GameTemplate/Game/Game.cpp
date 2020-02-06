@@ -23,8 +23,6 @@ bool Game::Start()
 	Player* player = NewGO<Player>(1, "player");
 	Stage* stage = NewGO<Stage>(1, "stage");
 	ex2D* ex2d = NewGO<ex2D>(1, "ex2D");
-	stageObject1* UpDownToge = NewGO<stageObject1>(1, "upDownToge");
-	stageObjectJenerator* jenerator = NewGO<stageObjectJenerator>(1, "generator");
 	return true;
 }
 

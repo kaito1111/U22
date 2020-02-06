@@ -14,8 +14,10 @@ public:
 	Player* player = nullptr;//プレイヤークラス
 private:
 
-	SkinModel* m_model = nullptr;			//スキンモデル
-	CVector3 m_position = CVector3::Zero();//座標
+	SkinModel* m_model = nullptr;			         //スキンモデル
+	CVector3 m_position = CVector3::Zero();          //座標
+	CQuaternion m_rotation = CQuaternion::Identity();//回転
+	CVector3 scale = CVector3::One();				 //拡大
 	void Draw();
 
 };
