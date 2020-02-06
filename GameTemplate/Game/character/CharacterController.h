@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include "MagnetManager.h"
 #include "Physics/CapsuleCollider.h"
 #include "Physics/RigidBody.h"
 
@@ -12,7 +11,7 @@
 /*!
 * @brief	キャラクタコントローラー。
 */
-class CharacterController : public MagnetManager {
+class CharacterController{
 public:
 	CharacterController() {
 

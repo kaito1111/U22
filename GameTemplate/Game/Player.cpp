@@ -49,7 +49,7 @@ void Player::SpawnPole()
 			SpawnDir = m_forward;
 		}
 		m_pole->SetPosition(m_position);
-		m_pole->SetForward(SpawnDir);
+		m_pole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
 	if (g_pad->IsTrigger(enButtonLB1))
