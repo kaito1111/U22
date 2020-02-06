@@ -61,11 +61,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>DirectXTK.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies);xinput.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;Photon-cpp_vc15_debug_windows_mt_x64.lib;Common-cpp_vc15_debug_windows_mt_x64.lib;LoadBalancing-cpp_vc15_debug_windows_mt_x64.lib</AdditionalDependencies>
+      <AdditionalDependencies>DirectXTK.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies);xinput.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib</AdditionalDependencies>
     </Link>
     <ImageContentTask>
       <ContentOutput>$(ProjectDir)\Assets\sprite\%(Filename).dds</ContentOutput>
@@ -131,6 +132,7 @@
     <ClCompile Include="math\Matrix.cpp" />
     <ClCompile Include="math\Vector.cpp" />
     <ClCompile Include="myEngine.cpp" />
+    <ClCompile Include="myListener.cpp" />
     <ClCompile Include="NPole.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\Physics.cpp" />
@@ -190,6 +192,7 @@
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="myEngine.h" />
+    <ClInclude Include="myListener.h" />
     <ClInclude Include="NPole.h" />
     <ClInclude Include="physics\ICollider.h" />
     <ClInclude Include="physics\MeshCollider.h" />

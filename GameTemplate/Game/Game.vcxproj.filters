@@ -51,6 +51,7 @@
     <ClCompile Include="iwa.cpp" />
     <ClCompile Include="graphics\2D\SpriteRender.cpp" />
     <ClCompile Include="SampleNetworkLogic.cpp" />
+    <ClCompile Include="myListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -116,6 +117,7 @@
     <ClInclude Include="iwa.h" />
     <ClInclude Include="graphics\2D\SpriteRender.h" />
     <ClInclude Include="SampleNetworkLogic.h" />
+    <ClInclude Include="myListener.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

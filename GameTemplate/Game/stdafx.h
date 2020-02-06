@@ -1,11 +1,15 @@
 #pragma once
 
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory>
 #include <math.h>
 #include <vector>
 #include <list>
+//D3Dcompiler.hより下にすると再定義おこります
+#include "Common-cpp/inc/Common.h"
 #include <D3Dcompiler.h>
 #include <Windows.h>
 #include <d3d11.h>
@@ -39,6 +43,10 @@
 
 #include "GameObject/GameObjectManager.h"
 #include "GameObject/IGameObject.h"
+
+#include "photon/LoadBalancing-cpp/inc/friendinfo.h"
+#include "Photon-cpp/Inc/PhotonPeer.h"
+
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。
