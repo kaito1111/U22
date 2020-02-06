@@ -63,8 +63,9 @@ void Player::SpawnPole()
 		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = m_forward;
 		}
-		m_pole->SetPosition(m_position);
+		SpawnDir.Normalize();
 		m_pole->SetMoveDir(SpawnDir);
+		m_pole->SetPosition(m_position);
 	}
 }
 

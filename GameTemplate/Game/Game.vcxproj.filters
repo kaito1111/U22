@@ -52,6 +52,8 @@
     <ClCompile Include="SampleNetworkLogic.cpp" />
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="Iwa.cpp" />
+    <ClCompile Include="Magnet.cpp" />
+    <ClCompile Include="MagnetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -118,6 +120,8 @@
     <ClInclude Include="SampleNetworkLogic.h" />
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="Iwa.h" />
+    <ClInclude Include="Magnet.h" />
+    <ClInclude Include="MagnetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
@@ -134,5 +138,8 @@
     <ImageContentTask Include="Assets\modelData\a.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />
     <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
+    <ImageContentTask Include="Assets\sprite\MagnetBlue.png" />
+    <ImageContentTask Include="Assets\sprite\MagnetRed.png" />
+    <ImageContentTask Include="Assets\sprite\MagnetZero.png" />
   </ItemGroup>
 </Project>

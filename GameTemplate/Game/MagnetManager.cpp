@@ -8,13 +8,13 @@ MagnetManager::~MagnetManager()
 {
 }
 
-void MagnetManager::LearnObject(Magnet* magnet, CVector3 pos)
+void MagnetManager::LearnMagetObject(Magnet magnet, CVector3 pos)
 {
-	m_MagnetList.push_back(magnet);
-	magnet->SetPosition(&pos);
+	m_MagnetList.push_back(&magnet);
+	magnet.SetPosition(&pos);
 }
 
-void MagnetManager::FindObject(std::function < bool(Magnet*mag) > func)
+void MagnetManager::FindMagnetObject(std::function < bool(Magnet*mag) > func)
 {
 	for (auto MagnetList : m_MagnetList) {
 		if ( func( MagnetList ) == false )
@@ -24,8 +24,8 @@ void MagnetManager::FindObject(std::function < bool(Magnet*mag) > func)
 	}
 }
 
-void MagnetManager::QueryObject(std::function<bool(Magnet*mag)> func)
+void MagnetManager::QueryMagnetObject(std::function<bool(Magnet*mag)> func)
 {
-	FindObject(func);
+	FindMagnetObject(func);
 }
 

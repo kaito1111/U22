@@ -233,6 +233,9 @@
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
   </ItemGroup>
   <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\MagnetZero.png" />
+    <ImageContentTask Include="Assets\sprite\MagnetRed.png" />
+    <ImageContentTask Include="Assets\sprite\MagnetBlue.png" />
     <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
     <Image Include="Assets\sprite\dummy.png" />
     <ImageContentTask Include="Assets\modelData\a.png" />

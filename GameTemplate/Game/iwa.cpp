@@ -7,6 +7,7 @@ Iwa::Iwa(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
 	m_model->Init(modelName);
 	m_pos = pos;
 	m_rot = rot;
+	LearnMO(m_magnet, m_pos);
 }
 
 
@@ -24,6 +25,6 @@ void Iwa::Draw()
 
 void Iwa::Update()
 {
-
+	m_pos = MagnetMove();
 	m_model->UpdateWorldMatrix(m_pos, m_rot, {5.0f,5.0f,5.0f});
 }
