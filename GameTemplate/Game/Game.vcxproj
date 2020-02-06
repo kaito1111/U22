@@ -101,7 +101,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
-    <ClCompile Include="GamePad.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="graphics\2D\ex2D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -162,10 +161,10 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
+    <ClCompile Include="TwoP_Pad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
-    <ClInclude Include="GamePad.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="graphics\2D\ex2D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -224,6 +223,7 @@
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
+    <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
   </ItemGroup>
