@@ -9,6 +9,8 @@ Player::Player()
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/unityChan.cmo");
 	m_characon.Init(20.0, 100.0f, m_position);
+	//プレイヤーに磁力を持たせる
+	LearnMO(&m_Magnet, m_position);
 }
 
 
@@ -85,6 +87,8 @@ void Player::Move()
 
 	//左右の移動
 	movespeed.x = g_pad[PadNo].GetLStickXF() * -20.0f;
+	m_Magnet.MagnetMove();
+	movespeed += m_Magnet.GetMove();
 	m_position = m_characon.Execute(1.0f, movespeed);
 	if (g_pad[PadNo].GetLStickXF() > 0.0f)
 	{
@@ -107,13 +111,13 @@ void Player::MyMagnet()
 	switch (m_magnetSwich)
 	{
 	case 0:
-		SetState(State::SMode);
+		m_Magnet.SetState(Magnet::State::NoMode);
 		break;
 	case 1:
-		SetState(State::NMode);
+		m_Magnet.SetState(Magnet::State::NMode);
 		break;
 	case 2:
-		SetState(State::NoMode);
+		m_Magnet.SetState(Magnet::State::SMode);
 		break;
 	default:
 		m_magnetSwich = 0;

@@ -20,6 +20,7 @@ Game::~Game()
 bool Game::Start()
 {
 	NewGO< GameCamera>(1, "camera");
+
 	const int PlayerNum = 2;
 	for (int i = 0; i < PlayerNum; i++)
 	{
@@ -27,8 +28,6 @@ bool Game::Start()
 		CVector3 position = CVector3::Zero();
 		position.x = 100.0*i;
 		player->SetPosition(position);
-		//ƒvƒŒƒCƒ„[‚ÉŽ¥—Í‚ðŽ‚½‚¹‚é
-		LearnMO(player, player->GetPosition());
 		player->SetPadNo(i);
 	}
 

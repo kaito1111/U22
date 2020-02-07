@@ -52,10 +52,10 @@
     <ClCompile Include="SampleNetworkLogic.cpp" />
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="Iwa.cpp" />
-    <ClCompile Include="Magnet.cpp" />
-    <ClCompile Include="MagnetManager.cpp" />
     <ClCompile Include="myListener.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
+    <ClCompile Include="Magnet\Magnet.cpp" />
+    <ClCompile Include="Magnet\MagnetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -122,10 +122,10 @@
     <ClInclude Include="SampleNetworkLogic.h" />
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="Iwa.h" />
-    <ClInclude Include="Magnet.h" />
-    <ClInclude Include="MagnetManager.h" />
     <ClInclude Include="myListener.h" />
     <ClInclude Include="TwoP_Pad.h" />
+    <ClInclude Include="Magnet\Magnet.h" />
+    <ClInclude Include="Magnet\MagnetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

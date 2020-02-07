@@ -8,11 +8,27 @@ namespace MyMagnet {
 		MagnetList m_MagnetList;
 	public:
 		/*磁石と位置をマネージャーに登録*/
-		void LearnMagetObject(Magnet* magnetObject,CVector3 pos);
+		void LearnMagetObject(Magnet* magnetObject,CVector3 pos)
+		{
+			m_MagnetList.push_back(magnetObject);
+			magnetObject->SetPosition(&pos);
+		}
+
 		/*IGameObjectのFindGOsと一緒*/
-		void FindMagnetObject(std::function<bool(Magnet* mag)>func);
+		void FindMagnetObject(std::function<bool(Magnet* mag)>func)
+		{
+			for (auto MagnetList : m_MagnetList) {
+
+				if (func(MagnetList) == false)
+				{
+					return;
+				}
+			}
+		}
 		/*IGameObjectと一緒*/
-		void QueryMagnetObject(std::function<bool(Magnet* mag)>func);
+		void QueryMagnetObject(std::function<bool(Magnet* mag)>func){
+			FindMagnetObject(func);
+		}
 		MagnetManager();
 		~MagnetManager();
 

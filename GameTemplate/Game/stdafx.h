@@ -49,7 +49,7 @@
 #include "Photon-cpp/Inc/PhotonPeer.h"
 
 //=======
-#include "MagnetManager.h"
+#include "Magnet/MagnetManager.h"
 //>>>>>>> 4866722e335d1b016ee8b3e503c062b66dcfff24
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。

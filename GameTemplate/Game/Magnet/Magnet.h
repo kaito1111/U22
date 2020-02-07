@@ -4,7 +4,7 @@ namespace MyMagnet {
 	class Magnet
 	{
 		CVector3* m_Position = nullptr;
-
+		CVector3 m_Diff = CVector3::Zero();
 		friend class MagnetManager;
 	public:
 		Magnet();
@@ -16,7 +16,8 @@ namespace MyMagnet {
 			NoMode,
 			Num,
 		};
-		myEngine::SpriteRender* m_Sprite = nullptr;
+		myEngine::SpriteRender* m_SMagSprite = nullptr;
+		myEngine::SpriteRender* m_NMagSprite = nullptr;
 	private:
 		State state = NoMode;
 	public:
@@ -31,6 +32,10 @@ namespace MyMagnet {
 		}
 		const void SetPosition(CVector3* pos) {
 			m_Position = pos;
+		}
+		//Ž¥—Í‚Å“®‚¢‚Ä‚¢‚­•ûŒü‚ð‚Æ‚é
+		const CVector3 GetMove() {
+			return m_Diff;
 		}
 	};
 }
