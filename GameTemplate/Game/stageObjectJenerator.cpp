@@ -3,7 +3,7 @@
 #include "Iwa.h"
 #include"stageObject1.h"
 #include"stageObject2.h"
-
+#include"moveFloor.h"
 stageObjectJenerator::stageObjectJenerator()
 {
 
@@ -36,6 +36,7 @@ bool stageObjectJenerator::Start()
 	//オブジェクトのNewGO
 	object1 = NewGO<stageObject1>(1, "object1");
 	//object2 = NewGO<stageObject2>(1, "object2");
+	movefloor = NewGO<moveFloor>(1, "movefloor");
 	return true;
 }
 
