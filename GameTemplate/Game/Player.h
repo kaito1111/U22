@@ -3,7 +3,7 @@
 #include "character/CharacterController.h"
 #include "graphics/2D/SpriteRender.h"
 
-class Player : public IGameObject
+class Player : public IGameObject , public Magnet
 {
 public:
 	Player();
@@ -19,8 +19,10 @@ public:
 	int GetMagnetNum() {
 		return m_magnetSwich;
 	}
+	void SetPadNo(int No) {
+		PadNo = No;
+	}
 private:
-	//SpriteRender* m_spriteRender = nullptr;
 	~Player();
 	void Update();
 	void Draw();
@@ -32,6 +34,7 @@ private:
 	CVector3 m_forward = CVector3::Front();
 	int m_magnetSwich = 0;			//ƒvƒŒƒCƒ„[‚Ì¥—Í‚ğØ‚è‘Ö‚¦‚é•Ï”
 
+	int PadNo = 0;
 	void SpawnPole();
 	void Move();
 	void MyMagnet();

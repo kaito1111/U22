@@ -13,7 +13,7 @@ namespace myEngine {
 		/// <param name="texFilePath">テクスチャのファイルパス</param>
 		/// <param name="w">幅</param>
 		/// <param name="h">高さ</param>
-		void Init(const wchar_t* texFilePath, float w, float h, bool isDraw3D);
+		void Init(const wchar_t* texFilePath, float w, float h, bool isDraw3D = false);
 		/// <summary>
 		/// 座標の設定
 		/// </summary>

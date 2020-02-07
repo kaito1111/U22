@@ -1,6 +1,7 @@
 #pragma once
-class Iwa : public IGameObject
-{
+#include "Magnet.h"
+class Iwa : public IGameObject ,public Magnet
+{ 
 public:
 	Iwa(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
 	~Iwa();

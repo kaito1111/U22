@@ -8,11 +8,11 @@ namespace MyMagnet {
 		MagnetList m_MagnetList;
 	public:
 		/*磁石と位置をマネージャーに登録*/
-		void LearnObject(Magnet* magnet, CVector3 pos);
+		void LearnMagetObject(Magnet* magnetObject,CVector3 pos);
+		/*IGameObjectのFindGOsと一緒*/
+		void FindMagnetObject(std::function<bool(Magnet* mag)>func);
 		/*IGameObjectと一緒*/
-		void FindObject(std::function<bool(Magnet* mag)>func);
-		/*IGameObjectと一緒*/
-		void QueryObject(std::function<bool(Magnet* mag)>func);
+		void QueryMagnetObject(std::function<bool(Magnet* mag)>func);
 		MagnetManager();
 		~MagnetManager();
 
@@ -26,4 +26,15 @@ namespace MyMagnet {
 		return MagnetManager::Instance();
 	}
 
+	static inline void LearnMO(Magnet* magnetObject,CVector3 pos) {
+		return MagnetManeger().LearnMagetObject(magnetObject , pos);
+	}
+
+	static inline void FindMO(std::function<bool(Magnet* mag)> func) {
+		return MagnetManeger().FindMagnetObject(func);
+	}
+
+	static inline void QueryMO(std::function<bool(Magnet* mag)> func) {
+		return MagnetManeger().QueryMagnetObject(func);
+	}
 };
