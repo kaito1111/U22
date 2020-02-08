@@ -6,7 +6,7 @@ public:
 	NPole();
 	~NPole();
 	//i‚Ş•ûŒü‚ğŒˆ‚ß‚é
-	void SetForward(CVector3 forward) {
+	void SetMoveDir(CVector3 forward) {
 		m_move = forward;
 	}
 	void SetPosition(CVector3 pos) {
@@ -26,4 +26,7 @@ private:
 	CVector3 m_position = CVector3::Zero();
 	CVector3 m_move = CVector3::Zero();
 	Player* m_player = nullptr;
+
+	void Move();
+	void SetNPole();
 };

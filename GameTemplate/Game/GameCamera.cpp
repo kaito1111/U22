@@ -15,14 +15,29 @@ GameCamera::~GameCamera()
 
 bool GameCamera::Start()
 {
-	m_Player = FindGO<Player>("player");
+	QueryGOs<Player>("player", [&](Player* player)->bool {
+
+		m_Player[m_PlayerNum] = player;
+		m_PlayerNum++;
+		return true;
+	});
 	return true;
 }
 
 void GameCamera::Update()
 {
-	CVector3 Target = m_Player->GetPosition();
-	Target.y += 100.0f;
+	CVector3 Target = CVector3::Zero();
+	for (int i = 0; i < m_PlayerNum; i++) {
+		Target += m_Player[i]->GetPosition();
+		Target.y += 100.0f;
+	}
+	Target /= (int)m_PlayerNum;
+	if (Decline < Target.y) {
+		Decline = Target.y;
+	}
+	else {
+		Target.y = Decline;
+	}
 	CVector3 pos = Target;
 	pos.z += 500.0f;
 	g_camera3D.SetTarget(Target);

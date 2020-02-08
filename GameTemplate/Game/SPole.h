@@ -1,6 +1,7 @@
 #pragma once
 class Player;
 class NPole;
+
 class SPole : public IGameObject
 {
 public:
@@ -8,16 +9,16 @@ public:
 	SPole();
 	~SPole();
 	//êiÇﬁï˚å¸ÇåàÇﬂÇÈ
-	void SetMoveDir(CVector3 MoveDir) {
+	const void SetMoveDir(CVector3 MoveDir) {
 		m_move = MoveDir;
 	}
-	void SetPosition(CVector3 pos) {
-		m_position=pos;
-	}
-	CVector3 GetPosition() {
+	const CVector3 GetPosition() {
 		return m_position;
 	}
-	void magunetTask(CVector3& Position);
+	const void SetPosition(CVector3 pos) {
+		m_position = pos;
+	}
+	//void magunetTask(CVector3& Position);
 private:
 
 
@@ -33,4 +34,5 @@ private:
 
 	void deleteRange();
 	void idou();
+	void SetSPole();
 };

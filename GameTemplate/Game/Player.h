@@ -1,12 +1,14 @@
 #pragma once
-#include "GameObject/IGameObject.h"
 #include "character/CharacterController.h"
 #include "graphics/2D/SpriteRender.h"
+
+#include "Magnet/Magnet.h"
 
 class Player : public IGameObject
 {
 public:
 	Player();
+	~Player();
 	CVector3 GetPosition() { 
 		return m_position; 
 	}
@@ -19,9 +21,10 @@ public:
 	int GetMagnetNum() {
 		return m_magnetSwich;
 	}
+	void SetPadNo(int No) {
+		PadNo = No;
+	}
 private:
-	//SpriteRender* m_spriteRender = nullptr;
-	~Player();
 	void Update();
 	void Draw();
 	SkinModel m_model;									//スキンモデル。
@@ -30,8 +33,11 @@ private:
 	CVector3 m_position = CVector3::Zero();
 	CQuaternion m_rot = CQuaternion::Identity();
 	CVector3 m_forward = CVector3::Front();
+
+	MyMagnet::Magnet m_Magnet;
 	int m_magnetSwich = 0;			//プレイヤーの磁力を切り替える変数
 
+	int PadNo = 0;
 	void SpawnPole();
 	void Move();
 	void MyMagnet();
