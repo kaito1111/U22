@@ -1,4 +1,5 @@
 #pragma once
+
 /*!
  *@brief	グラフィックスエンジン。
  */

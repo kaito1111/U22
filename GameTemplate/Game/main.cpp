@@ -3,7 +3,7 @@
 #include "system/system.h"
 #include "level/Level.h"
 #include "Game.h"
-#include "MagnetManager.h"
+#include "Magnet/MagnetManager.h"
 
 
 ///////////////////////////////////////////////////////////////////
@@ -13,7 +13,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 {
 	//ÉQÅ[ÉÄÇÃèâä˙âªÅB
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
-
 
 	NewGO<Game>(1, "game");
 
