@@ -15,11 +15,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
 
-	//ExitGames::Common::Base* hoge;
 	NewGO<Game>(1, "game");
-	
-	NewGO<Game>(0, "game");
-	//DeleteGO(player);
 
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)

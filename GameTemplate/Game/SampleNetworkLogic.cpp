@@ -4,6 +4,7 @@
 
 //SampleNetworkLogic::SampleNetworkLogic(const ExitGames::Common::JString& appID, const ExitGames::Common::JString& appVersion)
 //	: m_LoadBalancingClient(myListener, appID, appVersion)
+//	, myListener(*pLib, mLogger)
 //{
 //
 //}
@@ -17,7 +18,6 @@
 //}
 //void SampleNetworkLogic::debugReturn(int debugLevel, const ExitGames::Common::JString& string)
 //{
-//
 //}
 //
 //int main(void)

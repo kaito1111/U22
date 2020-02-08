@@ -3,7 +3,8 @@
 #include "photon/LoadBalancing-cpp/inc/Client.h"
 #include "myListener.h"
 //#include "photon/Demos/shared/inc/OutputListener.h"
-class SampleNetworkLogic 
+
+class SampleNetworkLogic
 {
 //public:
 //	/// <summary>
@@ -30,7 +31,8 @@ class SampleNetworkLogic
 //	virtual void debugReturn(int debugLevel, const ExitGames::Common::JString& string);
 //private:
 //	ExitGames::LoadBalancing::Client			m_LoadBalancingClient;		//クライアント
-//	ExitGames::LoadBalancing::myListener			myListener;					//リスナーの実装(中継地点？)
+//	myListener									myListener;					//リスナーの実装(中継地点？	
 //	ExitGames::Common::Logger					mLogger;					//EGLOGにアクセス 名前変えたらばぐるよ
+//	CPhotonlib*									pLib;						//フォトンライブラリ
 };
 

@@ -26,9 +26,51 @@ public:
 		float m[4][4];
 	};
 public:
+	/// <summary>
+	/// Effekseerの行列型の変数に行列の各要素をコピーする。
+	/// </summary>
+	/// <param name="efMat">コピー先</param>
+	void CopyTo(Effekseer::Matrix44& efMat) const
+	{
+		memcpy(efMat.Values, m, sizeof(efMat.Values));
+	}
 	operator DirectX::XMMATRIX() const
 	{
 		return DirectX::XMLoadFloat4x4(&mat);
+	}
+	/// <summary>
+	/// エフェクサー用の行列のオーバーライド
+	/// </summary>
+	/// <returns></returns>
+	operator Effekseer::Matrix44() const
+	{
+		Effekseer::Matrix44 eMat = *((Effekseer::Matrix44*)&mat);
+		return eMat;
+	}
+	/// <summary>
+	/// エフェクサー用の行列のオーバーライド
+	/// </summary>
+	/// <returns></returns>
+	operator Effekseer::Matrix43() const
+	{
+		Effekseer::Matrix43 eMat;
+		eMat.Value[0][0] = mat.m[0][0];
+		eMat.Value[0][1] = mat.m[0][1];
+		eMat.Value[0][2] = mat.m[0][2];
+
+		eMat.Value[1][0] = mat.m[1][0];
+		eMat.Value[1][1] = mat.m[1][1];
+		eMat.Value[1][2] = mat.m[1][2];
+
+		eMat.Value[2][0] = mat.m[2][0];
+		eMat.Value[2][1] = mat.m[2][1];
+		eMat.Value[2][2] = mat.m[2][2];
+
+		eMat.Value[3][0] = mat.m[3][0];
+		eMat.Value[3][1] = mat.m[3][1];
+		eMat.Value[3][2] = mat.m[3][2];
+
+		return eMat;
 	}
 	CMatrix() {
 

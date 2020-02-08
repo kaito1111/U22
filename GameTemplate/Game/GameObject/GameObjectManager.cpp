@@ -51,11 +51,11 @@ namespace myEngine {
 	/// Draw‚ÌŒã‚ÉŒÄ‚Î‚ê‚é•`‰æˆ—
 	/// </summary>
 	/// <param name="rc"></param>
-	void GameObjectManager::PostRender(RenderContext& rc)
+	void GameObjectManager::PostDraw()
 	{
 		for (GameObjectList objList : m_gameObjectListArray) {
 			for (IGameObject* obj : objList) {
-				obj->PostRenderWrapper(rc);
+				obj->PostDrawWrapper();
 			}
 		}
 	}
@@ -74,7 +74,8 @@ namespace myEngine {
 			//RenderContext& rc = g_graphicsEngine->GetRenderContext();
 			//ForwardRender(rc);
 			Draw();
-			//PostRender(rc);
+			//ˆê”Ô’x‚¢Draw
+			PostDraw();
 		}
 		//íœ
 		ExcuteDeleteGameObject();

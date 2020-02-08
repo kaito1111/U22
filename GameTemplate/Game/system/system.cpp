@@ -88,6 +88,8 @@ void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, in
 	//DirectXの初期化。
 	g_graphicsEngine = new GraphicsEngine();
 	g_graphicsEngine->Init(g_hWnd);
+	//エフェクト関連いろいろの初期化
+	//g_graphicsEngine->InitEffekseer();
 
 	//ゲームパッドの初期化。
 	//最大４つのコントローラーを接続できるようにしましょう。

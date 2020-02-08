@@ -167,10 +167,10 @@ namespace myEngine {
 		/// <param name="rc">レンダーコンテキスト</param>
 		void ForwardRender(RenderContext& rc);
 		/// <summary>
-		/// 描画処理
+		/// 最後の描画処理
 		/// </summary>
 		/// <param name="rc">レンダーコンテキスト</param>
-		void PostRender(RenderContext& rc);
+		void PostDraw();
 		/// <summary>
 		/// ゲームオブジェクトマネージャーから呼ばれる各処理
 		/// </summary>
