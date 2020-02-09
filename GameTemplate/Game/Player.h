@@ -3,6 +3,7 @@
 #include "graphics/2D/SpriteRender.h"
 
 #include "Magnet/Magnet.h"
+#include"HID/Pad.h"
 
 class Player : public IGameObject
 {
@@ -21,8 +22,8 @@ public:
 	int GetMagnetNum() {
 		return m_magnetSwich;
 	}
-	void SetPadNo(int No) {
-		PadNo = No;
+	void SetPad(Pad* pad) {
+		m_Pad = pad;
 	}
 private:
 	void Update();
@@ -37,7 +38,7 @@ private:
 	MyMagnet::Magnet m_Magnet;
 	int m_magnetSwich = 0;			//プレイヤーの磁力を切り替える変数
 
-	int PadNo = 0;
+	Pad* m_Pad = nullptr;			//このプレイヤーのパッド
 	void SpawnPole();
 	void Move();
 	void MyMagnet();
