@@ -8,6 +8,7 @@ Camera::Camera():
 	m_near(0.1f),
 	m_far(5000.0f),
 	m_position(CVector3::Zero()),
+	m_target(CVector3{0,0,1}),
 	m_up(CVector3::Up()),
 	m_aspect(1.0f)
 {
@@ -22,7 +23,8 @@ void Camera::Update()
 		m_target,
 		m_up
 	);
-
+	
+//プロジェクション行列
 	m_projMatrix.MakeProjectionMatrix(
 		m_viewAngle,					//スクリーンの横
 		FRAME_BUFFER_W / FRAME_BUFFER_H,	//スクリーンの高さ

@@ -20,6 +20,10 @@
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
 
+//エフェクサー
+#include "Effekseer.h"
+#include "EffekseerRendererDX11.h"
+
 //DirectXTKのインクルードファイル。
 #include "DirectXTK/Inc/Model.h"
 #include "DirectXTK/Inc/Effects.h"	
@@ -41,16 +45,16 @@
 #include "graphics/animation/AnimationClip.h"
 #include "graphics/Camera.h"
 
+#include "Effect.h"
+
 #include "GameObject/GameObjectManager.h"
 #include "GameObject/IGameObject.h"
 
-//<<<<<<< HEAD
 #include "photon/LoadBalancing-cpp/inc/friendinfo.h"
 #include "Photon-cpp/Inc/PhotonPeer.h"
 
-//=======
 #include "Magnet/MagnetManager.h"
-//>>>>>>> 4866722e335d1b016ee8b3e503c062b66dcfff24
+
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。
