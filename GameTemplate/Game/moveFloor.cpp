@@ -49,15 +49,15 @@ void moveFloor::Move()
 		m_pos.y += -moveSpeed;	  //動くスピードが上がる
 		moveSpeed++;
 		if (moveSpeed >= speedLimit) {
-			sLimit = true;		  //スピードが上限まで来たから変える
+			sLimit = true;		          //スピードが上限まで来たから変える
 		}
 	}
 	if (UDPos == false&& sLimit == true) {//一定値までスピードが上がると
-		moveSpeed--;              //スピードを下げていく。
-		if (moveSpeed <= 0)		  //スピードが０以下になったら
-			moveSpeed = 0;        //スピードに０を入れる。
-			UDPos = true;		  //下がるモードから上がるモードへ。
-			sLimit = false;		  //スピードリミットを戻す。
+		moveSpeed--;					  //スピードを下げていく。
+		if (moveSpeed <= 0)				  //スピードが０以下になったら
+			moveSpeed = 0;				  //スピードに０を入れる。
+			UDPos = true;				  //下がるモードから上がるモードへ。
+			sLimit = false;				  //スピードリミットを戻す。
 	}
 
 	//上がるプログラム
