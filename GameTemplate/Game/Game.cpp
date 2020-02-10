@@ -16,12 +16,11 @@ Game::~Game()
 
 bool Game::Start()
 {
-	NewGO<GameCamera>(1, "camera");
-	Stage* stage = NewGO<Stage>(1, "stage");
+	NewGO<TwoP_Pad>(1, "pad");
+	Stage* stage = NewGO<Stage>(2, "stage");
 	//2D‚ÌƒTƒ“ƒvƒ‹
 	ex2D* ex2d = NewGO<ex2D>(1, "ex2D");
-	NewGO< TwoP_Pad>(1, "pad");
-
+	NewGO<GameCamera>(9, "camera");
 	return true;
 }
 
