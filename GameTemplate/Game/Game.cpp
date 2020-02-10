@@ -1,13 +1,9 @@
 #include "stdafx.h"
 #include "Game.h"
-#include "Player.h"
 #include"Stage.h"
-#include"stageObject1.h"
 #include "GameCamera.h"
-#include "graphics/Shader.h"
 #include "graphics/2D/ex2D.h"
 #include "exEffect.h"
-#include"stageObjectJenerator.h"
 
 Game::Game()
 {
