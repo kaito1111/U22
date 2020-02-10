@@ -162,7 +162,6 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
-    <ClCompile Include="TwoP_Pad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -225,7 +224,6 @@
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
-    <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
   </ItemGroup>
@@ -235,6 +233,7 @@
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
+    <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />

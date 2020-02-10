@@ -19,6 +19,6 @@ private:
 	bool speedDown = false;							//スピードを上げたり下げたりする
 	float moveSpeed = 0;                            //速度。上がったり下がったりする
 	bool sLimit = false;		    				//動いた量
-	PhysicsStaticObject m_phyStaticObuject;         //静的物理オブジェクト
+	PhysicsStaticObject m_phyStaticObject;         //静的物理オブジェクト
 };
 

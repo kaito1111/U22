@@ -12,6 +12,8 @@ moveFloor::moveFloor()
 {
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/moveFloor.cmo");
+	m_pos = {50.0f,50.0f,0.0f};
+	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);
 }
 
 moveFloor::~moveFloor()
@@ -29,10 +31,10 @@ void moveFloor::Draw()
 void moveFloor::Update()
 {
 	//メッシュの云々。要するに当たり判定
-	m_phyStaticObuject.CreateMeshObject(m_model, m_pos, m_rot);
+	
 
 	//ワールド行列の更新
-	m_model.UpdateWorldMatrix(m_pos, m_rot, CVector3::One());
+	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
 }
 
 void moveFloor::Move()

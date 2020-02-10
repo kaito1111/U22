@@ -4,6 +4,9 @@
     <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
     <ImageContentTask Include="Assets\modelData\a.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />
+    <ImageContentTask Include="Assets\sprite\MagnetZero.png" />
+    <ImageContentTask Include="Assets\sprite\MagnetRed.png" />
+    <ImageContentTask Include="Assets\sprite\MagnetBlue.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
@@ -72,6 +75,7 @@
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
