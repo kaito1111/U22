@@ -19,7 +19,10 @@ bool stageObject1::Start()
 	//cmoƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
 	m_model.Init(L"Assets/modelData/TogeToge.cmo");
 	m_characon.Init(100.0f, 0.0f, m_position);
-	player = FindGO<Player>("player");
+	int MaxPlayer = 0;
+	for (int PadNum = Pad::CONNECT_PAD_MAX; MaxPlayer < PadNum; PadNum++) {
+		player = FindGO<Player>("player%d", PadNum);
+	}
 	return true;
 }
 
