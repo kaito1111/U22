@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "moveFloor.h"
-
+#include "Player.h"
 
 //moveFloor::moveFloor(const wchar_t * modelName, CVector3 pos, CQuaternion rot)
 //{
@@ -10,10 +10,7 @@
 //}
 moveFloor::moveFloor()
 {
-	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/moveFloor.cmo");
-	m_pos = {50.0f,50.0f,0.0f};
-	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);
+	
 }
 
 moveFloor::~moveFloor()
@@ -28,6 +25,17 @@ void moveFloor::Draw()
 	);
 }
 
+bool moveFloor::Start()
+{
+	//cmoファイルの読み込み。
+	m_model.Init(L"Assets/modelData/moveFloor.cmo");
+	//m_pos = { 50.0f,50.0f,0.0f };
+	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);
+
+	player = FindGO<Player>("player");
+	return true;
+}
+
 void moveFloor::Update()
 {
 	//メッシュの云々。要するに当たり判定
@@ -39,9 +47,6 @@ void moveFloor::Update()
 
 void moveFloor::Move()
 {
-	
-
-
 	const float speedLimit = 100;//スピードの上限
 
 	//初期位置は上。下がるプログラム。
@@ -74,8 +79,57 @@ void moveFloor::Move()
 			moveSpeed = 0;				  //スピードに０を入れる。
 		UDPos = true;					  //上がるモードから下がるモードへ。
 		sLimit = false;					  //速度を戻す。
-	}
+	}	
+}
+
+void moveFloor::SetBoxDot()
+{
+	const float LengthAndWidth = 100.0f;//縦と横の長さ
+	const float height =		 20.0f;//高さ
+
+	///////前////////////
+	//右上
+	FrontRightUp.x += LengthAndWidth;
+	FrontRightUp.z += LengthAndWidth;
+	FrontRightUp.y += height;
+
+	//右下
+	FrontRightDown.x += LengthAndWidth;
+	FrontRightDown.z += LengthAndWidth;
+
+	//左上
+	FrontLeftUp.x -= LengthAndWidth;
+	FrontLeftUp.z += LengthAndWidth;
+	FrontLeftUp.y += height;
+
+	//左下
+	FrontLeftDown.x -= LengthAndWidth;
+	FrontLeftDown.z += LengthAndWidth;
 
 
-	
+	/////後ろ//////
+	//右上
+	BackRightUp.x += LengthAndWidth;
+	BackRightUp.z -= LengthAndWidth;
+	BackRightUp.y += height;
+
+	//右下
+	BackRightDown.x += LengthAndWidth;
+	BackRightDown.z -= LengthAndWidth;
+
+	//左上
+	BackLeftUp.x -= LengthAndWidth;
+	BackLeftUp.z -= LengthAndWidth;
+	BackLeftUp.y += height;
+
+	//左下
+	BackLeftDown.x -= LengthAndWidth;
+	BackLeftDown.z -= LengthAndWidth;
+
+
+}
+
+void moveFloor::CollisionDetection()
+{
+
 }
