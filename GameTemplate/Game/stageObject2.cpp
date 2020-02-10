@@ -4,8 +4,9 @@
 
 stageObject2::stageObject2()
 {
-	m_model->Init(L"Assets/modelData/maruToge.cmo");
-
+	m_model->Init(L"Assets/modelData/RorlingRock.cmo");
+	charaCon.Init(20.0, 100.0f, m_pos);
+	m_pos.y += 200.0f;
 }
 
 
@@ -21,10 +22,18 @@ bool stageObject2::Start()
 
 void stageObject2::Update()
 {
-	//距離図ってプレイヤーを殺す。演出とかも付けたいな。
-	//出す場所も考えないと
 
-	m_model->UpdateWorldMatrix(m_position, m_rotation, scale);
+	m_model->UpdateWorldMatrix(m_pos, m_rot, scale);
+	m_pos = charaCon.Execute(1.0f, moveSpeed);
+}
+
+void stageObject2::Rorling()
+{
+	charaCon.SetPosition(m_pos);
+	//回るぜ
+	CQuaternion qRot;
+	qRot.SetRotationDeg(CVector3::AxisZ(), 1.0f*0.3f);
+	m_rot.Multiply(qRot);
 }
 
 
