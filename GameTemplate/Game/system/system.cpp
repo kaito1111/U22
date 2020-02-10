@@ -93,10 +93,6 @@ void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, in
 
 	//ゲームパッドの初期化。
 	//最大４つのコントローラーを接続できるようにしましょう。
-	g_pad[0].Init(0);
-	g_pad[1].Init(1);
-	g_pad[2].Init(2);
-	g_pad[3].Init(3);
 
 	g_physics.Init();
 }
