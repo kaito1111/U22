@@ -138,7 +138,7 @@ class SoundSource
 //		enStreamingBuffering,	//バッファリング
 //		enStreamngQueueing,		//キューイング
 //	};
-//	//std::shared_ptr<CWaveFile>	m_waveFile;
+//	//std::shared_ptr<WaveFile>		m_waveFile;
 //	IXAudio2SourceVoice*			m_sourceVoice = nullptr;		//ソースボイス
 //	bool							m_isLoop = false;				//ループフラグ	
 //	bool							m_isPlaying = false;			//再生中フラグ
