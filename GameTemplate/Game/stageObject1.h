@@ -14,7 +14,10 @@ public:
 		return m_position;  //当たり判定とかで使う予定。
 	}
 private:
-	Player* player = nullptr;
+
+	Player* player[4] = {};
+	int MaxPlayer;//プレイヤーの最大数
+	int PadNum;
 
 	SkinModel m_model;  //スキンモデル
 

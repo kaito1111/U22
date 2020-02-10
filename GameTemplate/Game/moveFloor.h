@@ -18,8 +18,8 @@ public:
 	void SetBoxDot();         //直方体の４頂点の座標
 	void CollisionDetection();//プレイヤーとの当たり判定
 private:
-	Player* player = nullptr;
-
+	Player* player[4] = {};
+	int MaxPlayer;//プレイヤーの最大数
 	SkinModel m_model;								//スキンモデル
 	CVector3 m_pos = CVector3::Zero();				//座標
 	CQuaternion m_rot = CQuaternion::Identity();	//回転

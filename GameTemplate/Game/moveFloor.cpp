@@ -27,13 +27,17 @@ void moveFloor::Draw()
 
 bool moveFloor::Start()
 {
+
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/moveFloor.cmo");
 	//m_pos = { 50.0f,50.0f,0.0f };
 	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);
-	int MaxPlayer = 0;
-	for (int PadNum = Pad::CONNECT_PAD_MAX; MaxPlayer < PadNum; PadNum++) {
-		player = FindGO<Player>("player%d",PadNum);
+	int MaxPlayer = Pad::CONNECT_PAD_MAX;
+	for (int PadNum = 1; PadNum < MaxPlayer ; PadNum++) {
+		char pl[256];
+		sprintf(pl, "player%d", PadNum+1);
+
+		player[PadNum] = FindGO<Player>(pl);
 	}
 	
 	return true;

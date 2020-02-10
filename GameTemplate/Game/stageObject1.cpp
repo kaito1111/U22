@@ -19,9 +19,13 @@ bool stageObject1::Start()
 	//cmoファイルの読み込み
 	m_model.Init(L"Assets/modelData/TogeToge.cmo");
 	m_characon.Init(100.0f, 0.0f, m_position);
-	int MaxPlayer = 0;
-	for (int PadNum = Pad::CONNECT_PAD_MAX; MaxPlayer < PadNum; PadNum++) {
-		player = FindGO<Player>("player%d", PadNum);
+
+	MaxPlayer = Pad::CONNECT_PAD_MAX;
+	for (PadNum = 0; PadNum < MaxPlayer; PadNum++) {
+		char pl[256];
+		sprintf(pl, "player%d", PadNum+1);
+
+		player[PadNum] = FindGO<Player>(pl);
 	}
 	return true;
 }
@@ -75,7 +79,7 @@ void stageObject1::Move()
 
 	//プレイヤーを殺す処理
 
-	CVector3 PPos = player->GetPosition();
+	CVector3 PPos = player[PadNum]->GetPosition();
 	CVector3 ToP = PPos - m_position;
 	if (ToP.y <= 50 && ToP.y-50			//プレイヤーからのベクトルYのみを取る
 		&&ToP.x >=-50 && ToP.x <= 50) { //     　　　〃　　　　　Xのみを取る
@@ -83,7 +87,7 @@ void stageObject1::Move()
 		CVector3 CheckPoint = CVector3::Zero();
 
 		//後でチェックポイントを作る
-		player->SetPosition(CheckPoint);
+		player[PadNum]->SetPosition(CheckPoint);
 	}
 
 
