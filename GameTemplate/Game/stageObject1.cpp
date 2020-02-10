@@ -4,17 +4,23 @@
 
 stageObject1::stageObject1()
 {
-	//ドッスン棘やで。
-	 
-	//cmoファイルの読み込み
-	m_model.Init(L"Assets/modelData/TogeToge.cmo");
-	m_characon.Init(100.0f, 0.0f, m_position);
-	player = FindGO<Player>("player");
+	
 }
 
 stageObject1::~stageObject1()
 {
+	
+}
 
+bool stageObject1::Start()
+{
+	//ドッスン棘やで。
+
+	//cmoファイルの読み込み
+	m_model.Init(L"Assets/modelData/TogeToge.cmo");
+	m_characon.Init(100.0f, 0.0f, m_position);
+	player = FindGO<Player>("player");
+	return true;
 }
 
 void stageObject1::Update()

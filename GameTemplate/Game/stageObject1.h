@@ -8,6 +8,7 @@ class stageObject1 : public IGameObject
 public:
 	stageObject1();
 	~stageObject1();
+	bool Start();
 	void Update();
 	CVector3 GetTogePos() { //座標の取得。
 		return m_position;  //当たり判定とかで使う予定。
