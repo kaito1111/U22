@@ -20,10 +20,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	{
 		//描画開始。
 		g_graphicsEngine->BegineRender();
-		//ゲームパッドの更新。	
-		for (auto& pad : g_pad) {
-			pad.Update();
-		}
 		//物理エンジンの更新。
 		g_physics.Update();
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます

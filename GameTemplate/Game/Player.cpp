@@ -79,22 +79,26 @@ void Player::Move()
 {
 	//ジャンプ判定
 	CVector3 movespeed = CVector3::Zero();
-	if (g_pad[PadNo].IsTrigger(enButtonB) && m_characon.IsOnGround())
+	if (m_Pad->IsTrigger(enButtonB) && m_characon.IsOnGround())
 	{
-		movespeed.y = 100.0f;
+		const float junpPower = 100.0f;
+		movespeed.y = junpPower;
 	}
-	movespeed.y -= 5.0f;
-
+	{
+		//重力
+		const float gravity = 5.0f;
+		movespeed.y -= gravity;
+	}
 	//左右の移動
-	movespeed.x = g_pad[PadNo].GetLStickXF() * -20.0f;
+	movespeed.x = m_Pad->GetLStickXF() * -20.0f;
 	m_Magnet.MagnetMove();
 	movespeed += m_Magnet.GetMove();
 	m_position = m_characon.Execute(1.0f, movespeed);
-	if (g_pad[PadNo].GetLStickXF() > 0.0f)
+	if (m_Pad->GetLStickXF() > 0.0f)
 	{
 		m_rot.SetRotationDeg(CVector3::AxisY(), -90.0f);
 	}
-	if (g_pad[PadNo].GetLStickXF() < 0.0f)
+	if (m_Pad->GetLStickXF() < 0.0f)
 	{
 		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
 	}
@@ -105,7 +109,7 @@ void Player::Move()
 void Player::MyMagnet()
 {
 
-	if (g_pad[PadNo].IsTrigger(enButtonY)) {
+	if (m_Pad->IsTrigger(enButtonY)) {
 		m_magnetSwich++;
 	}
 	switch (m_magnetSwich)
