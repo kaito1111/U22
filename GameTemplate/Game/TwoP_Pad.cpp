@@ -11,16 +11,16 @@ TwoP_Pad::~TwoP_Pad()
 
 bool TwoP_Pad::Start()
 {
-	m_pad[0].Init(0);
-	m_pad[1].Init(1);
-	m_pad[2].Init(2);
-	m_pad[3].Init(3);
-	int PadNum = 0;
-	QueryGOs<Player>("player", [&](Player* player)->bool {
-		player->SetPad(&m_pad[PadNum]);
-		PadNum++;
-		return true;
-	});
+	int i = 0;
+	for (auto p : m_pad) {
+		m_pad[i].Init(i);
+		char PlayerName[256] = "player";
+		char PlayerNo[256] = {};
+		sprintf(PlayerNo, PlayerName, i);
+		Player* player = NewGO<Player>(0, PlayerNo);
+		player->SetPad(m_pad);
+		i++;
+	}
 	return true;
 }
 
