@@ -127,6 +127,7 @@
     <ClCompile Include="GameObject\IGameObject.cpp" />
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
     <ClCompile Include="Iwa.cpp" />
+    <ClCompile Include="KaitoTask.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
     <ClCompile Include="Magnet\Magnet.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="GameObject\IGameObject.h" />
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
     <ClInclude Include="Iwa.h" />
+    <ClInclude Include="KaitoTask.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
     <ClInclude Include="Magnet\Magnet.h" />

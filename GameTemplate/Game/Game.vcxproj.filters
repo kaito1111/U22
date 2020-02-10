@@ -60,6 +60,7 @@
     <ClCompile Include="SoundEngine.cpp" />
     <ClCompile Include="SoundSource.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
+    <ClCompile Include="KaitoTask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -136,6 +137,7 @@
     <ClInclude Include="SoundEngine.h" />
     <ClInclude Include="SoundSource.h" />
     <ClInclude Include="TwoP_Pad.h" />
+    <ClInclude Include="KaitoTask.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

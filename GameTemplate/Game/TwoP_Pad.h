@@ -9,7 +9,7 @@ public:
 
 private:
 	Pad m_pad[Pad::CONNECT_PAD_MAX];		//m_pad‚Ì’è‹`B
-	bool Start();
+	bool Start()override;
 	void Update()override;
 };
 

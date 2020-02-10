@@ -15,12 +15,16 @@ GameCamera::~GameCamera()
 
 bool GameCamera::Start()
 {
-	QueryGOs<Player>("player", [&](Player* player)->bool {
-
-		m_Player[m_PlayerNum] = player;
-		m_PlayerNum++;
-		return true;
-	});
+	for (int i = 0; i < m_PlayerNum + 1; i++) {
+		char PlayerName[256] = "player";
+		char PlayerNo[256] = {};
+		sprintf(PlayerNo, "player%d", m_PlayerNum + 1);
+		QueryGOs<Player>(PlayerNo, [&](Player* player)->bool {
+			m_Player[m_PlayerNum] = player;
+			m_PlayerNum++;
+			return true;
+		});
+	}
 	return true;
 }
 

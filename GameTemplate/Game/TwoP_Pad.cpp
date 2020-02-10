@@ -14,9 +14,8 @@ bool TwoP_Pad::Start()
 	int i = 0;
 	for (auto p : m_pad) {
 		m_pad[i].Init(i);
-		char PlayerName[256] = "player";
 		char PlayerNo[256] = {};
-		sprintf(PlayerNo, PlayerName, i);
+		sprintf(PlayerNo, "player%d", i+1);
 		Player* player = NewGO<Player>(0, PlayerNo);
 		player->SetPad(m_pad);
 		i++;
