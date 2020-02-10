@@ -52,7 +52,6 @@
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="Iwa.cpp" />
     <ClCompile Include="myListener.cpp" />
-    <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="Magnet\Magnet.cpp" />
     <ClCompile Include="Magnet\MagnetManager.cpp" />
     <ClCompile Include="moveFloor.cpp" />
@@ -60,6 +59,7 @@
     <ClCompile Include="exEffect.cpp" />
     <ClCompile Include="SoundEngine.cpp" />
     <ClCompile Include="SoundSource.cpp" />
+    <ClCompile Include="TwoP_Pad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -71,6 +71,7 @@
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -127,7 +128,6 @@
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="Iwa.h" />
     <ClInclude Include="myListener.h" />
-    <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="Magnet\Magnet.h" />
     <ClInclude Include="Magnet\MagnetManager.h" />
     <ClInclude Include="moveFloor.h" />
@@ -135,6 +135,7 @@
     <ClInclude Include="exEffect.h" />
     <ClInclude Include="SoundEngine.h" />
     <ClInclude Include="SoundSource.h" />
+    <ClInclude Include="TwoP_Pad.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
