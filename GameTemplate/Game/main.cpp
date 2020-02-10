@@ -1,5 +1,4 @@
 #include "stdafx.h"
-
 #include "system/system.h"
 #include "level/Level.h"
 #include "Game.h"

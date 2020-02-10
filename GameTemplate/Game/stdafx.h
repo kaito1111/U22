@@ -1,7 +1,9 @@
 #pragma once
 
-
-
+#include <WinSock2.h>
+#include <windows.h>
+#include <d3d11.h>
+#include <D3Dcompiler.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory>
@@ -9,13 +11,15 @@
 #include <vector>
 #include <list>
 //D3Dcompiler.hより下にすると再定義おこります
-#include "Common-cpp/inc/Common.h"
-#include <D3Dcompiler.h>
-#include <Windows.h>
-#include <d3d11.h>
+//#include "Common-cpp/inc/Common.h"
 #include <map>
 #include <functional>
 #include <algorithm>
+//オーディオのインクルード
+#include <xaudio2.h>
+#include <x3daudio.h>
+#include <xaudio2fx.h>
+
 
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\CollisionDispatch\btGhostObject.h"
@@ -36,7 +40,11 @@
 
 #include "math/Vector.h"
 #include "math/Matrix.h"
+
+//エンジン系
+#include "myEngine.h"
 #include "graphics/GraphicsEngine.h"
+#include "SoundEngine.h"
 
 #include "graphics/SkinModel.h"
 #include "graphics/Skeleton.h"
@@ -50,8 +58,8 @@
 #include "GameObject/GameObjectManager.h"
 #include "GameObject/IGameObject.h"
 
-#include "photon/LoadBalancing-cpp/inc/friendinfo.h"
-#include "Photon-cpp/Inc/PhotonPeer.h"
+//#include "photon/LoadBalancing-cpp/inc/friendinfo.h"
+//#include "Photon-cpp/Inc/PhotonPeer.h"
 
 #include "Magnet/MagnetManager.h"
 
