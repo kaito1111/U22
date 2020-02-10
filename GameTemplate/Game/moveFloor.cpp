@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "moveFloor.h"
 #include "Player.h"
-
+#include"HID/Pad.h"
 //moveFloor::moveFloor(const wchar_t * modelName, CVector3 pos, CQuaternion rot)
 //{
 //	m_model.Init(modelName);
@@ -31,8 +31,11 @@ bool moveFloor::Start()
 	m_model.Init(L"Assets/modelData/moveFloor.cmo");
 	//m_pos = { 50.0f,50.0f,0.0f };
 	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);
-
-	player = FindGO<Player>("player");
+	int MaxPlayer = 0;
+	for (int PadNum = Pad::CONNECT_PAD_MAX; MaxPlayer < PadNum; PadNum++) {
+		player = FindGO<Player>("player%d",PadNum);
+	}
+	
 	return true;
 }
 
