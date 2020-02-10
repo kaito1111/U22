@@ -1,9 +1,8 @@
 #include "stdafx.h"
-
 #include "system/system.h"
 #include "level/Level.h"
 #include "Game.h"
-#include "MagnetManager.h"
+#include "Magnet/MagnetManager.h"
 
 
 ///////////////////////////////////////////////////////////////////
@@ -14,20 +13,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
-
-	//ExitGames::Common::Base* hoge;
 	NewGO<Game>(1, "game");
-	//DeleteGO(player);
 
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
 		//描画開始。
 		g_graphicsEngine->BegineRender();
-		//ゲームパッドの更新。	
-		for (auto& pad : g_pad) {
-			pad.Update();
-		}
 		//物理エンジンの更新。
 		g_physics.Update();
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます

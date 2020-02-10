@@ -47,9 +47,8 @@ namespace myEngine {
 		/// 機能が追加されたときに追記します
 		/// </remarks>
 		/// <param name="rc">レンダーコンテキスト</param>
-		virtual void PostRender(RenderContext& rc)
+		virtual void PostDraw()
 		{
-			(void)rc;
 		}
 		/// <summary>
 		/// <para>Updateの直前に呼ばれる開始処理</para>
@@ -83,11 +82,11 @@ namespace myEngine {
 		/// 関数をラップしてるだけだよ
 		/// 各オブジェクトの関数の処理を開始させるよ
 		/// </summary>
-		void PostRenderWrapper(RenderContext& rc)
+		void PostDrawWrapper()
 		{
 			if (m_isActive && m_isStart && !m_isDead)
 			{
-				PostRender(rc);
+				PostDraw();
 			}
 		}
 		void ForwardRenderWrapper(RenderContext& rc)

@@ -8,6 +8,7 @@
 
 #pragma once
 #include "graphics/GraphicsEngine.h"
+#include "SoundEngine.h"
 
 namespace myEngine {
 	class CEngine
@@ -39,9 +40,18 @@ namespace myEngine {
 		{
 			return m_graphicsEngine;
 		}
+		/// <summary>
+		/// サウンドエンジンの取得
+		/// </summary>
+		/// <returns></returns>
+		//SoundEngine& GetSoundEngine()
+		//{
+		//	return m_soundEngine;
+		//}
 
 	private:
 		GraphicsEngine			m_graphicsEngine;	//グラフィックエンジン
+		//SoundEngine				m_soundEngine;		//サウンドエンジン
 	};	
 	/// <summary>
 	/// エンジンを取得
@@ -52,12 +62,20 @@ namespace myEngine {
 		return CEngine::GetInstance();
 	}
 	/// <summary>
-	/// グラフィックエンジンを取得
+	/// エンジンからグラフィックエンジンを取得
 	/// </summary>
 	/// <returns>グラフィックエンジン</returns>
 	static inline GraphicsEngine& graphicsEngine()
 	{
 		return Engine().GetGraphicsEngine();
 	}
+	/// <summary>
+	/// エンジンからサウンドエンジンの取得
+	/// </summary>
+	/// <returns></returns>
+	//static inline SoundEngine& soundEngine()
+	//{
+	//	return Engine().GetSoundEngine();
+	//}
 }
 

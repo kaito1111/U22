@@ -24,6 +24,7 @@ void GraphicsEngine::BegineRender()
 	m_pd3dDeviceContext->ClearDepthStencilView(m_depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 	
 }
+
 void GraphicsEngine::EndRender()
 {
 	//バックバッファとフロントバッファを入れ替える。
@@ -111,8 +112,6 @@ void GraphicsEngine::Init(HWND hWnd)
 	m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
 	m_pd3dDevice->CreateRenderTargetView(pBackBuffer, NULL, &m_backBuffer);
 	pBackBuffer->Release();
-	//自分が書いたやつ
-	//m_renderContext.Init(m_pd3dDeviceContext, m_pImmediateContext);
 	//深度ステンシルビューの作成。
 	{
 		//深度テクスチャの作成。
@@ -197,4 +196,28 @@ void GraphicsEngine::Init(HWND hWnd)
 	}
 
 	m_pd3dDeviceContext->RSSetState(m_rasterizerState);
+}
+
+void GraphicsEngine::InitEffekseer()
+{
+	//レンダラーを初期化。
+	m_effekseerRenderer = EffekseerRendererDX11::Renderer::Create(
+		g_graphicsEngine->GetD3DDevice(),					//D3Dデバイス。
+		g_graphicsEngine->GetD3DDeviceContext(),			//D3Dデバイスコンテキスト。	
+		20000												//板ポリの最大数。
+	);
+	//エフェクトマネージャを初期化。
+	m_manager = Effekseer::Manager::Create(10000);
+
+	// 描画用インスタンスから描画機能を設定
+	m_manager->SetSpriteRenderer(m_effekseerRenderer->CreateSpriteRenderer());
+	m_manager->SetRibbonRenderer(m_effekseerRenderer->CreateRibbonRenderer());
+	m_manager->SetRingRenderer(m_effekseerRenderer->CreateRingRenderer());
+	m_manager->SetTrackRenderer(m_effekseerRenderer->CreateTrackRenderer());
+	m_manager->SetModelRenderer(m_effekseerRenderer->CreateModelRenderer());
+
+	// 描画用インスタンスからテクスチャの読込機能を設定
+	// 独自拡張可能、現在はファイルから読み込んでいる。
+	m_manager->SetTextureLoader(m_effekseerRenderer->CreateTextureLoader());
+	m_manager->SetModelLoader(m_effekseerRenderer->CreateModelLoader());
 }
