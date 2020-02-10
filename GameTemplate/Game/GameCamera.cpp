@@ -31,11 +31,19 @@ bool GameCamera::Start()
 void GameCamera::Update()
 {
 	CVector3 Target = CVector3::Zero();
+	
+	//PlayerNumが0だからこれ入ってない
 	for (int i = 0; i < m_PlayerNum; i++) {
 		Target += m_Player[i]->GetPosition();
 		Target.y += 100.0f;
 	}
-	Target /= (int)m_PlayerNum;
+	//上でカメラの位置が調整されてないので無理やり調整
+	//上直したら消してね
+	Target.y += 100.0f;
+	
+	//このコード何？？
+	//Target /= (int)m_PlayerNum;
+
 	if (Decline < Target.y) {
 		Decline = Target.y;
 	}
