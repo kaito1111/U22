@@ -42,7 +42,7 @@ void GameCamera::Update()
 	Target.y += 100.0f;
 	
 	//このコード何？？
-	//Target /= (int)m_PlayerNum;
+	Target /= (int)m_PlayerNum;
 
 	if (Decline < Target.y) {
 		Decline = Target.y;
