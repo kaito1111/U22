@@ -79,17 +79,21 @@ void stageObject1::Move()
 
 	//プレイヤーを殺す処理
 
-	CVector3 PPos = player[PadNum]->GetPosition();
-	CVector3 ToP = PPos - m_position;
-	if (ToP.y <= 50 && ToP.y-50			//プレイヤーからのベクトルYのみを取る
-		&&ToP.x >=-50 && ToP.x <= 50) { //     　　　〃　　　　　Xのみを取る
-		//ここにプレイヤーを殺す処理かな
-		CVector3 CheckPoint = CVector3::Zero();
+	for (int playerNum = 0; playerNum < Pad::CONNECT_PAD_MAX; playerNum++) {
+		CVector3 PPos = player[playerNum]->GetPosition();
+		CVector3 ToP = PPos - m_position;
+		if (ToP.y <= 50 && ToP.y - 50			//プレイヤーからのベクトルYのみを取る
+			&& ToP.x >= -50 && ToP.x <= 50) { //     　　　〃　　　　　Xのみを取る
+			//ここにプレイヤーを殺す処理かな
+			CVector3 CheckPoint = CVector3::Zero();
 
-		//後でチェックポイントを作る
-		player[PadNum]->SetPosition(CheckPoint);
+			//後でチェックポイントを作る
+			player[playerNum]->SetPosition(CheckPoint);
+		}
+		if (playerNum >= Pad::CONNECT_PAD_MAX) {
+			playerNum = 0;
+		}
 	}
-
 
 }
 
