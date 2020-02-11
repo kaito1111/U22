@@ -10,7 +10,7 @@ namespace myEngine {
 	Effect::Effect()
 	{
 		//エフェクサーの初期化
-		g_graphicsEngine->InitEffekseer();
+		//g_graphicsEngine->InitEffekseer();
 	}
 	Effect::~Effect()
 	{

@@ -22,6 +22,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		g_graphicsEngine->BegineRender();
 		//物理エンジンの更新。
 		g_physics.Update();
+		//サウンドエンジンの更新
+		Engine().GetSoundEngine().Update();
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
 		gameObjectManager().Start();
 		//ゲームオブジェクトマネージャーでする処理の呼び出し

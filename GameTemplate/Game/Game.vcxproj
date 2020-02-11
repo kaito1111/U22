@@ -102,13 +102,12 @@
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="exEffect.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
-    <ClCompile Include="graphics\2D\ex2D.cpp">
+    <ClCompile Include="exampleCode\ex2D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
     <ClCompile Include="graphics\2D\SpriteRender.cpp" />
@@ -148,8 +147,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="GPUView\ShaderResourceView.cpp" />
     <ClCompile Include="graphics\Primitive.cpp" />
-    <ClCompile Include="SoundEngine.cpp" />
-    <ClCompile Include="SoundSource.cpp" />
+    <ClCompile Include="sound\SoundEngine.cpp" />
+    <ClCompile Include="sound\SoundSource.cpp" />
     <ClCompile Include="SPole.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -167,13 +166,14 @@
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
+    <ClCompile Include="sound\WaveFile.cpp" />
+    <ClCompile Include="sound\WaveFileBank.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="Effect.h" />
-    <ClInclude Include="exEffect.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
-    <ClInclude Include="graphics\2D\ex2D.h">
+    <ClInclude Include="exampleCode\ex2D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Game.h" />
@@ -219,8 +219,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
-    <ClInclude Include="SoundEngine.h" />
-    <ClInclude Include="SoundSource.h" />
+    <ClInclude Include="sound\SoundEngine.h" />
+    <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="SPole.h" />
     <ClInclude Include="graphics\2D\Sprite.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -236,6 +236,8 @@
     <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
+    <ClInclude Include="sound\WaveFile.h" />
+    <ClInclude Include="sound\WaveFileBank.h" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
