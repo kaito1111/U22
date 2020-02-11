@@ -6,6 +6,8 @@
 
 Game::Game()
 {
+	//サウンドの初期化
+	m_se.Init(L"Assets/sound/coinGet.wav");
 }
 
 Game::~Game()
@@ -38,8 +40,6 @@ void Game::Sample()
 		effect->Play(L"Assets/effect/test.efk");
 		effect->SetScale(CVector3::One() * 10);
 
-		//サウンドの初期化
-		m_se.Init(L"Assets/sound/coinGet.wav");
 		//サウンドの再生
 		m_se.Play(false);
 	}
