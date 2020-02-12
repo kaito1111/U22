@@ -4,6 +4,7 @@
 #include"stageObject1.h"
 #include"stageObject2.h"
 #include"moveFloor.h"
+#include"RorlingRock.h"
 stageObjectJenerator::stageObjectJenerator()
 {
 
@@ -37,6 +38,7 @@ bool stageObjectJenerator::Start()
 	object1 = NewGO<stageObject1>(1, "object1");
 	//object2 = NewGO<stageObject2>(1, "object2");
 	//movefloor = NewGO<moveFloor>(1, "movefloor");
+	//rorlingRock = NewGO< RorlingRock>(1, "rorlingRock");
 	return true;
 }
 
