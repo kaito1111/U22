@@ -8,10 +8,10 @@ namespace MyMagnet {
 		MagnetList m_MagnetList;
 	public:
 		/*磁石と位置をマネージャーに登録*/
-		void LearnMagetObject(Magnet* magnetObject,CVector3 pos)
+		void LearnMagetObject(Magnet* magnetObject,CVector3* pos)
 		{
 			m_MagnetList.push_back(magnetObject);
-			magnetObject->SetPosition(&pos);
+			magnetObject->SetPosition(pos);
 		}
 
 		/*IGameObjectのFindGOsと一緒*/
@@ -42,7 +42,7 @@ namespace MyMagnet {
 		return MagnetManager::Instance();
 	}
 
-	static inline void LearnMO(Magnet* magnetObject,CVector3 pos) {
+	static inline void LearnMO(Magnet* magnetObject,CVector3* pos) {
 		return MagnetManeger().LearnMagetObject(magnetObject , pos);
 	}
 

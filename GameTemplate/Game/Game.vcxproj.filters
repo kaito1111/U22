@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameCamera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NPole.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -47,7 +46,6 @@
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="graphics\Primitive.cpp" />
     <ClCompile Include="graphics\2D\Sprite.cpp" />
-    <ClCompile Include="graphics\2D\ex2D.cpp" />
     <ClCompile Include="graphics\2D\SpriteRender.cpp" />
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="Iwa.cpp" />
@@ -55,12 +53,15 @@
     <ClCompile Include="Magnet\Magnet.cpp" />
     <ClCompile Include="Magnet\MagnetManager.cpp" />
     <ClCompile Include="moveFloor.cpp" />
-    <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="exEffect.cpp" />
-    <ClCompile Include="SoundEngine.cpp" />
-    <ClCompile Include="SoundSource.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="KaitoTask.cpp" />
+    <ClCompile Include="sound\WaveFile.cpp" />
+    <ClCompile Include="sound\WaveFileBank.cpp" />
+    <ClCompile Include="sound\GameCamera.cpp" />
+    <ClCompile Include="sound\SoundEngine.cpp" />
+    <ClCompile Include="sound\SoundSource.cpp" />
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="exampleCode\ex2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -124,7 +125,6 @@
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="graphics\2D\Sprite.h" />
-    <ClInclude Include="graphics\2D\ex2D.h" />
     <ClInclude Include="graphics\2D\SpriteRender.h" />
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="Iwa.h" />
@@ -133,11 +133,13 @@
     <ClInclude Include="Magnet\MagnetManager.h" />
     <ClInclude Include="moveFloor.h" />
     <ClInclude Include="Effect.h" />
-    <ClInclude Include="exEffect.h" />
-    <ClInclude Include="SoundEngine.h" />
-    <ClInclude Include="SoundSource.h" />
     <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="KaitoTask.h" />
+    <ClInclude Include="sound\WaveFile.h" />
+    <ClInclude Include="sound\WaveFileBank.h" />
+    <ClInclude Include="sound\SoundEngine.h" />
+    <ClInclude Include="sound\SoundSource.h" />
+    <ClInclude Include="exampleCode\ex2D.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

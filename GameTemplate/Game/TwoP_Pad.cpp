@@ -10,7 +10,7 @@ TwoP_Pad::TwoP_Pad() {
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", i+1);
 		Player* player = NewGO<Player>(1, PlayerNo);
-		player->SetPad(m_pad);
+		player->SetPad(&m_pad[i]);
 		i++;
 	}
 }
