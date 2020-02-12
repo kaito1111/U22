@@ -36,7 +36,7 @@ void Game::Sample()
 		//ex2D* ex2d = NewGO<ex2D>(4, "ex2D");
 
 		//エフェクトの作成
-		Effect* effect = NewGO<Effect>(0);
+		Effect* effect = NewGO<Effect>(1);
 		effect->Play(L"Assets/effect/test.efk");
 		effect->SetScale(CVector3::One() * 10);
 
