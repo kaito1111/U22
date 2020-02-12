@@ -58,5 +58,7 @@ void PhysicsWorld::AddRigidBody(RigidBody& rb)
 }
 void PhysicsWorld::RemoveRigidBody(RigidBody& rb)
 {
-	dynamicWorld->removeRigidBody(rb.GetBody());
+	if ((rb.GetBody() != nullptr)) {
+		dynamicWorld->removeRigidBody(rb.GetBody());
+	}
 }

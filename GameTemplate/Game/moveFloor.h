@@ -15,7 +15,7 @@ public:
 	bool Start();
 	void Update();
 	void Move();
-	void SetBoxDot();         //直方体の４頂点の座標
+	void SetDotUpdate();         //直方体の４頂点の座標
 	void CollisionDetection();//プレイヤーとの当たり判定
 private:
 	Player* player[4] = {};
@@ -43,6 +43,14 @@ private:
 	CVector3 BackRightDown = CVector3::Zero();//右下
 	CVector3 BackLeftUp = CVector3::Zero();   //左上
 	CVector3 BackLeftDown = CVector3::Zero(); //左下
+
+
+	//プレイヤーのサイズ
+	CVector3 PlayerRightUp = CVector3::Zero();
+	CVector3 PlayerRightDown = CVector3::Zero();
+	CVector3 PlayerLeftUp = CVector3::Zero();
+	CVector3 PlayerLeftDown = CVector3::Zero();
+	int PlayerNum = 0;
 
 };	
 
