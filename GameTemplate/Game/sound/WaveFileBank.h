@@ -6,6 +6,7 @@
 
 #include <map>
 #include <memory>
+
 class WaveFile;
 //Waveファイルとポインタの共有
 using WaveFilePtr = std::shared_ptr<WaveFile>;
