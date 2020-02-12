@@ -44,7 +44,7 @@
 //ƒGƒ“ƒWƒ“Œn
 #include "myEngine.h"
 #include "graphics/GraphicsEngine.h"
-#include "SoundEngine.h"
+#include "Sound/SoundEngine.h"
 
 #include "graphics/SkinModel.h"
 #include "graphics/Skeleton.h"
@@ -54,6 +54,8 @@
 #include "graphics/Camera.h"
 
 #include "Effect.h"
+
+#include "sound/SoundSource.h"
 
 #include "GameObject/GameObjectManager.h"
 #include "GameObject/IGameObject.h"
