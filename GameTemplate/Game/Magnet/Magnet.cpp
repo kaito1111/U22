@@ -4,9 +4,11 @@
 Magnet::Magnet()
 {
 	m_SMagSprite = NewGO<myEngine::SpriteRender>(0);
-	m_SMagSprite->Init(L"Assets/sprite/MagnetZero.dds", 200.0f, 100.0f);
+	m_SMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 200.0f, 100.0f);
+	m_SMagSprite->SetW(0.0f);
 	m_NMagSprite = NewGO<myEngine::SpriteRender>(0);
-	m_NMagSprite->Init(L"Assets/sprite/MagnetZero.dds", 200.0f, 100.0f);
+	m_NMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 200.0f, 100.0f);
+	m_NMagSprite->SetW(0.0f);
 }
 
 Magnet::~Magnet()
@@ -77,4 +79,35 @@ CVector3 Magnet::MagnetMove()
 		return true;
 	});
 	return m_Diff;
+}
+
+void MyMagnet::Magnet::Update()
+{
+	switch (state)
+	{
+	case Magnet::SMode:
+		m_SMagSprite->SetW(1.0f);
+		m_NMagSprite->SetW(0.0f);
+		break;
+	case Magnet::NMode:
+		m_SMagSprite->SetW(0.0f);
+		m_NMagSprite->SetW(1.0f);
+		break;
+	default:
+		m_SMagSprite->SetW(0.0f);
+		m_NMagSprite->SetW(0.0f);
+		break;
+	}
+	m_NMagSprite->SetPosition(*m_Position);
+	m_NMagSprite->Update(); 
+
+	m_SMagSprite->SetPosition(*m_Position);
+	m_SMagSprite->Update();
+
+}
+
+void MyMagnet::Magnet::PostDraw()
+{
+	m_NMagSprite->Draw();
+	m_SMagSprite->Draw();
 }

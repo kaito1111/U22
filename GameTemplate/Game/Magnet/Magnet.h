@@ -1,7 +1,10 @@
 #pragma once
+
 #include "graphics/2D/SpriteRender.h"
+#include "GameObject/IGameObject.h"
+
 namespace MyMagnet {
-	class Magnet
+	class Magnet : public myEngine::IGameObject
 	{
 		CVector3* m_Position = nullptr;
 		CVector3 m_Diff = CVector3::Zero();
@@ -16,6 +19,8 @@ namespace MyMagnet {
 			NoMode,
 			Num,
 		};
+		void Update();
+		void PostDraw();
 		myEngine::SpriteRender* m_SMagSprite = nullptr;
 		myEngine::SpriteRender* m_NMagSprite = nullptr;
 	private:
