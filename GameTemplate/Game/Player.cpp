@@ -93,7 +93,11 @@ void Player::Move()
 	}
 	//¶‰E‚ÌˆÚ“®
 	movespeed.x = m_Pad->GetLStickXF() * -20.0f;
+
+	//Ž¥Î‚ÌˆÚ“®
 	movespeed += m_Magnet->MagnetMove();
+
+
 	m_position = m_characon.Execute(1.0f, movespeed);
 	if (m_Pad->GetLStickXF() > 0.0f)
 	{

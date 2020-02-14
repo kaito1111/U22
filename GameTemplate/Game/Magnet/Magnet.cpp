@@ -35,7 +35,7 @@ CVector3 Magnet::MagnetMove()
 			case Magnet::NMode:
 				if (diff.Length() < maganetLen) {
 					diff.Normalize();
-					diff *= MagnetPower;
+					diff *= -MagnetPower;
 				}
 				break;
 			case Magnet::SMode:
@@ -45,7 +45,6 @@ CVector3 Magnet::MagnetMove()
 				}
 				break;
 			default:
-				diff = CVector3::Zero();
 				break;
 			}
 			break;
@@ -54,7 +53,7 @@ CVector3 Magnet::MagnetMove()
 			case Magnet::NMode:
 				if (diff.Length() < maganetLen) {
 					diff.Normalize();
-					diff *= MagnetPower;
+					diff *= -MagnetPower;
 				}
 				break;
 			case Magnet::SMode:
@@ -64,7 +63,6 @@ CVector3 Magnet::MagnetMove()
 				}
 				break;
 			default:
-				diff = CVector3::Zero();
 				break;
 				return true;
 			}
@@ -72,6 +70,7 @@ CVector3 Magnet::MagnetMove()
 			diff = CVector3::Zero();
 			break;
 		default:
+			diff = CVector3::Zero();
 			break;
 		}
 		diff.z = 0;
