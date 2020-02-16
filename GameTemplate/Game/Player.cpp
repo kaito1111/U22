@@ -26,10 +26,10 @@ void Player::Update()
 }
 void Player::Draw()
 {
-	m_model.Draw(
+	/*m_model.Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix()
-	);
+	);*/
 }
 
 void Player::SpawnPole()

@@ -12,6 +12,7 @@ public:
 	 * この関数を呼ばないと、カメラは動かないので注意が必要です。
 	 */
 	void Update();
+	void Update2D();
 	/*!
 	 * @brief	カメラ行列を取得。
 	 */
@@ -102,3 +103,4 @@ private:
 };
 
 extern Camera g_camera3D;		//!<3Dカメラ。
+extern Camera g_camera2D;		//2Dカメラ

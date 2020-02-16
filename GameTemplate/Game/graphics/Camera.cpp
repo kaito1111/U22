@@ -2,7 +2,7 @@
 #include "Camera.h"
 
 Camera g_camera3D;		//3Dカメラ。(のような2D)
-//Camera g_camera2D;		//2Dカメラ
+Camera g_camera2D;		//2Dカメラ
 
 Camera::Camera():
 	m_near(0.1f),
@@ -31,4 +31,17 @@ void Camera::Update()
 		m_near, 
 		m_far
 	);
+}
+
+void Camera::Update2D()
+{
+	g_camera2D.SetPosition({ 0.0f,0.0f,-10.0f });
+	g_camera2D.SetTarget({ 0.0,0.0,0.0 });
+
+	m_viewMatrix.MakeLookAt(
+		m_position,
+		m_target,
+		m_up
+	);
+	m_projMatrix.MakeOrthoProjectionMatrix(FRAME_BUFFER_W, FRAME_BUFFER_H, m_near, m_far);
 }
