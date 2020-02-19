@@ -63,6 +63,7 @@
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="exampleCode\ex2D.cpp" />
     <ClCompile Include="RorlingRock.cpp" />
+    <ClCompile Include="GameObjectScythe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -142,6 +143,7 @@
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="exampleCode\ex2D.h" />
     <ClInclude Include="RorlingRock.h" />
+    <ClInclude Include="GameObjectScythe.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

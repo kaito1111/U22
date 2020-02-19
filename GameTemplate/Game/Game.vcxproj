@@ -102,6 +102,7 @@
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="GameObjectScythe.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="exampleCode\ex2D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -173,6 +174,7 @@
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="GameObjectScythe.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="exampleCode\ex2D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

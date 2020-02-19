@@ -35,8 +35,8 @@ bool stageObjectJenerator::Start()
 	});
 
 	//オブジェクトのNewGO
-	object1 = NewGO<stageObject1>(1, "object1");
-	//object2 = NewGO<stageObject2>(1, "object2");
+	//object1 = NewGO<stageObject1>(1, "object1");
+	//object2 = NewGO<stageObject2>(1, "object2");//現在バグなう。追加しないでね。
 	//movefloor = NewGO<moveFloor>(1, "movefloor");
 	//rorlingRock = NewGO< RorlingRock>(1, "rorlingRock");
 	return true;
