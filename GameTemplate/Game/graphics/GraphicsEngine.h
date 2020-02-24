@@ -4,6 +4,7 @@
  *@brief	グラフィックスエンジン。
  */
 
+#include "DirectionLight.h"
 
 class GraphicsEngine
 {
@@ -23,8 +24,6 @@ public:
 	 *@brief	解放。
 	 */
 	void Release();
-
-	
 	/*!
 	 *@brief	D3D11デバイスを取得。
 	 */

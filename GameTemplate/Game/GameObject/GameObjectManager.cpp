@@ -72,6 +72,7 @@ namespace myEngine {
 		/// •`‰æŒnˆ—
 		{
 			//RenderContext& rc = g_graphicsEngine->GetRenderContext();
+			//Render
 			//ForwardRender(rc);
 			Draw();
 			//ˆê”Ô’x‚¢Draw
