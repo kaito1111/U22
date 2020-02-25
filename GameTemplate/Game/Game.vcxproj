@@ -103,11 +103,13 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="GameObjectScythe.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="exampleCode\ex2D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="RorlingRock.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
@@ -174,6 +176,7 @@
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="GameObjectScythe.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="exampleCode\ex2D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -221,6 +224,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
+    <ClInclude Include="RorlingRock.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="SPole.h" />

@@ -16,7 +16,6 @@ GameCamera::~GameCamera()
 bool GameCamera::Start()
 {
 	for (int i = 0; i < m_PlayerNum + 1; i++) {
-		char PlayerName[256] = "player";
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", m_PlayerNum + 1);
 		QueryGOs<Player>(PlayerNo, [&](Player* player)->bool {
@@ -42,7 +41,7 @@ void GameCamera::Update()
 	//Target.y += 100.0f;
 	
 	//プレイヤーが2人以上いるから真ん中をとる
-	//Target /= (int)m_PlayerNum;
+	//Target /= m_PlayerNum;
 
 	if (Decline < Target.y) {
 		Decline = Target.y;

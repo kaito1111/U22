@@ -35,7 +35,7 @@ private:
 	CQuaternion m_rot = CQuaternion::Identity();
 	CVector3 m_forward = CVector3::Front();
 
-	MyMagnet::Magnet m_Magnet;
+	MyMagnet::Magnet* m_Magnet = nullptr;
 	int m_magnetSwich = 0;			//プレイヤーの磁力を切り替える変数
 
 	Pad* m_Pad = nullptr;			//このプレイヤーのパッド
