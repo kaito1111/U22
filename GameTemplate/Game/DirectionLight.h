@@ -16,6 +16,7 @@ namespace myEngine {
 	{
 		CVector4 direction[NUM_DIRECTION_LIG];	//ライトの方向
 		CVector4 color[NUM_DIRECTION_LIG];		//ライトのカラー
+		int		 active[NUM_DIRECTION_LIG];		//0ならFalse, 1ならTrue
 	};
 
 	/// <summary>

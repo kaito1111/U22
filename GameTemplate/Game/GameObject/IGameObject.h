@@ -33,12 +33,10 @@ namespace myEngine {
 		{
 		};
 		/// <summary>
-		/// Render関数が実行される
+		/// 描画設定
 		/// </summary>
-		/// <param name="rc">レンダーコンテキスト</param>
-		virtual void ForwardRender(RenderContext& rc)
+		virtual void Render()
 		{
-			(void)rc;
 		}
 		/// <summary>
 		/// レンダー関数が実行された後で呼ばれる描画処理
@@ -89,11 +87,11 @@ namespace myEngine {
 				PostDraw();
 			}
 		}
-		void ForwardRenderWrapper(RenderContext& rc)
+		void RenderWrapper()
 		{
 			if (m_isActive && m_isStart && !m_isDead)
 			{
-				ForwardRender(rc);
+				Render();
 			}
 		}
 		void StartWrapper()

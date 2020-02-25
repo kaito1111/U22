@@ -158,18 +158,16 @@ namespace myEngine {
 		//更新
 		void Update();
 		/// <summary>
+		/// 描画設定
+		/// </summary>
+		void Render();
+		/// <summary>
 		/// 描画
 		/// </summary>
 		void Draw();
 		/// <summary>
-		/// レンダー処理が呼ばれる前に呼ばれる描画処理
-		/// </summary>
-		/// <param name="rc">レンダーコンテキスト</param>
-		void ForwardRender(RenderContext& rc);
-		/// <summary>
 		/// 最後の描画処理
 		/// </summary>
-		/// <param name="rc">レンダーコンテキスト</param>
 		void PostDraw();
 		/// <summary>
 		/// ゲームオブジェクトマネージャーから呼ばれる各処理
@@ -177,10 +175,10 @@ namespace myEngine {
 		void ExecuteFromGameThread();
 		/// <summary>
 		/// オブジェクトのデーター開放処理
+		///	<para>本当にメモリの解放をする処理はこっち！</para>
 		/// </summary>
 		/// <remarks>
 		/// DeleteGOは削除リストに積んでるだけだよ！
-		/// 本当にメモリの解放をする処理はこっち！
 		/// </remarks>
 		void ExcuteDeleteGameObject();
 

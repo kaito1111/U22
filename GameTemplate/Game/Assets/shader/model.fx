@@ -34,6 +34,7 @@ static const int NUM_DIRECTION_LIG = 4;
 cbuffer LightCb : register(b0) {
 	float3 Direction[NUM_DIRECTION_LIG];
 	float4 Color[NUM_DIRECTION_LIG];
+	int	   active[NUM_DIRECTION_LIG];
 };
 
 
@@ -150,12 +151,26 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 //--------------------------------------------------------------------------------------
 float4 PSMain( PSInput In ) : SV_Target0
 {
+	int activeLig = 0;
 	//albedoテクスチャからカラーをフェッチする。
 	float4 albedoColor = albedoTexture.Sample(Sampler, In.TexCoord);
 	//ディレクションライトの拡散反射光を計算する。
 	float3 lig = 0.0f;
-	for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
-		lig += max(0.0f, dot(In.Normal * -1.0f, Direction[i])) * Color[i];
+	for (int i = 0; i < NUM_DIRECTION_LIG; i++) 
+	{
+		if (active[i] == 1) {
+			activeLig++;
+		}
+	}
+
+	for (int i = 0; i < NUM_DIRECTION_LIG; i++)
+	{
+		if (activeLig > 0) {
+			lig += max(0.0f, dot(In.Normal * -1.0f, Direction[i])) * Color[i];
+		}
+		else {
+			return albedoColor;
+		}
 	}
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;

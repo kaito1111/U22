@@ -27,23 +27,20 @@ namespace myEngine {
 		}
 	}
 
+	void GameObjectManager::Render()
+	{
+		for (GameObjectList objList : m_gameObjectListArray) {
+			for (IGameObject* obj : objList) {
+				obj->RenderWrapper();
+			}
+		}
+	}
+
 	void GameObjectManager::Draw()
 	{
 		for (GameObjectList objList : m_gameObjectListArray) {
 			for (IGameObject* obj : objList) {
 				obj->DrawWrapper();
-			}
-		}
-	}
-	/// <summary>
-	/// Draw‚Ì‘O‚ÉŒÄ‚Î‚ê‚é•`‰æˆ—
-	/// </summary>
-	/// <param name="rc"></param>
-	void GameObjectManager::ForwardRender(RenderContext& rc)
-	{
-		for (GameObjectList objList : m_gameObjectListArray) {
-			for (IGameObject* obj : objList) {
-				obj->ForwardRenderWrapper(rc);
 			}
 		}
 	}
@@ -72,7 +69,7 @@ namespace myEngine {
 		/// •`‰æŒnˆ—
 		{
 			//RenderContext& rc = g_graphicsEngine->GetRenderContext();
-			//Render
+			//Render();
 			//ForwardRender(rc);
 			Draw();
 			//ˆê”Ô’x‚¢Draw
