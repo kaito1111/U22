@@ -92,10 +92,10 @@ namespace myEngine {
 		CD3D11_BLEND_DESC BLEND_DETE(drfault);
 		BLEND_DETE.RenderTarget[0].BlendEnable = true;
 		//2個を一回で初期化してるよ 同じ値なのでできる！
-		BLEND_DETE.RenderTarget[0].BlendOp = BLEND_DETE.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-		BLEND_DETE.RenderTarget[0].DestBlend = BLEND_DETE.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
-		BLEND_DETE.RenderTarget[0].SrcBlend = BLEND_DETE.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_SRC_ALPHA;
-
+		BLEND_DETE.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
+		BLEND_DETE.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
+		BLEND_DETE.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
+		
 		//ブレンドステートの作成 & 初期化
 		auto Device = g_graphicsEngine->GetD3DDevice(); 
 		Device->CreateBlendState(&BLEND_DETE, &BlendState);
@@ -133,16 +133,16 @@ namespace myEngine {
 
 	void Sprite::Draw(const CMatrix& viewMatrix, const CMatrix& projMatrix, const float w)
 	{
+		
+		//CMatrix view;
+		//CMatrix proj;
+		//view.MakeLookAt(
+		//	{ 0.0f,0.0f,-1.0f },
+		//	{ 0.0f,0.0f,0.0f },
+		//	CVector3::Up()
+		//);
 
-		CMatrix view;
-		CMatrix proj;
-		view.MakeLookAt(
-			{ 0.0f,0.0f,-1.0f },
-			{ 0.0f,0.0f,0.0f },
-			CVector3::Up()
-		);
-
-		proj.MakeOrthoProjectionMatrix(1280.0f, 720.0f, 0.1f, 2.0f);
+		//proj.MakeOrthoProjectionMatrix(1280.0f, 720.0f, 0.1f, 2.0f);
 
 		ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
 
@@ -162,10 +162,10 @@ namespace myEngine {
 		SSpriteCB cb;
 		//プロジェクション行列を乗算
 		cb.WVP = m_world;
-		cb.WVP = cb.WVP * view;
-		cb.WVP = cb.WVP * proj;
+		cb.WVP = cb.WVP * viewMatrix;
+		cb.WVP = cb.WVP * projMatrix;
 		//乗算カラーの代入 + 透明度の乗算
-		cb.m_mulColor = m_mulColor * w;
+		cb.m_mulColor = m_mulColor;
 
 		d3dDeviceContext->UpdateSubresource(m_cb.GetBody(), 0, NULL, &cb, 0, 0);
 
@@ -175,7 +175,7 @@ namespace myEngine {
 		d3dDeviceContext->PSSetShaderResources(0, 1, &m_textureSRV);
 		d3dDeviceContext->PSSetShader((ID3D11PixelShader*)m_ps.GetBody(), NULL, 0);
 		d3dDeviceContext->VSSetShader((ID3D11VertexShader*)m_vs.GetBody(), NULL, 0);
-
+		d3dDeviceContext->OMSetBlendState(BlendState, nullptr, 0xffffffff);
 		d3dDeviceContext->IASetInputLayout(m_vs.GetInputLayout());
 
 		g_graphicsEngine->GetD3DDeviceContext()->VSSetSamplers(0, 1, &SamplerState);

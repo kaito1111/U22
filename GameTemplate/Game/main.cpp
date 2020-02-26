@@ -15,6 +15,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	NewGO<Game>(1, "game");
 
+	g_camera2D.Update2D();
+
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
