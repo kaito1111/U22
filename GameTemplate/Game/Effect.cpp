@@ -47,10 +47,12 @@ namespace myEngine {
 
 	void Effect::Update()
 	{
+		//g_cameraからカメラ行列とプロジェクション行列をコピー
 		Effekseer::Matrix44 efCameraMat;
-		g_camera3D.GetViewMatrix().CopyTo(efCameraMat);
+		g_camera2D.GetViewMatrix().CopyTo(efCameraMat);
 		Effekseer::Matrix44 efProjMat;
-		g_camera3D.GetProjectionMatrix().CopyTo(efProjMat);
+		g_camera2D.GetProjectionMatrix().CopyTo(efProjMat);
+
 		//カメラ行列とプロジェクション行列を設定。
 		g_graphicsEngine->GetEffekseerRenderer()->SetCameraMatrix(efCameraMat);
 		g_graphicsEngine->GetEffekseerRenderer()->SetProjectionMatrix(efProjMat);
@@ -77,9 +79,14 @@ namespace myEngine {
 
 	}
 
+	//すべてのエフェクトを描いた後にEndRenderingを実行するように使用変更してね！
 	void Effect::PostDraw()
 	{
+		//ブレンドステートの保存
+		g_graphicsEngine->GetEffekseerRenderer()->BeginRendering();
 		//描画
 		g_graphicsEngine->GetEffekseerManager()->Draw();
+		//ブレンドステートをもとに戻す
+		g_graphicsEngine->GetEffekseerRenderer()->EndRendering();
 	}
 }

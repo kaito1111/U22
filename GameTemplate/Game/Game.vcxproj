@@ -101,6 +101,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
+    <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="GameObjectScythe.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
+    <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="GameObjectScythe.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />

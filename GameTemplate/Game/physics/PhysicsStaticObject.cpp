@@ -17,7 +17,7 @@ PhysicsStaticObject::~PhysicsStaticObject()
 
 void PhysicsStaticObject::CreateMeshObject(SkinModel& skinModel, CVector3 pos, CQuaternion rot)
 {
-	//追加分
+	//nullじゃないなら解放処理
 	g_physics.RemoveRigidBody(m_rigidBody);
 	//メッシュコライダーを作成。
 	m_meshCollider.CreateFromSkinModel(skinModel, nullptr);

@@ -89,7 +89,7 @@ void Player::Move()
 	{
 		//d—Í
 		const float gravity = 5.0f;
-		movespeed.y -= gravity;
+		//movespeed.y -= gravity;
 	}
 	//¶‰E‚ÌˆÚ“®
 	movespeed.x = m_Pad->GetLStickXF() * -20.0f;

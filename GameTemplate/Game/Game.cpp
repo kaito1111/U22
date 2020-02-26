@@ -17,6 +17,7 @@ Game::~Game()
 bool Game::Start()
 {
 	NewGO< KaitoTask>(3, "kaito");
+	//NewGO<DirectionLight>(3, "light");
 	Stage* stage = NewGO<Stage>(2, "stage");
 
 	return true;
@@ -38,7 +39,8 @@ void Game::Sample()
 		//エフェクトの作成
 		Effect* effect = NewGO<Effect>(1);
 		effect->Play(L"Assets/effect/test.efk");
-		effect->SetScale(CVector3::One() * 10);
+		effect->SetPosition({ 0,0, 0 });
+		effect->SetScale(CVector3::One() * 20);
 
 		//サウンドの再生
 		m_se.Play(false);

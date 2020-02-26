@@ -4,6 +4,7 @@
  *@brief	グラフィックスエンジン。
  */
 
+#include "DirectionLight.h"
 
 class GraphicsEngine
 {
@@ -23,8 +24,6 @@ public:
 	 *@brief	解放。
 	 */
 	void Release();
-
-	
 	/*!
 	 *@brief	D3D11デバイスを取得。
 	 */
@@ -92,6 +91,7 @@ private:
 	ID3D11RasterizerState*	m_rasterizerState = NULL;					//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;						//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;					//デプスステンシルビュー。
+	D3D11_FEATURE_DATA_THREADING m_featureDataThreading;
 	EffekseerRenderer::Renderer* m_effekseerRenderer = nullptr;			//エフェクサーレンダー
 	Effekseer::Manager* m_manager = nullptr;							//エフェクトマネジャー
 
