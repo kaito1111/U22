@@ -18,6 +18,9 @@ public:
 	const void SetPosition(CVector3 pos) {
 		m_position = pos;
 	}
+	void SetPlayer(Player* pl) {
+		m_player = pl;
+	}
 	//void magunetTask(CVector3& Position);
 private:
 

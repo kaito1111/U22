@@ -15,6 +15,9 @@ public:
 	CVector3 GetPosition() {
 		return m_position;
 	}
+	void SetPlayer(Player* pl) {
+		m_player = pl;
+	}
 private:
 
 

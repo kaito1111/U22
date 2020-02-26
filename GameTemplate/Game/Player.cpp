@@ -2,16 +2,11 @@
 #include "Player.h"
 #include "NPole.h"
 #include "SPole.h"
+#include "GameCamera.h"
 
 
 Player::Player()
 {
-	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/unityChan.cmo");
-	m_characon.Init(20.0, 100.0f, m_position);
-	//プレイヤーに磁力を持たせる
-	m_Magnet = NewGO<Magnet>(1, "Magnet");
-	LearnMO(*m_Magnet, &m_position);
 }
 
 
@@ -20,11 +15,25 @@ Player::~Player()
 	DeleteGO(m_Magnet);
 }
 
+bool Player::Start()
+{
+	//cmoファイルの読み込み。
+	m_model.Init(L"Assets/modelData/Player.cmo");
+	m_characon.Init(20.0, 100.0f, m_position);
+	//プレイヤーに磁力を持たせる
+	m_Magnet = NewGO<Magnet>(1, "Magnet");
+	LearnMO(m_Magnet, &m_position);
+	return true;
+}
+
 void Player::Update()
 {
 	MyMagnet();
 	SpawnPole();
 	Move();
+	if (IsSi) {
+		SIBOU();
+	}
 }
 void Player::Draw()
 {
@@ -47,15 +56,16 @@ void Player::SpawnPole()
 			DeleteGO(m_pole);
 			return true;
 		});
-		NPole* m_pole = NewGO<NPole>(1, "npole");
+		NPole* npole = NewGO<NPole>(1, "npole");
+		npole->SetPlayer(this);
 		CVector3 SpawnDir = { m_Pad->GetRStickXF() * -1.0f , m_Pad->GetRStickYF() , 0.0f };
 		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = m_forward;
 		}
 		CVector3 SpownPole = m_position;
 		SpownPole.y = 50.0f;
-		m_pole->SetPosition(SpownPole);
-		m_pole->SetMoveDir(SpawnDir);
+		npole->SetPosition(SpownPole);
+		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
 	if (m_Pad->IsTrigger(enButtonLB1))
@@ -64,16 +74,17 @@ void Player::SpawnPole()
 			DeleteGO(m_pole);
 			return true;
 		});
-		SPole* m_pole = NewGO< SPole>(1, "spole");
+		SPole* spole = NewGO< SPole>(1, "spole");
+		spole->SetPlayer(this);
 		CVector3 MoveDir = { m_Pad->GetRStickXF() * -1.0f , m_Pad->GetRStickYF() , 0.0f };
 		if (MoveDir.Length() < 0.01f) {
 			MoveDir = m_forward;
 		}
 		MoveDir.Normalize();
-		m_pole->SetMoveDir(MoveDir);
+		spole->SetMoveDir(MoveDir);
 		CVector3 SpownPole = m_position;
 		SpownPole.y = 50.0f;
-		m_pole->SetPosition(SpownPole);
+		spole->SetPosition(SpownPole);
 	}
 }
 
@@ -108,7 +119,7 @@ void Player::Move()
 		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
 	}
 	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_position, m_rot, CVector3::One());
+	m_model.UpdateWorldMatrix(m_position, m_rot, m_Scale);
 }
 
 void Player::MyMagnet()
@@ -123,13 +134,35 @@ void Player::MyMagnet()
 		m_Magnet->SetState(Magnet::State::NoMode);
 		break;
 	case 1:
-		m_Magnet->SetState(Magnet::State::NMode);
+		m_Magnet->SetState(Magnet::State::SMode);
 		break;
 	case 2:
-		m_Magnet->SetState(Magnet::State::SMode);
+		m_Magnet->SetState(Magnet::State::NMode);
 		break;
 	default:
 		m_magnetSwich = 0;
 		break;
 	}
 }
+
+void Player::SIBOU()
+{
+	m_position = CVector3::Zero();
+	GameCamera* camera = FindGO<GameCamera>("camera");
+	camera->SetDec(0.0f);
+	IsSi = false;
+}
+
+void Player::Press()
+{
+	if (m_Scale.y >= 1.0f) {
+		Effect* effect = NewGO<Effect>(1);
+		effect->Play(L"Assets/effect/ti.efk");
+	}
+	m_Scale.y -= 0.1f;
+	if (m_Scale.y <= 0.1f) {
+		m_Scale.y = 0.1f;
+		IsSi = true;
+	}
+}
+
