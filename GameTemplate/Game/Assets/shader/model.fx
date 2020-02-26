@@ -32,10 +32,12 @@ static const int NUM_DIRECTION_LIG = 4;
 
 //ライト用の定数バッファ
 cbuffer LightCb : register(b0) {
-	float3 Direction[NUM_DIRECTION_LIG];
-	float4 Color[NUM_DIRECTION_LIG];
-	int	   active[NUM_DIRECTION_LIG];
-};
+	float3		Direction[NUM_DIRECTION_LIG];	//カメラの方向
+	float4		Color[NUM_DIRECTION_LIG];		//カラー
+	float3		eyePos;							//視点の座標	
+	bool		active;							//アクティブ
+	float		specPow[NUM_DIRECTION_LIG];		//鏡面反射の絞り 最後に書いて！
+};	
 
 
 /////////////////////////////////////////////////////////////
@@ -72,6 +74,7 @@ struct PSInput{
 	float3 Normal		: NORMAL;
 	float3 Tangent		: TANGENT;
 	float2 TexCoord 	: TEXCOORD0;
+	float3 worldPos		: TEXCOORD1;
 };
 /*!
  *@brief	スキン行列を計算。
@@ -96,10 +99,14 @@ float4x4 CalcSkinMatrix(VSInputNmTxWeights In)
 PSInput VSMain( VSInputNmTxVcTangent In ) 
 {
 	PSInput psInput = (PSInput)0;
+	
+	//ワールド座標計算
 	float4 pos = mul(mWorld, In.Position);
+	psInput.worldPos = pos;
 	pos = mul(mView, pos);
 	pos = mul(mProj, pos);
 	psInput.Position = pos;
+
 	psInput.TexCoord = In.TexCoord;
 	psInput.Normal = normalize(mul(mWorld, In.Normal));
 	psInput.Tangent = normalize(mul(mWorld, In.Tangent));
@@ -151,26 +158,39 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 //--------------------------------------------------------------------------------------
 float4 PSMain( PSInput In ) : SV_Target0
 {
-	int activeLig = 0;
 	//albedoテクスチャからカラーをフェッチする。
 	float4 albedoColor = albedoTexture.Sample(Sampler, In.TexCoord);
 	//ディレクションライトの拡散反射光を計算する。
 	float3 lig = 0.0f;
-	for (int i = 0; i < NUM_DIRECTION_LIG; i++) 
+
+	//デイレクションライトの計算
+	for (int i = 0; i < NUM_DIRECTION_LIG; i++)
 	{
-		if (active[i] == 1) {
-			activeLig++;
+		if (active == true) {
+			//ディレクションライトが有効
+			lig += max(0.0f, dot(In.Normal * -1.0f, Direction[i])) * Color[i];
+		}
+		else if(active == false){
+			//ディレクションライトが無効
+			return albedoColor;
 		}
 	}
 
+	//鏡面反射の計算
 	for (int i = 0; i < NUM_DIRECTION_LIG; i++)
 	{
-		if (activeLig > 0) {
-			lig += max(0.0f, dot(In.Normal * -1.0f, Direction[i])) * Color[i];
-		}
-		else {
-			return albedoColor;
-		}
+		//ライトを当てる面から視点に伸びるベクトル計算
+		float3 toEyeDir = normalize(eyePos - In.worldPos);
+		//反射ベクトル
+		float3 reflectV = -toEyeDir + 2 * dot(In.Normal, toEyeDir)* In.Normal;
+		//反射ベクトルとディレクションライトの内積からスペキュラの強さ計算
+		float3 t = max(0.0f, dot(-Direction[0], reflectV));
+		
+		//スペキュラを絞る  pow(x,y) = xのy乗
+		float3 spec = pow(t, specPow[0]) * Color[0].xyz;
+
+		//ligに加算
+		lig += spec;
 	}
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;

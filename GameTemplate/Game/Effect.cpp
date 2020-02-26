@@ -49,9 +49,9 @@ namespace myEngine {
 	{
 		//g_cameraからカメラ行列とプロジェクション行列をコピー
 		Effekseer::Matrix44 efCameraMat;
-		g_camera2D.GetViewMatrix().CopyTo(efCameraMat);
+		g_camera3D.GetViewMatrix().CopyTo(efCameraMat);
 		Effekseer::Matrix44 efProjMat;
-		g_camera2D.GetProjectionMatrix().CopyTo(efProjMat);
+		g_camera3D.GetProjectionMatrix().CopyTo(efProjMat);
 
 		//カメラ行列とプロジェクション行列を設定。
 		g_graphicsEngine->GetEffekseerRenderer()->SetCameraMatrix(efCameraMat);
