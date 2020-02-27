@@ -250,6 +250,7 @@
     <ClInclude Include="sound\WaveFileBank.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />

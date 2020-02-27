@@ -7,6 +7,7 @@ class stageObject1;
 class stageObject2;
 class moveFloor;
 class GameObjectScythe;
+class StageObjectDossun;
 class stageObjectJenerator : public IGameObject
 {
 public:
@@ -21,6 +22,7 @@ private:
 	RorlingRock* rorlingRock = nullptr;
 	Iwa* iwa = nullptr;
 	GameObjectScythe* scythe = nullptr;
+	StageObjectDossun* dossun = nullptr;
 
 	void Update();
 	bool Start();
