@@ -34,9 +34,9 @@ static const int NUM_DIRECTION_LIG = 4;
 cbuffer LightCb : register(b0) {
 	float3		Direction[NUM_DIRECTION_LIG];	//カメラの方向
 	float4		Color[NUM_DIRECTION_LIG];		//カラー
-	float3		eyePos;							//視点の座標	
-	bool		active;							//アクティブ
+	float3		eyePos;							//視点の座標
 	float		specPow[NUM_DIRECTION_LIG];		//鏡面反射の絞り 最後に書いて！
+	bool		active;							//アクティブ
 };	
 
 

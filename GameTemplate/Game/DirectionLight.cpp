@@ -85,6 +85,7 @@ void DirectionLight::Render()
 	//視点の取得
 	m_dirLight.eyePos = g_camera3D.GetPosition();
 
+
 	//ライト用の定数バッファの更新
 	dc->UpdateSubresource(m_lightCb, 0, nullptr, &m_dirLight, 0, 0);
 
@@ -99,14 +100,14 @@ void DirectionLight::Update()
 	//for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
 	//	qRot.Multiply(m_dirLight.direction[i]);
 	//}
-	if (GetAsyncKeyState('B')) {
-		for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
-			m_dirLight.specPow[i] = max(0.0f, m_dirLight.specPow[i] - 0.5f);
-		}
-	}
-	else if (GetAsyncKeyState('N')) {
-		for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
-			m_dirLight.specPow[i] = min(0.0f, m_dirLight.specPow[i] + 0.5f);
-		}
-	}
+	//if (GetAsyncKeyState('B')) {
+	//	for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
+	//		m_dirLight.specPow[i] = max(0.0f, m_dirLight.specPow[i] - 0.5f);
+	//	}
+	//}
+	//else if (GetAsyncKeyState('N')) {
+	//	for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
+	//		m_dirLight.specPow[i] = min(0.0f, m_dirLight.specPow[i] + 0.5f);
+	//	}
+	//}
 }
