@@ -16,7 +16,6 @@ SPole::~SPole()
 bool SPole::Start()
 {
 	m_npole = FindGO<NPole>("npole");
-	m_player = FindGO<Player>("player");
 	m_position = m_player->GetPosition();
 	return true;
 }

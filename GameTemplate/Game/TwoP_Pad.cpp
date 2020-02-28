@@ -5,27 +5,30 @@
 TwoP_Pad::TwoP_Pad() {
 
 	int i = 0;
-	for (auto p : m_pad) {
+	const int PlayerNum = 2;
+	for (int i = 0; i < PlayerNum;) {
 		m_pad[i].Init(i);
+		CVector3 SpownPos = { 100.0f * i,0.0f,0.0f };
 		char PlayerNo[256] = {};
-		sprintf(PlayerNo, "player%d", i+1);
+		sprintf(PlayerNo, "player%d", ++i);
 		Player* player = NewGO<Player>(1, PlayerNo);
-		player->SetPad(&m_pad[i]);
-		i++;
+		player->SetPosition(SpownPos);
+		player->SetPad(&m_pad[i-1]);
 	}
 }
 TwoP_Pad::~TwoP_Pad()
 {
 }
 
-bool TwoP_Pad::Start()
-{
-	return true;
-}
+//bool TwoP_Pad::Start()
+//{
+//	return true;
+//}
 
 void TwoP_Pad::Update()
 {
 	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
 		m_pad[i].Update();
 	}
+	
 }

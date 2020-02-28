@@ -25,15 +25,19 @@ public:
 	void SetPad(Pad* pad) {
 		m_Pad = pad;
 	}
+	void Press();
 private:
+	bool Start();
 	void Update();
 	void Draw();
+
 	SkinModel m_model;									//スキンモデル。
-	SkinModel m_magnetModel;
 	CharacterController m_characon;
 	CVector3 m_position = CVector3::Zero();
 	CQuaternion m_rot = CQuaternion::Identity();
 	CVector3 m_forward = CVector3::Front();
+	bool IsSi = false;
+	CVector3 m_Scale = CVector3::One();
 
 	MyMagnet::Magnet* m_Magnet = nullptr;
 	int m_magnetSwich = 0;			//プレイヤーの磁力を切り替える変数
@@ -42,5 +46,6 @@ private:
 	void SpawnPole();
 	void Move();
 	void MyMagnet();
+	void SIBOU();
 };
 

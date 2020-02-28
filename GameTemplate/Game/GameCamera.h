@@ -7,6 +7,9 @@ public:
 	GameCamera();
 	~GameCamera();
 
+	void SetDec(float d) {
+		Decline = d;
+	}
 private:
 	int m_PlayerNum = 0;
 	bool Start()override;

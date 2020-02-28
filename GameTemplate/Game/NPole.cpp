@@ -14,7 +14,6 @@ NPole::~NPole()
 
 bool NPole::Start()
 {
-	m_player = FindGO<Player>("player");
 	return true;
 }
 
