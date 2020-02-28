@@ -17,8 +17,8 @@ namespace myEngine {
 		CVector4	direction[NUM_DIRECTION_LIG];	//ライトの方向
 		CVector4	color[NUM_DIRECTION_LIG];		//ライトのカラー
 		CVector3	eyePos;							//視点の座標	
-		bool		active;							//0ならFalse, 1ならTrue
 		float		specPow[NUM_DIRECTION_LIG];		//鏡面反射の絞り
+		bool		active;							//0ならFalse, 1ならTrue
 	};
 
 	/// <summary>
