@@ -22,8 +22,8 @@ bool Player::Start()
 	//ÉvÉåÉCÉÑÅ[Ç…é•óÕÇéùÇΩÇπÇÈ
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet, &m_position);
-	m_FrontModel.Init(L"Assets/modelData/a.cmo");
-	//m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
+	m_FrontModel.Init(L"Assets/modelData/player(front).cmo");
+	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
 	return true;
 }
 
@@ -59,12 +59,12 @@ void Player::Draw()
 			g_camera3D.GetProjectionMatrix()
 		);
 	}
-	/*if (m_PlayerCut) {
+	if (m_PlayerCut) {
 		m_BuckModel.Draw(
 			g_camera3D.GetViewMatrix(),
 			g_camera3D.GetProjectionMatrix()
 		);
-	}*/
+	}
 }
 
 void Player::SpawnPole()
