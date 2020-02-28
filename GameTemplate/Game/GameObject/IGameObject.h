@@ -20,7 +20,8 @@ namespace myEngine {
 		IGameObject() :
 			m_priority(0),
 			m_isStart(false),
-			m_isDead(false)
+			m_isDead(false),
+			m_isActive(true)
 		{
 		};
 		/// <summary>
@@ -73,6 +74,22 @@ namespace myEngine {
 		GameObjPrio GetPriority() const
 		{
 			return m_priority;
+		}
+
+
+		virtual bool IsStart() const
+		{
+			return m_isStart;
+		}
+		/*!
+		*@brief アクティブかどうかを判定。
+		*/
+		bool IsActive() const
+		{
+			return m_isActive;
+		}
+		void SetActive(bool act) {
+			m_isActive = act;
 		}
 
 	public:

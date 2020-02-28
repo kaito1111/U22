@@ -4,11 +4,11 @@
 Magnet::Magnet()
 {
 	m_SMagSprite = NewGO<myEngine::SpriteRender>(0);
-	m_SMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 200.0f, 100.0f);
-	m_SMagSprite->SetW(0.0f);
+	m_SMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 200.0f, 100.0f, true);
+	m_SMagSprite->SetActiveFlag(false);
 	m_NMagSprite = NewGO<myEngine::SpriteRender>(0);
-	m_NMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 200.0f, 100.0f);
-	m_NMagSprite->SetW(0.0f);
+	m_NMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 200.0f, 100.0f, true);
+	m_SMagSprite->SetActiveFlag(false);
 }
 
 Magnet::~Magnet()
@@ -91,7 +91,7 @@ CVector3 Magnet::MagnetMove()
 		diff /= MagnetNum;
 		m_Diff += diff;
 		return true;
-	});
+	}); 
 	return m_Diff;
 }
 
@@ -100,22 +100,22 @@ void MyMagnet::Magnet::Update()
 	switch (state)
 	{
 	case Magnet::SMode:
-		m_SMagSprite->SetW(1.0f);
-		m_NMagSprite->SetW(0.0f);
+		m_SMagSprite->SetActiveFlag(true);
+		m_NMagSprite->SetActiveFlag(false);
 		break;
 	case Magnet::NMode:
-		m_SMagSprite->SetW(0.0f);
-		m_NMagSprite->SetW(1.0f);
+		m_SMagSprite->SetActiveFlag(false);
+		m_NMagSprite->SetActiveFlag(true);
 		break;
 	default:
-		m_SMagSprite->SetW(0.0f);
-		m_NMagSprite->SetW(0.0f);
+		m_SMagSprite->SetActiveFlag(false);
+		m_NMagSprite->SetActiveFlag(false);
 		break;
 	}
 	m_NMagSprite->SetPosition(*m_Position);
 	m_NMagSprite->Update(); 
 
-	m_SMagSprite->SetPosition(*m_Position);
+	m_SMagSprite->SetPosition({ m_Position->x,m_Position->y,m_Position->z });
 	m_SMagSprite->Update();
 }
 

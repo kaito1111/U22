@@ -66,6 +66,7 @@
     <ClCompile Include="GameObjectScythe.cpp" />
     <ClCompile Include="StageObjectMagma.cpp" />
     <ClCompile Include="StageObjectDossun.cpp" />
+    <ClCompile Include="DirectionLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -79,6 +80,9 @@
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
+    <MeshContentTask Include="Assets\modelData\Player(front).FBX" />
+    <MeshContentTask Include="Assets\modelData\player%28Back%29.FBX" />
+    <MeshContentTask Include="Assets\modelData\A.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -149,6 +153,7 @@
     <ClInclude Include="GameObjectScythe.h" />
     <ClInclude Include="StageObjectMagma.h" />
     <ClInclude Include="StageObjectDossun.h" />
+    <ClInclude Include="DirectionLight.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
