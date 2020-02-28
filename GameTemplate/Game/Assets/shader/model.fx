@@ -176,22 +176,29 @@ float4 PSMain( PSInput In ) : SV_Target0
 		}
 	}
 
+
 	//鏡面反射の計算
 	for (int i = 0; i < NUM_DIRECTION_LIG; i++)
-	{
-		//ライトを当てる面から視点に伸びるベクトル計算
-		float3 toEyeDir = normalize(eyePos - In.worldPos);
-		//反射ベクトル
-		float3 reflectV = -toEyeDir + 2 * dot(In.Normal, toEyeDir)* In.Normal;
-		//反射ベクトルとディレクションライトの内積からスペキュラの強さ計算
-		float3 t = max(0.0f, dot(-Direction[0], reflectV));
-		
-		//スペキュラを絞る  pow(x,y) = xのy乗
-		float3 spec = pow(t, specPow[0]) * Color[0].xyz;
+		if (specPow[i] > 1.0f) {
+			{
+				//ライトを当てる面から視点に伸びるベクトル計算
+				float3 toEyeDir = normalize(eyePos - In.worldPos);
+				//反射ベクトル
+				float3 reflectV = -toEyeDir + 2 * dot(In.Normal, toEyeDir)* In.Normal;
+				//反射ベクトルとディレクションライトの内積からスペキュラの強さ計算
+				float3 t = max(0.0f, dot(-Direction[i], reflectV));
 
-		//ligに加算
-		lig += spec;
-	}
+
+				if (Color[i].x != 0 && Color[i].y != 0 && Color[i].z != 0) {
+					//カラーがあるなら
+					//スペキュラを絞る  pow(x,y) = xのy乗
+					float3 spec = pow(t, specPow[i]) * Color[i].xyz;
+					//ligに加算
+					lig += spec;
+				}
+
+			}
+		}
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;
 	return finalColor;

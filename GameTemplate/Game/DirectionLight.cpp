@@ -42,27 +42,39 @@ void DirectionLight::InitDirectionLight()
 	!!!!!	Set系列作ってないので、ここいじってライトの情報決めてください	!!!!!
 	*/
 
-	//ライトの方向
-	//あんまりいじらないほうがいいよ
+	/*
+	ライトの方向
+	ディレクションライトは位置情報は関係ないので向きのみになります。
+	デフォルトでそれなりの位置においてます。
+	*/
 	m_dirLight.direction[0] = { 1.0f, 0.0f, 0.0f, 1.0f };
 	m_dirLight.direction[1] = { -1.0f, 0.0f, 0.0f,1.0f };
 	m_dirLight.direction[2] = { 0.0f, 0.0f, 1.0f ,1.0f };
-	m_dirLight.direction[3] = { 1.0f, 0.0f, -1.0f,1.0f };
+	m_dirLight.direction[3] = { 0.0f, 0.0f, -1.0f,1.0f };
 
 	//ライトのカラー
 	m_dirLight.color[0] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	m_dirLight.color[1] = { 0.0f, 0.0f, 0.0f, 0.0f };
 	m_dirLight.color[2] = { 0.0f, 0.0f, 0.0f, 0.0f };
 	m_dirLight.color[3] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	//0.0f, 0.0f, 0.0f, 0.0f
 
-	//ライトの絞り
-	m_dirLight.specPow[0] = 10.0f;
-	m_dirLight.specPow[1] = 10.0f;
-	m_dirLight.specPow[2] = 10.0f;
-	m_dirLight.specPow[3] = 10.0f;
+	/*
+	ライトの絞り
+	ここを1.0f未満にすると鏡面反射がOFFになります。
+	※4本分あるけど0番目しか鏡面反射させれません※
+	*/
+	m_dirLight.specPow[0] = 1.0f;
+	//ここから↓のspecPowの値変えないで
+	m_dirLight.specPow[1] = 1.0f;
+	m_dirLight.specPow[2] = 1.0f;
+	m_dirLight.specPow[3] = 1.0f;
 
-	//!!!!!ライトが有効か無効か!!!!!
-	m_dirLight.active = true; 
+	/*
+	ディレクションライトが有効か無効か
+	Trueにすると鏡面反射も付きます
+	*/
+	m_dirLight.active = false; 
 }
 
 void DirectionLight::Render()
