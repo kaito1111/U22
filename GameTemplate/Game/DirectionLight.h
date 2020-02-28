@@ -14,9 +14,11 @@ namespace myEngine {
 	/// </summary>
 	struct SDirectionLight
 	{
-		CVector4 direction[NUM_DIRECTION_LIG];	//ライトの方向
-		CVector4 color[NUM_DIRECTION_LIG];		//ライトのカラー
-		int		 active[NUM_DIRECTION_LIG];		//0ならFalse, 1ならTrue
+		CVector4	direction[NUM_DIRECTION_LIG];	//ライトの方向
+		CVector4	color[NUM_DIRECTION_LIG];		//ライトのカラー
+		CVector3	eyePos;							//視点の座標	
+		bool		active;							//0ならFalse, 1ならTrue
+		float		specPow[NUM_DIRECTION_LIG];		//鏡面反射の絞り
 	};
 
 	/// <summary>
@@ -27,6 +29,13 @@ namespace myEngine {
 	public:
 		DirectionLight();
 		~DirectionLight();
+		/// <summary>
+		/// 16の倍数に切り上げ
+		/// </summary>
+		int Raundup(int n)
+		{
+			return (((n - 1) / 16) + 1) * 16;
+		}
 		/// <summary>
 		/// 解放処理
 		/// </summary>
@@ -48,9 +57,7 @@ namespace myEngine {
 		/// </summary>
 		void InitDirectionLight();
 	private:
-		ID3D11Buffer*	m_lightCb = nullptr;	//ライトの定数バッファ
-		SDirectionLight	m_dirLight;				//ディレクションライト
+		ID3D11Buffer*		m_lightCb = nullptr;	//ライトの定数バッファ
+		SDirectionLight		m_dirLight;				//ディレクションライト
 	};
-
-
 }

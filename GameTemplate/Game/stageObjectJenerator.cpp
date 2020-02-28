@@ -6,6 +6,7 @@
 #include"moveFloor.h"
 #include"RorlingRock.h"
 #include"GameObjectScythe.h"
+#include"StageObjectDossun.h"
 stageObjectJenerator::stageObjectJenerator()
 {
 
@@ -41,6 +42,7 @@ bool stageObjectJenerator::Start()
 	//movefloor = NewGO<moveFloor>(1, "movefloor");
 	//rorlingRock = NewGO<RorlingRock>(1, "rorlingRock");
 	scythe = NewGO<GameObjectScythe>(1, "scythe");
+	dossun = NewGO< StageObjectDossun>(1, "dossun");
 	return true;
 }
 

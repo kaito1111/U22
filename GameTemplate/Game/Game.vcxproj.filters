@@ -80,9 +80,7 @@
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
-    <MeshContentTask Include="Assets\modelData\Player(front).FBX" />
-    <MeshContentTask Include="Assets\modelData\player%28Back%29.FBX" />
-    <MeshContentTask Include="Assets\modelData\A.FBX" />
+    <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
