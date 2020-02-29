@@ -198,6 +198,8 @@ void Player::Cut()
 	Effect* effect = NewGO<Effect>(1);
 	if (!effect->IsPlay()) {
 		effect->Play(L"Assets/effect/hemohage.efk");
+		effect->SetPosition({ 0,0, 0 });
+		effect->SetScale(CVector3::One() * 20);
 	}
 }
 
@@ -205,7 +207,11 @@ void Player::Press()					//OK
 {
 	if (m_Scale.z >= 1.0f) {
 		Effect* effect = NewGO<Effect>(1);
-		effect->Play(L"Assets/effect/ti.efk");
+		if (!effect->IsPlay()) {
+			effect->Play(L"Assets/effect/ti.efk");
+			effect->SetPosition({ 0,0, 0 });
+			effect->SetScale(CVector3::One() * 20);
+		}
 	}
 	m_Scale.z -= 0.1f;
 	if (m_Scale.z <= 0.1f) {
