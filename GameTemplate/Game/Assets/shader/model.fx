@@ -36,7 +36,7 @@ cbuffer LightCb : register(b0) {
 	float4		Color[NUM_DIRECTION_LIG];		//カラー
 	float3		eyePos;							//視点の座標
 	bool		active = true;					//アクティブ
-	float		specPow[NUM_DIRECTION_LIG];		//鏡面反射の絞り 最後に書いて！
+	float		specPow/*[NUM_DIRECTION_LIG]*/;		//鏡面反射の絞り 最後に書いて！
 };	
 
 
@@ -180,11 +180,8 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//鏡面反射の計算
 	for (int i = 0; i < NUM_DIRECTION_LIG; i++)
 	{
-		if (specPow[i] >= 1.0f) 
+		if (specPow/*[i]*/ >= 1.0f) 
 		{
-			if (i == 1) {
-				return albedoColor;
-			}
 			//鏡面反射反射させる
 			{
 				//ライトを当てる面から視点に伸びるベクトル計算
@@ -197,7 +194,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 				if (Color[i].x != 0 && Color[i].y != 0 && Color[i].z != 0) {
 					//カラーがあるなら
 					//スペキュラ計算  pow(x,y) = xのy乗
-					float3 spec = pow(t, specPow[i]) * Color[i].xyz;
+					float3 spec = pow(t, specPow/*[i]*/) * Color[i].xyz;
 					//ligに加算
 					lig += spec;
 				}
