@@ -17,7 +17,7 @@ Player::~Player()
 bool Player::Start()
 {
 	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/Player.cmo");
+	m_model.Init(L"Assets/modelData/unityChan.cmo");
 	m_characon.Init(20.0, 100.0f, m_position);
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");

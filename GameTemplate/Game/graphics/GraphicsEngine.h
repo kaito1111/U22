@@ -4,7 +4,7 @@
  *@brief	グラフィックスエンジン。
  */
 
-#include "DirectionLight.h"
+#include "LightManager.h"
 
 class GraphicsEngine
 {
@@ -70,6 +70,14 @@ public:
 	{
 		return m_effekseerRenderer;
 	}
+	/// <summary>
+	/// ライトマネージャーの取得
+	/// </summary>
+	/// <returns></returns>
+	myEngine::LightManager* GetLigManager()
+	{
+		return m_ligManager;
+	}
 	/*!
 	 *@brief	描画開始。
 	 */
@@ -94,8 +102,7 @@ private:
 	D3D11_FEATURE_DATA_THREADING m_featureDataThreading;
 	EffekseerRenderer::Renderer* m_effekseerRenderer = nullptr;			//エフェクサーレンダー
 	Effekseer::Manager* m_manager = nullptr;							//エフェクトマネジャー
-
-
+	myEngine::LightManager* m_ligManager;								//ライトマネージャー
 };
 
 extern GraphicsEngine* g_graphicsEngine;			//グラフィックスエンジン

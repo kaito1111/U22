@@ -67,6 +67,7 @@
     <ClCompile Include="StageObjectMagma.cpp" />
     <ClCompile Include="StageObjectDossun.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
+    <ClCompile Include="LightManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -155,6 +156,7 @@
     <ClInclude Include="StageObjectMagma.h" />
     <ClInclude Include="StageObjectDossun.h" />
     <ClInclude Include="DirectionLight.h" />
+    <ClInclude Include="LightManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
