@@ -1,6 +1,10 @@
 /// <summary>
 /// ディレクションライト
 /// </summary>
+/// <remarks>
+/// IGameObjectを継承していないので、
+/// LightManagerで対応した関数を作成して、呼び出してください。
+/// </remarks>
 
 #pragma once
 #include "GameObject/IGameObject.h"

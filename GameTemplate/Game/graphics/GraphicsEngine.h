@@ -102,7 +102,7 @@ private:
 	D3D11_FEATURE_DATA_THREADING m_featureDataThreading;
 	EffekseerRenderer::Renderer* m_effekseerRenderer = nullptr;			//エフェクサーレンダー
 	Effekseer::Manager* m_manager = nullptr;							//エフェクトマネジャー
-	myEngine::LightManager* m_ligManager;								//ライトマネージャー
+	myEngine::LightManager* m_ligManager;								//ライトマネージャー グラフィックエンジンでNewGOしてる
 };
 
 extern GraphicsEngine* g_graphicsEngine;			//グラフィックスエンジン
