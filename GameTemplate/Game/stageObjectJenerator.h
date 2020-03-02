@@ -8,6 +8,7 @@ class stageObject2;
 class moveFloor;
 class GameObjectScythe;
 class StageObjectDossun;
+class StageObjectMagma;
 class stageObjectJenerator : public IGameObject
 {
 public:
@@ -16,6 +17,7 @@ public:
 
 private:
 	//オブジェクト
+	StageObjectMagma* magma = nullptr;
 	moveFloor* movefloor = nullptr;
 	stageObject1* object1 = nullptr;
 	stageObject2* object2 = nullptr;
