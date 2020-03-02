@@ -14,4 +14,5 @@ private:
 	void Sample();
 	SpriteRender* m_test=nullptr;
 	SoundSource	m_se;
+	Effect* effect = nullptr;
 };

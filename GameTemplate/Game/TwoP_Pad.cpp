@@ -20,15 +20,9 @@ TwoP_Pad::~TwoP_Pad()
 {
 }
 
-//bool TwoP_Pad::Start()
-//{
-//	return true;
-//}
-
 void TwoP_Pad::Update()
 {
 	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
 		m_pad[i].Update();
 	}
-	
 }

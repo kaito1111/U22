@@ -4,7 +4,6 @@
 #include "SPole.h"
 #include "GameCamera.h"
 
-
 Player::Player()
 {
 }
@@ -23,6 +22,8 @@ bool Player::Start()
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet, &m_position);
+	m_FrontModel.Init(L"Assets/modelData/player(front).cmo");
+	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
 	return true;
 }
 
@@ -30,17 +31,40 @@ void Player::Update()
 {
 	MyMagnet();
 	SpawnPole();
-	Move();
-	if (IsSi) {
+	if (m_Pad->IsTrigger(enButtonX)) {
+		Cut();
+	}
+	if (m_IsSi) {
 		SIBOU();
 	}
+	else {
+		Move();
+	}
+	//ワールド行列の更新。
+	m_model.UpdateWorldMatrix(m_position, m_rot, m_Scale);
+	m_BuckModel.UpdateWorldMatrix(m_position, m_ReverseDefeatRot, m_Scale);
+	m_FrontModel.UpdateWorldMatrix(m_position, m_DefeatRot, m_Scale);
 }
 void Player::Draw()
 {
-	m_model.Draw(
-		g_camera3D.GetViewMatrix(),
-		g_camera3D.GetProjectionMatrix()
-	);
+	if (!m_PlayerCut) {
+		m_model.Draw(
+			g_camera3D.GetViewMatrix(),
+			g_camera3D.GetProjectionMatrix()
+		);
+	}
+	if (m_PlayerCut) {
+		m_FrontModel.Draw(
+			g_camera3D.GetViewMatrix(),
+			g_camera3D.GetProjectionMatrix()
+		);
+	}
+	if (m_PlayerCut) {
+		m_BuckModel.Draw(
+			g_camera3D.GetViewMatrix(),
+			g_camera3D.GetProjectionMatrix()
+		);
+	}
 }
 
 void Player::SpawnPole()
@@ -100,7 +124,7 @@ void Player::Move()
 	{
 		//重力
 		const float gravity = 5.0f;
-		//movespeed.y -= gravity;
+		movespeed.y -= gravity;
 	}
 	//左右の移動
 	movespeed.x = m_Pad->GetLStickXF() * -20.0f;
@@ -118,8 +142,6 @@ void Player::Move()
 	{
 		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
 	}
-	//ワールド行列の更新。
-	m_model.UpdateWorldMatrix(m_position, m_rot, m_Scale);
 }
 
 void Player::MyMagnet()
@@ -145,24 +167,58 @@ void Player::MyMagnet()
 	}
 }
 
-void Player::SIBOU()
+void Player::SIBOU()				//OK
 {
-	m_position = CVector3::Zero();
-	GameCamera* camera = FindGO<GameCamera>("camera");
-	camera->SetDec(0.0f);
-	IsSi = false;
+	if (m_Pad->IsTrigger(enButtonA)) {
+		m_position = CVector3::Zero();
+		GameCamera* camera = FindGO<GameCamera>("camera");
+		camera->SetDec(0.0f);
+		m_IsSi = false;
+	}
 }
 
-void Player::Press()
+void Player::MagumaDead()				//OK
 {
-	if (m_Scale.y >= 1.0f) {
+	m_position.y -= 1.0f; 
+	m_IsSi = true;
+
+}
+
+void Player::Cut()
+{
+	m_PlayerCut = true;
+	rate += 2.0f;
+	if (rate > 90.0f) {
+		rate = 90.0f;
+	}
+	m_DefeatRot.SetRotationDeg(CVector3::AxisZ(), rate);
+	m_DefeatRot.Multiply(m_rot);
+	m_ReverseDefeatRot.SetRotationDeg(CVector3::AxisZ(), -rate);
+	m_ReverseDefeatRot.Multiply(m_rot);
+	Effect* effect = NewGO<Effect>(1);
+	if (!effect->IsPlay()) {
+		effect->Play(L"Assets/effect/hemohage.efk");
+		effect->SetPosition({ 0,0, 0 });
+		effect->SetScale(CVector3::One() * 20);
+	}
+}
+
+void Player::Press()					//OK
+{
+	if (m_Scale.z >= 1.0f) {
 		Effect* effect = NewGO<Effect>(1);
-		effect->Play(L"Assets/effect/ti.efk");
+		if (!effect->IsPlay()) {
+			effect->Play(L"Assets/effect/ti.efk");
+			effect->SetPosition({ 0,0, 0 });
+			effect->SetScale(CVector3::One() * 20);
+		}
 	}
-	m_Scale.y -= 0.1f;
-	if (m_Scale.y <= 0.1f) {
-		m_Scale.y = 0.1f;
-		IsSi = true;
+	m_Scale.z -= 0.1f;
+	if (m_Scale.z <= 0.1f) {
+		m_Scale.z = 0.1f;
+		m_IsSi = true;
+	}
+	if (m_Pad->IsTrigger(enButtonA)) {
+		m_Scale.z = 1.0f;
 	}
 }
-

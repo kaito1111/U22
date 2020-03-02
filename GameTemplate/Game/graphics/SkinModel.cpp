@@ -2,6 +2,7 @@
 #include "SkinModel.h"
 #include "SkinModelDataManager.h"
 
+
 SkinModel::~SkinModel()
 {
 	if (m_cb != nullptr) {
@@ -26,8 +27,6 @@ void SkinModel::Init(const wchar_t* filePath, EnFbxUpAxis enFbxUpAxis)
 
 	//SkinModelDataManagerを使用してCMOファイルのロード。
 	m_modelDx = g_skinModelDataManager.Load(filePath, m_skeleton);
-
-	lig = NewGO<DirectionLight>(3, "light");
 
 	m_enFbxUpAxis = enFbxUpAxis;
 }
@@ -108,32 +107,34 @@ void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVect
 }
 void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 {
-	ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
- 	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
+	
+		ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
+		DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
 
-	//定数バッファの内容を更新。
-	SVSConstantBuffer vsCb;
-	vsCb.mWorld = m_worldMatrix;
-	vsCb.mProj = projMatrix;
-	vsCb.mView = viewMatrix;
-	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
-	//定数バッファをGPUに転送。
-	d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb);
-	d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
-	//サンプラステートを設定。
-	d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
-	//ボーン行列をGPUに転送。
-	m_skeleton.SendBoneMatrixArrayToGPU();
+		//定数バッファの内容を更新。
+		SVSConstantBuffer vsCb;
+		vsCb.mWorld = m_worldMatrix;
+		vsCb.mProj = projMatrix;
+		vsCb.mView = viewMatrix;
+		d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
+		//定数バッファをGPUに転送。
+		d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb);
+		d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb);
+		//サンプラステートを設定。
+		d3dDeviceContext->PSSetSamplers(0, 1, &m_samplerState);
+		//ボーン行列をGPUに転送。
+		m_skeleton.SendBoneMatrixArrayToGPU();
 
-	//描画設定
-	lig->Render();
+		//ライト用の描画設定
+		g_graphicsEngine->GetLigManager()->GetDirLig().Render();
 
-	//描画。
-	  m_modelDx->Draw(
-		d3dDeviceContext,
-		state,
-		m_worldMatrix,
-		viewMatrix,
-		projMatrix
-	);
+		//描画。
+		m_modelDx->Draw(
+			d3dDeviceContext,
+			state,
+			m_worldMatrix,
+			viewMatrix,
+			projMatrix
+		);
+	
 }
