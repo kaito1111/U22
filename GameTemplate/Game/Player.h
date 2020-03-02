@@ -25,10 +25,10 @@ public:
 	void SetPad(Pad* pad) {
 		m_Pad = pad;
 	}
-	void SIBOU();
-	void Press();
-	void MagumaDead();
-	void Cut();
+	void SIBOU();						
+	void Press();						//‰½“x‚àŒÄ‚Ô
+	void MagumaDead();					//‰½“x‚àŒÄ‚Ô
+	void Cut();							//‰½“x‚àŒÄ‚Ô
 private:
 	bool Start();
 	void Update();

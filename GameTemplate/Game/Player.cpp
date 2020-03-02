@@ -116,7 +116,7 @@ void Player::Move()
 {
 	//ƒWƒƒƒ“ƒv”»’è
 	CVector3 movespeed = CVector3::Zero();
-	if (m_Pad->IsTrigger(enButtonB) && m_characon.IsOnGround())
+	if (m_Pad->IsTrigger(enButtonB))
 	{
 		const float junpPower = 100.0f;
 		movespeed.y = junpPower;
@@ -184,7 +184,7 @@ void Player::MagumaDead()				//OK
 
 }
 
-void Player::Cut()
+void Player::Cut()						//OK
 {
 	m_PlayerCut = true;
 	rate += 2.0f;
