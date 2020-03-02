@@ -55,7 +55,7 @@ void moveFloor::Update()
 
 void moveFloor::Move()
 {
-	const float speedUPLimit = 10;  //スピードの上限
+	const float speedUPLimit = 7;  //スピードの上限
 	const float speedDownLimit = 0;//スピードの下限
 	const float speed = 0.1;
 
