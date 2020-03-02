@@ -109,6 +109,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="RorlingRock.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
@@ -207,6 +208,7 @@
     <ClInclude Include="KaitoTask.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
+    <ClInclude Include="LightManager.h" />
     <ClInclude Include="Magnet\Magnet.h" />
     <ClInclude Include="Magnet\MagnetManager.h" />
     <ClInclude Include="math\kMath.h" />
@@ -254,6 +256,7 @@
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
+    <MeshContentTask Include="Assets\modelData\magma.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />

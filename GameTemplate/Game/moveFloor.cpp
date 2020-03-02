@@ -33,12 +33,12 @@ bool moveFloor::Start()
 	m_pos = { 0.0f,100.0f,0.0f };
 	//m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
 	int MaxPlayer = Pad::CONNECT_PAD_MAX;
-	for (int PadNum = 1; PadNum < MaxPlayer ; PadNum++) {
+	/*for (int PadNum = 1; PadNum < MaxPlayer ; PadNum++) {
 		char pl[256];
 		sprintf(pl, "player%d", PadNum+1);
 
 		player[PadNum] = FindGO<Player>(pl);
-	}
+	}*/
 	
 	return true;
 }
@@ -55,7 +55,7 @@ void moveFloor::Update()
 
 void moveFloor::Move()
 {
-	const float speedUPLimit = 10;  //スピードの上限
+	const float speedUPLimit = 7;  //スピードの上限
 	const float speedDownLimit = 0;//スピードの下限
 	const float speed = 0.1;
 
@@ -113,58 +113,58 @@ void moveFloor::Move()
 void moveFloor::SetDotUpdate()
 {
 
-	//動く床のサイズ
+	////動く床のサイズ
 
-	const float LengthAndWidth = 100.0f;//縦と横の長さ
-	const float height =		 20.0f;//高さ
-	const float side =			 200.0f;//横の長さ
+	//const float LengthAndWidth = 100.0f;//縦と横の長さ
+	//const float height =		 20.0f;//高さ
+	//const float side =			 200.0f;//横の長さ
 
-	///////前////////////
-	//右上
-	FrontRightUp.x += side;
-	FrontRightUp.y += height;
+	/////////前////////////
+	////右上
+	//FrontRightUp.x += side;
+	//FrontRightUp.y += height;
 
-	//右下
-	FrontRightDown.x += side;
+	////右下
+	//FrontRightDown.x += side;
 
-	//左上
-	FrontLeftUp.x -= side;
-	FrontLeftUp.y += height;
+	////左上
+	//FrontLeftUp.x -= side;
+	//FrontLeftUp.y += height;
 
-	//左下
-	FrontLeftDown.x -= side;
-
-
-	//プレイヤーの当たり判定のサイズ.10,100
-	const float PlayerYSize = 100.0f;
-	const float PlayerXSize = 10.0f;
-
-	if (PlayerNum >= 5) {
-		PlayerNum = 1;
-	}
-	CVector3 PlayerPos = player[PlayerNum]->GetPosition();
-	PlayerRightUp = PlayerPos;
-	PlayerRightDown = PlayerPos;
-	PlayerLeftUp = PlayerPos;
-	PlayerLeftDown = PlayerPos;
+	////左下
+	//FrontLeftDown.x -= side;
 
 
-	//プレイヤーの右上
-	PlayerRightUp.x += PlayerXSize;
-	PlayerRightUp.y += PlayerYSize;
+	////プレイヤーの当たり判定のサイズ.10,100
+	//const float PlayerYSize = 100.0f;
+	//const float PlayerXSize = 10.0f;
 
-	//プレイヤーの右下
-	PlayerRightDown.x += PlayerXSize;
+	//if (PlayerNum >= 5) {
+	//	PlayerNum = 1;
+	//}
+	//CVector3 PlayerPos = player[PlayerNum]->GetPosition();
+	//PlayerRightUp = PlayerPos;
+	//PlayerRightDown = PlayerPos;
+	//PlayerLeftUp = PlayerPos;
+	//PlayerLeftDown = PlayerPos;
 
-	//プレイヤーの左上
-	PlayerLeftUp.x -= PlayerXSize;
-	PlayerLeftUp.y += PlayerYSize;
 
-	//プレイヤーの左下
-	PlayerLeftDown.x -= PlayerXSize;
+	////プレイヤーの右上
+	//PlayerRightUp.x += PlayerXSize;
+	//PlayerRightUp.y += PlayerYSize;
+
+	////プレイヤーの右下
+	//PlayerRightDown.x += PlayerXSize;
+
+	////プレイヤーの左上
+	//PlayerLeftUp.x -= PlayerXSize;
+	//PlayerLeftUp.y += PlayerYSize;
+
+	////プレイヤーの左下
+	//PlayerLeftDown.x -= PlayerXSize;
 
 
-	PlayerNum++;
+	//PlayerNum++;
 }
 
 void moveFloor::CollisionDetection()
