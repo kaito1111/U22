@@ -45,12 +45,12 @@ void GameCamera::Update()
 	//Target /= m_PlayerNum;
 
 	//下の限界を更新
-	if (Decline < Target.y) {
+	/*if (Decline < Target.y) {
 		Decline = Target.y;
 	}
 	else {
 		Target.y = Decline;
-	}
+	}*/
 
 	//プレイヤーを殺す
 	if (m_Player[0]->GetPosition().y < Target.y - 200.0f) {
