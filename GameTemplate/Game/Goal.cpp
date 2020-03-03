@@ -5,7 +5,7 @@
 
 Goal::Goal()
 {
-	m_Skin.Init(L"Asset/modelData/Goal.cmo");
+	m_Skin.Init(L"Assets/modelData/Goal.cmo");
 }
 
 Goal::~Goal()
@@ -14,7 +14,7 @@ Goal::~Goal()
 
 bool Goal::Start()
 {
-	m_player = FindGO <Player>("player");
+	m_player = FindGO<Player>("player1");
 	return true;
 }
 

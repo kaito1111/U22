@@ -87,6 +87,7 @@
     <MeshContentTask Include="Assets\modelData\Player(front).FBX" />
     <MeshContentTask Include="Assets\modelData\Player(Back).FBX" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
+    <MeshContentTask Include="Assets\modelData\Goal.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />

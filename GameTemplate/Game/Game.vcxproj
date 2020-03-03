@@ -257,6 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
+    <MeshContentTask Include="Assets\modelData\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
