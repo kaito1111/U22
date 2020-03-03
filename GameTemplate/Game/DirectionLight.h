@@ -60,6 +60,14 @@ namespace myEngine {
 		/// ディレクションライトの初期化
 		/// </summary>
 		void InitDirectionLight();
+
+		void SetColor(CVector4 color, int i = 0 ) {
+			m_dirLight.color[i] = color;
+		}
+		void SetColor(CVector3 color, int i = 0) {
+			CVector4 Color = { color.x,color.y,color.z,1.0f };
+			m_dirLight.color[i] = Color;
+		}
 	private:
 		ID3D11Buffer*		m_lightCb = nullptr;	//ライトの定数バッファ
 		SDirectionLight		m_dirLight;				//ディレクションライト

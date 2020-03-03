@@ -69,6 +69,7 @@
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="PhysicsGhostObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -85,7 +86,6 @@
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Player(front).FBX" />
     <MeshContentTask Include="Assets\modelData\Player(Back).FBX" />
-    <MeshContentTask Include="Assets\modelData\a.FBX" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +160,7 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="LightManager.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="PhysicsGhostObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />
