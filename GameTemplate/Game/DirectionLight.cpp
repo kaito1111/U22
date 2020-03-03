@@ -96,11 +96,11 @@ void DirectionLight::Render()
 
 void DirectionLight::Update()
 {
-	CQuaternion qRot;
-	qRot.SetRotationDeg(CVector3::AxisY(), 2.0f);
-	for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
-		qRot.Multiply(m_dirLight.direction[i]);
-	}
+	//CQuaternion qRot;
+	//qRot.SetRotationDeg(CVector3::AxisY(), 2.0f);
+	//for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
+	//	qRot.Multiply(m_dirLight.direction[i]);
+	//}
 	//if (GetAsyncKeyState('B')) {
 	//	for (int i = 0; i < NUM_DIRECTION_LIG; i++) {
 	//		m_dirLight.specPow[i] = max(0.0f, m_dirLight.specPow[i] - 0.5f);

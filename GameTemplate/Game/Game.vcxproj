@@ -109,6 +109,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="graphics\RenderTarget.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="RorlingRock.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
     <ClInclude Include="graphics\Camera.h" />
     <ClInclude Include="graphics\GraphicsEngine.h" />
+    <ClInclude Include="graphics\RenderTarget.h" />
     <ClInclude Include="graphics\Shader.h" />
     <ClInclude Include="graphics\ShaderResources.h" />
     <ClInclude Include="graphics\Skeleton.h" />

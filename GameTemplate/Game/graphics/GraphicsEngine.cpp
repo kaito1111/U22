@@ -196,6 +196,7 @@ void GraphicsEngine::Init(HWND hWnd)
 		MemoryBarrier();
 	}
 	
+	//ライトマネージャーの作成
 	m_ligManager = NewGO<LightManager>(0);
 
 	m_pd3dDeviceContext->RSSetViewports(1, &viewport);
