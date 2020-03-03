@@ -18,7 +18,7 @@ bool Player::Start()
 {
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/Player.cmo");
-	m_characon.Init(20.0, 100.0f, m_position);
+	m_characon.Init(20.0, 50.0f, m_position);
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet, &m_position);
@@ -32,7 +32,7 @@ void Player::Update()
 	MyMagnet();
 	SpawnPole();
 	if (m_Pad->IsTrigger(enButtonX)) {
-		Cut();
+		SIBOU();
 	}
 	if (m_IsSi) {
 		SIBOU();
@@ -116,9 +116,9 @@ void Player::Move()
 {
 	//ジャンプ判定
 	CVector3 movespeed = CVector3::Zero();
-	if (m_Pad->IsTrigger(enButtonB))
+	if (m_Pad->IsPress(enButtonB))
 	{
-		const float junpPower = 100.0f;
+		const float junpPower = 20.0f;
 		movespeed.y = junpPower;
 	}
 	{
@@ -198,7 +198,7 @@ void Player::Cut()						//OK
 	Effect* effect = NewGO<Effect>(1);
 	if (!effect->IsPlay()) {
 		effect->Play(L"Assets/effect/hemohage.efk");
-		effect->SetPosition({ 0,0, 0 });
+		effect->SetPosition(m_position);
 		effect->SetScale(CVector3::One() * 20);
 	}
 }
@@ -209,7 +209,7 @@ void Player::Press()					//OK
 		Effect* effect = NewGO<Effect>(1);
 		if (!effect->IsPlay()) {
 			effect->Play(L"Assets/effect/ti.efk");
-			effect->SetPosition({ 0,0, 0 });
+			effect->SetPosition(m_position);
 			effect->SetScale(CVector3::One() * 20);
 		}
 	}
