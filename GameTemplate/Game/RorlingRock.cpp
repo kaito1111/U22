@@ -12,7 +12,7 @@ RorlingRock::~RorlingRock()
 bool RorlingRock::Start()
 {
 	m_model.Init(L"Assets/modelData/RorlingRock.cmo");
-	charaCon.Init(100.0f, 100.0f, m_pos);//キャラコンの初期化
+	charaCon.Init(1.0f, 1.0f, m_pos);//キャラコンの初期化
 
 	player1 = FindGO<Player>("player1");
 	player2 = FindGO<Player>("player2");
@@ -29,6 +29,7 @@ void RorlingRock::Draw()
 
 void RorlingRock::Update()
 {
+	killPlayer();
 	Rorling();
 	Move();
 	m_model.UpdateWorldMatrix(m_pos, m_rot, m_scale);
@@ -44,7 +45,7 @@ void RorlingRock::Rorling()
 
 void RorlingRock::Move()
 {
-	moveSpeed.x -= 10.0f;
+	moveSpeed.x -= 0.01f;
 	moveSpeed.y--;
 	m_pos = charaCon.Execute(1.0f, moveSpeed);
 
@@ -60,7 +61,12 @@ void RorlingRock::killPlayer()
 	CVector3 toP2 = player2->GetPosition() - m_pos;
 	float toP2Length = toP2.Length();
 	
-	if (toP1Length < 200.0f|| toP2Length) {
-
+	if (toP1Length < 200.0f) {
+		//ここに死亡処理書く。後でね。
+		player1->MagumaDead();
+	}
+	if (toP2Length < 200.0f) {
+		//ここに死亡処理書く。後でね。
+		player2->MagumaDead();
 	}
 }
