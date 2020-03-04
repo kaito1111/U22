@@ -7,10 +7,14 @@ Magnet::Magnet()
 	m_SMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 50.0f, 50.0f, true);
 	m_SMagSprite->SetW(0.0f);
 	m_SMagSprite->SetPivot({ 0.0f,0.0f });
+	CQuaternion qRot;
+	qRot.SetRotationDeg(CVector3::AxisY(), 180.0f);
+	m_SMagSprite->SetRotation(qRot);
 	m_NMagSprite = NewGO<myEngine::SpriteRender>(3);
 	m_NMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 50.0f, 50.0f, true);
 	m_NMagSprite->SetW(0.0f);
 	m_SMagSprite->SetPivot({ 0.0f,0.0f });
+	m_NMagSprite->SetRotation(qRot);
 }
 
 Magnet::~Magnet()
