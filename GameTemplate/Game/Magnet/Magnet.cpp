@@ -135,6 +135,11 @@ void MyMagnet::Magnet::Update()
 
 void MyMagnet::Magnet::PostDraw()
 {
-	m_NMagSprite->Draw();
-	m_SMagSprite->Draw();
+	int i = 0;
+
+	if (i < 60) {
+		m_NMagSprite->Draw();
+		m_SMagSprite->Draw();
+		i++;
+	}
 }
