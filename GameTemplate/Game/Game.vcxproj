@@ -162,7 +162,6 @@
     </ClCompile>
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stageObject1.cpp" />
-    <ClCompile Include="stageObject2.cpp" />
     <ClCompile Include="StageObjectDossun.cpp" />
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="StageObjectMagma.cpp" />
@@ -243,7 +242,6 @@
     </ClInclude>
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stageObject1.h" />
-    <ClInclude Include="stageObject2.h" />
     <ClInclude Include="StageObjectDossun.h" />
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="StageObjectMagma.h" />
