@@ -201,6 +201,7 @@ void Player::Cut()						//OK
 		effect->SetPosition(m_position);
 		effect->SetScale(CVector3::One() * 20);
 	}
+	m_IsSi = true;
 }
 
 void Player::Press()					//OK

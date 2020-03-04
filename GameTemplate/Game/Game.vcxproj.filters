@@ -68,7 +68,12 @@
     <ClCompile Include="StageObjectDossun.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="LightManager.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="graphics\RenderTarget.cpp" />
+=======
     <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="PhysicsGhostObject.cpp" />
+>>>>>>> 69aa0b63a4fe706fa2eac45a25c3a1a7fa15ddaa
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
@@ -85,8 +90,8 @@
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Player(front).FBX" />
     <MeshContentTask Include="Assets\modelData\Player(Back).FBX" />
-    <MeshContentTask Include="Assets\modelData\a.FBX" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
+    <MeshContentTask Include="Assets\modelData\Goal.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -159,7 +164,12 @@
     <ClInclude Include="StageObjectDossun.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="LightManager.h" />
+<<<<<<< HEAD
+    <ClInclude Include="graphics\RenderTarget.h" />
+=======
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="PhysicsGhostObject.h" />
+>>>>>>> 69aa0b63a4fe706fa2eac45a25c3a1a7fa15ddaa
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\modelData\CheckPoint2.png" />

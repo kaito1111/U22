@@ -110,7 +110,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="graphics\RenderTarget.cpp" />
     <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="RorlingRock.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="graphics\animation\AnimationPlayController.h" />
     <ClInclude Include="graphics\Camera.h" />
     <ClInclude Include="graphics\GraphicsEngine.h" />
+    <ClInclude Include="graphics\RenderTarget.h" />
     <ClInclude Include="graphics\Shader.h" />
     <ClInclude Include="graphics\ShaderResources.h" />
     <ClInclude Include="graphics\Skeleton.h" />
@@ -220,6 +223,7 @@
     <ClInclude Include="myEngine.h" />
     <ClInclude Include="myListener.h" />
     <ClInclude Include="NPole.h" />
+    <ClInclude Include="PhysicsGhostObject.h" />
     <ClInclude Include="physics\ICollider.h" />
     <ClInclude Include="physics\MeshCollider.h" />
     <ClInclude Include="physics\Physics.h" />
@@ -254,8 +258,8 @@
     <ClInclude Include="sound\WaveFileBank.h" />
   </ItemGroup>
   <ItemGroup>
-    <MeshContentTask Include="Assets\modelData\a.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
+    <MeshContentTask Include="Assets\modelData\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
