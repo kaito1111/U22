@@ -2,7 +2,6 @@
 #include "system/system.h"
 #include "level/Level.h"
 #include "Game.h"
-#include "Magnet/MagnetManager.h"
 
 
 ///////////////////////////////////////////////////////////////////
