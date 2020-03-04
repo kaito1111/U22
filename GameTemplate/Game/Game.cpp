@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Game.h"
-#include"Stage.h"
+#include "Stage.h"
 #include "exampleCode/ex2D.h"
 #include "KaitoTask.h"
 

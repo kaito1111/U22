@@ -165,7 +165,7 @@ namespace myEngine {
 		cb.WVP = cb.WVP * viewMatrix;
 		cb.WVP = cb.WVP * projMatrix;
 		//æŽZƒJƒ‰[‚Ì‘ã“ü + “§–¾“x‚ÌæŽZ
-		cb.m_mulColor = m_mulColor;
+		cb.m_mulColor = m_mulColor * w;
 
 		d3dDeviceContext->UpdateSubresource(m_cb.GetBody(), 0, NULL, &cb, 0, 0);
 

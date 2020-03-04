@@ -26,7 +26,7 @@ namespace MyMagnet {
 	private:
 		State state = NoMode;
 		CQuaternion m_Rot = CQuaternion::Identity();
-		bool Start();
+		//bool Start();
 	public:
 		const void SetState(State s) {
 			state = s;
