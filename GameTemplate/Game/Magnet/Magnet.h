@@ -25,6 +25,8 @@ namespace MyMagnet {
 		myEngine::SpriteRender* m_NMagSprite = nullptr;
 	private:
 		State state = NoMode;
+		CQuaternion m_Rot = CQuaternion::Identity();
+		bool Start();
 	public:
 		const void SetState(State s) {
 			state = s;
