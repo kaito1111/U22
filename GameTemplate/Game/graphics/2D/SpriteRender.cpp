@@ -44,7 +44,7 @@ namespace myEngine {
 			m_sprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), m_w);
 		}
 		else {
-			m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), m_w);
+			m_sprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), m_w);
 		}
 	}
 

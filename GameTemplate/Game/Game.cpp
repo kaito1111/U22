@@ -35,7 +35,7 @@ void Game::Sample()
 	if (GetAsyncKeyState('H'))
 	{
 		//2Dのサンプル
-		//ex2D* ex2d = NewGO<ex2D>(4, "ex2D");
+		ex2D* ex2d = NewGO<ex2D>(4, "ex2D");
 
 		//エフェクトの作成
 		if (!effect->IsPlay()) {
