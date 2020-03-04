@@ -87,9 +87,6 @@ namespace myEngine {
 		{
 			m_w = w;
 		}
-		void SetActiveFlag(bool isactive) {
-			IsActive = isactive;
-		}
 	public:
 		/// <summary>
 		/// 更新処理
@@ -116,7 +113,6 @@ namespace myEngine {
 		CVector3 m_scale = CVector3::One();					//拡大率
 		CVector2 m_pivot = Sprite::DEFAULT_PIVOT;			//ピボット
 		float m_w = 1.0f;									//透明度
-		bool IsActive = true;
 	};
 }
 
