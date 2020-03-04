@@ -41,7 +41,7 @@ bool stageObjectJenerator::Start()
 	//object1 = NewGO<stageObject1>(1, "object1");
 	//object2 = NewGO<stageObject2>(1, "object2");//現在バグなう。追加しないでね。
 	//movefloor = NewGO<moveFloor>(1, "movefloor");
-	//rorlingRock = NewGO<RorlingRock>(1, "rorlingRock");
+	rorlingRock = NewGO<RorlingRock>(1, "rorlingRock");
 	//scythe = NewGO<GameObjectScythe>(1, "scythe");
 	//dossun = NewGO< StageObjectDossun>(1, "dossun");
 	//magma = NewGO< StageObjectMagma>(1, "magma");

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RorlingRock.h"
-
+#include "Player.h"
 RorlingRock::RorlingRock()
 {
 }
@@ -13,6 +13,9 @@ bool RorlingRock::Start()
 {
 	m_model.Init(L"Assets/modelData/RorlingRock.cmo");
 	charaCon.Init(100.0f, 100.0f, m_pos);//キャラコンの初期化
+
+	player1 = FindGO<Player>("player1");
+	player2 = FindGO<Player>("player2");
 	return true;
 }
 
@@ -47,4 +50,17 @@ void RorlingRock::Move()
 
 	m_pos.y += 200;
 
+}
+
+void RorlingRock::killPlayer()
+{
+	//当たり判定.それぞれのプレイヤーまでの距離
+	CVector3 toP1 = player1->GetPosition() - m_pos;
+	float toP1Length = toP1.Length();
+	CVector3 toP2 = player2->GetPosition() - m_pos;
+	float toP2Length = toP2.Length();
+	
+	if (toP1Length < 200.0f|| toP2Length) {
+
+	}
 }
