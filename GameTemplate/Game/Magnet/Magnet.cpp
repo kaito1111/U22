@@ -4,16 +4,17 @@
 Magnet::Magnet()
 {
 	m_SMagSprite = NewGO<myEngine::SpriteRender>(3);
-	m_SMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 50.0f, 50.0f, false);
+	m_SMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 50.0f, 50.0f, true);
 	m_SMagSprite->SetW(0.0f);
 	m_SMagSprite->SetPivot({ 1.0f,1.0f });
 	m_Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
 	m_SMagSprite->SetRotation(m_Rot);
 	m_SMagSprite->SetActive(false);
 	m_NMagSprite = NewGO<myEngine::SpriteRender>(3);
-	m_NMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 50.0f, 50.0f, false);
+	m_NMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 50.0f, 50.0f, true);
 	m_NMagSprite->SetW(0.0f);
 	m_NMagSprite->SetPivot({ -1.0f,-1.0f });
+	m_NMagSprite->SetRotation(m_Rot);
 	m_NMagSprite->SetActive(false);
 }
 

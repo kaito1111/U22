@@ -31,4 +31,13 @@ void Goal::Update()
 			effect->SetScale(CVector3::One() * 20);
 		}
 	}
+	m_Skin.UpdateWorldMatrix(m_Position, CQuaternion::Identity(), CVector3::One());
+}
+
+void Goal::Draw()
+{
+	m_Skin.Draw(
+		g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix()
+	);
 }
