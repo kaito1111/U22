@@ -2,6 +2,7 @@
 #include "stageObjectJenerator.h"
 #include "Iwa.h"
 #include"stageObject1.h"
+//#include"stageObject2.h"
 #include"moveFloor.h"
 #include"RorlingRock.h"
 #include"GameObjectScythe.h"
