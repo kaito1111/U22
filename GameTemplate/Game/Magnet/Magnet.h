@@ -14,9 +14,9 @@ namespace MyMagnet {
 		~Magnet();
 		CVector3 MagnetMove();
 		enum State {
+			NoMode,
 			NMode,
 			SMode,
-			NoMode,
 			Num,
 		};
 		void Update();

@@ -84,11 +84,8 @@ void Player::SpawnPole()
 		npole->SetPlayer(this);
 		CVector3 SpawnDir = { m_Pad->GetRStickXF() * -1.0f , m_Pad->GetRStickYF() , 0.0f };
 		if (SpawnDir.Length() < 0.01f) {
-			SpawnDir = m_forward;
+			SpawnDir = CVector3::Up();
 		}
-		CVector3 SpownPole = m_position;
-		SpownPole.y = 50.0f;
-		npole->SetPosition(SpownPole);
 		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
@@ -102,13 +99,10 @@ void Player::SpawnPole()
 		spole->SetPlayer(this);
 		CVector3 MoveDir = { m_Pad->GetRStickXF() * -1.0f , m_Pad->GetRStickYF() , 0.0f };
 		if (MoveDir.Length() < 0.01f) {
-			MoveDir = m_forward;
+			MoveDir = CVector3::Up();
 		}
 		MoveDir.Normalize();
 		spole->SetMoveDir(MoveDir);
-		CVector3 SpownPole = m_position;
-		SpownPole.y = 50.0f;
-		spole->SetPosition(SpownPole);
 	}
 }
 
@@ -148,22 +142,12 @@ void Player::MyMagnet()
 {
 
 	if (m_Pad->IsTrigger(enButtonY)) {
+		int m_magnetSwich = m_Magnet->GetState();
 		m_magnetSwich++;
-	}
-	switch (m_magnetSwich)
-	{
-	case 0:
-		m_Magnet->SetState(Magnet::State::NoMode);
-		break;
-	case 1:
-		m_Magnet->SetState(Magnet::State::SMode);
-		break;
-	case 2:
-		m_Magnet->SetState(Magnet::State::NMode);
-		break;
-	default:
-		m_magnetSwich = 0;
-		break;
+		if (m_magnetSwich >= Magnet::State::Num) {
+			m_magnetSwich = 0;
+		}
+		m_Magnet->SetState((Magnet::State) m_magnetSwich);
 	}
 }
 
