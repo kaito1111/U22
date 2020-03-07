@@ -4,7 +4,6 @@
 class RorlingRock;
 class Iwa;
 class stageObject1;
-class stageObject2;
 class moveFloor;
 class GameObjectScythe;
 class StageObjectDossun;
@@ -20,7 +19,6 @@ private:
 	StageObjectMagma* magma = nullptr;
 	moveFloor* movefloor = nullptr;
 	stageObject1* object1 = nullptr;
-	stageObject2* object2 = nullptr;
 	RorlingRock* rorlingRock = nullptr;
 	Iwa* iwa = nullptr;
 	GameObjectScythe* scythe = nullptr;
@@ -32,8 +30,9 @@ private:
 	//今回はレベル君を使うぜ！
 	Level level;
 	std::list<Iwa*> IwaList;
-
-	
-
+	std::list<moveFloor*> moveFloorList;
+	std::list<GameObjectScythe*> GameObjectScytheList;
+	std::list<StageObjectDossun*> StageObjectDossunList;
+	std::list<StageObjectMagma*> StageObjectMagmaList;
 };
 

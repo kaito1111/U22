@@ -290,6 +290,9 @@
     <Image Include="Assets\modelData\stage1.jpg" />
     <Image Include="Assets\modelData\stone_00010.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\level\stageLevel.tkl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

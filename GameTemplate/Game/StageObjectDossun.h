@@ -1,15 +1,19 @@
 #pragma once
 #include"physics/PhysicsStaticObject.h"
+class Player;
 class StageObjectDossun : public IGameObject
 {
 public:
-	StageObjectDossun();
+	StageObjectDossun(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
 	~StageObjectDossun();
 	bool Start();
 	void Update();
 	void Draw();
 	void Move();
+	void playerKill();
 private:
+	Player* player1 = nullptr;
+	Player* player2 = nullptr;
 	SkinModel m_model;                          //スキンモデル
 	CVector3 startPos = CVector3::Zero();		//初期座標を保存する
 	CVector3 m_pos = CVector3::Zero();			//座標

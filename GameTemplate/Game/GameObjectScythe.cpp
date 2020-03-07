@@ -2,8 +2,11 @@
 #include "GameObjectScythe.h"
 #include"Player.h"
 
-GameObjectScythe::GameObjectScythe()
+GameObjectScythe::GameObjectScythe(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
 {
+	m_model.Init(modelName);
+	m_pos = pos;
+	m_rot = rot;
 }
 
 
@@ -24,6 +27,7 @@ bool GameObjectScythe::Start()
 
 void GameObjectScythe::Update()
 {
+	PlayerKill();
 	Move();
 	m_model.UpdateWorldMatrix(m_pos, m_rot, CVector3::One());
 }
@@ -55,6 +59,7 @@ void GameObjectScythe::PlayerKill()
 
 	CVector3 atariHantei = m_up * hanteiPivotLen;
 	atariHantei.Dot(atariHantei);
+	player1->GetPosition();
 	CVector3 toP1  = atariHantei - player1->GetPosition();
 	CVector3 toP2 = atariHantei - player2->GetPosition();
 	/*float toP1Lengh = toP1.Length();

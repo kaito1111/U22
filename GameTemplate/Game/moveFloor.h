@@ -7,8 +7,7 @@ class moveFloor : public IGameObject
 {
 	//ÉTÉCÉY200*200*20
 public:
-	//moveFloor(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
-	moveFloor();
+	moveFloor(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
 	~moveFloor();
 
 	void Draw();
