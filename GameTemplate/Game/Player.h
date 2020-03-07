@@ -19,9 +19,6 @@ public:
 	CVector3 GetForward() {
 		return m_forward;
 	}
-	int GetMagnetNum() {
-		return m_magnetSwich;
-	}
 	void SetPad(Pad* pad) {
 		m_Pad = pad;
 	}
@@ -49,7 +46,6 @@ private:
 	float rate = 0.0f;
 
 	MyMagnet::Magnet* m_Magnet = nullptr;
-	int m_magnetSwich = 0;			//プレイヤーの磁力を切り替える変数
 
 	Pad* m_Pad = nullptr;			//このプレイヤーのパッド
 	void SpawnPole();

@@ -6,15 +6,16 @@ Magnet::Magnet()
 	m_SMagSprite = NewGO<myEngine::SpriteRender>(3);
 	m_SMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 50.0f, 50.0f, true);
 	m_SMagSprite->SetW(0.0f);
-	m_SMagSprite->SetPivot({ 0.0f,0.0f });
-	CQuaternion qRot;
-	qRot.SetRotationDeg(CVector3::AxisY(), 180.0f);
-	m_SMagSprite->SetRotation(qRot);
+	m_SMagSprite->SetPivot({ 1.0f,1.0f });
+	m_Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
+	m_SMagSprite->SetRotation(m_Rot);
+	m_SMagSprite->SetActive(false);
 	m_NMagSprite = NewGO<myEngine::SpriteRender>(3);
 	m_NMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 50.0f, 50.0f, true);
 	m_NMagSprite->SetW(0.0f);
-	m_SMagSprite->SetPivot({ 0.0f,0.0f });
-	m_NMagSprite->SetRotation(qRot);
+	m_NMagSprite->SetPivot({ -1.0f,-1.0f });
+	m_NMagSprite->SetRotation(m_Rot);
+	m_NMagSprite->SetActive(false);
 }
 
 Magnet::~Magnet()
@@ -39,10 +40,6 @@ CVector3 Magnet::MagnetMove()
 		}
 
 		CVector3 diff = mag->GetPosition() - *m_Position;
-		/*if (mag->GetPosition().y != m_Position->y) {
-			m_Position->y = mag->GetPosition().y;
-			diff = mag->GetPosition() + *m_Position;
-		}*/
 		float a = 0;					//マグネットの力が遠いほど弱くなるやつ
 		a = maganetLen - diff.Length();
 		switch (state)
@@ -52,7 +49,7 @@ CVector3 Magnet::MagnetMove()
 			case Magnet::NMode:
 				if (diff.Length() < maganetLen) {
 					diff.Normalize();
-					diff*= -(MagnetPower * a);
+					diff *= -(MagnetPower * a);
 				}
 				else {
 					diff = CVector3::Zero();
@@ -118,15 +115,21 @@ void MyMagnet::Magnet::Update()
 	switch (state)
 	{
 	case Magnet::SMode:
-		m_SMagSprite->SetW(0.0f);
-		m_NMagSprite->SetW(1.0f);
+		m_SMagSprite->SetActive(true);
+		m_SMagSprite->SetW(1.0f);
+		m_NMagSprite->SetActive(false);
+		m_NMagSprite->SetW(0.0f);
 		break;
 	case Magnet::NMode:
+		m_SMagSprite->SetActive(false);
 		m_SMagSprite->SetW(0.0f);
+		m_NMagSprite->SetActive(true);
 		m_NMagSprite->SetW(1.0f);
 		break;
 	default:
+		m_SMagSprite->SetActive(false);
 		m_SMagSprite->SetW(0.0f);
+		m_NMagSprite->SetActive(false);
 		m_NMagSprite->SetW(0.0f);
 		break;
 	}
@@ -139,11 +142,11 @@ void MyMagnet::Magnet::Update()
 
 void MyMagnet::Magnet::PostDraw()
 {
-	int i = 0;
+	m_NMagSprite->Draw();
+	m_SMagSprite->Draw();
+}
 
-	if (i < 60) {
-		m_NMagSprite->Draw();
-		m_SMagSprite->Draw();
-		i++;
-	}
+bool MyMagnet::Magnet::Start()
+{
+	return true;
 }

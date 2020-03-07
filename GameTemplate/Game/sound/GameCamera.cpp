@@ -32,17 +32,17 @@ void GameCamera::Update()
 	CVector3 Target = CVector3::Zero();
 
 	//PlayerNumが0だからこれ入ってない
-	//for (int i = 0; i < m_PlayerNum; i++) {
-	Target += m_Player[0]->GetPosition();
+	for (int i = 0; i < m_PlayerNum; i++) {
+	Target += m_Player[i]->GetPosition();
 	Target.y += 100.0f;
 
-	//}
+	}
 	//上でカメラの位置が調整されてないので無理やり調整
 	//上直したら消してね
 	//Target.y += 100.0f;
 
 	//プレイヤーが2人以上いるから真ん中をとる
-	//Target /= m_PlayerNum;
+	Target /= m_PlayerNum;
 
 	//下の限界を更新
 	/*if (Decline < Target.y) {
