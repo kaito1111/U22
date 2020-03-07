@@ -99,11 +99,3 @@ void moveFloor::Move()
 		m_pos.y -= moveSpeed;
 	}
 }
-
-void moveFloor::SetDotUpdate()
-{
-}
-
-void moveFloor::CollisionDetection()
-{
-}

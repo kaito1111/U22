@@ -56,12 +56,12 @@ void StageObjectDossun::Move()
 	count++;
 	NextGataGata++;
 	if (count >= gatagataTimer &&leftRight == false&&Up == true&& NextGataGata >= 30) {
-		count = 0.0f;
+		count = 0;
 		m_rot = migi;
 		leftRight = true;
 	}
 	if (count >= gatagataTimer && leftRight == true&& Up == true) {
-		count = 0.0f;
+		count = 0;
 		m_rot = hidari;
 		leftRight = false;
 		yurashitaCount++;

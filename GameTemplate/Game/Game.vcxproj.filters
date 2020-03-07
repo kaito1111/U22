@@ -184,5 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\stageLevel.tkl" />
+    <None Include="Assets\level\GoalNomiStage.tkl" />
   </ItemGroup>
 </Project>

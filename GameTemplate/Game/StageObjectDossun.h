@@ -25,7 +25,7 @@ private:
 	bool leftRight = false;						//左右に揺らすためのフラグ
 	int count = 0;                              //時間のカウント
 	int yurashitaCount = 0;                     //揺らした回数を保存する変数     
-	int  NextGataGata = 0.0f;                   //再度動き出すためのフラグ
+	int  NextGataGata = 0;                      //再度動き出すためのフラグ
 
 	
 };
