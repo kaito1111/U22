@@ -31,22 +31,6 @@ public:
 	{
 		return m_pd3dDevice;
 	}
-	/// <summary>
-	/// レンダーコンテキストの取得
-	/// </summary>
-	/// <returns></returns>
-	//myEngine::RenderContext& GetRenderContext()
-	//{
-	//	return m_renderContext;
-	//}
-	/// <summary>
-	/// D3D即時デバイスコンテキストの取得
-	/// </summary>
-	/// <returns></returns>
-	ID3D11DeviceContext* GetD3DImmediateDeviceContext() const
-	{
-		return m_pImmediateContext;
-	}
 	/*!
 	 *@brief	D3D11デバイスコンテキストを取得。
 	 */
@@ -89,20 +73,24 @@ public:
 private:
 	D3D_FEATURE_LEVEL		m_featureLevel;								//Direct3D デバイスのターゲットとなる機能セット。
 	ID3D11Device*			m_pd3dDevice = NULL;						//D3D11デバイス。
-	ID3D11DeviceContext*	m_pd3dDeviceContext = NULL;					//D3D11デバイスコンテキスト。	
-	ID3D11DeviceContext*	m_pImmediateContext = NULL;					//即時コンテキスト
-	ID3D11RenderTargetView* m_frameBufferRenderTargetView = nullptr;	//フレームバッファのレンダリングターゲットビュー。
-	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームバッファのデプスステンシルビュー。	
-	D3D11_VIEWPORT m_frameBufferViewports;								//フレームバッファビューポート
+	ID3D11DeviceContext*	m_pd3dDeviceContext = NULL;					//D3D11デバイスコンテキスト。		
 	IDXGISwapChain*			m_pSwapChain = NULL;						//スワップチェイン。
 	ID3D11RenderTargetView* m_backBuffer = NULL;						//バックバッファ。
 	ID3D11RasterizerState*	m_rasterizerState = NULL;					//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;						//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;					//デプスステンシルビュー。
-	D3D11_FEATURE_DATA_THREADING m_featureDataThreading;
 	EffekseerRenderer::Renderer* m_effekseerRenderer = nullptr;			//エフェクサーレンダー
 	Effekseer::Manager* m_manager = nullptr;							//エフェクトマネジャー
 	myEngine::LightManager* m_ligManager;								//ライトマネージャー グラフィックエンジンでNewGOしてる
+
+	//汚かったグラフィックエンジンから取り除いた変数一覧
+	/*
+	D3D11_VIEWPORT m_frameBufferViewports;								//フレームバッファビューポート
+	ID3D11DeviceContext*	m_pImmediateContext = NULL;					//即時コンテキスト
+	ID3D11RenderTargetView* m_frameBufferRenderTargetView = nullptr;	//フレームバッファのレンダリングターゲットビュー。
+	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームバッファのデプスステンシルビュー。
+	D3D11_FEATURE_DATA_THREADING m_featureDataThreading;
+	*/
 };
 
 extern GraphicsEngine* g_graphicsEngine;			//グラフィックスエンジン
