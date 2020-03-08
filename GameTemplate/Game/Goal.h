@@ -3,13 +3,18 @@ class Player;
 class Goal : public IGameObject
 {
 public:
-	Goal();
+	Goal(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
 	~Goal();
 
-private:
+	//Start,Update,Drawはジェネレーターからアクセスするので、
+	//publicメンバ変数に入れています
 	bool Start();
 	void Update();
+	void Draw();
+private:
+	
 	SkinModel m_Skin;
 	CVector3 m_Position = CVector3::Zero();
 	Player* m_player = nullptr;
+	CQuaternion m_rot = CQuaternion::Identity();
 };

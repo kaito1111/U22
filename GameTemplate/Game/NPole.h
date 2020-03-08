@@ -9,12 +9,6 @@ public:
 	void SetMoveDir(CVector3 forward) {
 		m_move = forward;
 	}
-	void SetPosition(CVector3 pos) {
-		m_position = pos;
-	}
-	CVector3 GetPosition() {
-		return m_position;
-	}
 	void SetPlayer(Player* pl) {
 		m_player = pl;
 	}
@@ -30,6 +24,7 @@ private:
 	CVector3 m_move = CVector3::Zero();
 	Player* m_player = nullptr;
 
+	void deleteRange();
 	void Move();
 	void SetNPole();
 };

@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "RorlingRock.h"
 #include "Player.h"
-RorlingRock::RorlingRock()
+RorlingRock::RorlingRock(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
 {
+	m_model.Init(modelName);
+	m_pos = pos;
+	m_rot = rot;
 }
 
 RorlingRock::~RorlingRock()
@@ -62,11 +65,11 @@ void RorlingRock::killPlayer()
 	float toP2Length = toP2.Length();
 	
 	if (toP1Length < 200.0f) {
-		//‚±‚±‚ÉŽ€–Sˆ—‘‚­BŒã‚Å‚ËB
+		//‚±‚±‚ÉŽ€–Sˆ—‘‚­B
 		player1->MagumaDead();
 	}
 	if (toP2Length < 200.0f) {
-		//‚±‚±‚ÉŽ€–Sˆ—‘‚­BŒã‚Å‚ËB
+		//‚±‚±‚ÉŽ€–Sˆ—‘‚­B
 		player2->MagumaDead();
 	}
 }

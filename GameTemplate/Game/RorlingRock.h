@@ -4,7 +4,7 @@ class Player;
 class RorlingRock : public IGameObject
 {
 public:
-	RorlingRock();
+	RorlingRock(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
 	~RorlingRock();
 	bool Start();
 	void Update();

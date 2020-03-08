@@ -12,16 +12,9 @@ public:
 	const void SetMoveDir(CVector3 MoveDir) {
 		m_move = MoveDir;
 	}
-	const CVector3 GetPosition() {
-		return m_position;
-	}
-	const void SetPosition(CVector3 pos) {
-		m_position = pos;
-	}
 	void SetPlayer(Player* pl) {
 		m_player = pl;
 	}
-	//void magunetTask(CVector3& Position);
 private:
 
 

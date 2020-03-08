@@ -2,7 +2,7 @@
 #include "stageObject1.h"
 #include "Player.h"
 
-stageObject1::stageObject1()
+stageObject1::stageObject1(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
 {
 	
 }

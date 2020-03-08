@@ -6,7 +6,7 @@ class stageObject1 : public IGameObject
 {
 	//ドッスン棘やで。
 public:
-	stageObject1();
+	stageObject1(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
 	~stageObject1();
 	bool Start();
 	void Update();

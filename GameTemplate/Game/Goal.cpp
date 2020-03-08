@@ -3,9 +3,11 @@
 #include "Player.h"
 #include "DirectionLight.h"
 
-Goal::Goal()
+Goal::Goal(const wchar_t * modelName, CVector3 pos, CQuaternion rot)
 {
-	m_Skin.Init(L"Assets/modelData/Goal.cmo");
+	m_Skin.Init(modelName);
+	m_Position = pos;
+	m_rot = rot;
 }
 
 Goal::~Goal()
@@ -14,6 +16,7 @@ Goal::~Goal()
 
 bool Goal::Start()
 {
+	m_Skin.Init(L"Assets/modelData/Goal.cmo");
 	m_player = FindGO<Player>("player1");
 	return true;
 }
@@ -31,4 +34,13 @@ void Goal::Update()
 			effect->SetScale(CVector3::One() * 20);
 		}
 	}
+	m_Skin.UpdateWorldMatrix(m_Position, CQuaternion::Identity(), CVector3::One());
+}
+
+void Goal::Draw()
+{
+	m_Skin.Draw(
+		g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix()
+	);
 }

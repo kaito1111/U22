@@ -183,4 +183,8 @@
     <Image Include="Assets\modelData\stage1.jpg" />
     <Image Include="Assets\modelData\stone_00010.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\level\stageLevel.tkl" />
+    <None Include="Assets\level\GoalNomiStage.tkl" />
+  </ItemGroup>
 </Project>
