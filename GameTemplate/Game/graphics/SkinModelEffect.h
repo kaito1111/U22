@@ -12,22 +12,49 @@ protected:
 	Shader* m_pPSShader = nullptr;
 	Shader m_vsShader;
 	Shader m_psShader;
+	Shader m_psSilhouette;			//シルエット用シェーダー
+	bool m_renderMode = 0;			//レンダーモード
 	bool isSkining;
-	ID3D11ShaderResourceView* m_albedoTex = nullptr;
+	ID3D11ShaderResourceView*	m_albedoTex = nullptr;
+	ID3D11DepthStencilState*	m_silhouettoDepthStencilState = nullptr;
 
 public:
 	ModelEffect()
 	{
+		//シェーダのロード
 		m_psShader.Load("Assets/shader/model.fx", "PSMain", Shader::EnType::PS);
-		
+		m_psSilhouette.Load("Assets/shader/model.fx", "PSMain_Silhouette", Shader::EnType::PS);
+		//ポリモーフィズム？
 		m_pPSShader = &m_psShader;
+		//デプスの作成
+		InitDepthStensliState();
 	}
 	virtual ~ModelEffect()
 	{
 		if (m_albedoTex) {
 			m_albedoTex->Release();
 		}
+
+		if (m_silhouettoDepthStencilState != nullptr) {
+			m_silhouettoDepthStencilState->Release();
+		}
 	}
+	/// <summary>
+	/// 深度ステンシルステートの作成
+	/// </summary>
+	void InitDepthStensliState()
+	{
+		//デバイス取得
+		auto dv = g_graphicsEngine->GetD3DDevice();
+		//深度ステンシルステートの定義を設定
+		D3D11_DEPTH_STENCIL_DESC desc = { 0 };
+		desc.DepthEnable = true;							//Zテスト有効
+		desc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;	//ZバッファにZ値を書き込まない
+		desc.DepthFunc = D3D11_COMPARISON_GREATER;			//Z値が大きければフレームバッファに書き込み
+		//作成
+		dv->CreateDepthStencilState(&desc, &m_silhouettoDepthStencilState);
+	}
+
 	void __cdecl Apply(ID3D11DeviceContext* deviceContext) override;
 
 	void __cdecl GetVertexShaderBytecode(void const** pShaderByteCode, size_t* pByteCodeLength) override
@@ -42,6 +69,14 @@ public:
 	void SetMatrialName(const wchar_t* matName)
 	{
 		m_materialName = matName;
+	}
+	/// <summary>
+	/// レンダーモードの設定
+	/// </summary>
+	/// <param name="renderMode"></param>
+	void SetRenderMode(int renderMode)
+	{
+		m_renderMode = renderMode;
 	}
 	
 	bool EqualMaterialName(const wchar_t* name) const
