@@ -24,9 +24,9 @@ Magnet::~Magnet()
 
 CVector3 Magnet::MagnetMove()
 {
-	m_Diff = CVector3::Zero();
-	float MagnetPower = 0.5f;				//磁力の強さ
-	float maganetLen = 100.0f;				//磁力が働く距離
+	m_MagnetForce = CVector3::Zero();
+	float MagnetPower = 2.0f;				//磁力の強さ
+	float maganetLen =300.0f;				//磁力が働く距離
 	int MagnetNum = 0;
 	QueryMO([&](Magnet* mag)->bool {
 		QueryMO([&](Magnet* mag)->bool {
@@ -40,79 +40,85 @@ CVector3 Magnet::MagnetMove()
 		}
 
 		CVector3 diff = mag->GetPosition() - *m_Position;
+		diff.z = 0.0f;
+		float diffLen = diff.Length();
 		float a = 0;					//マグネットの力が遠いほど弱くなるやつ
-		a = maganetLen - diff.Length();
+		a =( maganetLen - diffLen);
+		CVector3 MagnetForce = diff;
+		MagnetForce.Normalize();
 		switch (state)
 		{
 		case Magnet::NMode:
 			switch (mag->GetState()) {
 			case Magnet::NMode:
-				if (diff.Length() < maganetLen) {
-					diff.Normalize();
-					diff *= -(MagnetPower * a);
+				if (diffLen < maganetLen) {
+					MagnetForce *= -(MagnetPower * a);
 				}
 				else {
-					diff = CVector3::Zero();
+					MagnetForce = CVector3::Zero();
 				}
 				break;
 			case Magnet::SMode:
-				if (diff.Length() < maganetLen) {
-					diff.Normalize();
-					diff *= (MagnetPower * a);
+				if (diffLen < maganetLen) {
+					MagnetForce *= (MagnetPower * a);
+					if (diffLen < MagnetForce.Length()) {
+						MagnetForce = diff;
+					}
 				}
 				else {
-					diff = CVector3::Zero();
+					MagnetForce = CVector3::Zero();
 				}
 				break;
 			default:
-				diff = CVector3::Zero();
+				MagnetForce = CVector3::Zero();
 				break;
 			}
 			break;
 		case Magnet::SMode:
 			switch (mag->GetState()) {
 			case Magnet::NMode:
-				if (diff.Length() < maganetLen) {
-					diff.Normalize();
-					diff *= (MagnetPower * a);
+				if (diffLen < maganetLen) {
+					MagnetForce *= (MagnetPower * a);
+					if (diffLen < MagnetForce.Length()) {
+						MagnetForce = diff;
+					}
 				}
 				else {
-					diff = CVector3::Zero();
+					MagnetForce = CVector3::Zero();
 				}
 				break;
 			case Magnet::SMode:
-				if (diff.Length() < maganetLen) {
-					diff.Normalize();
-					diff *= -(MagnetPower * a);
+				if (diffLen < maganetLen) {
+					MagnetForce *= -(MagnetPower * a);
 				}
 				else {
-					diff = CVector3::Zero();
+					MagnetForce = CVector3::Zero();
 				}
 				break;
 			default:
-				diff = CVector3::Zero();
+				MagnetForce = CVector3::Zero();
 				break;
 				return true;
 			}
 			break;
 		case Magnet::NoMode:
-			diff = CVector3::Zero();
+			MagnetForce = CVector3::Zero();
 			break;
 		default:
-			diff = CVector3::Zero();
+			MagnetForce = CVector3::Zero();
 			break;
 		}
-		diff.z = 0;
-		diff /= MagnetNum;
-		m_Diff += diff;
+		MagnetForce.z = 0;
+		MagnetForce /= MagnetNum;
+		m_MagnetForce += MagnetForce;
 		return true;
 	}); 
-	return m_Diff;
+	return m_MagnetForce;
 }
 
 void MyMagnet::Magnet::Update()
 {
-	switch (state)
+	switch (state)					//UI
 	{
 	case Magnet::SMode:
 		m_SMagSprite->SetActive(true);
