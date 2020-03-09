@@ -97,6 +97,7 @@
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
+    <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -186,5 +187,6 @@
   <ItemGroup>
     <None Include="Assets\level\stageLevel.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
+    <None Include="Assets\level\Corse_Level_1.tkl" />
   </ItemGroup>
 </Project>

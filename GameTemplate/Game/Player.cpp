@@ -129,17 +129,18 @@ void Player::SpawnPole()
 void Player::Move()
 {
 	//ジャンプ判定
-	CVector3 movespeed = CVector3::Zero();
-	const float junpPower = 60.0f;
+	movespeed.x = 0.0f;
+	movespeed.z = 0.0f;
+	const float junpPower = 10.0f;
 	if (m_characon.IsJump() &&
-		m_Pad->IsPress(enButtonB)&&
+		m_Pad->IsPress(enButtonA)&&
 		JumpTimer < 1.0f) {
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
 	}
 	if (m_characon.IsOnGround())
 	{
-		if (m_Pad->IsTrigger(enButtonB)) {
+		if (m_Pad->IsTrigger(enButtonA)) {
 			movespeed.y = junpPower;
 		}
 		else {
@@ -147,11 +148,11 @@ void Player::Move()
 		}
 	}
 
-	const float gravity = 5.0f;		//重力
+	const float gravity = 0.8f;		//重力
 	movespeed.y -= gravity;
 
 	//左右の移動
-	movespeed.x = m_Pad->GetLStickXF() * -20.0f;
+	movespeed.x = m_Pad->GetLStickXF() * -10.0f;
 
 	//磁石の移動
 	movespeed += m_Magnet->MagnetMove();
@@ -174,20 +175,14 @@ void Player::Move()
 void Player::MyMagnet()
 {
 	if (m_Pad->IsTrigger(enButtonX)) {
-		if (m_Magnet->GetState() == Magnet::State::NMode) {
-			m_Magnet->SetState(Magnet::State::NoMode);
-		}
-		else {
 			m_Magnet->SetState(Magnet::State::NMode);
-		}
 	}
 	if (m_Pad->IsTrigger(enButtonY)) {
-		if (m_Magnet->GetState() == Magnet::State::SMode) {
-			m_Magnet->SetState(Magnet::State::NoMode);
-		}
-		else {
 			m_Magnet->SetState(Magnet::State::SMode);
-		}
+	}
+	if (m_Pad->IsTrigger(enButtonB)) {
+			m_Magnet->SetState(Magnet::State::NoMode);
+		
 	}
 }
 
