@@ -52,7 +52,7 @@ private:
 	float JumpTimer = 0.0f;
 
 	MyMagnet::Magnet* m_Magnet = nullptr;
-
+	CVector3 movespeed = CVector3::Zero();
 	Pad* m_Pad = nullptr;			//このプレイヤーのパッド
 	void SpawnPole();
 	void Move();

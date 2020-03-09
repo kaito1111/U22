@@ -25,12 +25,12 @@ Magnet::~Magnet()
 CVector3 Magnet::MagnetMove()
 {
 	m_MagnetForce = CVector3::Zero();
-	float MagnetPower = 2.0f;				//Ž¥—Í‚Ì‹­‚³
-	float maganetLen =300.0f;				//Ž¥—Í‚ª“­‚­‹——£
+	float MagnetPower = 0.05f;				//Ž¥—Í‚Ì‹­‚³
+	float maganetLen = 300.0f;				//Ž¥—Í‚ª“­‚­‹——£
 	int MagnetNum = 0;
 	QueryMO([&](Magnet* mag)->bool {
 		QueryMO([&](Magnet* mag)->bool {
-			MagnetNum++; 
+			MagnetNum++;
 			return true;
 		});
 
@@ -112,7 +112,7 @@ CVector3 Magnet::MagnetMove()
 		MagnetForce /= MagnetNum;
 		m_MagnetForce += MagnetForce;
 		return true;
-	}); 
+	});
 	return m_MagnetForce;
 }
 
@@ -140,7 +140,7 @@ void MyMagnet::Magnet::Update()
 		break;
 	}
 	m_NMagSprite->SetPosition(*m_Position);
-	m_NMagSprite->Update(); 
+	m_NMagSprite->Update();
 
 	m_SMagSprite->SetPosition({ m_Position->x,m_Position->y,m_Position->z });
 	m_SMagSprite->Update();
