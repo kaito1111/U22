@@ -48,21 +48,41 @@ void Player::Update()
 void Player::Draw()
 {
 	if (!m_PlayerCut) {
+		//シルエット用の描画
 		m_model.Draw(
 			g_camera3D.GetViewMatrix(),
-			g_camera3D.GetProjectionMatrix()
+			g_camera3D.GetProjectionMatrix(),
+			1
+		);
+		//シルエットなし用の描画
+		m_model.Draw(
+			g_camera3D.GetViewMatrix(),
+			g_camera3D.GetProjectionMatrix(),
+			0
 		);
 	}
 	if (m_PlayerCut) {
 		m_FrontModel.Draw(
 			g_camera3D.GetViewMatrix(),
-			g_camera3D.GetProjectionMatrix()
+			g_camera3D.GetProjectionMatrix(),
+			1
+		);
+		m_model.Draw(
+			g_camera3D.GetViewMatrix(),
+			g_camera3D.GetProjectionMatrix(),
+			0
 		);
 	}
 	if (m_PlayerCut) {
 		m_BuckModel.Draw(
 			g_camera3D.GetViewMatrix(),
-			g_camera3D.GetProjectionMatrix()
+			g_camera3D.GetProjectionMatrix(),
+			1
+		);
+		m_model.Draw(
+			g_camera3D.GetViewMatrix(),
+			g_camera3D.GetProjectionMatrix(),
+			0
 		);
 	}
 }

@@ -16,9 +16,10 @@ Game::~Game()
 
 bool Game::Start()
 {
-	NewGO< KaitoTask>(3, "kaito");
+	Stage* stage = NewGO<Stage>(0, "stage");
+	NewGO< KaitoTask>(2, "kaito");
 	//NewGO<DirectionLight>(3, "light");
-	Stage* stage = NewGO<Stage>(2, "stage");
+
 	effect = NewGO<Effect>(1);
 
 	return true;

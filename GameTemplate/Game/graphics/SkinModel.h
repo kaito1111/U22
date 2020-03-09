@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Skeleton.h"
+#include "Shader.h"
 
 /*!
 *@brief	FBXの上方向。
@@ -46,14 +47,41 @@ public:
 		int boneId = m_skeleton.FindBoneID(boneName);
 		return m_skeleton.GetBone(boneId);
 	}
-	/*!
-	*@brief	モデルを描画。
-	*@param[in]	viewMatrix		カメラ行列。
-	*  ワールド座標系の3Dモデルをカメラ座標系に変換する行列です。
-	*@param[in]	projMatrix		プロジェクション行列。
-	*  カメラ座標系の3Dモデルをスクリーン座標系に変換する行列です。
-	*/
+	
+	/// <summary>
+	/// 旧モデル描画（もとからこのエンジンにあったやつ）
+	/// <para>---!!CAUTION!!---</para>
+	/// <para>このDraw関数は消す予定があるので使わないでください。</para>
+	/// <para>こちらの関数を使っているクラスがあるなら、もう片方のDrawに引っ越しをお願いします。</para>
+	/// <para>---!!CAUTION!!---</para>
+	/// </summary>
+	/// <remarks>
+	/// 下のDraw関数実装に伴い削除する予定がある関数です。
+	/// 正直機能としてはシルエット描画ができるか否かの差しかないので、
+	/// 気にせずもう一つのDraw関数を使ってください。
+	/// </remarks>
+	/// <param name="viewMatrix"></param>
+	/// <param name="projMatrix"></param>
 	void Draw( CMatrix viewMatrix, CMatrix projMatrix );
+	/// <summary>
+	/// シルエット描画or描画
+	/// <para>0が通常描画、1がシルエット描画</para>
+	/// <para>シルエット描画の詳細はこの関数のRemarksに書いてあるので、</para>
+	/// <para>それを参考にシルエット描画を実装してください。</para>
+	/// </summary>
+	/// <remarks>
+	/// -----シルエット描画の方法について-----
+	/// 1.シルエットを映したいオブジェクトを描画（壁系)
+	/// 2.シルエットになるオブジェクト(Player系)をシルエット描画（ RenderMode = 1 ）
+	/// 3.2のオブジェクトを通常描画（ RenderMode = 0 ）
+	/// 順番を間違えたりするとシルエットが映らなかったり、変なところにシルエットが映るので
+	/// しっかり描画順番を確認しておいてください。
+	/// --------------------------------------
+	/// </remarks>
+	/// <param name="viewMatrix">カメラ行列</param>
+	/// <param name="projMatrix">プロジェクション行列</param>
+	/// <param name="RenderMode">/描画モード/ 0->通常描画 1->シルエット描画</param>
+	void Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode);
 	/*!
 	*@brief	スケルトンの取得。
 	*/

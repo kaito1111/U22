@@ -4,7 +4,7 @@
 GameCamera::GameCamera()
 {
 	//カメラを初期化。
-	g_camera3D.SetPosition({ 100.0f, 100.0f, 0.0f });
+	g_camera3D.SetPosition({ -300.0f, 100.0f, 1000.0f });
 	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
 	g_camera3D.SetFar(10000.0f);
 }
@@ -63,4 +63,20 @@ void GameCamera::Update()
 	g_camera3D.SetPosition(pos);
 	//カメラの更新。
 	g_camera3D.Update();
+
+	//デバッグ用のカメラ
+	{
+		////注視点から視点に向かって伸びるベクトルを計算する。
+		//CVector3 toPos = g_camera3D.GetPosition() - g_camera3D.GetTarget();
+		////カメラを回すクォータニオンを作成する。
+		//CQuaternion qAddRot;
+		////ゲームパッドの左スティックでカメラが回る。
+		////ゲームパッドがない人はキーボードの'a'と'd'で回せるよ。
+		//qAddRot.SetRotation(CVector3::AxisY(), 0.01f);
+		////注視点から視点に向かって伸びるベクトルを回す。
+		//qAddRot.Multiply(toPos);
+		////新しい視点を計算する。
+		//g_camera3D.SetPosition(g_camera3D.GetTarget() + toPos);
+		//g_camera3D.Update();
+	}
 }
