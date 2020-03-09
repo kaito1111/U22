@@ -192,9 +192,10 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			//現在の座標から次の移動先へ向かうベクトルを求める。
 			CVector3 addPos;
 			addPos.Subtract(nextPosition, m_position);
-			CVector3 addPosXZ = addPos;
-			addPosXZ.y = 0.0f;
-			if (addPosXZ.Length() < FLT_EPSILON) {
+			CVector3 addPosX = addPos;
+			addPosX.y = 0.0f;
+			addPosX.z = 0.0f;
+			if (addPosX.Length() < FLT_EPSILON) {
 				//XZ平面で動きがないので調べる必要なし。
 				//FLT_EPSILONは1より大きい、最小の値との差分を表す定数。
 				//とても小さい値のことです。
@@ -210,7 +211,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			//始点はカプセルコライダーの中心座標 + 0.2の座標をposTmpに求める。
 			start.setOrigin(btVector3(posTmp.x, posTmp.y, posTmp.z));
 			//終点は次の移動先。XZ平面での衝突を調べるので、yはposTmp.yを設定する。
-			end.setOrigin(btVector3(nextPosition.x, posTmp.y, nextPosition.z));
+			end.setOrigin(btVector3(nextPosition.x, posTmp.y, posTmp.z));
 
 			SweepResultWall callback;
 			callback.me = m_rigidBody.GetBody();
@@ -224,10 +225,10 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 #if 1
 				//こちらを有効にすると衝突解決が衝突点に戻すになる。
 				nextPosition.x = callback.hitPos.x;
-				nextPosition.z = callback.hitPos.z;
+				//nextPosition.z = callback.hitPos.z;
 				//法線の方向に半径分押し戻す。
 				nextPosition.x += callback.hitNormal.x * m_radius;
-				nextPosition.z += callback.hitNormal.z * m_radius;
+				//nextPosition.z += callback.hitNormal.z * m_radius;
 #else
 				CVector3 vT0, vT1;
 				//XZ平面上での移動後の座標をvT0に、交点の座標をvT1に設定する。
@@ -332,6 +333,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 		//レイを作成する。
 		//カプセルコライダーの中心座標 + 高さ*0.1の座標をposTmpに求める。
 		CVector3 posTmp = m_position;
+		posTmp.Subtract(addPos);
 		posTmp.y += m_height * 0.5 + m_radius + m_height * 0.2;
 		btTransform start, end;
 		start.setIdentity();
@@ -357,6 +359,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 		{
 			endPos.y += 1.0f;
 		}
+		endPos.Add(addPos);
 		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
 		SweepResultCeil callback;
 		callback.me = m_rigidBody.GetBody();

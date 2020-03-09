@@ -256,6 +256,7 @@
     <ClInclude Include="sound\WaveFileBank.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
@@ -292,6 +293,7 @@
     <Image Include="Assets\modelData\stone_00010.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\level\Corse_Level_1.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
     <None Include="Assets\level\stageLevel.tkl" />
   </ItemGroup>

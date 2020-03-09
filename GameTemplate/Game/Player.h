@@ -45,6 +45,8 @@ private:
 	CQuaternion m_ReverseDefeatRot = CQuaternion::Identity();//倒れているときの回転率(後側)
 	float rate = 0.0f;
 
+	float JumpTimer = 0.0f;
+
 	MyMagnet::Magnet* m_Magnet = nullptr;
 
 	Pad* m_Pad = nullptr;			//このプレイヤーのパッド

@@ -7,7 +7,7 @@ namespace MyMagnet {
 	class Magnet : public myEngine::IGameObject
 	{
 		CVector3* m_Position = nullptr;
-		CVector3 m_Diff = CVector3::Zero();
+		CVector3 m_MagnetForce = CVector3::Zero();
 		friend class MagnetManager;
 	public:
 		Magnet();
@@ -23,6 +23,16 @@ namespace MyMagnet {
 		void PostDraw();
 		myEngine::SpriteRender* m_SMagSprite = nullptr;
 		myEngine::SpriteRender* m_NMagSprite = nullptr;
+		const CVector3 GetPosition() {
+			return *m_Position;
+		}
+		const void SetPosition(CVector3* pos) {
+			m_Position = pos;
+		}
+		//Ž¥—Í‚Å“®‚¢‚Ä‚¢‚­•ûŒü‚ð‚Æ‚é
+		const CVector3 GetMove() {
+			return m_MagnetForce;
+		}
 	private:
 		State state = NoMode;
 		CQuaternion m_Rot = CQuaternion::Identity();
@@ -33,16 +43,6 @@ namespace MyMagnet {
 		}
 		const State GetState() {
 			return state;
-		}
-		const CVector3 GetPosition() {
-			return *m_Position;
-		}
-		const void SetPosition(CVector3* pos) {
-			m_Position = pos;
-		}
-		//Ž¥—Í‚Å“®‚¢‚Ä‚¢‚­•ûŒü‚ð‚Æ‚é
-		const CVector3 GetMove() {
-			return m_Diff;
 		}
 	};
 }
