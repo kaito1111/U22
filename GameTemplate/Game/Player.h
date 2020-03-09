@@ -22,6 +22,9 @@ public:
 	void SetPad(Pad* pad) {
 		m_Pad = pad;
 	}
+	void SetPoint(CVector3 point) {
+		m_CheckPoint = point;
+	}
 	void SIBOU();						
 	void Press();						//‰½“x‚àŒÄ‚Ô
 	void MagumaDead();					//‰½“x‚àŒÄ‚Ô
@@ -44,6 +47,7 @@ private:
 	CQuaternion m_DefeatRot = CQuaternion::Identity();	//“|‚ê‚Ä‚¢‚é‚Æ‚«‚Ì‰ñ“]—¦(‘O‘¤)
 	CQuaternion m_ReverseDefeatRot = CQuaternion::Identity();//“|‚ê‚Ä‚¢‚é‚Æ‚«‚Ì‰ñ“]—¦(Œã‘¤)
 	float rate = 0.0f;
+	CVector3 m_CheckPoint = CVector3::Zero();
 
 	float JumpTimer = 0.0f;
 

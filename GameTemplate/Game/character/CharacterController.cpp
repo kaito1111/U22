@@ -192,10 +192,8 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			//現在の座標から次の移動先へ向かうベクトルを求める。
 			CVector3 addPos;
 			addPos.Subtract(nextPosition, m_position);
-			CVector3 addPosX = addPos;
-			addPosX.y = 0.0f;
-			addPosX.z = 0.0f;
-			if (addPosX.Length() < FLT_EPSILON) {
+			float addPosX = addPos.x;
+			if (addPosX < FLT_EPSILON) {
 				//XZ平面で動きがないので調べる必要なし。
 				//FLT_EPSILONは1より大きい、最小の値との差分を表す定数。
 				//とても小さい値のことです。
@@ -215,7 +213,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 
 			SweepResultWall callback;
 			callback.me = m_rigidBody.GetBody();
-			callback.startPos = posTmp;
+			//callback.startPos.Set(posTmp);
 			//衝突検出。
 			g_physics.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
 

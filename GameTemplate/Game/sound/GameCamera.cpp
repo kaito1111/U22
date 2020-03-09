@@ -57,9 +57,18 @@ void GameCamera::Update()
 		m_Player[0]->SIBOU();
 	}
 
+	if (Target.x > -200.0f) {
+		Target.x = -200.0f;
+	}
+	if (Target.x < -400.0f) {
+		Target.x = -400.0f;
+	}
+	if (Target.y < 190.0f) {
+		Target.y = 190.0f;
+	}
 	CVector3 pos = Target;
 	pos.z += 500.0f;
-	g_camera3D.SetTarget(Target);
+	g_camera3D.SetTarget(Target); 
 	g_camera3D.SetPosition(pos);
 	//カメラの更新。
 	g_camera3D.Update();

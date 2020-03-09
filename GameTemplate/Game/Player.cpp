@@ -18,7 +18,7 @@ bool Player::Start()
 {
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/Player.cmo");
-	m_characon.Init(20.0f, 50.0f, m_position);
+	m_characon.Init(30.0f, 20.0f, m_position);
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet, &m_position);
@@ -194,7 +194,7 @@ void Player::MyMagnet()
 void Player::SIBOU()				//OK
 {
 	if (m_Pad->IsTrigger(enButtonA)) {
-		m_position = CVector3::Zero();
+		m_position = m_CheckPoint;
 		GameCamera* camera = FindGO<GameCamera>("camera");
 		camera->SetDec(0.0f);
 		m_IsSi = false;
