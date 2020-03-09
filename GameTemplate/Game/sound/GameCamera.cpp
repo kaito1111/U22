@@ -57,11 +57,11 @@ void GameCamera::Update()
 		m_Player[0]->SIBOU();
 	}
 
-	if (Target.x > -200.0f) {
-		Target.x = -200.0f;
+	if (Target.x > 300.0f) {
+		Target.x = 300.0f;
 	}
-	if (Target.x < -400.0f) {
-		Target.x = -400.0f;
+	if (Target.x < 200.0f) {
+		Target.x = 200.0f;
 	}
 	if (Target.y < 190.0f) {
 		Target.y = 190.0f;

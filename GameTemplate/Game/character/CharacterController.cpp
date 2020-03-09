@@ -275,15 +275,15 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	m_position.z = nextPosition.z;
 	//下方向を調べる。
 	{
+		m_position = nextPosition;	//移動の仮確定。
 									//レイを作成する。
 		btTransform start, end;
 		start.setIdentity();
 		end.setIdentity();
 		//始点はカプセルコライダーの中心。
 		/*変更点
-		m_position = nextPosition;	//移動の仮確定。
-		start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));*/
-		start.setOrigin(btVector3(nextPosition.x, m_position.y + m_height * 0.5f + m_radius, nextPosition.z));
+		start.setOrigin(btVector3(nextPosition.x, m_position.y + m_height * 0.5f + m_radius, nextPosition.z));*/
+		start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
 		//終点は地面上にいない場合は1m下を見る。
 		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
 		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
