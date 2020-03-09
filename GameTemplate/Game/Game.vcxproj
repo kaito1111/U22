@@ -292,6 +292,7 @@
     <Image Include="Assets\modelData\stone_00010.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\level\Corse_Level_1.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
     <None Include="Assets\level\stageLevel.tkl" />
   </ItemGroup>

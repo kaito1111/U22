@@ -37,7 +37,7 @@ stageObjectJenerator::~stageObjectJenerator()
 
 bool stageObjectJenerator::Start()
 {
-	level.Init(L"Assets/level/GoalNomiStage.tkl", [&](const auto& objData)
+	level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
 	{
 		////ä‚
 		//if (wcscmp(objData.name, L"iwa") == 0) {
@@ -49,14 +49,14 @@ bool stageObjectJenerator::Start()
 		//	return true;
 		//}
 		////ìÆÇ≠è∞
-		//if (wcscmp(objData.name, L"moveFloor") == 0) {
-		//	auto moveFloorPtr = new moveFloor(
-		//		L"Assets/modelData/moveFloor.cmo",
-		//		objData.position,
-		//		objData.rotation);
-		//	moveFloorList.push_back(moveFloorPtr);
-		//	return true;
-		//}
+		if (wcscmp(objData.name, L"moveFloor") == 0) {
+			auto moveFloorPtr = new moveFloor(
+				L"Assets/modelData/moveFloor.cmo",
+				objData.position,
+				objData.rotation);
+			moveFloorList.push_back(moveFloorPtr);
+			return true;
+		}
 		////âÒÇÈäô
 		//if (wcscmp(objData.name, L"Huriko") == 0) {
 		//	auto GameObjectScythePtr = new GameObjectScythe(

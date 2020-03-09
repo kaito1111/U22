@@ -17,16 +17,27 @@ Goal::~Goal()
 bool Goal::Start()
 {
 	m_Skin.Init(L"Assets/modelData/Goal.cmo");
-	m_player = FindGO<Player>("player1");
+	m_player[0] = FindGO<Player>("player1");
+	m_player[1] = FindGO<Player>("player2");
 	return true;
 }
 
 void Goal::Update()
 {
-	float Len = 20.0f;				//ƒS[ƒ‹‚Ì”¼Œa
-	CVector3 diff = m_player->GetPosition() - m_Position;
-	float playerLen = diff.Length();
-	if (playerLen < Len) {
+	const float Len = 50.0f;				//ƒS[ƒ‹‚Ì”¼Œa
+	const int clearNum = 2;
+	int i;
+	for (i = 0; i < clearNum;) {
+		CVector3 diff = m_player[i]->GetPosition() - m_Position;
+		float playerLen = diff.Length();
+		if (playerLen < Len) {
+			i++;
+		}
+		else {
+			break;
+		}
+	}
+	if (i == clearNum) {
 		Effect* effect = NewGO<Effect>(1);
 		if (!effect->IsPlay()) {
 			effect->Play(L"Assets/effect/hemohage.efk");

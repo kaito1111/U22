@@ -18,7 +18,7 @@ bool Player::Start()
 {
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/Player.cmo");
-	m_characon.Init(30.0, 50.0f, m_position);
+	m_characon.Init(20.0f, 50.0f, m_position);
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet, &m_position);
@@ -112,13 +112,14 @@ void Player::Move()
 	CVector3 movespeed = CVector3::Zero();
 	const float junpPower = 60.0f;
 	if (m_characon.IsJump() &&
+		m_Pad->IsPress(enButtonB)&&
 		JumpTimer < 1.0f) {
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
 	}
 	if (m_characon.IsOnGround())
 	{
-		if (m_Pad->IsPress(enButtonB)) {
+		if (m_Pad->IsTrigger(enButtonB)) {
 			movespeed.y = junpPower;
 		}
 		else {
