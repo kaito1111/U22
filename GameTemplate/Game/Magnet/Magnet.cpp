@@ -130,7 +130,7 @@ void MyMagnet::Magnet::Update()
 			SEffect = NewGO<Effect>(0);
 			SEffect->Play(L"Assets/effect/SMode.efk");
 			SEffect->SetPosition(*m_Position);
-			SEffect->SetScale(CVector3::One() * 1.0f);
+			SEffect->SetScale(CVector3::One() * 2.75f);
 			CoolTime = 0.0f;
 		}
 		else {
@@ -146,7 +146,7 @@ void MyMagnet::Magnet::Update()
 			SEffect = NewGO<Effect>(0);
 			SEffect->Play(L"Assets/effect/NMode.efk");
 			SEffect->SetPosition(*m_Position);
-			SEffect->SetScale(CVector3::One() * 1);
+			SEffect->SetScale(CVector3::One() * 2.75f);
 			CoolTime = 0.0f;
 		}
 		else {
