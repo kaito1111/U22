@@ -7,6 +7,11 @@ GameCamera::GameCamera()
 	g_camera3D.SetPosition({ -300.0f, 100.0f, 1000.0f });
 	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
 	g_camera3D.SetFar(10000.0f);
+
+	m_ButtonSprite = NewGO<SpriteRender>(5);
+	m_ButtonSprite->Init(L"Assets/sprite/Button.dds", 250.0f, 250.0f);
+	CVector3 ButtonSpritePos = { 500.0f,-250.0f,0.0f };
+	m_ButtonSprite->SetPosition(ButtonSpritePos);
 }
 
 GameCamera::~GameCamera()
@@ -33,9 +38,8 @@ void GameCamera::Update()
 
 	//PlayerNumが0だからこれ入ってない
 	for (int i = 0; i < m_PlayerNum; i++) {
-	Target += m_Player[i]->GetPosition();
-	Target.y += 100.0f;
-
+		Target += m_Player[i]->GetPosition();
+		Target.y += 100.0f;
 	}
 	//上でカメラの位置が調整されてないので無理やり調整
 	//上直したら消してね
@@ -68,7 +72,7 @@ void GameCamera::Update()
 	}
 	CVector3 pos = Target;
 	pos.z += 500.0f;
-	g_camera3D.SetTarget(Target); 
+	g_camera3D.SetTarget(Target);
 	g_camera3D.SetPosition(pos);
 	//カメラの更新。
 	g_camera3D.Update();
