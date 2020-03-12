@@ -96,6 +96,9 @@ bool stageObjectJenerator::Start()
 		return false;
 	});
 
+	//動作確認テスト用のオブジェクト達。最終的に消す。
+	//scythe = NewGO<GameObjectScythe>(1);
+
 	
 	return true;
 }
