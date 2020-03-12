@@ -24,11 +24,26 @@ bool Player::Start()
 	LearnMO(m_Magnet, &m_position);
 	m_FrontModel.Init(L"Assets/modelData/player(front).cmo");
 	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
+
+	m_ThisNumSprite = NewGO<SpriteRender>(0);
+	wchar_t spriteName[256] = {};
+	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum);
+	m_ThisNumSprite->Init(spriteName, 100.0f, 100.0f,true);
+	CVector3 ThisNumSpritePos = m_position;
+	ThisNumSpritePos.y += 150.0f;
+	ThisNumSpritePos.x -= 50.0f;
+	m_ThisNumSprite->SetPosition(ThisNumSpritePos);
+	CQuaternion Rot;
+	Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
+	m_ThisNumSprite->SetRotation(Rot);
 	return true;
 }
 
 void Player::Update()
 {
+	if (m_Pad->IsTrigger(enButtonSelect)) {
+		m_position = m_CheckPoint;
+	}
 	MyMagnet();
 	SpawnPole();
 	if (m_Pad->IsTrigger(enButtonX)) {
@@ -39,6 +54,13 @@ void Player::Update()
 	}
 	else {
 		Move();
+	}
+	{
+		CVector3 ThisNumSpritePos = m_position;
+		ThisNumSpritePos.y += 150.0f;
+		float diff = fabsf(g_camera3D.GetTarget().x) - ThisNumSpritePos.x ;
+		ThisNumSpritePos.x -= ( diff / 5.0f);
+		m_ThisNumSprite->SetPosition(ThisNumSpritePos); 
 	}
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(m_position, m_rot, m_Scale);
@@ -182,7 +204,6 @@ void Player::MyMagnet()
 	}
 	if (m_Pad->IsTrigger(enButtonB)) {
 			m_Magnet->SetState(Magnet::State::NoMode);
-		
 	}
 }
 

@@ -11,9 +11,10 @@ public:
 		Decline = d;
 	}
 private:
-	int m_PlayerNum = 0;
-	bool Start()override;
-	void Update()override;
-	Player* m_Player[4] = {};
-	float Decline = 0.0f;		//‰º‚ÌŒÀŠE
+	SpriteRender*	m_ButtonSprite		= nullptr;
+	int				m_PlayerNum			= 0;
+	bool			Start()override;
+	void			Update()override;
+	Player*			m_Player[4]			= {};
+	float			Decline				= 0.0f;		//‰º‚ÌŒÀŠE
 };
