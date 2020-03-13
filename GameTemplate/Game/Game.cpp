@@ -3,6 +3,8 @@
 #include "Stage.h"
 #include "exampleCode/ex2D.h"
 #include "KaitoTask.h"
+#include "DebugMan.h"
+#include "GameCamera.h"
 
 Game::Game()
 {
@@ -37,6 +39,9 @@ void Game::Sample()
 	{
 		//2Dのサンプル
 		ex2D* ex2d = NewGO<ex2D>(4, "ex2D");
+		
+		//デバッグ用UnitychanのNewGO
+		NewGO<DebugMan>(0, "debugman");
 
 		//エフェクトの作成
 		if (!effect->IsPlay()) {

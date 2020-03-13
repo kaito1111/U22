@@ -7,6 +7,8 @@ Stage::Stage()
 {
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/Course_Level1.cmo");
+	//シャドウレシーバーとする
+	m_model.SetShadowReciever(true);
 	m_phyStaticObuject.CreateMeshObject(m_model, CVector3::Zero(), CQuaternion::Identity());
 	generator = NewGO<stageObjectJenerator>(1);
 

@@ -101,6 +101,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
+    <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="GameObjectScythe.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="RorlingRock.cpp" />
+    <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
@@ -179,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
+    <ClInclude Include="DebugMan.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="GameObjectScythe.h" />
@@ -234,6 +237,7 @@
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="RorlingRock.h" />
+    <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="SPole.h" />
@@ -257,6 +261,8 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
+    <MeshContentTask Include="Assets\modelData\d.FBX" />
+    <MeshContentTask Include="Assets\modelData\debugMan.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />

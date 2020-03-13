@@ -68,6 +68,7 @@ public:
 	/// <para>0が通常描画、1がシルエット描画</para>
 	/// <para>シルエット描画の詳細はこの関数のRemarksに書いてあるので、</para>
 	/// <para>それを参考にシルエット描画を実装してください。</para>
+	/// <para>第3引数のRenderModeの値によって描画方法が異なるので気を付けてください。</para>
 	/// </summary>
 	/// <remarks>
 	/// -----シルエット描画の方法について-----
@@ -80,7 +81,7 @@ public:
 	/// </remarks>
 	/// <param name="viewMatrix">カメラ行列</param>
 	/// <param name="projMatrix">プロジェクション行列</param>
-	/// <param name="RenderMode">/描画モード/ 0->通常描画 1->シルエット描画</param>
+	/// <param name="RenderMode">/描画モード/ 0->通常描画 1->シルエット描画 2->シャドウ描画</param>
 	void Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode);
 	/*!
 	*@brief	スケルトンの取得。
@@ -88,6 +89,14 @@ public:
 	Skeleton& GetSkeleton()
 	{
 		return m_skeleton;
+	}
+	/// <summary>
+	/// シャドウレシーバのフラグ設定
+	/// </summary>
+	/// <param name="flag">trueでシャドウレシーバー</param>
+	void SetShadowReciever(bool flag)
+	{
+		m_isShadowReciever = flag;
 	}
 	/*!
 	*@brief	メッシュを検索する。
@@ -126,9 +135,12 @@ private:
 private:
 	//定数バッファ。
 	struct SVSConstantBuffer {
-		CMatrix mWorld;
-		CMatrix mView;
-		CMatrix mProj;
+		CMatrix mWorld;			//ワールド行列
+		CMatrix mView;			//ビュー行列
+		CMatrix mProj;			//プロジェクション行列
+		CMatrix mLightView;		//ライトビュー行列
+		CMatrix mLightProj;		//ライトプロジェクション行列
+		int isShadowReciever;	//シャドウレシーバーフラグ
 	};
 	EnFbxUpAxis			m_enFbxUpAxis = enFbxUpAxisZ;	//!<FBXの上方向。
 	ID3D11Buffer*		m_cb = nullptr;					//!<定数バッファ。
@@ -136,5 +148,6 @@ private:
 	CMatrix				m_worldMatrix;					//!<ワールド行列。
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
 	ID3D11SamplerState* m_samplerState = nullptr;		//!<サンプラステート。
+	bool m_isShadowReciever;								//影を受け取るオブジェクトか
 };
 

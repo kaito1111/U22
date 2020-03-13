@@ -198,6 +198,7 @@ void GraphicsEngine::Init(HWND hWnd)
 	
 	//ライトマネージャーの作成
 	m_ligManager = NewGO<LightManager>(0);
+	m_shadowMap = NewGO<ShadowMap>(0);
 
 	m_pd3dDeviceContext->RSSetViewports(1, &viewport);
 	m_pd3dDeviceContext->RSSetState(m_rasterizerState);

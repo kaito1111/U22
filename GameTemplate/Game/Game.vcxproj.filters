@@ -78,6 +78,8 @@
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
+    <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="DebugMan.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -97,6 +99,9 @@
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
+    <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
+    <MeshContentTask Include="Assets\modelData\debugMan.FBX" />
+    <MeshContentTask Include="Assets\modelData\d.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -171,6 +176,8 @@
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
+    <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="DebugMan.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />
@@ -186,5 +193,6 @@
   <ItemGroup>
     <None Include="Assets\level\stageLevel.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
+    <None Include="Assets\level\Corse_Level_1.tkl" />
   </ItemGroup>
 </Project>

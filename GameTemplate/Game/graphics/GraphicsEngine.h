@@ -1,10 +1,21 @@
 #pragma once
 
+/// <summary>
+/// レンダリングモード
+/// </summary>
+enum EnRenderMode {
+	enRenderMode_Normal,			//通常描画
+	enRenderMode_CreateSilhouette,	//シルエット描画
+	enRenderMode_CreateShadowMap,	//シャドウマップ生成
+	enRenderMode_Num				//レンダリングモードの数
+};	
+
 /*!
  *@brief	グラフィックスエンジン。
  */
 
 #include "LightManager.h"
+#include "ShadowMap.h"
 
 class GraphicsEngine
 {
@@ -62,6 +73,11 @@ public:
 	{
 		return m_ligManager;
 	}
+
+	myEngine::ShadowMap* GetShadowMap()
+	{
+		return m_shadowMap;
+	}
 	/*!
 	 *@brief	描画開始。
 	 */
@@ -82,6 +98,7 @@ private:
 	EffekseerRenderer::Renderer* m_effekseerRenderer = nullptr;			//エフェクサーレンダー
 	Effekseer::Manager* m_manager = nullptr;							//エフェクトマネジャー
 	myEngine::LightManager* m_ligManager;								//ライトマネージャー グラフィックエンジンでNewGOしてる
+	myEngine::ShadowMap* m_shadowMap;												//シャドウマップ
 
 	//汚かったグラフィックエンジンから取り除いた変数一覧
 	/*

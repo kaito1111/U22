@@ -8,6 +8,8 @@
 /////////////////////////////////////////////////////////////
 //アルベドテクスチャ。
 Texture2D<float4> albedoTexture : register(t0);	
+//シャドウマップ
+Texture2D<float4> shadowMap : register(t1);
 //ボーン行列
 StructuredBuffer<float4x4> boneMatrix : register(t1);
 
@@ -26,11 +28,16 @@ cbuffer VSPSCb : register(b0){
 	float4x4 mWorld;
 	float4x4 mView;
 	float4x4 mProj;
+	float4x4 mLightView;
+	float4x4 mLightProj;
+	int isShadowReciever;
 };
 
 static const int NUM_DIRECTION_LIG = 4;
 
-//ライト用の定数バッファ
+/*
+	ライト用定数バッファ 
+*/
 cbuffer LightCb : register(b0) {
 	float3		Direction[NUM_DIRECTION_LIG];	//カメラの方向
 	float4		Color[NUM_DIRECTION_LIG];		//カラー
@@ -39,6 +46,12 @@ cbuffer LightCb : register(b0) {
 	float		specPow/*[NUM_DIRECTION_LIG]*/;		//鏡面反射の絞り 最後に書いて！
 };	
 
+/*
+	シャドウマップ用の定数バッファ
+*/
+cbuffer ShadowMapCb : register(b1) {
+	float4x4 lightViewProjMatrix;	//ライトビュープロジェクション行列。
+}
 
 /////////////////////////////////////////////////////////////
 //各種構造体
@@ -75,7 +88,9 @@ struct PSInput{
 	float3 Tangent		: TANGENT;
 	float2 TexCoord 	: TEXCOORD0;
 	float3 worldPos		: TEXCOORD1;
+	float4 posInLVP		: TEXCOORD2;
 };
+
 /*!
  *@brief	スキン行列を計算。
  */
@@ -105,11 +120,14 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 	psInput.worldPos = pos;
 	pos = mul(mView, pos);
 	pos = mul(mProj, pos);
+	
 	psInput.Position = pos;
 
+	//ピクセルシェーダーに渡す
 	psInput.TexCoord = In.TexCoord;
 	psInput.Normal = normalize(mul(mWorld, In.Normal));
 	psInput.Tangent = normalize(mul(mWorld, In.Tangent));
+
 	return psInput;
 }
 
@@ -149,7 +167,9 @@ PSInput VSMainSkin( VSInputNmTxWeights In )
 	
 	pos = mul(mView, pos);
 	pos = mul(mProj, pos);
+
 	psInput.Position = pos;
+
 	psInput.TexCoord = In.TexCoord;
     return psInput;
 }
@@ -201,6 +221,8 @@ float4 PSMain( PSInput In ) : SV_Target0
 			}
 		}
 	}
+
+
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;
 	return finalColor;
@@ -212,3 +234,4 @@ float4 PSMain_Silhouette(PSInput In) : SV_Target0
 {
 	return float4( 0.5f, 0.5f, 0.5f, 1.0f);
 }
+

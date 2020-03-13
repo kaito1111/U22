@@ -9,16 +9,21 @@ void __cdecl ModelEffect::Apply(ID3D11DeviceContext* deviceContext)
 	
 	switch (m_renderMode)
 	{
-	case 0:
+	case enRenderMode_Normal:
 		//通常描画
 		deviceContext->PSSetShader((ID3D11PixelShader*)m_pPSShader->GetBody(), NULL, 0);
 		deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
 		break;
-	case 1:
+	case enRenderMode_CreateSilhouette:
 		//シルエット描画
 		deviceContext->PSSetShader((ID3D11PixelShader*)m_psSilhouette.GetBody(), NULL, 0);
 		//シルエット用 深度ステンシルステート
 		deviceContext->OMSetDepthStencilState(m_silhouettoDepthStencilState, 0);
+		break;
+	case enRenderMode_CreateShadowMap:
+		//シャドウマップ生成
+		//deviceContext->VSSetShader((ID3D11VertexShader*)m_vsShadowMap.GetBody(), NULL, 0);
+		deviceContext->PSSetShader((ID3D11PixelShader*)m_psShadowMap.GetBody(), NULL, 0);
 		break;
 	}
 }

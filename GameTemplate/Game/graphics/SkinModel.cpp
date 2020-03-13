@@ -148,9 +148,23 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode)
 
 	//定数バッファの内容を更新。
 	SVSConstantBuffer vsCb;
+	//ワールド行列
 	vsCb.mWorld = m_worldMatrix;
+	//カメラ行列
 	vsCb.mProj = projMatrix;
 	vsCb.mView = viewMatrix;
+	//ライトカメラの行列
+	vsCb.mLightView = g_graphicsEngine->GetShadowMap()->GetLightViewMatirx();
+	vsCb.mLightProj = g_graphicsEngine->GetShadowMap()->GetLightProjMatirx();
+	//シャドウレシーバーの判定
+	if (m_isShadowReciever == true) {
+		//シャドウレシーバー
+		vsCb.isShadowReciever = 1;
+	}
+	else {
+		//シャドウレシーバーじゃない
+		vsCb.isShadowReciever = 0;
+	}
 	d3dDeviceContext->UpdateSubresource(m_cb, 0, nullptr, &vsCb, 0, 0);
 	//定数バッファをGPUに転送。
 	d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb);
@@ -163,6 +177,7 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode)
 	//ライト用の描画設定
 	g_graphicsEngine->GetLigManager()->GetDirLig().Render();
 
+	//レンダーモードのセット
 	m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {
 		auto modelMaterial = reinterpret_cast<SkinModelEffect*>(material);
 		modelMaterial->SetRenderMode(RenderMode);

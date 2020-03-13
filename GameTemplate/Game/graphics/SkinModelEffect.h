@@ -13,6 +13,8 @@ protected:
 	Shader m_vsShader;
 	Shader m_psShader;
 	Shader m_psSilhouette;			//シルエット用シェーダー
+	Shader m_psShadowMap;			//シャドウマップ用PSシェーダー
+	Shader m_vsShadowMap;			//シャドウマップ用VSシェーダ
 	bool m_renderMode = 0;			//レンダーモード
 	bool isSkining;
 	ID3D11ShaderResourceView*	m_albedoTex = nullptr;
@@ -24,6 +26,8 @@ public:
 		//シェーダのロード
 		m_psShader.Load("Assets/shader/model.fx", "PSMain", Shader::EnType::PS);
 		m_psSilhouette.Load("Assets/shader/model.fx", "PSMain_Silhouette", Shader::EnType::PS);
+		//m_psShadowMap.Load("Assets/shader/model.fx", "PSMain_ShadowMap", Shader::EnType::PS);
+		//m_vsShadowMap.Load("Assets/shader/model.fx", "VSMain_ShadowMap", Shader::EnType::VS);
 		//ポリモーフィズム？
 		m_pPSShader = &m_psShader;
 		//デプスの作成
