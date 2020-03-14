@@ -21,7 +21,7 @@ namespace myEngine {
 		m_skinModel.UpdateWorldMatrix(m_pos, m_rot, m_scale);
 	}
 
-	void DebugMan::Draw()
+	void DebugMan::Render()
 	{
 		//シャドウマップにレンダリング
 		{
@@ -45,10 +45,10 @@ namespace myEngine {
 			g_graphicsEngine->GetShadowMap()->RenderToShadowMap();
 
 			//もとに戻す
-			dc->OMGetRenderTargets(
+			dc->OMSetRenderTargets(
 				1,
 				&oldRenderTargetView,
-				&oldDepthStencilView
+				oldDepthStencilView
 			);
 			dc->RSSetViewports(viewport, &oldViewports);
 			//解放

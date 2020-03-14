@@ -31,7 +31,7 @@ namespace myEngine {
 		/// <summary>
 		/// •`‰æ
 		/// </summary>
-		void Draw();
+		void Render();
 	private:
 		CVector3 m_pos = CVector3::Zero();
 		CVector3 m_scale = CVector3::One();

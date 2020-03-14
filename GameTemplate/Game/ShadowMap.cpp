@@ -11,10 +11,18 @@ ShadowMap::ShadowMap()
 		2048,
 		DXGI_FORMAT_R32_FLOAT
 	);
+
+	m_lightCameraPosition = { 0.0f, 1000.0f, 0.0f };
+	m_lightCameraTarget = CVector3::Zero();
 }
 
 ShadowMap::~ShadowMap()
 {
+}
+
+void ShadowMap::Update()
+{
+	UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
 }
 
 void ShadowMap::UpdateFromLightDirection(CVector3 lightCameraPos, CVector3 lightDir)

@@ -28,11 +28,9 @@ cbuffer VSPSCb : register(b0){
 	float4x4 mWorld;
 	float4x4 mView;
 	float4x4 mProj;
-	float4x4 mLightView;
-	float4x4 mLightProj;
-	int isShadowReciever;
 };
 
+//ライトの数
 static const int NUM_DIRECTION_LIG = 4;
 
 /*
@@ -89,6 +87,13 @@ struct PSInput{
 	float2 TexCoord 	: TEXCOORD0;
 	float3 worldPos		: TEXCOORD1;
 	float4 posInLVP		: TEXCOORD2;
+};
+
+/*
+	シャドウマップ用のピクセルシェーダーへの入力構造体
+*/
+struct PSInput_ShadowMap {
+	float4 Position			: SV_POSITION;	//座標
 };
 
 /*!
@@ -233,5 +238,26 @@ float4 PSMain( PSInput In ) : SV_Target0
 float4 PSMain_Silhouette(PSInput In) : SV_Target0
 {
 	return float4( 0.5f, 0.5f, 0.5f, 1.0f);
+}
+
+/*
+	シャドウマップ生成用の頂点シェーダー
+*/
+PSInput_ShadowMap VSMain_ShadowMap(VSInputNmTxVcTangent In)
+{
+	PSInput_ShadowMap psInput = (PSInput_ShadowMap)0;
+	float4 pos = mul(mWorld, In.Position);
+	pos = mul(mView, pos);
+	pos = mul(mProj, pos);
+	psInput.Position = pos;
+	return psInput;
+}
+/*
+	ピクセルシェーダーのエントリ関数
+*/
+float4 PSMain_ShadowMap(PSInput_ShadowMap In) : SV_Target0
+{
+	//射影空間でのZ値を返す
+	return In.Position.z / In.Position.w;
 }
 

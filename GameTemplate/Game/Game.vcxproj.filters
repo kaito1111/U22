@@ -100,8 +100,6 @@
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
-    <MeshContentTask Include="Assets\modelData\debugMan.FBX" />
-    <MeshContentTask Include="Assets\modelData\d.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />

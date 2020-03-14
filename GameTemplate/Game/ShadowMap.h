@@ -39,6 +39,8 @@ namespace myEngine {
 			return m_lightProjMatirx;
 		}
 
+		void Update();
+
 		/// <summary>
 		/// <para>更新(ライトカメラの注視点を指定するバージョン。)</para>
 		/// </summary>
@@ -89,11 +91,20 @@ namespace myEngine {
 			m_shadowCasters.push_back(shadowCaster);
 		}
 
+		/// <summary>
+		/// シャドウマップのSRVを取得
+		/// </summary>
+		/// <returns></returns>
+		ID3D11ShaderResourceView* GetShadowMapSRV()
+		{
+			return m_shadowMapRT.GetRenderTargetSRV();
+		}
+
 	private:
 		CVector3 m_lightCameraPosition = CVector3::Zero();	//ライトカメラの視点
 		CVector3 m_lightCameraTarget = CVector3::Zero();	//ライトカメラの注視点
-		CMatrix m_lightViewMatrix = CMatrix::Identity();	//ライトビュー行列
-		CMatrix	m_lightProjMatirx = CMatrix::Identity();	//ライトプロジェクション行列
+		CMatrix m_lightViewMatrix;							//ライトビュー行列
+		CMatrix	m_lightProjMatirx;							//ライトプロジェクション行列
 		RenderTarget m_shadowMapRT;							//シャドウマップ描画用のレンダリングターゲット
 		std::vector<SkinModel*> m_shadowCasters;			//シャドウキャスターの配列
 	};

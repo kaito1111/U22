@@ -261,8 +261,6 @@
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
-    <MeshContentTask Include="Assets\modelData\d.FBX" />
-    <MeshContentTask Include="Assets\modelData\debugMan.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
