@@ -83,6 +83,7 @@
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="stageObjectShuriken.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -104,6 +105,7 @@
     <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
+    <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -179,6 +181,7 @@
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="stageObjectShuriken.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />
@@ -190,6 +193,9 @@
     <Image Include="Assets\modelData\metal_00078.jpg" />
     <Image Include="Assets\modelData\stage1.jpg" />
     <Image Include="Assets\modelData\stone_00010.jpg" />
+    <Image Include="Assets\sprite\ProvisionalTitle.png" />
+    <Image Include="Assets\sprite\stage1.png" />
+    <Image Include="Assets\sprite\stage2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\stageLevel.tkl" />
