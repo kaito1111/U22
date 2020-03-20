@@ -10,18 +10,23 @@ void __cdecl ModelEffect::Apply(ID3D11DeviceContext* deviceContext)
 	switch (m_renderMode)
 	{
 	//通常描画
-	case enRenderMode_Normal:
+	case enRenderMode_Normal: 
+	{
 		//頂点シェーダーの設定
 		deviceContext->VSSetShader((ID3D11VertexShader*)m_vsShader.GetBody(), NULL, 0);
 		//ピクセルシェーダーの設定
 		deviceContext->PSSetShader((ID3D11PixelShader*)m_pPSShader->GetBody(), NULL, 0);
 		//テクスチャの設定
-		deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
+		//deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
 		//ID3D11ShaderResourceView* srvArray[] = {
 		//	m_albedoTex,
 		//	g_graphicsEngine->GetShadowMap()->GetShadowMapSRV()
 		//};
-		//deviceContext->PSSetShaderResources(0,2,srvArray);
+		//deviceContext->PSSetShaderResources(0, 2, srvArray);
+		deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
+		m_shadowMap = g_graphicsEngine->GetShadowMap()->GetShadowMapSRV();
+		deviceContext->PSSetShaderResources(2, 1, &m_shadowMap);
+	}
 		break;
 	//シルエット描画
 	case enRenderMode_CreateSilhouette:

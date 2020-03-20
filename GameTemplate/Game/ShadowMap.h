@@ -5,10 +5,10 @@
 #pragma once
 
 #include "graphics/RenderTarget.h"
-#include "SkinModel.h"
+#include "graphics/SkinModel.h"
 
 namespace myEngine {
-	class ShadowMap : public IGameObject
+	class ShadowMap 
 	{
 	public:
 		/// <summary>
@@ -38,8 +38,6 @@ namespace myEngine {
 		{
 			return m_lightProjMatirx;
 		}
-
-		void Update();
 
 		/// <summary>
 		/// <para>更新(ライトカメラの注視点を指定するバージョン。)</para>

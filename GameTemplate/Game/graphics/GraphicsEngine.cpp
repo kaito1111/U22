@@ -195,10 +195,15 @@ void GraphicsEngine::Init(HWND hWnd)
 		m_pd3dDeviceContext->OMSetDepthStencilState(depthStencilState, 0);
 		MemoryBarrier();
 	}
-	
-	//ライトマネージャーの作成
-	m_ligManager = NewGO<LightManager>(0);
-	m_shadowMap = NewGO<ShadowMap>(0);
+
+	//Getの都合上ここでNew　tkEngineに合わせたいねぇ(願望)
+	//実態をGraphicsEngineで作るとdv,dcが初期化されてないのでダメー！
+	{
+		//ライトマネージャーの作成　※改善の余地あり
+		m_ligManager = NewGO<LightManager>(0);
+		//シャドウマップの作成
+		m_shadowMap = new ShadowMap;
+	}
 
 	m_pd3dDeviceContext->RSSetViewports(1, &viewport);
 	m_pd3dDeviceContext->RSSetState(m_rasterizerState);

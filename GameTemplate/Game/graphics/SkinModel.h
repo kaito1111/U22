@@ -82,7 +82,7 @@ public:
 	/// <param name="viewMatrix">カメラ行列</param>
 	/// <param name="projMatrix">プロジェクション行列</param>
 	/// <param name="RenderMode">/描画モード/ 0->通常描画 1->シルエット描画 2->シャドウ描画</param>
-	void Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode);
+	void Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode, CMatrix m_LViewMatrix = CMatrix::Identity(), CMatrix m_LProjMatrix = CMatrix::Identity());
 	/*!
 	*@brief	スケルトンの取得。
 	*/
@@ -148,6 +148,6 @@ private:
 	CMatrix				m_worldMatrix;					//!<ワールド行列。
 	DirectX::Model*		m_modelDx;						//!<DirectXTKが提供するモデルクラス。
 	ID3D11SamplerState* m_samplerState = nullptr;		//!<サンプラステート。
-	bool m_isShadowReciever;								//影を受け取るオブジェクトか
+	bool m_isShadowReciever = false;							//影を受け取るオブジェクトか
 };
 

@@ -18,6 +18,7 @@ protected:
 	int m_renderMode = 0;			//レンダーモード
 	bool isSkining;
 	ID3D11ShaderResourceView*	m_albedoTex = nullptr;
+	ID3D11ShaderResourceView*	m_shadowMap = nullptr;
 	ID3D11DepthStencilState*	m_silhouettoDepthStencilState = nullptr;
 
 public:

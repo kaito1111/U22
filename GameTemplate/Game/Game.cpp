@@ -18,10 +18,9 @@ Game::~Game()
 
 bool Game::Start()
 {
-	//Stage* stage = NewGO<Stage>(0, "stage");
+	Stage* stage = NewGO<Stage>(0, "stage");
 	NewGO< KaitoTask>(2, "kaito");
 	//NewGO<DirectionLight>(3, "light");
-
 	effect = NewGO<Effect>(1);
 
 	return true;
@@ -38,7 +37,7 @@ void Game::Sample()
 	if (GetAsyncKeyState('H'))
 	{
 		//2Dのサンプル
-		ex2D* ex2d = NewGO<ex2D>(4, "ex2D");
+		//ex2D* ex2d = NewGO<ex2D>(4, "ex2D");
 		
 		//デバッグ用UnitychanのNewGO
 		NewGO<DebugMan>(0, "debugman");
