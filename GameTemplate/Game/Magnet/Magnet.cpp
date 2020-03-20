@@ -3,19 +3,20 @@
 
 Magnet::Magnet()
 {
-	m_SMagSprite = NewGO<myEngine::SpriteRender>(3);
-	m_SMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 50.0f, 50.0f, true);
-	m_SMagSprite->SetW(0.0f);
-	m_SMagSprite->SetPivot({ 1.0f,1.0f });
-	m_Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
-	m_SMagSprite->SetRotation(m_Rot);
-	m_SMagSprite->SetActive(false);
-	m_NMagSprite = NewGO<myEngine::SpriteRender>(3);
-	m_NMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 50.0f, 50.0f, true);
-	m_NMagSprite->SetW(0.0f);
-	m_NMagSprite->SetPivot({ -1.0f,-1.0f });
-	m_NMagSprite->SetRotation(m_Rot);
-	m_NMagSprite->SetActive(false);
+	//m_SMagSprite = NewGO<myEngine::SpriteRender>(1);
+	//m_SMagSprite->Init(L"Assets/sprite/MagnetBlue.dds", 50.0f, 50.0f, true);
+	//m_SMagSprite->SetW(0.0f);
+	////m_SMagSprite->SetPivot({ 1.0f,1.0f });
+	//m_Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
+	//m_SMagSprite->SetRotation(m_Rot);
+	////m_SMagSprite->SetActive(false);
+	//m_NMagSprite = NewGO<myEngine::SpriteRender>(1);
+	//m_NMagSprite->Init(L"Assets/sprite/MagnetRed.dds", 50.0f, 50.0f, true);
+	//m_NMagSprite->SetW(0.0f);
+	////m_NMagSprite->SetPivot({ -1.0f,-1.0f });
+	//m_NMagSprite->SetRotation(m_Rot);
+	////m_NMagSprite->SetActive(false);
+	SEffect = NewGO<Effect>(0);
 }
 
 Magnet::~Magnet()
@@ -25,12 +26,12 @@ Magnet::~Magnet()
 CVector3 Magnet::MagnetMove()
 {
 	m_MagnetForce = CVector3::Zero();
-	float MagnetPower = 2.0f;				//Ž¥—Í‚Ì‹­‚³
-	float maganetLen =300.0f;				//Ž¥—Í‚ª“­‚­‹——£
+	float MagnetPower = 0.05f;				//Ž¥—Í‚Ì‹­‚³
+	float maganetLen = 300.0f;				//Ž¥—Í‚ª“­‚­‹——£
 	int MagnetNum = 0;
 	QueryMO([&](Magnet* mag)->bool {
 		QueryMO([&](Magnet* mag)->bool {
-			MagnetNum++; 
+			MagnetNum++;
 			return true;
 		});
 
@@ -112,7 +113,7 @@ CVector3 Magnet::MagnetMove()
 		MagnetForce /= MagnetNum;
 		m_MagnetForce += MagnetForce;
 		return true;
-	}); 
+	});
 	return m_MagnetForce;
 }
 
@@ -121,35 +122,56 @@ void MyMagnet::Magnet::Update()
 	switch (state)					//UI
 	{
 	case Magnet::SMode:
-		m_SMagSprite->SetActive(true);
+		/*//m_SMagSprite->SetActive(true);
 		m_SMagSprite->SetW(1.0f);
-		m_NMagSprite->SetActive(false);
-		m_NMagSprite->SetW(0.0f);
+		//m_NMagSprite->SetActive(false);
+		m_NMagSprite->SetW(0.0f);*/
+		if (!SEffect->IsPlay()) {
+			SEffect = NewGO<Effect>(0);
+			SEffect->Play(L"Assets/effect/SMode.efk");
+			SEffect->SetPosition(*m_Position);
+			SEffect->SetScale(CVector3::One() * 2.75f);
+			CoolTime = 0.0f;
+		}
+		else {
+			CoolTime++;
+		}
 		break;
 	case Magnet::NMode:
-		m_SMagSprite->SetActive(false);
+		/*//m_SMagSprite->SetActive(false);
 		m_SMagSprite->SetW(0.0f);
-		m_NMagSprite->SetActive(true);
-		m_NMagSprite->SetW(1.0f);
+		//m_NMagSprite->SetActive(true);
+		m_NMagSprite->SetW(1.0f);*/
+		if (!SEffect->IsPlay()) {
+			SEffect = NewGO<Effect>(0);
+			SEffect->Play(L"Assets/effect/NMode.efk");
+			SEffect->SetPosition(*m_Position);
+			SEffect->SetScale(CVector3::One() * 2.75f);
+			CoolTime = 0.0f;
+		}
+		else {
+			CoolTime++;
+		}
 		break;
 	default:
-		m_SMagSprite->SetActive(false);
+		/*//m_SMagSprite->SetActive(false);
 		m_SMagSprite->SetW(0.0f);
-		m_NMagSprite->SetActive(false);
-		m_NMagSprite->SetW(0.0f);
+		//m_NMagSprite->SetActive(false);
+		m_NMagSprite->SetW(0.0f);*/
+		CoolTime = 0;
 		break;
 	}
-	m_NMagSprite->SetPosition(*m_Position);
-	m_NMagSprite->Update(); 
+	//m_NMagSprite->SetPosition(*m_Position);
+	//m_NMagSprite->Update();
 
-	m_SMagSprite->SetPosition({ m_Position->x,m_Position->y,m_Position->z });
-	m_SMagSprite->Update();
+	//m_SMagSprite->SetPosition({ m_Position->x,m_Position->y,m_Position->z });
+	//m_SMagSprite->Update();
 }
 
 void MyMagnet::Magnet::PostDraw()
 {
-	m_NMagSprite->Draw();
-	m_SMagSprite->Draw();
+	//m_NMagSprite->Draw();
+	//m_SMagSprite->Draw();
 }
 
 bool MyMagnet::Magnet::Start()

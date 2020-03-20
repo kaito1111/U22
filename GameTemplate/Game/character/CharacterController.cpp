@@ -192,10 +192,8 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			//現在の座標から次の移動先へ向かうベクトルを求める。
 			CVector3 addPos;
 			addPos.Subtract(nextPosition, m_position);
-			CVector3 addPosX = addPos;
-			addPosX.y = 0.0f;
-			addPosX.z = 0.0f;
-			if (addPosX.Length() < FLT_EPSILON) {
+			float addPosX = addPos.x;
+			if (fabsf(addPosX) < FLT_EPSILON) {
 				//XZ平面で動きがないので調べる必要なし。
 				//FLT_EPSILONは1より大きい、最小の値との差分を表す定数。
 				//とても小さい値のことです。
@@ -215,7 +213,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 
 			SweepResultWall callback;
 			callback.me = m_rigidBody.GetBody();
-			callback.startPos = posTmp;
+			callback.startPos.Set(posTmp);
 			//衝突検出。
 			g_physics.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
 
@@ -283,6 +281,8 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 		start.setIdentity();
 		end.setIdentity();
 		//始点はカプセルコライダーの中心。
+		/*変更点
+		start.setOrigin(btVector3(nextPosition.x, m_position.y + m_height * 0.5f + m_radius, nextPosition.z));*/
 		start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
 		//終点は地面上にいない場合は1m下を見る。
 		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
@@ -316,7 +316,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 				moveSpeed.y = 0.0f;
 				m_isJump = false;
 				m_isOnGround = true;
-				nextPosition.y = callback.hitPos.y;
+				nextPosition.y = callback.hitPos.y+ addPos.y * 0.01f;
 			}
 			else {
 				//地面上にいない。

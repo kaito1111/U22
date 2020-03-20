@@ -51,7 +51,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)/bulletPhysics/src;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(ProjectDir)/bulletPhysics/src;$(ProjectDir)/photon/;$(ProjectDir)/EffekseerRuntime130/src/include/;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)/DirectXTK\Bin\Desktop_2015_Win10\x64\Release;$(SolutionDir)/x64/Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -167,6 +167,7 @@
     <ClCompile Include="StageObjectDossun.cpp" />
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="StageObjectMagma.cpp" />
+    <ClCompile Include="stageObjectShuriken.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -175,6 +176,7 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
@@ -249,10 +251,12 @@
     <ClInclude Include="StageObjectDossun.h" />
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="StageObjectMagma.h" />
+    <ClInclude Include="stageObjectShuriken.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
@@ -274,17 +278,26 @@
     <MeshContentTask Include="Assets\modelData\Player(front).FBX" />
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
     <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
+    <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
+    <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\sprite\ProvisionalTitle.png" />
+    <Image Include="Assets\sprite\stage1.png" />
+    <Image Include="Assets\sprite\stage2.png" />
+    <ImageContentTask Include="Assets\sprite\manual.png" />
     <ImageContentTask Include="Assets\sprite\MagnetZero.png" />
     <ImageContentTask Include="Assets\sprite\MagnetRed.png" />
     <ImageContentTask Include="Assets\sprite\MagnetBlue.png" />
     <ImageContentTask Include="Assets\sprite\utc_all2.tga" />
+    <ImageContentTask Include="Assets\sprite\Button.png" />
+    <ImageContentTask Include="Assets\sprite\1P_Pointer.png" />
+    <ImageContentTask Include="Assets\sprite\2P_Pointer.png" />
     <Image Include="Assets\sprite\dummy.png" />
     <ImageContentTask Include="Assets\modelData\a.png" />
     <Image Include="Assets\modelData\CheckPoint2.png" />
