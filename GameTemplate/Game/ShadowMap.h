@@ -1,6 +1,10 @@
 /// <summary>
 /// シャドウマップ
 /// </summary>
+/// <remarks>
+/// サンプルコードはDebugManクラスとStageクラスのコンストラクタを確認
+/// </remarks>
+
 
 #pragma once
 
@@ -65,7 +69,10 @@ namespace myEngine {
 		/// <summary>
 		/// <para>シャドウマップにシャドウキャスターをレンダリング。</para>
 		/// <para>この関数を呼び出すと、シャドウキャスターのリストはクリアされます。</para>
-		/// 毎フレーム呼び出すこと。
+		/// <para>毎フレーム呼び出すこと。</para>
+		/// <para>★★超重要★★</para>
+		/// <para>この関数を呼び出す前にBginRender,呼び出した後EndRenderを呼ぶこと</para>
+		/// <para>★★超重要★★</para>
 		/// </summary>
 		/// <remarks>
 		/// シャドウマップに描画されるシャドウキャスターは
@@ -90,6 +97,22 @@ namespace myEngine {
 		}
 
 		/// <summary>
+		/// 描画設定のバックアップ
+		/// </summary>
+		/// <remarks>
+		/// 1.レンダーターゲットビューをバックアップ。
+		/// 2.深度ステンシルビューをバックアップ。
+		/// 3.ビューポートをバックアップ。
+		/// </remarks>
+		void BiginRender();
+
+		/// <summary>
+		/// 元の描画設定に戻す
+		/// </summary>
+		void EndRender();
+
+
+		/// <summary>
 		/// シャドウマップのSRVを取得
 		/// </summary>
 		/// <returns></returns>
@@ -105,6 +128,10 @@ namespace myEngine {
 		CMatrix	m_lightProjMatirx;							//ライトプロジェクション行列
 		RenderTarget m_shadowMapRT;							//シャドウマップ描画用のレンダリングターゲット
 		std::vector<SkinModel*> m_shadowCasters;			//シャドウキャスターの配列
+		ID3D11RenderTargetView* oldRenderTargetView;		//バックアップ用レンダーターゲットビュー
+		ID3D11DepthStencilView* oldDepthStencilView;		//バックアップ用深度ステンシルビュー
+		D3D11_VIEWPORT oldViewports;						//バックアップ用ビューポート
+		unsigned int viewport = 1;							//ビューポート
 	};
 
 }

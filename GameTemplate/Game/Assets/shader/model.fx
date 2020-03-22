@@ -139,7 +139,7 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 	if (isShadowReciever == 1) {
 		//シャドウレシーバーだった
 		//ビュー行列に変換
-		psInput.posInLVP = mul(mLightView, pos);
+		psInput.posInLVP = mul(mLightView, float4 (psInput.worldPos, 1.0f));
 		//プロジェクション行列に変換
 		psInput.posInLVP = mul(mLightProj, psInput.posInLVP);
 	}

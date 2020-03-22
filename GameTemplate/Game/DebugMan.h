@@ -6,7 +6,7 @@ namespace myEngine {
 	/// <summary>
 	/// ！！デバッグマン！！
 	/// 能力ⅰ：シャドウマップの作成ができる。
-	/// 補正ⅰ：ただし影はでない。
+	/// 能力ⅱ：影を出せる。
 	/// </summary>
 	/// <remarks>
 	/// エンジンの機能追加の際など既存のPlayerとか使うのは、
@@ -41,11 +41,12 @@ namespace myEngine {
 		/// </summary>
 		void Draw();
 	private:
-		CVector3 m_pos = CVector3::Zero();
-		CVector3 m_scale = CVector3::One();
-		CQuaternion m_rot = CQuaternion::Identity();
-		CVector3 m_lightCameraPosition;
-		CVector3 m_lightCameraTarget;
-		SkinModel m_skinModel;
+		CVector3 m_pos = CVector3::Zero();				//デバッグマンの位置
+		CVector3 m_scale = CVector3::One();				//デバッグマンの拡大率
+		CQuaternion m_rot = CQuaternion::Identity();	//デバッグマンの回転軸
+		CVector3 m_lightCameraPosition;					//ライトカメラの視点位置
+		CVector3 m_lightCameraTarget;					//ライトカメラの注視点位置
+		SkinModel m_skinModel;							//デバッグマンのスキンモデル
+		ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 	};
 }

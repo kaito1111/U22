@@ -72,6 +72,24 @@ void ShadowMap::UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCam
 	UpdateFromLightDirection(lightCameraPos, lightDir);
 }
 
+void ShadowMap::BiginRender()
+{
+	//デバコン取得
+	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	//RTVとDSVのバックアップ
+	dc->OMGetRenderTargets(
+		1,
+		&oldRenderTargetView,
+		&oldDepthStencilView
+	);
+
+	//ビューポート
+	viewport = 1;
+	//ビューポートのバックアップ
+	dc->RSGetViewports(&viewport, &oldViewports);
+
+}
+
 void ShadowMap::RenderToShadowMap()
 {
 	auto dc = g_graphicsEngine->GetD3DDeviceContext();
@@ -101,5 +119,25 @@ void ShadowMap::RenderToShadowMap()
 	}
 	//キャスターをクリア
 	m_shadowCasters.clear();
+}
+
+void ShadowMap::EndRender()
+{
+	//デバイスコンテキストの取得
+	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+
+	//もとに戻す
+	dc->OMSetRenderTargets(
+		1,
+		&oldRenderTargetView,
+		oldDepthStencilView
+	);
+
+	//ビューポートももとに戻す
+	dc->RSSetViewports(viewport, &oldViewports);
+
+	//解放
+	oldDepthStencilView->Release();
+	oldRenderTargetView->Release();
 }
 
