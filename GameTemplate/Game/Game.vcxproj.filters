@@ -85,6 +85,8 @@
     <ClCompile Include="stageObjectShuriken.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="TitleStage.cpp" />
+    <ClCompile Include="DebugMan.cpp" />
+    <ClCompile Include="ShadowMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -107,6 +109,7 @@
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
+    <MeshContentTask Include="Assets\modelData\bg.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -184,6 +187,8 @@
     <ClInclude Include="stageObjectShuriken.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="TitleStage.h" />
+    <ClInclude Include="DebugMan.h" />
+    <ClInclude Include="ShadowMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

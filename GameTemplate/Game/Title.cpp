@@ -126,8 +126,10 @@ void Title::stageSelect()
 	}
 
 	//各ステージの情報を更新
+	//ステージ１
 	titleStage->SetPos(pos1);
-	titleStage->SetPos(pos2);
 	titleStage->SetScale(scale1);
+	//ステージ2
+	titleStage->SetPos(pos2);
 	titleStage->SetScale(scale2);
 }
