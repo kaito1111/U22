@@ -80,7 +80,7 @@ namespace myEngine {
 	}
 
 	//すべてのエフェクトを描いた後にEndRenderingを実行するように使用変更してね！
-	void Effect::PostDraw()
+	void Effect::PostRender()
 	{
 		//ブレンドステートの保存
 		g_graphicsEngine->GetEffekseerRenderer()->BeginRendering();

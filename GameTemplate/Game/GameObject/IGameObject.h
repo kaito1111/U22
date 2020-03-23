@@ -34,19 +34,23 @@ namespace myEngine {
 		{
 		};
 		/// <summary>
-		/// 描画設定
+		/// プレレンダー
 		/// </summary>
-		virtual void Render()
+		/// <remarks>
+		/// PreRenderで描画が望まれるもの。
+		/// 1.シャドウマップ　※RenderToShadowMap
+		/// </remarks>
+		virtual void PreRender()
 		{
 		}
 		/// <summary>
-		/// レンダー関数が実行された後で呼ばれる描画処理
+		/// ポストレンダー
 		/// </summary>
 		/// <remarks>
-		/// 機能が追加されたときに追記します
+		/// PostRenderで描画が望まれるもの。
+		/// 1.エフェクト 
 		/// </remarks>
-		/// <param name="rc">レンダーコンテキスト</param>
-		virtual void PostDraw()
+		virtual void PostRender()
 		{
 		}
 		/// <summary>
@@ -97,18 +101,11 @@ namespace myEngine {
 		/// 関数をラップしてるだけだよ
 		/// 各オブジェクトの関数の処理を開始させるよ
 		/// </summary>
-		void PostDrawWrapper()
+		void PreRenderWrapper()
 		{
 			if (m_isActive && m_isStart && !m_isDead)
 			{
-				PostDraw();
-			}
-		}
-		void RenderWrapper()
-		{
-			if (m_isActive && m_isStart && !m_isDead)
-			{
-				Render();
+				PreRender();
 			}
 		}
 		void StartWrapper()
@@ -133,6 +130,13 @@ namespace myEngine {
 			if (m_isActive && m_isStart)
 			{
 				Draw();
+			}
+		}
+		void PostRenderWrapper()
+		{
+			if (m_isActive && m_isStart && !m_isDead)
+			{
+				PostRender();
 			}
 		}
 		friend class GameObjectManager;

@@ -51,7 +51,7 @@ namespace myEngine {
 		/// <summary>
 		/// 描画設定
 		/// </summary>
-		void Render();
+		void PreRender();
 		/// <summary>
 		/// 定数バッファの作成
 		/// </summary>

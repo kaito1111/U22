@@ -27,11 +27,11 @@ namespace myEngine {
 		}
 	}
 
-	void GameObjectManager::Render()
+	void GameObjectManager::PreRender()
 	{
 		for (GameObjectList objList : m_gameObjectListArray) {
 			for (IGameObject* obj : objList) {
-				obj->RenderWrapper();
+				obj->PreRenderWrapper();
 			}
 		}
 	}
@@ -44,15 +44,12 @@ namespace myEngine {
 			}
 		}
 	}
-	/// <summary>
-	/// Draw‚ÌŒã‚ÉŒÄ‚Î‚ê‚é•`‰æˆ—
-	/// </summary>
-	/// <param name="rc"></param>
-	void GameObjectManager::PostDraw()
+	
+	void GameObjectManager::PostRender()
 	{
 		for (GameObjectList objList : m_gameObjectListArray) {
 			for (IGameObject* obj : objList) {
-				obj->PostDrawWrapper();
+				obj->PostRenderWrapper();
 			}
 		}
 	}
@@ -69,11 +66,11 @@ namespace myEngine {
 		/// •`‰æŒnˆ—
 		{
 			//RenderContext& rc = g_graphicsEngine->GetRenderContext();
-			Render();
+			PreRender();
 			//ForwardRender(rc);
 			Draw();
 			//ˆê”Ô’x‚¢Draw
-			PostDraw();
+			PostRender();
 		}
 		//íœ
 		ExcuteDeleteGameObject();

@@ -35,7 +35,7 @@ namespace MyMagnet {
 	private:
 		bool Start();
 		void Update();
-		void PostDraw();
+		void PostRender();
 		State		state		  = NoMode;
 		CQuaternion m_Rot		  = CQuaternion::Identity();
 		//myEngine::SpriteRender* m_SMagSprite = nullptr;

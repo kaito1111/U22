@@ -158,9 +158,9 @@ namespace myEngine {
 		//更新
 		void Update();
 		/// <summary>
-		/// 描画設定
+		/// プレレンダー
 		/// </summary>
-		void Render();
+		void PreRender();
 		/// <summary>
 		/// 描画
 		/// </summary>
@@ -168,7 +168,7 @@ namespace myEngine {
 		/// <summary>
 		/// 最後の描画処理
 		/// </summary>
-		void PostDraw();
+		void PostRender();
 		/// <summary>
 		/// ゲームオブジェクトマネージャーから呼ばれる各処理
 		/// </summary>

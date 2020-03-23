@@ -168,7 +168,7 @@ void MyMagnet::Magnet::Update()
 	//m_SMagSprite->Update();
 }
 
-void MyMagnet::Magnet::PostDraw()
+void MyMagnet::Magnet::PostRender()
 {
 	//m_NMagSprite->Draw();
 	//m_SMagSprite->Draw();
