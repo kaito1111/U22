@@ -35,9 +35,9 @@ public:
 	{
 		m_PlayerNum = n;
 	}
+	void UpDate();
 private:
 	bool Start();
-	void Update();
 	void Draw();
 
 	SkinModel			m_model;										//スキンモデル。
@@ -59,6 +59,7 @@ private:
 
 	SpriteRender*		m_ThisNumSprite		 = nullptr;
 	int					m_PlayerNum	  		 = 0;
+
 
 	MyMagnet::Magnet*	m_Magnet			 = nullptr;
 	CVector3			movespeed			 = CVector3::Zero();

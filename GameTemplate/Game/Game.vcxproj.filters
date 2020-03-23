@@ -11,6 +11,7 @@
     <ImageContentTask Include="Assets\sprite\2P_Pointer.png" />
     <ImageContentTask Include="Assets\sprite\1P_Pointer.png" />
     <ImageContentTask Include="Assets\sprite\manual.png" />
+    <ImageContentTask Include="Assets\sprite\Clear.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />

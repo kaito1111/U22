@@ -46,7 +46,7 @@ void Game::Sample()
 		if (!effect->IsPlay()) {
 			effect = NewGO<Effect>(1);
 			effect->Play(L"Assets/effect/test.efk");
-			effect->SetPosition({ 0,0, 0 });
+			effect->SetPosition({ 100,0, 0 });
 			effect->SetScale(CVector3::One() * 20);
 		}
 		//ƒTƒEƒ“ƒh‚ÌÄ¶

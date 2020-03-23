@@ -4,17 +4,16 @@
 
 TwoP_Pad::TwoP_Pad() {
 
-	const int PlayerNum = 2;
 	for (int i = 0; i < PlayerNum;) {
 		m_pad[i].Init(i);
 		CVector3 SpownPos = { 100.0f * i,0.0f,0.0f };
 		char PlayerNo[256] = {};
-		sprintf(PlayerNo, "player%d", ++i);
+		sprintf(PlayerNo, "player%d", i + 1);
 		//優先度をステージより
-		Player* player = NewGO<Player>(1, PlayerNo);
-		player->SetPosition(SpownPos);
-		player->SetPad(&m_pad[i - 1]);
-		player->SetPlayerNum(i);
+		player[i] = NewGO<Player>(1, PlayerNo);
+		player[i]->SetPosition(SpownPos);
+		player[i]->SetPad(&m_pad[i]);
+		player[i++]->SetPlayerNum(i);
 	}
 	m_ManualSprite = NewGO<SpriteRender>(6);
 	m_ManualSprite->Init(L"Assets/sprite/manual.dds", 1420.0f, 720.0f);
@@ -22,23 +21,29 @@ TwoP_Pad::TwoP_Pad() {
 }
 TwoP_Pad::~TwoP_Pad()
 {
+	for (int i = 0; i < PlayerNum;) {
+		DeleteGO(player[i]);
+	}
 }
 
 void TwoP_Pad::Update()
 {
 	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
-		if (IsPad) {
-			m_pad[i].Update();
-			//if (m_pad[i].IsTrigger(enButtonStart)) {
-			//	m_ManualSprite->SetW(1.0f);
-			//	IsPad = false;
-			//}
+		m_pad[i].Update();
+		if (m_pad[i].IsTrigger(enButtonStart)) {
+			m_ManualSprite->SetW(1.0f);
+			UpdateStop = false;
 		}
-		//else {
-		//	if (m_pad[i].IsTrigger(enButtonA)) {
-		//		m_ManualSprite->SetW(0.0f);
-		//		IsPad = true;
-		//	}
-		//}
+		else {
+			if (m_pad[i].IsTrigger(enButtonStart)) {
+				m_ManualSprite->SetW(0.0f);
+				UpdateStop = true;
+			}
+		}
+		if (!UpdateStop
+			&& i < 2					//プレイヤーの人数分回す
+			) {
+			player[i]->UpDate();
+		}
 	}
 }
