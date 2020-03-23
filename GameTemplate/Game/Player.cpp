@@ -28,7 +28,7 @@ bool Player::Start()
 	m_ThisNumSprite = NewGO<SpriteRender>(0);
 	wchar_t spriteName[256] = {};
 	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum);
-	m_ThisNumSprite->Init(spriteName, 100.0f, 100.0f,true);
+	m_ThisNumSprite->Init(spriteName, 100.0f, 100.0f, true);
 	CVector3 ThisNumSpritePos = m_position;
 	ThisNumSpritePos.y += 150.0f;
 	ThisNumSpritePos.x -= 50.0f;
@@ -39,16 +39,13 @@ bool Player::Start()
 	return true;
 }
 
-void Player::Update()
+void Player::UpDate()
 {
 	if (m_Pad->IsTrigger(enButtonSelect)) {
 		m_position = m_CheckPoint;
 	}
 	MyMagnet();
 	SpawnPole();
-	if (m_Pad->IsTrigger(enButtonX)) {
-		SIBOU();
-	}
 	if (m_IsSi) {
 		SIBOU();
 	}
@@ -58,9 +55,9 @@ void Player::Update()
 	{
 		CVector3 ThisNumSpritePos = m_position;
 		ThisNumSpritePos.y += 150.0f;
-		float diff = fabsf(g_camera3D.GetTarget().x) - ThisNumSpritePos.x ;
-		ThisNumSpritePos.x -= ( diff / 5.0f);
-		m_ThisNumSprite->SetPosition(ThisNumSpritePos); 
+		float diff = fabsf(g_camera3D.GetTarget().x) - ThisNumSpritePos.x;
+		ThisNumSpritePos.x -= (diff / 5.0f);
+		m_ThisNumSprite->SetPosition(ThisNumSpritePos);
 	}
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(m_position, m_rot, m_Scale);
@@ -155,7 +152,7 @@ void Player::Move()
 	movespeed.z = 0.0f;
 	const float junpPower = 10.0f;
 	if (m_characon.IsJump() &&
-		m_Pad->IsPress(enButtonA)&&
+		m_Pad->IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
@@ -171,14 +168,14 @@ void Player::Move()
 	}
 
 	const float gravity = 0.8f;		//重力
-	movespeed.y -= gravity;
+	//movespeed.y -= gravity;
 
 	//左右の移動
 	movespeed.x = m_Pad->GetLStickXF() * -10.0f;
 
 	//磁石の移動
 	movespeed += m_Magnet->MagnetMove();
-	if (m_characon.IsOnGround()&&movespeed.y<0.0f) {
+	if (m_characon.IsOnGround() && movespeed.y < 0.0f) {
 		movespeed.y = 0;
 	}
 
@@ -197,13 +194,19 @@ void Player::Move()
 void Player::MyMagnet()
 {
 	if (m_Pad->IsTrigger(enButtonX)) {
-			m_Magnet->SetState(Magnet::State::NMode);
+		if (!Magnet::State::NMode == m_Magnet->GetState()) {
+			m_Magnet->SetCool(100.0f);
+		}
+		m_Magnet->SetState(Magnet::State::NMode);
 	}
 	if (m_Pad->IsTrigger(enButtonY)) {
-			m_Magnet->SetState(Magnet::State::SMode);
+		if (!Magnet::State::SMode == m_Magnet->GetState()) {
+			m_Magnet->SetCool(100.0f);
+		}
+		m_Magnet->SetState(Magnet::State::SMode);
 	}
 	if (m_Pad->IsTrigger(enButtonB)) {
-			m_Magnet->SetState(Magnet::State::NoMode);
+		m_Magnet->SetState(Magnet::State::NoMode);
 	}
 }
 

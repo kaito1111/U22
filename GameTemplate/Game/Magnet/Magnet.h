@@ -16,21 +16,24 @@ namespace MyMagnet {
 			SMode,
 			Num,
 		};
-		const void SetState(State s) {
-			state = s;
-		}
 		const State GetState() {
 			return state;
 		}
 		const CVector3 GetPosition() {
 			return *m_Position;
 		}
-		const void SetPosition(CVector3* pos) {
-			m_Position = pos;
-		}
 		//Ž¥—Í‚Å“®‚¢‚Ä‚¢‚­•ûŒü‚ð‚Æ‚é
 		const CVector3 GetMove() {
 			return m_MagnetForce;
+		}
+		const void SetState(State s) {
+			state = s;
+		}
+		const void SetPosition(CVector3* pos) {
+			m_Position = pos;
+		}
+		void SetCool(float t) {
+			CoolTime = t;
 		}
 	private:
 		bool Start();
@@ -42,8 +45,7 @@ namespace MyMagnet {
 		//myEngine::SpriteRender* m_NMagSprite = nullptr;
 		CVector3*	m_Position	  = nullptr;
 		CVector3	m_MagnetForce = CVector3::Zero();
-		float		CoolTime	  = 0.0f;
-		myEngine::Effect* SEffect = nullptr;
+		float		CoolTime	  = 100.0f;
 		friend class MagnetManager;
 	};
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "HID/Pad.h"
+#include "Player.h"
 
 class TwoP_Pad: public IGameObject
 {
@@ -8,10 +9,13 @@ public:
 	~TwoP_Pad();
 
 private:
-	Pad m_pad[Pad::CONNECT_PAD_MAX];		//m_padの定義。
-	SpriteRender* m_ManualSprite = nullptr;
-	bool IsPad = true;						//パッド更新している？
+	Pad				m_pad[Pad::CONNECT_PAD_MAX];		//m_padの定義。
+	SpriteRender*	m_ManualSprite = nullptr;
+
+	const int		PlayerNum = 2;
+	Player*			player[2] = {};
+	bool			UpdateStop = false;					//Updateを止めるフラグfalseでUpdateする。
 	//bool Start()override;
-	void Update()override;
+	void			Update()override;
 };
 
