@@ -29,4 +29,10 @@ PSInput VSMain(VSInput In)
 float4 PSMain( PSInput In ) : SV_Target0
 {
 	return colorTexture.Sample(Sampler, In.uv) * mulColor;
+	//float4 color = colorTexture.Sample(Sampler, In.uv) * mulColor;
+	//float monoColor = color.x * 0.29900 + color.b * 0.58700 + color.b * 0.11400;
+	//color.r = monoColor;
+	//color.g = monoColor;
+	//color.b = monoColor;
+	//return color;
 }

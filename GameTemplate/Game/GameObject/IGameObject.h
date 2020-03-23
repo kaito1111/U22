@@ -6,10 +6,11 @@
 /// オブジェクトマネージャーの関数を使う場合は継承してね！！
 /// </summary>
 /// <remarks>
-/// 各Renderで使用が望まれるもの。
+/// /*---各Renderで使用が望まれるもの---*/
 /// PreRender→シャドウマップ、シルエット
 /// PostRender→エフェクト
 /// Draw→上記以外
+/// /*----------------------------------*/
 /// </remarks>
 
 
@@ -77,11 +78,9 @@ namespace myEngine {
 		/// </summary>
 		virtual void Draw() {};
 		/// <summary>
-		/// <para>実行優先度を取得</para>
+		/// 優先度取得
 		/// </summary>
-		/// <returns>
-		/// 優先度
-		/// </returns>
+		/// <returns>優先度</returns>
 		GameObjPrio GetPriority() const
 		{
 			return m_priority;

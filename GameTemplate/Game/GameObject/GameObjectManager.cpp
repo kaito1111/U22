@@ -65,11 +65,11 @@ namespace myEngine {
 		}
 		/// 描画系処理
 		{
-			//RenderContext& rc = g_graphicsEngine->GetRenderContext();
+			//プレレンダー
 			PreRender();
-			//ForwardRender(rc);
+			//通常描画
 			Draw();
-			//一番遅いDraw
+			//ポストレンダー
 			PostRender();
 		}
 		//削除
