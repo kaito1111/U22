@@ -9,10 +9,21 @@ public:
 	~Game();
 
 private:
+	/// <summary>
+	/// スタート
+	/// </summary>
+	/// <returns></returns>
 	bool Start()override;
+	/// <summary>
+	/// 更新
+	/// </summary>
 	void Update()override;
-	void Sample();
-	SpriteRender* m_test=nullptr;
-	SoundSource	m_se;
-	Effect* effect = nullptr;
+	/// <summary>
+	/// サンプル
+	/// <para>夢いっぱい、サンプルいっぱい</para>
+	/// </summary>
+	void Sample();						
+	SpriteRender* m_test=nullptr;		//スプライトレンダー
+	SoundSource	m_se;					//サウンドソース
+	Effect* effect = nullptr;			//エフェクト
 };

@@ -14,6 +14,7 @@ private:
 
 	stageObjectJenerator* generator = nullptr;//ｼﾞｪﾈﾚｰﾀｰ
 	SkinModel m_model;						  //スキンモデル。
+	CVector3 m_position;
 	
 	PhysicsStaticObject m_phyStaticObuject;   //静的物理オブジェクト
 	 
