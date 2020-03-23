@@ -2,6 +2,7 @@
 #include "Title.h"
 #include "Game.h"
 #include "stageObjectJenerator.h"
+#include"TitleStage.h"
 Title::Title()
 {
 }
@@ -9,28 +10,25 @@ Title::Title()
 
 Title::~Title()
 {
-	
+	DeleteGO(titleStage);
 }
 
 bool Title::Start()
 {
-	
-	m_model.Init(L"Asset/modelData/stage_oreore.cmo");
-	m_model2.Init(L"Asset/modelData/stageDossun.cmo");
+	titleStage = NewGO<TitleStage>(1);
 	return true;
 }
 
 void Title::Update()
 {
 	stageSelect();
-	
-	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), m_scale);
-	m_model2.UpdateWorldMatrix(m_pos2, CQuaternion::Identity(), m_scale2);
 
 	//nowStageをジェネレーターに渡して、その数字に応じてNewGOさせる
 	if (GetAsyncKeyState('K')) {
 		NewGO<Game>(1);
 		generator->setStageNum(nowStage);
+		DeleteGO(this);
+		
 	}
 
 }
@@ -52,71 +50,84 @@ void Title::stageSelect()
 	}
 	////////////////////////////////////////////////////////////////
 	//ステージ１
+	//stage1の情報
+	CVector3 pos1 = titleStage->GetPos();
+	CVector3 scale1 = titleStage->GetScale();
 	//右が押されたときに左送りにする
 	if(nowStage == 0					//自分の番号以上
 		||nowStage == -1				//自分の数字より１つ小さい
-		&&m_pos.x > LLimit				//端に行っているかどうか
+		&& pos1.x > LLimit				//端に行っているかどうか
 		&&RStageChange == true){		//右が押された
-		m_pos.x -= moveSpeed;			//動かす
-			if (m_pos.x <= -LLimit) {
-				m_pos.x = -LLimit;
+		pos1.x -= moveSpeed;			//動かす
+			if (pos1.x <= -LLimit) {
+				pos1.x = -LLimit;
 				RStageChange = false;
 			}
 	}
 	//左が押されたときに右送りにする
 	if (nowStage >= 0					//自分の番号以下
 		|| nowStage == 1				//自分の数字より1つ大きい
-		&& m_pos.x < RLimit			    //端に行っているかどうか
+		&& pos1.x < RLimit			    //端に行っているかどうか
 		&& LStageChange == true) {		//左が押された
-		m_pos.x += moveSpeed;			//動かす
-		if (m_pos.x <= -RLimit) {
-			m_pos.x = -RLimit;
+		pos1.x += moveSpeed;			//動かす
+		if (pos1.x <= -RLimit) {
+			pos1.x = -RLimit;
 			LStageChange = false;
 		}
 	}
 	//自分の番号じゃなくなったとき、小さくする
+	
 
-	if (nowStage != 0 && m_scale.x > 0) {
-		m_scale.x -= scaleChangeSpeed.x;
+	if (nowStage != 0 && pos1.x > 0) {
+		scale1.x -= scaleChangeSpeed.x;
 	}
-	if (nowStage != 0 && m_scale.y > 0) {
-		m_scale.y -= scaleChangeSpeed.y;
+	if (nowStage != 0 && pos1.y > 0) {
+		scale1.y -= scaleChangeSpeed.y;
 	}
-	if (nowStage != 0 && m_scale.z > 0) {
-		m_scale.z -= scaleChangeSpeed.z;
+	if (nowStage != 0 && pos1.z > 0) {
+		scale1.z -= scaleChangeSpeed.z;
 	}
 	////////////////////////////////////////////////////////////////////
 	//ステージ2
+	//stage2の情報
+	CVector3 pos2 = titleStage->GetPos2();
+	CVector3 scale2 = titleStage->GetScale2();
 	//右が押されたときに左送りにする
 	if (nowStage == 1					//自分の番号以上
 		|| nowStage == 0				//自分の数字より１つ小さい
-		&& m_pos2.x > LLimit			//端に行っているかどうか
+		&& pos2.x > LLimit			//端に行っているかどうか
 		&&RStageChange == true) {		//右が押された
-		m_pos2.x -= moveSpeed;			//動かす
-		if (m_pos2.x <= -LLimit) {
-			m_pos2.x = -LLimit;
+		pos2.x -= moveSpeed;			//動かす
+		if (pos2.x <= -LLimit) {
+			pos2.x = -LLimit;
 			RStageChange = false;
 		}
 	}
 	//左が押されたときに右送りにする
 	if (nowStage >= 1					//自分の番号以下
 		|| nowStage == 2				//自分の数字より1つ大きい
-		&& m_pos2.x < RLimit			//端に行っているかどうか
+		&& pos2.x < RLimit			//端に行っているかどうか
 		&& LStageChange == true) {		//左が押された
-		m_pos2.x += moveSpeed;			//動かす
-		if (m_pos2.x <= -RLimit) {
-			m_pos2.x = -RLimit;
+		pos2.x += moveSpeed;			//動かす
+		if (pos2.x <= -RLimit) {
+			pos2.x = -RLimit;
 			LStageChange = false;
 		}
 	}
 	//自分の番号じゃなくなったとき、小さくする
-	if (nowStage != 1 && m_scale2.x > 0) {
-		m_scale2.x -= scaleChangeSpeed.x;
+	if (nowStage != 1 && scale2.x > 0) {
+		scale2.x -= scaleChangeSpeed.x;
 	}
-	if (nowStage != 1 && m_scale2.y > 0) {
-		m_scale2.y -= scaleChangeSpeed.y;
+	if (nowStage != 1 && scale2.y > 0) {
+		scale2.y -= scaleChangeSpeed.y;
 	}
-	if (nowStage != 1 && m_scale2.z > 0) {
-		m_scale2.z -= scaleChangeSpeed.z;
+	if (nowStage != 1 && scale2.z > 0) {
+		scale2.z -= scaleChangeSpeed.z;
 	}
+
+	//各ステージの情報を更新
+	titleStage->SetPos(pos1);
+	titleStage->SetPos(pos2);
+	titleStage->SetScale(scale1);
+	titleStage->SetScale(scale2);
 }

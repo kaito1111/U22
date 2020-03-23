@@ -57,42 +57,71 @@ bool stageObjectJenerator::Start()
 	if (StageNum == 1) {
 	}
 
+	//各オブジェクトのスタートが走ります
+	for (auto& i : IwaList) {
+		i->Start();;
+	}
+	for (auto& i : moveFloorList) {
+		i->Start();
+	}
+	for (auto& i : GameObjectScytheList) {
+		i->Start();
+	}
+	for (auto& i : StageObjectDossunList) {
+		i->Start();
+	}
+	for (auto& i : StageObjectMagmaList) {
+		i->Start();;
+	}
+	for (auto& i : goalList) {
+		i->Start();
+	}
 	return true;
 }
+
+
 
 void stageObjectJenerator::Update()
 {
 	level.Draw();
 	for (auto& i : IwaList) {
-		i->Start();
 		i->Update();
-		i->Draw();
 	}
 	for (auto& i : moveFloorList) {
-		i->Start();
 		i->Update();
-		i->Draw();
 	}
 	for (auto& i : GameObjectScytheList) {
-		i->Start();
 		i->Update();
-		i->Draw();
 	}
 	for (auto& i : StageObjectDossunList) {
-		i->Start();
 		i->Update();
-		i->Draw();
 	}
 	for (auto& i : StageObjectMagmaList) {
-		i->Start();
 		i->Update();
-		i->Draw();
 	}
 	for (auto& i : goalList) {
-		i->Start();
 		i->Update();
-		i->Draw();
 	}
 }
 
-        
+void stageObjectJenerator::Draw()
+{
+	for (auto& i : IwaList) {
+		i->Draw();
+	}
+	for (auto& i : moveFloorList) {
+		i->Draw();
+	}
+	for (auto& i : GameObjectScytheList) {
+		i->Draw();
+	}
+	for (auto& i : StageObjectDossunList) {
+		i->Draw();
+	}
+	for (auto& i : StageObjectMagmaList) {
+		i->Draw();
+	}
+	for (auto& i : goalList) {
+		i->Draw();
+	}
+}

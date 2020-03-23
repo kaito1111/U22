@@ -84,6 +84,7 @@
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="stageObjectShuriken.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -182,6 +183,7 @@
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="stageObjectShuriken.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleStage.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

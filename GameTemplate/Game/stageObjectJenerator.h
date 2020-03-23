@@ -31,7 +31,7 @@ private:
 
 	void Update();
 	bool Start();
-
+	void Draw();
 	//今回はレベル君を使うぜ！
 	Level level;
 	std::list<Goal*> goalList;
