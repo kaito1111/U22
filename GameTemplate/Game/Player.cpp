@@ -157,7 +157,7 @@ void Player::Move()
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
 	}
-	if (m_characon.IsOnGround())
+	//if (m_characon.IsOnGround())
 	{
 		if (m_Pad->IsTrigger(enButtonA)) {
 			movespeed.y = junpPower;

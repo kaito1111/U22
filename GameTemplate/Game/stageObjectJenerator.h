@@ -14,9 +14,12 @@ class stageObjectJenerator : public IGameObject
 public:
 	stageObjectJenerator();
 	~stageObjectJenerator();
-
+	void setStageNum(const int num) {
+		StageNum = num;
+	}
 private:
 	//オブジェクト
+	int StageNum = 0;
 	Goal* goal = nullptr;
 	StageObjectMagma* magma = nullptr;
 	moveFloor* movefloor = nullptr;
@@ -28,7 +31,7 @@ private:
 
 	void Update();
 	bool Start();
-
+	void Draw();
 	//今回はレベル君を使うぜ！
 	Level level;
 	std::list<Goal*> goalList;

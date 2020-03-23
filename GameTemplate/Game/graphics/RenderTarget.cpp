@@ -89,13 +89,8 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 		//レンダリングターゲットビューの作成
 		dv->CreateRenderTargetView(m_renderTargetTex, &viewDesc, &m_renderTargetView);
 	}
-
+	//シェーダーリソースビュー
 	{
-
-		//////////////////////////////////////////////////////////////
-		//ここからシェーダーリソースビューの作成。
-		//////////////////////////////////////////////////////////////
-
 		D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 		//フォーマットはテクスチャと同じでよい。
 		srvDesc.Format = texDesc.Format;
@@ -108,12 +103,9 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 		//SRVを作成する。
 		dv->CreateShaderResourceView(m_renderTargetTex, &srvDesc, &m_renderTargetSRV);
 	}
-	//4.デプスステンシルテクスチャの作成
+	//デプスステンシルテクスチャの作成
 	D3D11_TEXTURE2D_DESC depthTexDesc = texDesc;
 	{
-		//////////////////////////////////////////////////////////////
-		//ここからデプスステンシルテクスチャの作成。
-		//////////////////////////////////////////////////////////////
 		//デプスステンシルビューにバインドする。
 		depthTexDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 		//32bit浮動小数点のデプスステンシルバッファを作成する。
@@ -121,11 +113,8 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 		//デプスステンシルテクスチャを作成する。
 		dv->CreateTexture2D(&depthTexDesc, nullptr, &m_depthStencilTex);
 	}
-	//5.デプスステンシルビューの作成
+	//デプスステンシルビューの作成
 	{
-		//////////////////////////////////////////////////////////////
-		//ここからデプスステンシルビューの作成。
-		//////////////////////////////////////////////////////////////
 		D3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc;
 		//フォーマットは深度ステンシルと同じにする。
 		depthStencilViewDesc.Format = depthTexDesc.Format;
@@ -137,6 +126,15 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 		depthStencilViewDesc.Flags = 0;
 		//デプスステンシルビューを作成。
 		dv->CreateDepthStencilView(m_depthStencilTex, &depthStencilViewDesc, &m_depthStencilView);
+	}
+	//ビューポート
+	{
+		m_viewport.TopLeftX = 0;
+		m_viewport.TopLeftY = 0;
+		m_viewport.Width = w;
+		m_viewport.Height = h;
+		m_viewport.MinDepth = 0.0f;
+		m_viewport.MaxDepth = 0.0f;
 	}
 }
 

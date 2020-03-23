@@ -49,7 +49,7 @@ void DirectionLight::InitDirectionLight()
 	*/
 	m_dirLight.direction[0] = { 1.0f, 0.0f, 0.0f, 1.0f };
 	m_dirLight.direction[1] = { -1.0f, 0.0f, 0.0f,1.0f };
-	m_dirLight.direction[2] = { 0.0f, 0.0f, 1.0f ,1.0f };
+	m_dirLight.direction[2] = { 0.0f, -1.0f, 0.0f ,1.0f };
 	m_dirLight.direction[3] = { 0.0f, 0.0f, -1.0f,1.0f };
 
 	//ライトのカラー
@@ -91,7 +91,7 @@ void DirectionLight::Render()
 	dc->UpdateSubresource(m_lightCb, 0, nullptr, &m_dirLight, 0, 0);
 
 	//ライト用の定数バッファをシェーダースロットに設定
-	dc->PSSetConstantBuffers(0, 1, &m_lightCb);
+	dc->PSSetConstantBuffers(1, 1, &m_lightCb);
 }
 
 void DirectionLight::Update()

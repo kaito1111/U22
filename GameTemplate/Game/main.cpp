@@ -14,6 +14,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	NewGO<Game>(1, "game");
 
+	//カメラの初期化
 	g_camera2D.Update2D();
 
 	//ゲームループ。
