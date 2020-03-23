@@ -5,6 +5,12 @@
 /// ゲームオブジェクトの基底クラス
 /// オブジェクトマネージャーの関数を使う場合は継承してね！！
 /// </summary>
+/// <remarks>
+/// 各Renderで使用が望まれるもの。
+/// PreRender→シャドウマップ、シルエット
+/// PostRender→エフェクト
+/// Draw→上記以外
+/// </remarks>
 
 
 namespace myEngine {
@@ -38,7 +44,8 @@ namespace myEngine {
 		/// </summary>
 		/// <remarks>
 		/// PreRenderで描画が望まれるもの。
-		/// 1.シャドウマップ　※RenderToShadowMap
+		/// 1.シャドウマップ描画　※RenderToShadowMap
+		/// 2.シルエット描画 ※
 		/// </remarks>
 		virtual void PreRender()
 		{
