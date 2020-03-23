@@ -284,6 +284,7 @@
     <ImageContentTask Include="Assets\sprite\Button.png" />
     <ImageContentTask Include="Assets\sprite\1P_Pointer.png" />
     <ImageContentTask Include="Assets\sprite\2P_Pointer.png" />
+    <ImageContentTask Include="Assets\sprite\Clear.png" />
     <Image Include="Assets\sprite\dummy.png" />
     <ImageContentTask Include="Assets\modelData\a.png" />
     <Image Include="Assets\modelData\CheckPoint2.png" />

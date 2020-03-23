@@ -16,7 +16,6 @@ Magnet::Magnet()
 	////m_NMagSprite->SetPivot({ -1.0f,-1.0f });
 	//m_NMagSprite->SetRotation(m_Rot);
 	////m_NMagSprite->SetActive(false);
-	SEffect = NewGO<Effect>(0);
 }
 
 Magnet::~Magnet()
@@ -126,8 +125,8 @@ void MyMagnet::Magnet::Update()
 		m_SMagSprite->SetW(1.0f);
 		//m_NMagSprite->SetActive(false);
 		m_NMagSprite->SetW(0.0f);*/
-		if (!SEffect->IsPlay()) {
-			SEffect = NewGO<Effect>(0);
+		if (CoolTime > 100.0f) {
+			Effect* SEffect = NewGO<Effect>(0);
 			SEffect->Play(L"Assets/effect/SMode.efk");
 			SEffect->SetPosition(*m_Position);
 			SEffect->SetScale(CVector3::One() * 2.75f);
@@ -142,8 +141,8 @@ void MyMagnet::Magnet::Update()
 		m_SMagSprite->SetW(0.0f);
 		//m_NMagSprite->SetActive(true);
 		m_NMagSprite->SetW(1.0f);*/
-		if (!SEffect->IsPlay()) {
-			SEffect = NewGO<Effect>(0);
+		if (CoolTime>100.0f) {
+			Effect* SEffect = NewGO<Effect>(0);
 			SEffect->Play(L"Assets/effect/NMode.efk");
 			SEffect->SetPosition(*m_Position);
 			SEffect->SetScale(CVector3::One() * 2.75f);
@@ -158,7 +157,7 @@ void MyMagnet::Magnet::Update()
 		m_SMagSprite->SetW(0.0f);
 		//m_NMagSprite->SetActive(false);
 		m_NMagSprite->SetW(0.0f);*/
-		CoolTime = 0;
+		//CoolTime = 0;
 		break;
 	}
 	//m_NMagSprite->SetPosition(*m_Position);

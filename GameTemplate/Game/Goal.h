@@ -11,10 +11,11 @@ public:
 	bool Start();
 	void Update();
 	void Draw();
-private:
-	
+private:	
 	SkinModel m_Skin;
 	CVector3 m_Position = CVector3::Zero();
 	Player* m_player[2] = {};
 	CQuaternion m_rot = CQuaternion::Identity();
+
+	SpriteRender* m_ClearSprite = nullptr;
 };
