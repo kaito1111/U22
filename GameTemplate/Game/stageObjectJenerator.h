@@ -1,6 +1,7 @@
 #pragma once
 #include"level/Level.h"
 #include<stdio.h>
+class stageObjectStopFloor;
 class Goal;
 class RorlingRock;
 class Iwa;
@@ -20,6 +21,7 @@ public:
 private:
 	//オブジェクト
 	int StageNum = 0;
+	stageObjectStopFloor* stopFloor = nullptr;
 	Goal* goal = nullptr;
 	StageObjectMagma* magma = nullptr;
 	moveFloor* movefloor = nullptr;
@@ -34,6 +36,7 @@ private:
 	void Draw();
 	//今回はレベル君を使うぜ！
 	Level level;
+	std::list< stageObjectStopFloor*> stopFloorList;
 	std::list<Goal*> goalList;
 	std::list<Iwa*> IwaList;
 	std::list<moveFloor*> moveFloorList;

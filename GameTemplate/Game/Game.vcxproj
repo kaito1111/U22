@@ -104,6 +104,7 @@
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameObjectScythe.cpp" />
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="StageObjectMagma.cpp" />
     <ClCompile Include="stageObjectShuriken.cpp" />
+    <ClCompile Include="stageObjectStopFloor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -188,6 +190,7 @@
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Floor.h" />
     <ClInclude Include="GameObjectScythe.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
@@ -254,6 +257,7 @@
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="StageObjectMagma.h" />
     <ClInclude Include="stageObjectShuriken.h" />
+    <ClInclude Include="stageObjectStopFloor.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
@@ -268,7 +272,9 @@
     <ClInclude Include="sound\WaveFileBank.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
+    <MeshContentTask Include="Assets\modelData\bStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />

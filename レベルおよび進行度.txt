@@ -44,6 +44,16 @@
 			StageObjectMagmaList.push_back(StageObjectMagmaPtr);
 			return true;
 		}
+                //御一人様専用通路
+		if (wcscmp(objData.name, L"aStopFloor") == 0) {
+			auto stopFloorPtr = new stageObjectStopFloor(
+				L"Assets/modelData/aStopFloor.cmo",
+				objData.position,
+				objData.rotation);
+			stopFloorList.push_back(stopFloorPtr);
+			return true;
+		}
+
 		//ゴール
 		if (wcscmp(objData.name, L"Goal") == 0) {
 			auto GoalPtr = new Goal(
@@ -53,6 +63,4 @@
 			goalList.push_back(GoalPtr);
 			return true;
 		}
-
-
-Titleですね。はい。カメラとかいろいろわかんなくなってます。ごめんなさい。あとどんな感じにするか悩んで死にかけてます。はい。
+進捗パンダ

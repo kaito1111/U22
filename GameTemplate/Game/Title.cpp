@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "stageObjectJenerator.h"
 #include"TitleStage.h"
+#include"TitleCamera.h"
 Title::Title()
 {
 }
@@ -15,6 +16,7 @@ Title::~Title()
 
 bool Title::Start()
 {
+	titleCamera = titleCamera;
 	titleStage = NewGO<TitleStage>(1);
 	return true;
 }

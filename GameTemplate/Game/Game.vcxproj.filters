@@ -89,6 +89,8 @@
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="TitleCamera.cpp" />
+    <ClCompile Include="stageObjectStopFloor.cpp" />
+    <ClCompile Include="Floor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -112,6 +114,8 @@
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
+    <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\bStopFloor.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -192,6 +196,8 @@
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="TitleCamera.h" />
+    <ClInclude Include="stageObjectStopFloor.h" />
+    <ClInclude Include="Floor.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

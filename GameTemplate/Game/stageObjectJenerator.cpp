@@ -8,6 +8,7 @@
 #include"StageObjectDossun.h"
 #include"StageObjectMagma.h"
 #include"Goal.h"
+#include"stageObjectStopFloor.h"
 stageObjectJenerator::stageObjectJenerator()
 {
 }
@@ -33,6 +34,9 @@ stageObjectJenerator::~stageObjectJenerator()
 	for (auto i : goalList) {
 		delete i;
 	}
+	for (auto i : stopFloorList) {
+		delete i;
+	}
 }
 
 bool stageObjectJenerator::Start()
@@ -47,6 +51,15 @@ bool stageObjectJenerator::Start()
 					objData.position,
 					objData.rotation);
 				moveFloorList.push_back(moveFloorPtr);
+				return true;
+			}
+			//Œäˆêl—lê—p’Ê˜H
+			if (wcscmp(objData.name, L"aStopFloor") == 0) {
+				auto stopFloorPtr = new stageObjectStopFloor(
+					L"Assets/modelData/aStopFloor.cmo",
+					objData.position,
+					objData.rotation);
+				stopFloorList.push_back(stopFloorPtr);
 				return true;
 			}
 			//ƒS[ƒ‹
@@ -106,6 +119,9 @@ bool stageObjectJenerator::Start()
 	for (auto& i : goalList) {
 		i->Start();
 	}
+	for (auto& i : goalList) {
+		i->Start();
+	}
 	return true;
 }
 
@@ -132,6 +148,10 @@ void stageObjectJenerator::Update()
 	for (auto& i : goalList) {
 		i->Update();
 	}
+	for (auto& i : stopFloorList) {
+		i->Update();
+	}
+	
 }
 
 void stageObjectJenerator::Draw()
@@ -151,7 +171,7 @@ void stageObjectJenerator::Draw()
 	for (auto& i : StageObjectMagmaList) {
 		i->Draw();
 	}
-	for (auto& i : goalList) {
+	for (auto& i : stopFloorList) {
 		i->Draw();
 	}
 }
