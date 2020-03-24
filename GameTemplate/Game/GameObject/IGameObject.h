@@ -5,6 +5,13 @@
 /// ゲームオブジェクトの基底クラス
 /// オブジェクトマネージャーの関数を使う場合は継承してね！！
 /// </summary>
+/// <remarks>
+/// /*---各Renderで使用が望まれるもの---*/
+/// PreRender→シャドウマップ、シルエット
+/// PostRender→エフェクト
+/// Draw→上記以外
+/// /*----------------------------------*/
+/// </remarks>
 
 
 namespace myEngine {
@@ -34,19 +41,24 @@ namespace myEngine {
 		{
 		};
 		/// <summary>
-		/// 描画設定
+		/// プレレンダー
 		/// </summary>
-		virtual void Render()
+		/// <remarks>
+		/// PreRenderで描画が望まれるもの。
+		/// 1.シャドウマップ描画　※RenderToShadowMap
+		/// 2.シルエット描画 ※
+		/// </remarks>
+		virtual void PreRender()
 		{
 		}
 		/// <summary>
-		/// レンダー関数が実行された後で呼ばれる描画処理
+		/// ポストレンダー
 		/// </summary>
 		/// <remarks>
-		/// 機能が追加されたときに追記します
+		/// PostRenderで描画が望まれるもの。
+		/// 1.エフェクト 
 		/// </remarks>
-		/// <param name="rc">レンダーコンテキスト</param>
-		virtual void PostDraw()
+		virtual void PostRender()
 		{
 		}
 		/// <summary>
@@ -66,11 +78,9 @@ namespace myEngine {
 		/// </summary>
 		virtual void Draw() {};
 		/// <summary>
-		/// <para>実行優先度を取得</para>
+		/// 優先度取得
 		/// </summary>
-		/// <returns>
-		/// 優先度
-		/// </returns>
+		/// <returns>優先度</returns>
 		GameObjPrio GetPriority() const
 		{
 			return m_priority;
@@ -97,18 +107,11 @@ namespace myEngine {
 		/// 関数をラップしてるだけだよ
 		/// 各オブジェクトの関数の処理を開始させるよ
 		/// </summary>
-		void PostDrawWrapper()
+		void PreRenderWrapper()
 		{
 			if (m_isActive && m_isStart && !m_isDead)
 			{
-				PostDraw();
-			}
-		}
-		void RenderWrapper()
-		{
-			if (m_isActive && m_isStart && !m_isDead)
-			{
-				Render();
+				PreRender();
 			}
 		}
 		void StartWrapper()
@@ -133,6 +136,13 @@ namespace myEngine {
 			if (m_isActive && m_isStart)
 			{
 				Draw();
+			}
+		}
+		void PostRenderWrapper()
+		{
+			if (m_isActive && m_isStart && !m_isDead)
+			{
+				PostRender();
 			}
 		}
 		friend class GameObjectManager;
