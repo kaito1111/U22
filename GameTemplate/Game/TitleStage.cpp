@@ -13,7 +13,7 @@ TitleStage::~TitleStage()
 
 bool TitleStage::Start()
 {
-	m_model.Init(L"Asset / modelData / stage_oreore.cmo");
+	m_model.Init(L"Asset/modelData/stage_oreore.cmo");
 	m_model2.Init(L"Asset/modelData/stageDossun.cmo");
 	return true;
 }

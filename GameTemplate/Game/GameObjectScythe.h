@@ -3,8 +3,8 @@ class Player;
 class GameObjectScythe : public IGameObject
 {
 public:
-	//GameObjectScythe(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
-	GameObjectScythe();
+	GameObjectScythe(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
+	//GameObjectScythe();
 	~GameObjectScythe();
 	bool Start();
 	void Update();

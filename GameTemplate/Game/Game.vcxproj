@@ -177,6 +177,7 @@
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="TitleStage.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
@@ -258,6 +259,7 @@
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="TitleStage.h" />
     <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
