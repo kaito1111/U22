@@ -7,6 +7,7 @@ GameCamera::GameCamera()
 	g_camera3D.SetPosition({ -300.0f, 100.0f, 1000.0f });
 	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
 	g_camera3D.SetFar(10000.0f);
+	g_camera3D.SetNear(100.0f);
 
 	m_ButtonSprite = NewGO<SpriteRender>(5);
 	m_ButtonSprite->Init(L"Assets/sprite/Button.dds", 250.0f, 250.0f);

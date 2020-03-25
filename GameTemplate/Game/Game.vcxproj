@@ -105,6 +105,7 @@
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="GameObjectScythe.cpp" />
+    <ClCompile Include="Gimmick_Button.cpp" />
     <ClCompile Include="Goal.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="exampleCode\ex2D.cpp">
@@ -116,6 +117,7 @@
     <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="RorlingRock.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
@@ -188,6 +190,7 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="GameObjectScythe.h" />
+    <ClInclude Include="Gimmick_Button.h" />
     <ClInclude Include="Goal.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="exampleCode\ex2D.h">
@@ -241,6 +244,7 @@
     <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="RorlingRock.h" />
     <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="SPole.h" />
@@ -269,6 +273,7 @@
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
+    <MeshContentTask Include="Assets\modelData\Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
@@ -276,9 +281,11 @@
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
+    <MeshContentTask Include="Assets\modelData\P.FBX" />
     <MeshContentTask Include="Assets\modelData\Player(Back).FBX" />
     <MeshContentTask Include="Assets\modelData\Player(front).FBX" />
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
+    <MeshContentTask Include="Assets\modelData\Press_Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
