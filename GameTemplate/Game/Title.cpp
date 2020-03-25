@@ -16,7 +16,7 @@ Title::~Title()
 
 bool Title::Start()
 {
-	titleCamera = titleCamera;
+	titleCamera = NewGO<TitleCamera>(1);
 	titleStage = NewGO<TitleStage>(1);
 	return true;
 }
