@@ -14,7 +14,7 @@ KaitoTask::~KaitoTask()
 
 bool KaitoTask::Start()
 {
-	NewGO<TwoP_Pad>(0, "pad");
+	NewGO<TwoP_Pad>(5, "pad");
 	NewGO<GameCamera>(1, "camera");
 	//NewGO<Goal>(1, "goal");
 	return true;

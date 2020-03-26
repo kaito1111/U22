@@ -84,13 +84,14 @@
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="stageObjectShuriken.cpp" />
-    <ClCompile Include="Title.cpp" />
     <ClCompile Include="TitleStage.cpp" />
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="stageObjectStopFloor.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="stageObjectYokoKonbou.cpp" />
+    <ClCompile Include="StageSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -116,6 +117,9 @@
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\bStopFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
+    <MeshContentTask Include="Assets\modelData\stage3.fbx" />
+    <MeshContentTask Include="Assets\modelData\sky.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -191,13 +195,14 @@
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="stageObjectShuriken.h" />
-    <ClInclude Include="Title.h" />
     <ClInclude Include="TitleStage.h" />
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="stageObjectStopFloor.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="stageObjectYokoKonbou.h" />
+    <ClInclude Include="StageSelect.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

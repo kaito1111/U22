@@ -2,24 +2,26 @@
 class stageObjectJenerator;
 class TitleStage;
 class TitleCamera;
-class Title : public IGameObject
+class Game;
+class StageSelect : public IGameObject
 {
 public:
-	Title();
-	~Title();
+	StageSelect();
+	~StageSelect();
 	bool Start();
 	void Update();
 	void stageSelect();
 private:
+	Game* game = nullptr;
 	TitleCamera* titleCamera = nullptr;
 	TitleStage* titleStage = nullptr;
 	stageObjectJenerator* generator;
 	SpriteRender m_sprite;             //スプライト
 	CVector2 m_spritePos;              //スプライトの座標。
-	const int stageMax = 2;            //ステージの数.上限
 	int nowStage = 0;                  //現在選択しているステージ 
 	bool LStageChange = false;          //ステージを切り替えるフラグ
 	bool RStageChange = false;
+	int count = 0;
 	const CVector3 littleScale = { 0.1f,0.1f,0.1f };//選ばれてないステージのサイズ
 	const CVector3 halfScale = { 0.5f,0.5f,0.5f };
 };

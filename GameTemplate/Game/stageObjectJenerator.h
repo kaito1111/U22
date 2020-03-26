@@ -15,7 +15,7 @@ class stageObjectJenerator : public IGameObject
 public:
 	stageObjectJenerator();
 	~stageObjectJenerator();
-	void setStageNum(const int num) {
+	void setStageNum(const int& num) {
 		StageNum = num;
 	}
 private:

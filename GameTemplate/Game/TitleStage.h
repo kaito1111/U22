@@ -7,6 +7,7 @@ public:
 	~TitleStage();
 	bool Start();
 	void Update();
+	void Draw();
 	//ステージ1
 	CVector3 GetPos() {
 		return m_pos;
@@ -36,13 +37,15 @@ public:
 		m_scale2 = scale;
 	}
 private:
+	//空。つまり背景
+	SkinModel skyModel;
 	//ステージ１
 	SkinModel m_model;
 	CVector3 m_pos = CVector3::Zero();
 	CVector3 m_scale = CVector3::One();
 	//ステージ２
 	SkinModel m_model2;
-	CVector3 m_pos2 = {2000.0f,0.0f,0.0f};
+	CVector3 m_pos2 = {0.0f,0.0f,0.0f};
 	CVector3 m_scale2 = CVector3::One();
 };
 

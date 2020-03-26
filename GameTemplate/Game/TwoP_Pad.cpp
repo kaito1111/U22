@@ -10,7 +10,7 @@ TwoP_Pad::TwoP_Pad() {
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", i + 1);
 		//優先度をステージより
-		player[i] = NewGO<Player>(1, PlayerNo);
+		player[i] = NewGO<Player>(0, PlayerNo);
 		player[i]->SetPosition(SpownPos);
 		player[i]->SetPad(&m_pad[i]);
 		player[i++]->SetPlayerNum(i);
