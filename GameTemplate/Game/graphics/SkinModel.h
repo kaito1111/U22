@@ -117,6 +117,11 @@ public:
 		enSkinModelSRVReg_DiffuseTexture = 0,		//!<ディフューズテクスチャ。
 		enSkinModelSRVReg_BoneMatrix,				//!<ボーン行列。
 	};
+	void Update(
+		const CVector3& trans,
+		const CQuaternion& rot,
+		const CVector3& scale
+	);
 private:
 	/*!
 	*@brief	サンプラステートの初期化。

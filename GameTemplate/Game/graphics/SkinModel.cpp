@@ -70,6 +70,10 @@ void SkinModel::InitConstantBuffer()
 	//作成。
 	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_cb);
 }
+void SkinModel::Update(const CVector3 & trans, const CQuaternion & rot, const CVector3 & scale)
+{
+	UpdateWorldMatrix(trans, rot, scale);
+}
 void SkinModel::InitSamplerState()
 {
 	//テクスチャのサンプリング方法を指定するためのサンプラステートを作成。

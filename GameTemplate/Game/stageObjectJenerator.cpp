@@ -8,34 +8,8 @@
 #include"StageObjectDossun.h"
 #include"StageObjectMagma.h"
 #include"Goal.h"
+#include "Gimmick_Button.h"
 stageObjectJenerator::stageObjectJenerator()
-{
-}
-
-
-stageObjectJenerator::~stageObjectJenerator()
-{
-	for (auto i : IwaList) {
-		delete i;
-	}
-	for (auto i : moveFloorList) {
-		delete i;
-	}
-	for (auto i : GameObjectScytheList) {
-		delete i;
-	}
-	for (auto i : StageObjectDossunList) {
-		delete i;
-	}
-	for (auto i : StageObjectMagmaList) {
-		delete i;
-	}
-	for (auto i : goalList) {
-		delete i;
-	}
-}
-
-bool stageObjectJenerator::Start()
 {
 	if (StageNum == 0) {
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
@@ -56,6 +30,12 @@ bool stageObjectJenerator::Start()
 					objData.position,
 					objData.rotation);
 				goalList.push_back(GoalPtr);
+				return true;
+			}
+			//動く床
+			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
+				Gimmick_Button* moveButtonPtr = NewGO< Gimmick_Button>(0, "gimmick_button");
+				moveButtonPtr->SetPosition(objData.position);
 				return true;
 			}
 			return false;
@@ -86,6 +66,33 @@ bool stageObjectJenerator::Start()
 			}
 		});
 	}
+}
+
+
+stageObjectJenerator::~stageObjectJenerator()
+{
+	for (auto i : IwaList) {
+		delete i;
+	}
+	for (auto i : moveFloorList) {
+		delete i;
+	}
+	for (auto i : GameObjectScytheList) {
+		delete i;
+	}
+	for (auto i : StageObjectDossunList) {
+		delete i;
+	}
+	for (auto i : StageObjectMagmaList) {
+		delete i;
+	}
+	for (auto i : goalList) {
+		delete i;
+	}
+}
+
+bool stageObjectJenerator::Start()
+{
 
 	//各オブジェクトのスタートが走ります
 	for (auto& i : IwaList) {

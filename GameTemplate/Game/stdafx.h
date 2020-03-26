@@ -59,6 +59,7 @@
 
 #include "GameObject/GameObjectManager.h"
 #include "GameObject/IGameObject.h"
+#include "SkinModelRender.h"
 
 //#include "photon/LoadBalancing-cpp/inc/friendinfo.h"
 //#include "Photon-cpp/Inc/PhotonPeer.h"
