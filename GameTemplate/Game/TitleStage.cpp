@@ -13,6 +13,11 @@ TitleStage::~TitleStage()
 
 bool TitleStage::Start()
 {
+	m_copymainRendrTarget.Init(
+		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
+		FRAME_BUFFER_W,
+		FRAME_BUFFER_H
+	);
 	//ステージのレベル配置前の情報
 	skyModel.Init(L"Assets/modelData/sky.cmo");     //クソ雑魚背景
 	m_model.Init(L"Assets/modelData/stage_00.cmo"); //ステージ1．
@@ -46,4 +51,10 @@ void TitleStage::Draw()
 		g_camera3D.GetProjectionMatrix(),
 		0
 	);
+}
+
+void TitleStage::PostRender()
+{
+	m_copymainRendrTarget.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
+	m_copymainRendrTarget.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix());
 }
