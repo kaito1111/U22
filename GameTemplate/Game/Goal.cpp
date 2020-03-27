@@ -42,12 +42,6 @@ void Goal::Update()
 		}
 	}
 	if (i == clearNum) {
-		Effect* effect = NewGO<Effect>(1);
-		if (!effect->IsPlay()) {
-			effect->Play(L"Assets/effect/hemohage.efk");
-			effect->SetPosition(m_Position);
-			effect->SetScale(CVector3::One() * 20);
-		}
 		m_ClearSprite->SetW(1.0f);
 	}
 	m_Skin.UpdateWorldMatrix(m_Position, CQuaternion::Identity(), CVector3::One());

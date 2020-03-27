@@ -8,38 +8,8 @@
 #include"StageObjectDossun.h"
 #include"StageObjectMagma.h"
 #include"Goal.h"
-#include"stageObjectStopFloor.h"
+#include "Gimmick_Button.h"
 stageObjectJenerator::stageObjectJenerator()
-{
-}
-
-
-stageObjectJenerator::~stageObjectJenerator()
-{
-	for (auto i : IwaList) {
-		delete i;
-	}
-	for (auto i : moveFloorList) {
-		delete i;
-	}
-	for (auto i : GameObjectScytheList) {
-		delete i;
-	}
-	for (auto i : StageObjectDossunList) {
-		delete i;
-	}
-	for (auto i : StageObjectMagmaList) {
-		delete i;
-	}
-	for (auto i : goalList) {
-		delete i;
-	}
-	for (auto i : stopFloorList) {
-		delete i;
-	}
-}
-
-bool stageObjectJenerator::Start()
 {
 	if (StageNum == 0) {
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
@@ -53,15 +23,6 @@ bool stageObjectJenerator::Start()
 				moveFloorList.push_back(moveFloorPtr);
 				return true;
 			}
-			//御一人様専用通路
-			if (wcscmp(objData.name, L"aStopFloor") == 0) {
-				auto stopFloorPtr = new stageObjectStopFloor(
-					L"Assets/modelData/aStopFloor.cmo",
-					objData.position,
-					objData.rotation);
-				stopFloorList.push_back(stopFloorPtr);
-				return true;
-			}
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
 				auto GoalPtr = new Goal(
@@ -69,6 +30,12 @@ bool stageObjectJenerator::Start()
 					objData.position,
 					objData.rotation);
 				goalList.push_back(GoalPtr);
+				return true;
+			}
+			//動く床
+			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
+				Gimmick_Button* moveButtonPtr = NewGO< Gimmick_Button>(0, "gimmick_button");
+				moveButtonPtr->SetPosition(objData.position);
 				return true;
 			}
 			return false;
@@ -99,6 +66,33 @@ bool stageObjectJenerator::Start()
 			}
 		});
 	}
+}
+
+
+stageObjectJenerator::~stageObjectJenerator()
+{
+	for (auto i : IwaList) {
+		delete i;
+	}
+	for (auto i : moveFloorList) {
+		delete i;
+	}
+	for (auto i : GameObjectScytheList) {
+		delete i;
+	}
+	for (auto i : StageObjectDossunList) {
+		delete i;
+	}
+	for (auto i : StageObjectMagmaList) {
+		delete i;
+	}
+	for (auto i : goalList) {
+		delete i;
+	}
+}
+
+bool stageObjectJenerator::Start()
+{
 
 	//各オブジェクトのスタートが走ります
 	for (auto& i : IwaList) {
@@ -115,9 +109,6 @@ bool stageObjectJenerator::Start()
 	}
 	for (auto& i : StageObjectMagmaList) {
 		i->Start();;
-	}
-	for (auto& i : goalList) {
-		i->Start();
 	}
 	for (auto& i : goalList) {
 		i->Start();
@@ -148,10 +139,6 @@ void stageObjectJenerator::Update()
 	for (auto& i : goalList) {
 		i->Update();
 	}
-	for (auto& i : stopFloorList) {
-		i->Update();
-	}
-	
 }
 
 void stageObjectJenerator::Draw()
@@ -171,7 +158,7 @@ void stageObjectJenerator::Draw()
 	for (auto& i : StageObjectMagmaList) {
 		i->Draw();
 	}
-	for (auto& i : stopFloorList) {
+	for (auto& i : goalList) {
 		i->Draw();
 	}
 }

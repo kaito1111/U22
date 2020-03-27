@@ -41,8 +41,10 @@ bool Player::Start()
 
 void Player::UpDate()
 {
-	if (m_Pad->IsTrigger(enButtonSelect)) {
+	if (m_Pad->IsTrigger(enButtonLB2)) {
 		m_position = m_CheckPoint;
+		m_characon.SetPosition(m_CheckPoint);
+		movespeed.y = 0.0f;
 	}
 	MyMagnet();
 	SpawnPole();
@@ -157,7 +159,7 @@ void Player::Move()
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
 	}
-	//if (m_characon.IsOnGround())
+	if( m_characon.IsOnGround() )
 	{
 		if (m_Pad->IsTrigger(enButtonA)) {
 			movespeed.y = junpPower;
@@ -168,7 +170,7 @@ void Player::Move()
 	}
 
 	const float gravity = 0.8f;		//d—Í
-	//movespeed.y -= gravity;
+	movespeed.y -= gravity;
 
 	//¶‰E‚ÌˆÚ“®
 	movespeed.x = m_Pad->GetLStickXF() * -10.0f;

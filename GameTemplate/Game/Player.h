@@ -53,7 +53,7 @@ private:
 	CQuaternion			m_DefeatRot			 = CQuaternion::Identity();	//倒れているときの回転率(前側)
 	CQuaternion			m_ReverseDefeatRot	 = CQuaternion::Identity(); //倒れているときの回転率(後側)
 	float				rate				 = 0.0f;
-	CVector3			m_CheckPoint		 = CVector3::Zero();		//リスポーン地点
+	CVector3			m_CheckPoint = { 0.0f,100.0f,0.0f };		//リスポーン地点
 
 	float				JumpTimer			 = 0.0f;
 
@@ -64,6 +64,7 @@ private:
 	MyMagnet::Magnet*	m_Magnet			 = nullptr;
 	CVector3			movespeed			 = CVector3::Zero();
 	Pad*				m_Pad				 = nullptr;					//このプレイヤーのパッド
+
 	void SpawnPole();
 	void Move();
 	void MyMagnet();

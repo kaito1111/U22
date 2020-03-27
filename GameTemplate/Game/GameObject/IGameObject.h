@@ -28,7 +28,8 @@ namespace myEngine {
 			m_priority(0),
 			m_isStart(false),
 			m_isDead(false),
-			m_isActive(true)
+			m_isActive(true),
+			m_isUpdate(true)
 		{
 		};
 		/// <summary>
@@ -102,6 +103,10 @@ namespace myEngine {
 			m_isActive = act;
 		}
 
+		void SetUpdate(bool Up) {
+			m_isUpdate = Up;
+		}
+
 	public:
 		/// <summary>
 		/// 関数をラップしてるだけだよ
@@ -126,7 +131,7 @@ namespace myEngine {
 		}
 		void UpdateWrapper()
 		{
-			if (m_isActive && m_isStart)
+			if (m_isActive && m_isStart && m_isUpdate)
 			{
 				Update();
 			}
@@ -150,6 +155,7 @@ namespace myEngine {
 		GameObjPrio		m_priority;		//優先度
 		bool			m_isStart;		//Startフラグ
 		bool			m_isDead;		//死亡フラグ
+		bool			m_isUpdate;		//更新フラグ
 		bool			m_isActive;		//Activeフラグ
 		unsigned int	m_tags = 0;		//タグ
 		unsigned int	m_nameKey = 0;	//名前キー

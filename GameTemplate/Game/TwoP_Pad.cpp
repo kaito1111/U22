@@ -4,7 +4,7 @@
 
 TwoP_Pad::TwoP_Pad() {
 
-	for (int i = 0; i < PlayerNum;) {
+	for (int i = 0; i < g_PlayerNum;) {
 		m_pad[i].Init(i);
 		CVector3 SpownPos = { 100.0f * i,0.0f,0.0f };
 		char PlayerNo[256] = {};
@@ -21,7 +21,7 @@ TwoP_Pad::TwoP_Pad() {
 }
 TwoP_Pad::~TwoP_Pad()
 {
-	for (int i = 0; i < PlayerNum;) {
+	for (int i = 0; i < g_PlayerNum;) {
 		DeleteGO(player[i]);
 	}
 }
@@ -30,7 +30,8 @@ void TwoP_Pad::Update()
 {
 	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
 		m_pad[i].Update();
-		if (m_pad[i].IsTrigger(enButtonStart)) {
+		if (m_pad[i].IsTrigger(enButtonStart)&&
+			UpdateStop) {
 			m_ManualSprite->SetW(1.0f);
 			UpdateStop = false;
 		}
@@ -40,8 +41,8 @@ void TwoP_Pad::Update()
 				UpdateStop = true;
 			}
 		}
-		if (!UpdateStop
-			&& i < 2					//プレイヤーの人数分回す
+		if (UpdateStop
+			&& i < g_PlayerNum					//プレイヤーの人数分回す
 			) {
 			player[i]->UpDate();
 		}
