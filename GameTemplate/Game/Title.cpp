@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "stageObjectJenerator.h"
 #include"TitleStage.h"
+#include"TitleCamera.h"
 Title::Title()
 {
 }
@@ -15,6 +16,7 @@ Title::~Title()
 
 bool Title::Start()
 {
+	titleCamera = NewGO<TitleCamera>(1);
 	titleStage = NewGO<TitleStage>(1);
 	return true;
 }
@@ -126,8 +128,10 @@ void Title::stageSelect()
 	}
 
 	//各ステージの情報を更新
+	//ステージ１
 	titleStage->SetPos(pos1);
-	titleStage->SetPos(pos2);
 	titleStage->SetScale(scale1);
+	//ステージ2
+	titleStage->SetPos(pos2);
 	titleStage->SetScale(scale2);
 }

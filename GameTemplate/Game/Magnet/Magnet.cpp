@@ -32,7 +32,7 @@ CVector3 Magnet::MagnetMove()
 		QueryMO([&](Magnet* mag)->bool {
 			MagnetNum++;
 			return true;
-		});
+		}); 
 
 		//Ž©•ª‚ÍŒvŽZ‚µ‚È‚¢
 		if (mag == this) {

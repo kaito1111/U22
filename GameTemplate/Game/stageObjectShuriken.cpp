@@ -10,6 +10,9 @@ stageObjectShuriken::stageObjectShuriken()
 //レベル配置用のコンストラクタ
 //stageObjectShuriken::stageObjectShuriken(const wchar_t * modelName, CVector3 pos, CQuaternion rot)
 //{
+//  m_model.Init(modelName);
+//  m_pos = pos;
+//  m_rot = rot;
 //}
 
 stageObjectShuriken::~stageObjectShuriken()
