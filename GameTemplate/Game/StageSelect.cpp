@@ -12,6 +12,7 @@ StageSelect::StageSelect()
 StageSelect::~StageSelect()
 {
 	DeleteGO(titleStage);
+	DeleteGO(titleCamera);
 }
 
 bool StageSelect::Start()
@@ -82,8 +83,6 @@ void StageSelect::stageSelect()
 	if (nowStage != 1) {
 		scale2 = CVector3::Zero();
 	}
-
-
 	//各ステージの情報を更新
 	//ステージ１
 	titleStage->SetPos(pos1);
