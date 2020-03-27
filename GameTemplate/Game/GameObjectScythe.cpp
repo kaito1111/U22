@@ -2,17 +2,17 @@
 #include "GameObjectScythe.h"
 #include"Player.h"
 
-//GameObjectScythe::GameObjectScythe(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
-//{
-//	m_model.Init(modelName);
-//	m_pos = pos;
-//	m_rot = rot;
-//}
-
-
-GameObjectScythe::GameObjectScythe()
+GameObjectScythe::GameObjectScythe(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
 {
+	m_model.Init(modelName);
+	m_pos = pos;
+	m_rot = rot;
 }
+
+
+//GameObjectScythe::GameObjectScythe()
+//{
+//}
 
 GameObjectScythe::~GameObjectScythe()
 {

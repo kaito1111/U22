@@ -6,15 +6,20 @@ namespace myEngine {
 
 	DebugMan::DebugMan()
 	{
-		m_shadowMap = g_graphicsEngine->GetShadowMap();
 		//ゴールの位置
 		//m_pos = { -358.0f,925.0f,0.0f };
 		m_pos = CVector3::Zero();
 		m_skinModel.Init(L"Assets/modelData/unityChan.cmo");
-		//影を落とすカメラの座標
-		m_lightCameraPosition = { 0.0f, 2000.0f, 0.0f };
-		//影を落とす注視点の座標
-		m_lightCameraTarget = m_pos;/*CVector3::Zero();*/
+	
+		//シャドウ関連の初期化処理
+		{
+			//グラフィックスエンジンからシャドウマップを取得
+			m_shadowMap = g_graphicsEngine->GetShadowMap();
+			//影を落とすカメラの座標
+			m_lightCameraPosition = { 0.0f, 4000.0f, 0.0f };
+			//影を落とす注視点の座標
+			m_lightCameraTarget = CVector3::Zero();;/*CVector3::Zero();*/
+		}
 	}
 
 	DebugMan::~DebugMan()
@@ -24,15 +29,26 @@ namespace myEngine {
 
 	void DebugMan::Update()
 	{
-		//シャドウキャスター登録
-		m_shadowMap->RegistShdowCaster(&m_skinModel);
-		//ライトの座標を更新
-		m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
+		//シャドウ関連の更新処理
+		{
+			//シャドウキャスター登録
+			m_shadowMap->RegistShdowCaster(&m_skinModel);
+			//ライトの座標を更新
+			m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
+		}
+
+		if (GetAsyncKeyState('A')) {
+			m_pos.x += 5;
+		}
+		else if(GetAsyncKeyState('D')){
+			m_pos.x -= 5;
+		}
+
 		//ワールド行列更新
 		m_skinModel.UpdateWorldMatrix(m_pos, m_rot, m_scale);
 	}
 
-	void DebugMan::Render()
+	void DebugMan::PreRender()
 	{
 		//シャドウマップにレンダリング
 		{

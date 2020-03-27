@@ -79,7 +79,7 @@ void DirectionLight::InitDirectionLight()
 	m_dirLight.active = true; 
 }
 
-void DirectionLight::Render()
+void DirectionLight::PreRender()
 {
 	//ƒfƒoƒRƒ“‚ÌŽæ“¾
 	auto dc = g_graphicsEngine->GetD3DDeviceContext();

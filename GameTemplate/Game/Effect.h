@@ -63,7 +63,7 @@ namespace myEngine {
 		/// <summary>
 		/// ˆê”ÔÅŒã‚Ì•`‰æ
 		/// </summary>
-		void PostDraw();
+		void PostRender();
 		/// <summary>
 		/// 
 		/// </summary>

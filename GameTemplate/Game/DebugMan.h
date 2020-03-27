@@ -35,7 +35,7 @@ namespace myEngine {
 		/// <summary>
 		/// Draw‚æ‚è‘‚¢•`‰æ
 		/// </summary>
-		void Render();
+		void PreRender();
 		/// <summary>
 		/// •`‰æ
 		/// </summary>

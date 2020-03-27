@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "stageObjectJenerator.h"
 #include"TitleStage.h"
+#include"TitleCamera.h"
 Title::Title()
 {
 }
@@ -15,6 +16,7 @@ Title::~Title()
 
 bool Title::Start()
 {
+	titleCamera = NewGO<TitleCamera>(1);
 	titleStage = NewGO<TitleStage>(1);
 	return true;
 }
@@ -47,6 +49,45 @@ void Title::stageSelect()
 	if (GetAsyncKeyState('A')&&nowStage > 0) {
 		LStageChange = true;
 		nowStage--;
+	}
+	////////////////////////////////////////////////////////////////
+	//ステージ１
+	//stage1の情報
+	CVector3 pos1 = titleStage->GetPos();
+	CVector3 scale1 = titleStage->GetScale();
+	//右が押されたときに左送りにする
+	if(nowStage == 0					//自分の番号以上
+		||nowStage == -1				//自分の数字より１つ小さい
+		&& pos1.x > LLimit				//端に行っているかどうか
+		&&RStageChange == true){		//右が押された
+		pos1.x -= moveSpeed;			//動かす
+			if (pos1.x <= -LLimit) {
+				pos1.x = -LLimit;
+				RStageChange = false;
+			}
+	}
+	//左が押されたときに右送りにする
+	if (nowStage >= 0					//自分の番号以下
+		|| nowStage == 1				//自分の数字より1つ大きい
+		&& pos1.x < RLimit			    //端に行っているかどうか
+		&& LStageChange == true) {		//左が押された
+		pos1.x += moveSpeed;			//動かす
+		if (pos1.x <= -RLimit) {
+			pos1.x = -RLimit;
+			LStageChange = false;
+		}
+	}
+	//自分の番号じゃなくなったとき、小さくする
+	
+
+	if (nowStage != 0 && pos1.x > 0) {
+		scale1.x -= scaleChangeSpeed.x;
+	}
+	if (nowStage != 0 && pos1.y > 0) {
+		scale1.y -= scaleChangeSpeed.y;
+	}
+	if (nowStage != 0 && pos1.z > 0) {
+		scale1.z -= scaleChangeSpeed.z;
 	}
 	////////////////////////////////////////////////////////////////////
 	//ステージ2
@@ -85,4 +126,12 @@ void Title::stageSelect()
 	if (nowStage != 1 && scale2.z > 0) {
 		scale2.z -= scaleChangeSpeed.z;
 	}
+
+	//各ステージの情報を更新
+	//ステージ１
+	titleStage->SetPos(pos1);
+	titleStage->SetScale(scale1);
+	//ステージ2
+	titleStage->SetPos(pos2);
+	titleStage->SetScale(scale2);
 }

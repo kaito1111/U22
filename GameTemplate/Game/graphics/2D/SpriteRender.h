@@ -95,7 +95,7 @@ namespace myEngine {
 		/// <summary>
 		/// 呼ばれるのが早いDraw処理
 		/// </summary>
-		void ForwardRender();
+		//void PreRender();
 		/// <summary>
 		/// 最後に呼ばれるDraw処理
 		/// </summary>
@@ -103,7 +103,7 @@ namespace myEngine {
 		/// <summary>
 		/// まだ実装されてないDraw処理
 		/// </summary>
-		void PostRender();
+		//void PostRender();
 	private:
 		bool m_isDraw3D = false;							//3D空間描画？
 		ShaderResourceView m_texture;						//テクスチャ

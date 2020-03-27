@@ -131,7 +131,7 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 		m_skeleton.SendBoneMatrixArrayToGPU();
 
 		//ライト用の描画設定
-		g_graphicsEngine->GetLigManager()->GetDirLig().Render();
+		g_graphicsEngine->GetLigManager()->GetDirLig().PreRender();
 
 		//描画。
 		m_modelDx->Draw(
@@ -182,7 +182,7 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode, CMa
 	m_skeleton.SendBoneMatrixArrayToGPU();
 
 	//ライト用の描画設定
-	g_graphicsEngine->GetLigManager()->GetDirLig().Render();
+	g_graphicsEngine->GetLigManager()->GetDirLig().PreRender();
 
 	//レンダーモードのセット
 	m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {

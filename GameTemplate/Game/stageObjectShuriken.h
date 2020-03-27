@@ -11,7 +11,6 @@ class stageObjectShuriken : public IGameObject
 		void Draw();
 		bool Start();
 		void Update();
-		void Move();
 	private:
 		SkinModel m_model;								//スキンモデル
 		CVector3 m_pos = CVector3::Zero();				//座標

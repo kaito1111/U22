@@ -14,7 +14,7 @@
     <ProjectGuid>{9CB90C92-58AF-482A-B34C-AC02496110F6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Lesson_00</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -104,6 +104,7 @@
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameObjectScythe.cpp" />
     <ClCompile Include="Gimmick_Button.cpp" />
     <ClCompile Include="Goal.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="StageObjectMagma.cpp" />
     <ClCompile Include="stageObjectShuriken.cpp" />
+    <ClCompile Include="stageObjectStopFloor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -179,6 +181,7 @@
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="TitleStage.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
@@ -189,6 +192,7 @@
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Floor.h" />
     <ClInclude Include="GameObjectScythe.h" />
     <ClInclude Include="Gimmick_Button.h" />
     <ClInclude Include="Goal.h" />
@@ -257,11 +261,13 @@
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="StageObjectMagma.h" />
     <ClInclude Include="stageObjectShuriken.h" />
+    <ClInclude Include="stageObjectStopFloor.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="TitleStage.h" />
     <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
@@ -270,7 +276,9 @@
     <ClInclude Include="sound\WaveFileBank.h" />
   </ItemGroup>
   <ItemGroup>
+    <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
+    <MeshContentTask Include="Assets\modelData\bStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Gimmick_Button.FBX" />

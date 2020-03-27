@@ -27,11 +27,11 @@ namespace myEngine {
 		}
 	}
 
-	void GameObjectManager::Render()
+	void GameObjectManager::PreRender()
 	{
 		for (GameObjectList objList : m_gameObjectListArray) {
 			for (IGameObject* obj : objList) {
-				obj->RenderWrapper();
+				obj->PreRenderWrapper();
 			}
 		}
 	}
@@ -44,15 +44,12 @@ namespace myEngine {
 			}
 		}
 	}
-	/// <summary>
-	/// Drawの後に呼ばれる描画処理
-	/// </summary>
-	/// <param name="rc"></param>
-	void GameObjectManager::PostDraw()
+	
+	void GameObjectManager::PostRender()
 	{
 		for (GameObjectList objList : m_gameObjectListArray) {
 			for (IGameObject* obj : objList) {
-				obj->PostDrawWrapper();
+				obj->PostRenderWrapper();
 			}
 		}
 	}
@@ -68,12 +65,12 @@ namespace myEngine {
 		}
 		/// 描画系処理
 		{
-			//RenderContext& rc = g_graphicsEngine->GetRenderContext();
-			Render();
-			//ForwardRender(rc);
+			//プレレンダー
+			PreRender();
+			//通常描画
 			Draw();
-			//一番遅いDraw
-			PostDraw();
+			//ポストレンダー
+			PostRender();
 		}
 		//削除
 		ExcuteDeleteGameObject();

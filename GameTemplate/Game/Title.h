@@ -1,6 +1,7 @@
 #pragma once
 class stageObjectJenerator;
 class TitleStage;
+class TitleCamera;
 class Title : public IGameObject
 {
 public:
@@ -10,6 +11,7 @@ public:
 	void Update();
 	void stageSelect();
 private:
+	TitleCamera* titleCamera = nullptr;
 	TitleStage* titleStage = nullptr;
 	stageObjectJenerator* generator;
 	SpriteRender m_sprite;             //スプライト
@@ -20,6 +22,4 @@ private:
 	bool RStageChange = false;
 	const CVector3 littleScale = { 0.1f,0.1f,0.1f };//選ばれてないステージのサイズ
 	const CVector3 halfScale = { 0.5f,0.5f,0.5f };
-
-	
 };

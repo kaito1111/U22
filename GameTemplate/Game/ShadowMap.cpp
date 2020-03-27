@@ -47,9 +47,10 @@ void ShadowMap::UpdateFromLightDirection(CVector3 lightCameraPos, CVector3 light
 
 	//ライトプロジェクション行列を作成する。
 	//太陽光からの影を落としたいなら、平行投影行列を作成する。
+	//ここのw,hをいじるとシャドウマップの範囲が変わる！
 	m_lightProjMatirx.MakeOrthoProjectionMatrix(
-		FRAME_BUFFER_W,
-		FRAME_BUFFER_H,
+		5000,
+		5000,
 		0.1f,
 		5000.0f
 	);
