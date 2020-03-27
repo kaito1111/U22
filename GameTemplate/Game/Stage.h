@@ -9,9 +9,13 @@ class Stage : public IGameObject
 public:
 	Stage();
 	~Stage();
+	bool Start();
 	void Update();
 	void Draw();
 private:
+	int stageNum = 0;
+	int count = 0;
+	bool newStage = false;
                    //ゲームクラス
 	stageObjectJenerator* generator = nullptr;//ｼﾞｪﾈﾚｰﾀｰ
 	SkinModel m_model;						  //スキンモデル。

@@ -31,7 +31,6 @@ void TitleStage::Update()
 	skyModel.UpdateWorldMatrix({0,0,2000}, CQuaternion::Identity(), { 1,1,1 });
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), m_scale);
 	m_model2.UpdateWorldMatrix(m_pos2, CQuaternion::Identity(), m_scale2);
-	
 }
 
 void TitleStage::Draw()

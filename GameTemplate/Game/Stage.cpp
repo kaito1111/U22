@@ -20,8 +20,18 @@ Stage::~Stage()
 
 }
 
+bool Stage::Start()
+{
+	return true;
+}
+
 void Stage::Update()
 {
+	count++;
+	if (count > 5 && newStage == false) {
+		newStage = true;
+		generator = NewGO<stageObjectJenerator>(1, "generator");
+	}
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 	//g_graphicsEngine->GetShadowMap()->RegistShdowCaster(&m_model);
