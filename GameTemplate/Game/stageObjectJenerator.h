@@ -15,13 +15,13 @@ class stageObjectJenerator : public IGameObject
 public:
 	stageObjectJenerator();
 	~stageObjectJenerator();
-	void setStageNum(const int num) {
+	void setStageNum(const int& num) {
 		StageNum = num;
 	}
 private:
 	//オブジェクト
 	int StageNum = 0;
-	stageObjectStopFloor* stopFloor = nullptr;
+	/*stageObjectStopFloor* stopFloor = nullptr;
 	Goal* goal = nullptr;
 	StageObjectMagma* magma = nullptr;
 	moveFloor* movefloor = nullptr;
@@ -29,19 +29,19 @@ private:
 	RorlingRock* rorlingRock = nullptr;
 	Iwa* iwa = nullptr;
 	GameObjectScythe* scythe = nullptr;
-	StageObjectDossun* dossun = nullptr;
+	StageObjectDossun* dossun = nullptr;*/
 
 	void Update();
 	bool Start();
 	void Draw();
 	//今回はレベル君を使うぜ！
 	Level level;
-	std::list< stageObjectStopFloor*> stopFloorList;
+	/*std::list< stageObjectStopFloor*> stopFloorList;
 	std::list<Goal*> goalList;
 	std::list<Iwa*> IwaList;
 	std::list<moveFloor*> moveFloorList;
 	std::list<GameObjectScythe*> GameObjectScytheList;
 	std::list<StageObjectDossun*> StageObjectDossunList;
-	std::list<StageObjectMagma*> StageObjectMagmaList;
+	std::list<StageObjectMagma*> StageObjectMagmaList;*/
 };
 

@@ -4,13 +4,16 @@ class Player;
 class StageObjectDossun : public IGameObject
 {
 public:
-	StageObjectDossun(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
+	StageObjectDossun(/*const wchar_t* modelName, CVector3 pos, CQuaternion rot*/);
 	~StageObjectDossun();
 	bool Start();
 	void Update();
 	void Draw();
 	void Move();
 	void playerKill();
+	void SetPosition(const CVector3& pos) {
+		m_pos = pos;
+	}
 private:
 	Player* player1 = nullptr;
 	Player* player2 = nullptr;

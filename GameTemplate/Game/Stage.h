@@ -3,6 +3,7 @@
 #include "character/CharacterController.h"
 #include"physics/PhysicsStaticObject.h"
 class stageObjectJenerator;
+class Game;
 class Stage : public IGameObject
 {
 public:
@@ -11,7 +12,7 @@ public:
 	void Update();
 	void Draw();
 private:
-
+                   //ゲームクラス
 	stageObjectJenerator* generator = nullptr;//ｼﾞｪﾈﾚｰﾀｰ
 	SkinModel m_model;						  //スキンモデル。
 	CVector3 m_position;

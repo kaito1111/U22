@@ -2,12 +2,12 @@
 #include "StageObjectMagma.h"
 #include"Player.h"
 
-StageObjectMagma::StageObjectMagma(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
+StageObjectMagma::StageObjectMagma(/*const wchar_t* modelName, CVector3 pos, CQuaternion rot*/)
 {
 	//マグマになる予定なんだ。予定だけど。
-	m_model.Init(modelName);
+	/*m_model.Init(modelName);
 	m_pos = pos;
-	m_rot = rot;
+	m_rot = rot;*/
 }
 
 

@@ -4,7 +4,7 @@ class Player;
 class RorlingRock : public IGameObject
 {
 public:
-	RorlingRock(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
+	RorlingRock(/*const wchar_t* modelName, CVector3 pos, CQuaternion rot*/);
 	~RorlingRock();
 	bool Start();
 	void Update();
@@ -12,6 +12,9 @@ public:
 	void Move();
 	void killPlayer();
 	void Draw();
+	void SetPosition(const CVector3& pos) {
+		m_pos = pos;
+	}
 private:
 	Player* player1 = nullptr;
 	Player* player2 = nullptr;

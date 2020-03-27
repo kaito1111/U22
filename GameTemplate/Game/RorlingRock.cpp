@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "RorlingRock.h"
 #include "Player.h"
-RorlingRock::RorlingRock(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
+RorlingRock::RorlingRock(/*const wchar_t* modelName, CVector3 pos, CQuaternion rot*/)
 {
-	m_model.Init(modelName);
+	/*m_model.Init(modelName);
 	m_pos = pos;
-	m_rot = rot;
+	m_rot = rot;*/
 }
 
 RorlingRock::~RorlingRock()

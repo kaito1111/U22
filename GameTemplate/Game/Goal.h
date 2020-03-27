@@ -3,7 +3,7 @@ class Player;
 class Goal : public IGameObject
 {
 public:
-	Goal(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
+	Goal(/*const wchar_t* modelName, CVector3 pos, CQuaternion rot*/);
 	~Goal();
 
 	//Start,Update,Drawはジェネレーターからアクセスするので、
@@ -11,6 +11,9 @@ public:
 	bool Start();
 	void Update();
 	void Draw();
+	void SetPosition(const CVector3& pos) {
+		m_Position = pos;
+	}
 private:	
 	SkinModel m_Skin;
 	CVector3 m_Position = CVector3::Zero();

@@ -2,11 +2,11 @@
 #include "moveFloor.h"
 #include "Player.h"
 #include"HID/Pad.h"
-moveFloor::moveFloor(const wchar_t * modelName, CVector3 pos, CQuaternion rot)
+moveFloor::moveFloor(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 {
-	m_model.Init(modelName);
+	/*m_model.Init(modelName);
 	m_pos = pos;
-	m_rot = rot;
+	m_rot = rot;*/
 }
 
 
