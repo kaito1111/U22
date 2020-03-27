@@ -12,7 +12,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ƒQ[ƒ€‚Ì‰Šú‰»B
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
-	NewGO<Game>(1, "game");
+	NewGO<Game>(0, "game");
 
 	//ƒJƒƒ‰‚Ì‰Šú‰»
 	g_camera2D.Update2D();

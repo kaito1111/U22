@@ -67,8 +67,14 @@ namespace myEngine {
 		{
 			//プレレンダー
 			PreRender();
+			//レンダーターゲットのバックアップ
+			g_graphicsEngine->oldTarget();
+			//フォワードレンダーターゲットに変える
+			g_graphicsEngine->ForwardRenderTarget();
 			//通常描画
 			Draw();
+			//ポストレンダーターゲットに変える
+			g_graphicsEngine->PostRenderTarget();
 			//ポストレンダー
 			PostRender();
 		}

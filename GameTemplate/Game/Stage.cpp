@@ -10,7 +10,7 @@ Stage::Stage()
 	//シャドウレシーバーとする
 	m_model.SetShadowReciever(true);
 	m_phyStaticObuject.CreateMeshObject(m_model, CVector3::Zero(), CQuaternion::Identity());
-	generator = NewGO<stageObjectJenerator>(1);
+	generator = NewGO<stageObjectJenerator>(0);
 
 }
 
