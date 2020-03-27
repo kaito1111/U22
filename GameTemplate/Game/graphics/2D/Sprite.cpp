@@ -175,6 +175,7 @@ namespace myEngine {
 		d3dDeviceContext->PSSetShader((ID3D11PixelShader*)m_ps.GetBody(), NULL, 0);
 		d3dDeviceContext->VSSetShader((ID3D11VertexShader*)m_vs.GetBody(), NULL, 0);
 		//grapgicsEngineのPostRenderのBlendStateを使う
+		//2Dでバグが出たら、たぶんこいつ
 		//d3dDeviceContext->OMSetBlendState(BlendState, nullptr, 0xffffffff);
 		d3dDeviceContext->IASetInputLayout(m_vs.GetInputLayout());
 
