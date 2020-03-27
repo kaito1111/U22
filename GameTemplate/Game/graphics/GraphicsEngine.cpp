@@ -338,7 +338,7 @@ void GraphicsEngine::PostRenderTarget()
 		&m_frameBufferViewports
 	);
 
-
+	//ブレンドステート設定
 	D3D11_BLEND_DESC BLEND_DETE;
 	ID3D11BlendState* BlendState;
 	BLEND_DETE.AlphaToCoverageEnable = false;
@@ -358,6 +358,6 @@ void GraphicsEngine::PostRenderTarget()
 	//dc->ClearDepthStencilView(m_frameBufferDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 	//あとでEndRenderにでも追加
-	//m_frameBufferRenderTargetView->Release();
-	//m_frameBufferDepthStencilView->Release();
+	m_frameBufferRenderTargetView->Release();
+	m_frameBufferDepthStencilView->Release();
 }

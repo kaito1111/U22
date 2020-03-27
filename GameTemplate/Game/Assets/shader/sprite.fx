@@ -38,7 +38,6 @@ float4 PSMain( PSInput In ) : SV_Target0
 		//color.r = monoColor;
 		//color.g = monoColor;
 		//color.b = monoColor;
-		//return color;
 	}
 
 	//コントラスト強化2D（何に使うねーんｗｗ）
