@@ -159,6 +159,7 @@ void Player::Move()
 		JumpTimer < 1.0f) {
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
+		m_Se.Play(false);
 	}
 	if( m_characon.IsOnGround() )
 	{

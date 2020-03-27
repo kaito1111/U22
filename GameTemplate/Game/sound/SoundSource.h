@@ -49,7 +49,7 @@ public:
 	/// <para>isLoop‚ªfalse‚È‚çˆê‰ñ‚Ì‚İ‚ÌÄ¶I</para>
 	/// </summary>
 	/// <param name="isLoop"></param>
-	void Play(bool isLoop);
+	void Play(bool isLoop = false);				//true‚Åƒ‹[ƒv‚·‚é
 	/// <summary>
 	/// ’â~
 	/// </summary>

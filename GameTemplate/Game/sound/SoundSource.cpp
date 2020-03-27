@@ -110,7 +110,7 @@ void SoundSource::StartStreamingBuffring()
 	m_waveFile->ReadAsync(&readStartBuff[m_readStartPos], m_streamingBufferSize, &m_currentBufferingSize);
 	m_streamingState = enStreamingBuffering;
 }
-void SoundSource::Play(bool isLoop)
+void SoundSource::Play(bool isLoop)				
 {
 	if (m_isAvailable == false) {
 
