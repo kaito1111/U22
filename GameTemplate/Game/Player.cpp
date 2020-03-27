@@ -6,6 +6,11 @@
 
 Player::Player()
 {
+	//cmoファイルの読み込み。
+	m_model.Init(L"Assets/modelData/Player.cmo");
+	m_FrontModel.Init(L"Assets/modelData/player(front).cmo");
+	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
+	m_Se.Init(L"Assets/sound/junp.wav");
 }
 
 
@@ -16,14 +21,10 @@ Player::~Player()
 
 bool Player::Start()
 {
-	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/Player.cmo");
 	m_characon.Init(30.0f, 20.0f, m_position);
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet, &m_position);
-	m_FrontModel.Init(L"Assets/modelData/player(front).cmo");
-	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
 
 	m_ThisNumSprite = NewGO<SpriteRender>(0);
 	wchar_t spriteName[256] = {};
