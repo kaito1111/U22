@@ -91,7 +91,6 @@ namespace myEngine {
 		CD3D11_DEFAULT drfault;
 		CD3D11_BLEND_DESC BLEND_DETE(drfault);
 		BLEND_DETE.RenderTarget[0].BlendEnable = true;
-		//2ŒÂ‚ðˆê‰ñ‚Å‰Šú‰»‚µ‚Ä‚é‚æ “¯‚¶’l‚È‚Ì‚Å‚Å‚«‚éI
 		BLEND_DETE.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
 		BLEND_DETE.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
 		BLEND_DETE.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
@@ -175,7 +174,8 @@ namespace myEngine {
 		d3dDeviceContext->PSSetShaderResources(0, 1, &m_textureSRV);
 		d3dDeviceContext->PSSetShader((ID3D11PixelShader*)m_ps.GetBody(), NULL, 0);
 		d3dDeviceContext->VSSetShader((ID3D11VertexShader*)m_vs.GetBody(), NULL, 0);
-		d3dDeviceContext->OMSetBlendState(BlendState, nullptr, 0xffffffff);
+		//grapgicsEngine‚ÌPostRender‚ÌBlendState‚ðŽg‚¤
+		//d3dDeviceContext->OMSetBlendState(BlendState, nullptr, 0xffffffff);
 		d3dDeviceContext->IASetInputLayout(m_vs.GetInputLayout());
 
 		g_graphicsEngine->GetD3DDeviceContext()->VSSetSamplers(0, 1, &SamplerState);
