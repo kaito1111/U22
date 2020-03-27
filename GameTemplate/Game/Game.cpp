@@ -5,7 +5,7 @@
 #include "KaitoTask.h"
 #include "DebugMan.h"
 #include "GameCamera.h"
-
+#include "stageObjectJenerator.h"
 Game::Game()
 {
 	//ƒTƒEƒ“ƒh‚Ì‰Šú‰»
@@ -18,16 +18,21 @@ Game::~Game()
 
 bool Game::Start()
 {
-	Stage* stage = NewGO<Stage>(0, "stage");
+
 	NewGO< KaitoTask>(2, "kaito");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);
-
+	
 	return true;
 }
 
 void Game::Update()
 {
+	count++;
+	if (count >= 10&&a == false) {
+		stageObjectJenerator* generator = NewGO<stageObjectJenerator>(0);
+		a == true;
+	}
 	Sample();
 }
 

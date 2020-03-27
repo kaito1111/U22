@@ -6,10 +6,13 @@ class stageObjectStopFloor : public IGameObject
 {
 public:
 	//stageObjectStopFloor();
-	stageObjectStopFloor(const wchar_t * modelName, CVector3 pos, CQuaternion rot);
+	stageObjectStopFloor(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/);
 	~stageObjectStopFloor();
 	bool Start();
 	void Update();
+	void SetPosition(const CVector3& pos) {
+		m_pos = pos;
+	}
 private:
 	Floor* floor = nullptr;
 	Player* m_player[2] = {};//プレイヤークラスの初期化

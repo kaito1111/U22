@@ -2,11 +2,11 @@
 #include "StageObjectDossun.h"
 #include "Player.h"
 
-StageObjectDossun::StageObjectDossun(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
+StageObjectDossun::StageObjectDossun(/*const wchar_t* modelName, CVector3 pos, CQuaternion rot*/)
 {
-	m_model.Init(modelName);
-	m_pos = pos;
-	m_rot = rot;
+	//m_model.Init(modelName);
+	//m_pos = pos;
+	//m_rot = rot;
 }
 
 

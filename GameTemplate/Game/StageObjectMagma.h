@@ -3,12 +3,14 @@ class Player;
 class StageObjectMagma : public IGameObject
 {
 public:
-	StageObjectMagma(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
+	StageObjectMagma(/*const wchar_t* modelName, CVector3 pos, CQuaternion rot*/);
 	~StageObjectMagma();
 	bool Start();
 	void Update();
 	void Draw();
-
+	void SetPosition(const CVector3& pos) {
+		m_pos = pos;
+	}
 	void PlayerKill();
 private:
 	Player* player1 = nullptr;

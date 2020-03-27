@@ -29,8 +29,8 @@ void StageSelect::Update()
 	//nowStageをジェネレーターに渡して、その数字に応じてNewGOさせる
 	if (GetAsyncKeyState('K')) {
 		game = NewGO<Game>(0);
-		generator = NewGO<stageObjectJenerator>(1);
-		generator->setStageNum(nowStage);
+		
+		//generator->setStageNum(nowStage);
 		DeleteGO(this);
 		
 	}

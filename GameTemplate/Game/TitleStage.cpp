@@ -15,7 +15,7 @@ bool TitleStage::Start()
 {
 	//ステージのレベル配置前の情報
 	skyModel.Init(L"Assets/modelData/sky.cmo");     //クソ雑魚背景
-	m_model.Init(L"Assets/modelData/stage_00.cmo"); //ステージ1．はよデータもらえカス
+	m_model.Init(L"Assets/modelData/stage_00.cmo"); //ステージ1．
 	m_model2.Init(L"Assets/modelData/stage3.cmo");	//ステージⅢ．おいおいⅢかよ
 	return true;
 }

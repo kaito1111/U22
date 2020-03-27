@@ -26,4 +26,6 @@ private:
 	SpriteRender* m_test=nullptr;		//スプライトレンダー
 	SoundSource	m_se;					//サウンドソース
 	Effect* effect = nullptr;			//エフェクト
+	int count = 0;
+	bool a = false;
 };

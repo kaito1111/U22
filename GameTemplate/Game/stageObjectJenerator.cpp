@@ -16,23 +16,16 @@ stageObjectJenerator::stageObjectJenerator()
 		{
 			//動く床
 			if (wcscmp(objData.name, L"moveFloor") == 0) {
-				auto moveFloorPtr = new moveFloor(
-					L"Assets/modelData/moveFloor.cmo",
-					objData.position,
-					objData.rotation);
-				moveFloorList.push_back(moveFloorPtr);
+				moveFloor* moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
+				moveFloorPtr->SetPosition(objData.position);
 				return true;
 			}
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				auto GoalPtr = new Goal(
-					L"Assets/modelData/Goal.cmo",
-					objData.position,
-					objData.rotation);
-				goalList.push_back(GoalPtr);
-				return true;
+				Goal* goalPtr = NewGO<Goal>(0, "Goal");
+				goalPtr->SetPosition(objData.position);
 			}
-			//動く床
+			//ギミック起動ボタン
 			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
 				Gimmick_Button* moveButtonPtr = NewGO< Gimmick_Button>(0, "gimmick_button");
 				moveButtonPtr->SetPosition(objData.position);
@@ -48,21 +41,14 @@ stageObjectJenerator::stageObjectJenerator()
 		level.Init(L"Assets/level/stageDossun.tkl", [&](const auto& objData)
 		{
 			if (wcscmp(objData.name, L"Dossun") == 0) {
-				auto StageObjectDossunPtr = new StageObjectDossun(
-					L"Assets/modelData/Dossun.cmo",
-					objData.position,
-					objData.rotation);
-				StageObjectDossunList.push_back(StageObjectDossunPtr);
+				StageObjectDossun* dossunPtr = NewGO< StageObjectDossun>(0, "Dossun");
+				dossunPtr->SetPosition(objData.position);
 				return true;
 			}
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				auto GoalPtr = new Goal(
-					L"Assets/modelData/Goal.cmo",
-					objData.position,
-					objData.rotation);
-				goalList.push_back(GoalPtr);
-				return true;
+				Goal* goalPtr = NewGO<Goal>(0, "Goal");
+				goalPtr->SetPosition(objData.position);
 			}
 		});
 	}
@@ -71,7 +57,7 @@ stageObjectJenerator::stageObjectJenerator()
 
 stageObjectJenerator::~stageObjectJenerator()
 {
-	for (auto i : IwaList) {
+	/*for (auto i : IwaList) {
 		delete i;
 	}
 	for (auto i : moveFloorList) {
@@ -88,14 +74,14 @@ stageObjectJenerator::~stageObjectJenerator()
 	}
 	for (auto i : goalList) {
 		delete i;
-	}
+	}*/
 }
 
 bool stageObjectJenerator::Start()
 {
 
 	//各オブジェクトのスタートが走ります
-	for (auto& i : IwaList) {
+	/*for (auto& i : IwaList) {
 		i->Start();;
 	}
 	for (auto& i : moveFloorList) {
@@ -112,7 +98,7 @@ bool stageObjectJenerator::Start()
 	}
 	for (auto& i : goalList) {
 		i->Start();
-	}
+	}*/
 	return true;
 }
 
@@ -121,7 +107,7 @@ bool stageObjectJenerator::Start()
 void stageObjectJenerator::Update()
 {
 	level.Draw();
-	for (auto& i : IwaList) {
+	/*for (auto& i : IwaList) {
 		i->Update();
 	}
 	for (auto& i : moveFloorList) {
@@ -138,12 +124,12 @@ void stageObjectJenerator::Update()
 	}
 	for (auto& i : goalList) {
 		i->Update();
-	}
+	}*/
 }
 
 void stageObjectJenerator::Draw()
 {
-	for (auto& i : IwaList) {
+	/*for (auto& i : IwaList) {
 		i->Draw();
 	}
 	for (auto& i : moveFloorList) {
@@ -160,5 +146,5 @@ void stageObjectJenerator::Draw()
 	}
 	for (auto& i : goalList) {
 		i->Draw();
-	}
+	}*/
 }

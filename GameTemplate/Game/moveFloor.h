@@ -7,13 +7,16 @@ class moveFloor : public IGameObject
 {
 	//サイズ200*200*20
 public:
-	moveFloor(const wchar_t* modelName, CVector3 pos, CQuaternion rot);
+	moveFloor(/*const wchar_t* modelName, CVector3 pos, CQuaternion rot*/);
 	~moveFloor();
 
 	void Draw();
 	bool Start();
 	void Update();
 	void Move();
+	void SetPosition(const CVector3& pos) {
+		m_pos = pos;
+	}
 private:
 	SkinModel m_model;								//スキンモデル
 	CVector3 m_pos = CVector3::Zero();				//座標
