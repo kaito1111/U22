@@ -28,11 +28,44 @@ PSInput VSMain(VSInput In)
 }
 float4 PSMain( PSInput In ) : SV_Target0
 {
-	return colorTexture.Sample(Sampler, In.uv) * mulColor;
-	//float4 color = colorTexture.Sample(Sampler, In.uv) * mulColor;
-	//float monoColor = color.x * 0.29900 + color.b * 0.58700 + color.b * 0.11400;
-	//color.r = monoColor;
-	//color.g = monoColor;
-	//color.b = monoColor;
-	//return color;
+	//普通のスプライトのカラー
+	float4 color = colorTexture.Sample(Sampler, In.uv) * mulColor;
+
+	//モノクロ2D（何に使うねーんｗｗ）
+	{
+		//float4 color = colorTexture.Sample(Sampler, In.uv) * mulColor;
+		//float monoColor = color.x * 0.29900 + color.b * 0.58700 + color.b * 0.11400;
+		//color.r = monoColor;
+		//color.g = monoColor;
+		//color.b = monoColor;
+		//return color;
+	}
+
+	//コントラスト強化2D（何に使うねーんｗｗ）
+	{
+		//float akarusa = max(color.r, color.g);
+		//akarusa = max(akarusa, color.b);
+		////明るいとこはさらに明るく
+		//if (akarusa > 0.5f) {
+		//	color.r = min(1.0f, color.r * 1.5f);
+		//	color.g = min(1.0f, color.g * 1.5f);
+		//	color.b = min(1.0f, color.b * 1.5f);
+		//}
+		////暗いとこはさらに暗く
+		//else {
+		//	color.r *= 0.5f;
+		//	color.g *= 0.5f;
+		//	color.b *= 0.5f;
+		//}
+	}
+
+	//セピア調2D（何に使うねーんｗｗ）
+	{
+		//color.r = color.r * 0.393 + color.g * 0.769 + color.b * 0.189;
+		//color.g = color.r * 0.349 + color.g * 0.686 + color.b * 0.168;
+		//color.b = color.r * 0.272 + color.g * 0.534 + color.b * 0.131;
+	}
+	
+	return color;
+
 }

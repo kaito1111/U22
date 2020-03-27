@@ -13,6 +13,9 @@ public:
 	CVector3 GetTogePos() { //座標の取得。
 		return m_position;  //当たり判定とかで使う予定。
 	}
+	void SetPosition(const CVector3& pos) {
+		m_position = pos;
+	}
 private:
 
 	Player* player[4] = {};

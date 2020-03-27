@@ -2,6 +2,7 @@
 #include "system/system.h"
 #include "level/Level.h"
 #include "Game.h"
+#include "StageSelect.h"
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -11,7 +12,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
-	NewGO<Game>(1, "game");
+	//タイトルセレクト作ってます。
+	//タイトルに変えて欲しみがマリアナ海溝
+	NewGO<StageSelect>(1, "game");
 
 	//カメラの初期化
 	g_camera2D.Update2D();

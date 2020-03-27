@@ -3,11 +3,11 @@
 #include "Player.h"
 #include "DirectionLight.h"
 
-Goal::Goal(const wchar_t * modelName, CVector3 pos, CQuaternion rot)
+Goal::Goal(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 {
-	m_Skin.Init(modelName);
+	/*m_Skin.Init(modelName);
 	m_Position = pos;
-	m_rot = rot;
+	m_rot = rot;*/
 }
 
 Goal::~Goal()

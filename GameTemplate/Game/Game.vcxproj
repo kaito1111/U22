@@ -172,6 +172,7 @@
     <ClCompile Include="StageObjectMagma.cpp" />
     <ClCompile Include="stageObjectShuriken.cpp" />
     <ClCompile Include="stageObjectStopFloor.cpp" />
+    <ClCompile Include="stageObjectYokoKonbou.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -180,7 +181,7 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
-    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="TitleStage.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
@@ -262,11 +263,12 @@
     <ClInclude Include="StageObjectMagma.h" />
     <ClInclude Include="stageObjectShuriken.h" />
     <ClInclude Include="stageObjectStopFloor.h" />
+    <ClInclude Include="stageObjectYokoKonbou.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
-    <ClInclude Include="Title.h" />
+    <ClInclude Include="StageSelect.h" />
     <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="TitleStage.h" />
     <ClInclude Include="TwoP_Pad.h" />
@@ -296,12 +298,15 @@
     <MeshContentTask Include="Assets\modelData\Press_Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
+    <MeshContentTask Include="Assets\modelData\sky.fbx" />
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
+    <MeshContentTask Include="Assets\modelData\stage3.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
+    <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\ProvisionalTitle.png" />
