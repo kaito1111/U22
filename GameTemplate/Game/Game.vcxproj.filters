@@ -94,6 +94,7 @@
     <ClCompile Include="stageObjectYokoKonbou.cpp" />
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="TitleCamera.cpp" />
+    <ClCompile Include="Bloom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -210,6 +211,7 @@
     <ClInclude Include="stageObjectYokoKonbou.h" />
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="TitleCamera.h" />
+    <ClInclude Include="Bloom.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

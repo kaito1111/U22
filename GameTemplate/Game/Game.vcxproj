@@ -100,6 +100,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="sound\WaveFileBank.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bloom.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="DirectionLight.h" />
