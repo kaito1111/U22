@@ -16,7 +16,7 @@ stageObjectJenerator::stageObjectJenerator()
 		{
 			//動く床
 			if (wcscmp(objData.name, L"moveFloor") == 0) {
-				moveFloor* moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
+				moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
 				moveFloorPtr->SetPosition(objData.position);
 				return true;
 			}
@@ -27,7 +27,7 @@ stageObjectJenerator::stageObjectJenerator()
 			}
 			//ギミック起動ボタン
 			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
-				Gimmick_Button* moveButtonPtr = NewGO< Gimmick_Button>(0, "gimmick_button");
+				moveButtonPtr = NewGO<Gimmick_Button>(0, "gimmick_button");
 				moveButtonPtr->SetPosition(objData.position);
 				return true;
 			}
@@ -106,7 +106,7 @@ bool stageObjectJenerator::Start()
 
 void stageObjectJenerator::Update()
 {
-	level.Draw();
+	//level.Draw();
 	/*for (auto& i : IwaList) {
 		i->Update();
 	}

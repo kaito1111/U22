@@ -14,7 +14,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//タイトルセレクト作ってます。
 	//タイトルに変えて欲しみがマリアナ海溝
-	NewGO<StageSelect>(1, "game");
+	//NewGO<StageSelect>(1, "game");
+	NewGO<Game>(1, "game");
 
 	//カメラの初期化
 	g_camera2D.Update2D();
