@@ -15,6 +15,12 @@ stageObjectJenerator::stageObjectJenerator()
 	if (StageNum == 0) {
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
 		{
+			//ギミック起動ボタン
+			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
+				moveButtonPtr = NewGO<Gimmick_Button>(0, "gimmick_button");
+				moveButtonPtr->SetPosition(objData.position);
+				return true;
+			}
 			//動く床
 			if (wcscmp(objData.name, L"moveFloor") == 0) {
 				moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
@@ -38,12 +44,7 @@ stageObjectJenerator::stageObjectJenerator()
 				Goal* goalPtr = NewGO<Goal>(0, "Goal");
 				goalPtr->SetPosition(objData.position);
 			}
-			//ギミック起動ボタン
-			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
-				moveButtonPtr = NewGO<Gimmick_Button>(0, "gimmick_button");
-				moveButtonPtr->SetPosition(objData.position);
-				return true;
-			}
+			
 			return false;
 		});
 	}	

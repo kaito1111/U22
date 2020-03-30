@@ -1,7 +1,7 @@
 #pragma once
 #include"physics/RigidBody.h"
 #include"physics/PhysicsStaticObject.h"
-
+#include"Gimmick_Button.h"
 class Player;
 class moveFloor : public IGameObject
 {
@@ -21,15 +21,25 @@ private:
 	void Update();
 	void Draw();
 	void Move();
+
+	Gimmick_Button* button = nullptr;
 	SkinModel m_model;								//スキンモデル
 	CVector3 m_pos = CVector3::Zero();				//座標
 	CQuaternion m_rot = CQuaternion::Identity();	//回転
 	bool UDPos = false;								//上がり切ってるか下がり切ってるか
 	bool speedDown = false;							//スピードを上げたり下げたりする
 	float moveSpeed = 0;                            //速度。上がったり下がったりする
+	bool fastMove = false;                          //最初に動くときのフラグ
 	bool sLimit = false;		    				//動いた量
 	PhysicsStaticObject m_phyStaticObject;          //静的物理オブジェクト
 	SoundSource m_Se;
+	CVector3 startPos = CVector3::Zero();
 
+	void move2();
+	float up = 0;
+	float down = 0;
+	bool start = false;
+	bool udlimit = false;
+	bool statPos = true;
 };	
 
