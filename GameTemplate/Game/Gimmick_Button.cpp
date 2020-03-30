@@ -3,6 +3,7 @@
 
 Gimmick_Button::Gimmick_Button()
 {
+	m_Se.Init(L"Assets/sound/Button_On.wav");
 }
 
 Gimmick_Button::~Gimmick_Button()
@@ -31,11 +32,14 @@ void Gimmick_Button::Update()
 	for (int i = 0; i < g_PlayerNum; i++) {
 		CVector3 Diff = m_Player[i]->GetPosition() - m_Position;
 		if (Diff.Length() > 20.0f) {
-			if (m_Position.y > m_Position.y + 10.0f&&
-				m_Position.y < m_Position.y + 50.0f) {
-				m_PushSkin->SetActive(true);
-				m_Skin->SetActive(false);
-				IsOn = true;
+			if (IsOn) {
+				if (m_Position.y > m_Position.y + 10.0f&&
+					m_Position.y < m_Position.y + 50.0f) {
+					m_PushSkin->SetActive(true);
+					m_Skin->SetActive(false);
+					IsOn = true;
+					m_Se.Play();
+				}
 			}
 		}
 	}

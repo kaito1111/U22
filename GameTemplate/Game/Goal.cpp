@@ -28,26 +28,30 @@ bool Goal::Start()
 
 void Goal::Update()
 {
-	const float Len = 50.0f;				//ÉSÅ[ÉãÇÃîºåa
-	const int clearNum = 2;
-	int i;
-	for (i = 0; i < clearNum;) {
-		CVector3 diff = m_player[i]->GetPosition() - m_Position;
-		float playerLen = diff.Length();
-		if (playerLen < Len) {
-			i++;
+	if (!isClear) {
+		const float Len = 50.0f;				//ÉSÅ[ÉãÇÃîºåa
+		const int clearNum = 2;
+		int i;
+		for (i = 0; i < clearNum;) {
+			CVector3 diff = m_player[i]->GetPosition() - m_Position;
+			float playerLen = diff.Length();
+			if (playerLen < Len) {
+				i++;
+			}
+			else {
+				break;
+			}
 		}
-		else {
-			break;
+		if (i == clearNum) {
+			isClear = true;
+			m_ClearSprite->SetW(1.0f);
+			m_Se.Play();
 		}
-	}
-	if (i == clearNum) {
-		m_ClearSprite->SetW(1.0f);
 	}
 	m_Skin.UpdateWorldMatrix(m_Position, CQuaternion::Identity(), CVector3::One());
 }
 
-void Goal::Draw() 
+void Goal::Draw()
 {
 	m_Skin.Draw(
 		g_camera3D.GetViewMatrix(),

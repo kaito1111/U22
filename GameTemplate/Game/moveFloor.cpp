@@ -2,11 +2,13 @@
 #include "moveFloor.h"
 #include "Player.h"
 #include"HID/Pad.h"
+#include"Gimmick_Button.h"
 moveFloor::moveFloor(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 {
 	/*m_model.Init(modelName);
 	m_pos = pos;
 	m_rot = rot;*/
+	m_Se.Init(L"Assets/sound/moveFloor.wav");
 }
 
 
@@ -29,15 +31,20 @@ bool moveFloor::Start()
 	m_model.Init(L"Assets/modelData/moveFloor.cmo");
 	//m_pos = { 0.0f,100.0f,0.0f };
 	int MaxPlayer = Pad::CONNECT_PAD_MAX;
-	
-	
-	return true;
+	button = FindGO< Gimmick_Button>("gimmick_button");
+
+	startPos = m_pos;
+	up = m_pos.y + 100;
+	down = m_pos.y - 100;
+               	return true;
 }
 
 void moveFloor::Update()
 {
+	m_Se.Play(true);
 	//メッシュの云々。要するに当たり判定
-	Move();
+	//Move();
+	move2();
 	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
@@ -45,10 +52,10 @@ void moveFloor::Update()
 
 void moveFloor::Move()
 {
+	//const float startUpLimit = 5;  //最初のスピードの上限
 	const float speedUPLimit = 7;  //スピードの上限
 	const float speedDownLimit = 0;//スピードの下限
 	const float speed = 0.1;
-
 	//下降
 	if (UDPos == false) {
 
@@ -69,6 +76,7 @@ void moveFloor::Move()
 				speedDown = false;				//一定値まで行ったらフラグを切り替える。
 				UDPos = true;					//下がり切っているので上昇下降フラグも切り替える
 				moveSpeed = speedDownLimit;		//スピードを0に合わせる
+
 			}
 		}
 		m_pos.y += moveSpeed;
@@ -83,6 +91,7 @@ void moveFloor::Move()
 			//一定値まで行ったらフラグを切り替える
 			if (moveSpeed >= speedUPLimit) {
 				speedDown = true;
+
 			}
 		}
 
@@ -97,5 +106,32 @@ void moveFloor::Move()
 			}
 		}
 		m_pos.y -= moveSpeed;
+	}
+}
+
+void moveFloor::move2()
+{
+
+	const float movespeed = 4;
+	float y = m_pos.y;
+	//上昇
+	if (y <= up && udlimit == false) {
+		y += movespeed;
+	}
+	if (y >= up) {
+		udlimit = true;
+	}
+	if (button->GetOn() == false) {
+		//下降
+		if (y >= down && udlimit == true) {
+			y -= movespeed;
+		}
+		if (down >= y) {
+			udlimit = false;
+		}
+		m_pos.y = y;
+	}
+	if (button->GetOn() == true) {
+		m_pos = startPos;
 	}
 }

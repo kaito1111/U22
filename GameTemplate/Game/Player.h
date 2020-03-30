@@ -35,7 +35,7 @@ public:
 	{
 		m_PlayerNum = n;
 	}
-	void UpDate();
+	void Update();
 private:
 	bool Start();
 	void Draw();
@@ -56,7 +56,8 @@ private:
 	CVector3			m_CheckPoint = { 0.0f,100.0f,0.0f };		//リスポーン地点
 
 	float				JumpTimer = 0.0f;
-	SoundSource m_Se;
+	SoundSource m_Se;					//ジャンプ音
+	SoundSource m_Se2;					//m_Seが流れているときに流れるサブ音声
 
 	SpriteRender*		m_ThisNumSprite = nullptr;
 	int					m_PlayerNum = 0;

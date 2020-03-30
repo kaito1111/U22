@@ -10,6 +10,7 @@ class moveFloor;
 class GameObjectScythe;
 class StageObjectDossun;
 class StageObjectMagma;
+class Gimmick_Button;
 class stageObjectJenerator : public IGameObject
 {
 public:
@@ -36,6 +37,8 @@ private:
 	void Draw();
 	//今回はレベル君を使うぜ！
 	Level level;
+	Gimmick_Button* moveButtonPtr = nullptr;
+	moveFloor* moveFloorPtr = nullptr;
 	/*std::list< stageObjectStopFloor*> stopFloorList;
 	std::list<Goal*> goalList;
 	std::list<Iwa*> IwaList;
