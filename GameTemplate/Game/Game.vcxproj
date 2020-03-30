@@ -115,6 +115,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="graphics\RenderTarget.cpp" />
     <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="MoveFloor2.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="RorlingRock.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
     <ClInclude Include="moveFloor.h" />
+    <ClInclude Include="MoveFloor2.h" />
     <ClInclude Include="myEngine.h" />
     <ClInclude Include="myListener.h" />
     <ClInclude Include="NPole.h" />
