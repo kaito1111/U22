@@ -127,6 +127,8 @@ public:
 	{
 		return m_mainRenderTarget;
 	}
+
+	void a();
 	/*!
 	 *@brief	•`‰æŠJnB
 	 */
