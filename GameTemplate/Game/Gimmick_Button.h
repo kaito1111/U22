@@ -11,6 +11,9 @@ public:
 	void SetPosition(const CVector3& pos) {
 		m_Position = pos;
 	}
+	bool GetOn() {
+		return IsOn;
+	}
 private:
 	bool Start();
 	void Update();
@@ -21,6 +24,7 @@ private:
 	CVector3 m_Position = { 300.0f,0.0f,0.0 };
 
 	SkinModelRender* m_PushSkin = nullptr;
+	SoundSource m_Se;
 
 	Player* m_Player[2] = {};
 

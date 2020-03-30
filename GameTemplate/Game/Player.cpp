@@ -10,13 +10,15 @@ Player::Player()
 	m_model.Init(L"Assets/modelData/Player.cmo");
 	m_FrontModel.Init(L"Assets/modelData/player(front).cmo");
 	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
-	m_Se.Init(L"Assets/sound/junp.wav");
+	m_Se.Init(L"Assets/sound/jump.wav");
+	m_Se2.Init(L"Assets/sound/jump.wav");
 }
 
 
 Player::~Player()
 {
 	DeleteGO(m_Magnet);
+	DeleteGO(m_ThisNumSprite);
 }
 
 bool Player::Start()
@@ -40,7 +42,7 @@ bool Player::Start()
 	return true;
 }
 
-void Player::UpDate()
+void Player::Update()
 {
 	if (m_Pad->IsTrigger(enButtonLB2)) {
 		m_position = m_CheckPoint;
@@ -159,12 +161,15 @@ void Player::Move()
 		JumpTimer < 1.0f) {
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
-		m_Se.Play(false);
 	}
-	if( m_characon.IsOnGround() )
+	if (m_characon.IsOnGround())
 	{
 		if (m_Pad->IsTrigger(enButtonA)) {
 			movespeed.y = junpPower;
+			if (m_Se.IsPlaying()) {
+				m_Se2.Play(false);
+			}
+			m_Se.Play(false);
 		}
 		else {
 			JumpTimer = 0.0f;

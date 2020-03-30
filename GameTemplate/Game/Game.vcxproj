@@ -100,6 +100,7 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
@@ -117,6 +118,7 @@
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="MoveFloor2.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
+    <ClCompile Include="PostEffect.cpp" />
     <ClCompile Include="RorlingRock.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
@@ -190,6 +192,7 @@
     <ClCompile Include="sound\WaveFileBank.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bloom.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="DirectionLight.h" />
@@ -249,6 +252,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
+    <ClInclude Include="PostEffect.h" />
     <ClInclude Include="RorlingRock.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="SkinModelRender.h" />

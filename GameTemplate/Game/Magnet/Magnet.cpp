@@ -132,6 +132,7 @@ void MyMagnet::Magnet::Update()
 			SEffect->SetPosition(*m_Position);
 			SEffect->SetScale(CVector3::One() * 2.75f);
 			CoolTime = 0.0f;
+			m_Se.Play();
 		}
 		else {
 			CoolTime++;

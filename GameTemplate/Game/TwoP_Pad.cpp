@@ -31,20 +31,15 @@ void TwoP_Pad::Update()
 	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
 		m_pad[i].Update();
 		if (m_pad[i].IsTrigger(enButtonStart)&&
-			UpdateStop) {
+			player[i]->GetUpdate()) {
 			m_ManualSprite->SetW(1.0f);
-			UpdateStop = false;
+			player[i]->SetUpdate(false);
 		}
 		else {
 			if (m_pad[i].IsTrigger(enButtonStart)) {
 				m_ManualSprite->SetW(0.0f);
-				UpdateStop = true;
+				player[i]->SetUpdate(true);
 			}
-		}
-		if (UpdateStop
-			&& i < g_PlayerNum					//プレイヤーの人数分回す
-			) {
-			player[i]->UpDate();
 		}
 	}
 }

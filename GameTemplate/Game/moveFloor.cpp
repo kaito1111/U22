@@ -7,6 +7,7 @@ moveFloor::moveFloor(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*
 	/*m_model.Init(modelName);
 	m_pos = pos;
 	m_rot = rot;*/
+	m_Se.Init(L"Assets/sound/moveFloor.wav");
 }
 
 
@@ -36,6 +37,7 @@ bool moveFloor::Start()
 
 void moveFloor::Update()
 {
+	m_Se.Play(true);
 	//メッシュの云々。要するに当たり判定
 	Move();
 	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
