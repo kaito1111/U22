@@ -1,6 +1,7 @@
 #pragma once
 #include "graphics/2D/Sprite.h"
 #include "graphics/2D/SpriteRender.h"
+#include "PostEffect.h"
 
 class Game : public IGameObject
 {
@@ -39,4 +40,5 @@ private:
 	ID3D11RenderTargetView* m_frameBufferRenderTargetView;	//フレームRTV
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView;	//フレームDSV
 	D3D11_VIEWPORT m_frameBufferViewports;					//フレームビューポート
+	myEngine::PostEffect m_postEffect;								//ブルーム
 };

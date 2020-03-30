@@ -2,12 +2,8 @@
 #include "Iwa.h"
 
 
-Iwa::Iwa(const wchar_t* modelName, CVector3 pos, CQuaternion rot)
+Iwa::Iwa()
 {
-	m_model.Init(modelName);
-	m_pos = pos;
-	m_rot = rot;
-	//LearnMO(this, m_pos);
 }
 
 
