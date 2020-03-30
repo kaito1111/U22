@@ -107,6 +107,18 @@ namespace myEngine {
 
 	void Bloom::Update()
 	{
+		//重みの更新
+		float total = 0;
+		//重みの計算
+		for (int i = 0; i < NUM_WEIGHTS; i++) {
+			m_blurParam.weights[i] = expf(-0.5f * (float)(i * i) / m_blurDispersion);
+			total += 2.0f * m_blurParam.weights[i];
+		}
+		
+		//規格化
+		for (int i = 0; i < NUM_WEIGHTS; i++) {
+			m_blurParam.weights[i] /= total;
+		}
 
 	}
 
@@ -115,7 +127,7 @@ namespace myEngine {
 		//デバコン取得
 		auto dc = g_graphicsEngine->GetD3DDeviceContext();
 
-		dc->PSGetSamplers(0, 1, &m_samplerState);
+		//dc->PSGetSamplers(0, 1, &m_samplerState);
 
 		//バックアップ
 		g_graphicsEngine->oldTarget();

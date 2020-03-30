@@ -220,7 +220,7 @@ void GraphicsEngine::Init(HWND hWnd)
 	}
 
 	//レンダーターゲットの作成
-	m_mainRenderTarget->Create(FRAME_BUFFER_W, FRAME_BUFFER_H, DXGI_FORMAT_R8G8B8A8_UNORM);
+	m_mainRenderTarget->Create(FRAME_BUFFER_W, FRAME_BUFFER_H, DXGI_FORMAT_R16G16B16A16_FLOAT);
 
 	m_pd3dDeviceContext->RSSetViewports(1, &viewport);
 	m_pd3dDeviceContext->RSSetState(m_rasterizerState);
@@ -360,4 +360,14 @@ void GraphicsEngine::PostRenderTarget()
 	//あとでEndRenderにでも追加
 	m_frameBufferRenderTargetView->Release();
 	m_frameBufferDepthStencilView->Release();
+}
+
+void GraphicsEngine::a()
+{
+	g_graphicsEngine->ChangeRenderTarget(
+		m_pd3dDeviceContext,
+		m_frameBufferRenderTargetView,
+		m_frameBufferDepthStencilView,
+		&m_frameBufferViewports
+	);
 }

@@ -76,7 +76,7 @@ void GameCamera::Update()
 	g_camera3D.SetTarget(Target);
 	g_camera3D.SetPosition(pos);
 	//カメラの更新。
-	g_camera3D.Update();
+	g_camera3D.Update();    
 
 	//デバッグ用のカメラ
 	{
