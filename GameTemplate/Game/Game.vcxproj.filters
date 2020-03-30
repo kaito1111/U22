@@ -95,6 +95,7 @@
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="Bloom.cpp" />
+    <ClCompile Include="PostEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -212,6 +213,7 @@
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="Bloom.h" />
+    <ClInclude Include="PostEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />
