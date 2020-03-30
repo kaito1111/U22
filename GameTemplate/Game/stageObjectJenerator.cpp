@@ -9,12 +9,25 @@
 #include"StageObjectMagma.h"
 #include"Goal.h"
 #include "Gimmick_Button.h"
+#include"MoveFloor2.h"
 stageObjectJenerator::stageObjectJenerator()
 {
 	if (StageNum == 0) {
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
 		{
 			//動く床
+			if (wcscmp(objData.name, L"moveFloor") == 0) {
+				moveFloor* moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
+				moveFloorPtr->SetPosition(objData.position);
+				return true;
+			}
+			//動く床
+			if (wcscmp(objData.name, L"MoveFloor2") == 0) {
+				MoveFloor2* moveFloor2Ptr = NewGO<MoveFloor2>(0, "MoveFloor2");
+				moveFloor2Ptr->SetPosition(objData.position);
+				return true;
+			}
+			//動く床左右バージョン
 			if (wcscmp(objData.name, L"moveFloor") == 0) {
 				moveFloor* moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
 				moveFloorPtr->SetPosition(objData.position);

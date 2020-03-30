@@ -58,6 +58,7 @@ void moveFloor::Move()
 			//一定値まで行ったら加減速フラグを切り替える
 			if (moveSpeed >= speedUPLimit) {
 				speedDown = true;
+
 			}
 		}
 
@@ -69,6 +70,7 @@ void moveFloor::Move()
 				speedDown = false;				//一定値まで行ったらフラグを切り替える。
 				UDPos = true;					//下がり切っているので上昇下降フラグも切り替える
 				moveSpeed = speedDownLimit;		//スピードを0に合わせる
+
 			}
 		}
 		m_pos.y += moveSpeed;
@@ -83,6 +85,7 @@ void moveFloor::Move()
 			//一定値まで行ったらフラグを切り替える
 			if (moveSpeed >= speedUPLimit) {
 				speedDown = true;
+
 			}
 		}
 

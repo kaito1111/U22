@@ -6,16 +6,16 @@ class MoveFloor2 : public IGameObject
 public:
 	MoveFloor2();
 	~MoveFloor2();
+	void SetPosition(const CVector3& pos) {
+		m_pos = pos;
+	}
 
 private:
 	void Draw();
 	bool Start();
 	void Update();
 	void Move();
-	void SetPosition(const CVector3& pos) {
-		m_pos = pos;
-	}
-
+	
 	SkinModel m_model;								//スキンモデル
 	CVector3 m_pos = CVector3::Zero();				//座標
 	CQuaternion m_rot = CQuaternion::Identity();	//回転
