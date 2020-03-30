@@ -45,6 +45,7 @@ namespace MyMagnet {
 		//myEngine::SpriteRender* m_NMagSprite = nullptr;
 		CVector3*	m_Position	  = nullptr;
 		CVector3	m_MagnetForce = CVector3::Zero();
+		SoundSource m_Se;
 		float		CoolTime	  = 100.0f;
 		friend class MagnetManager;
 	};
