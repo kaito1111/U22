@@ -95,6 +95,8 @@
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="MoveFloor2.cpp" />
+    <ClCompile Include="Bloom.cpp" />
+    <ClCompile Include="PostEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -119,13 +121,13 @@
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
     <MeshContentTask Include="Assets\modelData\P.FBX" />
-    <MeshContentTask Include="Assets\modelData\Press_Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\bStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\sky.fbx" />
     <MeshContentTask Include="Assets\modelData\stage3.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
+    <MeshContentTask Include="Assets\modelData\Press.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -212,6 +214,8 @@
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="MoveFloor2.h" />
+    <ClInclude Include="Bloom.h" />
+    <ClInclude Include="PostEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />
