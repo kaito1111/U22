@@ -16,6 +16,7 @@ Magnet::Magnet()
 	////m_NMagSprite->SetPivot({ -1.0f,-1.0f });
 	//m_NMagSprite->SetRotation(m_Rot);
 	////m_NMagSprite->SetActive(false);
+	m_Se.Init(L"Assets/sound/MagnetEffrect1.wav");
 }
 
 Magnet::~Magnet()
