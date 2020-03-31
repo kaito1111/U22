@@ -1,15 +1,15 @@
 #include "stdafx.h"
 #include "stageObjectJenerator.h"
-#include "Iwa.h"
-#include"stageObject1.h"
-#include"moveFloor.h"
-#include"RorlingRock.h"
-#include"GameObjectScythe.h"
-#include"StageObjectDossun.h"
-#include"StageObjectMagma.h"
-#include"Goal.h"
-#include "Gimmick_Button.h"
-#include"MoveFloor2.h"
+#include "stageObject/Iwa.h"
+#include"stageObject/stageObject1.h"
+#include"stageObject/moveFloor.h"
+#include"stageObject/RorlingRock.h"
+#include"stageObject/GameObjectScythe.h"
+#include"stageObject/StageObjectDossun.h"
+#include"stageObject/StageObjectMagma.h"
+#include"stageObject/Goal.h"
+#include "stageObject/Gimmick_Button.h"
+#include"stageObject/MoveFloor2.h"
 stageObjectJenerator::stageObjectJenerator()
 {
 	if (StageNum == 0) {
@@ -25,12 +25,16 @@ stageObjectJenerator::stageObjectJenerator()
 			if (wcscmp(objData.name, L"moveFloor") == 0) {
 				moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
 				moveFloorPtr->SetPosition(objData.position);
+				//float型です。動かしたい量を入れてね。
+				moveFloorPtr->SetMoveLimit(100.0f);
 				return true;
 			}
 			//動く床左右バージョン
 			if (wcscmp(objData.name, L"moveFloor2") == 0) {
 				MoveFloor2* moveFloor2Ptr = NewGO<MoveFloor2>(0, "moveFloor2");
 				moveFloor2Ptr->SetPosition(objData.position);
+				//float型です。動かしたい量を入れてね。
+				moveFloorPtr->SetMoveLimit(100.0f);
 				return true;
 			}
 			

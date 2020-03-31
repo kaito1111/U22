@@ -107,7 +107,7 @@
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
-    <ClCompile Include="Gimmick_Button.cpp" />
+    <ClCompile Include="stageObject\Gimmick_Button.cpp" />
     <ClCompile Include="stageObject\Goal.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="exampleCode\ex2D.cpp">
@@ -119,7 +119,7 @@
     <ClCompile Include="stageObject\MoveFloor2.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="PostEffect.cpp" />
-    <ClCompile Include="RorlingRock.cpp" />
+    <ClCompile Include="stageObject\RorlingRock.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
@@ -199,7 +199,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
-    <ClInclude Include="Gimmick_Button.h" />
+    <ClInclude Include="stageObject\Gimmick_Button.h" />
     <ClInclude Include="stageObject\Goal.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="exampleCode\ex2D.h">
@@ -253,7 +253,7 @@
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="PostEffect.h" />
-    <ClInclude Include="RorlingRock.h" />
+    <ClInclude Include="stageObject\RorlingRock.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="sound\SoundEngine.h" />

@@ -25,15 +25,17 @@ bool MoveFloor2::Start()
 	m_model.Init(L"Assets/modelData/moveFloor2.cmo");
 	//m_pos = { 0.0f,100.0f,0.0f };
 	int MaxPlayer = Pad::CONNECT_PAD_MAX;
+	StartPos = m_pos;
 
-
+	//いらなくなったら消してくだしあ
+	button = FindGO< Gimmick_Button>("gimmick_button");
 	return true;
 }
 
 void MoveFloor2::Update()
 {
 	//メッシュの云々。要するに当たり判定
-	Move();
+	Move2();
 	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
@@ -95,5 +97,31 @@ void MoveFloor2::Move()
 			}
 		}
 		m_pos.x -= moveSpeed;
+	}
+}
+
+void MoveFloor2::Move2()
+{
+	const float movespeed = 4;
+	float y = m_pos.y;
+	//上昇
+	if (y <= up && udlimit == false) {
+		y += movespeed;
+	}
+	if (y >= up) {
+		udlimit = true;
+	}
+	if (button->GetOn() == false) {
+		//下降
+		if (y >= down && udlimit == true) {
+			y -= movespeed;
+		}
+		if (down >= y) {
+			udlimit = false;
+		}
+		m_pos.y = y;
+	}
+	if (button->GetOn() == true) {
+		m_pos = StartPos;
 	}
 }

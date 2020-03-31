@@ -23,7 +23,6 @@
     <ClCompile Include="graphics\RenderTarget.cpp" />
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
-    <ClCompile Include="RorlingRock.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
     <ClCompile Include="GPUBuffer\GPUBuffer.cpp" />
@@ -78,7 +77,6 @@
     <ClCompile Include="TitleStage.cpp" />
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
-    <ClCompile Include="Gimmick_Button.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="StageSelect.cpp" />
@@ -97,6 +95,8 @@
     <ClCompile Include="stageObject\stageObjectStopFloor.cpp" />
     <ClCompile Include="stageObject\stageObjectYokoKonbou.cpp" />
     <ClCompile Include="stageObjectJenerator.cpp" />
+    <ClCompile Include="stageObject\RorlingRock.cpp" />
+    <ClCompile Include="stageObject\Gimmick_Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -179,7 +179,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
-    <ClInclude Include="RorlingRock.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
     <ClInclude Include="SPole.h" />
@@ -197,7 +196,6 @@
     <ClInclude Include="TitleStage.h" />
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="ShadowMap.h" />
-    <ClInclude Include="Gimmick_Button.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="StageSelect.h" />
@@ -216,6 +214,8 @@
     <ClInclude Include="stageObject\stageObjectStopFloor.h" />
     <ClInclude Include="stageObject\stageObjectYokoKonbou.h" />
     <ClInclude Include="stageObjectJenerator.h" />
+    <ClInclude Include="stageObject\RorlingRock.h" />
+    <ClInclude Include="stageObject\Gimmick_Button.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

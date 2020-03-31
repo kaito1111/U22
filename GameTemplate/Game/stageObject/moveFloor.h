@@ -16,6 +16,10 @@ public:
 	void SetUp(bool up) {
 
 	}
+	void SetMoveLimit(const float& limit) {
+		up =  m_pos.y + limit;
+		down =m_pos.y -  limit;
+	}
 private:
 	bool Start();
 	void Update();

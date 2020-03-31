@@ -1,5 +1,6 @@
 #pragma once
 #include"physics/PhysicsStaticObject.h"
+#include"Gimmick_Button.h"
 class MoveFloor2 : public IGameObject
 {
 //左右に動くヤツやで。
@@ -9,13 +10,17 @@ public:
 	void SetPosition(const CVector3& pos) {
 		m_pos = pos;
 	}
-
+	void SetMoveLimit(const float& limit) {
+		up = m_pos.y + limit;
+		down = m_pos.y - limit;
+	}
 private:
+	Gimmick_Button* button = nullptr;
 	void Draw();
 	bool Start();
 	void Update();
 	void Move();
-	
+	void Move2();
 	SkinModel m_model;								//スキンモデル
 	CVector3 m_pos = CVector3::Zero();				//座標
 	CQuaternion m_rot = CQuaternion::Identity();	//回転
@@ -24,5 +29,11 @@ private:
 	float moveSpeed = 0;                            //速度。上がったり下がったりする
 	bool sLimit = false;		    				//動いた量
 	PhysicsStaticObject m_phyStaticObject;          //静的物理オブジェクト
+	float up = 0;
+	float down = 0;
+	bool start = false;
+	bool udlimit = false;
+	bool statPos = true;
+	CVector3 StartPos = CVector3::Zero();
 };
 
