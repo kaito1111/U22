@@ -27,18 +27,13 @@ stageObjectJenerator::stageObjectJenerator()
 				moveFloorPtr->SetPosition(objData.position);
 				return true;
 			}
-			//動く床
-			if (wcscmp(objData.name, L"MoveFloor2") == 0) {
-				MoveFloor2* moveFloor2Ptr = NewGO<MoveFloor2>(0, "MoveFloor2");
+			//動く床左右バージョン
+			if (wcscmp(objData.name, L"moveFloor2") == 0) {
+				MoveFloor2* moveFloor2Ptr = NewGO<MoveFloor2>(0, "moveFloor2");
 				moveFloor2Ptr->SetPosition(objData.position);
 				return true;
 			}
-			//動く床左右バージョン
-			if (wcscmp(objData.name, L"moveFloor") == 0) {
-				moveFloor* moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
-				moveFloorPtr->SetPosition(objData.position);
-				return true;
-			}
+			
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
 				Goal* goalPtr = NewGO<Goal>(0, "Goal");
