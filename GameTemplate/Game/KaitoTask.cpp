@@ -17,6 +17,7 @@ bool KaitoTask::Start()
 {
 	NewGO<TwoP_Pad>(5, "pad");
 	NewGO<GameCamera>(1, "camera");
+	NewGO< Gimmick_Button>(0, nullptr);
 	//NewGO<Goal>(1, "goal");
 	return true;
 }
