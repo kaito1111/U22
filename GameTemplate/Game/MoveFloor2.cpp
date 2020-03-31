@@ -22,7 +22,7 @@ bool MoveFloor2::Start()
 {
 
 	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/moveFloor.cmo");
+	m_model.Init(L"Assets/modelData/moveFloor2.cmo");
 	//m_pos = { 0.0f,100.0f,0.0f };
 	int MaxPlayer = Pad::CONNECT_PAD_MAX;
 
