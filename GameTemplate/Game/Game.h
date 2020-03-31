@@ -41,4 +41,5 @@ private:
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView;	//フレームDSV
 	D3D11_VIEWPORT m_frameBufferViewports;					//フレームビューポート
 	myEngine::PostEffect m_postEffect;								//ブルーム
+	KaitoTask* m_task = nullptr;
 };

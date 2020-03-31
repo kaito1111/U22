@@ -13,9 +13,6 @@ public:
 	void SetPosition(const CVector3& pos) {
 		m_pos = pos;
 	}
-	void SetUp(bool up) {
-
-	}
 private:
 	bool Start();
 	void Update();

@@ -29,7 +29,7 @@ stageObjectJenerator::stageObjectJenerator()
 			}
 			//動く床左右バージョン
 			if (wcscmp(objData.name, L"moveFloor2") == 0) {
-				MoveFloor2* moveFloor2Ptr = NewGO<MoveFloor2>(0, "moveFloor2");
+				moveFloor2Ptr = NewGO<MoveFloor2>(0, "moveFloor2");
 				moveFloor2Ptr->SetPosition(objData.position);
 				return true;
 			}
