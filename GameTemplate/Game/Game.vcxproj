@@ -296,6 +296,7 @@
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
     <MeshContentTask Include="Assets\modelData\P.FBX" />
     <MeshContentTask Include="Assets\modelData\Player(Back).FBX" />
