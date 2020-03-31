@@ -106,9 +106,9 @@
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Floor.cpp" />
-    <ClCompile Include="GameObjectScythe.cpp" />
-    <ClCompile Include="Gimmick_Button.cpp" />
-    <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="stageObject\GameObjectScythe.cpp" />
+    <ClCompile Include="stageObject\Gimmick_Button.cpp" />
+    <ClCompile Include="stageObject\Goal.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="exampleCode\ex2D.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -116,10 +116,10 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="graphics\RenderTarget.cpp" />
     <ClCompile Include="LightManager.cpp" />
-    <ClCompile Include="MoveFloor2.cpp" />
+    <ClCompile Include="stageObject\MoveFloor2.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="PostEffect.cpp" />
-    <ClCompile Include="RorlingRock.cpp" />
+    <ClCompile Include="stageObject\RorlingRock.cpp" />
     <ClCompile Include="ShadowMap.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
@@ -140,7 +140,7 @@
     <ClCompile Include="HID\Pad.cpp" />
     <ClCompile Include="GameObject\IGameObject.cpp" />
     <ClCompile Include="GPUBuffer\IndexBuffer.cpp" />
-    <ClCompile Include="Iwa.cpp" />
+    <ClCompile Include="stageObject\Iwa.cpp" />
     <ClCompile Include="KaitoTask.cpp" />
     <ClCompile Include="level\Level.cpp" />
     <ClCompile Include="level\MapChip.cpp" />
@@ -150,7 +150,7 @@
     <ClCompile Include="math\kMath.cpp" />
     <ClCompile Include="math\Matrix.cpp" />
     <ClCompile Include="math\Vector.cpp" />
-    <ClCompile Include="moveFloor.cpp" />
+    <ClCompile Include="stageObject\moveFloor.cpp" />
     <ClCompile Include="myEngine.cpp" />
     <ClCompile Include="myListener.cpp" />
     <ClCompile Include="NPole.cpp" />
@@ -169,13 +169,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Stage.cpp" />
-    <ClCompile Include="stageObject1.cpp" />
-    <ClCompile Include="StageObjectDossun.cpp" />
+    <ClCompile Include="stageObject\stageObject1.cpp" />
+    <ClCompile Include="stageObject\StageObjectDossun.cpp" />
     <ClCompile Include="stageObjectJenerator.cpp" />
-    <ClCompile Include="StageObjectMagma.cpp" />
-    <ClCompile Include="stageObjectShuriken.cpp" />
-    <ClCompile Include="stageObjectStopFloor.cpp" />
-    <ClCompile Include="stageObjectYokoKonbou.cpp" />
+    <ClCompile Include="stageObject\StageObjectMagma.cpp" />
+    <ClCompile Include="stageObject\stageObjectShuriken.cpp" />
+    <ClCompile Include="stageObject\stageObjectStopFloor.cpp" />
+    <ClCompile Include="stageObject\stageObjectYokoKonbou.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -198,9 +198,9 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Floor.h" />
-    <ClInclude Include="GameObjectScythe.h" />
-    <ClInclude Include="Gimmick_Button.h" />
-    <ClInclude Include="Goal.h" />
+    <ClInclude Include="stageObject\GameObjectScythe.h" />
+    <ClInclude Include="stageObject\Gimmick_Button.h" />
+    <ClInclude Include="stageObject\Goal.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="exampleCode\ex2D.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -226,7 +226,7 @@
     <ClInclude Include="HID\Pad.h" />
     <ClInclude Include="GameObject\IGameObject.h" />
     <ClInclude Include="GPUBuffer\IndexBuffer.h" />
-    <ClInclude Include="Iwa.h" />
+    <ClInclude Include="stageObject\Iwa.h" />
     <ClInclude Include="KaitoTask.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
@@ -236,8 +236,8 @@
     <ClInclude Include="math\kMath.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
-    <ClInclude Include="moveFloor.h" />
-    <ClInclude Include="MoveFloor2.h" />
+    <ClInclude Include="stageObject\moveFloor.h" />
+    <ClInclude Include="stageObject\MoveFloor2.h" />
     <ClInclude Include="myEngine.h" />
     <ClInclude Include="myListener.h" />
     <ClInclude Include="NPole.h" />
@@ -253,7 +253,7 @@
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
     <ClInclude Include="PostEffect.h" />
-    <ClInclude Include="RorlingRock.h" />
+    <ClInclude Include="stageObject\RorlingRock.h" />
     <ClInclude Include="ShadowMap.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="sound\SoundEngine.h" />
@@ -263,13 +263,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Stage.h" />
-    <ClInclude Include="stageObject1.h" />
-    <ClInclude Include="StageObjectDossun.h" />
+    <ClInclude Include="stageObject\stageObject1.h" />
+    <ClInclude Include="stageObject\StageObjectDossun.h" />
     <ClInclude Include="stageObjectJenerator.h" />
-    <ClInclude Include="StageObjectMagma.h" />
-    <ClInclude Include="stageObjectShuriken.h" />
-    <ClInclude Include="stageObjectStopFloor.h" />
-    <ClInclude Include="stageObjectYokoKonbou.h" />
+    <ClInclude Include="stageObject\StageObjectMagma.h" />
+    <ClInclude Include="stageObject\stageObjectShuriken.h" />
+    <ClInclude Include="stageObject\stageObjectStopFloor.h" />
+    <ClInclude Include="stageObject\stageObjectYokoKonbou.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />

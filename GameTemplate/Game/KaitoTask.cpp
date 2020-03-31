@@ -2,8 +2,8 @@
 #include "KaitoTask.h"
 #include "TwoP_Pad.h"
 #include "GameCamera.h"
-#include "Goal.h"
-#include "Gimmick_Button.h"
+#include "stageObject/Goal.h"
+#include "stageObject/Gimmick_Button.h"
 
 KaitoTask::KaitoTask()
 {
