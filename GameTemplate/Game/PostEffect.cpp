@@ -76,12 +76,12 @@ namespace myEngine {
 		//なんのバッファとして登録するんじゃ？　頂点バッファじゃ
 		bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 
-		//サブリソースでデータの初期化
-		//なんでしてるのかわからない。Sampleの方でNULL渡してもエラーはでんかった。
+		//初期化データにVertexの情報を入れる
 		D3D11_SUBRESOURCE_DATA InitData;
 		ZeroMemory(&InitData, sizeof(InitData));
 		InitData.pSysMem = vertex;
 
+		//第二引数は初期化データなので上で定義したVertexでm_vertexBuffer初期化？
 		//頂点バッファの作成
 		g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_vertexBuffer);
 	}
@@ -105,7 +105,7 @@ namespace myEngine {
 		//レイアウト設定
 		dc->IASetInputLayout(vsShader.GetInputLayout());
 		//頂点バッファの設定
-		dc->IAGetVertexBuffers(0, 1, &m_vertexBuffer, &vertexSize, &offset);
+		dc->IASetVertexBuffers(0, 1, &m_vertexBuffer, &vertexSize, &offset);
 		//描画
 		dc->Draw(4, 0);
 	}

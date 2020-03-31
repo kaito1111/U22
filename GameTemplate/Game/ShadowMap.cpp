@@ -58,8 +58,8 @@ void ShadowMap::UpdateFromLightDirection(CVector3 lightCameraPos, CVector3 light
 
 void ShadowMap::UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCameraTarget)
 {
-	m_lightCameraTarget = lightCameraTarget;
-	m_lightCameraPosition = lightCameraPos;
+	m_lightCameraTarget = CVector3::Zero();
+	m_lightCameraPosition = {0.0f, 4000.0f, 0.0f};
 	//ƒ‰ƒCƒg‚Ì•ûŒü‚ðŒvŽZ
 	auto lightDir = m_lightCameraTarget - m_lightCameraPosition;
 	if (lightDir.Length() < 0.00001f) {
@@ -70,7 +70,7 @@ void ShadowMap::UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCam
 	//³‹K‰»
 	lightDir.Normalize();
 	//‰e‚ð‚¨‚Æ‚·ˆ—
-	UpdateFromLightDirection(lightCameraPos, lightDir);
+	UpdateFromLightDirection(m_lightCameraPosition, lightDir);
 }
 
 void ShadowMap::BiginRender()

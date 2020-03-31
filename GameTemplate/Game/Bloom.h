@@ -46,7 +46,7 @@ namespace myEngine {
 		/// </summary>
 		void InitSamplerState();
 	private:
-		static const int NUM_WEIGHTS = 8;	//重みの数
+		static const int NUM_WEIGHTS = 8;	//重みの数 増やすとBloomが小さくなるよ
 		/// <summary>
 		/// ブラー用のパラメータバッファ
 		/// <para>これを変更したら、Shader/bloom.fxのCBBlurの中身も変更するように</para>
@@ -55,6 +55,9 @@ namespace myEngine {
 			CVector4 offset;			//間隔
 			float weights[NUM_WEIGHTS];	//重み
 		};
+		ID3D11Buffer* m_blurParamCB = nullptr;	//ブラーパラメーター用の定数バッファ
+		SBlurParam m_blurParam;					//ブラー用のパラメーター
+	private:
 		ID3D11SamplerState* m_samplerState = nullptr;		//サンプラーステート
 		ID3D11BlendState* m_disableBlendState = nullptr;	//αを無効にするブレンドステート
 		ID3D11BlendState* m_finalBlendState = nullptr;		//最終合成用ブレンドステート
@@ -67,7 +70,6 @@ namespace myEngine {
 		Shader m_vsYBlur;				//Yブラー用頂点シェーダー
 		Shader m_psBlur;				//ブラー用ピクセルシェーダー
 		Shader m_psFinal;				//最終合成用のピクセルシェーダー
-		ID3D11Buffer* m_blurParamCB = nullptr;	//ブラーパラメーター用の定数バッファ
-
+		float m_blurDispersion = 50.0f ;			//ブラーの分散具合　大きいと分散する。
 	};
 }
