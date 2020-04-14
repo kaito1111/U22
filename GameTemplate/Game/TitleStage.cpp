@@ -13,6 +13,7 @@ TitleStage::~TitleStage()
 
 bool TitleStage::Start()
 {
+	
 	m_copymainRendrTarget.Init(
 		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
 		FRAME_BUFFER_W,
@@ -51,6 +52,7 @@ void TitleStage::Draw()
 		g_camera3D.GetProjectionMatrix(),
 		0
 	);
+
 }
 
 void TitleStage::PostRender()

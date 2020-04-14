@@ -3,6 +3,8 @@
 #include "level/Level.h"
 #include "Game.h"
 #include "StageSelect.h"
+#include "TwoP_Pad.h"
+#include "Title.h"
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -12,11 +14,20 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 
+	//カメラを初期化。
+	g_camera3D.SetPosition({ -300.0f, 100.0f, 1000.0f });
+	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
+	g_camera3D.SetFar(10000.0f);
+	g_camera3D.SetNear(100.0f);
+
+	g_camera3D.Update();
+
 	//タイトルセレクト作ってます。
 	//タイトルに変えて欲しみがマリアナ海溝
 	//NewGO<StageSelect>(1, "game");
-	NewGO<Game>(1, "game");
-
+	//NewGO<Game>(1, "game");
+	NewGO<TwoP_Pad>(1, "twop_pad");
+	NewGO<Title>(1, "title");
 	//カメラの初期化
 	g_camera2D.Update2D();
 

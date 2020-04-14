@@ -33,8 +33,10 @@ bool moveFloor::Start()
 	int MaxPlayer = Pad::CONNECT_PAD_MAX;
 
 	startPos = m_pos;
-	up = m_pos.y + 100;
-	down = m_pos.y - 100;
+	//up = m_pos.y + 100;
+	//down = m_pos.y - 100;
+	//ワールド行列の更新
+	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
                	return true;
 }
 
@@ -120,7 +122,6 @@ void moveFloor::move2()
 	if (y >= up) {
 		udlimit = true;
 	}
-	if (button->GetOn() == false) {
 		//下降
 		if (y >= down && udlimit == true) {
 			y -= movespeed;
@@ -129,8 +130,5 @@ void moveFloor::move2()
 			udlimit = false;
 		}
 		m_pos.y = y;
-	}
-	if (button->GetOn() == true) {
-		m_pos = startPos;
-	}
+
 }

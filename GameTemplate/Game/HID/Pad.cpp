@@ -7,6 +7,7 @@
 
 #define INPUT_DEADZONE  ( 0.24f * FLOAT(0x7FFF) )  // 入力の遊びとなる範囲。
 
+Pad g_Pad[Pad::CONNECT_PAD_MAX];
 /*!
  *@brief	仮想ボタンとXBoxコントローラのボタンとの関連付けを表す構造体。
  */

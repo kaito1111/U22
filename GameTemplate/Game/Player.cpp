@@ -25,14 +25,9 @@ Player::~Player()
 
 bool Player::Start()
 {
-	m_characon.Init(30.0f, 20.0f, m_position);
-	//プレイヤーに磁力を持たせる
-	m_Magnet = NewGO<Magnet>(1, "Magnet");
-	LearnMO(m_Magnet, &m_position);
-
 	m_ThisNumSprite = NewGO<SpriteRender>(0);
 	wchar_t spriteName[256] = {};
-	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum);
+	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum--);
 	m_ThisNumSprite->Init(spriteName, 100.0f, 100.0f, true);
 	CVector3 ThisNumSpritePos = m_position;
 	ThisNumSpritePos.y += 150.0f;
@@ -41,6 +36,14 @@ bool Player::Start()
 	CQuaternion Rot;
 	Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
 	m_ThisNumSprite->SetRotation(Rot);
+
+	//プレイヤーに磁力を持たせる
+	m_Magnet = NewGO<Magnet>(1, "Magnet");
+	LearnMO(m_Magnet);
+	m_Magnet->SetPosition(&m_position);
+	m_Magnet->SetPad(&g_Pad[m_PlayerNum]);
+
+	m_characon.Init(30.0f, 20.0f, m_position);
 	return true;
 }
 
@@ -57,7 +60,7 @@ void Player::Update()
 	//	//ライトの座標を更新
 	//	m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
 	//}
-	if (m_Pad->IsTrigger(enButtonLB2)) {
+	if (g_Pad[g_PlayerNum].IsTrigger(enButtonLB2)) {
 		m_position = m_CheckPoint;
 		m_characon.SetPosition(m_CheckPoint);
 		movespeed.y = 0.0f;
@@ -145,7 +148,7 @@ void Player::SpawnPole()
 	m_forward = { mrot.m[2][0],mrot.m[2][1],mrot.m[2][2] };
 	m_forward.Normalize();
 	//NSpawn
-	if (m_Pad->IsTrigger(enButtonRB1))
+	if (g_Pad->IsTrigger(enButtonRB1))
 	{
 		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool {
 			DeleteGO(m_pole);
@@ -153,14 +156,14 @@ void Player::SpawnPole()
 		});
 		NPole* npole = NewGO<NPole>(1, "npole");
 		npole->SetPlayer(this);
-		CVector3 SpawnDir = { m_Pad->GetRStickXF() * -1.0f , m_Pad->GetRStickYF() , 0.0f };
+		CVector3 SpawnDir = { g_Pad[g_PlayerNum].GetRStickXF() * -1.0f , g_Pad[g_PlayerNum].GetRStickYF() , 0.0f };
 		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = CVector3::Up();
 		}
 		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
-	if (m_Pad->IsTrigger(enButtonLB1))
+	if (g_Pad[g_PlayerNum].IsTrigger(enButtonLB1))
 	{
 		QueryGOs< SPole>("spole", [&](SPole* m_pole)->bool {
 			DeleteGO(m_pole);
@@ -168,7 +171,7 @@ void Player::SpawnPole()
 		});
 		SPole* spole = NewGO< SPole>(1, "spole");
 		spole->SetPlayer(this);
-		CVector3 MoveDir = { m_Pad->GetRStickXF() * -1.0f , m_Pad->GetRStickYF() , 0.0f };
+		CVector3 MoveDir = { g_Pad[g_PlayerNum].GetRStickXF() * -1.0f , g_Pad[g_PlayerNum].GetRStickYF() , 0.0f };
 		if (MoveDir.Length() < 0.01f) {
 			MoveDir = CVector3::Up();
 		}
@@ -184,14 +187,14 @@ void Player::Move()
 	movespeed.z = 0.0f;
 	const float junpPower = 10.0f;
 	if (m_characon.IsJump() &&
-		m_Pad->IsPress(enButtonA) &&
+		g_Pad[g_PlayerNum].IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
 	}
 	if (m_characon.IsOnGround())
 	{
-		if (m_Pad->IsTrigger(enButtonA)) {
+		if (g_Pad[g_PlayerNum].IsTrigger(enButtonA)) {
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
 				m_Se2.Play(false);
@@ -207,7 +210,7 @@ void Player::Move()
 	movespeed.y -= gravity;
 
 	//左右の移動
-	movespeed.x = m_Pad->GetLStickXF() * -10.0f;
+	movespeed.x = g_Pad[g_PlayerNum].GetLStickXF() * -10.0f;
 
 	//磁石の移動
 	movespeed += m_Magnet->MagnetMove();
@@ -217,11 +220,11 @@ void Player::Move()
 
 
 	m_position = m_characon.Execute(1.0f, movespeed);
-	if (m_Pad->GetLStickXF() > 0.0f)
+	if (g_Pad[g_PlayerNum].GetLStickXF() > 0.0f)
 	{
 		m_rot.SetRotationDeg(CVector3::AxisY(), -90.0f);
 	}
-	if (m_Pad->GetLStickXF() < 0.0f)
+	if (g_Pad[g_PlayerNum].GetLStickXF() < 0.0f)
 	{
 		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
 	}
@@ -229,26 +232,26 @@ void Player::Move()
 
 void Player::MyMagnet()
 {
-	if (m_Pad->IsTrigger(enButtonX)) {
+	if (g_Pad[g_PlayerNum].IsTrigger(enButtonX)) {
 		if (!Magnet::State::NMode == m_Magnet->GetState()) {
 			m_Magnet->SetCool(100.0f);
 		}
 		m_Magnet->SetState(Magnet::State::NMode);
 	}
-	if (m_Pad->IsTrigger(enButtonY)) {
+	if (g_Pad[g_PlayerNum].IsTrigger(enButtonY)) {
 		if (!Magnet::State::SMode == m_Magnet->GetState()) {
 			m_Magnet->SetCool(100.0f);
 		}
 		m_Magnet->SetState(Magnet::State::SMode);
 	}
-	if (m_Pad->IsTrigger(enButtonB)) {
+	if (g_Pad[g_PlayerNum].IsTrigger(enButtonB)) {
 		m_Magnet->SetState(Magnet::State::NoMode);
 	}
 }
 
 void Player::SIBOU()				//OK
 {
-	if (m_Pad->IsTrigger(enButtonA)) {
+	if (g_Pad[g_PlayerNum].IsTrigger(enButtonA)) {
 		m_position = m_CheckPoint;
 		GameCamera* camera = FindGO<GameCamera>("camera");
 		camera->SetDec(0.0f);
@@ -298,7 +301,7 @@ void Player::Press()					//OK
 		m_Scale.z = 0.1f;
 		m_IsSi = true;
 	}
-	if (m_Pad->IsTrigger(enButtonA)) {
+	if (g_Pad[g_PlayerNum].IsTrigger(enButtonA)) {
 		m_Scale.z = 1.0f;
 	}
 }

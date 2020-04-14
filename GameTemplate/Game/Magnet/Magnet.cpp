@@ -16,7 +16,7 @@ Magnet::Magnet()
 	////m_NMagSprite->SetPivot({ -1.0f,-1.0f });
 	//m_NMagSprite->SetRotation(m_Rot);
 	////m_NMagSprite->SetActive(false);
-	m_Se.Init(L"Assets/sound/MagnetEffrect1.wav");
+	//m_Se.Init(L"Assets/sound/MagnetEffect2.wav");
 }
 
 Magnet::~Magnet()
@@ -126,13 +126,19 @@ void MyMagnet::Magnet::Update()
 		m_SMagSprite->SetW(1.0f);
 		//m_NMagSprite->SetActive(false);
 		m_NMagSprite->SetW(0.0f);*/
+		//if (m_Pad->IsTrigger(enButtonDown)) {
+		//	SeVolume -= 0.1f;
+		//}
+		//if (m_Pad->IsTrigger(enButtonUp)) {
+		//	SeVolume += 0.1f;
+		//}
 		if (CoolTime > 100.0f) {
 			Effect* SEffect = NewGO<Effect>(0);
 			SEffect->Play(L"Assets/effect/SMode.efk");
 			SEffect->SetPosition(*m_Position);
 			SEffect->SetScale(CVector3::One() * 2.75f);
 			CoolTime = 0.0f;
-			m_Se.Play();
+			//m_Se.Play();			
 		}
 		else {
 			CoolTime++;

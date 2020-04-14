@@ -5,6 +5,7 @@
 #include "KaitoTask.h"
 #include "DebugMan.h"
 #include "GameCamera.h"
+#include "TitleStage.h"
 
 Game::Game()
 {
@@ -37,8 +38,9 @@ bool Game::Start()
 {
 	//1”Ô–Ú
 	m_task = new KaitoTask();
+
 	//2”Ô–Ú
-	Stage* stage = NewGO<Stage>(0, "stage");
+	TitleStage* stage = NewGO<TitleStage>(0, "TitleStage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);
 

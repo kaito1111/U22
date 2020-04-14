@@ -35,6 +35,9 @@ namespace MyMagnet {
 		void SetCool(float t) {
 			CoolTime = t;
 		}
+		void SetPad(Pad* pad) {
+			m_Pad = pad;
+		}
 	private:
 		bool Start();
 		void Update();
@@ -45,8 +48,10 @@ namespace MyMagnet {
 		//myEngine::SpriteRender* m_NMagSprite = nullptr;
 		CVector3*	m_Position	  = nullptr;
 		CVector3	m_MagnetForce = CVector3::Zero();
-		SoundSource m_Se;
+		//SoundSource m_Se;
 		float		CoolTime	  = 100.0f;
+		float		SeVolume = 2.0f;
+		Pad*		m_Pad = nullptr;
 		friend class MagnetManager;
 	};
 }

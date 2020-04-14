@@ -7,6 +7,7 @@ class RorlingRock;
 class Iwa;
 class stageObject1;
 class moveFloor;
+class MoveFloor2;
 class GameObjectScythe;
 class StageObjectDossun;
 class StageObjectMagma;

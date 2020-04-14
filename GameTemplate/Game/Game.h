@@ -3,6 +3,8 @@
 #include "graphics/2D/SpriteRender.h"
 #include "PostEffect.h"
 
+class KaitoTask;
+
 class Game : public IGameObject
 {
 public:
