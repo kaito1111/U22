@@ -12,4 +12,5 @@ private:
 	void Update()override;
 	SpriteRender* m_Sprite = nullptr;
 	Fade* m_fade = nullptr;
+	SoundSource m_bgm;
 };

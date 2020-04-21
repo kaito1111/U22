@@ -11,7 +11,6 @@ public:
 		Decline = d;
 	}
 private:
-	SpriteRender* m_ButtonSprite		= nullptr;
 	int	m_PlayerNum			= 0;
 	bool Start()override;
 	void Update()override;

@@ -11,7 +11,8 @@ Title::Title()
 		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
-	);
+	); 
+	m_bgm.Play("Title_bgm.wav");
 }
 
 Title::~Title()

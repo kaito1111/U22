@@ -42,7 +42,7 @@ bool Game::Start()
 	m_task = new KaitoTask();
 
 	//2”Ô–Ú
-	TitleStage* stage = NewGO<TitleStage>(0, "TitleStage");
+	//TitleStage* stage = NewGO<TitleStage>(0, "TitleStage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);
 	Level level;
