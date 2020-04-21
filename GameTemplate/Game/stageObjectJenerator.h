@@ -20,9 +20,15 @@ public:
 	void setStageNum(const int& num) {
 		StageNum = num;
 	}
+	/*void setStage(enum Stage stageee) {
+		
+	}*/
+
 private:
+	int StageNum = 1;
+	//enum stageNum{ stage1, stage2, stage3};
 	//オブジェクト
-	int StageNum = 0;
+	
 	/*stageObjectStopFloor* stopFloor = nullptr;
 	Goal* goal = nullptr;
 	StageObjectMagma* magma = nullptr;

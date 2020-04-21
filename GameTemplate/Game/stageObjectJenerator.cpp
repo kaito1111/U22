@@ -12,13 +12,17 @@
 #include"stageObject/MoveFloor2.h"
 stageObjectJenerator::stageObjectJenerator()
 {
+	/*enum stageNum stage;
+	switch(stage) {
+	case stage1:*/
+	//enumバグったからとりあえずintで引数渡してセレクトさせます。0番目から始まるよ
 	if (StageNum == 0) {
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
 		{
 			//ギミック起動ボタン
 			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
 				moveButtonPtr = NewGO<Gimmick_Button>(0, "gimmick_button");
-				moveButtonPtr->SetPosition(/*CVector3::Zero()*/objData.position);
+				moveButtonPtr->SetPosition(objData.position);
 				return true;
 			}
 			//動く床
@@ -26,24 +30,32 @@ stageObjectJenerator::stageObjectJenerator()
 				moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
 				moveFloorPtr->SetPosition(objData.position);
 				//float型です。動かしたい量を入れてね。
-				moveFloorPtr->SetMoveLimit(300.0f);
-				moveFloorPtr->SetUpdate(false);
+				moveFloorPtr->SetMoveLimit(100.0f);
 				return true;
 			}
 			//動く床左右バージョン
 			if (wcscmp(objData.name, L"moveFloor2") == 0) {
-				moveFloor2Ptr = NewGO<MoveFloor2>(0, "moveFloor2");
+				MoveFloor2* moveFloor2Ptr = NewGO<MoveFloor2>(0, "moveFloor2");
 				moveFloor2Ptr->SetPosition(objData.position);
 				//float型です。動かしたい量を入れてね。
-				moveFloor2Ptr->SetMoveLimit(100.0f);
-				moveFloor2Ptr->SetUpdate(false);
+				moveFloorPtr->SetMoveLimit(100.0f);
 				return true;
-			}			
+			}
+
+			//ゴール
+			if (wcscmp(objData.name, L"Goal") == 0) {
+				Goal* goalPtr = NewGO<Goal>(0, "Goal");
+				goalPtr->SetPosition(objData.position);
+			}
+
 			return false;
 		});
-	}	
+	}
+	
+		
+	
 
-	//ステージ二つ目。未完成。ふｃきｎ。
+	//case stage2:
 	if (StageNum == 1) {
 		//ドッスン
 		level.Init(L"Assets/level/stageDossun.tkl", [&](const auto& objData)
@@ -53,8 +65,14 @@ stageObjectJenerator::stageObjectJenerator()
 				dossunPtr->SetPosition(objData.position);
 				return true;
 			}
+			//ゴール
+			if (wcscmp(objData.name, L"Goal") == 0) {
+				Goal* goalPtr = NewGO<Goal>(0, "Goal");
+				goalPtr->SetPosition(objData.position);
+			}
 		});
 	}
+	
 }
 
 
@@ -109,15 +127,6 @@ bool stageObjectJenerator::Start()
 
 void stageObjectJenerator::Update()
 {
-	if (StageNum == 0) {
-		if (moveButtonPtr->IsOn()) {
-				moveFloor2Ptr->SetUpdate(true);
-			if (moveFloor2Ptr->GetPosition().x < -100.0f) {
-				moveFloor2Ptr->SetUpdate(false);
-			}
-			moveFloorPtr->SetUpdate(true);
-		}
-	}
 	//level.Draw();
 	/*for (auto& i : IwaList) {
 		i->Update();
