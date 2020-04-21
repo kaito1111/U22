@@ -6,7 +6,12 @@
 Stage::Stage()
 {
 	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/Course_Level1.cmo");
+	if (stageNum == 0) {
+		m_model.Init(L"Assets/modelData/Course_Level1.cmo");
+	}
+	if (stageNum == 1) {
+		m_model.Init(L"Assets/modelData/stage3.cmo");
+	}
 	//シャドウレシーバーとする
 	m_model.SetShadowReciever(true);
 	m_phyStaticObuject.CreateMeshObject(m_model, CVector3::Zero(), CQuaternion::Identity());
@@ -22,15 +27,17 @@ Stage::~Stage()
 
 bool Stage::Start()
 {
+	generator = NewGO<stageObjectJenerator>(1, "generator");
+	generator->setStageNum(stageNum);
 	return true;
 }
 
 void Stage::Update()
 {
 	count++;
-	if (count > 5 && newStage == false) {
+	if (count > 0 && newStage == false) {
 		newStage = true;
-		generator = NewGO<stageObjectJenerator>(1, "generator");
+		
 	}
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());

@@ -12,6 +12,10 @@
 #include"stageObject/MoveFloor2.h"
 stageObjectJenerator::stageObjectJenerator()
 {
+	/*enum stageNum stage;
+	switch(stage) {
+	case stage1:*/
+	//enumバグったからとりあえずintで引数渡してセレクトさせます。0番目から始まるよ
 	if (StageNum == 0) {
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
 		{
@@ -37,18 +41,21 @@ stageObjectJenerator::stageObjectJenerator()
 				moveFloorPtr->SetMoveLimit(100.0f);
 				return true;
 			}
-			
+
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
 				Goal* goalPtr = NewGO<Goal>(0, "Goal");
 				goalPtr->SetPosition(objData.position);
 			}
-			
+
 			return false;
 		});
-	}	
+	}
+	
+		
+	
 
-	//ステージ二つ目。未完成。ふｃきｎ。
+	//case stage2:
 	if (StageNum == 1) {
 		//ドッスン
 		level.Init(L"Assets/level/stageDossun.tkl", [&](const auto& objData)
@@ -65,6 +72,7 @@ stageObjectJenerator::stageObjectJenerator()
 			}
 		});
 	}
+	
 }
 
 

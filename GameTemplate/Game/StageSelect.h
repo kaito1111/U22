@@ -3,6 +3,7 @@ class stageObjectJenerator;
 class TitleStage;
 class TitleCamera;
 class Game;
+class Stage;
 class StageSelect : public IGameObject
 {
 public:
@@ -12,6 +13,7 @@ public:
 	void Update();
 	void stageSelect();
 private:
+	Stage* stage = nullptr;
 	Game* game = nullptr;
 	TitleCamera* titleCamera = nullptr;
 	TitleStage* titleStage = nullptr;
