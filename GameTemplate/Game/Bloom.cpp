@@ -14,6 +14,8 @@ namespace myEngine {
 		InitAlphaBlendState();
 		//サンプラーステート
 		InitSamplerState();
+		//定数バッファの初期化
+		InitConstantBuffer();
 	}
 
 	Bloom::~Bloom()
@@ -30,6 +32,22 @@ namespace myEngine {
 			FRAME_BUFFER_H,
 			DXGI_FORMAT_R16G16B16A16_FLOAT
 		);
+
+		//ブラーをかけるためのダウンサンプリング用のレンダリングターゲット
+		//横ブラー用を作成。
+		m_downSamplingRT[0].Create(
+			FRAME_BUFFER_W * 0.5f,	//横の解像度を半分に
+			FRAME_BUFFER_H,
+			DXGI_FORMAT_R16G16B16A16_FLOAT
+		);
+
+		//縦ブラー
+		m_downSamplingRT[1].Create(
+			FRAME_BUFFER_W * 0.5f,
+			FRAME_BUFFER_H * 0.5f,	//解像度を半分に
+			DXGI_FORMAT_R16G16B16A16_FLOAT
+		);
+
 	}
 	
 	void Bloom::InitShader()
@@ -39,13 +57,13 @@ namespace myEngine {
 		//輝度を抽出した頂点シェーダーのロード
 		m_psLuminance.Load("Assets/shader/bloom.fx", "PSSamplingLuminance", Shader::EnType::PS);
 		//Xブラー用の頂点シェーダー
-		//m_vsXBlur.Load("Assets/shader/bloom.fx", "VSXBlur", Shader::EnType::VS);
+		m_vsXBlur.Load("Assets/shader/bloom.fx", "VSXBlur", Shader::EnType::VS);
 		////Yブラー用の頂点シェーダー
-		//m_vsYBlur.Load("Aseets/shader/bloom.fx", "VSYBlur", Shader::EnType::VS);
+		m_vsYBlur.Load("Assets/shader/bloom.fx", "VSYBlur", Shader::EnType::VS);
 		////ブラー用ピクセルシェーダー
-		//m_psBlur.Load("Assets/shader/bloom.fx", "PSBlur", Shader::EnType::PS);
+		m_psBlur.Load("Assets/shader/bloom.fx", "PSBlur", Shader::EnType::PS);
 		////最終合成用ピクセルシェーダー
-		//m_psFinal.Load("Assets/Shader/bloom.fx", "PSFinal", Shader::EnType::PS);
+		m_psFinal.Load("Assets/Shader/bloom.fx", "PSFinal", Shader::EnType::PS);
 	}
 
 	void Bloom::InitAlphaBlendState()
@@ -110,6 +128,8 @@ namespace myEngine {
 		//重みの更新
 		float total = 0;
 		//重みの計算
+		//正負の結果が一緒なので、サンプリングするテクセルの数の半分でOK！
+		//重みが8→サンプリングテクセル16
 		for (int i = 0; i < NUM_WEIGHTS; i++) {
 			m_blurParam.weights[i] = expf(-0.5f * (float)(i * i) / m_blurDispersion);
 			total += 2.0f * m_blurParam.weights[i];
@@ -135,9 +155,11 @@ namespace myEngine {
 		//サンプラーステートのセット
 		dc->PSSetSamplers(0, 1, &m_samplerState);
 		
+		//ガウシアンフィルタは縦横ブラーを一気にかけず
+		//横→縦（逆もOK）でかけるときれいにでる。
 		//輝度抽出
 		{
-			//αブレンドを無効のする
+			//αブレンドを無効にする
 			float blendFactor[] = { 0.0f,0.0f,0.0f,0.0f };
 			dc->OMSetBlendState(m_disableBlendState, blendFactor, 0xffffffff);
 
@@ -155,7 +177,77 @@ namespace myEngine {
 			//フルスクリーン描画
 			postEfferct.DrawFullScreenQuadPrimitive(m_vs, m_psLuminance);
 		}
-		
+
+		//輝度を抽出したテクスチャにXブラーをかける
+		{
+			//Xブラー用のレンダリングターゲットに変更する。
+			g_graphicsEngine->ChangeRenderTarget(dc, &m_downSamplingRT[0], m_downSamplingRT[0].GetViewport());
+
+			//輝度テクスチャをt0レジスタに設定
+			//輝度テクスチャの取得
+			auto luminanceTexSRV = m_luminaceRT.GetRenderTargetSRV();
+			//頂点シェーダーにシェーダーリソースを設定
+			dc->VSSetShaderResources(0, 1, &luminanceTexSRV);
+			//ピクセルシェーダーにリソースを設定
+			dc->PSSetShaderResources(0, 1, &luminanceTexSRV);
+
+			//定数バッファの更新
+			//横の頂点間隔
+			m_blurParam.offset.x = 16.0f / m_luminaceRT.GetWidth();
+			//縦の頂点間隔
+			m_blurParam.offset.y = 0.0f;
+			//更新
+			dc->UpdateSubresource(m_blurParamCB, 0, nullptr, &m_blurParam, 0, 0);
+			//ブラー用の定数バッファを設定
+			dc->PSSetConstantBuffers(0, 1, &m_blurParamCB);
+
+			//フルスクリーン描画
+			postEfferct.DrawFullScreenQuadPrimitive(m_vsXBlur, m_psBlur);
+		}
+
+		//Xブラーをかけたテクスチャに、Yブラーをかける。
+		{
+			//Yブラー用のレンダリングターゲットに変更
+			g_graphicsEngine->ChangeRenderTarget(dc, &m_downSamplingRT[1], m_downSamplingRT[1].GetViewport());
+
+			//Xブラーをかけたテクスチャをt0レジスタに設定
+			auto xBlurSRV = m_downSamplingRT[0].GetRenderTargetSRV();
+			//shader設定
+			dc->VSSetShaderResources(0, 1, &xBlurSRV);
+			dc->PSSetShaderResources(0, 1, &xBlurSRV);
+
+			//定数バッファ更新
+			//頂点間隔（解像度を切り替えてるイメージ
+			m_blurParam.offset.x = 0.0f;
+			m_blurParam.offset.y = 16.0f / m_luminaceRT.GetHeight();
+			dc->UpdateSubresource(m_blurParamCB, 0, nullptr, &m_blurParam, 0, 0);
+
+			//フルスクリーン描画
+			postEfferct.DrawFullScreenQuadPrimitive(m_vsYBlur, m_psBlur);
+		}
+
+		//最後にぼかした絵を加算合成でメインレンダリングターゲットに合成して終わり
+		{
+			//メインレンダリングターゲットに変更
+			auto mainRT = g_graphicsEngine->GetOffScreenRenderTarget();
+			g_graphicsEngine->ChangeRenderTarget(dc, mainRT, mainRT->GetViewport());
+
+			//XYブラーをかけたテクスチャをt0レジスタに設定
+			auto srv = m_downSamplingRT[1].GetRenderTargetSRV();
+			//srvを設定
+			dc->PSSetShaderResources(0, 1, &srv);
+
+			//加算合成用のブレンディングステートを設定
+			float blendFactor[] = { 0.0f,0.0f,0.0f,0.0f };
+			//最終合成用ブレンドステートをセット
+			dc->OMSetBlendState(m_finalBlendState, blendFactor, 0xffffffff);
+
+			//フルスクリーン描画
+			postEfferct.DrawFullScreenQuadPrimitive(m_vs, m_psFinal);
+
+			//ブレンドステートをもとに戻す
+			dc->OMSetBlendState(m_disableBlendState, blendFactor, 0xffffffff);
+		}
 		//ターゲットをもとに戻す
 		g_graphicsEngine->PostRenderTarget();
 	}

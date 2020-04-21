@@ -27,6 +27,7 @@ namespace myEngine {
 		void Draw();
 		/// <summary>
 		/// フルスクリーン描画
+		/// <para>設定したいVS,PSをおくる</para>
 		/// </summary>
 		/// <param name="vs">頂点シェーダー</param>
 		/// <param name="ps">ピクセルシェーダー</param>

@@ -47,6 +47,7 @@ bool Game::Start()
 void Game::Update()
 {
 	Sample();
+	m_postEffect.Update();
 }
 
 //いろいろなサンプル
@@ -80,7 +81,10 @@ void Game::Draw()
 void Game::PostRender()
 {
 	//ポストエフェクト描画
-	m_postEffect.Draw();
+	//m_postEffect.Draw();
+
+	auto a = g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV();
+
 	//ドロー
 	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
