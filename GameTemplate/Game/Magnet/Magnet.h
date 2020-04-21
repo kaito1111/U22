@@ -42,16 +42,16 @@ namespace MyMagnet {
 		bool Start();
 		void Update();
 		void PostRender();
-		State		state		  = NoMode;
+		State state		  = NoMode;
 		CQuaternion m_Rot		  = CQuaternion::Identity();
 		//myEngine::SpriteRender* m_SMagSprite = nullptr;
 		//myEngine::SpriteRender* m_NMagSprite = nullptr;
-		CVector3*	m_Position	  = nullptr;
-		CVector3	m_MagnetForce = CVector3::Zero();
+		CVector3* m_Position	  = nullptr;
+		CVector3 m_MagnetForce = CVector3::Zero();
 		//SoundSource m_Se;
-		float		CoolTime	  = 100.0f;
-		float		SeVolume = 2.0f;
-		Pad*		m_Pad = nullptr;
+		float CoolTime	  = 100.0f;
+		float SeVolume = 2.0f;
+		Pad* m_Pad = nullptr;
 		friend class MagnetManager;
 	};
 }

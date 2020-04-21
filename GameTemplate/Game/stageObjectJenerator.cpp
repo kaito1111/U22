@@ -38,14 +38,7 @@ stageObjectJenerator::stageObjectJenerator()
 				moveFloor2Ptr->SetMoveLimit(100.0f);
 				moveFloor2Ptr->SetUpdate(false);
 				return true;
-			}
-			
-			//ÉSÅ[Éã
-			if (wcscmp(objData.name, L"Goal") == 0) {
-				Goal* goalPtr = NewGO<Goal>(0, "Goal");
-				goalPtr->SetPosition(objData.position);
-			}
-			
+			}			
 			return false;
 		});
 	}	
@@ -59,11 +52,6 @@ stageObjectJenerator::stageObjectJenerator()
 				StageObjectDossun* dossunPtr = NewGO< StageObjectDossun>(0, "Dossun");
 				dossunPtr->SetPosition(objData.position);
 				return true;
-			}
-			//ÉSÅ[Éã
-			if (wcscmp(objData.name, L"Goal") == 0) {
-				Goal* goalPtr = NewGO<Goal>(0, "Goal");
-				goalPtr->SetPosition(objData.position);
 			}
 		});
 	}
@@ -122,7 +110,7 @@ bool stageObjectJenerator::Start()
 void stageObjectJenerator::Update()
 {
 	if (StageNum == 0) {
-		if (moveButtonPtr->GetOn()) {
+		if (moveButtonPtr->IsOn()) {
 				moveFloor2Ptr->SetUpdate(true);
 			if (moveFloor2Ptr->GetPosition().x < -100.0f) {
 				moveFloor2Ptr->SetUpdate(false);

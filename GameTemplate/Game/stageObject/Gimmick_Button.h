@@ -12,8 +12,8 @@ public:
 	void SetPosition(const CVector3 pos) {
 		m_Position = pos;
 	}
-	bool GetOn() {
-		return IsOn;
+	bool IsOn() {
+		return isOn;
 	}
 private:
 	bool Start();
@@ -28,5 +28,5 @@ private:
 	SoundSource m_Se;
 	Player* m_Player[2] = {};
 
-	bool IsOn = false;
+	bool isOn = false;
 };

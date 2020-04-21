@@ -111,7 +111,7 @@ void MoveFloor2::Move2()
 	if (y >= up) {
 		udlimit = true;
 	}
-	if (button->GetOn() == false) {
+	if (button->IsOn() == false) {
 		//‰º~
 		if (y >= down && udlimit == true) {
 			y -= movespeed;
@@ -121,7 +121,7 @@ void MoveFloor2::Move2()
 		}
 		m_pos.y = y;
 	}
-	if (button->GetOn() == true) {
+	if (button->IsOn() == true) {
 		m_pos = StartPos;
 	}
 }

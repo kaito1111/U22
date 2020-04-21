@@ -2,6 +2,7 @@
 #include "graphics/2D/Sprite.h"
 #include "graphics/2D/SpriteRender.h"
 #include "PostEffect.h"
+#include "stageObject/Goal.h"
 
 class KaitoTask;
 
@@ -10,6 +11,9 @@ class Game : public IGameObject
 public:
 	Game();
 	~Game();
+	void SetStage(int num) {
+		StageNum = num;
+	}
 private:
 	/// <summary>
 	/// スタート
@@ -34,6 +38,8 @@ private:
 	/// </summary>
 	void PostRender();
 private:
+	Goal* goalPtr = nullptr;
+	int StageNum = 0;
 	SpriteRender* m_test = nullptr;							//スプライトレンダー
 	Sprite m_copyMainRtToFrameBufferSprite;					//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 	SoundSource	m_se;										//サウンドソース

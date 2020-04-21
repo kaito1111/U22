@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "moveFloor.h"
 #include "Player.h"
-#include"HID/Pad.h"
 #include"Gimmick_Button.h"
 moveFloor::moveFloor(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 {

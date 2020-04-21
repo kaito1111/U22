@@ -103,6 +103,7 @@
     <ClCompile Include="stageObject\RorlingRock.cpp" />
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Fade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -224,6 +225,7 @@
     <ClInclude Include="stageObject\RorlingRock.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="Fade.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

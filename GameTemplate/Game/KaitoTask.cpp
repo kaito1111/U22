@@ -19,7 +19,7 @@ KaitoTask::KaitoTask()
 		//優先度をステージより早く
 		m_Player[i] = NewGO<Player>(0, PlayerNo);
 		m_Player[i]->SetPosition(SpownPos);
-		m_Player[i]->SetPlayerNum(i++);
+		m_Player[i++]->SetPlayerNum(i);
 	}
 	//NewGO<Goal>(1, "goal");
 }

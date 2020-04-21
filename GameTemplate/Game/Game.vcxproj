@@ -105,6 +105,7 @@
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />

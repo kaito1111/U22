@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Goal.h"
-#include "Player.h"
 #include "DirectionLight.h"
 
 Goal::Goal(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)

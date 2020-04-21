@@ -1,5 +1,5 @@
 #pragma once
-class Player;
+#include "Player.h"
 class Goal : public IGameObject
 {
 public:
@@ -14,7 +14,7 @@ public:
 	void SetPosition(const CVector3& pos) {
 		m_Position = pos;
 	}
-	bool GetClear() {
+	bool IsClear() {
 		return isClear;
 	}
 private:	
