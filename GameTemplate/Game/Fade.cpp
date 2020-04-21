@@ -11,7 +11,7 @@ Fade::Fade()
 	m_SSprite = NewGO<SpriteRender>(0);
 	m_SSprite->Init(L"Assets/sprite/LoadS.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 	m_NSprite = NewGO<SpriteRender>(0);
-	m_SSprite->Init(L"Assets/sprite/LoadN.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
+	m_NSprite->Init(L"Assets/sprite/LoadN.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 }
 
 Fade::~Fade()

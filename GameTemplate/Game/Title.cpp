@@ -41,7 +41,7 @@ void Title::Update()
 	g_camera3D.Update();
 	if (g_Pad->IsPress(enButtonA)) {
 		NewGO<Game>(0, "game");
-		//NewGO<Fade>(0, "fade");
+		NewGO<Fade>(0, "fade");
 		DeleteGO(this);
 	}
 	float moveSpeed = 3.0f;
