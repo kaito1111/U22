@@ -8,10 +8,9 @@ namespace MyMagnet {
 		MagnetList m_MagnetList;
 	public:
 		/*¥Î‚ÆˆÊ’u‚ğƒ}ƒl[ƒWƒƒ[‚É“o˜^*/
-		void LearnMagetObject(Magnet* magnetObject,CVector3* pos)
+		void LearnMagetObject(Magnet* magnetObject)
 		{
 			m_MagnetList.push_back(magnetObject);
-			magnetObject->SetPosition(pos);
 		}
 
 		/*IGameObject‚ÌFindGOs‚Æˆê*/
@@ -42,8 +41,8 @@ namespace MyMagnet {
 	}
 
 	//¥—Í‚Ì“o˜^B‰Šú‰»
-	static inline void LearnMO(Magnet* magnetObject,CVector3* pos) {
-		return MagnetManeger().LearnMagetObject(magnetObject , pos);
+	static inline void LearnMO(Magnet* magnetObject) {
+		return MagnetManeger().LearnMagetObject(magnetObject);
 	}
 
 	static inline void FindMO(std::function<bool(Magnet* mag)> func) {

@@ -12,6 +12,11 @@
     <ImageContentTask Include="Assets\sprite\1P_Pointer.png" />
     <ImageContentTask Include="Assets\sprite\manual.png" />
     <ImageContentTask Include="Assets\sprite\Clear.png" />
+    <ImageContentTask Include="Assets\sprite\Title.png" />
+    <ImageContentTask Include="Assets\sprite\LoadN.png" />
+    <ImageContentTask Include="Assets\sprite\LoadScreen(Up).png" />
+    <ImageContentTask Include="Assets\sprite\LoadS.png" />
+    <ImageContentTask Include="Assets\sprite\LoadScreen(Down).png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
@@ -97,6 +102,8 @@
     <ClCompile Include="stageObjectJenerator.cpp" />
     <ClCompile Include="stageObject\RorlingRock.cpp" />
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
+    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Fade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -128,6 +135,7 @@
     <MeshContentTask Include="Assets\modelData\stage3.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
     <MeshContentTask Include="Assets\modelData\Press.FBX" />
+    <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -216,6 +224,8 @@
     <ClInclude Include="stageObjectJenerator.h" />
     <ClInclude Include="stageObject\RorlingRock.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="Fade.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

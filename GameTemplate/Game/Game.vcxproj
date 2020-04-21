@@ -105,6 +105,7 @@
     <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
     <ClCompile Include="StageSelect.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="TitleStage.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
@@ -197,6 +199,7 @@
     <ClInclude Include="DebugMan.h" />
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="Fade.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />
@@ -275,6 +278,7 @@
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
     <ClInclude Include="StageSelect.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="TitleStage.h" />
     <ClInclude Include="TwoP_Pad.h" />
@@ -296,6 +300,7 @@
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />
     <MeshContentTask Include="Assets\modelData\NPole.FBX" />
     <MeshContentTask Include="Assets\modelData\P.FBX" />
     <MeshContentTask Include="Assets\modelData\Player(Back).FBX" />
@@ -315,9 +320,14 @@
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
   </ItemGroup>
   <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\LoadN.png" />
+    <ImageContentTask Include="Assets\sprite\LoadS.png" />
+    <ImageContentTask Include="Assets\sprite\LoadScreen(Down).png" />
+    <ImageContentTask Include="Assets\sprite\LoadScreen(Up).png" />
     <Image Include="Assets\sprite\ProvisionalTitle.png" />
     <Image Include="Assets\sprite\stage1.png" />
     <Image Include="Assets\sprite\stage2.png" />
+    <ImageContentTask Include="Assets\sprite\Title.png" />
     <ImageContentTask Include="Assets\sprite\manual.png" />
     <ImageContentTask Include="Assets\sprite\MagnetZero.png" />
     <ImageContentTask Include="Assets\sprite\MagnetRed.png" />

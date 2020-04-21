@@ -4,7 +4,9 @@
 #include "exampleCode/ex2D.h"
 #include "KaitoTask.h"
 #include "DebugMan.h"
-#include "GameCamera.h"
+#include "TitleStage.h"
+#include "stageObject/Goal.h"
+#include "level/Level.h"
 
 Game::Game()
 {
@@ -30,23 +32,42 @@ Game::~Game()
 	if (m_frameBufferRenderTargetView != nullptr) {
 		m_frameBufferRenderTargetView->Release();
 	}
+	delete m_task;
+	DeleteGO(goalPtr);
 }
 
 bool Game::Start()
 {
 	//1番目
-	NewGO< KaitoTask>(5, "kaito");
+	m_task = new KaitoTask();
+
 	//2番目
-	Stage* stage = NewGO<Stage>(0, "stage");
+	TitleStage* stage = NewGO<TitleStage>(0, "TitleStage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);
+	Level level;
 
+	if (StageNum == 0) {
+		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
+		{
+			//ゴール
+			if (wcscmp(objData.name, L"Goal") == 0) {
+				goalPtr = NewGO<Goal>(0, "Goal");
+				goalPtr->SetPosition(objData.position);
+			}
+			return false;
+		});
+	}
 	return true;
 }
 
 void Game::Update()
 {
+	if (goalPtr->IsClear()) {
+		DeleteGO(this);
+	}
 	Sample();
+	m_postEffect.Update();
 }
 
 //いろいろなサンプル
@@ -80,7 +101,10 @@ void Game::Draw()
 void Game::PostRender()
 {
 	//ポストエフェクト描画
-	m_postEffect.Draw();
+	//m_postEffect.Draw();
+
+	auto a = g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV();
+
 	//ドロー
 	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);

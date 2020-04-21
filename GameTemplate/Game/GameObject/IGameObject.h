@@ -106,7 +106,7 @@ namespace myEngine {
 		void SetUpdate(bool Up) {
 			m_isUpdate = Up;
 		}
-		bool GetUpdate() {
+		bool IsUpdate() {
 			return m_isUpdate;
 		}
 	public:

@@ -10,9 +10,15 @@ public:
 	void SetPosition(const CVector3& pos) {
 		m_pos = pos;
 	}
+	CVector3 GetPosition() {
+		return m_pos;
+	}
 	void SetMoveLimit(const float& limit) {
 		up = m_pos.y + limit;
 		down = m_pos.y - limit;
+	}
+	void SetScale(const CVector3& scale) {
+		m_Scale = scale;
 	}
 private:
 	Gimmick_Button* button = nullptr;
@@ -24,6 +30,7 @@ private:
 	SkinModel m_model;								//スキンモデル
 	CVector3 m_pos = CVector3::Zero();				//座標
 	CQuaternion m_rot = CQuaternion::Identity();	//回転
+	CVector3 m_Scale = CVector3::One();
 	bool UDPos = false;								//上がり切ってるか下がり切ってるか
 	bool speedDown = false;							//スピードを上げたり下げたりする
 	float moveSpeed = 0;                            //速度。上がったり下がったりする

@@ -5,6 +5,10 @@ namespace myEngine {
 	/// <summary>
 	/// ブルーム
 	/// </summary>
+	/// <remarks>
+	/// 使用する場合DirectionLightのカラーを1.0以上にしてください。
+	/// どこのライトの方向でも可
+	/// </remarks>
 	class Bloom 
 	{
 	public:

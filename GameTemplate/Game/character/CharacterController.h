@@ -86,13 +86,13 @@ public:
 		MagnetTask = true;
 	}
 private:
-	CVector3 			m_position = CVector3::Zero();	//座標。
-	bool 				m_isJump = false;				//ジャンプ中？
-	bool				m_isOnGround = true;			//地面の上にいる？
-	CapsuleCollider		m_collider;						//コライダー。
-	float				m_radius = 0.0f;
-	float				m_height = 0.0f;		
-	RigidBody			m_rigidBody;					//剛体。
+	CVector3 m_position = CVector3::Zero();	//座標。
+	bool m_isJump = false;				//ジャンプ中？
+	bool m_isOnGround = true;			//地面の上にいる？
+	CapsuleCollider	m_collider;						//コライダー。
+	float m_radius = 0.0f;
+	float m_height = 0.0f;		
+	RigidBody m_rigidBody;					//剛体。
 	
 	bool MagnetTask = false;
 };

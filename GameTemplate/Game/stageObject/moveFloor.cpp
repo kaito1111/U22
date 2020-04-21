@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "moveFloor.h"
 #include "Player.h"
-#include"HID/Pad.h"
 #include"Gimmick_Button.h"
 moveFloor::moveFloor(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 {
@@ -26,16 +25,18 @@ void moveFloor::Draw()
 
 bool moveFloor::Start()
 {
+
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/moveFloor.cmo");
 	//m_pos = { 0.0f,100.0f,0.0f };
 	int MaxPlayer = Pad::CONNECT_PAD_MAX;
 
-	//いらなくなったら消してくだしあ
-	button = FindGO< Gimmick_Button>("gimmick_button");
-
 	startPos = m_pos;
-    return true;
+	//up = m_pos.y + 100;
+	//down = m_pos.y - 100;
+	//ワールド行列の更新
+	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
+               	return true;
 }
 
 void moveFloor::Update()
@@ -120,7 +121,6 @@ void moveFloor::move2()
 	if (y >= up) {
 		udlimit = true;
 	}
-	if (button->GetOn() == false) {
 		//下降
 		if (y >= down && udlimit == true) {
 			y -= movespeed;
@@ -129,8 +129,5 @@ void moveFloor::move2()
 			udlimit = false;
 		}
 		m_pos.y = y;
-	}
-	if (button->GetOn() == true) {
-		m_pos = startPos;
-	}
+
 }

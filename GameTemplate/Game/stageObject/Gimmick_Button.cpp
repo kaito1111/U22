@@ -34,12 +34,12 @@ void Gimmick_Button::Update()
 	for (int i = 0; i < g_PlayerNum; i++) {
 		CVector3 Diff = m_Player[i]->GetPosition() - m_Position;
 		if (Diff.Length() < 40.0f) {
-			if (!IsOn) {
+			if (!isOn) {
 				if (m_Player[i]->GetPosition().y > m_Position.y + 10.0f&&
 					m_Player[i]->GetPosition().y < m_Position.y + 50.0f) {
 					m_PushSkin->SetActive(true);
 					m_Skin->SetActive(false);
-					IsOn = true;
+					isOn = true;
 					m_Se.Play();
 				}
 			}

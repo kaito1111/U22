@@ -85,7 +85,7 @@ namespace myEngine {
 		//ブレンドステートの保存
 		g_graphicsEngine->GetEffekseerRenderer()->BeginRendering();
 		//描画
-		g_graphicsEngine->GetEffekseerManager()->Draw();
+ 		g_graphicsEngine->GetEffekseerManager()->Draw();
 		//ブレンドステートをもとに戻す
 		g_graphicsEngine->GetEffekseerRenderer()->EndRendering();
 	}

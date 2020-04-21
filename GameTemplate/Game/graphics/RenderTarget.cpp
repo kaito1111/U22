@@ -47,8 +47,10 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 
 		//テクスチャの横の解像度
 		texDesc.Width = w;
+		m_width = w;
 		//テクスチャの縦の解像度
 		texDesc.Height = h;
+		m_height = h;
 		//ミニマップレベル
 		texDesc.MipLevels = 1;
 		//テクスチャの配列サイズ

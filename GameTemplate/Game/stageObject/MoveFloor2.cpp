@@ -27,29 +27,29 @@ bool MoveFloor2::Start()
 	int MaxPlayer = Pad::CONNECT_PAD_MAX;
 	StartPos = m_pos;
 
-	//いらなくなったら消してくだしあ
-	button = FindGO< Gimmick_Button>("gimmick_button");
+	//ワールド行列の更新
+	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), m_Scale);
 	return true;
 }
 
 void MoveFloor2::Update()
 {
 	//メッシュの云々。要するに当たり判定
-	Move2();
+	Move();
 	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
 	//ワールド行列の更新
-	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
+	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), m_Scale);
 }
 
 void MoveFloor2::Move()
 {
 	//必要に応じて適当にいじってくだしあ
-	const float speedUPLimit = 7;  //スピードの上限
-	const float speedDownLimit = 0;//スピードの下限
+	const float speedUPLimit = 0;  //スピードの上限
+	const float speedDownLimit = -7;//スピードの下限
 	const float speed = 0.1;
 
 	//下降とか書いてるけど左右に動くヤツやで。
-	//下降
+	//左
 	if (UDPos == false) {
 
 		//加速
@@ -74,7 +74,7 @@ void MoveFloor2::Move()
 		m_pos.x += moveSpeed;
 	}
 
-	//上昇
+	//右
 	if (UDPos == true) {
 
 		//加速
@@ -111,7 +111,7 @@ void MoveFloor2::Move2()
 	if (y >= up) {
 		udlimit = true;
 	}
-	if (button->GetOn() == false) {
+	if (button->IsOn() == false) {
 		//下降
 		if (y >= down && udlimit == true) {
 			y -= movespeed;
@@ -121,7 +121,7 @@ void MoveFloor2::Move2()
 		}
 		m_pos.y = y;
 	}
-	if (button->GetOn() == true) {
+	if (button->IsOn() == true) {
 		m_pos = StartPos;
 	}
 }
