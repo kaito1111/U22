@@ -1,7 +1,6 @@
 #pragma once
-class KaitoTask:public IGameObject
+class KaitoTask
 {
-	bool Start();
 public:
 	KaitoTask();
 	~KaitoTask();

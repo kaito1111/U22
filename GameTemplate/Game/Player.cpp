@@ -12,6 +12,8 @@ Player::Player()
 	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
 	m_Se.Init(L"Assets/sound/jump.wav");
 	m_Se2.Init(L"Assets/sound/jump.wav");
+	////グラフィックスエンジンからシャドウマップを取得
+	//m_shadowMap = g_graphicsEngine->GetShadowMap();
 }
 
 
@@ -44,6 +46,17 @@ bool Player::Start()
 
 void Player::Update()
 {
+	////シャドウ関連の更新処理
+	//{
+	//	//シャドウキャスター登録
+	//	m_shadowMap->RegistShdowCaster(&m_model);
+	//	//影を落とすカメラの座標
+	//	CVector3 m_lightCameraPosition = { 0.0f, 4000.0f, 0.0f };
+	//	//影を落とす注視点の座標
+	//	CVector3 m_lightCameraTarget = CVector3::Zero();;/*CVector3::Zero();*/
+	//	//ライトの座標を更新
+	//	m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
+	//}
 	if (m_Pad->IsTrigger(enButtonLB2)) {
 		m_position = m_CheckPoint;
 		m_characon.SetPosition(m_CheckPoint);
@@ -109,6 +122,20 @@ void Player::Draw()
 			0
 		);
 	}
+}
+
+void Player::PreRender()
+{
+//	//シャドウマップにレンダリング
+//	{
+//		//描画設定のバックアップ
+//		m_shadowMap->BiginRender();
+//		//シャドウマップ用の描画設定に切り替えて
+//		//登録されているシャドウキャスターの影を描画
+//		m_shadowMap->RenderToShadowMap();
+//		//描画設定をもとに戻す
+//		m_shadowMap->EndRender();
+//	}
 }
 
 void Player::SpawnPole()

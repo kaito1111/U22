@@ -39,6 +39,7 @@ private:
 	Level level;
 	Gimmick_Button* moveButtonPtr = nullptr;
 	moveFloor* moveFloorPtr = nullptr;
+	MoveFloor2* moveFloor2Ptr = nullptr;
 	/*std::list< stageObjectStopFloor*> stopFloorList;
 	std::list<Goal*> goalList;
 	std::list<Iwa*> IwaList;

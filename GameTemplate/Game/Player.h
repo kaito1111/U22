@@ -39,6 +39,7 @@ public:
 private:
 	bool Start();
 	void Draw();
+	void PreRender()override;
 
 	SkinModel			m_model;										//スキンモデル。
 	SkinModel			m_FrontModel;									//スキンモデル。
@@ -66,6 +67,7 @@ private:
 	MyMagnet::Magnet*	m_Magnet = nullptr;
 	CVector3			movespeed = CVector3::Zero();
 	Pad*				m_Pad = nullptr;					//このプレイヤーのパッド
+	//ShadowMap*			 m_shadowMap = nullptr;				//シャドウマップ
 
 	void SpawnPole();
 	void Move();

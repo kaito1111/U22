@@ -30,12 +30,13 @@ Game::~Game()
 	if (m_frameBufferRenderTargetView != nullptr) {
 		m_frameBufferRenderTargetView->Release();
 	}
+	delete m_task;
 }
 
 bool Game::Start()
 {
 	//1”Ô–Ú
-	NewGO< KaitoTask>(5, "kaito");
+	m_task = new KaitoTask();
 	//2”Ô–Ú
 	Stage* stage = NewGO<Stage>(0, "stage");
 	//NewGO<DirectionLight>(3, "light");
