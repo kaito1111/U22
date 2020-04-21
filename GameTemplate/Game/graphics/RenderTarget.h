@@ -62,6 +62,22 @@ public:
 	{
 		return &m_viewport;
 	}
+	/// <summary>
+	/// 横幅の取得
+	/// </summary>
+	/// <returns></returns>
+	float GetWidth()
+	{
+		return m_width;
+	}
+	/// <summary>
+	/// 高さの取得
+	/// </summary>
+	/// <returns></returns>
+	float GetHeight()
+	{
+		return m_height;
+	}
 
 private:
 	ID3D11Texture2D*			m_renderTargetTex;		//レンダーターゲットとなるテクスチャ
@@ -72,5 +88,7 @@ private:
 	ID3D11DepthStencilView*		m_depthStencilView;		//デプスステンシルビュー
 	ID3D11DepthStencilView*		m_oldDepthStencilView;	//バックアップ用のデプスステンシルビュー
 	D3D11_VIEWPORT				m_viewport;				//ビューポート
+	float m_width = 0;									//レンダリングターゲットの幅
+	float m_height = 0;									//レンダリングターゲットの高さ
 };
 

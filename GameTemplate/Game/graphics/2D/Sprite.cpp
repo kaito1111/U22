@@ -153,7 +153,7 @@ namespace myEngine {
 		*/
 		if (m_textureSRV == nullptr) {
 			//SRVがない
-			//なんかエンジンいじった？SRVのポインタ確認してね
+			//SRVのポインタ確認してね
 			throw;
 			return;
 		}
