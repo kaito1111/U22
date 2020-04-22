@@ -122,7 +122,6 @@
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
-    <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
@@ -136,6 +135,8 @@
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
     <MeshContentTask Include="Assets\modelData\Press.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage3.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage1.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
