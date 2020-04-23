@@ -201,6 +201,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />
     <ClInclude Include="stageObject\Goal.h" />
@@ -353,6 +354,9 @@
     <None Include="Assets\level\Corse_Level_1.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
     <None Include="Assets\level\stageLevel.tkl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

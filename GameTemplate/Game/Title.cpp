@@ -24,10 +24,12 @@ void Title::Update()
 {
 	g_camera2D.Update2D();
 	g_camera3D.Update();
-	if (g_Pad->IsPress(enButtonA)) {
+	if (g_Pad->IsPress(enButtonA)&&
+		!DeleteTitle) {
 		m_fade = NewGO<Fade>(0, "fade");
+		DeleteTitle = true;
 	}
-	if (m_fade != nullptr) {
+	if (DeleteTitle) {
 		if (m_fade->GetLengh() < 210.0f) {
 			NewGO<Game>(0, "game");
 			DeleteGO(this);

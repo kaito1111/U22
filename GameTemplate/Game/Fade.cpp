@@ -9,9 +9,9 @@ Fade::Fade()
 		FRAME_BUFFER_H
 	);
 	m_LoadUp = NewGO<SpriteRender>(2);
-	m_LoadUp->Init(L"Assets/sprite/LoadScreen(Up).dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
+	m_LoadUp->Init(L"Assets/sprite/LoadScreen(Up).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H);
 	m_LoadDown = NewGO<SpriteRender>(2);
-	m_LoadDown->Init(L"Assets/sprite/LoadScreen(Down).dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
+	m_LoadDown->Init(L"Assets/sprite/LoadScreen(Down).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H);
 	m_SSprite = NewGO<SpriteRender>(2);
 	m_SSprite->Init(L"Assets/sprite/LoadS.dds", 200.0f, 200.0f);
 	m_SSprite->SetPosition(m_SPos);
@@ -36,14 +36,14 @@ Fade::~Fade()
 
 void Fade::Update()
 {
-	float moveSpeed = 3.0f;
+	float moveSpeed = 6.0f;
 	if (m_SPos.x > 100.0f) {
 		m_SPos.x -= moveSpeed;
 		m_NPos.x += moveSpeed;
 	}
 	else {
 		if (m_angle < 360.0f) {
-			m_angle+=2.0f;
+			m_angle+=4.0f;
 			CQuaternion SRot = CQuaternion::Identity();
 			SRot.SetRotationDeg(CVector3::AxisZ(), -m_angle);
 			m_SSprite->SetRotation(SRot);
