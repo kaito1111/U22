@@ -23,7 +23,7 @@ bool StageSelect::Start()
 	
 	titleCamera = NewGO<TitleCamera>(1);
 	titleStage = NewGO<TitleStage>(1);
-	player = FindGO<Player>("player1");
+	player = FindGO<Player>("player2");
 	return true;
 }
 
@@ -33,8 +33,8 @@ void StageSelect::Update()
 	const float stageXSize = 640.0f;//選ぶステージの横幅
 	CVector3 pPos = player->GetPosition();
 	if (g_Pad->IsPress(enButtonA)) {
+
 		for (int nowStage = 0; nowStage < stageMax; nowStage++) {
-			player = FindGO<Player>("player1");
 			//プレイヤー1の座標からステージを選びます
 
 			if (pPos.x < stageXSize * (nowStage + 1) &&//プレイヤーの座標がスプライト右端より小さく

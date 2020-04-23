@@ -29,6 +29,7 @@ bool Stage::Start()
 {
 	generator = NewGO<stageObjectJenerator>(1, "generator");
 	generator->setStageNum(nowStage);
+	goal = FindGO<Goal>("Goal");
 	return true;
 }
 
@@ -38,6 +39,10 @@ void Stage::Update()
 	m_model.UpdateWorldMatrix(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 	//g_graphicsEngine->GetShadowMap()->RegistShdowCaster(&m_model);
 	//バレットフィジックスが出来次第チェックポイントのシステムを作る
+
+	if (goal->IsClear() == true) {
+		DeleteGO(this);
+	}
 }
 
 void Stage::Draw()

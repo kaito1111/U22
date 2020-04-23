@@ -4,6 +4,7 @@
 #include"physics/PhysicsStaticObject.h"
 class stageObjectJenerator;
 class Game;
+#include "stageObject/Goal.h"
 class Stage : public IGameObject
 {
 public:
@@ -20,6 +21,7 @@ private:
 	int count = 0;
 	bool newStage = false;
                    //ゲームクラス
+	Goal* goal = nullptr;
 	stageObjectJenerator* generator = nullptr;//ｼﾞｪﾈﾚｰﾀｰ
 	SkinModel m_model;						  //スキンモデル。
 	CVector3 m_position;

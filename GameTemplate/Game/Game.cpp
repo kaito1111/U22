@@ -4,10 +4,10 @@
 #include "exampleCode/ex2D.h"
 #include "KaitoTask.h"
 #include "DebugMan.h"
-#include "TitleStage.h"
+#include "StageSelect/TitleStage.h"
 #include "stageObject/Goal.h"
 #include "level/Level.h"
-#include "StageSelect.h"
+#include "StageSelect/StageSelect.h"
 StageSelect;
 Game::Game()
 {
@@ -44,7 +44,7 @@ bool Game::Start()
 
 	//2”Ô–Ú
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
-	Stage* stage = NewGO<Stage>(0, "stage");
+	StageSelect* stage = NewGO<StageSelect>(0, "StageSelect");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);
 	Level level;
