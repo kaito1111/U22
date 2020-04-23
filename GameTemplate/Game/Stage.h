@@ -13,10 +13,10 @@ public:
 	void Update();
 	void Draw();
 	void setStageNum(const int& num) {
-		stageNum = num;
+		nowStage = num;
 	}
 private:
-	int stageNum = 0;
+	int nowStage = 0;
 	int count = 0;
 	bool newStage = false;
                    //ƒQ[ƒ€ƒNƒ‰ƒX

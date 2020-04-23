@@ -18,14 +18,14 @@ public:
 	stageObjectJenerator();
 	~stageObjectJenerator();
 	void setStageNum(const int& num) {
-		stageNum = num;
+		nowStage = num;
 	}
 	/*void setStage(enum Stage stageee) {
 		
 	}*/
 
 private:
-	int stageNum = 1;
+	int nowStage = 1;
 	//enum stageNum{ stage1, stage2, stage3};
 	//オブジェクト
 	

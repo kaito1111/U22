@@ -6,10 +6,10 @@
 Stage::Stage()
 {
 	//cmoファイルの読み込み。
-	if (stageNum == 0) {
+	if (nowStage == 0) {
 		m_model.Init(L"Assets/modelData/Course_Level1.cmo");
 	}
-	if (stageNum == 1) {
+	if (nowStage == 1) {
 		m_model.Init(L"Assets/modelData/stage3.cmo");
 	}
 	//シャドウレシーバーとする
@@ -28,7 +28,7 @@ Stage::~Stage()
 bool Stage::Start()
 {
 	generator = NewGO<stageObjectJenerator>(1, "generator");
-	generator->setStageNum(stageNum);
+	generator->setStageNum(nowStage);
 	return true;
 }
 

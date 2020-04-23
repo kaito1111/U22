@@ -16,7 +16,7 @@ stageObjectJenerator::stageObjectJenerator()
 	switch(stage) {
 	case stage1:*/
 	//enumバグったからとりあえずintで引数渡してセレクトさせます。0番目から始まるよ
-	if (stageNum == 0) {
+	if (nowStage == 0) {
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
 		{
 			//ギミック起動ボタン
@@ -56,7 +56,7 @@ stageObjectJenerator::stageObjectJenerator()
 	
 
 	//case stage2:
-	if (stageNum == 1) {
+	if (nowStage == 1) {
 		//ドッスン
 		level.Init(L"Assets/level/stageDossun.tkl", [&](const auto& objData)
 		{

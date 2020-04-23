@@ -4,6 +4,7 @@ class TitleStage;
 class TitleCamera;
 class Game;
 class Stage;
+class Player;
 class StageSelect : public IGameObject
 {
 public:
@@ -13,6 +14,7 @@ public:
 	void Update();
 	void stageSelect();
 private:
+	Player* player = nullptr;
 	Stage* stage = nullptr;
 	Game* game = nullptr;
 	TitleCamera* titleCamera = nullptr;

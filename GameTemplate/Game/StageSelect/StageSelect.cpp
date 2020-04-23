@@ -23,6 +23,7 @@ bool StageSelect::Start()
 	
 	titleCamera = NewGO<TitleCamera>(1);
 	titleStage = NewGO<TitleStage>(1);
+	player = FindGO<Player>("player1");
 	return true;
 }
 
@@ -30,20 +31,21 @@ void StageSelect::Update()
 {
 	const int stageMax = 2;//ステージの数.上限
 	const float stageXSize = 640.0f;//選ぶステージの横幅
+	CVector3 pPos = player->GetPosition();
 	if (g_Pad->IsPress(enButtonA)) {
 		for (int nowStage = 0; nowStage < stageMax; nowStage++) {
-			Player* player = FindGO<Player>("player1");
+			player = FindGO<Player>("player1");
 			//プレイヤー1の座標からステージを選びます
-			if (player->GetPosition().x <stageXSize * (nowStage + 1) &&
-				player->GetPosition().x >stageXSize * (nowStage)) {
+
+			if (pPos.x < stageXSize * (nowStage + 1) &&//プレイヤーの座標がスプライト右端より小さく
+				pPos.x > stageXSize * (nowStage)) {    //左端より大きいとき
+
 				stage = NewGO<Stage>(1, "stage");
 				stage->setStageNum(nowStage);
-				
-
+				DeleteGO(this);
 			}
-			DeleteGO(this);
 		}
-		
+
 	}
 	vector<float> stageLength;
 
