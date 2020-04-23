@@ -2,7 +2,7 @@
 #include "system/system.h"
 #include "level/Level.h"
 #include "Game.h"
-#include "StageSelect.h"
+#include "StageSelect/StageSelect.h"
 #include "TwoP_Pad.h"
 #include "Title.h"
 

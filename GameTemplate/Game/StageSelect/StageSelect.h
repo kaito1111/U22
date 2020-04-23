@@ -20,7 +20,6 @@ private:
 	stageObjectJenerator* generator;
 	SpriteRender m_sprite;             //スプライト
 	CVector2 m_spritePos;              //スプライトの座標。
-	int nowStage = 0;                  //現在選択しているステージ 
 	bool LStageChange = false;          //ステージを切り替えるフラグ
 	bool RStageChange = false;
 	int count = 0;

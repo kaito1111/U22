@@ -1,4 +1,5 @@
 #pragma once
+#include"physics/physicsStaticObject.h"
 class TitleStage : public IGameObject
 {
 public:
@@ -38,8 +39,12 @@ public:
 		m_scale2 = scale;
 	}
 private:
+	PhysicsStaticObject physics;
 	//空。つまり背景
 	SkinModel skyModel;
+	//床
+	SkinModel m_floorModel;
+	CVector3 m_floorPos = CVector3::Zero();
 	//ステージ１
 	SkinModel m_model;
 	CVector3 m_pos = CVector3::Zero();

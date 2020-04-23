@@ -33,12 +33,7 @@ bool Stage::Start()
 }
 
 void Stage::Update()
-{
-	count++;
-	if (count > 0 && newStage == false) {
-		newStage = true;
-		
-	}
+{		
 	//ワールド行列の更新。
 	m_model.UpdateWorldMatrix(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 	//g_graphicsEngine->GetShadowMap()->RegistShdowCaster(&m_model);
