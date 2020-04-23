@@ -4,7 +4,7 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{2A04211F-1BB8-30D8-B268-37E7BAA2F2BA}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Source Files\Header Files">
       <UniqueIdentifier>{28BC13D6-E540-3536-8983-A19E4698A0B9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

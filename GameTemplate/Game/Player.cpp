@@ -148,7 +148,7 @@ void Player::SpawnPole()
 	m_forward = { mrot.m[2][0],mrot.m[2][1],mrot.m[2][2] };
 	m_forward.Normalize();
 	//NSpawn
-	if (g_Pad->IsTrigger(enButtonRB1))
+	if (g_Pad[m_PlayerNum].IsTrigger(enButtonRB1))
 	{
 		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool {
 			DeleteGO(m_pole);
@@ -163,7 +163,7 @@ void Player::SpawnPole()
 		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
-	if (g_Pad[g_PlayerNum].IsTrigger(enButtonLB1))
+	if (g_Pad[m_PlayerNum].IsTrigger(enButtonLB1))
 	{
 		QueryGOs< SPole>("spole", [&](SPole* m_pole)->bool {
 			DeleteGO(m_pole);
@@ -187,14 +187,14 @@ void Player::Move()
 	movespeed.z = 0.0f;
 	const float junpPower = 10.0f;
 	if (m_characon.IsJump() &&
-		g_Pad[g_PlayerNum].IsPress(enButtonA) &&
+		g_Pad[m_PlayerNum].IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
 	}
 	if (m_characon.IsOnGround())
 	{
-		if (g_Pad[g_PlayerNum].IsTrigger(enButtonA)) {
+		if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)) {
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
 				m_Se2.Play(false);
@@ -210,7 +210,7 @@ void Player::Move()
 	movespeed.y -= gravity;
 
 	//¶‰E‚ÌˆÚ“®
-	movespeed.x = g_Pad[g_PlayerNum].GetLStickXF() * -10.0f;
+	movespeed.x = g_Pad[m_PlayerNum].GetLStickXF() * -10.0f;
 
 	//Ž¥Î‚ÌˆÚ“®
 	movespeed += m_Magnet->MagnetMove();
@@ -220,14 +220,27 @@ void Player::Move()
 
 
 	m_position = m_characon.Execute(1.0f, movespeed);
-	if (g_Pad[g_PlayerNum].GetLStickXF() > 0.0f)
+	if (g_Pad[m_PlayerNum].GetLStickXF() > 0.0f)
 	{
-		m_rot.SetRotationDeg(CVector3::AxisY(), -90.0f);
+		dir = Dir::L;
 	}
-	if (g_Pad[g_PlayerNum].GetLStickXF() < 0.0f)
+	if (g_Pad[m_PlayerNum].GetLStickXF() < 0.0f)
 	{
-		m_rot.SetRotationDeg(CVector3::AxisY(), 90.0f);
+		dir = Dir::R;
 	}
+	if (dir == Dir::L) {
+		m_rotAngle -= 45.0f;
+		if (m_rotAngle < -90.0f) {
+			m_rotAngle = -90.0f;
+		}
+	}
+	if (dir == Dir::R) {
+		m_rotAngle += 45.0f;
+		if (m_rotAngle > 90.0f) {
+			m_rotAngle = 90.0f;
+		}
+	}
+	m_rot.SetRotationDeg(CVector3::AxisY(), m_rotAngle);
 }
 
 void Player::MyMagnet()
@@ -251,11 +264,14 @@ void Player::MyMagnet()
 
 void Player::SIBOU()				//OK
 {
+	m_characon.RemoveRigidBoby();
+	DeleteMO(m_Magnet);
 	if (g_Pad[g_PlayerNum].IsTrigger(enButtonA)) {
 		m_position = m_CheckPoint;
 		GameCamera* camera = FindGO<GameCamera>("camera");
 		camera->SetDec(0.0f);
 		m_IsSi = false;
+		LearnMO(m_Magnet);
 	}
 }
 
@@ -288,6 +304,7 @@ void Player::Cut()						//OK
 
 void Player::Press()					//OK
 {
+		m_IsSi = true;
 	if (m_Scale.z >= 1.0f) {
 		Effect* effect = NewGO<Effect>(1);
 		if (!effect->IsPlay()) {
@@ -299,7 +316,6 @@ void Player::Press()					//OK
 	m_Scale.z -= 0.1f;
 	if (m_Scale.z <= 0.1f) {
 		m_Scale.z = 0.1f;
-		m_IsSi = true;
 	}
 	if (g_Pad[g_PlayerNum].IsTrigger(enButtonA)) {
 		m_Scale.z = 1.0f;

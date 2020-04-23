@@ -66,7 +66,7 @@ namespace {
 		virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 		{
 			if (convexResult.m_hitCollisionObject == me) {
-				//自分に衝突した。or 地面に衝突した。
+				//自分に衝突した。
 				return 0.0f;
 			}
 			//衝突点の法線を引っ張ってくる。
@@ -75,7 +75,24 @@ namespace {
 			//上方向と衝突点の法線のなす角度を求める。
 			float angle = fabsf(acosf(hitNormalTmp.Dot(CVector3::Up())));
 			if (angle >= CMath::PI * 0.2f && angle <= CMath::PI * 0.7f		//地面の傾斜が54度以上、126度以下なので壁とみなす。
-				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character	//もしくはコリジョン属性がキャラクタなので壁とみなす。
+				) {
+				isHit = true;
+				CVector3 hitPosTmp;
+				hitPosTmp.Set(convexResult.m_hitPointLocal);
+				//交点との距離を調べる。
+				CVector3 vDist;
+				vDist.Subtract(hitPosTmp, startPos);
+				vDist.y = 0.0f;
+				float distTmp = vDist.Length();
+				if (distTmp < dist) {
+					//この衝突点の方が近いので、最近傍の衝突点を更新する。
+					hitPos = hitPosTmp;
+					dist = distTmp;
+					hitNormal = hitNormalTmp;
+				}
+			}
+			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character
+				//コリジョン属性がキャラクタなので壁とみなす。
 				) {
 				isHit = true;
 				CVector3 hitPosTmp;

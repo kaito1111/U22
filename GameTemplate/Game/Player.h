@@ -43,6 +43,15 @@ private:
 	CharacterController m_characon;
 	CVector3 m_position = CVector3::Zero();
 	CQuaternion	m_rot = CQuaternion::Identity();
+	float m_rotAngle = 0.0f;
+	enum Dir{//方向
+		L,//Left　左
+		R,//Right 右
+		U,//Up    上
+		D,//Down  下
+		num
+	};
+	Dir dir = num;
 	CVector3 m_forward = CVector3::Front();
 	bool m_IsSi = false;
 	CVector3 m_Scale	 = CVector3::One();
@@ -64,6 +73,8 @@ private:
 	CVector3 movespeed = CVector3::Zero();
 	//ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 
+	AnimationClip m_nimeClip;
+	Animation m_Animation;
 	void SpawnPole();
 	void Move();
 	void MyMagnet();
