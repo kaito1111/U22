@@ -25,7 +25,7 @@ public:
 	}*/
 
 private:
-	int nowStage = 1;
+	int nowStage = 0;
 	//enum stageNum{ stage1, stage2, stage3};
 	//オブジェクト
 	
