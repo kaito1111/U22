@@ -25,7 +25,7 @@ public:
 	}*/
 
 private:
-	int StageNum = 1;
+	int StageNum = 0;
 	//enum stageNum{ stage1, stage2, stage3};
 	//オブジェクト
 	
@@ -46,7 +46,8 @@ private:
 	Level level;
 	Gimmick_Button* moveButtonPtr = nullptr;
 	moveFloor* moveFloorPtr = nullptr;
-	MoveFloor2* moveFloor2Ptr = nullptr;
+	MoveFloor2* moveFloor2Ptr = nullptr; 
+	float Floor2PosX = 0.0f;
 	/*std::list< stageObjectStopFloor*> stopFloorList;
 	std::list<Goal*> goalList;
 	std::list<Iwa*> IwaList;

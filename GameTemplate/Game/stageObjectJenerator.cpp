@@ -30,15 +30,19 @@ stageObjectJenerator::stageObjectJenerator()
 				moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
 				moveFloorPtr->SetPosition(objData.position);
 				//float型です。動かしたい量を入れてね。
-				moveFloorPtr->SetMoveLimit(100.0f);
+				moveFloorPtr->SetMoveLimit(300.0f);
+				moveFloorPtr->SetUpdate(false);
 				return true;
 			}
 			//動く床左右バージョン
 			if (wcscmp(objData.name, L"moveFloor2") == 0) {
-				MoveFloor2* moveFloor2Ptr = NewGO<MoveFloor2>(0, "moveFloor2");
+				moveFloor2Ptr = NewGO<MoveFloor2>(0, "moveFloor2");
 				moveFloor2Ptr->SetPosition(objData.position);
 				//float型です。動かしたい量を入れてね。
-				moveFloorPtr->SetMoveLimit(100.0f);
+				moveFloor2Ptr->SetMoveLimit(100.0f);
+				moveFloor2Ptr->SetUpdate(false);
+				Floor2PosX = moveFloor2Ptr->GetPosition().x;
+				Floor2PosX -= 200.0f;
 				return true;
 			}
 
@@ -51,9 +55,9 @@ stageObjectJenerator::stageObjectJenerator()
 			return false;
 		});
 	}
-	
-		
-	
+
+
+
 
 	//case stage2:
 	if (StageNum == 1) {
@@ -72,7 +76,7 @@ stageObjectJenerator::stageObjectJenerator()
 			}
 		});
 	}
-	
+
 }
 
 
@@ -127,6 +131,15 @@ bool stageObjectJenerator::Start()
 
 void stageObjectJenerator::Update()
 {
+	if (moveButtonPtr->IsOn()) {
+		if (moveFloor2Ptr->GetPosition().x > Floor2PosX) {
+			moveFloor2Ptr->SetUpdate(true);
+			moveFloorPtr->SetUpdate(true);
+		}
+		else {
+			moveFloor2Ptr->SetUpdate(false);
+		}
+	}
 	//level.Draw();
 	/*for (auto& i : IwaList) {
 		i->Update();

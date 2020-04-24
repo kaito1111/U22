@@ -31,7 +31,7 @@ void StageSelect::Update()
 	if (GetAsyncKeyState('K')) {
 		game = NewGO<Game>(1,"game");
 		stage = NewGO<Stage>(1,"stage");
-		stage->setStageNum(nowStage);
+		stage->setStageNum(0);
 
 		DeleteGO(this);
 		

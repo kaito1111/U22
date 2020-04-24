@@ -275,8 +275,11 @@ void Player::SIBOU()				//OK
 		GameCamera* camera = FindGO<GameCamera>("camera");
 		camera->SetDec(0.0f);
 		m_IsSi = false;
+		m_characon.Init(30.0f, 20.0f, m_position);
 		LearnMO(m_Magnet);
 		HaveMagnet = true;
+		m_Magnet->SetPosition(&m_position);
+		m_Scale.z = 1.0f;
 	}
 }
 
@@ -321,8 +324,5 @@ void Player::Press()					//OK
 	m_Scale.z -= 0.1f;
 	if (m_Scale.z <= 0.1f) {
 		m_Scale.z = 0.1f;
-	}
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)) {
-		m_Scale.z = 1.0f;
 	}
 }
