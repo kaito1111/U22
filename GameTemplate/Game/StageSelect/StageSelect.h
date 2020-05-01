@@ -14,7 +14,8 @@ public:
 	void Update();
 	void stageSelect();
 private:
-	Player* player = nullptr;
+	Player* player1 = nullptr;
+	Player* player2 = nullptr;
 	Stage* stage = nullptr;
 	Game* game = nullptr;
 	TitleCamera* titleCamera = nullptr;
