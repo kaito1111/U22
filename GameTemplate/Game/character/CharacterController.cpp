@@ -338,7 +338,6 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			else {
 				//ínñ è„Ç…Ç¢Ç»Ç¢ÅB
 				m_isOnGround = false;
-
 			}
 		}
 	}
