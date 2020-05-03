@@ -1,5 +1,4 @@
 #pragma once
-
 #include <WinSock2.h>
 #include <windows.h>
 #include <d3d11.h>
@@ -63,6 +62,8 @@
 
 //#include "photon/LoadBalancing-cpp/inc/friendinfo.h"
 //#include "Photon-cpp/Inc/PhotonPeer.h"
+#include "photon/Common-cpp/inc/Common.h"
+#include "photon/LoadBalancing-cpp/inc/Client.h"
 
 #include "Magnet/MagnetManager.h"
 

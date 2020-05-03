@@ -4,7 +4,7 @@
 #include "stageObjectJenerator.h"
 #include"TitleStage.h"
 #include"TitleCamera.h"
-
+#include"Stage.h"
 StageSelect::StageSelect()
 {
 }
@@ -29,9 +29,10 @@ void StageSelect::Update()
 
 	//nowStageをジェネレーターに渡して、その数字に応じてNewGOさせる
 	if (GetAsyncKeyState('K')) {
-		game = NewGO<Game>(0);
-		
-		//generator->setStageNum(nowStage);
+		game = NewGO<Game>(1,"game");
+		stage = NewGO<Stage>(1,"stage");
+		stage->setStageNum(0);
+
 		DeleteGO(this);
 		
 	}
@@ -65,23 +66,25 @@ void StageSelect::stageSelect()
 	if (nowStage > stageMax) {
 		nowStage = stageMax;
 	}
+
 	//ステージⅠ
 	CVector3 pos1 = titleStage->GetPos();
 	CVector3 scale1 = titleStage->GetScale();
-	if (nowStage == 0) {
-		scale1 = CVector3::One();
+	
+	if (nowStage == 0 && scale1.x<1) {
+		scale1 += scaleChangeSpeed;
 	}
-	if (nowStage != 0) {
-		scale1 = CVector3::Zero();
+	if (nowStage != 0&&scale1.x>0) {
+		scale1 -= scaleChangeSpeed;
 	}
 	//ステージⅡ
 	CVector3 pos2 = titleStage->GetPos2();
 	CVector3 scale2 = titleStage->GetScale2();
 	if (nowStage == 1) {
-		scale2 = {1,1,1};
+		scale2 += scaleChangeSpeed;
 	}
 	if (nowStage != 1) {
-		scale2 = CVector3::Zero();
+		scale2 -= scaleChangeSpeed;
 	}
 	//各ステージの情報を更新
 	//ステージ１

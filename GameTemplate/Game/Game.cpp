@@ -7,7 +7,8 @@
 #include "TitleStage.h"
 #include "stageObject/Goal.h"
 #include "level/Level.h"
-
+#include "StageSelect.h"
+StageSelect;
 Game::Game()
 {
 	//ƒTƒEƒ“ƒh‚Ì‰Šú‰»
@@ -42,7 +43,8 @@ bool Game::Start()
 	m_task = new KaitoTask();
 
 	//2”Ô–Ú
-	TitleStage* stage = NewGO<TitleStage>(0, "TitleStage");
+	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
+	Stage* stage = NewGO<Stage>(0, "stage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);
 	Level level;

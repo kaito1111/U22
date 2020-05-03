@@ -12,7 +12,13 @@ namespace MyMagnet {
 		{
 			m_MagnetList.push_back(magnetObject);
 		}
-
+		void DeleteMagnetObject(Magnet* magnetObject) {
+			if (magnetObject != nullptr) {
+				auto it = std::find(m_MagnetList.begin(), m_MagnetList.end(), magnetObject);
+				m_MagnetList.erase(it); 
+				magnetObject == nullptr;
+			}
+		}
 		/*IGameObject‚ÌFindGOs‚Æˆê*/
 		void FindMagnetObject(std::function<bool(Magnet* mag)>func)
 		{
@@ -42,7 +48,12 @@ namespace MyMagnet {
 
 	//¥—Í‚Ì“o˜^B‰Šú‰»
 	static inline void LearnMO(Magnet* magnetObject) {
-		return MagnetManeger().LearnMagetObject(magnetObject);
+		MagnetManeger().LearnMagetObject(magnetObject);
+	}
+
+	//¥—Í‚Ìíœ
+	static inline void DeleteMO(Magnet* magnetObject) {
+		MagnetManeger().DeleteMagnetObject(magnetObject);
 	}
 
 	static inline void FindMO(std::function<bool(Magnet* mag)> func) {

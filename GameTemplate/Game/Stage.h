@@ -12,6 +12,9 @@ public:
 	bool Start();
 	void Update();
 	void Draw();
+	void setStageNum(const int& num) {
+		stageNum = num;
+	}
 private:
 	int stageNum = 0;
 	int count = 0;

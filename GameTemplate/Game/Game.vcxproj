@@ -14,19 +14,19 @@
     <ProjectGuid>{9CB90C92-58AF-482A-B34C-AC02496110F6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Lesson_00</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -66,7 +66,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>DirectXTK.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies);xinput.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;Effekseer.Debug.lib;EffekseerRendererDX11.Debug.lib;XAudio2.lib;Winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>DirectXTK.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies);xinput.lib;BulletCollision_Debug.lib;BulletDynamics_Debug.lib;LinearMath_Debug.lib;Effekseer.Debug.lib;EffekseerRendererDX11.Debug.lib;XAudio2.lib;Winmm.lib;Photon-cpp_vc15_debug_windows_mt_x64.lib;Common-cpp_vc15_debug_windows_mt_x64.lib;LoadBalancing-cpp_vc15_debug_windows_mt_x64.lib</AdditionalDependencies>
     </Link>
     <ImageContentTask>
       <ContentOutput>$(ProjectDir)\Assets\sprite\%(Filename).dds</ContentOutput>
@@ -107,6 +107,12 @@
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Network\BaseView.cpp" />
+    <ClCompile Include="Network\Console.cpp" />
+    <ClCompile Include="Network\LoadBalancingListener.cpp" />
+    <ClCompile Include="Network\NetworkLogic.cpp" />
+    <ClCompile Include="Network\OutputListener.cpp" />
+    <ClCompile Include="Network\TestView.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
     <ClCompile Include="stageObject\Goal.cpp" />
@@ -201,6 +207,13 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Floor.h" />
+    <ClInclude Include="Network\BaseView.h" />
+    <ClInclude Include="Network\Console.h" />
+    <ClInclude Include="Network\LoadBalancingListener.h" />
+    <ClInclude Include="Network\NetworkLogic.h" />
+    <ClInclude Include="Network\OutputListener.h" />
+    <ClInclude Include="Network\TestView.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />
     <ClInclude Include="stageObject\Goal.h" />
@@ -353,6 +366,9 @@
     <None Include="Assets\level\Corse_Level_1.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
     <None Include="Assets\level\stageLevel.tkl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

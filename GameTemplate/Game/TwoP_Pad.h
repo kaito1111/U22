@@ -18,4 +18,5 @@ private:
 	void Update()override;
 	bool NewGOPlayer = false;		//ƒvƒŒƒCƒ„[‚ğNewGO‚·‚é‚©‚Ç‚¤‚©
 	float m_Manual_W = 0.0f;
+	SpriteRender* m_ButtonSprite = nullptr;
 };

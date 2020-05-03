@@ -20,9 +20,15 @@ public:
 	void setStageNum(const int& num) {
 		StageNum = num;
 	}
+	/*void setStage(enum Stage stageee) {
+		
+	}*/
+
 private:
-	//オブジェクト
 	int StageNum = 0;
+	//enum stageNum{ stage1, stage2, stage3};
+	//オブジェクト
+	
 	/*stageObjectStopFloor* stopFloor = nullptr;
 	Goal* goal = nullptr;
 	StageObjectMagma* magma = nullptr;
@@ -40,7 +46,8 @@ private:
 	Level level;
 	Gimmick_Button* moveButtonPtr = nullptr;
 	moveFloor* moveFloorPtr = nullptr;
-	MoveFloor2* moveFloor2Ptr = nullptr;
+	MoveFloor2* moveFloor2Ptr = nullptr; 
+	float Floor2PosX = 0.0f;
 	/*std::list< stageObjectStopFloor*> stopFloorList;
 	std::list<Goal*> goalList;
 	std::list<Iwa*> IwaList;

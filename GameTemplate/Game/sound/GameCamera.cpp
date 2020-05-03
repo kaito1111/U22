@@ -4,10 +4,6 @@
 GameCamera::GameCamera()
 {
 
-	m_ButtonSprite = NewGO<SpriteRender>(5);
-	m_ButtonSprite->Init(L"Assets/sprite/Button.dds", 250.0f, 250.0f);
-	CVector3 ButtonSpritePos = { 500.0f,-250.0f,0.0f };
-	m_ButtonSprite->SetPosition(ButtonSpritePos);
 }
 
 GameCamera::~GameCamera()
