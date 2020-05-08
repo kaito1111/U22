@@ -74,10 +74,17 @@ private:
 	CVector3 movespeed = CVector3::Zero();
 	//ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 
-	AnimationClip m_nimeClip;
-	Animation m_Animation;
+	enum enAniCli {
+		Wait,
+		Run,
+		Junp,
+		AnimaitionNum
+	};
+	AnimationClip m_AnimeClip[enAniCli::AnimaitionNum];
+	Animation m_Animetion;
 	void SpawnPole();
 	void Move();
 	void MyMagnet();
+	SoundSource m_Asioto;
 };
 

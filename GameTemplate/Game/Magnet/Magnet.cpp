@@ -16,7 +16,9 @@ Magnet::Magnet()
 	////m_NMagSprite->SetPivot({ -1.0f,-1.0f });
 	//m_NMagSprite->SetRotation(m_Rot);
 	////m_NMagSprite->SetActive(false);
-	//m_Se.Init(L"Assets/sound/MagnetEffect2.wav");
+	m_Se.Init(L"Assets/sound/MagnetEffect3.wav");
+	SEffect = NewGO<Effect>(1);
+	NEffect = NewGO<Effect>(1);
 }
 
 Magnet::~Magnet()
@@ -122,45 +124,52 @@ void MyMagnet::Magnet::Update()
 	switch (state)					//UI
 	{
 	case Magnet::SMode:
-		/*//m_SMagSprite->SetActive(true);
-		m_SMagSprite->SetW(1.0f);
+		SeVolume += 0.01f;
+		if (SeVolume >= 1.0f) {
+			SeVolume = 1.0f;
+		}
+		////m_SMagSprite->SetActive(true);
+		//m_SMagSprite->SetW(1.0f);
 		//m_NMagSprite->SetActive(false);
-		m_NMagSprite->SetW(0.0f);*/
+		////m_NMagSprite->SetW(0.0f);
 		//if (m_Pad->IsTrigger(enButtonDown)) {
 		//	SeVolume -= 0.1f;
 		//}
 		//if (m_Pad->IsTrigger(enButtonUp)) {
 		//	SeVolume += 0.1f;
 		//}
-		if (CoolTime > 100.0f) {
-			Effect* SEffect = NewGO<Effect>(0);
-			SEffect->Play(L"Assets/effect/SMode.efk");
-			SEffect->SetPosition(*m_Position);
-			SEffect->SetScale(CVector3::One() * 2.75f);
-			CoolTime = 0.0f;
-			//m_Se.Play();			
-		}
-		else {
-			CoolTime++;
+		if (SEffect->IsPlay() == false
+			&& m_Se.IsPlaying() == false) {
+			NEffect = NewGO<Effect>(1);
+			NEffect->Play(L"Assets/effect/SMode.efk");
+			NEffect->SetPosition(*m_Position);
+			NEffect->SetScale(CVector3::One() * 2.75f);
+			m_Se.Play();
 		}
 		break;
 	case Magnet::NMode:
+		SeVolume+=0.01f;
+		if (SeVolume >= 1.0f) {
+			SeVolume = 1.0f;
+		}
 		/*//m_SMagSprite->SetActive(false);
 		m_SMagSprite->SetW(0.0f);
 		//m_NMagSprite->SetActive(true);
 		m_NMagSprite->SetW(1.0f);*/
-		if (CoolTime>100.0f) {
-			Effect* SEffect = NewGO<Effect>(0);
+		if (SEffect->IsPlay() == false
+			&& m_Se.IsPlaying() == false) {
+			SEffect = NewGO<Effect>(1);
 			SEffect->Play(L"Assets/effect/NMode.efk");
 			SEffect->SetPosition(*m_Position);
 			SEffect->SetScale(CVector3::One() * 2.75f);
-			CoolTime = 0.0f;
-		}
-		else {
-			CoolTime++;
+			m_Se.Play();
 		}
 		break;
 	default:
+		SeVolume-=0.01f;
+		if (SeVolume <= 0.0f) {
+			SeVolume = 0.0f;
+		}
 		/*//m_SMagSprite->SetActive(false);
 		m_SMagSprite->SetW(0.0f);
 		//m_NMagSprite->SetActive(false);
@@ -170,7 +179,7 @@ void MyMagnet::Magnet::Update()
 	}
 	//m_NMagSprite->SetPosition(*m_Position);
 	//m_NMagSprite->Update();
-
+	//m_Se.SetVolume(SeVolume);
 	//m_SMagSprite->SetPosition({ m_Position->x,m_Position->y,m_Position->z });
 	//m_SMagSprite->Update();
 }

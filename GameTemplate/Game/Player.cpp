@@ -14,6 +14,9 @@ Player::Player()
 	m_Se2.Init(L"Assets/sound/jump.wav");
 	////グラフィックスエンジンからシャドウマップを取得
 	//m_shadowMap = g_graphicsEngine->GetShadowMap();
+	m_Asioto.Init(L"Assets/sound/asioto.wav");
+	m_Asioto.Play(true);
+	m_Asioto.SetVolume(0.0f);
 }
 
 
@@ -36,7 +39,6 @@ bool Player::Start()
 	CQuaternion Rot;
 	Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
 	m_ThisNumSprite->SetRotation(Rot);
-
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet); 
@@ -44,7 +46,13 @@ bool Player::Start()
 	m_Magnet->SetPosition(&m_position);
 	m_Magnet->SetPad(&g_Pad[m_PlayerNum]);
 
-	m_characon.Init(30.0f, 20.0f, m_position);
+	m_characon.Init(40.0f, 20.0f, m_position);
+	m_AnimeClip[enAniCli::Run].Load(L"Assets/animData/PlayerRun.tka");
+	m_AnimeClip[enAniCli::Run].SetLoopFlag(true);
+	m_AnimeClip[enAniCli::Wait].Load(L"Assets/animData/wait.tka");
+	m_AnimeClip[enAniCli::Wait].SetLoopFlag(true);
+	m_AnimeClip[enAniCli::Junp].Load(L"Assets/animData/kirarajunp.tka");
+	m_Animetion.Init(m_model, m_AnimeClip, enAniCli::AnimaitionNum);
 	return true;
 }
 
@@ -61,18 +69,19 @@ void Player::Update()
 	//	//ライトの座標を更新
 	//	m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
 	//}
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonLB2)) {
-		m_position = m_CheckPoint;
-		m_characon.SetPosition(m_CheckPoint);
-		movespeed.y = 0.0f;
-	}
-	MyMagnet();
-	SpawnPole();
 	if (m_IsSi) {
 		SIBOU();
 	}
 	else {
+		if (g_Pad[m_PlayerNum].IsTrigger(enButtonLB2)) {
+			m_position = m_CheckPoint;
+			m_characon.SetPosition(m_CheckPoint);
+			movespeed.y = 0.0f;
+		}
 		Move();
+		MyMagnet();
+		SpawnPole();
+		m_Animetion.Update(1.0f / 60.0f);
 	}
 	{
 		CVector3 ThisNumSpritePos = m_position;
@@ -186,7 +195,11 @@ void Player::Move()
 	//ジャンプ判定
 	movespeed.x = 0.0f;
 	movespeed.z = 0.0f;
-	const float junpPower = 10.0f;
+	//左右の移動
+	movespeed.x = g_Pad[m_PlayerNum].GetLStickXF() * -10.0f;
+	float Volume = fabsf(g_Pad[m_PlayerNum].GetLStickXF());
+	m_Asioto.SetVolume(Volume);
+	const float junpPower = 15.0f;
 	if (m_characon.IsJump() &&
 		g_Pad[m_PlayerNum].IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
@@ -210,9 +223,17 @@ void Player::Move()
 	const float gravity = 0.8f;		//重力
 	movespeed.y -= gravity;
 
-	//左右の移動
-	movespeed.x = g_Pad[m_PlayerNum].GetLStickXF() * -10.0f;
-
+	if (fabsf(movespeed.x) > 0.0f
+		&&m_characon.IsOnGround()
+		) {
+		m_Animetion.Play(enAniCli::Run, 0.3f);
+	}
+	else if (m_characon.IsOnGround()) {
+		m_Animetion.Play(enAniCli::Wait, 0.3f);
+	}
+	if (movespeed.y > 0.0f) {
+		m_Animetion.Play(enAniCli::Junp, 0.3f);
+	}
 	//磁石の移動
 	movespeed += m_Magnet->MagnetMove();
 	if (m_characon.IsOnGround() && movespeed.y < 0.0f) {
@@ -247,15 +268,9 @@ void Player::Move()
 void Player::MyMagnet()
 {
 	if (g_Pad[m_PlayerNum].IsTrigger(enButtonX)) {
-		if (!Magnet::State::NMode == m_Magnet->GetState()) {
-			m_Magnet->SetCool(100.0f);
-		}
 		m_Magnet->SetState(Magnet::State::NMode);
 	}
 	if (g_Pad[m_PlayerNum].IsTrigger(enButtonY)) {
-		if (!Magnet::State::SMode == m_Magnet->GetState()) {
-			m_Magnet->SetCool(100.0f);
-		}
 		m_Magnet->SetState(Magnet::State::SMode);
 	}
 	if (g_Pad[m_PlayerNum].IsTrigger(enButtonB)) {
@@ -275,7 +290,7 @@ void Player::SIBOU()				//OK
 		GameCamera* camera = FindGO<GameCamera>("camera");
 		camera->SetDec(0.0f);
 		m_IsSi = false;
-		m_characon.Init(30.0f, 20.0f, m_position);
+		m_characon.Init(40.0f, 20.0f, m_position);
 		LearnMO(m_Magnet);
 		HaveMagnet = true;
 		m_Magnet->SetPosition(&m_position);
@@ -307,12 +322,22 @@ void Player::Cut()						//OK
 		effect->SetPosition(m_position);
 		effect->SetScale(CVector3::One() * 20);
 	}
+	if (m_IsSi == false) {
+		SoundSource m_bleeding;
+		m_bleeding.Init(L"Assets/sound/bleeding.wav");
+		m_bleeding.Play();
+	}
 	m_IsSi = true;
 }
 
 void Player::Press()					//OK
 {
-		m_IsSi = true;
+	if (m_IsSi == false) {
+		SoundSource m_bleeding;
+		m_bleeding.Init(L"Assets/sound/bleeding.wav");
+		m_bleeding.Play();
+	}
+	m_IsSi = true;
 	if (m_Scale.z >= 1.0f) {
 		Effect* effect = NewGO<Effect>(1);
 		if (!effect->IsPlay()) {

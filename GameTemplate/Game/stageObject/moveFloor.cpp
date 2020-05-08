@@ -34,6 +34,7 @@ bool moveFloor::Start()
 	startPos = m_pos;
 	//up = m_pos.y + 100;
 	//down = m_pos.y - 100;
+	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
                	return true;

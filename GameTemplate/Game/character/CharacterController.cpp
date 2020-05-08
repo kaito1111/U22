@@ -65,8 +65,10 @@ namespace {
 												//衝突したときに呼ばれるコールバック関数。
 		virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 		{
-			if (convexResult.m_hitCollisionObject == me) {
-				//自分に衝突した。
+			if (convexResult.m_hitCollisionObject == me				//自分に衝突した。
+				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character
+				//キャラクタ属性のコリジョンと衝突した。
+				) {
 				return 0.0f;
 			}
 			//衝突点の法線を引っ張ってくる。
@@ -113,7 +115,6 @@ namespace {
 		}
 	};
 
-}
 
 
 //衝突したときに呼ばれる関数オブジェクト(天井用)
@@ -161,6 +162,7 @@ struct SweepResultCeil : public btCollisionWorld::ConvexResultCallback
 		return 0.0f;
 	}
 };
+}
 
 void CharacterController::Init(float radius, float height, const CVector3& position)
 {
@@ -292,7 +294,11 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	m_position.z = nextPosition.z;
 	//下方向を調べる。
 	{
-		m_position = nextPosition;	//移動の仮確定。
+		CVector3 addPos;
+		addPos.Subtract(nextPosition, m_position);
+		//addPos = nextPosition - m_position;
+
+		//m_position = nextPosition;	//移動の仮確定。
 									//レイを作成する。
 		btTransform start, end;
 		start.setIdentity();
@@ -300,7 +306,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 		//始点はカプセルコライダーの中心。
 		/*変更点
 		start.setOrigin(btVector3(nextPosition.x, m_position.y + m_height * 0.5f + m_radius, nextPosition.z));*/
-		start.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
+		start.setOrigin(btVector3(m_position.x, nextPosition.y + m_height * 0.5f + m_radius, m_position.z));
 		//終点は地面上にいない場合は1m下を見る。
 		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
 		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
@@ -344,18 +350,18 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	/*ここから追加分
 	上方向の移動処理*/
 	{
-		//CVector3 addPos;
-		//addPos.Subtract(nextPosition, m_position);
+		CVector3 addPos;
+		addPos.Subtract(nextPosition, m_position);
 		//レイを作成する。
 		//カプセルコライダーの中心座標 + 高さ*0.1の座標をposTmpに求める。
-		CVector3 posTmp = m_position;
-		posTmp.Subtract(addPos);
-		posTmp.y += m_height * 0.5 + m_radius + m_height * 0.2;
+		//CVector3 posTmp = m_position;
+		//posTmp.Subtract(addPos);
+		//posTmp.y += m_height * 1.0f + m_radius *2.0f/*+ m_height * 0.1*/;
 		btTransform start, end;
 		start.setIdentity();
 		end.setIdentity();
 		//始点はカプセルコライダーの中心座標 + 0.2の座標をposTmpに求める。
-		start.setOrigin(btVector3(posTmp.x, posTmp.y, posTmp.z));
+		start.setOrigin(btVector3(m_position.x, nextPosition.y + m_height * 0.5f + m_radius, m_position.z));
 		//地面上にいなくてジャンプで上昇中の場合は上昇量を見る。
 		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
 		CVector3 endPos;
@@ -364,18 +370,20 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			if (addPos.y > 0.0f) {
 				//ジャンプ中とかで上昇中。
 				//上昇している場合はそのまま上を調べる。
+				//endPos.y += addPos.y * 0.01f;
 				endPos.y += addPos.y;
 			}
 			else {
 				//落下中でもXZに移動した結果めり込んでいる可能性があるので上を調べる。
-				endPos.y -= addPos.y*0.1f;
+				//endPos.y -= addPos.y;
+				endPos.y -= addPos.y*0.01f;
 			}
 		}
 		else
 		{
 			endPos.y += 1.0f;
 		}
-		endPos.Add(addPos);
+		//endPos.Add(addPos);
 		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
 		SweepResultCeil callback;
 		callback.me = m_rigidBody.GetBody();
@@ -387,7 +395,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 				//当たった。
 				moveSpeed.y = 0.0f;
 				//nextPosition.y = callback.hitPos.y - (m_height + m_radius + m_height * 0.5);
-				nextPosition.y = callback.hitPos.y - (m_height + m_radius * 2.0f + 8.0f);
+				nextPosition.y = callback.hitPos.y - ( m_height + m_radius * 2.0f/*+ 8.0f*/);
 			}
 		}
 	}
