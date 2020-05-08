@@ -366,6 +366,8 @@ void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 
 	ev.put((nByte)1, hash);
 
+	//データの送信7
+	//customEventActionが呼ばれる
 	mpLbc->opRaiseEvent(false, ev, 0);
 	printf("data raise event\n");
 }

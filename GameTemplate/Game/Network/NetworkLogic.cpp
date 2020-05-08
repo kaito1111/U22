@@ -52,6 +52,18 @@ void NetworkLogic::Disconnect() {
 	mpLbl->disconnect();
 }
 
+void NetworkLogic::CreateRoom()
+{
+	mpLbl->createRoom();
+}
+
+void NetworkLogic::Join()
+{
+	Hashtable expectedCustomRoomProperties;
+	expectedCustomRoomProperties.put(L"map", 1);
+	mpLbc->opJoinRandomRoom(expectedCustomRoomProperties);
+}
+
 /// <summary>
 /// ‰Šú‰»ˆ—
 /// </summary>
