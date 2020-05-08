@@ -8,6 +8,13 @@
 #include <fstream>
 #include <string>
 
+/// <summary>
+/// リスナークラス
+/// </summary>
+/// <remarks>
+/// 各処理時のエラーや動作に対しイベントを起こす監視者
+/// 分類としてはマネージャ系列みたいな感じだと思う。
+/// </remarks>
 
 //TODO : Raise系で重複した処理をまとめる
 
@@ -53,6 +60,7 @@ public:
 //{
 //}
 
+
 LoadBalancingListener::LoadBalancingListener(BaseView* pView)
 {
 	mpLbc = NULL;
@@ -78,7 +86,6 @@ void LoadBalancingListener::disconnect() {
 	mpLbc->disconnect();
 }
 
-
 void LoadBalancingListener::debugReturn(int debugLevel, const JString& string)
 {
 	Console::get().debugReturn(debugLevel, string);
@@ -96,6 +103,10 @@ void LoadBalancingListener::clientErrorReturn(int errorCode)
 	updateState();
 }
 
+/// <summary>
+/// 警告
+/// </summary>
+/// <param name="warningCode">警告コード(番号)</param>
 void LoadBalancingListener::warningReturn(int warningCode)
 {
 	Console::get().writeLine(JString(L"received warning ") + warningCode + " from client");
@@ -328,21 +339,29 @@ void LoadBalancingListener::connectReturn(int errorCode, const JString& errorStr
 
 void LoadBalancingListener::service()
 {
+	//応答時間の取得？
 	unsigned long t = GETTIMEMS();
+
+	//遅延時間の割り出し？ 
 	if ((t - lastUpdateTime) > PLAYER_UPDATE_INTERVAL_MS)
 	{
 		lastUpdateTime = t;
 		if (mpLbc->getState() == PeerStates::Joined) {
+			int a = 0;
 		}
 	}
 }
 
 
 void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
+	//なんヵ　列挙型みたいな型かなぁ
 	Hashtable ev;
+	//
 	ExitGames::Common::Hashtable hash;
 
+	//登録
 	hash.put((nByte)1, (nByte)blue);
+	//登録
 	hash.put((nByte)2, (nByte)orange);
 
 	ev.put((nByte)1, hash);

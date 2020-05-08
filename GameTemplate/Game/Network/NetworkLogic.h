@@ -28,8 +28,8 @@ public:
 		return mpLbc;
 	}
 private:
-	ExitGames::LoadBalancing::Client* mpLbc;
-	LoadBalancingListener* mpLbl = nullptr;
+	ExitGames::LoadBalancing::Client* mpLbc;	//クライアント
+	LoadBalancingListener* mpLbl = nullptr;		//lbリスナー
 	TestView m_testview;
 };
 

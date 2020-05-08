@@ -2,20 +2,56 @@
 #include "LoadBalancing-cpp/inc/Client.h"
 #include "BaseView.h"
 
+//プレイヤーの応答速度間隔
 #define PLAYER_UPDATE_INTERVAL_MS 500
 
+//名前空間定義
 using namespace ExitGames::Common;
 using namespace ExitGames::LoadBalancing;
 
+/// <summary>
+/// リスナークラス
+/// </summary>
+/// <remarks>
+/// 各処理時のエラーや動作に対しイベントを起こす監視者
+/// 分類としてはマネージャ系列みたいな感じだと思う。
+/// </remarks>
 class LoadBalancingListener : public ExitGames::LoadBalancing::Listener
 {
 public:
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="pView">基底ビュー</param>
 	LoadBalancingListener(BaseView* pView);
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~LoadBalancingListener();
+	/// <summary>
+	/// LBClientの設定
+	/// </summary>
+	/// <param name="pLbc">LBClient</param>
 	void setLBC(ExitGames::LoadBalancing::Client* pLbc);
+	/// <summary>
+	/// サーバーに接続
+	/// </summary>
+	/// <param name="userName">ユーザーネーム</param>
 	void connect(const ExitGames::Common::JString& userName);
+	/// <summary>
+	/// サーバーから切断
+	/// </summary>
 	void disconnect();
+	/// <summary>
+	/// ルームの作成
+	/// </summary>
 	void createRoom(void);
+	/// <summary>
+	/// Updateで呼び出さないといけないやつ
+	/// </summary>
+	/// <remarks>
+	/// 応答速度の遅延みてるのかな？
+	/// </remarks>
 	void service();
 	//Test
 	void RaiseGameScore(int blue, int orange);

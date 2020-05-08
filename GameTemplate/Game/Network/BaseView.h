@@ -1,5 +1,8 @@
 #pragma once
 #include "Common-cpp/inc/Common.h"
+/// <summary>
+/// ビューの基底クラス
+/// </summary>
 class BaseView
 {
 public:
