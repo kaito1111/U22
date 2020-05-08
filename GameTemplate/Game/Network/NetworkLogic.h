@@ -17,6 +17,8 @@ public:
 	void Start();
 	void Connect();
 	void Disconnect();
+	void CreateRoom();
+	void Join();
 	void Update();
 
 	LoadBalancingListener* GetLBL()

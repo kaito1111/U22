@@ -33,6 +33,18 @@ void Title::Update()
 		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100,200);
 	}
 
+	//Network CreateRoom Test
+	if (GetAsyncKeyState('1')) {
+		NetworkLogic::GetInstance().CreateRoom();
+		printf("test CreateRoom");
+	}
+
+	//Network JoinRoom Test
+	if (GetAsyncKeyState('2')) {
+		NetworkLogic::GetInstance().Join();
+		NetworkLogic::GetInstance().GetLBL()->joinLobbyReturn();
+		printf("test Join");
+	}
 
 	g_camera2D.Update2D();
 	g_camera3D.Update();

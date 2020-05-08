@@ -56,7 +56,7 @@ public:
 	//Test
 	void RaiseGameScore(int blue, int orange);
 
-private:
+public:
 
 	//From Common::BaseListener
 
