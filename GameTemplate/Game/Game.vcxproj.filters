@@ -104,6 +104,24 @@
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Fade.cpp" />
+    <ClCompile Include="Network\LoadBalancingListener.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\NetworkLogic.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\OutputListener.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\TestView.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\BaseView.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="Network\Console.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -227,6 +245,24 @@
     <ClInclude Include="Title.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Network\LoadBalancingListener.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\NetworkLogic.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\OutputListener.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\TestView.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\BaseView.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network\Console.h">
+      <Filter>network</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />
@@ -249,5 +285,10 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="network">
+      <UniqueIdentifier>{43524bc7-12fd-49fa-a5e5-3ae0d9edd1cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
