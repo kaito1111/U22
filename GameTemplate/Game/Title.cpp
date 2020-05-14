@@ -22,29 +22,15 @@ Title::Title()
 Title::~Title()
 {
 	NetworkLogic::GetInstance().Disconnect();
+	NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
+	printf("disconnect");
 	DeleteGO(m_Sprite);
 }
 
 void Title::Update()
 {
-	//Network Test
-	NetworkLogic::GetInstance().Update();
-	if (g_Pad->IsTrigger(enButtonB)){
-		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100,200);
-	}
-
-	//Network CreateRoom Test
-	if (GetAsyncKeyState('1')) {
-		NetworkLogic::GetInstance().CreateRoom();
-		printf("test CreateRoom");
-	}
-
-	//Network JoinRoom Test
-	if (GetAsyncKeyState('2')) {
-		NetworkLogic::GetInstance().Join();
-		NetworkLogic::GetInstance().GetLBL()->joinLobbyReturn();
-		printf("test Join");
-	}
+	//ネット更新系処理
+	NetworkUpdate();
 
 	g_camera2D.Update2D();
 	g_camera3D.Update();
@@ -58,6 +44,21 @@ void Title::Update()
 			NewGO<Game>(0, "game");
 			DeleteGO(this);
 		}
+	}
+}
+
+void Title::NetworkUpdate()
+{
+	//Network Test
+	NetworkLogic::GetInstance().Update();
+	if (g_Pad->IsTrigger(enButtonB)) {
+		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100, 200);
+	}
+
+	//ルームの作成　そのルームが作成済みなら参加
+	//キーボードのSpace g_Padの44行目参照
+	if (g_Pad->IsTrigger(enButtonSelect)) {
+		NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
 	}
 }
 
