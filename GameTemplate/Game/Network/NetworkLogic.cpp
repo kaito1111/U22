@@ -57,11 +57,21 @@ void NetworkLogic::CreateRoom()
 	mpLbl->createRoom();
 }
 
+void NetworkLogic::CreateRoom(const JString& roomName, nByte maxPlayers)
+{
+	mpLbc->opCreateRoom(roomName, RoomOptions().setMaxPlayers(maxPlayers));
+}
+
 void NetworkLogic::Join()
 {
 	Hashtable expectedCustomRoomProperties;
 	expectedCustomRoomProperties.put(L"map", 1);
 	mpLbc->opJoinRandomRoom(expectedCustomRoomProperties);
+}
+
+void NetworkLogic::CreateRoomOrJoin(const JString& roomName, nByte maxPlayers)
+{
+	mpLbc->opJoinOrCreateRoom(roomName, RoomOptions().setMaxPlayers(maxPlayers));
 }
 
 /// <summary>
@@ -89,9 +99,7 @@ void NetworkLogic::Start() {
 	mpLbl->connect(JString(L"NV") + GETTIMEMS());
 }
 
-/// <summary>
-/// サーバーの更新処理
-/// </summary>
+
 void NetworkLogic::Update() {
 	//クライアントの更新
 	mpLbc->service();

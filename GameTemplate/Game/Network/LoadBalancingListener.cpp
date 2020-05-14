@@ -171,6 +171,10 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
 		}
 		break;
+	//case 1:
+	//	nByte Key = 1;
+	//	
+	//	break;
 	}
 }
 
@@ -354,7 +358,7 @@ void LoadBalancingListener::service()
 
 
 void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
-	//なんヵ　列挙型みたいな型かなぁ
+	//mapみたいなkeyとvalueでできてるクラス
 	Hashtable ev;
 	//
 	ExitGames::Common::Hashtable hash;
@@ -364,10 +368,15 @@ void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	//登録
 	hash.put((nByte)2, (nByte)orange);
 
+	auto a = hash.getValue((nByte)1);
+
+	auto b = hash.getValue((nByte)2);
+
 	ev.put((nByte)1, hash);
 
-	//データの送信7
+	//データの送信
 	//customEventActionが呼ばれる
+	//送信なので自分のcustomEventActionは呼ばれない。
 	mpLbc->opRaiseEvent(false, ev, 0);
 	printf("data raise event\n");
 }

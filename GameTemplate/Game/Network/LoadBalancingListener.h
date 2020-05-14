@@ -73,6 +73,18 @@ public:
 	// events, triggered by certain operations of all players in the same room
 	virtual void joinRoomEventAction(int playerNr, const ExitGames::Common::JVector<int>& playernrs, const ExitGames::LoadBalancing::Player& player);
 	virtual void leaveRoomEventAction(int playerNr, bool isInactive);
+	/// <summary>
+	/// イベントのアクション
+	/// <para>データの送信に使ってください。</para>
+	/// <para>opRaiseEventを呼ぶとこの関数が呼ばれます。</para>
+	/// </summary>
+	/// <remarks>
+	/// 送信側のcustomEventActionは呼ばれません。
+	/// 受信側のcustomEventActionが呼ばれます。
+	/// </remarks>
+	/// <param name="playerNr"></param>
+	/// <param name="eventCode"></param>
+	/// <param name="eventContent"></param>
 	virtual void customEventAction(int playerNr, nByte eventCode, const ExitGames::Common::Object& eventContent);
 
 	// callbacks for operations on PhotonLoadBalancing server
