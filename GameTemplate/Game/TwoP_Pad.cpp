@@ -8,7 +8,7 @@ TwoP_Pad::TwoP_Pad() {
 	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
 		g_Pad[i].Init(i);
 	}
-	m_ManualSprite = NewGO<SpriteRender>(1);
+	m_ManualSprite = NewGO<SpriteRender>(4);
 	m_ManualSprite->Init(L"Assets/sprite/manual.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 	m_ManualSprite->SetW(m_Manual_W);
 	m_copyMainRtToFrameBufferSprite.Init(
@@ -16,7 +16,7 @@ TwoP_Pad::TwoP_Pad() {
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
 	);
-	m_ButtonSprite = NewGO<SpriteRender>(0);
+	m_ButtonSprite = NewGO<SpriteRender>(3);
 	m_ButtonSprite->Init(L"Assets/sprite/Button.dds", 250.0f, 250.0f);
 	CVector3 ButtonSpritePos = { 500.0f,-250.0f,0.0f };
 	m_ButtonSprite->SetPosition(ButtonSpritePos);

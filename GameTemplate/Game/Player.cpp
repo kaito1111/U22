@@ -11,7 +11,9 @@ Player::Player()
 	m_FrontModel.Init(L"Assets/modelData/player(front).cmo");
 	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
 	m_Se.Init(L"Assets/sound/jump.wav");
+	m_Se.SetVolume(0.2f);
 	m_Se2.Init(L"Assets/sound/jump.wav");
+	m_Se2.SetVolume(0.2f);
 	////グラフィックスエンジンからシャドウマップを取得
 	//m_shadowMap = g_graphicsEngine->GetShadowMap();
 	m_Asioto.Init(L"Assets/sound/asioto.wav");
@@ -135,6 +137,7 @@ void Player::Draw()
 			0
 		);
 	}
+
 }
 
 void Player::PreRender()
@@ -197,9 +200,8 @@ void Player::Move()
 	movespeed.z = 0.0f;
 	//左右の移動
 	movespeed.x = g_Pad[m_PlayerNum].GetLStickXF() * -10.0f;
-	float Volume = fabsf(g_Pad[m_PlayerNum].GetLStickXF());
-	m_Asioto.SetVolume(Volume);
 	const float junpPower = 15.0f;
+	float Volume;
 	if (m_characon.IsJump() &&
 		g_Pad[m_PlayerNum].IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
@@ -208,6 +210,7 @@ void Player::Move()
 	}
 	if (m_characon.IsOnGround())
 	{
+		Volume = fabsf(g_Pad[m_PlayerNum].GetLStickXF());
 		if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)) {
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
@@ -219,9 +222,13 @@ void Player::Move()
 			JumpTimer = 0.0f;
 		}
 	}
-
 	const float gravity = 0.8f;		//重力
 	movespeed.y -= gravity;
+	Volume = fabsf(g_Pad[m_PlayerNum].GetLStickXF());
+	if (movespeed.y >= 0.0f) {
+		Volume -= 0.1f;
+	}
+	m_Asioto.SetVolume(Volume);
 
 	if (fabsf(movespeed.x) > 0.0f
 		&&m_characon.IsOnGround()
