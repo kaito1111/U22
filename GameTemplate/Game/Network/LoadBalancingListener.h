@@ -55,6 +55,10 @@ public:
 	void service();
 	//Test
 	void RaiseGameScore(int blue, int orange);
+	/// <summary>
+	/// プレイヤーの情報を転送
+	/// </summary>
+	void RaisePlayerData();
 
 public:
 
@@ -105,9 +109,22 @@ public:
 	virtual void onAvailableRegions(const ExitGames::Common::JVector<ExitGames::Common::JString>& /*availableRegions*/, const ExitGames::Common::JVector<ExitGames::Common::JString>&) override;
 	void updateState(void);
 	void afterRoomJoined(int localPlayerNr);
+	/// <summary>
+	/// リストに積む
+	/// </summary>
+	/// <param name="i">キー</param>
+	/// <param name="f">送る値(float)</param>
+	void putData(nByte i, float f);
+	/// <summary>
+	/// リストに積む
+	/// </summary>
+	/// <param name="i">キー</param>
+	/// <param name="f">送る値(float)</param>
+	void putData(nByte i, bool b);
 
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;
+	Hashtable playerData;		//プレイヤー情報格納用
 	BaseView* mpView;
 	int m_maxPlayer = 2;
 	unsigned long lastUpdateTime;

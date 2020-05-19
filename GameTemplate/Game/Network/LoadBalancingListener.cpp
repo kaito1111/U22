@@ -171,10 +171,10 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
 		}
 		break;
-	//case 1:
+	//case1:
 	//	nByte Key = 1;
-	//	
-	//	break;
+	//	float valueStick[4];
+	//	playerData = 
 	}
 }
 
@@ -356,7 +356,7 @@ void LoadBalancingListener::service()
 	}
 }
 
-
+//Sample
 void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	//mapみたいなkeyとvalueでできてるクラス
 	Hashtable ev;
@@ -373,6 +373,27 @@ void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	auto b = hash.getValue((nByte)2);
 
 	ev.put((nByte)1, hash);
+
+	//データの送信
+	//customEventActionが呼ばれる
+	//送信なので自分のcustomEventActionは呼ばれない。
+	mpLbc->opRaiseEvent(false, ev, 0);
+	printf("data raise event\n");
+}
+
+void LoadBalancingListener::putData(nByte i, float f) {
+	playerData.put(i, f);
+}
+
+void LoadBalancingListener::putData(nByte i, bool b) {
+	playerData.put(i, b);
+}
+
+void LoadBalancingListener::RaisePlayerData()
+{
+	Hashtable ev;
+
+	ev.put((nByte)1, playerData);
 
 	//データの送信
 	//customEventActionが呼ばれる

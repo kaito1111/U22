@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "TwoP_Pad.h"
 #include "Player.h"
+#include "Network/NetworkLogic.h"
 
 
 TwoP_Pad::TwoP_Pad() {
@@ -62,6 +63,23 @@ void TwoP_Pad::Update()
 					//player[i]->SetUpdate(true);
 				}
 			}
+		}
+		bool IsAllPad[EnButton::enButtonNum] = {};
+
+		for (int PadNo = 0; PadNo << EnButton::enButtonNum; PadNo++) {
+			IsAllPad[PadNo] = g_Pad[i].GetPress(PadNo);
+			//ネットワークのリストにツムツム
+			NetworkLogic::GetInstance().GetLBL()->putData(1, IsAllPad[PadNo]);
+		}
+		float AllStick[4] = {};
+		AllStick[0] = g_Pad[i].GetLStickXF();
+		AllStick[1] = g_Pad[i].GetRStickXF();
+		AllStick[2] = g_Pad[i].GetLStickYF();
+		AllStick[3] = g_Pad[i].GetRStickYF();
+
+		//ネットワークのリストにツムツム
+		for (int i = 0; i < 4; i++) {
+			NetworkLogic::GetInstance().GetLBL()->putData(1, AllStick[i]);
 		}
 	}
 }
