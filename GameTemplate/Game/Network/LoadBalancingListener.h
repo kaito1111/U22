@@ -55,6 +55,7 @@ public:
 	void service();
 	//Test
 	void RaiseGameScore(int blue, int orange);
+	void RaiseInputPad(float padLX, float padLY, float padRX, float padRY, int Trigger);
 
 public:
 
