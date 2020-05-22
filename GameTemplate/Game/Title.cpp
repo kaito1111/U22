@@ -7,8 +7,8 @@
 
 Title::Title()
 {
-	NetworkLogic::GetInstance().Start();
-
+	//NetworkLogic::GetInstance().Start();
+	printf("Spaceキーを入力してください。");
 	m_Sprite = NewGO<SpriteRender>(0);
 	m_Sprite->Init(L"Assets/sprite/Title.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 	m_copyMainRtToFrameBufferSprite.Init(
@@ -21,16 +21,20 @@ Title::Title()
 
 Title::~Title()
 {
-	NetworkLogic::GetInstance().Disconnect();
-	NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
-	printf("disconnect");
+	//NetworkLogic::GetInstance().Disconnect();
+	//NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
+	//printf("disconnect");
 	DeleteGO(m_Sprite);
 }
 
 void Title::Update()
 {
-	//ネット更新系処理
-	NetworkUpdate();
+	//ルームの作成　そのルームが作成済みなら参加
+	//キーボードのSpace g_Padの44行目参照
+	if (g_Pad->IsTrigger(enButtonSelect)) {
+		NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
+		printf("joined");
+	}
 
 	g_camera2D.Update2D();
 	g_camera3D.Update();
@@ -50,7 +54,7 @@ void Title::Update()
 void Title::NetworkUpdate()
 {
 	//Network Test
-	NetworkLogic::GetInstance().Update();
+	//NetworkLogic::GetInstance().Update();
 
 	//EventTest
 	if (g_Pad->IsTrigger(enButtonB)) {
@@ -58,12 +62,6 @@ void Title::NetworkUpdate()
 	}
 
 	//NetworkLogic::GetInstance().GetLBL()->RaiseInputPad(g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->IsTrigger());
-
-	//ルームの作成　そのルームが作成済みなら参加
-	//キーボードのSpace g_Padの44行目参照
-	if (g_Pad->IsTrigger(enButtonSelect)) {
-		NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
-	}
 }
 
 void Title::PostRender()
