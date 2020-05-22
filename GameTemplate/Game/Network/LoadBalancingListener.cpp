@@ -171,10 +171,24 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
 		}
 		break;
-	//case1:
-	//	nByte Key = 1;
-	//	float valueStick[4];
-	//	playerData = 
+	case 1:
+		nByte Key = 1;
+
+		//padの入力
+		float padLX, padLY, padRX, padRY; 
+		//トリガー
+		int Trigger;
+
+		Hashtable playerData;
+
+		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
+
+		if (eventContent.getValue(Key)) {
+			
+			playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
+		}
+		
+		break;
 	}
 }
 
@@ -356,7 +370,7 @@ void LoadBalancingListener::service()
 	}
 }
 
-//Sample
+
 void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	//mapみたいなkeyとvalueでできてるクラス
 	Hashtable ev;
@@ -381,23 +395,18 @@ void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	printf("data raise event\n");
 }
 
-void LoadBalancingListener::putData(nByte i, float f) {
-	playerData.put(i, f);
-}
-
-void LoadBalancingListener::putData(nByte i, bool b) {
-	playerData.put(i, b);
-}
-
-void LoadBalancingListener::RaisePlayerData()
-{
+void LoadBalancingListener::RaiseInputPad(float padLX, float padLY, float padRX, float padRY, int Trigger) {
 	Hashtable ev;
+	Hashtable hash;
 
-	ev.put((nByte)1, playerData);
+	hash.put((nByte)1, (nByte)padLX);
+	hash.put((nByte)2, (nByte)padLY);
+	hash.put((nByte)3, (nByte)padRX);
+	hash.put((nByte)4, (nByte)padRY);
+	hash.put((nByte)5, (nByte)Trigger);
 
-	//データの送信
-	//customEventActionが呼ばれる
-	//送信なので自分のcustomEventActionは呼ばれない。
+	ev.put((nByte)1, hash);
+
 	mpLbc->opRaiseEvent(false, ev, 0);
-	printf("data raise event\n");
+	printf("PadData raise event\n");
 }
