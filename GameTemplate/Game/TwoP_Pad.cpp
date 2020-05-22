@@ -66,7 +66,7 @@ void TwoP_Pad::Update()
 		}
 		bool IsAllPad[EnButton::enButtonNum] = {};
 
-		for (int PadNo = 0; PadNo << EnButton::enButtonNum; PadNo++) {
+		for (int PadNo = 0; PadNo < EnButton::enButtonNum; PadNo++) {
 			IsAllPad[PadNo] = g_Pad[i].GetPress(PadNo);
 			//ネットワークのリストにツムツム
 			NetworkLogic::GetInstance().GetLBL()->putData(1, IsAllPad[PadNo]);
