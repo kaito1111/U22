@@ -171,25 +171,25 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
 		}
 		break;
-	case 1:
-		nByte Key = 1;
+	//case 1:
+	//	nByte Key = 1;
 
-		//padの入力
-		float padLX, padLY, padRX, padRY; 
-		//トリガー
-		int Trigger;
+	//	//padの入力
+	//	float padLX, padLY, padRX, padRY; 
+	//	//トリガー
+	//	int Trigger;
 
-		Hashtable playerData;
+	//	Hashtable playerData;
 
-		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
+	//	playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
-		if (eventContent.getValue(Key)) {
-			
-			playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
-		}
-		
-		break;
-	}
+	//	if (eventContent.getValue(Key)) {
+	//		
+	//		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
+	//	}
+	//	
+	//	break;
+	//}
 }
 
 void LoadBalancingListener::disconnectReturn(void)
