@@ -33,6 +33,7 @@ void TitleStage::Update()
 }
 void TitleStage::Draw()
 {
+	//もう少しまともなステージ選択画面を作りたい
 	//ワールド行列の更新
 	m_floorModel.UpdateWorldMatrix(m_floorPos, CQuaternion::Identity(), CVector3::One());
 	/*skyModel.UpdateWorldMatrix({ 0,0,2000 }, CQuaternion::Identity(), { 1,1,1 });

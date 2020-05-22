@@ -41,11 +41,12 @@ void StageSelect::Update()
 			float a = stageXSize * (nowStage + 1);
 			float b = stageXSize * nowStage;
 			if (pPos.x > a &&//プレイヤーの座標がスプライト右端より小さく
-				pPos.x < b) {    //左端より大きいとき
+				pPos.x < b) {//左端より大きいとき
 				stage = NewGO<Stage>(1, "stage");
-				stage->setStageNum(nowStage);
 				player1->SetPosition(nextPlayerPosition);
 				player2->SetPosition(nextPlayerPosition);
+				stage->setStageNum(nowStage);
+				
 				DeleteGO(this);
 			}
 		}
@@ -58,8 +59,8 @@ void StageSelect::Update()
 void StageSelect::stageSelect()
 {
 	
-	const float moveSpeed = 100;	//動く速度
-	const CVector3 scaleChangeSpeed = {0.5, 0.5, 0.5};   //拡縮速度
-	count++;
+	//const float moveSpeed = 100;	//動く速度
+	//const CVector3 scaleChangeSpeed = {0.5, 0.5, 0.5};   //拡縮速度
+	//count++;
 	
 }
