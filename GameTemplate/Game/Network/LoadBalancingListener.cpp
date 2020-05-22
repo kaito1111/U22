@@ -153,39 +153,55 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 
 	switch (eventCode) {
 	case 0:
-		nByte Key = 1;
-		int blueTeamScore, orangeTeamScore;
-		ExitGames::Common::Hashtable hashData;
-		hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
+		//nByte Key = 1;
+		//int blueTeamScore, orangeTeamScore;
+		//ExitGames::Common::Hashtable hashData;
+		//hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
-		if (eventContent.getValue(Key)) {
+		//if (eventContent.getValue(Key)) {
 
-			hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
+		//	hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
-			if (hashData.getValue((nByte)1)) {
-				blueTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)1))).getDataCopy();
-			}
-			if (hashData.getValue((nByte)2)) {
-				orangeTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)2))).getDataCopy();
-			}
-			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
-		}
+		//	if (hashData.getValue((nByte)1)) {
+		//		blueTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)1))).getDataCopy();
+		//	}
+		//	if (hashData.getValue((nByte)2)) {
+		//		orangeTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)2))).getDataCopy();
+		//	}
+		//	printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
+		//}
 		break;
 	case 1:
+
 		nByte Key = 1;
 
 		//padの入力
 		float padLX, padLY, padRX, padRY; 
 		//トリガー
-		int Trigger;
+		int Trigger[4];
 
 		Hashtable playerData;
 
 		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
 		if (eventContent.getValue(Key)) {
-			
 			playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
+			if (playerData.getValue((nByte)1)) {
+				padLX = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
+				Trigger[0] = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
+			}
+			if (playerData.getValue((nByte)2)) {
+				padLY = ValueObject<nByte>(playerData.getValue((nByte)2)).getDataCopy();
+				Trigger[1] = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
+			}
+			if (playerData.getValue((nByte)3)) {
+				padRX = ValueObject<nByte>(playerData.getValue((nByte)3)).getDataCopy();
+				Trigger[2] = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
+			}
+			if (playerData.getValue((nByte)4)) {
+				padRY = ValueObject<nByte>(playerData.getValue((nByte)4)).getDataCopy();
+				Trigger[3] = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
+			}
 		}
 		
 		break;
@@ -395,18 +411,23 @@ void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	printf("data raise event\n");
 }
 
-void LoadBalancingListener::RaiseInputPad(float padLX, float padLY, float padRX, float padRY, int Trigger) {
+void LoadBalancingListener::putData(nByte i, float f) {
+	playerData.put(i, f);
+}
+
+void LoadBalancingListener::putData(nByte i, bool b) {
+	playerData.put(i, b);
+}
+
+void LoadBalancingListener::RaisePlayerData()
+{
 	Hashtable ev;
-	Hashtable hash;
 
-	hash.put((nByte)1, (nByte)padLX);
-	hash.put((nByte)2, (nByte)padLY);
-	hash.put((nByte)3, (nByte)padRX);
-	hash.put((nByte)4, (nByte)padRY);
-	hash.put((nByte)5, (nByte)Trigger);
+	ev.put((nByte)1, playerData);
 
-	ev.put((nByte)1, hash);
-
-	mpLbc->opRaiseEvent(false, ev, 0);
-	printf("PadData raise event\n");
+	//データの送信
+	//customEventActionが呼ばれる
+	//送信なので自分のcustomEventActionは呼ばれない。
+	mpLbc->opRaiseEvent(false, ev, 1);
+	printf("data raise event\n");
 }
