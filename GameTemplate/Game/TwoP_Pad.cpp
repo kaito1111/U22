@@ -66,10 +66,10 @@ void TwoP_Pad::Update()
 		}
 		bool IsAllPad[EnButton::enButtonNum] = {};
 
-		for (int PadNo = 0; PadNo << EnButton::enButtonNum; PadNo++) {
+		for (int PadNo = 0; PadNo < EnButton::enButtonNum; PadNo++) {
 			IsAllPad[PadNo] = g_Pad[i].GetPress(PadNo);
 			//ネットワークのリストにツムツム
-			NetworkLogic::GetInstance().GetLBL()->putData(1, IsAllPad[PadNo]);
+			NetworkLogic::GetInstance().GetLBL()->putData(PadNo, IsAllPad[PadNo]);
 		}
 		float AllStick[4] = {};
 		AllStick[0] = g_Pad[i].GetLStickXF();
@@ -79,7 +79,10 @@ void TwoP_Pad::Update()
 
 		//ネットワークのリストにツムツム
 		for (int i = 0; i < 4; i++) {
-			NetworkLogic::GetInstance().GetLBL()->putData(1, AllStick[i]);
+			NetworkLogic::GetInstance().GetLBL()->putData(i, AllStick[i]);
 		}
+
+
+		NetworkLogic::GetInstance().GetLBL()->RaisePlayerData();
 	}
 }

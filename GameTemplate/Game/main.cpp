@@ -5,6 +5,7 @@
 #include "StageSelect/StageSelect.h"
 #include "TwoP_Pad.h"
 #include "Title.h"
+#include "Network/NetworkLogic.h"
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -19,6 +20,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//ゲームの初期化。
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
+
+	//ネットワークの初期化関連処理 InitGameの中入れてもいいかも？
+	NetworkLogic::GetInstance().Start();
 
 	//カメラを初期化。
 	g_camera3D.SetPosition({ 00.0f, 100.0f, 500.0f });
@@ -46,6 +50,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		g_physics.Update();
 		//サウンドエンジンの更新
 		Engine().GetSoundEngine().Update();
+		//ネットワークの更新
+		NetworkLogic::GetInstance().Update();
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
 		gameObjectManager().Start();
 		//ゲームオブジェクトマネージャーでする処理の呼び出し
@@ -53,4 +59,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//描画終了。
 		g_graphicsEngine->EndRender();
 	}
+
+	//ネットワークからの切断
+	NetworkLogic::GetInstance().Disconnect();
+	NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
+	printf("disconnect\n");
 }
