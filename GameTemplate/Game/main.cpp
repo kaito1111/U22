@@ -11,6 +11,12 @@
 ///////////////////////////////////////////////////////////////////
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow)
 {
+
+	//Console
+	AllocConsole();
+	freopen("CON", "r", stdin);
+	freopen("CON", "w", stdout);
+
 	//ÉQÅ[ÉÄÇÃèâä˙âªÅB
 	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
 

@@ -49,7 +49,7 @@ void GameCamera::Update()
 	}*/
 
 	//ƒvƒŒƒCƒ„[‚ðŽE‚·
-	if (m_Player[0]->GetPosition().y < Target.y - 200.0f) {
+	if (m_Player[0]->GetPosition().y < Target.y - 500.0f) {
 		m_Player[0]->SIBOU();
 	}
 

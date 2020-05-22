@@ -177,6 +177,9 @@ public:
 	{
 		return m_rStickY;
 	}
+	int GetPress(int PudNum) {
+		return m_press[PudNum];
+	}
 private:
 	/*!
 	*@brief	ボタンの入力情報を更新。
