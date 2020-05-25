@@ -8,7 +8,9 @@
 Title::Title()
 {
 	//NetworkLogic::GetInstance().Start();
-	printf("Spaceキーを入力してください。");
+	printf("ルームに入場もしくは、作成を行っています。\n");
+	NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
+	printf("ルームに入場しました。\n");
 	m_Sprite = NewGO<SpriteRender>(0);
 	m_Sprite->Init(L"Assets/sprite/Title.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 	m_copyMainRtToFrameBufferSprite.Init(
@@ -32,8 +34,6 @@ void Title::Update()
 	//ルームの作成　そのルームが作成済みなら参加
 	//キーボードのSpace g_Padの44行目参照
 	if (g_Pad->IsTrigger(enButtonSelect)) {
-		NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
-		printf("joined");
 	}
 
 	g_camera2D.Update2D();

@@ -172,8 +172,12 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		//}
 		break;
 	case 1:
-		//
-		nByte Key = 2;
+		/*
+		padデータ（ボタン、pad入力）を送信側から受け取る処理。
+		*/
+
+		//キーの初期化
+		nByte Key = 0;
 
 		//padの入力
 		float padLX, padLY, padRX, padRY;
@@ -196,16 +200,16 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			for (int i = 16; i < 20; i++) {
 				if (playerData.getValue((nByte)i)) {
 					if (playerData.getValue((nByte)i)) {
-						if (i = 16) {
+						if (i == 16) {
 							padLX = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
 						}
-						if (i = 17) {
+						if (i == 17) {
 							padLY = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
 						}
-						if (i = 18) {
+						if (i == 18) {
 							padRX = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
 						}
-						if (i = 19) {
+						if (i == 19) {
 							padRY = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
 						}
 					}
@@ -439,5 +443,5 @@ void LoadBalancingListener::RaisePlayerData()
 	//customEventActionが呼ばれる
 	//送信なので自分のcustomEventActionは呼ばれない。
 	mpLbc->opRaiseEvent(false, ev, 1);
-	printf("playerdata raise event\n");
+	//printf("playerdata raise event\n");
 }
