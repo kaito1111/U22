@@ -16,7 +16,7 @@ namespace myEngine {
 			//グラフィックスエンジンからシャドウマップを取得
 			m_shadowMap = g_graphicsEngine->GetShadowMap();
 			//影を落とすカメラの座標
-			m_lightCameraPosition = { 0.0f, 4000.0f, 0.0f };
+			//m_lightCameraPosition = { 0.0f, 4000.0f, 0.0f };
 			//影を落とす注視点の座標
 			m_lightCameraTarget = CVector3::Zero();;/*CVector3::Zero();*/
 		}
@@ -34,7 +34,7 @@ namespace myEngine {
 			//シャドウキャスター登録
 			m_shadowMap->RegistShdowCaster(&m_skinModel);
 			//ライトの座標を更新
-			m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
+			//m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
 		}
 
 		if (GetAsyncKeyState('A')) {
