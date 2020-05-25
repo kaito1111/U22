@@ -72,7 +72,7 @@ private:
 	MyMagnet::Magnet* m_Magnet = nullptr;
 	bool HaveMagnet = false;
 	CVector3 movespeed = CVector3::Zero();
-	//ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
+	ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 
 	enum enAniCli {
 		Wait,
