@@ -172,39 +172,47 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		//}
 		break;
 	case 1:
-
-		nByte Key = 1;
+		//
+		nByte Key = 2;
 
 		//padの入力
-		float padLX, padLY, padRX, padRY; 
+		float padLX, padLY, padRX, padRY;
 		//トリガー
-		int Trigger[4];
+		int Trigger[15];
 
 		Hashtable playerData;
 
 		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
+		//イベント
 		if (eventContent.getValue(Key)) {
 			playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
-			if (playerData.getValue((nByte)1)) {
-				padLX = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
-				Trigger[0] = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
+			for (int i = 0; i < 16; i++) {
+				if (playerData.getValue((nByte)i)) {
+					Trigger[i] = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
+				}
 			}
-			if (playerData.getValue((nByte)2)) {
-				padLY = ValueObject<nByte>(playerData.getValue((nByte)2)).getDataCopy();
-				Trigger[1] = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
-			}
-			if (playerData.getValue((nByte)3)) {
-				padRX = ValueObject<nByte>(playerData.getValue((nByte)3)).getDataCopy();
-				Trigger[2] = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
-			}
-			if (playerData.getValue((nByte)4)) {
-				padRY = ValueObject<nByte>(playerData.getValue((nByte)4)).getDataCopy();
-				Trigger[3] = ValueObject<nByte>(playerData.getValue((nByte)1)).getDataCopy();
+
+			for (int i = 16; i < 20; i++) {
+				if (playerData.getValue((nByte)i)) {
+					if (playerData.getValue((nByte)i)) {
+						if (i = 16) {
+							padLX = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
+						}
+						if (i = 17) {
+							padLY = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
+						}
+						if (i = 18) {
+							padRX = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
+						}
+						if (i = 19) {
+							padRY = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
+						}
+					}
+					break;
+				}
 			}
 		}
-		
-		break;
 	}
 }
 
@@ -421,13 +429,15 @@ void LoadBalancingListener::putData(nByte i, bool b) {
 
 void LoadBalancingListener::RaisePlayerData()
 {
+	//送るデータのコンテナ(eventContent)
 	Hashtable ev;
 
+	//コンテナにplayerデータの情報を積む
 	ev.put((nByte)1, playerData);
 
 	//データの送信
 	//customEventActionが呼ばれる
 	//送信なので自分のcustomEventActionは呼ばれない。
 	mpLbc->opRaiseEvent(false, ev, 1);
-	printf("data raise event\n");
+	printf("playerdata raise event\n");
 }
