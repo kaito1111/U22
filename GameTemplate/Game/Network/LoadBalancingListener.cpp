@@ -200,18 +200,10 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			for (int i = 16; i < 20; i++) {
 				if (playerData.getValue((nByte)i)) {
 					if (playerData.getValue((nByte)i)) {
-						if (i == 16) {
-							padLX = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
-						}
-						if (i == 17) {
-							padLY = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
-						}
-						if (i == 18) {
-							padRX = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
-						}
-						if (i == 19) {
-							padRY = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
-						}
+						padLX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+						padLY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+						padRX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+						padRY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
 					}
 					break;
 				}
