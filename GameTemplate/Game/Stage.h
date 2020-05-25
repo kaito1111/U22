@@ -16,7 +16,7 @@ public:
 		stageNum = num;
 	}
 private:
-	int stageNum = 0;
+	int stageNum = 2;
 	int count = 0;
 	bool newStage = false;
                    //ƒQ[ƒ€ƒNƒ‰ƒX

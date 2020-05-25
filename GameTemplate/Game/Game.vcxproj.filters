@@ -154,6 +154,7 @@
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
     <MeshContentTask Include="Assets\modelData\Press.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />
+    <MeshContentTask Include="Assets\modelData\Course_Level2.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />

@@ -305,6 +305,7 @@
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
     <MeshContentTask Include="Assets\modelData\bStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
+    <MeshContentTask Include="Assets\modelData\Course_Level2.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />
