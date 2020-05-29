@@ -71,6 +71,21 @@ void ShadowMap::UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCam
 	UpdateFromLightDirection(m_lightCameraPosition, lightDir);
 }
 
+void ShadowMap::UpdateFromLightTarget()
+{
+	//ライトの方向を計算
+	auto lightDir = m_lightCameraTarget - m_lightCameraPosition;
+	if (lightDir.Length() < 0.00001f) {
+		//視点と注視点近すぎ
+		//恐らくバグなのでクラッシュ
+		std::abort();
+	}
+	//正規化
+	lightDir.Normalize();
+	//影をおとす処理
+	UpdateFromLightDirection(m_lightCameraPosition, lightDir);
+}
+
 void ShadowMap::BiginRender()
 {
 	//デバコン取得

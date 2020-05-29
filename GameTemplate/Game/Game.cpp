@@ -40,7 +40,7 @@ Game::~Game()
 bool Game::Start()
 {
 	//1”Ô–Ú
-	m_task = new KaitoTask();
+	m_task = NewGO<KaitoTask>(0);
 
 	//2”Ô–Ú
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
