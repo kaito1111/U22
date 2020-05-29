@@ -121,6 +121,7 @@ void LoadBalancingListener::serverErrorReturn(int errorCode)
 void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>& playernrs, const Player& player)
 {
 	Console::get().writeLine(JString("player ") + playerNr + L" " + player.getName() + L" has joined the game");
+	m_playerNum = playerNr;
 }
 
 void LoadBalancingListener::leaveRoomEventAction(int playerNr, bool isInactive)
@@ -177,7 +178,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		*/
 
 		//キーの初期化
-		nByte Key = 0;
+		nByte Key = 1;
 
 		//padの入力
 		float padLX, padLY, padRX, padRY;
@@ -187,11 +188,11 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		Hashtable playerData;
 
 		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
-
+		auto a = eventContent.getValue(Key);
 		//イベント
 		if (eventContent.getValue(Key)) {
 			playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
-			for (int i = 0; i < 16; i++) {
+			for (int i = 0; i < 15; i++) {
 				if (playerData.getValue((nByte)i)) {
 					Trigger[i] = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
 				}
@@ -205,10 +206,10 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 						padRX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
 						padRY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
 					}
-					break;
 				}
 			}
 		}
+		break;
 	}
 }
 

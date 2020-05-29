@@ -128,5 +128,6 @@ private:
 	BaseView* mpView;
 	int m_maxPlayer = 2;
 	unsigned long lastUpdateTime;
+	int m_playerNum = 0;
 };
 

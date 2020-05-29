@@ -51,7 +51,7 @@ public:
 	/// </summary>
 	/// <param name="roomName">ルームの名前</param>
 	/// <param name="maxPlayers">最大Player数</param>
-	void CreateRoomOrJoin(const JString& roomName, nByte maxPlayers = 5);
+	void CreateRoomOrJoin(const JString& roomName, nByte maxPlayers = 5, bool CreateRoom = true);
 	/// <summary>
 	/// サーバーの更新処理
 	/// </summary>
