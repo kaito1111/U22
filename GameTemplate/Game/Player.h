@@ -31,9 +31,10 @@ public:
 	{
 		m_PlayerNum = n;
 	}
-	void Update();
+	void ReSpown();
 private:
 	bool Start();
+	void Update();
 	void Draw();
 	void PreRender()override;
 

@@ -6,15 +6,11 @@
 
 Stage::Stage()
 {
-	
-	
-
 }
 
 
 Stage::~Stage()
 {
-
 }
 
 bool Stage::Start()
@@ -24,6 +20,9 @@ bool Stage::Start()
 		m_model.Init(L"Assets/modelData/Course_Level1.cmo");
 	}
 	if (nowStage == 1) {
+		m_model.Init(L"Assets/modelData/stage2.cmo");
+	}
+	if (nowStage == 2) {
 		m_model.Init(L"Assets/modelData/stage3.cmo");
 	}
 	//シャドウレシーバーとする

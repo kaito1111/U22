@@ -30,7 +30,8 @@ bool StageSelect::Start()
 
 void StageSelect::Update()
 {
-	const CVector3 nextPlayerPosition = {0.0f,200.0f,0.0f};
+	const CVector3 nextPlayer1Position = {0.0f,200.0f,0.0f};
+	const CVector3 nextPlayer2Position = {-50.0f,200.0f,0.0f };
 	const int stageMax = 2;//ステージの数.上限
 	const float stageXSize = -640.0f;//選ぶステージの横幅
 	CVector3 pPos = player2->GetPosition();
@@ -43,10 +44,9 @@ void StageSelect::Update()
 			if (pPos.x > a &&//プレイヤーの座標がスプライト右端より小さく
 				pPos.x < b) {//左端より大きいとき
 				stage = NewGO<Stage>(1, "stage");
-				player1->SetPosition(nextPlayerPosition);
-				player2->SetPosition(nextPlayerPosition);
 				stage->setStageNum(nowStage);
-				
+				player1->SetPosition(nextPlayer1Position);
+				player2->SetPosition(nextPlayer2Position);
 				DeleteGO(this);
 			}
 		}

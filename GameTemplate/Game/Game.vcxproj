@@ -325,6 +325,7 @@
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\sky.fbx" />
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
+    <MeshContentTask Include="Assets\modelData\stage2.fbx" />
     <MeshContentTask Include="Assets\modelData\stage3.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
@@ -369,6 +370,7 @@
     <None Include="Assets\level\Corse_Level_1.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
     <None Include="Assets\level\stageLevel.tkl" />
+    <None Include="Assets\level\なんかもうできないですねぇStage2.tkl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

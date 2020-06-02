@@ -21,9 +21,7 @@ bool TitleStage::Start()
 	);
 	//ステージその他モデル
 	m_floorModel.Init(L"Assets/modelData/serectStage.cmo");//床
-	//skyModel.Init(L"Assets/modelData/sky.cmo");     //クソ雑魚背景
-	//m_model.Init(L"Assets/modelData/titleStage1.cmo"); //ステージ1．
-	//m_model2.Init(L"Assets/modelData/titleStage3.cmo");	//ステージⅢ．おいおいⅢかよ
+	
 	return true;
 }
 
