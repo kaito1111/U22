@@ -3,7 +3,7 @@
 #include "Stage.h"
 #include "exampleCode/ex2D.h"
 #include "KaitoTask.h"
-#include "DebugMan.h"
+#include "Debug/DebugMan.h"
 #include "TitleStage.h"
 #include "stageObject/Goal.h"
 #include "level/Level.h"

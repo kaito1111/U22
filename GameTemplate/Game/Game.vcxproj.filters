@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
-    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="GPUBuffer\ConstantBuffer.cpp" />
     <ClCompile Include="exampleCode\ex2D.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -78,12 +77,10 @@
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="TitleStage.cpp" />
-    <ClCompile Include="DebugMan.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="TitleCamera.cpp" />
-    <ClCompile Include="PostEffect.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
     <ClCompile Include="stageObject\Goal.cpp" />
     <ClCompile Include="stageObject\Iwa.cpp" />
@@ -122,6 +119,9 @@
     <ClCompile Include="light\DirectionLight.cpp" />
     <ClCompile Include="Bloom\Bloom.cpp" />
     <ClCompile Include="Shadow\ShadowMap.cpp" />
+    <ClCompile Include="Debug\DebugMan.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
+    <ClCompile Include="PostEffect\PostEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -158,7 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
-    <ClInclude Include="Effect.h" />
     <ClInclude Include="GPUBuffer\ConstantBuffer.h" />
     <ClInclude Include="exampleCode\ex2D.h" />
     <ClInclude Include="Game.h" />
@@ -219,12 +218,10 @@
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="TitleStage.h" />
-    <ClInclude Include="DebugMan.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="TitleCamera.h" />
-    <ClInclude Include="PostEffect.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Goal.h" />
     <ClInclude Include="stageObject\Iwa.h" />
@@ -264,6 +261,9 @@
     <ClInclude Include="light\DirectionLight.h" />
     <ClInclude Include="Bloom\Bloom.h" />
     <ClInclude Include="Shadow\ShadowMap.h" />
+    <ClInclude Include="Debug\DebugMan.h" />
+    <ClInclude Include="Effect\Effect.h" />
+    <ClInclude Include="PostEffect\PostEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />
