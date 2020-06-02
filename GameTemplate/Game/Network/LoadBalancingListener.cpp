@@ -185,7 +185,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 
 
 		Hashtable playerData;
-
+		//値の取得
 		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
 		auto a = eventContent.getValue(Key);
 		//イベント
@@ -209,6 +209,9 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 						if (i == 16) 
 						{
 							padLX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+							if (padLX != 0) {
+								printf("chu");
+							}
 						}
 						if (i == 17)
 						{
@@ -216,6 +219,9 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 						}
 						if (i == 18) 
 						{
+							if (padRX != 0) {
+								printf("chu");
+							}
 							padRX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
 						}
 						if (i == 19)

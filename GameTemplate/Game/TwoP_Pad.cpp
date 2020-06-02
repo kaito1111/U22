@@ -92,6 +92,10 @@ void TwoP_Pad::Update()
 	AllStick[1] = g_Pad[PlayerPad].GetRStickXF();
 	AllStick[2] = g_Pad[PlayerPad].GetLStickYF();
 	AllStick[3] = g_Pad[PlayerPad].GetRStickYF();
+
+	if (AllStick[0] != 0) {
+		auto a = AllStick[0];
+	}
 	//イベントコンテナに積む準備 keyの番号合わせるためにi+16
 	for (int i = 0; i < 4; i++)
 	{

@@ -134,12 +134,18 @@ public:
 		return Trigger[padNo];
 	}
 	int GetPlayerStickLXData() {
+		if (padLX != 0) {
+			printf("tyu");
+		}
 		return padLX;
 	}
 	int GetPlayerStickLYData() {
 		return padLY;
 	}
 	int GetPlayerStickRXData() {
+		if (padRX != 0) {
+			printf("tyu");
+		}
 		return padRX;
 	}
 	int GetPlayerStickRYData() {
