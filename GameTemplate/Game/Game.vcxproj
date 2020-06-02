@@ -100,11 +100,11 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bloom.cpp" />
+    <ClCompile Include="Bloom\Bloom.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
-    <ClCompile Include="DebugMan.cpp" />
-    <ClCompile Include="DirectionLight.cpp" />
-    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Debug\DebugMan.cpp" />
+    <ClCompile Include="light\DirectionLight.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Network\BaseView.cpp" />
@@ -122,12 +122,12 @@
     </ClCompile>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="graphics\RenderTarget.cpp" />
-    <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="light\LightManager.cpp" />
     <ClCompile Include="stageObject\MoveFloor2.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
-    <ClCompile Include="PostEffect.cpp" />
+    <ClCompile Include="PostEffect\PostEffect.cpp" />
     <ClCompile Include="stageObject\RorlingRock.cpp" />
-    <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="Shadow\ShadowMap.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
@@ -200,11 +200,11 @@
     <ClCompile Include="sound\WaveFileBank.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bloom.h" />
+    <ClInclude Include="Bloom\Bloom.h" />
     <ClInclude Include="character\CharacterController.h" />
-    <ClInclude Include="DebugMan.h" />
-    <ClInclude Include="DirectionLight.h" />
-    <ClInclude Include="Effect.h" />
+    <ClInclude Include="Debug\DebugMan.h" />
+    <ClInclude Include="light\DirectionLight.h" />
+    <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Network\BaseView.h" />
@@ -246,7 +246,7 @@
     <ClInclude Include="KaitoTask.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
-    <ClInclude Include="LightManager.h" />
+    <ClInclude Include="light\LightManager.h" />
     <ClInclude Include="Magnet\Magnet.h" />
     <ClInclude Include="Magnet\MagnetManager.h" />
     <ClInclude Include="math\kMath.h" />
@@ -268,9 +268,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
-    <ClInclude Include="PostEffect.h" />
+    <ClInclude Include="PostEffect\PostEffect.h" />
     <ClInclude Include="stageObject\RorlingRock.h" />
-    <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="Shadow\ShadowMap.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
@@ -305,6 +305,7 @@
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
     <MeshContentTask Include="Assets\modelData\bStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
+    <MeshContentTask Include="Assets\modelData\Course_Level2.FBX" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />

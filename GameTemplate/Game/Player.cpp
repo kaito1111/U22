@@ -74,17 +74,10 @@ bool Player::Start()
 
 void Player::Update()
 {
-	////シャドウ関連の更新処理
-	//{
-	//	//シャドウキャスター登録
-	//	m_shadowMap->RegistShdowCaster(&m_model);
-	//	//影を落とすカメラの座標
-	//	CVector3 m_lightCameraPosition = { 0.0f, 4000.0f, 0.0f };
-	//	//影を落とす注視点の座標
-	//	CVector3 m_lightCameraTarget = CVector3::Zero();;/*CVector3::Zero();*/
-	//	//ライトの座標を更新
-	//	m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
-	//}
+	//シャドウ関連の更新処理
+	{
+
+	}
 	if (m_IsSi) {
 		SIBOU();
 	}
@@ -154,19 +147,6 @@ void Player::Draw()
 
 }
 
-void Player::PreRender()
-{
-//	//シャドウマップにレンダリング
-//	{
-//		//描画設定のバックアップ
-//		m_shadowMap->BiginRender();
-//		//シャドウマップ用の描画設定に切り替えて
-//		//登録されているシャドウキャスターの影を描画
-//		m_shadowMap->RenderToShadowMap();
-//		//描画設定をもとに戻す
-//		m_shadowMap->EndRender();
-//	}
-}
 
 void Player::SpawnPole()
 {

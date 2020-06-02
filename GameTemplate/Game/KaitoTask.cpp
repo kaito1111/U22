@@ -24,6 +24,24 @@ KaitoTask::KaitoTask()
 	//NewGO<Goal>(1, "goal");
 }
 
+void KaitoTask::PreRender()
+{
+	auto shadowMap = g_graphicsEngine->GetShadowMap();
+	//描画設定のバックアップ
+	shadowMap->BiginRender();
+	//ライトの座標を更新
+	shadowMap->UpdateFromLightTarget();
+	//プレイヤー人数分シャドウキャスターとして登録
+	for (int i = 0; i < g_PlayerNum;) {
+		shadowMap->RegistShdowCaster(m_Player[i++]->GetModel());
+	}
+	//シャドウマップ用の描画設定に切り替えて
+	//登録されているシャドウキャスターの影を描画
+	shadowMap->RenderToShadowMap();
+	//描画設定をもとに戻す
+	shadowMap->EndRender();
+}
+
 KaitoTask::~KaitoTask()
 {
 	DeleteGO(m_GameCamera);

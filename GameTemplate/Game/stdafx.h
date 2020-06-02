@@ -52,7 +52,8 @@
 #include "graphics/animation/AnimationClip.h"
 #include "graphics/Camera.h"
 
-#include "Effect.h"
+#include "Effect/Effect.h"
+#include "PostEffect/PostEffect.h"
 
 #include "sound/SoundSource.h"
 

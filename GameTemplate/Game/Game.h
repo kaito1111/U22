@@ -1,7 +1,6 @@
 #pragma once
 #include "graphics/2D/Sprite.h"
 #include "graphics/2D/SpriteRender.h"
-#include "PostEffect.h"
 #include "stageObject/Goal.h"
 #include "StageSelect/StageSelect.h"
 class KaitoTask;

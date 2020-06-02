@@ -21,6 +21,9 @@ public:
 	void SetPoint(CVector3 point) {
 		m_CheckPoint = point;
 	}
+	SkinModel* GetModel() {
+		return &m_model;
+	}
 
 	void SIBOU();						
 	void Press();						//何度も呼ぶ
@@ -36,7 +39,6 @@ private:
 	bool Start();
 	void Update();
 	void Draw();
-	void PreRender()override;
 
 	SkinModel m_model;										//スキンモデル。
 	SkinModel m_FrontModel;									//スキンモデル。
@@ -73,7 +75,7 @@ private:
 	MyMagnet::Magnet* m_Magnet = nullptr;
 	bool HaveMagnet = false;
 	CVector3 movespeed = CVector3::Zero();
-	//ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
+	ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 
 	enum enAniCli {
 		Wait,

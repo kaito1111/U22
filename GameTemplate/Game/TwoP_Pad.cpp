@@ -66,23 +66,30 @@ void TwoP_Pad::Update()
 		}
 		bool IsAllPad[EnButton::enButtonNum] = {};
 
+		/// <summary>
+		/// ここからPadの入力値をphotonを中継して、通信相手に送るコード
+		/// </summary>
+
+		//padボタンの個数分まわす
 		for (int PadNo = 0; PadNo < EnButton::enButtonNum; PadNo++) {
 			IsAllPad[PadNo] = g_Pad[i].GetPress(PadNo);
 			//ネットワークのリストにツムツム
 			NetworkLogic::GetInstance().GetLBL()->putData(PadNo, IsAllPad[PadNo]);
 		}
+
+		//スティックの入力値転送コード
 		float AllStick[4] = {};
+		//スティックの入力値の取得
 		AllStick[0] = g_Pad[i].GetLStickXF();
 		AllStick[1] = g_Pad[i].GetRStickXF();
 		AllStick[2] = g_Pad[i].GetLStickYF();
 		AllStick[3] = g_Pad[i].GetRStickYF();
-
-		//ネットワークのリストにツムツム
+		//イベントコンテナに積む準備 keyの番号合わせるためにi+16
 		for (int i = 0; i < 4; i++) {
-			NetworkLogic::GetInstance().GetLBL()->putData(i, AllStick[i]);
+			NetworkLogic::GetInstance().GetLBL()->putData(i + 16, AllStick[i]);
 		}
 
-
+		//イベントの起動
 		NetworkLogic::GetInstance().GetLBL()->RaisePlayerData();
 	}
 }
