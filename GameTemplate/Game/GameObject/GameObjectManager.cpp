@@ -54,6 +54,16 @@ namespace myEngine {
 		}
 	}
 
+	void GameObjectManager::ShadowDraw()
+	{
+		//レンダーターゲットのバックアップ
+		g_graphicsEngine->GetShadowMap()->BiginRender();
+		//描画
+		g_graphicsEngine->GetShadowMap()->RenderToShadowMap();
+		//もとに戻す。
+		g_graphicsEngine->GetShadowMap()->EndRender();
+	}
+
 	/// <summary>
 	/// 更新処理、描画処理をまとめてしてくれるやつ
 	/// </summary>
@@ -67,6 +77,7 @@ namespace myEngine {
 		{
 			//プレレンダー
 			PreRender();
+			ShadowDraw();
 			//レンダーターゲットのバックアップ
 			g_graphicsEngine->oldTarget();
 			//フォワードレンダーターゲットに変える

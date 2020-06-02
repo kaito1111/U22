@@ -29,14 +29,6 @@ namespace myEngine {
 
 	void DebugMan::Update()
 	{
-		//シャドウ関連の更新処理
-		{
-			//シャドウキャスター登録
-			m_shadowMap->RegistShdowCaster(&m_skinModel);
-			//ライトの座標を更新
-			//m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
-		}
-
 		if (GetAsyncKeyState('A')) {
 			m_pos.x += 5;
 		}
@@ -53,12 +45,14 @@ namespace myEngine {
 		//シャドウマップにレンダリング
 		{
 			//描画設定のバックアップ
-			m_shadowMap->BiginRender();
+			//m_shadowMap->BiginRender();
+			//シャドウキャスター登録
+			m_shadowMap->RegistShdowCaster(&m_skinModel);
 			//シャドウマップ用の描画設定に切り替えて
 			//登録されているシャドウキャスターの影を描画
-			m_shadowMap->RenderToShadowMap();
+			//m_shadowMap->RenderToShadowMap();
 			//描画設定をもとに戻す
-			m_shadowMap->EndRender();
+			//m_shadowMap->EndRender();
 		}
 	}
 

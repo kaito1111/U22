@@ -4,6 +4,7 @@ class TitleStage;
 class TitleCamera;
 class Game;
 class Stage;
+class Player;
 class StageSelect : public IGameObject
 {
 public:
@@ -13,6 +14,8 @@ public:
 	void Update();
 	void stageSelect();
 private:
+	Player* player1 = nullptr;
+	Player* player2 = nullptr;
 	Stage* stage = nullptr;
 	Game* game = nullptr;
 	TitleCamera* titleCamera = nullptr;
@@ -20,7 +23,6 @@ private:
 	stageObjectJenerator* generator;
 	SpriteRender m_sprite;             //スプライト
 	CVector2 m_spritePos;              //スプライトの座標。
-	int nowStage = 0;                  //現在選択しているステージ 
 	bool LStageChange = false;          //ステージを切り替えるフラグ
 	bool RStageChange = false;
 	int count = 0;

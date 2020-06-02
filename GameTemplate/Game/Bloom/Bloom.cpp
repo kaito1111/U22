@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Bloom.h"
-#include "PostEffect.h"
 
 namespace myEngine {
 

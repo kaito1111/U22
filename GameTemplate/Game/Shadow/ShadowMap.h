@@ -55,6 +55,11 @@ namespace myEngine {
 		void UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCameraTarget);
 
 		/// <summary>
+		/// ライト
+		/// </summary>
+		void UpdateFromLightTarget();
+
+		/// <summary>
 		/// 更新（ライトカメラの向きを指定するバージョン。
 		/// </summary>
 		/// <remarks>

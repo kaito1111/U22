@@ -18,9 +18,7 @@ Player::Player()
 	//m_shadowMap = g_graphicsEngine->GetShadowMap();
 	m_Asioto.Init(L"Assets/sound/asioto.wav");
 	m_Asioto.Play(true);
-	m_Asioto.SetVolume(0.0f); 
-	//シャドウマップの初期化
-	m_shadowMap = g_graphicsEngine->GetShadowMap();
+	m_Asioto.SetVolume(0.0f);
 }
 
 
@@ -30,25 +28,33 @@ Player::~Player()
 	DeleteGO(m_ThisNumSprite);
 }
 
+void Player::ReSpown()
+{
+		m_position = m_CheckPoint;
+		GameCamera* camera = FindGO<GameCamera>("camera");
+		camera->SetDec(0.0f);
+		m_IsSi = false;
+		m_characon.Init(40.0f, 20.0f, m_position);
+		LearnMO(m_Magnet);
+		HaveMagnet = true;
+		m_Magnet->SetPosition(&m_position);
+		m_Scale.z = 1.0f;
+	
+}
+
 bool Player::Start()
 {
 	m_ThisNumSprite = NewGO<SpriteRender>(0);
 	wchar_t spriteName[256] = {};
-	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum);
+	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum--);
 	m_ThisNumSprite->Init(spriteName, 100.0f, 100.0f, true);
-	m_DieSprite = NewGO<SpriteRender>(0);
-	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer(Dead).dds", m_PlayerNum--);
-	m_DieSprite->Init(spriteName,100.0f, 100.0f, true);
 	CVector3 ThisNumSpritePos = m_position;
 	ThisNumSpritePos.y += 150.0f;
 	ThisNumSpritePos.x -= 50.0f;
 	m_ThisNumSprite->SetPosition(ThisNumSpritePos);
-	m_DieSprite->SetPosition(ThisNumSpritePos);
 	CQuaternion Rot;
 	Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
 	m_ThisNumSprite->SetRotation(Rot);
-	m_DieSprite->SetRotation(Rot);
-	m_DieSprite->SetW(0.0f);
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet); 
@@ -70,23 +76,13 @@ void Player::Update()
 {
 	//シャドウ関連の更新処理
 	{
-		//シャドウキャスター登録
-		m_shadowMap->RegistShdowCaster(&m_model);
-		//影を落とすカメラの座標
-		CVector3 m_lightCameraPosition = { 0.0f, 4000.0f, 0.0f };
-		//影を落とす注視点の座標
-		CVector3 m_lightCameraTarget = CVector3::Zero();;/*CVector3::Zero();*/
-		//ライトの座標を更新
-		m_shadowMap->UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
+
 	}
-	if (m_IsSi)
-	{
+	if (m_IsSi) {
 		SIBOU();
 	}
-	else
-	{
-		if (g_Pad[m_PlayerNum].IsTrigger(enButtonLB2))
-		{
+	else {
+		if (g_Pad[m_PlayerNum].IsTrigger(enButtonLB2)) {
 			m_position = m_CheckPoint;
 			m_characon.SetPosition(m_CheckPoint);
 			movespeed.y = 0.0f;
@@ -94,7 +90,7 @@ void Player::Update()
 		Move();
 		MyMagnet();
 		SpawnPole();
-		m_Animetion.Update(1.0f / 75.0f);
+		m_Animetion.Update(1.0f / 60.0f);
 	}
 	{
 		CVector3 ThisNumSpritePos = m_position;
@@ -110,8 +106,7 @@ void Player::Update()
 }
 void Player::Draw()
 {
-	if (!m_PlayerCut)
-	{
+	if (!m_PlayerCut) {
 		//シルエット用の描画
 		m_model.Draw(
 			g_camera3D.GetViewMatrix(),
@@ -125,8 +120,7 @@ void Player::Draw()
 			0
 		);
 	}
-	if (m_PlayerCut)
-	{
+	if (m_PlayerCut) {
 		m_FrontModel.Draw(
 			g_camera3D.GetViewMatrix(),
 			g_camera3D.GetProjectionMatrix(),
@@ -138,8 +132,7 @@ void Player::Draw()
 			0
 		);
 	}
-	if (m_PlayerCut)
-	{
+	if (m_PlayerCut) {
 		m_BuckModel.Draw(
 			g_camera3D.GetViewMatrix(),
 			g_camera3D.GetProjectionMatrix(),
@@ -154,19 +147,6 @@ void Player::Draw()
 
 }
 
-void Player::PreRender()
-{
-	//シャドウマップにレンダリング
-	{
-		//描画設定のバックアップ
-		m_shadowMap->BiginRender();
-		//シャドウマップ用の描画設定に切り替えて
-		//登録されているシャドウキャスターの影を描画
-		m_shadowMap->RenderToShadowMap();
-		//描画設定をもとに戻す
-		m_shadowMap->EndRender();
-	}
-}
 
 void Player::SpawnPole()
 {
@@ -177,8 +157,7 @@ void Player::SpawnPole()
 	//NSpawn
 	if (g_Pad[m_PlayerNum].IsTrigger(enButtonRB1))
 	{
-		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool 
-		{
+		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool {
 			DeleteGO(m_pole);
 			return true;
 		});
@@ -200,8 +179,7 @@ void Player::SpawnPole()
 		SPole* spole = NewGO< SPole>(1, "spole");
 		spole->SetPlayer(this);
 		CVector3 MoveDir = { g_Pad[m_PlayerNum].GetRStickXF() * -1.0f , g_Pad[m_PlayerNum].GetRStickYF() , 0.0f };
-		if (MoveDir.Length() < 0.01f)
-		{
+		if (MoveDir.Length() < 0.01f) {
 			MoveDir = CVector3::Up();
 		}
 		MoveDir.Normalize();
@@ -263,6 +241,7 @@ void Player::Move()
 		movespeed.y = 0;
 	}
 
+
 	m_position = m_characon.Execute(1.0f, movespeed);
 	if (g_Pad[m_PlayerNum].GetLStickXF() > 0.0f)
 	{
@@ -305,20 +284,10 @@ void Player::SIBOU()				//OK
 	m_characon.RemoveRigidBoby();
 	if (HaveMagnet) {
 		DeleteMO(m_Magnet);
-		m_DieSprite->SetW(1.0f);
-		m_ThisNumSprite->SetW(0.0f);
 		HaveMagnet = false;
 	}
 	if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)) {
-		m_position = m_CheckPoint;
-		GameCamera* camera = FindGO<GameCamera>("camera");
-		camera->SetDec(0.0f);
-		m_IsSi = false;
-		m_characon.Init(40.0f, 20.0f, m_position);
-		LearnMO(m_Magnet);
-		HaveMagnet = true;
-		m_Magnet->SetPosition(&m_position);
-		m_Scale.z = 1.0f;
+		ReSpown();
 	}
 }
 

@@ -100,11 +100,11 @@
     </MeshContentTask>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bloom.cpp" />
+    <ClCompile Include="Bloom\Bloom.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
-    <ClCompile Include="DebugMan.cpp" />
-    <ClCompile Include="DirectionLight.cpp" />
-    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Debug\DebugMan.cpp" />
+    <ClCompile Include="light\DirectionLight.cpp" />
+    <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Fade.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Network\BaseView.cpp" />
@@ -122,12 +122,12 @@
     </ClCompile>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="graphics\RenderTarget.cpp" />
-    <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="light\LightManager.cpp" />
     <ClCompile Include="stageObject\MoveFloor2.cpp" />
     <ClCompile Include="PhysicsGhostObject.cpp" />
-    <ClCompile Include="PostEffect.cpp" />
+    <ClCompile Include="PostEffect\PostEffect.cpp" />
     <ClCompile Include="stageObject\RorlingRock.cpp" />
-    <ClCompile Include="ShadowMap.cpp" />
+    <ClCompile Include="Shadow\ShadowMap.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="sound\GameCamera.cpp" />
     <ClCompile Include="GameObject\GameObjectManager.cpp" />
@@ -191,20 +191,20 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
-    <ClCompile Include="StageSelect.cpp" />
+    <ClCompile Include="StageSelect\StageSelect.cpp" />
     <ClCompile Include="Title.cpp" />
-    <ClCompile Include="TitleCamera.cpp" />
-    <ClCompile Include="TitleStage.cpp" />
+    <ClCompile Include="StageSelect\TitleCamera.cpp" />
+    <ClCompile Include="StageSelect\TitleStage.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bloom.h" />
+    <ClInclude Include="Bloom\Bloom.h" />
     <ClInclude Include="character\CharacterController.h" />
-    <ClInclude Include="DebugMan.h" />
-    <ClInclude Include="DirectionLight.h" />
-    <ClInclude Include="Effect.h" />
+    <ClInclude Include="Debug\DebugMan.h" />
+    <ClInclude Include="light\DirectionLight.h" />
+    <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Fade.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Network\BaseView.h" />
@@ -246,7 +246,7 @@
     <ClInclude Include="KaitoTask.h" />
     <ClInclude Include="level\Level.h" />
     <ClInclude Include="level\MapChip.h" />
-    <ClInclude Include="LightManager.h" />
+    <ClInclude Include="light\LightManager.h" />
     <ClInclude Include="Magnet\Magnet.h" />
     <ClInclude Include="Magnet\MagnetManager.h" />
     <ClInclude Include="math\kMath.h" />
@@ -268,9 +268,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="GPUView\ShaderResourceView.h" />
     <ClInclude Include="graphics\Primitive.h" />
-    <ClInclude Include="PostEffect.h" />
+    <ClInclude Include="PostEffect\PostEffect.h" />
     <ClInclude Include="stageObject\RorlingRock.h" />
-    <ClInclude Include="ShadowMap.h" />
+    <ClInclude Include="Shadow\ShadowMap.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundSource.h" />
@@ -290,10 +290,10 @@
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
-    <ClInclude Include="StageSelect.h" />
+    <ClInclude Include="StageSelect\StageSelect.h" />
     <ClInclude Include="Title.h" />
-    <ClInclude Include="TitleCamera.h" />
-    <ClInclude Include="TitleStage.h" />
+    <ClInclude Include="StageSelect\TitleCamera.h" />
+    <ClInclude Include="StageSelect\TitleStage.h" />
     <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
@@ -322,13 +322,17 @@
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
     <MeshContentTask Include="Assets\modelData\Press.FBX" />
     <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
+    <MeshContentTask Include="Assets\modelData\serectStage.fbx" />
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\sky.fbx" />
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
+    <MeshContentTask Include="Assets\modelData\stage2.fbx" />
     <MeshContentTask Include="Assets\modelData\stage3.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
+    <MeshContentTask Include="Assets\modelData\titleFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage1.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage3.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
@@ -369,6 +373,7 @@
     <None Include="Assets\level\Corse_Level_1.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
     <None Include="Assets\level\stageLevel.tkl" />
+    <None Include="Assets\level\なんかもうできないですねぇStage2.tkl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

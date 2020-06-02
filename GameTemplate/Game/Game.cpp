@@ -3,11 +3,11 @@
 #include "Stage.h"
 #include "exampleCode/ex2D.h"
 #include "KaitoTask.h"
-#include "DebugMan.h"
-#include "TitleStage.h"
+#include "Debug/DebugMan.h"
+#include "StageSelect/TitleStage.h"
 #include "stageObject/Goal.h"
 #include "level/Level.h"
-#include "StageSelect.h"
+#include "StageSelect/StageSelect.h"
 StageSelect;
 Game::Game()
 {
@@ -40,7 +40,7 @@ Game::~Game()
 bool Game::Start()
 {
 	//1”Ô–Ú
-	m_task = new KaitoTask();
+	m_task = NewGO<KaitoTask>(0);
 
 	//2”Ô–Ú
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");

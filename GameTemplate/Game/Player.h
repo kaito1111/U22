@@ -21,6 +21,9 @@ public:
 	void SetPoint(CVector3 point) {
 		m_CheckPoint = point;
 	}
+	SkinModel* GetModel() {
+		return &m_model;
+	}
 
 	void SIBOU();						
 	void Press();						//何度も呼ぶ
@@ -31,11 +34,11 @@ public:
 	{
 		m_PlayerNum = n;
 	}
-	void Update();
+	void ReSpown();
 private:
 	bool Start();
+	void Update();
 	void Draw();
-	void PreRender()override;
 
 	SkinModel m_model;										//スキンモデル。
 	SkinModel m_FrontModel;									//スキンモデル。
