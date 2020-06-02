@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "TitleStage.h"
+#include "StageSelect/TitleStage.h"
 
 
 TitleStage::TitleStage()
@@ -19,25 +19,31 @@ bool TitleStage::Start()
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
 	);
-	//ステージのレベル配置前の情報
-	skyModel.Init(L"Assets/modelData/sky.cmo");     //クソ雑魚背景
-	m_model.Init(L"Assets/modelData/stage_00.cmo"); //ステージ1．
-	m_model2.Init(L"Assets/modelData/stage3.cmo");	//ステージⅢ．おいおいⅢかよ
+	//ステージその他モデル
+	m_floorModel.Init(L"Assets/modelData/serectStage.cmo");//床
+	
 	return true;
 }
 
 void TitleStage::Update()
 {
-
-
+	physics.CreateMeshObject(m_floorModel, m_floorPos, CQuaternion::Identity());
 }
 void TitleStage::Draw()
 {
-	skyModel.UpdateWorldMatrix({ 0,0,2000 }, CQuaternion::Identity(), { 1,1,1 });
+	//もう少しまともなステージ選択画面を作りたい
+	//ワールド行列の更新
+	m_floorModel.UpdateWorldMatrix(m_floorPos, CQuaternion::Identity(), CVector3::One());
+	/*skyModel.UpdateWorldMatrix({ 0,0,2000 }, CQuaternion::Identity(), { 1,1,1 });
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), m_scale);
-	m_model2.UpdateWorldMatrix(m_pos2, CQuaternion::Identity(), m_scale2);
+	m_model2.UpdateWorldMatrix(m_pos2, CQuaternion::Identity(), m_scale2);*/
 
-	m_model.Draw(
+	m_floorModel.Draw(
+	g_camera3D.GetViewMatrix(),
+		g_camera3D.GetProjectionMatrix(),
+		0
+		);
+	/*m_model.Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),
 		0
@@ -51,7 +57,7 @@ void TitleStage::Draw()
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),
 		0
-	);
+	);*/
 
 }
 

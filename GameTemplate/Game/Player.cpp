@@ -28,6 +28,20 @@ Player::~Player()
 	DeleteGO(m_ThisNumSprite);
 }
 
+void Player::ReSpown()
+{
+		m_position = m_CheckPoint;
+		GameCamera* camera = FindGO<GameCamera>("camera");
+		camera->SetDec(0.0f);
+		m_IsSi = false;
+		m_characon.Init(40.0f, 20.0f, m_position);
+		LearnMO(m_Magnet);
+		HaveMagnet = true;
+		m_Magnet->SetPosition(&m_position);
+		m_Scale.z = 1.0f;
+	
+}
+
 bool Player::Start()
 {
 	m_ThisNumSprite = NewGO<SpriteRender>(0);
@@ -273,15 +287,7 @@ void Player::SIBOU()				//OK
 		HaveMagnet = false;
 	}
 	if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)) {
-		m_position = m_CheckPoint;
-		GameCamera* camera = FindGO<GameCamera>("camera");
-		camera->SetDec(0.0f);
-		m_IsSi = false;
-		m_characon.Init(40.0f, 20.0f, m_position);
-		LearnMO(m_Magnet);
-		HaveMagnet = true;
-		m_Magnet->SetPosition(&m_position);
-		m_Scale.z = 1.0f;
+		ReSpown();
 	}
 }
 

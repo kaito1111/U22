@@ -4,10 +4,10 @@
 #include "exampleCode/ex2D.h"
 #include "KaitoTask.h"
 #include "Debug/DebugMan.h"
-#include "TitleStage.h"
+#include "StageSelect/TitleStage.h"
 #include "stageObject/Goal.h"
 #include "level/Level.h"
-#include "StageSelect.h"
+#include "StageSelect/StageSelect.h"
 StageSelect;
 Game::Game()
 {

@@ -191,10 +191,10 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
-    <ClCompile Include="StageSelect.cpp" />
+    <ClCompile Include="StageSelect\StageSelect.cpp" />
     <ClCompile Include="Title.cpp" />
-    <ClCompile Include="TitleCamera.cpp" />
-    <ClCompile Include="TitleStage.cpp" />
+    <ClCompile Include="StageSelect\TitleCamera.cpp" />
+    <ClCompile Include="StageSelect\TitleStage.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
@@ -290,10 +290,10 @@
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />
     <ClInclude Include="GPUView\UnorderedAccessView.h" />
-    <ClInclude Include="StageSelect.h" />
+    <ClInclude Include="StageSelect\StageSelect.h" />
     <ClInclude Include="Title.h" />
-    <ClInclude Include="TitleCamera.h" />
-    <ClInclude Include="TitleStage.h" />
+    <ClInclude Include="StageSelect\TitleCamera.h" />
+    <ClInclude Include="StageSelect\TitleStage.h" />
     <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
@@ -322,13 +322,17 @@
     <MeshContentTask Include="Assets\modelData\Player.FBX" />
     <MeshContentTask Include="Assets\modelData\Press.FBX" />
     <MeshContentTask Include="Assets\modelData\RorlingRock.fbx" />
+    <MeshContentTask Include="Assets\modelData\serectStage.fbx" />
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\sky.fbx" />
     <MeshContentTask Include="Assets\modelData\SPole.FBX" />
+    <MeshContentTask Include="Assets\modelData\stage2.fbx" />
     <MeshContentTask Include="Assets\modelData\stage3.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
-    <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
+    <MeshContentTask Include="Assets\modelData\titleFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage1.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage3.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
@@ -367,6 +371,7 @@
     <None Include="Assets\level\Corse_Level_1.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
     <None Include="Assets\level\stageLevel.tkl" />
+    <None Include="Assets\level\なんかもうできないですねぇStage2.tkl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
