@@ -45,14 +45,14 @@ namespace myEngine {
 		//シャドウマップにレンダリング
 		{
 			//描画設定のバックアップ
-			m_shadowMap->BiginRender();
+			//m_shadowMap->BiginRender();
 			//シャドウキャスター登録
 			m_shadowMap->RegistShdowCaster(&m_skinModel);
 			//シャドウマップ用の描画設定に切り替えて
 			//登録されているシャドウキャスターの影を描画
-			m_shadowMap->RenderToShadowMap();
+			//m_shadowMap->RenderToShadowMap();
 			//描画設定をもとに戻す
-			m_shadowMap->EndRender();
+			//m_shadowMap->EndRender();
 		}
 	}
 

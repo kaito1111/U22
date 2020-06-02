@@ -162,6 +162,10 @@ namespace myEngine {
 		/// </summary>
 		void PreRender();
 		/// <summary>
+		/// シャドウマップ描画
+		/// </summary>
+		void ShadowDraw();
+		/// <summary>
 		/// 描画
 		/// </summary>
 		void Draw();
