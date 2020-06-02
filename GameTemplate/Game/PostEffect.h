@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bloom.h"
+#include "Bloom/Bloom.h"
 
 namespace myEngine {
 	/// <summary>

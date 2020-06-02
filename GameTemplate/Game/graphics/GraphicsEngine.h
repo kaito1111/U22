@@ -14,8 +14,8 @@ enum EnRenderMode {
  *@brief	グラフィックスエンジン。
  */
 
-#include "LightManager.h"
-#include "ShadowMap.h"
+#include "light/LightManager.h"
+#include "Shadow/ShadowMap.h"
 
 class GraphicsEngine
 {
