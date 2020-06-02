@@ -121,7 +121,10 @@ void LoadBalancingListener::serverErrorReturn(int errorCode)
 void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>& playernrs, const Player& player)
 {
 	Console::get().writeLine(JString("player ") + playerNr + L" " + player.getName() + L" has joined the game");
-	m_playerNum = playerNr;
+	if (m_playerNum == 20) 
+	{ 
+		m_playerNum = playerNr; 
+	}
 }
 
 void LoadBalancingListener::leaveRoomEventAction(int playerNr, bool isInactive)
@@ -180,31 +183,45 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		//キーの初期化
 		nByte Key = 1;
 
-		//padの入力
-		float padLX, padLY, padRX, padRY;
-		//トリガー
-		int Trigger[15];
 
 		Hashtable playerData;
 
 		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
 		auto a = eventContent.getValue(Key);
 		//イベント
-		if (eventContent.getValue(Key)) {
+		if (eventContent.getValue(Key)) 
+		{
 			playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
-			for (int i = 0; i < 15; i++) {
-				if (playerData.getValue((nByte)i)) {
+			for (int i = 0; i < 15; i++) 
+			{
+				if (playerData.getValue((nByte)i))
+				{
 					Trigger[i] = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
 				}
 			}
 
-			for (int i = 16; i < 20; i++) {
-				if (playerData.getValue((nByte)i)) {
-					if (playerData.getValue((nByte)i)) {
-						padLX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
-						padLY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
-						padRX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
-						padRY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+			for (int i = 16; i < 20; i++)
+			{
+				if (playerData.getValue((nByte)i))
+				{
+					if (playerData.getValue((nByte)i))
+					{
+						if (i == 16) 
+						{
+							padLX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+						}
+						if (i == 17)
+						{
+							padLY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+						}
+						if (i == 18) 
+						{
+							padRX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+						}
+						if (i == 19)
+						{
+							padRY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
+						}
 					}
 				}
 			}

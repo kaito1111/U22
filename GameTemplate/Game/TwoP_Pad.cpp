@@ -6,7 +6,8 @@
 
 TwoP_Pad::TwoP_Pad() {
 
-	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
+	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
+	{
 		g_Pad[i].Init(i);
 	}
 	m_ManualSprite = NewGO<SpriteRender>(4);
@@ -46,50 +47,89 @@ void TwoP_Pad::PostRender()
 
 void TwoP_Pad::Update()
 {
-	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
-		g_Pad[i].Update();
-		if (i < g_PlayerNum) {
-			if (g_Pad[i].IsTrigger(enButtonStart)
-				//&&player[i]->GetUpdate()
-				) {
-				if (m_Manual_W == 0.0f) {
-					m_Manual_W = 1.0f;
-					m_ManualSprite->SetW(m_Manual_W);
-					//player[i]->SetUpdate(false);
-				}
-				else {
-					m_Manual_W = 0.0f;
-					m_ManualSprite->SetW(m_Manual_W);
-					//player[i]->SetUpdate(true);
-				}
-			}
+	//自分のPadの更新と送信
+	int PlayerPad = 0;
+	//for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++) {
+	//g_Pad[PlayerPad].SetPadButton(1, 0);
+	g_Pad[PlayerPad].Update();
+	//if (i < g_PlayerNum) {
+	if (g_Pad[PlayerPad].IsTrigger(enButtonStart)
+		//&&player[i]->GetUpdate()
+		)
+	{
+		if (m_Manual_W == 0.0f)
+		{
+			m_Manual_W = 1.0f;
+			m_ManualSprite->SetW(m_Manual_W);
+			//player[i]->SetUpdate(false);
 		}
-		bool IsAllPad[EnButton::enButtonNum] = {};
-
-		/// <summary>
-		/// ここからPadの入力値をphotonを中継して、通信相手に送るコード
-		/// </summary>
-
-		//padボタンの個数分まわす
-		for (int PadNo = 0; PadNo < EnButton::enButtonNum; PadNo++) {
-			IsAllPad[PadNo] = g_Pad[i].GetPress(PadNo);
-			//ネットワークのリストにツムツム
-			NetworkLogic::GetInstance().GetLBL()->putData(PadNo, IsAllPad[PadNo]);
+		else
+		{
+			m_Manual_W = 0.0f;
+			m_ManualSprite->SetW(m_Manual_W);
+			//player[i]->SetUpdate(true);
 		}
+	}
+	//}
+	bool IsAllPad[EnButton::enButtonNum] = {};
 
-		//スティックの入力値転送コード
-		float AllStick[4] = {};
-		//スティックの入力値の取得
-		AllStick[0] = g_Pad[i].GetLStickXF();
-		AllStick[1] = g_Pad[i].GetRStickXF();
-		AllStick[2] = g_Pad[i].GetLStickYF();
-		AllStick[3] = g_Pad[i].GetRStickYF();
-		//イベントコンテナに積む準備 keyの番号合わせるためにi+16
-		for (int i = 0; i < 4; i++) {
-			NetworkLogic::GetInstance().GetLBL()->putData(i + 16, AllStick[i]);
+	/// <summary>
+	/// ここからPadの入力値をphotonを中継して、通信相手に送るコード
+	/// </summary>
+
+	//padボタンの個数分まわす
+	for (int PadNo = 0; PadNo < EnButton::enButtonNum; PadNo++) 
+	{
+		IsAllPad[PadNo] = g_Pad[PlayerPad].GetPress(PadNo);
+		//ネットワークのリストにツムツム
+		NetworkLogic::GetInstance().GetLBL()->putData(PadNo, IsAllPad[PadNo]);
+	}
+
+	//スティックの入力値転送コード
+	float AllStick[4] = {};
+	//スティックの入力値の取得
+	AllStick[0] = g_Pad[PlayerPad].GetLStickXF();
+	AllStick[1] = g_Pad[PlayerPad].GetRStickXF();
+	AllStick[2] = g_Pad[PlayerPad].GetLStickYF();
+	AllStick[3] = g_Pad[PlayerPad].GetRStickYF();
+	//イベントコンテナに積む準備 keyの番号合わせるためにi+16
+	for (int i = 0; i < 4; i++)
+	{
+		NetworkLogic::GetInstance().GetLBL()->putData(i + 16, AllStick[i]);
+	}
+
+	//イベントの起動
+	NetworkLogic::GetInstance().GetLBL()->RaisePlayerData();
+	//他プレイヤーからのPadの受け取り
+	PlayerPad = NetworkLogic::GetInstance().GetLBL()->GetplayerNum();
+	switch (PlayerPad)
+	{
+	case 0:
+		for (int i = 0; i < enButtonNum; i++)
+		{
+			g_Pad[1].SetPadButton(NetworkLogic::GetInstance().GetLBL()->GetPlayerPadData(i), i);
 		}
+		g_Pad[1].SetStickLX(NetworkLogic::GetInstance().GetLBL()->GetPlayerStickLXData());
+		g_Pad[1].SetStickLY(NetworkLogic::GetInstance().GetLBL()->GetPlayerStickLYData());
+		g_Pad[1].SetStickRX(NetworkLogic::GetInstance().GetLBL()->GetPlayerStickRXData());
+		g_Pad[1].SetStickLX(NetworkLogic::GetInstance().GetLBL()->GetPlayerStickRYData());
+		break;
+	default:
 
-		//イベントの起動
-		NetworkLogic::GetInstance().GetLBL()->RaisePlayerData();
+		for (int i = 0; i < enButtonNum; i++)
+		{
+			g_Pad[1].SetPadButton(g_Pad[0].GetPress(i), i);
+			g_Pad[0].SetPadButton(NetworkLogic::GetInstance().GetLBL()->GetPlayerPadData(i), i);
+		}
+		g_Pad[1].SetStickLX(g_Pad[0].GetLStickXF());
+		g_Pad[1].SetStickLY(g_Pad[0].GetLStickYF());
+		g_Pad[1].SetStickRX(g_Pad[0].GetRStickXF());
+		g_Pad[1].SetStickRY(g_Pad[0].GetRStickYF());
+		g_Pad[0].SetStickLX(NetworkLogic::GetInstance().GetLBL()->GetPlayerStickLXData());
+		g_Pad[0].SetStickLY(NetworkLogic::GetInstance().GetLBL()->GetPlayerStickLYData());
+		g_Pad[0].SetStickRX(NetworkLogic::GetInstance().GetLBL()->GetPlayerStickRXData());
+		g_Pad[0].SetStickRY(NetworkLogic::GetInstance().GetLBL()->GetPlayerStickRYData());
+		break;
 	}
 }
+//}

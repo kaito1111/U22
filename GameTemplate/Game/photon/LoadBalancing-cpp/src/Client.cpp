@@ -1834,7 +1834,7 @@ namespace ExitGames
 					}
 				}
 				break;
-			case OperationCode::JOIN_RANDOM_ROOM:
+			case OperationCode::JOIN_RAND	OM_ROOM:
 				if(operationResponse.getReturnCode())
 				{
 					switch(mLastJoinType)

@@ -10,7 +10,7 @@
 /*!
  *@brief	仮想ボタン定義。
  */
-enum EnButton{
+enum EnButton {
 	enButtonUp,		//!<上。
 	enButtonDown,		//!<下。
 	enButtonLeft,		//!<左。
@@ -32,7 +32,7 @@ enum EnButton{
 /*!
  *@brief	パッド
  */
-class Pad{
+class Pad {
 public:
 	static const int CONNECT_PAD_MAX = 4;		//接続可能なパッドの最大数。
 	/*!
@@ -180,6 +180,38 @@ public:
 	int GetPress(int PudNum) {
 		return m_press[PudNum];
 	}
+	/*
+	*@ボタンの入力情報を上書き
+	*@Code
+	int padValu ボタンの入力情報
+	int padNo　どのボタンを上書きするか指定できる
+	*/
+	void SetPadButton(int padValu,int padNo) {
+		if (padValu == 1) {
+			if (m_press[padNo] == 0) {
+				//1フレーム前は押されていないので、トリガー入力のフラグを立てる。
+				m_trigger[padNo] = 1;
+			}
+			else {
+				//1フレーム前にも押されているので、トリガー入力は終わり。
+				m_trigger[padNo] = 0;
+			}
+			//押されているフラグを立てる。
+			m_press[padNo] = 1;
+		}
+	}
+	void SetStickRX(float rx){
+		m_rStickX = rx;
+	}
+	void SetStickRY(float ry) {
+		m_rStickY = ry;
+	}
+	void SetStickLX(float lx) {
+		m_lStickX = lx;
+	}
+	void SetStickLY(float ly) {
+		m_lStickY = ly;
+	}
 private:
 	/*!
 	*@brief	ボタンの入力情報を更新。
@@ -189,6 +221,8 @@ private:
 	*@brief	アナログスティックの入力情報を更新。
 	*/
 	void UpdateAnalogStickInput();
+
+
 private:
 	PAD_STATE m_state;	//!<パッドステート。
 	int m_padNo = 0;			//!<パッド番号。
@@ -202,4 +236,4 @@ private:
 
 //ゲームパッドのグローバル変数のextern宣言。
 //extern宣言は変数の定義ではないので注意する！
-extern Pad g_Pad[ Pad::CONNECT_PAD_MAX ];
+extern Pad g_Pad[Pad::CONNECT_PAD_MAX];

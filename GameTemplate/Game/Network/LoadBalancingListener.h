@@ -122,12 +122,39 @@ public:
 	/// <param name="f">送る値(float)</param>
 	void putData(nByte i, bool b);
 
+	int GetplayerNum() {
+		return m_playerNum;
+	}
+	/// <summary>
+	/// パッドの値をとる
+	/// </summary>
+	/// <param name="padNo">ほしいパッドの番号</param>
+	/// <returns>パッドの値</returns>
+	int GetPlayerPadData(int padNo) {
+		return Trigger[padNo];
+	}
+	int GetPlayerStickLXData() {
+		return padLX;
+	}
+	int GetPlayerStickLYData() {
+		return padLY;
+	}
+	int GetPlayerStickRXData() {
+		return padRX;
+	}
+	int GetPlayerStickRYData() {
+		return padRY;
+	}
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;
 	Hashtable playerData;		//プレイヤー情報格納用
 	BaseView* mpView;
 	int m_maxPlayer = 2;
 	unsigned long lastUpdateTime;
-	int m_playerNum = 0;
+	int m_playerNum = 20;					//フォトンの最大参加人数、これが自分の参加番号になる
+	//padの入力
+	float padLX = 0, padLY = 0, padRX = 0, padRY = 0;
+	//トリガー
+	int Trigger[16] = {};
 };
 

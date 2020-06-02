@@ -67,7 +67,7 @@ private:
 
 	SpriteRender* m_ThisNumSprite = nullptr;
 	int	m_PlayerNum = 0;
-
+	SpriteRender* m_DieSprite = nullptr;
 
 	MyMagnet::Magnet* m_Magnet = nullptr;
 	bool HaveMagnet = false;

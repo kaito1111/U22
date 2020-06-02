@@ -17,6 +17,8 @@
     <ImageContentTask Include="Assets\sprite\LoadScreen(Up).png" />
     <ImageContentTask Include="Assets\sprite\LoadS.png" />
     <ImageContentTask Include="Assets\sprite\LoadScreen(Down).png" />
+    <ImageContentTask Include="Assets\sprite\1P_Pointer(Dead).png" />
+    <ImageContentTask Include="Assets\sprite\2P_Pointer(Dead).png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="character\CharacterController.cpp" />
