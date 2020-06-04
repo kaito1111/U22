@@ -75,8 +75,9 @@ namespace myEngine {
 		}
 		/// 描画系処理
 		{
-			//プレレンダー
+			//プレレンダー(シャドウマップのセットアップ)
 			PreRender();
+			//シャドウ描画
 			ShadowDraw();
 			//レンダーターゲットのバックアップ
 			g_graphicsEngine->oldTarget();
