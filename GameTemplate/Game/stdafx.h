@@ -1,4 +1,7 @@
 #pragma once
+
+static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
+
 #include <WinSock2.h>
 #include <windows.h>
 #include <d3d11.h>

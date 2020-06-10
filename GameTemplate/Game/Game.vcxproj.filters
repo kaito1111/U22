@@ -78,11 +78,8 @@
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
-    <ClCompile Include="TitleStage.cpp" />
     <ClCompile Include="SkinModelRender.cpp" />
     <ClCompile Include="Floor.cpp" />
-    <ClCompile Include="StageSelect.cpp" />
-    <ClCompile Include="TitleCamera.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
     <ClCompile Include="stageObject\Goal.cpp" />
     <ClCompile Include="stageObject\Iwa.cpp" />
@@ -124,6 +121,10 @@
     <ClCompile Include="Debug\DebugMan.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="PostEffect\PostEffect.cpp" />
+    <ClCompile Include="StageSelect\StageSelect.cpp" />
+    <ClCompile Include="StageSelect\TitleCamera.cpp" />
+    <ClCompile Include="StageSelect\TitleStage.cpp" />
+    <ClCompile Include="SamplerState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -142,7 +143,6 @@
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
-    <MeshContentTask Include="Assets\modelData\stage_oreore.FBX" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\shuriken.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
@@ -157,6 +157,11 @@
     <MeshContentTask Include="Assets\modelData\Press.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />
     <MeshContentTask Include="Assets\modelData\Course_Level2.FBX" />
+    <MeshContentTask Include="Assets\modelData\serectStage.fbx" />
+    <MeshContentTask Include="Assets\modelData\stage2.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleFloor.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage1.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage3.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character\CharacterController.h" />
@@ -219,11 +224,8 @@
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
-    <ClInclude Include="TitleStage.h" />
     <ClInclude Include="SkinModelRender.h" />
     <ClInclude Include="Floor.h" />
-    <ClInclude Include="StageSelect.h" />
-    <ClInclude Include="TitleCamera.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Goal.h" />
     <ClInclude Include="stageObject\Iwa.h" />
@@ -266,6 +268,10 @@
     <ClInclude Include="Debug\DebugMan.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="PostEffect\PostEffect.h" />
+    <ClInclude Include="StageSelect\StageSelect.h" />
+    <ClInclude Include="StageSelect\TitleCamera.h" />
+    <ClInclude Include="StageSelect\TitleStage.h" />
+    <ClInclude Include="SamplerState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />
@@ -285,6 +291,7 @@
     <None Include="Assets\level\stageLevel.tkl" />
     <None Include="Assets\level\GoalNomiStage.tkl" />
     <None Include="Assets\level\Corse_Level_1.tkl" />
+    <None Include="Assets\level\なんかもうできないですねぇStage2.tkl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

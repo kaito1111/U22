@@ -113,6 +113,7 @@
     <ClCompile Include="Network\NetworkLogic.cpp" />
     <ClCompile Include="Network\OutputListener.cpp" />
     <ClCompile Include="Network\TestView.cpp" />
+    <ClCompile Include="SamplerState.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
     <ClCompile Include="stageObject\Goal.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="Network\OutputListener.h" />
     <ClInclude Include="Network\TestView.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SamplerState.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />
     <ClInclude Include="stageObject\Goal.h" />

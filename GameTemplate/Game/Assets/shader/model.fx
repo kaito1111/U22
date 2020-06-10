@@ -55,6 +55,18 @@ cbuffer LightCb : register(b1) {
 //	float4x4 lightViewProjMatrix;	//ライトビュープロジェクション行列。
 //}
 
+//注意シャドウマップの枚数増やしたら、shadowCbのメンバを割り当てている
+//レジスタ番号を再調整する必要があります。
+#define NUM_SHADOW_MAP 3
+/*
+	シャドウマップ用の定数バッファ
+*/
+cbuffer ShadowCb : register(b2) {
+	float4x4 mLVP[NUM_SHADOW_MAP];		//ライトビュープロジェクション行列
+	float4 texOffset[NUM_SHADOW_MAP];	//シャドウマップサイズ
+	float4 shadowAreaDepthInViewSapce;	//カメラ空間で影を落とすエリア
+}
+
 /////////////////////////////////////////////////////////////
 //各種構造体
 /////////////////////////////////////////////////////////////

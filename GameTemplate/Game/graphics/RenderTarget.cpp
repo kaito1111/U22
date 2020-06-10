@@ -74,6 +74,14 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 		texDesc.MiscFlags = 0;
 		//テクスチャ作成
 		dv->CreateTexture2D(&texDesc, nullptr, &m_renderTargetTex);
+
+		//nullチェック
+		if (m_renderTargetTex == nullptr) {
+			/*---throw---
+			descの初期化の値を確認せよ
+			  ---throw---*/
+			throw;
+		}
 	}
 
 	//レンダリングターゲットビューの作成

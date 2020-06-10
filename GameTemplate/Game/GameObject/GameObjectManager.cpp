@@ -72,6 +72,7 @@ namespace myEngine {
 		/// XVŒnˆ—
 		{
 			Update();
+			g_graphicsEngine->GetShadowMap()->Update();
 		}
 		/// •`‰æŒnˆ—
 		{
