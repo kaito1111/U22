@@ -102,6 +102,8 @@
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
+    <ClCompile Include="CheckPoint.cpp" />
+    <ClCompile Include="CheckPointgenerator.cpp" />
     <ClCompile Include="Debug\DebugMan.cpp" />
     <ClCompile Include="light\DirectionLight.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
@@ -203,6 +205,8 @@
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
     <ClInclude Include="character\CharacterController.h" />
+    <ClInclude Include="CheckPoint.h" />
+    <ClInclude Include="CheckPointgenerator.h" />
     <ClInclude Include="Debug\DebugMan.h" />
     <ClInclude Include="light\DirectionLight.h" />
     <ClInclude Include="Effect\Effect.h" />

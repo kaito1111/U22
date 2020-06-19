@@ -10,7 +10,6 @@ public:
 	//publicƒƒ“ƒo•Ï”‚É“ü‚ê‚Ä‚¢‚Ü‚·
 	bool Start();
 	void Update();
-	void Draw();
 	void SetPosition(const CVector3& pos) {
 		m_Position = pos;
 	}
@@ -19,7 +18,7 @@ public:
 	}
 private:	
 	bool isClear = false;
-	SkinModel m_Skin;
+	SkinModelRender* m_SkinRender = nullptr;
 	CVector3 m_Position = CVector3::Zero();
 	Player* m_player[2] = {};
 	CQuaternion m_rot = CQuaternion::Identity();

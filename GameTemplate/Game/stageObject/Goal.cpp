@@ -18,7 +18,8 @@ bool Goal::Start()
 	m_ClearSprite = NewGO<SpriteRender>(5);
 	m_ClearSprite->Init(L"Assets/sprite/Clear.dds", 1420.0f, 720.0f);
 	m_ClearSprite->SetW(0.0f);
-	m_Skin.Init(L"Assets/modelData/Goal.cmo");
+	m_SkinRender = NewGO<SkinModelRender>(0);
+	m_SkinRender->Init(L"Assets/modelData/Goal.cmo");
 	m_player[0] = FindGO<Player>("player1");
 	m_player[1] = FindGO<Player>("player2");
 
@@ -47,13 +48,5 @@ void Goal::Update()
 			m_Se.Play();
 		}
 	}
-	m_Skin.UpdateWorldMatrix(m_Position, CQuaternion::Identity(), CVector3::One());
-}
-
-void Goal::Draw()
-{
-	m_Skin.Draw(
-		g_camera3D.GetViewMatrix(),
-		g_camera3D.GetProjectionMatrix()
-	);
+	m_SkinRender->SetPosition(m_Position);
 }
