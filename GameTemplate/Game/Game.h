@@ -1,8 +1,7 @@
 #pragma once
 #include "graphics/2D/Sprite.h"
 #include "graphics/2D/SpriteRender.h"
-#include "stageObject/Goal.h"
-#include "StageSelect/StageSelect.h"
+#include "Stage.h"
 class KaitoTask;
 
 class Game : public IGameObject
@@ -10,9 +9,6 @@ class Game : public IGameObject
 public:
 	Game();
 	~Game();
-	void SetStage(int num) {
-		StageNum = num;
-	}
 private:
 	/// <summary>
 	/// スタート
@@ -37,17 +33,15 @@ private:
 	/// </summary>
 	void PostRender();
 private:
-	StageSelect* stage = nullptr;
-	Goal* goalPtr = nullptr;
-	int StageNum = 0;
 	SpriteRender* m_test = nullptr;							//スプライトレンダー
 	Sprite m_copyMainRtToFrameBufferSprite;					//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 	SoundSource	m_se;										//サウンドソース
 	Effect* effect = nullptr;								//エフェクト
 	RenderTarget m_mainRenderTarget;						//メインレンダーターゲット
-	ID3D11RenderTargetView* m_frameBufferRenderTargetView;	//フレームRTV
-	ID3D11DepthStencilView* m_frameBufferDepthStencilView;	//フレームDSV
+	ID3D11RenderTargetView* m_frameBufferRenderTargetView= nullptr;	//フレームRTV
+	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームDSV
 	D3D11_VIEWPORT m_frameBufferViewports;					//フレームビューポート
 	myEngine::PostEffect m_postEffect;								//ブルーム
 	KaitoTask* m_task = nullptr;
+	Stage* stage = nullptr;
 };

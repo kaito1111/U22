@@ -48,8 +48,6 @@ void StageSelect::Update()
 				pPos.x < b) {//¶’[‚æ‚è‘å‚«‚¢‚Æ‚«
 				stage = NewGO<Stage>(1, "stage");
 				stage->setStageNum(nowStage);
-				CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
-				PointGenerator->Load(L"Assets/level/Corse_Level_2.tkl");
 				//player1->SetPosition(nextPlayer1Position);
 				//player2->SetPosition(nextPlayer2Position);
 				DeleteGO(this);

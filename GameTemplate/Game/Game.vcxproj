@@ -105,6 +105,7 @@
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
     <ClCompile Include="Debug\DebugMan.cpp" />
+    <ClCompile Include="GemeLoop.cpp" />
     <ClCompile Include="light\DirectionLight.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
     <ClInclude Include="Debug\DebugMan.h" />
+    <ClInclude Include="GemeLoop.h" />
     <ClInclude Include="light\DirectionLight.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Fade.h" />

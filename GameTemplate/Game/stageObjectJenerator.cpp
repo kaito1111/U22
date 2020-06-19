@@ -10,6 +10,7 @@
 #include"stageObject/Goal.h"
 #include "stageObject/Gimmick_Button.h"
 #include"stageObject/MoveFloor2.h"
+#include "CheckPointgenerator.h"
 stageObjectJenerator::stageObjectJenerator()
 {
 	
@@ -55,9 +56,16 @@ bool stageObjectJenerator::Start()
 
 			//ÉSÅ[Éã
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				Goal* goalPtr = NewGO<Goal>(0, "Goal");
-				goalPtr->SetPosition(objData.position);
+				m_goalPtr = NewGO<Goal>(0, "Goal");
+				m_goalPtr->SetPosition(objData.position);
+				return true;
 			}
+			if (wcsstr(objData.name, L"CheckPoint") != NULL)
+			{
+				return true;
+			}
+			CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
+			PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
 
 			return false;
 		});
@@ -81,6 +89,8 @@ bool stageObjectJenerator::Start()
 				Goal* goalPtr = NewGO<Goal>(0, "Goal");
 				goalPtr->SetPosition(objData.position);
 			}
+			CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
+			PointGenerator->Load(L"Assets/level/stageDossun.tkl");
 		});
 	}
 	return true;

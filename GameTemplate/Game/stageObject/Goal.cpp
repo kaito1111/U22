@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Goal.h"
 #include "light/DirectionLight.h"
+#include "../GemeLoop.h"
 
 Goal::Goal(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 {
@@ -45,6 +46,7 @@ void Goal::Update()
 		if (i == clearNum) {
 			isClear = true;
 			m_ClearSprite->SetW(1.0f);
+			NewGO<GameLoop>(1, "gameloop");
 			m_Se.Play();
 		}
 	}

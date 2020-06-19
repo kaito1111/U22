@@ -34,9 +34,11 @@ Game::~Game()
 	}
 	if (m_frameBufferRenderTargetView != nullptr) {
 		m_frameBufferRenderTargetView->Release();
+		m_frameBufferRenderTargetView = nullptr;
 	}
-	delete m_task;
-	DeleteGO(goalPtr);
+	//delete m_task;
+	DeleteGO(m_task);
+	DeleteGO(stage);
 }
 
 bool Game::Start()
@@ -46,37 +48,13 @@ bool Game::Start()
 
 	//2î‘ñ⁄
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
-	Stage* stage = NewGO<Stage>(0, "stage");
+	//stage = NewGO<Stage>(0, "stage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);		
-	CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
-	PointGenerator->Load(L"Assets/level/debug_test.tkl");
-	Level level;
-
-	if (StageNum == 0) {
-		level.Init(L"Assets/level/debug_test.tkl", [&](const auto& objData)
-		{
-			//ÉSÅ[Éã
-			if (wcscmp(objData.name, L"Goal") == 0) {
-				goalPtr = NewGO<Goal>(0, "Goal");
-				goalPtr->SetPosition(objData.position);
-				return true;
-			}
-			if (wcsstr(objData.name, L"CheckPoint") != NULL)
-			{
-				return true;
-			}
-			return false;
-		});
-	}
-	return true;
 }
 
 void Game::Update()
 {
-	if (goalPtr->IsClear()) {
-		DeleteGO(this);
-	}
 	Sample();
 	m_postEffect.Update();
 }
