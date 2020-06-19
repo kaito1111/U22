@@ -80,13 +80,13 @@ public:
 	}
 
 private:
-	ID3D11Texture2D*			m_renderTargetTex;		//レンダーターゲットとなるテクスチャ
-	ID3D11RenderTargetView*		m_renderTargetView;		//レンダーターゲットビュー
-	ID3D11RenderTargetView*		m_oldRenderTargetView;	//バックアップ用のレンダーターゲットビュー
-	ID3D11ShaderResourceView*	m_renderTargetSRV;		//レンダーターゲットのSRV
-	ID3D11Texture2D*			m_depthStencilTex;		//デプスステンシルとなるテクスチャ
-	ID3D11DepthStencilView*		m_depthStencilView;		//デプスステンシルビュー
-	ID3D11DepthStencilView*		m_oldDepthStencilView;	//バックアップ用のデプスステンシルビュー
+	ID3D11Texture2D*			m_renderTargetTex = nullptr;		//レンダーターゲットとなるテクスチャ
+	ID3D11RenderTargetView*		m_renderTargetView = nullptr;		//レンダーターゲットビュー
+	ID3D11RenderTargetView*		m_oldRenderTargetView = nullptr;	//バックアップ用のレンダーターゲットビュー
+	ID3D11ShaderResourceView*	m_renderTargetSRV = nullptr;		//レンダーターゲットのSRV
+	ID3D11Texture2D*			m_depthStencilTex = nullptr;		//デプスステンシルとなるテクスチャ
+	ID3D11DepthStencilView*		m_depthStencilView = nullptr;		//デプスステンシルビュー
+	ID3D11DepthStencilView*		m_oldDepthStencilView = nullptr;	//バックアップ用のデプスステンシルビュー
 	D3D11_VIEWPORT				m_viewport;				//ビューポート
 	float m_width = 0;									//レンダリングターゲットの幅
 	float m_height = 0;									//レンダリングターゲットの高さ

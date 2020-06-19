@@ -23,11 +23,14 @@ void Camera::Update()
 		m_target,
 		m_up
 	);
+
+	//アスペクト比計算
+	m_aspect = FRAME_BUFFER_W / FRAME_BUFFER_H;
 	
-//プロジェクション行列
+	//プロジェクション行列
 	m_projMatrix.MakeProjectionMatrix(
 		m_viewAngle,					//スクリーンの横
-		FRAME_BUFFER_W / FRAME_BUFFER_H,	//スクリーンの高さ
+		m_aspect,						
 		m_near, 
 		m_far
 	);

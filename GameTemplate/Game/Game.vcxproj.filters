@@ -124,8 +124,12 @@
     <ClCompile Include="StageSelect\StageSelect.cpp" />
     <ClCompile Include="StageSelect\TitleCamera.cpp" />
     <ClCompile Include="StageSelect\TitleStage.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="SamplerState.cpp" />
+=======
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
+>>>>>>> 868999397ce06bb533ca4b0bd89dc577567838d6
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
@@ -272,8 +276,12 @@
     <ClInclude Include="StageSelect\StageSelect.h" />
     <ClInclude Include="StageSelect\TitleCamera.h" />
     <ClInclude Include="StageSelect\TitleStage.h" />
+<<<<<<< HEAD
+    <ClInclude Include="SamplerState.h" />
+=======
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
+>>>>>>> 868999397ce06bb533ca4b0bd89dc577567838d6
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\sprite\dummy.png" />

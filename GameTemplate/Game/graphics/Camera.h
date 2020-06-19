@@ -41,12 +41,41 @@ public:
 	{
 		return m_target;
 	}
+	/// <summary>
+	/// ビューアングルを取得
+	/// </summary>
+	/// <returns></returns>
+	float GetViewAngle()
+	{
+		return m_viewAngle;
+	}
+
+	float GetAspect()
+	{
+		return m_aspect;
+	}
 	/*!
 	 * @brief	カメラの上方向を取得。
 	 */
 	CVector3 GetUp()
 	{
 		return m_up;
+	}
+	/// <summary>
+	/// カメラの前方向取得
+	/// </summary>
+	/// <returns></returns>
+	CVector3 GetForward()
+	{
+		return m_forward;
+	}
+	/// <summary>
+	/// カメラの右方向
+	/// </summary>
+	/// <returns></returns>
+	CVector3 GetRight()
+	{
+		return m_right;
 	}
 	/*!
 	 * @brief	視点を設定。
@@ -96,6 +125,8 @@ private:
 	CVector3 m_target = CVector3::Zero();			//注視点。
 	CVector3 m_position = CVector3::Zero();			//視点。
 	CVector3 m_up = CVector3::Up();					//上方向。
+	CVector3 m_forward = CVector3::Front();			//前方向
+	CVector3 m_right = CVector3::Right();			//右方向
 	float m_viewAngle = CMath::DegToRad(60.0f);		//画角。
 	float m_far = 10000.0f;							//遠い平面までの距離。
 	float m_near = 1.0f;							//近平面までの距離。

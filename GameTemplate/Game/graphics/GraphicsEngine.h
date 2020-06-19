@@ -60,7 +60,7 @@ public:
 	/// /// <summary>
 	/// フォワードレンダーターゲット
 	/// </summary>
-	void ForwardRenderTarget();
+	void ForwardRenderTarget(); 
 	/// <summary>
 	/// ポストレンダーターゲット
 	/// </summary>

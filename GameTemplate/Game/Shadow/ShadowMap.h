@@ -10,6 +10,7 @@
 
 #include "graphics/RenderTarget.h"
 #include "graphics/SkinModel.h"
+#include "SamplerState.h"
 
 namespace myEngine {
 	class ShadowMap 
@@ -24,6 +25,16 @@ namespace myEngine {
 		/// デストラクタ
 		/// </summary>
 		~ShadowMap();
+
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		void Init();
+
+		/// <summary>
+		/// 削除
+		/// </summary>
+		void Release();
 
 		/// <summary>
 		/// ライトビュー行列を取得。
@@ -44,6 +55,11 @@ namespace myEngine {
 		}
 
 		/// <summary>
+		/// 更新
+		/// </summary>
+		void Update();
+
+		/// <summary>
 		/// <para>更新(ライトカメラの注視点を指定するバージョン。)</para>
 		/// </summary>
 		/// <remarks>
@@ -55,6 +71,20 @@ namespace myEngine {
 		void UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCameraTarget);
 
 		/// <summary>
+		/// ライトの座標計算
+		/// <para></para>
+		/// </summary>
+		/// <remarks>
+		/// 視錐台の中心座標を先に計算しておく必要があります。
+		/// シャドウマップの回数分回すこと。
+		/// コードの詳細はカスケードシャドウ資料のCalcLightPosition.png参照。
+		/// </remarks>
+		/// <param name="lightHeight">ライトの高さ</param>
+		/// <param name="viewFrustomCenterPosition">視錐台の中心座標</param>
+		/// <returns>ライトの座標</returns>
+		CVector3 CalcLightPosition(float lightHeight, CVector3 viewFrustomCenterPosition);
+		
+		/// /// <summary>
 		/// ライト
 		/// </summary>
 		void UpdateFromLightTarget();
@@ -127,6 +157,29 @@ namespace myEngine {
 		}
 
 	private:
+		//カスケードシャドウ実装用変数//
+		
+		/// <summary>
+		/// こいつの中身いじったらShadowCbも変更すること
+		/// </summary>
+		struct SShadowCb {
+			CMatrix mLVP[NUM_SHADOW_MAP];						//ライトビュープロジェクション行列
+			CVector4 texOffset[NUM_SHADOW_MAP];					//Pivotみたいな感じ？
+			float shadowAreaDepthInViewSpace[NUM_SHADOW_MAP];	//カメラ空間での影を落とすエリアの深度テーブル
+		};
+
+		float m_lightHieght = 2000.0f;									//ライトの高さ
+		int shadowMapWidth = 2048;												//シャドウマップの幅
+		int shadowMapHeight = 2048;											//シャドウマップの高さ
+		RenderTarget m_KshadowMapRT[NUM_SHADOW_MAP]; 					//シャドウマップを書き込むレンダーターゲット
+		CMatrix m_LVPMatrix[NUM_SHADOW_MAP];							//ライトビュープロジェクション行列
+		SShadowCb m_shadowCbEntity;										//送る用
+		ConstantBuffer m_shadowCb;										//シャドウ用定数バッファ
+		SamplerState m_fetchShadowMapSampler;							//シャドウマップをフェッチするときに使用するサンプラ-
+		CVector3 m_lightDirection = CVector3::Down();					//ライトの方向
+
+		//ここまでカスケードシャドウ//
+
 		CVector3 m_lightCameraPosition = CVector3::Zero();	//ライトカメラの視点
 		CVector3 m_lightCameraTarget = CVector3::Zero();	//ライトカメラの注視点
 		CMatrix m_lightViewMatrix;							//ライトビュー行列
