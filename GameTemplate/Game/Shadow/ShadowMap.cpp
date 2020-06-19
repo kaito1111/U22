@@ -26,7 +26,7 @@ void ShadowMap::Release()
 {
 	//解放
 	for (auto& rt : m_KshadowMapRT) {
-			rt.Release();
+		rt.Release();
 	}
 }
 
@@ -62,7 +62,7 @@ void ShadowMap::Init()
 	}
 
 	//定数バッファを作成
-	//m_shadowCb.Create(&m_shadowCbEntity, sizeof(m_shadowCbEntity));
+	m_shadowCb.Create(&m_shadowCbEntity, sizeof(m_shadowCbEntity));
 
 	//シャドウマップ用サンプラー作成
 	CD3D11_DEFAULT def;
@@ -121,7 +121,7 @@ void ShadowMap::Update()
 
 	//ライトビュー行列の回転成分を計算
 	
-	//ライトビューの前方向
+	//ライトビューの前方向 下向き
 	CVector3 lightViewForward = m_lightDirection;
 	//ライトビューの上方向
 	CVector3 lightViewUp;
@@ -160,9 +160,9 @@ void ShadowMap::Update()
 
 	//視錐台を分割する比率
 	float shadowAreaTbl[] = {
-		m_lightHieght * 0.8f,
-		m_lightHieght * 1.6f,
-		m_lightHieght * 3.6f
+		2000 * 0.8f,
+		2000 * 1.6f,
+		2000 * 3.6f
 	};
 
 	//ライトビューの高さを計算
@@ -174,10 +174,11 @@ void ShadowMap::Update()
 	float nearPlaneZ = 0.0f;
 	//遠平面
 	float farPlaneZ;
-	//カメラの上方向
+	//メインカメラの上方向
 	CVector3 cameraUp;
-	//内積で上方向を計算
+	//外積で上方向を計算
 	cameraUp.Cross(g_camera3D.GetRight(), g_camera3D.GetForward());
+	//cameraUp = g_camera3D.GetUp();
 
 	//視錐台を分割するようにライトビュープロジェクション行列を計算
 	for (int i = 0; i < NUM_SHADOW_MAP; i++) {
@@ -210,7 +211,7 @@ void ShadowMap::Update()
 			auto nearPlaneCenterPos = g_camera3D.GetPosition() + cameraDir * nearPlaneZ;
 
 			//v[0] = 視錐台の近平面で右上にある四角形の頂点。
-			v[0] = nearPlaneCenterPos = g_camera3D.GetRight() * t * nearPlaneZ + toUpperNear;
+			v[0] = nearPlaneCenterPos + g_camera3D.GetRight() * t * nearPlaneZ + toUpperNear;
 			//v[1] = 視錐台の近平面で右下にある四角形の頂点
 			v[1] = v[0] - toUpperNear * 2.0f;
 
@@ -237,6 +238,7 @@ void ShadowMap::Update()
 			auto viewFrustumCenterPosition = (nearPlaneCenterPos + farPlaneCenterPos) * 0.5f;
 			//ライトの位置を計算。
 			auto lightPos = CalcLightPosition(lightHeight, viewFrustumCenterPosition);
+			//CVector3 lightPos = { 0,2000,1000 };
 
 			//ライトの回転
 			mLightView = lightViewRot;
@@ -263,6 +265,7 @@ void ShadowMap::Update()
 				vMax.Max(vInLight);
 				vMin.Min(vInLight);
 			}
+			//ビューの幅と高さを求める。
 			w = vMax.x - vMin.x;
 			h = vMax.y - vMin.y;
 			far_z = vMax.z;
