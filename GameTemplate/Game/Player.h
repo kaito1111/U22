@@ -35,6 +35,7 @@ public:
 		m_PlayerNum = n;
 	}
 	void ReSpown();
+	void SetCheckPoint(CVector3 spownPoint);
 private:
 	bool Start();
 	void Update();

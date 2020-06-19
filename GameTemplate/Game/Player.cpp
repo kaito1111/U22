@@ -42,6 +42,10 @@ void Player::ReSpown()
 	
 }
 
+void Player::SetCheckPoint(CVector3 spownPoint)
+{
+	m_CheckPoint = spownPoint;
+}
 bool Player::Start()
 {
 	m_ThisNumSprite = NewGO<SpriteRender>(0);

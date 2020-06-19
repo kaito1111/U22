@@ -136,7 +136,7 @@ void TwoP_Pad::Update()
 	{
 		NetworkLogic::GetInstance().GetLBL()->putData(i + 18, AllStick[i]);
 	}
-
+	g_Pad[1].Update();
 	//イベントの起動
 	NetworkLogic::GetInstance().GetLBL()->RaisePlayerData();
 }
