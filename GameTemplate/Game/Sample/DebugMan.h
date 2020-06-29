@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Shadow/ShadowMap.h"
+#include "character/CharacterController.h"
 
 namespace myEngine {
 	/// <summary>
@@ -48,5 +49,7 @@ namespace myEngine {
 		CVector3 m_lightCameraTarget;					//ライトカメラの注視点位置
 		SkinModel m_skinModel;							//デバッグマンのスキンモデル
 		ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
+		CharacterController m_charaCon;					//キャラコン
+		CVector3 m_moveSpeed = CVector3::Zero();		//移動速度
 	};
 }

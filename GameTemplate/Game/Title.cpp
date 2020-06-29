@@ -2,6 +2,7 @@
 #include "Title.h"
 #include "Game.h"
 #include "Fade.h"
+#include "SampleScene.h"
 #include "Network/NetworkLogic.h"
 #include "Network/LoadBalancingListener.h"
 
@@ -43,12 +44,18 @@ void Title::Update()
 		m_fade = NewGO<Fade>(0, "fade");
 		DeleteTitle = true;
 	}
+	//サンプルステージ
+	if (GetAsyncKeyState('Y')) {
+		NewGO<SampleScene>(0, "ground");
+		DeleteGO(this);
+	}
 	if (DeleteTitle) {
 		if (m_fade->GetLengh() < 210.0f) {
 			NewGO<Game>(0, "game");
 			DeleteGO(this);
 		}
 	}
+
 }
 
 void Title::NetworkUpdate()

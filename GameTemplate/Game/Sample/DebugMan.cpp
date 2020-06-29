@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DebugMan.h"
+#include "SampleScene.h"
 #include "Stage.h"
 
 namespace myEngine {
@@ -8,8 +9,9 @@ namespace myEngine {
 	{
 		//ゴールの位置
 		//m_pos = { -358.0f,925.0f,0.0f };
-		m_pos = CVector3::Zero();
+		m_pos = { 0.0f, 21.0f, 0.0f };
 		m_skinModel.Init(L"Assets/modelData/unityChan.cmo");
+		m_charaCon.Init(20.0f, 25.0f, m_pos);
 	
 		//シャドウ関連の初期化処理
 		{
@@ -30,11 +32,19 @@ namespace myEngine {
 	void DebugMan::Update()
 	{
 		if (GetAsyncKeyState('A')) {
-			m_pos.x += 5;
+			m_moveSpeed.x = 5.0f;
 		}
 		else if(GetAsyncKeyState('D')){
-			m_pos.x -= 5;
+			m_moveSpeed.x = -5.0f;
 		}
+		else {
+			m_moveSpeed.x = 0.0f;
+		}
+
+		m_moveSpeed.y = GRAVITY;
+
+		//移動量計算
+		m_pos = m_charaCon.Execute(1.0f, m_moveSpeed);
 
 		//ワールド行列更新
 		m_skinModel.UpdateWorldMatrix(m_pos, m_rot, m_scale);

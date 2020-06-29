@@ -104,7 +104,8 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
-    <ClCompile Include="Debug\DebugMan.cpp" />
+    <ClCompile Include="SampleGround.cpp" />
+    <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="light\DirectionLight.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -115,6 +116,7 @@
     <ClCompile Include="Network\NetworkLogic.cpp" />
     <ClCompile Include="Network\OutputListener.cpp" />
     <ClCompile Include="Network\TestView.cpp" />
+    <ClCompile Include="SampleScene.cpp" />
     <ClCompile Include="SamplerState.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
@@ -207,7 +209,8 @@
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
-    <ClInclude Include="Debug\DebugMan.h" />
+    <ClInclude Include="SampleGround.h" />
+    <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="light\DirectionLight.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Fade.h" />
@@ -219,6 +222,7 @@
     <ClInclude Include="Network\OutputListener.h" />
     <ClInclude Include="Network\TestView.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SampleScene.h" />
     <ClInclude Include="SamplerState.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />
@@ -312,6 +316,7 @@
     <MeshContentTask Include="Assets\modelData\bStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\Course_Level1.FBX" />
     <MeshContentTask Include="Assets\modelData\Course_Level2.FBX" />
+    <MeshContentTask Include="Assets\modelData\Doragon.fbx" />
     <MeshContentTask Include="Assets\modelData\Dossun.fbx" />
     <MeshContentTask Include="Assets\modelData\Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />
@@ -336,6 +341,7 @@
     <MeshContentTask Include="Assets\modelData\stage3.fbx" />
     <MeshContentTask Include="Assets\modelData\stageDossun.fbx" />
     <MeshContentTask Include="Assets\modelData\stage_00.FBX" />
+    <MeshContentTask Include="Assets\modelData\testGround.fbx" />
     <MeshContentTask Include="Assets\modelData\titleFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\titleStage1.fbx" />
     <MeshContentTask Include="Assets\modelData\titleStage3.fbx" />

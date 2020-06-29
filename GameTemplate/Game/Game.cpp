@@ -3,7 +3,7 @@
 #include "Stage.h"
 #include "exampleCode/ex2D.h"
 #include "KaitoTask.h"
-#include "Debug/DebugMan.h"
+#include "Sample/DebugMan.h"
 #include "StageSelect/TitleStage.h"
 #include "stageObject/Goal.h"
 #include "level/Level.h"
@@ -90,14 +90,14 @@ void Game::Sample()
 		//ex2D* ex2d = NewGO<ex2D>(4, "ex2D");
 		
 		//デバッグ用UnitychanのNewGO
-		NewGO<DebugMan>(0, "debugman");
+		//NewGO<DebugMan>(0, "debugman");
 
 		//エフェクトの作成
 		if (!effect->IsPlay()) {
 			effect = NewGO<Effect>(1);
-			effect->Play(L"Assets/effect/test.efk");
+			effect->Play(L"Assets/effect/SMode.efk");
 			effect->SetPosition({ 100,0, 0 });
-			effect->SetScale(CVector3::One() * 20);
+			effect->SetScale(CVector3::One() * 2);
 		}
 		//サウンドの再生
 		m_se.Play(false);

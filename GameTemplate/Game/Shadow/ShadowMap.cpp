@@ -285,7 +285,7 @@ void ShadowMap::Update()
 		//エンティティに積む
 		m_shadowCbEntity.mLVP[i] = m_LVPMatrix[i];
 		//どこまで影を落とすか(きわきわだと変な境界が発生するので少し狭める。)
-		m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * 0.8f;
+		//m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * 0.8f;
 		//次の近平面は今の遠平面。
 		nearPlaneZ = farPlaneZ;
 	}
