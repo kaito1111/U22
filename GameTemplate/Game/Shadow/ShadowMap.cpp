@@ -1,20 +1,10 @@
 #include "stdafx.h"
 #include "ShadowMap.h"
+#include "graphics/SkinModelShaderConst.h"
 
 ShadowMap::ShadowMap()
 {
 	Init();
-	////シャドウマップ生成用のレンダリングターゲットを作成
-	////解像度は2048*2048
-	////テクスチャのフォーマットはR成分のみ32bit浮動小数点型。
-	//m_shadowMapRT.Create(
-	//	2048,
-	//	2048,
-	//	DXGI_FORMAT_R32_FLOAT
-	//);
-
-	//m_lightCameraPosition = { -358.0f, 2000.0, 0.0f };
-	//m_lightCameraTarget = CVector3::Zero();
 }
 
 ShadowMap::~ShadowMap()
@@ -39,14 +29,15 @@ void ShadowMap::Init()
 	m_lightHieght = 2000.0f;
 
 	//カスケードシャドウマップの範囲
-	//恐らく処理が早いから左シフトとかしてるんだろう。
+	//恐らく処理が早いから左シフト
+	//ここでシャドウの解像度が決まるよ！
 	int wh[][2] = {
 		//そのままの範囲
 		{shadowMapWidth, shadowMapHeight},
 		//縦を左シフト1なので縦の値が半分に
-		{shadowMapWidth, shadowMapHeight >> 1},
+		{shadowMapWidth, shadowMapHeight >> 2},
 		//横を左シフト1、縦が左シフト1なので両方半分に
-		{shadowMapWidth >> 1, shadowMapHeight >> 1}
+		{shadowMapWidth >> 2, shadowMapHeight >> 2}
 	};
 
 	//シャドウマップ用のレンダリングターゲットを個数分作成
@@ -57,8 +48,8 @@ void ShadowMap::Init()
 			DXGI_FORMAT_R32_FLOAT
 		);
 		//pivot的な奴？
-		m_shadowCbEntity.texOffset[i].x = 1.0f / wh[i][0];
-		m_shadowCbEntity.texOffset[i].y = 1.0f / wh[i][1];
+		//m_shadowCbEntity.texOffset[i].x = 1.0f / wh[i][0];
+		//m_shadowCbEntity.texOffset[i].y = 1.0f / wh[i][1];
 	}
 
 	//定数バッファを作成
@@ -130,7 +121,7 @@ void ShadowMap::Update()
 		lightViewUp.Cross(lightViewForward, CVector3::Right());
 	}
 	else {
-		lightViewUp.Cross(lightViewUp, lightViewForward);
+		lightViewUp.Cross(lightViewForward, CVector3::Up());
 	}
 	//正規化
 	lightViewUp.Normalize();
@@ -160,9 +151,9 @@ void ShadowMap::Update()
 
 	//視錐台を分割する比率
 	float shadowAreaTbl[] = {
-		2000 * 0.8f,
-		2000 * 1.6f,
-		2000 * 3.6f
+		2000 * 0.2f,
+		2000 * 0.4f,
+		2000 * 0.8f
 	};
 
 	//ライトビューの高さを計算
@@ -187,7 +178,7 @@ void ShadowMap::Update()
 		//ライトビュー
 		CMatrix mLightView = CMatrix::Identity();
 		//視錐台の片方ずつ(上、下)計算していくのでアングルは半分
-		float halfViewAngle = g_camera3D.GetViewAngle() *0.5f;
+		float halfViewAngle = g_camera3D.GetViewAngle() * 0.5f;
 		//視錐台の8頂点をライト空間に変換してAABB(視錐台の中にある直方体)を求めて、正射影の幅と高さを求める。
 		float w, h;
 		float far_z = -1.0f;
@@ -243,7 +234,7 @@ void ShadowMap::Update()
 			//ライトの回転
 			mLightView = lightViewRot;
 
-			//ビューの回転
+			//ライトの位置,回転
 			mLightView.m[3][0] = lightPos.x;
 			mLightView.m[3][1] = lightPos.y;
 			mLightView.m[3][2] = lightPos.z;
@@ -279,84 +270,17 @@ void ShadowMap::Update()
 			far_z / 100.0f,
 			far_z
 		);
-
+		m_lightViewMatrix[i] = mLightView;
+		m_lightProjMatirx[i] = proj;
 		//ライト座標軸に変換
 		m_LVPMatrix[i] = mLightView * proj;
 		//エンティティに積む
 		m_shadowCbEntity.mLVP[i] = m_LVPMatrix[i];
 		//どこまで影を落とすか(きわきわだと変な境界が発生するので少し狭める。)
-		//m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * 0.8f;
+		m_shadowCbEntity.shadowAreaDepthInViewSpace[i] = farPlaneZ * 0.8f;
 		//次の近平面は今の遠平面。
 		nearPlaneZ = farPlaneZ;
 	}
-}
-
-
-
-//void ShadowMap::Update()
-//{
-//	//UpdateFromLightTarget(m_lightCameraPosition, m_lightCameraTarget);
-//}
-
-void ShadowMap::UpdateFromLightDirection(CVector3 lightCameraPos, CVector3 lightDir)
-{
-	////ライトの方向によって、ライトの上方向を決める。
-	//CVector3 lightCameraUpAxis;
-	////fabsf()はたしか絶対値
-	//if (fabsf(lightDir.y) > 0.99998f) {
-	//	//ほぼ真上or真下を向いているので、{ 1,0,0 }を上方向にする。
-	//	lightCameraUpAxis = CVector3::AxisX();
-	//}
-	//else {
-	//	//真上or真下向いていないので、{ 0,1,0 }を上方向にする。
-	//	lightCameraUpAxis = CVector3::AxisY();
-	//}
-	////カメラの上方向が決定したので、ライトビュー行列を計算
-	//m_lightViewMatrix.MakeLookAt(
-	//	m_lightCameraPosition,
-	//	m_lightCameraTarget,
-	//	lightCameraUpAxis
-	//);
-
-	////ライトプロジェクション行列を作成する。
-	////太陽光からの影を落としたいなら、平行投影行列を作成する。
-	////ここのw,hをいじるとシャドウマップの範囲が変わる！
-	//m_lightProjMatirx.MakeOrthoProjectionMatrix(
-	//	5000,
-	//	5000,
-	//	0.1f,
-	//	5000.0f
-	//);
-}
-
-void ShadowMap::UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCameraTarget)
-{
-	////ライトの方向を計算
-	//auto lightDir = m_lightCameraTarget - m_lightCameraPosition;
-	//if (lightDir.Length() < 0.00001f) {
-	//	//視点と注視点近すぎ
-	//	//恐らくバグなのでクラッシュ
-	//	std::abort();
-	//}
-	////正規化
-	//lightDir.Normalize();
-	////影をおとす処理
-	//UpdateFromLightDirection(m_lightCameraPosition, lightDir);
-}
-
-void ShadowMap::UpdateFromLightTarget()
-{
-	////ライトの方向を計算
-	//auto lightDir = m_lightCameraTarget - m_lightCameraPosition;
-	//if (lightDir.Length() < 0.00001f) {
-	//	//視点と注視点近すぎ
-	//	//恐らくバグなのでクラッシュ
-	//	std::abort();
-	//}
-	////正規化
-	//lightDir.Normalize();
-	////影をおとす処理
-	//UpdateFromLightDirection(m_lightCameraPosition, lightDir);
 }
 
 void ShadowMap::BiginRender()
@@ -377,37 +301,23 @@ void ShadowMap::BiginRender()
 
 }
 
+void ShadowMap::SendShadowParam()
+{
+	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	//リソース更新
+	dc->UpdateSubresource(m_shadowCb.GetBody(), 0, NULL, &m_shadowCbEntity, 0, 0);
+	//定数バッファの設定
+	dc->PSSetConstantBuffers(enSkinModelCBReg_Shadow, 1, &m_shadowCb.GetBody());
+
+	//リソースのセット
+	for (int i = 0; i < NUM_SHADOW_MAP; i++) {
+		dc->PSSetShaderResources(enSkinModelCBReg_Shadow1 + i, 1, &m_KshadowMapRT[i].GetRenderTargetSRV());
+	}
+}
+
 void ShadowMap::RenderToShadowMap()
 {
-	{
-		//auto dc = g_graphicsEngine->GetD3DDeviceContext();
-		////レンダリングターゲットを切り替え。
-		//ID3D11RenderTargetView* rts[] = {
-		//	//シャドウマップ用のレンダリングターゲット
-		//	m_shadowMapRT.GetRenderTargetView()
-		//};
-		//////深度ステンシルビューの設定
-		//dc->OMSetRenderTargets(1, rts, m_shadowMapRT.GetDepthStensilView());
-		//////ビューポートの設定
-		////dc->RSSetViewports(1, m_shadowMapRT.GetViewport());
-		//////シャドウマップをクリア
-		//////１番奥のZは1.0なので、1.0で塗りつぶす
-		////float clearColor[4] = { 1.0f,1.0f,1.0f,1.0f };
-		////m_shadowMapRT.ClearRenderTarget(clearColor);
 
-		//////シャドウキャスターをシャドウマップにレンダリング
-		////for (auto& caster : m_shadowCasters) {
-		////	//登録されているシャドウキャスターの数だけ回す
-		////	//シャドウマップ描画
-		////	caster->Draw(
-		////		m_lightViewMatrix,
-		////		m_lightProjMatirx,
-		////		enRenderMode_CreateShadowMap
-		////	);
-		////}
-		//////キャスターをクリア
-		////m_shadowCasters.clear();
-	}
 	//デバコン取得
 	auto dc = g_graphicsEngine->GetD3DDeviceContext();
 
@@ -435,7 +345,7 @@ void ShadowMap::RenderToShadowMap()
 		//シャドウキャスターとして登録されてるやつ分描画
 		for (auto& caster : m_shadowCasters) {
 			//もうカメラ座標軸に変換済みなのでプロジェクション行列はいらない？
-			caster->Draw(m_LVPMatrix[i], CMatrix::Identity(), enRenderMode_CreateShadowMap);
+			caster->Draw(m_lightViewMatrix[i], m_lightProjMatirx[i], enRenderMode_CreateShadowMap);
 		}
 	}
 	//キャスターを削除

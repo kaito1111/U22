@@ -38,7 +38,16 @@ namespace myEngine {
 			m_moveSpeed.x = -5.0f;
 		}
 		else {
-			m_moveSpeed.x = 0.0f;
+			m_moveSpeed.x = 0;
+		}
+		if (GetAsyncKeyState('S')) {
+			m_moveSpeed.z = 5.0f;
+		}
+		else if (GetAsyncKeyState('W')) {
+			m_moveSpeed.z = -5.0f;
+		}
+		else {
+			m_moveSpeed.z = 0;
 		}
 
 		m_moveSpeed.y = GRAVITY;
@@ -75,9 +84,7 @@ namespace myEngine {
 			m_skinModel.Draw(
 				g_camera3D.GetViewMatrix(),
 				g_camera3D.GetProjectionMatrix(),
-				0,
-				g_graphicsEngine->GetShadowMap()->GetLightViewMatirx(),
-				g_graphicsEngine->GetShadowMap()->GetLightProjMatirx()
+				0
 			);
 		}
 	}

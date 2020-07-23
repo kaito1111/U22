@@ -1,9 +1,6 @@
 /// <summary>
-/// シャドウマップ
+/// カスケードシャドウマップ
 /// </summary>
-/// <remarks>
-/// サンプルコードはDebugManクラスとStageクラスのコンストラクタを確認
-/// </remarks>
 
 
 #pragma once
@@ -42,7 +39,7 @@ namespace myEngine {
 		/// <returns></returns>
 		CMatrix GetLightViewMatirx() const
 		{
-			return m_lightViewMatrix;
+			return m_lightViewMatrix[NUM_SHADOW_MAP];
 		}
 
 		/// <summary>
@@ -51,24 +48,23 @@ namespace myEngine {
 		/// <returns></returns>
 		CMatrix GetLightProjMatirx() const
 		{
-			return m_lightProjMatirx;
+			return m_lightProjMatirx[NUM_SHADOW_MAP];
+		}
+
+		/// <summary>
+		/// ライトカメラの向きを設定
+		/// <para>ここをいじるとシャドウの落ちる方向が変わります。</para>
+		/// <para>真下に影を落としたいならCVector3::Down()</para>
+		/// </summary>
+		void SetLightCameraRotation(CVector3& rot)
+		{
+			m_lightDirection = rot;
 		}
 
 		/// <summary>
 		/// 更新
 		/// </summary>
 		void Update();
-
-		/// <summary>
-		/// <para>更新(ライトカメラの注視点を指定するバージョン。)</para>
-		/// </summary>
-		/// <remarks>
-		/// ライトビュー行列や、ライトプロジェクション行列を更新。
-		/// 毎フレーム呼び出すこと。
-		/// </remarks>
-		/// <param name="lightCameraPos">ライトカメラの視点の座標</param>
-		/// <param name="lightCameraTarget">ライトカメラの注視点の座標</param>
-		void UpdateFromLightTarget(CVector3 lightCameraPos, CVector3 lightCameraTarget);
 
 		/// <summary>
 		/// ライトの座標計算
@@ -83,23 +79,15 @@ namespace myEngine {
 		/// <param name="viewFrustomCenterPosition">視錐台の中心座標</param>
 		/// <returns>ライトの座標</returns>
 		CVector3 CalcLightPosition(float lightHeight, CVector3 viewFrustomCenterPosition);
-		
-		/// /// <summary>
-		/// ライト
-		/// </summary>
-		void UpdateFromLightTarget();
 
 		/// <summary>
-		/// 更新（ライトカメラの向きを指定するバージョン。
+		/// シャドウマップのパラメーターをGPUに転送
+		/// <para>標準ではRenderToShadowMapで呼び出し。</para>
 		/// </summary>
 		/// <remarks>
-		/// ライトビュー行列、ライトプロジェクション行列を更新。
-		/// UpdateFromLightTargetかUpdateFromLightDirectionどちらかを
 		/// 毎フレーム呼び出すこと。
 		/// </remarks>
-		/// <param name="lightCameraPos">ライトカメラの視点の座標</param>
-		/// <param name="lightDir">ライトカメラの注視点の座標</param>
-		void UpdateFromLightDirection(CVector3 lightCameraPos, CVector3 lightDir);
+		void SendShadowParam();
 
 		/// <summary>
 		/// <para>シャドウマップにシャドウキャスターをレンダリング。</para>
@@ -164,7 +152,7 @@ namespace myEngine {
 		/// </summary>
 		struct SShadowCb {
 			CMatrix mLVP[NUM_SHADOW_MAP];						//ライトビュープロジェクション行列
-			CVector4 texOffset[NUM_SHADOW_MAP];					//Pivotみたいな感じ？
+			//CVector4 texOffset[NUM_SHADOW_MAP];					//Pivotみたいな感じ？
 			float shadowAreaDepthInViewSpace[NUM_SHADOW_MAP];	//カメラ空間での影を落とすエリアの深度テーブル
 		};
 
@@ -182,8 +170,8 @@ namespace myEngine {
 
 		CVector3 m_lightCameraPosition = CVector3::Zero();	//ライトカメラの視点
 		CVector3 m_lightCameraTarget = CVector3::Zero();	//ライトカメラの注視点
-		CMatrix m_lightViewMatrix;							//ライトビュー行列
-		CMatrix	m_lightProjMatirx;							//ライトプロジェクション行列
+		CMatrix m_lightViewMatrix[NUM_SHADOW_MAP];			//ライトビュー行列
+		CMatrix	m_lightProjMatirx[NUM_SHADOW_MAP];			//ライトプロジェクション行列
 		RenderTarget m_shadowMapRT;							//シャドウマップ描画用のレンダリングターゲット
 		std::vector<SkinModel*> m_shadowCasters;			//シャドウキャスターの配列
 		ID3D11RenderTargetView* oldRenderTargetView;		//バックアップ用レンダーターゲットビュー

@@ -84,6 +84,8 @@ namespace myEngine {
 			g_graphicsEngine->oldTarget();
 			//フォワードレンダーターゲットに変える
 			g_graphicsEngine->ForwardRenderTarget();
+			//GPUにシャドウのパラメーターを送る
+			g_graphicsEngine->GetShadowMap()->SendShadowParam();
 			//通常描画
 			Draw();
 			//ポストレンダーターゲットに変える
