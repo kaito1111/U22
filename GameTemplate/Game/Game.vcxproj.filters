@@ -258,6 +258,7 @@
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="SampleScene.h" />
     <ClInclude Include="SampleGround.h" />
+    <ClInclude Include="Noncopyable.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

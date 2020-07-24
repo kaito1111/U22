@@ -5,8 +5,8 @@
 
 #pragma once
 
+class SkinModel;
 #include "graphics/RenderTarget.h"
-#include "graphics/SkinModel.h"
 #include "SamplerState.h"
 
 namespace myEngine {
