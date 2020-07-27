@@ -117,6 +117,7 @@
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="SampleScene.cpp" />
     <ClCompile Include="SampleGround.cpp" />
+    <ClCompile Include="PlayerPad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -259,6 +260,8 @@
     <ClInclude Include="SampleScene.h" />
     <ClInclude Include="SampleGround.h" />
     <ClInclude Include="Noncopyable.h" />
+    <ClInclude Include="IPad.h" />
+    <ClInclude Include="PlayerPad.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

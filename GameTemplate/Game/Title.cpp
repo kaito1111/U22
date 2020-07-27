@@ -58,10 +58,10 @@ void Title::Update()
 
 	//EventTest
 	if (g_Pad->IsTrigger(enButtonB)) {
+		//ƒTƒ“ƒvƒ‹
 		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100, 200);
 	}
 
-	//g_Pad
 
 }
 

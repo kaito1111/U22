@@ -104,6 +104,7 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
+    <ClCompile Include="PlayerPad.cpp" />
     <ClCompile Include="SampleGround.cpp" />
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="light\DirectionLight.cpp" />
@@ -209,7 +210,9 @@
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
+    <ClInclude Include="IPad.h" />
     <ClInclude Include="Noncopyable.h" />
+    <ClInclude Include="PlayerPad.h" />
     <ClInclude Include="SampleGround.h" />
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="light\DirectionLight.h" />
