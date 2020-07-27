@@ -1,5 +1,5 @@
 #pragma once
-class Player;
+class StageSelect;
 class TitleCamera :public IGameObject
 
 {
@@ -9,9 +9,15 @@ public:
 	~TitleCamera();
 	bool Start();
 	void Update();
-
+	int GetChoiceStageNum() const
+	{
+		return nowChoiceStage;
+	}
 private:
-	Player* player = nullptr;
+	StageSelect* stageSelect = nullptr;
+	void Move();
 	CVector3 m_pos = CVector3::Zero();
+	CVector3 m_target = CVector3::Zero();
+	int nowChoiceStage = 0;
 };
 

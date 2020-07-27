@@ -19,6 +19,7 @@
     <ImageContentTask Include="Assets\sprite\Clear.png" />
     <ImageContentTask Include="Assets\modelData\a.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />
+    <ImageContentTask Include="Assets\sprite\初めからor続きから.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
@@ -117,6 +118,8 @@
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="SampleScene.cpp" />
     <ClCompile Include="SampleGround.cpp" />
+    <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="NewOrContinue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -156,6 +159,7 @@
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
     <MeshContentTask Include="Assets\modelData\Doragon.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage2.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
@@ -258,6 +262,8 @@
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="SampleScene.h" />
     <ClInclude Include="SampleGround.h" />
+    <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="NewOrContinue.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

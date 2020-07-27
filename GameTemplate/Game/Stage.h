@@ -16,6 +16,10 @@ public:
 	void setStageNum(const int& num) {
 		nowStage = num;
 	}
+	const int& GetNowStage() const
+	{
+		return nowStage;
+	}
 private:
 	int nowStage = 0;
 	int count = 0;

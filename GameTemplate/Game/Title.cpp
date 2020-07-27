@@ -3,9 +3,9 @@
 #include "Game.h"
 #include "Fade.h"
 #include "SampleScene.h"
+#include"NewOrContinue.h"
 #include "Network/NetworkLogic.h"
 #include "Network/LoadBalancingListener.h"
-
 Title::Title()
 {
 	//NetworkLogic::GetInstance().Start();
@@ -44,6 +44,13 @@ void Title::Update()
 		m_fade = NewGO<Fade>(0, "fade");
 		DeleteTitle = true;
 	}
+	//ステージセレクト画面へ
+	if (g_Pad->IsTrigger(enButtonB)&&
+		!DeleteTitle) {
+		NewGO<NewOrContinue>(0,"stageSelect");
+		m_fade = NewGO<Fade>(0, "fade");
+		DeleteTitle = true;
+	}
 	//サンプルステージ
 	if (GetAsyncKeyState('Y')) {
 		NewGO<SampleScene>(0, "ground");
@@ -51,7 +58,7 @@ void Title::Update()
 	}
 	if (DeleteTitle) {
 		if (m_fade->GetLengh() < 210.0f) {
-			NewGO<Game>(0, "game");
+			//NewGO<Game>(0, "game");
 			DeleteGO(this);
 		}
 	}

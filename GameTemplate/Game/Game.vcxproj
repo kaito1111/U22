@@ -26,7 +26,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -104,6 +104,8 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
+    <ClCompile Include="NewOrContinue.cpp" />
+    <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="SampleGround.cpp" />
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="light\DirectionLight.cpp" />
@@ -209,6 +211,8 @@
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
+    <ClInclude Include="NewOrContinue.h" />
+    <ClInclude Include="PlayerData.h" />
     <ClInclude Include="SampleGround.h" />
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="light\DirectionLight.h" />
@@ -344,12 +348,14 @@
     <MeshContentTask Include="Assets\modelData\testGround.fbx" />
     <MeshContentTask Include="Assets\modelData\titleFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\titleStage1.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage2.fbx" />
     <MeshContentTask Include="Assets\modelData\titleStage3.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
   </ItemGroup>
   <ItemGroup>
+    <ImageContentTask Include="Assets\sprite\初めからor続きから.png" />
     <ImageContentTask Include="Assets\sprite\LoadN.png" />
     <ImageContentTask Include="Assets\sprite\LoadS.png" />
     <ImageContentTask Include="Assets\sprite\LoadScreen(Down).png" />

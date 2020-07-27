@@ -6,65 +6,77 @@
 #include"StageSelect/TitleCamera.h"
 #include"Stage.h"
 #include<vector>
-#include"Player.h"
+//#include"Player.h"
 #include "../CheckPointgenerator.h"
 #include <iostream>
-using namespace std;
 StageSelect::StageSelect()
 {
+	m_copyMainRtToFrameBufferSprite.Init(
+		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
+		FRAME_BUFFER_W,
+		FRAME_BUFFER_H
+	);
+	int a = 0;
 }
 
 StageSelect::~StageSelect()
 {
-	DeleteGO(titleStage);
+	//DeleteGO(titleStage);
 	DeleteGO(titleCamera);
+	
 }
 
 bool StageSelect::Start()
 {
+	static const float width = 640.0f;//横幅
+	static const float halfWidth = 320.0f;//半分
 
 	titleCamera = NewGO<TitleCamera>(1);
-	titleStage = NewGO<TitleStage>(1);
+	for (int nowInitStage = 0; nowInitStage < g_StageMAX; nowInitStage++)
+	{
+		//L""のLはwchar_tの型がどうか判断するためのヤツ
+
+		//ステージのテクスチャ張った板ポリを出してます。
+			wchar_t stagePath[256] = {};
+			swprintf(stagePath, L"Assets/modelData/titleStage%d.cmo", nowInitStage + 1);
+			m_stage[nowInitStage].Init(stagePath);
+			if (nowInitStage == 0) {
+				m_pos[nowInitStage] = CVector3::Zero();
+				//m_pos[nowInitStage].x += halfWidth;
+			}
+			else {
+				m_pos[nowInitStage] = CVector3::Zero();
+				m_pos[nowInitStage].x += width * nowInitStage;
+			}
+			
+	}
+	/*titleStage = NewGO<TitleStage>(1);
 	player1 = FindGO<Player>("player1");
-	player2 = FindGO<Player>("player2");
+	player2 = FindGO<Player>("player2");*/
+
 	return true;
 }
 
 void StageSelect::Update()
 {
-	const CVector3 nextPlayer1Position = { 0.0f,200.0f,0.0f };
-	const CVector3 nextPlayer2Position = { -50.0f,200.0f,0.0f };
-	const int stageMax = 2;//ステージの数.上限
-	const float stageXSize = -640.0f;//選ぶステージの横幅
-	CVector3 pPos = player2->GetPosition();
-
-	if (g_Pad->IsPress(enButtonA)) 
+	//ステージとKaitoTaskクラスをNewGOする。つかゲーム画面に移行する。
+	/*if (g_Pad->IsPress(enButtonA))
 	{
-		for (int nowStage = 0; nowStage < stageMax; nowStage++) {
-			//プレイヤー1の座標からステージを選びます
-			float a = stageXSize * (nowStage + 1);
-			float b = stageXSize * nowStage;
-			if (pPos.x > a &&//プレイヤーの座標がスプライト右端より小さく
-				pPos.x < b) {//左端より大きいとき
-				stage = NewGO<Stage>(1, "stage");
-				stage->setStageNum(nowStage);
-				CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
-				PointGenerator->Load(L"Assets/level/Corse_Level_2.tkl");
-				//player1->SetPosition(nextPlayer1Position);
-				//player2->SetPosition(nextPlayer2Position);
-				DeleteGO(this);
-			}
-		}
+		stage = NewGO<Stage>(1, "stage");
+		stage->setStageNum(titleCamera->GetChoiceStageNum());
+		CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
+		PointGenerator->Load(L"Assets/level/Corse_Level_2.tkl");
+		DeleteGO(this);
+	}*/
+	
+	for (int i = 0; i < g_StageMAX; i++) {
+		m_stage[i].UpdateWorldMatrix(m_pos[i], CQuaternion::Identity(), CVector3::One());
+		m_stage[i].Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
 	}
-	vector<float> stageLength;
-
 }
 
-void StageSelect::stageSelect()
+void StageSelect::PostRender()
 {
-
-	//const float moveSpeed = 100;	//動く速度
-	//const CVector3 scaleChangeSpeed = {0.5, 0.5, 0.5};   //拡縮速度
-	//count++;
-
+	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
+	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
 }
