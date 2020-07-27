@@ -1,10 +1,9 @@
 #pragma once
 #include "character/CharacterController.h"
 #include "graphics/2D/SpriteRender.h"
-
 #include "character/BoxCharactorController.h"
-
 #include "Magnet/Magnet.h"
+class ShadowMap;
 
 class Player : public IGameObject
 {

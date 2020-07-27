@@ -64,6 +64,8 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include "GameObject/IGameObject.h"
 #include "SkinModelRender.h"
 
+#include "Shadow/ShadowMap.h"
+
 //#include "photon/LoadBalancing-cpp/inc/friendinfo.h"
 //#include "Photon-cpp/Inc/PhotonPeer.h"
 #include "photon/Common-cpp/inc/Common.h"
