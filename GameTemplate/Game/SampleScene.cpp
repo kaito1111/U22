@@ -32,5 +32,5 @@ bool SampleScene::Start()
 
 void SampleScene::Update()
 {
-
+	
 }

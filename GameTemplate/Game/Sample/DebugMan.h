@@ -1,6 +1,6 @@
 /// <summary>
 /// Playerのprefab
-/// 1.基本的な移動処理
+/// 1.基本的な移動処理(移動、向き)
 /// 2.キャラコンによる当たり判定
 /// 3.カスケードシャドウマップによるシャドウ生成
 /// </summary>
@@ -14,29 +14,28 @@ namespace myEngine {
 	class DebugMan : public IGameObject
 	{
 	public:
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
+		//コンストラクタ
 		DebugMan();
-		/// <summary>
-		/// デストラクタ
-		/// </summary>
+		//デストラクタ
 		~DebugMan();
+		//スタート
+		bool Start();
 		/// <summary>
-		/// スタート
+		/// アニメーションの初期化
 		/// </summary>
-		bool Start() { return true; };
-		/// <summary>
-		/// 更新
-		/// </summary>
+		void AnimInit();
+		//更新
 		void Update();
 		/// <summary>
-		/// Drawより早い描画
+		/// 移動処理
+		/// </summary>
+		void Move();
+		/// <summary>
+		/// PreRender
+		/// <para>シャドウマップ描画</para>
 		/// </summary>
 		void PreRender();
-		/// <summary>
-		/// 描画
-		/// </summary>
+		//描画
 		void Draw();
 	public:
 		/// <summary>
@@ -54,6 +53,16 @@ namespace myEngine {
 		SkinModel m_skinModel;							//デバッグマンのスキンモデル
 		ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 		CharacterController m_charaCon;					//キャラコン
-		CVector3 m_moveSpeed = CVector3::Zero();		//移動速度
+		const float m_moveSpeed = -2.5f;				//基礎移動速度
+		//アニメーション系 マジックナンバーダメ絶対
+		enum EnAnimationClip {
+			enAnimClip_idle,	//ひまやなぁアニメーション
+			enAnimClip_walk,	//歩くのだるいわぁアニメーション
+			enAnimClip_run,		//ｳｵｵｵｵｵｵｵｵアニメーション
+			enAnimClip_Num		//アニメーションの数
+		};
+		Animation m_animation;							//アニメーション
+		AnimationClip m_animClip[enAnimClip_Num];		//アニメーションクリップ
+
 	};
 }

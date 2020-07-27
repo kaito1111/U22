@@ -56,17 +56,19 @@ void Title::Update()
 		}
 	}
 
+	//EventTest
+	if (g_Pad->IsTrigger(enButtonB)) {
+		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100, 200);
+	}
+
+	//g_Pad
+
 }
 
 void Title::NetworkUpdate()
 {
 	//Network Test
 	//NetworkLogic::GetInstance().Update();
-
-	//EventTest
-	if (g_Pad->IsTrigger(enButtonB)) {
-		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100, 200);
-	}
 
 	//NetworkLogic::GetInstance().GetLBL()->RaiseInputPad(g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->IsTrigger());
 }

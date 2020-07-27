@@ -34,9 +34,9 @@ void ShadowMap::Init()
 	int wh[][2] = {
 		//そのままの範囲
 		{shadowMapWidth, shadowMapHeight},
-		//縦を左シフト1なので縦の値が半分に
+		//縦を右シフト1なので縦の値が半分に
 		{shadowMapWidth, shadowMapHeight >> 2},
-		//横を左シフト1、縦が左シフト1なので両方半分に
+		//横を右シフト1、縦が右シフト1なので両方半分に
 		{shadowMapWidth >> 2, shadowMapHeight >> 2}
 	};
 
