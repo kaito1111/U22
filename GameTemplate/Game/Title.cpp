@@ -2,6 +2,7 @@
 #include "Title.h"
 #include "Game.h"
 #include "Fade.h"
+#include "SampleScene.h"
 #include "Network/NetworkLogic.h"
 #include "Network/LoadBalancingListener.h"
 
@@ -38,18 +39,23 @@ void Title::Update()
 
 	g_camera2D.Update2D();
 	g_camera3D.Update();
-	if (g_Pad->IsPress(enButtonA) &&
-		m_fade == nullptr) {
-		NewGO<Game>(0, "game");
-		DeleteGO(this);
-		//m_fade = NewGO<Fade>(0, "fade");
+	if (g_Pad->IsPress(enButtonA)&&
+		!DeleteTitle) {
+		m_fade = NewGO<Fade>(0, "fade");
+		DeleteTitle = true;
 	}
-	if (m_fade != nullptr) {
+	//サンプルステージ
+	if (GetAsyncKeyState('Y')) {
+		NewGO<SampleScene>(0, "ground");
+		DeleteGO(this);
+	}
+	if (DeleteTitle) {
 		if (m_fade->GetLengh() < 210.0f) {
 			NewGO<Game>(0, "game");
 			DeleteGO(this);
 		}
 	}
+
 }
 
 void Title::NetworkUpdate()

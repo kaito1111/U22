@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DebugMan.h"
+#include "SampleScene.h"
 #include "Stage.h"
 
 namespace myEngine {
@@ -8,17 +9,14 @@ namespace myEngine {
 	{
 		//ゴールの位置
 		//m_pos = { -358.0f,925.0f,0.0f };
-		m_pos = CVector3::Zero();
+		m_pos = { 0.0f, 21.0f, 0.0f };
 		m_skinModel.Init(L"Assets/modelData/unityChan.cmo");
+		m_charaCon.Init(20.0f, 25.0f, m_pos);
 	
 		//シャドウ関連の初期化処理
 		{
 			//グラフィックスエンジンからシャドウマップを取得
 			m_shadowMap = g_graphicsEngine->GetShadowMap();
-			//影を落とすカメラの座標
-			//m_lightCameraPosition = { 0.0f, 4000.0f, 0.0f };
-			//影を落とす注視点の座標
-			m_lightCameraTarget = CVector3::Zero();;/*CVector3::Zero();*/
 		}
 	}
 
@@ -30,11 +28,28 @@ namespace myEngine {
 	void DebugMan::Update()
 	{
 		if (GetAsyncKeyState('A')) {
-			m_pos.x += 5;
+			m_moveSpeed.x = 5.0f;
 		}
 		else if(GetAsyncKeyState('D')){
-			m_pos.x -= 5;
+			m_moveSpeed.x = -5.0f;
 		}
+		else {
+			m_moveSpeed.x = 0;
+		}
+		if (GetAsyncKeyState('S')) {
+			m_moveSpeed.z = 5.0f;
+		}
+		else if (GetAsyncKeyState('W')) {
+			m_moveSpeed.z = -5.0f;
+		}
+		else {
+			m_moveSpeed.z = 0;
+		}
+
+		m_moveSpeed.y = GRAVITY;
+
+		//移動量計算
+		m_pos = m_charaCon.Execute(1.0f, m_moveSpeed);
 
 		//ワールド行列更新
 		m_skinModel.UpdateWorldMatrix(m_pos, m_rot, m_scale);
@@ -65,9 +80,7 @@ namespace myEngine {
 			m_skinModel.Draw(
 				g_camera3D.GetViewMatrix(),
 				g_camera3D.GetProjectionMatrix(),
-				0,
-				g_graphicsEngine->GetShadowMap()->GetLightViewMatirx(),
-				g_graphicsEngine->GetShadowMap()->GetLightProjMatirx()
+				0
 			);
 		}
 	}

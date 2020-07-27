@@ -25,7 +25,6 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
-    <ClCompile Include="Debug\DebugMan.cpp" />
     <ClCompile Include="light\DirectionLight.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -46,6 +45,7 @@
     <ClCompile Include="graphics\RenderTarget.cpp" />
     <ClCompile Include="light\LightManager.cpp" />
     <ClCompile Include="stageObject\MoveFloor2.cpp" />
+    <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="PostEffect\PostEffect.cpp" />
     <ClCompile Include="stageObject\RorlingRock.cpp" />
     <ClCompile Include="Shadow\ShadowMap.cpp" />
@@ -114,8 +114,9 @@
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
-    <ClCompile Include="physics\BoxCollider.cpp" />
-    <ClCompile Include="character\BoxCharactorController.cpp" />
+    <ClCompile Include="Sample\DebugMan.cpp" />
+    <ClCompile Include="SampleScene.cpp" />
+    <ClCompile Include="SampleGround.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -127,6 +128,7 @@
     <MeshContentTask Include="Assets\modelData\Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
+    <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
@@ -150,16 +152,16 @@
     <MeshContentTask Include="Assets\modelData\titleStage1.fbx" />
     <MeshContentTask Include="Assets\modelData\titleStage3.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
+    <MeshContentTask Include="Assets\modelData\testGround.fbx" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
-    <MeshContentTask Include="Assets\modelData\MagnetObject.fbx" />
+    <MeshContentTask Include="Assets\modelData\Doragon.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
-    <ClInclude Include="Debug\DebugMan.h" />
     <ClInclude Include="light\DirectionLight.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Fade.h" />
@@ -213,6 +215,7 @@
     <ClInclude Include="myEngine.h" />
     <ClInclude Include="myListener.h" />
     <ClInclude Include="NPole.h" />
+    <ClInclude Include="PhysicsGhostObject.h" />
     <ClInclude Include="physics\ICollider.h" />
     <ClInclude Include="physics\MeshCollider.h" />
     <ClInclude Include="physics\Physics.h" />
@@ -252,8 +255,10 @@
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
-    <ClInclude Include="physics\BoxCollider.h" />
-    <ClInclude Include="character\BoxCharactorController.h" />
+    <ClInclude Include="Sample\DebugMan.h" />
+    <ClInclude Include="SampleScene.h" />
+    <ClInclude Include="SampleGround.h" />
+    <ClInclude Include="Noncopyable.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

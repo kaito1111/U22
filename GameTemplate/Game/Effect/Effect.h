@@ -1,6 +1,9 @@
+/// <summary>
+/// エフェクト
+/// </summary>
+
 #pragma once
 #include "GameObject/IGameObject.h"
-
 
 namespace myEngine {
 	class Effect : public IGameObject

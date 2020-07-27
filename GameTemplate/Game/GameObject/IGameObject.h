@@ -1,4 +1,5 @@
 #pragma once
+#include "Noncopyable.h"
 #include "graphics/RenderContext.h"
 
 /// <summary>
@@ -18,7 +19,7 @@ namespace myEngine {
 	class GameObjectManager;
 	//–¼‘O•ÏX‚µ‚µ‚Ä‚é‚¾‚¯
 	typedef unsigned char	GameObjPrio;
-	class IGameObject
+	class IGameObject : Noncopyable
 	{
 	public:
 		/// <summary>

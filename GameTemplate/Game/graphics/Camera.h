@@ -121,6 +121,7 @@ public:
 	}
 private:
 	CMatrix	m_viewMatrix = CMatrix::Identity();		//ビュー行列。
+	CMatrix m_viewMatrixInv = CMatrix::Identity();	//ビュー逆行列
 	CMatrix m_projMatrix = CMatrix::Identity();		//プロジェクション行列。
 	CVector3 m_target = CVector3::Zero();			//注視点。
 	CVector3 m_position = CVector3::Zero();			//視点。
