@@ -20,11 +20,11 @@ bool Gimmick_Button::Start()
 		m_Player[p] = FindGO<Player>(PlayerNo);
 	}
 	m_Skin = NewGO<SkinModelRender>(0);
-	m_Skin->Init(L"Gimmick_Button.cmo", nullptr);
+	m_Skin->Init(L"Assets/modelData/Gimmick_Button.cmo", nullptr);
 	m_Skin->SetPosition(m_Position);
 	m_Skin->SetActive(true);
 	m_PushSkin = NewGO<SkinModelRender>(0);
-	m_PushSkin->Init(L"Press.cmo", nullptr);
+	m_PushSkin->Init(L"Assets/modelData/Press.cmo", nullptr);
 	m_PushSkin->SetPosition(m_Position);
 	m_PushSkin->SetActive(false);
 	m_physicsOcject.CreateMeshObject(m_PushSkin->GetSkinModel(), m_Position, CQuaternion::Identity());

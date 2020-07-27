@@ -34,7 +34,7 @@ bool moveFloor::Start()
 	startPos = m_pos;
 	//up = m_pos.y + 100;
 	//down = m_pos.y - 100;
-	m_BoxCharaCon.Init(100.0f, 20.0f, 1.0f, m_pos);//静的物理オブジェクト
+	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
                	return true;
@@ -46,6 +46,7 @@ void moveFloor::Update()
 	//メッシュの云々。要するに当たり判定
 	//Move();
 	move2();
+	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
 }
@@ -129,6 +130,5 @@ void moveFloor::move2()
 			udlimit = false;
 		}
 		m_pos.y = y;
-		CVector3 MoveSpeed = { 0.0f,y,0.0f };
-		m_BoxCharaCon.Execute(0.1f, MoveSpeed);
+
 }

@@ -30,17 +30,16 @@ Player::~Player()
 
 void Player::ReSpown()
 {
-	movespeed.y = 0.0f;
-	m_position = m_CheckPoint;
-	GameCamera* camera = FindGO<GameCamera>("camera");
-	camera->SetDec(0.0f);
-	m_IsSi = false;
-	m_characon.RemoveRigidBoby();
-	m_characon.Init(40.0f, 40.0f,m_position);
-	LearnMO(m_Magnet);
-	HaveMagnet = true;
-	m_Magnet->SetPosition(&m_position);
-	m_Scale.z = 1.0f;
+		m_position = m_CheckPoint;
+		GameCamera* camera = FindGO<GameCamera>("camera");
+		camera->SetDec(0.0f);
+		m_IsSi = false;
+		m_characon.Init(40.0f, 20.0f, m_position);
+		LearnMO(m_Magnet);
+		HaveMagnet = true;
+		m_Magnet->SetPosition(&m_position);
+		m_Scale.z = 1.0f;
+	
 }
 
 void Player::SetCheckPoint(CVector3 spownPoint)
@@ -62,12 +61,12 @@ bool Player::Start()
 	m_ThisNumSprite->SetRotation(Rot);
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
-	LearnMO(m_Magnet);
+	LearnMO(m_Magnet); 
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
 	m_Magnet->SetPad(&g_Pad[m_PlayerNum]);
 
-	m_characon.Init(40.0f, 40.0f, m_position);
+	m_characon.Init(40.0f, 20.0f, m_position);
 	m_AnimeClip[enAniCli::Run].Load(L"Assets/animData/PlayerRun.tka");
 	m_AnimeClip[enAniCli::Run].SetLoopFlag(true);
 	m_AnimeClip[enAniCli::Wait].Load(L"Assets/animData/wait.tka");
@@ -194,10 +193,6 @@ void Player::SpawnPole()
 
 void Player::Move()
 {
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonLB3) ||
-		GetAsyncKeyState('G')) {
-		ReSpown();
-	}
 	//ジャンプ判定
 	movespeed.x = 0.0f;
 	movespeed.z = 0.0f;
@@ -205,12 +200,12 @@ void Player::Move()
 	movespeed.x = g_Pad[m_PlayerNum].GetLStickXF() * -10.0f;
 	const float junpPower = 15.0f;
 	float Volume;
-	//if (m_characon.IsJump() &&
-	//	g_Pad[m_PlayerNum].IsPress(enButtonA) &&
-	//	JumpTimer < 1.0f) {
-	//	movespeed.y = junpPower;
-	//	JumpTimer += 0.5f;
-	//}
+	if (m_characon.IsJump() &&
+		g_Pad[m_PlayerNum].IsPress(enButtonA) &&
+		JumpTimer < 1.0f) {
+		movespeed.y = junpPower;
+		JumpTimer += 0.5f;
+	}
 	if (m_characon.IsOnGround())
 	{
 		Volume = fabsf(g_Pad[m_PlayerNum].GetLStickXF());
@@ -236,22 +231,22 @@ void Player::Move()
 	if (fabsf(movespeed.x) > 0.0f
 		&&m_characon.IsOnGround()
 		) {
-		m_Animetion.Play(enAniCli::Run, 0.2f);
+		m_Animetion.Play(enAniCli::Run, 0.3f);
 	}
 	else if (m_characon.IsOnGround()) {
-		m_Animetion.Play(enAniCli::Wait, 0.0f);
+		m_Animetion.Play(enAniCli::Wait, 0.3f);
 	}
 	if (movespeed.y > 0.0f) {
-		m_Animetion.Play(enAniCli::Junp, 0.2f);
+		m_Animetion.Play(enAniCli::Junp, 0.3f);
 	}
 	//磁石の移動
 	movespeed += m_Magnet->MagnetMove();
-
 	if (m_characon.IsOnGround() && movespeed.y < 0.0f) {
 		movespeed.y = 0;
 	}
-	m_position = m_characon.Execute(1.0f, movespeed);
 
+
+	m_position = m_characon.Execute(1.0f, movespeed);
 	if (g_Pad[m_PlayerNum].GetLStickXF() > 0.0f)
 	{
 		dir = Dir::L;
@@ -290,12 +285,12 @@ void Player::MyMagnet()
 
 void Player::SIBOU()				//OK
 {
+	m_characon.RemoveRigidBoby();
 	if (HaveMagnet) {
 		DeleteMO(m_Magnet);
 		HaveMagnet = false;
 	}
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)||
-		GetAsyncKeyState('G')) {
+	if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)) {
 		ReSpown();
 	}
 }

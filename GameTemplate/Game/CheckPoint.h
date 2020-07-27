@@ -13,7 +13,9 @@ public:
 	void SetPoint(CheckPoint* point) {
 		m_point = point;
 	}
-	void SetCurrent(bool current);
+	void SetCurrent(bool current) {
+		m_IsCurrent = current;
+	}
 private:
 	CVector3 m_CheckPoint = CVector3::Zero();
 	bool Start();

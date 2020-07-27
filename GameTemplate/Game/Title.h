@@ -1,6 +1,5 @@
 #pragma once
 class Fade;
-class BoxCollider;
 class Title : public IGameObject
 {
 public:

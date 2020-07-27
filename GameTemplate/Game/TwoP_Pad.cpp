@@ -25,6 +25,9 @@ TwoP_Pad::TwoP_Pad() {
 }
 TwoP_Pad::~TwoP_Pad()
 {
+	//for (int i = 0; i < g_PlayerNum;i++) {
+	//	DeleteGO(player[i]);
+	//}
 	DeleteGO(m_ManualSprite);
 }
 
@@ -33,6 +36,14 @@ void TwoP_Pad::PostRender()
 	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
 	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
 }
+
+//bool TwoP_Pad::Start()
+//{
+//
+//		return true;
+//	
+//	return false;
+//}
 
 void TwoP_Pad::Update()
 {

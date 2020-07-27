@@ -1,9 +1,5 @@
 #pragma once
 #include "Player.h"
-#include "../GameCamera.h"
-#include "../Game.h"
-#include "../Fade.h"
-
 class Goal : public IGameObject
 {
 public:
@@ -17,9 +13,6 @@ public:
 	void SetPosition(const CVector3& pos) {
 		m_Position = pos;
 	}
-	CVector3 GetPos() {
-		return m_Position;
-	}
 	bool IsClear() {
 		return isClear;
 	}
@@ -31,7 +24,4 @@ private:
 	CQuaternion m_rot = CQuaternion::Identity();
 	SpriteRender* m_ClearSprite = nullptr;
 	SoundSource m_Se;
-	Fade* m_fade = nullptr;
-	Game* m_game = nullptr;
-	GameCamera* m_camera = nullptr;
 };

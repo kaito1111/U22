@@ -52,7 +52,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(ProjectDir);$(ProjectDir)/bulletPhysics/src;$(ProjectDir)/photon/;$(ProjectDir)/EffekseerRuntime130/src/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)/DirectXTK\Bin\Desktop_2015_Win10\x64\Release;$(SolutionDir)/x64/Release;$(ProjectDir)photon/Photon-cpp/lib;$(ProjectDir)photon/Common-cpp/lib;$(ProjectDir)photon/LoadBalancing-cpp/lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)/DirectXTK\Bin\Desktop_2015_Win10\x64\Release;$(SolutionDir)/x64/Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -90,7 +90,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>DirectXTK.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies);xinput.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;dxguid.lib;Effekseer.Release.lib;EffekseerRendererDX11.Release.lib;Photon-cpp_vc15_release_windows_mt_x64.lib;Common-cpp_vc15_release_windows_mt_x64.lib;LoadBalancing-cpp_vc15_release_windows_mt_x64.lib;XAudio2.lib;Winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>DirectXTK.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies);xinput.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;dxguid.lib</AdditionalDependencies>
     </Link>
     <ImageContentTask>
       <ContentOutput>$(ProjectDir)\Resource\sprite\%(Filename).dds</ContentOutput>
@@ -101,13 +101,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
-    <ClCompile Include="character\BoxCharactorController.cpp" />
-    <ClCompile Include="physics\BoxCollider.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
     <ClCompile Include="SampleGround.cpp" />
     <ClCompile Include="Sample\DebugMan.cpp" />
+    <ClCompile Include="Debug\DebugMan.cpp" />
+    <ClCompile Include="GemeLoop.cpp" />
     <ClCompile Include="light\DirectionLight.cpp" />
     <ClCompile Include="Effect\Effect.cpp" />
     <ClCompile Include="Fade.cpp" />
@@ -131,6 +131,7 @@
     <ClCompile Include="graphics\RenderTarget.cpp" />
     <ClCompile Include="light\LightManager.cpp" />
     <ClCompile Include="stageObject\MoveFloor2.cpp" />
+    <ClCompile Include="PhysicsGhostObject.cpp" />
     <ClCompile Include="PostEffect\PostEffect.cpp" />
     <ClCompile Include="stageObject\RorlingRock.cpp" />
     <ClCompile Include="Shadow\ShadowMap.cpp" />
@@ -207,14 +208,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
-    <ClInclude Include="character\BoxCharactorController.h" />
-    <ClInclude Include="physics\BoxCollider.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
     <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="SampleGround.h" />
     <ClInclude Include="Sample\DebugMan.h" />
+    <ClInclude Include="Debug\DebugMan.h" />
+    <ClInclude Include="GemeLoop.h" />
     <ClInclude Include="light\DirectionLight.h" />
     <ClInclude Include="Effect\Effect.h" />
     <ClInclude Include="Fade.h" />
@@ -271,6 +272,7 @@
     <ClInclude Include="myEngine.h" />
     <ClInclude Include="myListener.h" />
     <ClInclude Include="NPole.h" />
+    <ClInclude Include="PhysicsGhostObject.h" />
     <ClInclude Include="physics\ICollider.h" />
     <ClInclude Include="physics\MeshCollider.h" />
     <ClInclude Include="physics\Physics.h" />
@@ -324,8 +326,8 @@
     <MeshContentTask Include="Assets\modelData\Gimmick_Button.FBX" />
     <MeshContentTask Include="Assets\modelData\Goal.fbx" />
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
+    <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
-    <MeshContentTask Include="Assets\modelData\MagnetObject.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />

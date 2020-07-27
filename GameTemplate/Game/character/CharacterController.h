@@ -81,6 +81,10 @@ public:
 	* @brief	剛体を物理エンジンから削除。。
 	*/
 	void RemoveRigidBoby();
+
+	void MagnetLearn() {
+		MagnetTask = true;
+	}
 private:
 	CVector3 m_position = CVector3::Zero();	//座標。
 	bool m_isJump = false;				//ジャンプ中？
@@ -89,4 +93,6 @@ private:
 	float m_radius = 0.0f;
 	float m_height = 0.0f;		
 	RigidBody m_rigidBody;					//剛体。
+	
+	bool MagnetTask = false;
 };

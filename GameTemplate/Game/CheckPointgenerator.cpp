@@ -24,14 +24,14 @@ void CheckPointgenerator::Load(wchar_t* filePass)
 			if (wcscmp(Object.name, CheckName) == 0) {
 				m_point[PointNum -1] = NewGO<CheckPoint>(0, "point");
 				m_point[PointNum - 1]->SetPosition(Object.position);
+				return false;
 			}
 			return true;
 		});
 		m_point[0]->SetCurrent(true);
-		Player* m_p1 = FindGO<Player>("player1");
-		m_p1->ReSpown();
-		Player* m_p2 = FindGO<Player>("player2");
-		m_p2->ReSpown();
+		for (int i = 1; i < PointNum; i++) {
+			m_point[i]->SetPoint(m_point[i - 1]);
+		}
 	}
 }
 
