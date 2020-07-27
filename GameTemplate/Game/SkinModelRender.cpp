@@ -6,7 +6,9 @@ void myEngine::SkinModelRender::Init(
 	AnimationClip * animationClips, 
 	int numAnimationClips)
 {
-	m_skinModel.Init(filePath);
+	wchar_t StandardfilePach[256] = L"Assets/modeldata/";
+	wcscat(StandardfilePach, filePath);
+	m_skinModel.Init(StandardfilePach);
 	InitAnimation(animationClips, numAnimationClips);
 }
 
@@ -17,7 +19,7 @@ void SkinModelRender::InitAnimation(AnimationClip* animationClips, int numAnimat
 	if (m_animationClips != nullptr) {
 		m_animation.Init(m_skinModel, m_animationClips, m_numAnimationClips);
 	}
-}
+} 
 
 bool myEngine::SkinModelRender::Start()
 {

@@ -1,6 +1,6 @@
 #pragma once
 #include"physics/RigidBody.h"
-#include"physics/PhysicsStaticObject.h"
+#include"character/BoxCharactorController.h"
 #include"Gimmick_Button.h"
 class Player;
 class moveFloor : public IGameObject
@@ -32,7 +32,7 @@ private:
 	float moveSpeed = 0;                            //速度。上がったり下がったりする
 	bool fastMove = false;                          //最初に動くときのフラグ
 	bool sLimit = false;		    				//動いた量
-	PhysicsStaticObject m_phyStaticObject;          //静的物理オブジェクト
+	BoxCharactorController m_BoxCharaCon;          //静的物理オブジェクト
 	SoundSource m_Se;
 	CVector3 startPos = CVector3::Zero();
 

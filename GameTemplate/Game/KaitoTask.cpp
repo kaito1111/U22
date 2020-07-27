@@ -37,7 +37,7 @@ void KaitoTask::PreRender()
 
 KaitoTask::~KaitoTask()
 {
-	DeleteGO(m_GameCamera);
+	//DeleteGO(m_GameCamera);
 	DeleteGO(m_Player[0]);
 	DeleteGO(m_Player[1]);
 }

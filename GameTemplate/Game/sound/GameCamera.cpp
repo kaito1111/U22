@@ -31,7 +31,6 @@ void GameCamera::Update()
 	//PlayerNumが0だからこれ入ってない
 	for (int i = 0; i < m_PlayerNum; i++) {
 		Target += m_Player[i]->GetPosition();
-		Target.y += 100.0f;
 	}
 	//上でカメラの位置が調整されてないので無理やり調整
 	//上直したら消してね
@@ -39,6 +38,7 @@ void GameCamera::Update()
 
 	//プレイヤーが2人以上いるから真ん中をとる
 	Target /= m_PlayerNum;
+		Target.y += 100.0f;
 
 	//下の限界を更新
 	/*if (Decline < Target.y) {
@@ -48,11 +48,6 @@ void GameCamera::Update()
 		Target.y = Decline;
 	}*/
 
-	//プレイヤーを殺す
-	if (m_Player[0]->GetPosition().y < Target.y - 500.0f) {
-		m_Player[0]->SIBOU();
-	}
-
 	if (Target.x > 300.0f) {
 		Target.x = 300.0f;
 	}
@@ -61,6 +56,13 @@ void GameCamera::Update()
 	}
 	if (Target.y < 190.0f) {
 		Target.y = 190.0f;
+	}
+	//プレイヤーを殺す
+	if (m_Player[0]->GetPosition().y < Target.y - 500.0f) {
+		m_Player[0]->SIBOU();
+	}
+	if (m_Player[1]->GetPosition().y < Target.y - 500.0f) {
+		m_Player[1]->SIBOU();
 	}
 	CVector3 pos = Target;
 	pos.z += 500.0f;

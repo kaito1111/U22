@@ -23,9 +23,10 @@ stageObjectJenerator::~stageObjectJenerator()
 
 bool stageObjectJenerator::Start()
 {
+	CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
 	//enumバグったからとりあえずintで引数渡してセレクトさせます。0番目から始まるよ
 	if (StageNum == 0) {
-		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
+		level.Init(L"Assets/level/debug_test.tkl", [&](const auto& objData)
 		{
 			//ギミック起動ボタン
 			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
@@ -64,16 +65,11 @@ bool stageObjectJenerator::Start()
 			{
 				return true;
 			}
-			CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
 			PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
 
 			return false;
 		});
 	}
-
-
-
-
 	//case stage2:
 	if (StageNum == 1) {
 		//ドッスン
@@ -89,9 +85,19 @@ bool stageObjectJenerator::Start()
 				Goal* goalPtr = NewGO<Goal>(0, "Goal");
 				goalPtr->SetPosition(objData.position);
 			}
-			CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
 			PointGenerator->Load(L"Assets/level/stageDossun.tkl");
 		});
+	}
+	if (StageNum == 2) {
+			PointGenerator->Load(L"Assets/level/Corse_Level_2.tkl");
+		level.Init(L"Assets/level/Corse_Level_2.tkl", [&](const auto& objData) {
+			if (wcscmp(objData.name, L"MagnetObject") == 0) {
+				Iwa* iwa = NewGO<Iwa>(0, "iwa");
+				iwa->SetPosition(objData.position);
+			}
+			return true;
+		});
+			return true;
 	}
 	return true;
 }
@@ -100,16 +106,17 @@ bool stageObjectJenerator::Start()
 
 void stageObjectJenerator::Update()
 {
-	if (moveButtonPtr->IsOn()) {
-		if (moveFloor2Ptr->GetPosition().x > Floor2PosX) {
-			moveFloor2Ptr->SetUpdate(true);
-			moveFloorPtr->SetUpdate(true);
-		}
-		else {
-			moveFloor2Ptr->SetUpdate(false);
+	if (moveButtonPtr != nullptr) {
+		if (moveButtonPtr->IsOn()) {
+			if (moveFloor2Ptr->GetPosition().x > Floor2PosX) {
+				moveFloor2Ptr->SetUpdate(true);
+				moveFloorPtr->SetUpdate(true);
+			}
+			else {
+				moveFloor2Ptr->SetUpdate(false);
+			}
 		}
 	}
-	
 }
 
 void stageObjectJenerator::Draw()

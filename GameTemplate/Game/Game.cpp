@@ -9,6 +9,7 @@
 #include "level/Level.h"
 #include "StageSelect/StageSelect.h"
 #include "CheckPointgenerator.h"
+#include "stageObject/Iwa.h"
 StageSelect;
 Game::Game()
 {
@@ -48,9 +49,11 @@ bool Game::Start()
 
 	//2”Ô–Ú
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
-	//stage = NewGO<Stage>(0, "stage");
+	stage = NewGO<Stage>(0, "stage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);		
+	NewGO<Iwa>(0, "iwa");
+	return true;
 }
 
 void Game::Update()

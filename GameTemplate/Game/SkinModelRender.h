@@ -115,7 +115,7 @@ namespace myEngine {
 		Animation m_animation;
 		SkinModel m_skinModel;
 		//CSkinModelData				m_skinModelData;												実装できてない
-		const std::wstring m_filePath;
+		//const std::wstring m_filePath;
 		//bool						m_isFrustumCulling = false;			//!<フラスタムカリングを行う？	実装できてない
 		//CObjectFrustumCulling		m_frustumCulling;					//!<フラスタムカリング。		実装できてない
 		bool m_isUpdateAnimation = true;

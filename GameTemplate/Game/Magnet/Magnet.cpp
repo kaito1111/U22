@@ -141,8 +141,8 @@ void MyMagnet::Magnet::Update()
 		if (SEffect->IsPlay() == false
 			&& m_Se.IsPlaying() == false) {
 			NEffect = NewGO<Effect>(1);
-			NEffect->Play(L"Assets/effect/SMode.efk");
-			NEffect->SetPosition(*m_Position);
+			NEffect->Play(L"Assets/effect/NMode.efk");
+			NEffect->SetPosition(*m_Position); 
 			NEffect->SetScale(CVector3::One() * 2.75f);
 			m_Se.Play();
 		}
@@ -159,7 +159,7 @@ void MyMagnet::Magnet::Update()
 		if (SEffect->IsPlay() == false
 			&& m_Se.IsPlaying() == false) {
 			SEffect = NewGO<Effect>(1);
-			SEffect->Play(L"Assets/effect/NMode.efk");
+			SEffect->Play(L"Assets/effect/SMode.efk");
 			SEffect->SetPosition(*m_Position);
 			SEffect->SetScale(CVector3::One() * 2.75f);
 			m_Se.Play();
