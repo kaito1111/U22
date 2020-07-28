@@ -48,7 +48,7 @@ bool Game::Start()
 
 	//2”Ô–Ú
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
-	//stage = NewGO<Stage>(0, "stage");
+	stage = NewGO<Stage>(0, "stage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);		
 }

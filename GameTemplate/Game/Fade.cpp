@@ -8,14 +8,15 @@ Fade::Fade()
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
 	);
-	m_LoadUp = NewGO<SpriteRender>(2);
+	int FadeRenderTurn = 6;
+	m_LoadUp = NewGO<SpriteRender>(FadeRenderTurn);
 	m_LoadUp->Init(L"Assets/sprite/LoadScreen(Up).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H);
-	m_LoadDown = NewGO<SpriteRender>(2);
+	m_LoadDown = NewGO<SpriteRender>(FadeRenderTurn);
 	m_LoadDown->Init(L"Assets/sprite/LoadScreen(Down).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H);
-	m_SSprite = NewGO<SpriteRender>(2);
+	m_SSprite = NewGO<SpriteRender>(FadeRenderTurn);
 	m_SSprite->Init(L"Assets/sprite/LoadS.dds", 200.0f, 200.0f);
 	m_SSprite->SetPosition(m_SPos);
-	m_NSprite = NewGO<SpriteRender>(2);
+	m_NSprite = NewGO<SpriteRender>(FadeRenderTurn);
 	m_NSprite->Init(L"Assets/sprite/LoadN.dds", 200.0f, 200.0f);
 	m_NSprite->SetPosition(m_NPos);
 	CVector3 LoadUpPos = m_NPos;

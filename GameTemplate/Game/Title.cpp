@@ -12,7 +12,7 @@ Title::Title()
 	printf("ルームに入場もしくは、作成を行っています。\n");
 	NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
 	printf("ルームに入場しました。\n");
-	m_Sprite = NewGO<SpriteRender>(0);
+	m_Sprite = NewGO<SpriteRender>(5);
 	m_Sprite->Init(L"Assets/sprite/Title.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 	m_copyMainRtToFrameBufferSprite.Init(
 		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
