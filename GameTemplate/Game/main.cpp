@@ -22,7 +22,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	//ネットワークの初期化関連処理 InitGameの中入れてもいいかも？
 	NetworkLogic::GetInstance().Start();
-
 	//カメラを初期化。
 	g_camera3D.SetPosition({ 00.0f, 100.0f, 500.0f });
 	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });

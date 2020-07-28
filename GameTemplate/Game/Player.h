@@ -1,8 +1,8 @@
 #pragma once
 #include "character/CharacterController.h"
 #include "graphics/2D/SpriteRender.h"
-
 #include "Magnet/Magnet.h"
+class PlayerPad;
 
 class Player : public IGameObject
 {
@@ -90,5 +90,7 @@ private:
 	void Move();
 	void MyMagnet();
 	SoundSource m_Asioto;
+
+	PlayerPad* m_Pad;
 };
 

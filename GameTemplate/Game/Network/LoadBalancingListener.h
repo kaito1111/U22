@@ -151,9 +151,19 @@ public:
 	int GetPlayerStickRYData() {
 		return padRY;
 	}
+	/// <summary>
+	/// ユーザーのネームを取得
+	/// </summary>
+	/// <returns></returns>
+	const JString& GetUser(int playerNo)
+	{
+		return m_UserData[playerNo].getUserID();
+	}
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;
-	Hashtable playerData;		//プレイヤー情報格納用
+	int m_Num = 0;
+	AuthenticationValues m_UserData[2];	//Userのデータ(番号)
+	Hashtable playerData;				//プレイヤー情報格納用
 	BaseView* mpView;
 	int m_maxPlayer = 2;
 	unsigned long lastUpdateTime;

@@ -80,7 +80,8 @@ void LoadBalancingListener::setLBC(ExitGames::LoadBalancing::Client* pLbc)
 
 void LoadBalancingListener::connect(const JString& userName)
 {
-	mpLbc->connect(AuthenticationValues().setUserID(JString() + GETTIMEMS()), userName);
+	//mpLbc->connect(AuthenticationValues().setUserID(JString() + GETTIMEMS()), userName);
+	mpLbc->connect(m_UserData[m_Num++].setUserID(JString() + GETTIMEMS()), userName);
 }
 
 void LoadBalancingListener::disconnect() {

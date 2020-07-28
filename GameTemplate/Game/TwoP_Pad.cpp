@@ -4,7 +4,10 @@
 #include "Network/NetworkLogic.h"
 
 
-TwoP_Pad::TwoP_Pad() {
+TwoP_Pad::TwoP_Pad() 
+{
+
+
 
 	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
 	{
