@@ -1,9 +1,8 @@
 #pragma once
 #include "character/CharacterController.h"
 #include "graphics/2D/SpriteRender.h"
-#include "character/BoxCharactorController.h"
 #include "Magnet/Magnet.h"
-//class ShadowMap;
+class PlayerPad;
 
 class Player : public IGameObject
 {
@@ -77,7 +76,7 @@ private:
 	MyMagnet::Magnet* m_Magnet = nullptr;
 	bool HaveMagnet = false;
 	CVector3 movespeed = CVector3::Zero();
-	//ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
+	ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 
 	enum enAniCli {
 		Wait,
@@ -91,5 +90,7 @@ private:
 	void Move();
 	void MyMagnet();
 	SoundSource m_Asioto;
+
+	PlayerPad* m_Pad;
 };
 

@@ -11,6 +11,11 @@ Title::Title()
 	//NetworkLogic::GetInstance().Start();
 	printf("ルームに入場もしくは、作成を行っています。\n");
 	NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
+	JString a[2];
+	for (int i = 0; i < 2; i++) {
+		a[i] = NetworkLogic::GetInstance().GetLBL()->GetUser(i);
+	}
+
 	printf("ルームに入場しました。\n");
 	m_Sprite = NewGO<SpriteRender>(5);
 	m_Sprite->Init(L"Assets/sprite/Title.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
@@ -56,17 +61,17 @@ void Title::Update()
 		}
 	}
 
+	//EventTest
+	if (g_Pad->IsTrigger(enButtonB)) {
+		//サンプル
+		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100, 200);
+	}
 }
 
 void Title::NetworkUpdate()
 {
 	//Network Test
 	//NetworkLogic::GetInstance().Update();
-
-	//EventTest
-	if (g_Pad->IsTrigger(enButtonB)) {
-		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100, 200);
-	}
 
 	//NetworkLogic::GetInstance().GetLBL()->RaiseInputPad(g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->IsTrigger());
 }

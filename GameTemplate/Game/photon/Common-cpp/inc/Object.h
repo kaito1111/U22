@@ -39,6 +39,12 @@ namespace ExitGames
 			const short* getSizes(void) const;
 			unsigned int getDimensions(void) const;
 			JString& toString(JString& retStr, bool withTypes=false) const;
+
+			//データを返す。
+			const nByte& GetByteData()
+			{
+				return mData.byteData;
+			}
 		protected:
 			Object(const void* data, nByte type, nByte customType, bool makeCopy);
 			Object(const void* data, nByte type, nByte customType, int size, bool makeCopy);
