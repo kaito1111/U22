@@ -5,6 +5,7 @@
 #include "NetworkLogic.h"
 #include "Console.h"
 #include "TestView.h"
+#include "common-cpp/inc/object.h"
 #include <fstream>
 #include <string>
 
@@ -79,7 +80,8 @@ void LoadBalancingListener::setLBC(ExitGames::LoadBalancing::Client* pLbc)
 
 void LoadBalancingListener::connect(const JString& userName)
 {
-	mpLbc->connect(AuthenticationValues().setUserID(JString() + GETTIMEMS()), userName);
+	//mpLbc->connect(AuthenticationValues().setUserID(JString() + GETTIMEMS()), userName);
+	mpLbc->connect(m_UserData[m_Num++].setUserID(JString() + GETTIMEMS()), userName);
 }
 
 void LoadBalancingListener::disconnect() {
@@ -157,82 +159,29 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 
 	switch (eventCode) {
 	case 0:
-		//nByte Key = 1;
-		//int blueTeamScore, orangeTeamScore;
-		//ExitGames::Common::Hashtable hashData;
-		//hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
+		nByte Key = 1;
+		int blueTeamScore, orangeTeamScore;
+		ExitGames::Common::Hashtable hashData;
+		hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
-		//if (eventContent.getValue(Key)) {
+		if (eventContent.getValue(Key)) {
 
-		//	hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
+			hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
-		//	if (hashData.getValue((nByte)1)) {
-		//		blueTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)1))).getDataCopy();
-		//	}
-		//	if (hashData.getValue((nByte)2)) {
-		//		orangeTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)2))).getDataCopy();
-		//	}
-		//	printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
-		//}
+			if (hashData.getValue((nByte)1)) {
+				blueTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)1))).getDataCopy();
+			}
+			if (hashData.getValue((nByte)2)) {
+				orangeTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)2))).getDataCopy();
+			}
+			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
+		}
 		break;
-	case 1:
+	//case 1:
 		/*
 		padデータ（ボタン、pad入力）を送信側から受け取る処理。
 		*/
-
-		//キーの初期化
-		nByte Key = 1;
-
-
-		Hashtable playerData;
-		//値の取得
-		playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
-		auto a = eventContent.getValue(Key);
-		//イベント
-		if (eventContent.getValue(Key)) 
-		{
-			playerData = (ValueObject<Hashtable>(eventContent.getValue(Key))).getDataCopy();
-			for (int i = 0; i < 15; i++) 
-			{
-				if (playerData.getValue((nByte)i))
-				{
-					Trigger[i] = ValueObject<nByte>(playerData.getValue((nByte)i)).getDataCopy();
-				}
-			}
-
-			for (int i = 16; i < 20; i++)
-			{
-				if (playerData.getValue((nByte)i))
-				{
-					if (playerData.getValue((nByte)i))
-					{
-						if (i == 16) 
-						{
-							padLX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
-							if (padLX != 0) {
-								printf("chu");
-							}
-						}
-						if (i == 17)
-						{
-							padLY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
-						}
-						if (i == 18) 
-						{
-							if (padRX != 0) {
-								printf("chu");
-							}
-							padRX = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
-						}
-						if (i == 19)
-						{
-							padRY = ValueObject<nByte>(playerData.getValue((nByte)i++)).getDataCopy();
-						}
-					}
-				}
-			}
-		}
-		break;
+		//break;
 	}
 }
 
@@ -426,7 +375,7 @@ void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	//登録
 	hash.put((nByte)2, (nByte)orange);
 
-	auto a = hash.getValue((nByte)1);
+	const Object* Data = hash.getValue((nByte)1);
 
 	auto b = hash.getValue((nByte)2);
 

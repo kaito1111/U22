@@ -64,10 +64,10 @@ static const int NUM_SHADOW_MAP = 3;
 /*
 	シャドウマップ用の定数バッファ
 */
-cbuffer ShadowCb : register(b2) {
+cbuffer ShadowCb : register(b3) {
 	float4x4 mLVP[NUM_SHADOW_MAP];		//ライトビュープロジェクション行列
 	//float4 texOffset[NUM_SHADOW_MAP];	//シャドウマップサイズ
-	float3 shadowAreaDepthInViewSapce;	//カメラ空間で影を落とすエリア
+	float4 shadowAreaDepthInViewSapce;	//カメラ空間で影を落とすエリア x = shadow0 y = shadow1 z= shadow2
 }
 
 /////////////////////////////////////////////////////////////
@@ -100,7 +100,7 @@ struct VSInputNmTxWeights
  * @brief	ピクセルシェーダーの入力。
  */
 struct PSInput{
-	float4 Position 	: SV_POSITION;
+	float4 Position 	: SV_Position;
 	float3 Normal		: NORMAL;
 	float3 Tangent		: TANGENT;
 	float2 TexCoord 	: TEXCOORD0;
@@ -142,24 +142,24 @@ float CalcShadowPercent(Texture2D<float4> tex, float2 uv, float depth)
 	return 0.0f;
 }
 
-float CalcShadow(float3 worldPos, float zInView)
+float CalcShadow(float3 wp, float zInView)
 {
 	float shadow = 0.0f;
 	//シャドウレシーバーだった
 	if (isShadowReciever == 1)
 	{
+		//shadow = 1.0f;
 		//影を落とす。
 		//使用するシャドウマップの番号を取得。
 		int cascadeIndex = GetCascadeIndex(zInView);
-
 		//ライト座標軸に変換
-		float4 posInLVP = mul(mLVP[cascadeIndex], float4(worldPos, 1.0f));
+		float4 posInLVP = mul(mLVP[cascadeIndex], float4(wp, 1.0f));
 		//ライト座標系での深度値を計算。
 		posInLVP.xyz /= posInLVP.w;
 
 		//深度値を取得
-		float depth = min(posInLVP.z, 1.0f);
-
+		float depth = posInLVP.z;
+		
 		//uv座標に変換.
 		float2 shadowMapUV = float2(0.5f, -0.5f) * posInLVP.xy + float2(0.5f, 0.5f);
 
@@ -206,13 +206,13 @@ PSInput VSMain( VSInputNmTxVcTangent In )
 	
 	//ワールド座標計算
 	float4 pos = mul(mWorld, In.Position);
-	
+	//ワールド座標系
 	psInput.worldPos = pos;
-
+	//カメラ座標系計算
 	pos = mul(mView, pos);
-
+	//カメラ座標系
 	psInput.posInview = pos;
-
+	//スクリーン座標系計算
 	pos = mul(mProj, pos);
 	
 	//ピクセルシェーダーにプロジェクション座標を渡す
@@ -332,7 +332,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 		}
 	}
 
-	////シャドウレシーバーだった場合は影の計算
+	//シャドウレシーバーだった場合は影の計算
 	//if (isShadowReciever == 1) {
 	//	
 	//	//ライトビュープロジェクション空間から見た時の
@@ -353,7 +353,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//		//LVP空間での深度値計算
 	//		float zInLVP = In.posInLVP.z / In.posInLVP.w;
 	//		//シャドウマップに書き込まれている深度値を取得
-	//		float zInShadowMap = shadowMap.Sample(g_sampler, shadowMapUV);
+	//		float zInShadowMap = g_shadowMap0.Sample(g_sampler, shadowMapUV);
 	//		//シャドウアクネ（影のちらつき）を防ぐ処理
 	//		if (zInLVP > zInShadowMap + 0.01f) {
 	//			//影が落ちているので光を弱くする
@@ -363,10 +363,9 @@ float4 PSMain( PSInput In ) : SV_Target0
 	//}
 
 	//calcShadowした後にreturn 1.0fが帰ってきたらシャドウが落ちる。
-	float f;
+	float f = 0.0f;
 	//シャドウを落とす計算。
-	f = CalcShadow(In.Pos, In.posInview.z);
-
+	f = CalcShadow(In.worldPos, In.posInview.z);
 	if (f == 1.0f)
 	{
 		//影が落ちているのでライトの明かりを弱める。
@@ -375,6 +374,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;
+	//finalColor.x = f;
 	return finalColor;
 }
 //--------------------------------------------------------------------------------------
@@ -386,7 +386,7 @@ float4 PSMain_Silhouette(PSInput In) : SV_Target0
 }
 
 /*
-	シャドウマップ生成用の頂点シェーダー
+	スキンなしシャドウマップ生成用の頂点シェーダー
 */
 PSInput_ShadowMap VSMain_ShadowMap(VSInputNmTxVcTangent In)
 {
@@ -397,12 +397,51 @@ PSInput_ShadowMap VSMain_ShadowMap(VSInputNmTxVcTangent In)
 	psInput.Position = pos;
 	return psInput;
 }
+
+/*
+	スキンありシャドウマップ生成用の頂点シェーダー
+*/
+PSInput_ShadowMap VSMain_ShadowMapSkin(VSInputNmTxWeights In)
+{
+	PSInput_ShadowMap psInput = (PSInput_ShadowMap)0;
+	///////////////////////////////////////////////////
+	//ここからスキニングを行っている箇所。
+	//スキン行列を計算。
+	///////////////////////////////////////////////////
+	float4x4 skinning = 0;
+	float4 pos = 0;
+	{
+
+		float w = 0.0f;
+		for (int i = 0; i < 3; i++)
+		{
+			//boneMatrixにボーン行列が設定されていて、
+			//In.indicesは頂点に埋め込まれた、関連しているボーンの番号。
+			//In.weightsは頂点に埋め込まれた、関連しているボーンのウェイト。
+			skinning += boneMatrix[In.Indices[i]] * In.Weights[i];
+			w += In.Weights[i];
+		}
+		//最後のボーンを計算する。
+		skinning += boneMatrix[In.Indices[3]] * (1.0f - w);
+		//頂点座標にスキン行列を乗算して、頂点をワールド空間に変換。
+		//mulは乗算命令。
+		pos = mul(skinning, In.Position);
+	}
+
+	//pos = mul(mWorld, In.Position);
+	pos = mul(mView, pos);
+	pos = mul(mProj, pos);
+	psInput.Position = pos;
+	return psInput;
+}
+
 /*
 	ピクセルシェーダーのエントリ関数
 */
 float4 PSMain_ShadowMap(PSInput_ShadowMap In) : SV_Target0
 {
 	//射影空間でのZ値を返す
-	return In.Position.z / In.Position.w;
+	float z = In.Position.z / In.Position.w;
+    return z;
 }
 

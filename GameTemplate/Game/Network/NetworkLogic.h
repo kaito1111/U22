@@ -73,6 +73,7 @@ public:
 	Client* GetLBC() {
 		return mpLbc;
 	}
+
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;	//クライアント
 	LoadBalancingListener* mpLbl = nullptr;		//lbリスナー

@@ -158,8 +158,9 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode, CMa
 	vsCb.mProj = projMatrix;
 	vsCb.mView = viewMatrix;
 	//ライトカメラの行列
-	//vsCb.mLightView = m_LViewMatrix;//g_graphicsEngine->GetShadowMap()->GetLightViewMatirx();
-	//vsCb.mLightProj = m_LProjMatrix;//g_graphicsEngine->GetShadowMap()->GetLightProjMatirx();
+	//vsCb.mLightView = g_graphicsEngine->GetShadowMap()->GetLightViewMatirx();
+	//vsCb.mLightProj = g_graphicsEngine->GetShadowMap()->GetLightProjMatirx();
+
 	
 	//シャドウレシーバーの判定
 	if (m_isShadowReciever == true) {

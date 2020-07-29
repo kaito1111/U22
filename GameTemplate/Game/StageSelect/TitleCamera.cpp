@@ -4,10 +4,12 @@
 #include "StageSelect.h"
 TitleCamera::TitleCamera()
 {
+	int a = 0;
 }
 
 TitleCamera::~TitleCamera()
 {
+	int a = 0;
 }
 
 bool TitleCamera::Start()

@@ -112,6 +112,7 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 		srvDesc.Texture2D.MostDetailedMip = 0;
 		//SRVを作成する。
 		dv->CreateShaderResourceView(m_renderTargetTex, &srvDesc, &m_renderTargetSRV);
+
 	}
 	//デプスステンシルテクスチャの作成
 	D3D11_TEXTURE2D_DESC depthTexDesc = texDesc;
@@ -144,7 +145,7 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 		m_viewport.Width = w;
 		m_viewport.Height = h;
 		m_viewport.MinDepth = 0.0f;
-		m_viewport.MaxDepth = 0.0f;
+		m_viewport.MaxDepth = 1.0f;
 	}
 }
 

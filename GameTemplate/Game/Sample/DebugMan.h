@@ -1,55 +1,68 @@
+/// <summary>
+/// Playerのprefab
+/// 1.基本的な移動処理(移動、向き)
+/// 2.キャラコンによる当たり判定
+/// 3.カスケードシャドウマップによるシャドウ生成
+/// </summary>
+
 #pragma once
 
-#include "Shadow/ShadowMap.h"
+class ShadowMap;
 #include "character/CharacterController.h"
 
 namespace myEngine {
-	/// <summary>
-	/// ！！デバッグマン！！
-	/// 能力ⅰ：シャドウマップの作成ができる。
-	/// 能力ⅱ：影を出せる。
-	/// </summary>
-	/// <remarks>
-	/// エンジンの機能追加の際など既存のPlayerとか使うのは、
-	/// 気が引けるので作成。
-	/// モデルも後々かえて、アニメーションも付けたい。
-	/// </remarks>
 	class DebugMan : public IGameObject
 	{
 	public:
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
+		//コンストラクタ
 		DebugMan();
-		/// <summary>
-		/// デストラクタ
-		/// </summary>
+		//デストラクタ
 		~DebugMan();
+		//スタート
+		bool Start();
 		/// <summary>
-		/// スタート
+		/// アニメーションの初期化
 		/// </summary>
-		bool Start() { return true; };
-		/// <summary>
-		/// 更新
-		/// </summary>
+		void AnimInit();
+		//更新
 		void Update();
 		/// <summary>
-		/// Drawより早い描画
+		/// 移動処理
+		/// </summary>
+		void Move();
+		/// <summary>
+		/// PreRender
+		/// <para>シャドウマップ描画</para>
 		/// </summary>
 		void PreRender();
-		/// <summary>
-		/// 描画
-		/// </summary>
+		//描画
 		void Draw();
+	public:
+		/// <summary>
+		/// SampleManの位置取得
+		/// </summary>
+		/// <returns></returns>
+		const CVector3& GetPosition()
+		{
+			return m_pos;
+		}
 	private:
 		CVector3 m_pos = CVector3::Zero();				//デバッグマンの位置
 		CVector3 m_scale = CVector3::One();				//デバッグマンの拡大率
 		CQuaternion m_rot = CQuaternion::Identity();	//デバッグマンの回転軸
-		CVector3 m_lightCameraPosition;					//ライトカメラの視点位置
-		CVector3 m_lightCameraTarget;					//ライトカメラの注視点位置
 		SkinModel m_skinModel;							//デバッグマンのスキンモデル
 		ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 		CharacterController m_charaCon;					//キャラコン
-		CVector3 m_moveSpeed = CVector3::Zero();		//移動速度
+		const float m_moveSpeed = -2.5f;				//基礎移動速度
+		//アニメーション系 マジックナンバーダメ絶対
+		enum EnAnimationClip {
+			enAnimClip_idle,	//ひまやなぁアニメーション
+			enAnimClip_walk,	//歩くのだるいわぁアニメーション
+			enAnimClip_run,		//ｳｵｵｵｵｵｵｵｵアニメーション
+			enAnimClip_Num		//アニメーションの数
+		};
+		Animation m_animation;							//アニメーション
+		AnimationClip m_animClip[enAnimClip_Num];		//アニメーションクリップ
+
 	};
 }

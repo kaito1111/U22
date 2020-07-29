@@ -14,8 +14,6 @@ Player::Player()
 	m_Se.SetVolume(0.2f);
 	m_Se2.Init(L"Assets/sound/jump.wav");
 	m_Se2.SetVolume(0.2f);
-	////グラフィックスエンジンからシャドウマップを取得
-	//m_shadowMap = g_graphicsEngine->GetShadowMap();
 	m_Asioto.Init(L"Assets/sound/asioto.wav");
 	m_Asioto.Play(true);
 	m_Asioto.SetVolume(0.0f);

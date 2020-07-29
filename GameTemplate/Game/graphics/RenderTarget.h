@@ -49,7 +49,7 @@ public:
 	/// レンダリングターゲットのSRVを取得
 	/// </summary>
 	/// <returns>レンダリングターゲットのSRV</returns>
-	ID3D11ShaderResourceView* GetRenderTargetSRV()
+	ID3D11ShaderResourceView*& GetRenderTargetSRV()
 	{
 		return m_renderTargetSRV;
 	}

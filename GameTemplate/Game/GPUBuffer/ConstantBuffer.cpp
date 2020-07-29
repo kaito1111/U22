@@ -16,7 +16,6 @@ namespace myEngine {
 		ZeroMemory(&bufferDesc, sizeof(bufferDesc));
 		//アクセスフラグをデフォルト
 		bufferDesc.Usage = D3D11_USAGE_DEFAULT;
-		//メモリ上の位置調整 計算方法をこうしたほうが処理が速い？
 		//16バイトアライメントに切り上げ→参考URL
 		bufferDesc.ByteWidth = (((bufferSize - 1) / 16) + 1) * 16;
 		//定数バッファとして結び付け
