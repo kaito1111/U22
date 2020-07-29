@@ -151,6 +151,9 @@ public:
 	int GetPlayerStickRYData() {
 		return padRY;
 	}
+	int& GetPlayerNum() {
+		return m_playerNum;
+	}
 	/// <summary>
 	/// ユーザーのネームを取得
 	/// </summary>
@@ -167,7 +170,7 @@ private:
 	BaseView* mpView;
 	int m_maxPlayer = 2;
 	unsigned long lastUpdateTime;
-	int m_playerNum = 20;					//フォトンの最大参加人数、これが自分の参加番号になる
+	int m_playerNum = 0;					//フォトンの最大参加人数、これが自分の参加番号になる
 	//padの入力
 	float padLX = 0, padLY = 0, padRX = 0, padRY = 0;
 	//トリガー

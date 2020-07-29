@@ -36,10 +36,19 @@ private:
 	/// ポストレンダー
 	/// </summary>
 	void PostRender();
+	/// <summary>
+	/// プレイヤー番号取得
+	/// </summary>
+	/// <returns></returns>
+	int& GetPlayerNum()
+	{
+		return m_PlayerNum;
+	}
 private:
 	StageSelect* stage = nullptr;
 	Goal* goalPtr = nullptr;
 	int StageNum = 0;
+	int m_PlayerNum = 0;										//photonのプレイヤー番号
 	SpriteRender* m_test = nullptr;							//スプライトレンダー
 	Sprite m_copyMainRtToFrameBufferSprite;					//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 	SoundSource	m_se;										//サウンドソース

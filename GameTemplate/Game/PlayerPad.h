@@ -11,6 +11,12 @@ public:
 	//コンストラクタ
 	PlayerPad();
 	/// <summary>
+	/// パッドの初期化
+	/// </summary>
+	/// <param name="PadNum"></param>
+	/// <returns></returns>
+	void Init(int PadNum);
+	/// <summary>
 	/// 更新
 	/// <para>GameObjectManager下で管理されているので呼び出さないでください。</para>
 	/// </summary>
@@ -21,7 +27,7 @@ public:
 	/// <returns></returns>
 	virtual float& MoveX() override
 	{
-		float X = g_Pad[PadNum].GetLStickXF();
+		float X = g_Pad[m_PadNum].GetLStickXF();
 		return X;
 	}
 	/// <summary>
@@ -30,7 +36,7 @@ public:
 	/// <returns></returns>
 	virtual float& MoveZ() override
 	{
-		float Z = g_Pad[PadNum].GetLStickYF();
+		float Z = g_Pad[m_PadNum].GetLStickYF();
 		return Z;
 	}
 	/// <summary>
@@ -68,11 +74,8 @@ public:
 	/// <para>こいつで初期化、更新するPadを設定してください。</para>
 	/// </summary>
 	/// <param name="padNum"></param>
-	void SetNum(int padNum)
-	{
-		PadNum = padNum;
-	}
+	bool IsTriStart();
 private:
-	int PadNum = 0;		//Pad番号
+	int m_PadNum = 0;		//Pad番号
 };
 

@@ -69,9 +69,9 @@ void NetworkLogic::Join()
 	mpLbc->opJoinRandomRoom(expectedCustomRoomProperties);
 }
 
-void NetworkLogic::CreateRoomOrJoin(const JString& roomName, nByte maxPlayers,bool CreateRoom)
+void NetworkLogic::CreateRoomOrJoin(const JString& roomName, nByte maxPlayers, bool CreateRoom)
 {
-	CreateRoom = mpLbc->opJoinOrCreateRoom(roomName, RoomOptions().setMaxPlayers(maxPlayers));;
+	CreateRoom = mpLbc->opJoinOrCreateRoom(roomName, RoomOptions().setMaxPlayers(maxPlayers));
 }
 
 /// <summary>

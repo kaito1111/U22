@@ -25,6 +25,11 @@ public:
 		return &m_model;
 	}
 
+	/// <summary>
+	/// パッドの初期化
+	/// </summary>
+	/// <param name="pad">パッド</param>
+	void InitPad(PlayerPad* pad);
 	void SIBOU();						
 	void Press();						//何度も呼ぶ
 	void MagumaDead();					//何度も呼ぶ
@@ -91,6 +96,6 @@ private:
 	void MyMagnet();
 	SoundSource m_Asioto;
 
-	PlayerPad* m_Pad;
+	PlayerPad* m_Pad = nullptr;
 };
 

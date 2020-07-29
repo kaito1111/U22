@@ -3,6 +3,8 @@
 #include "NPole.h"
 #include "SPole.h"
 #include "GameCamera.h"
+#include "PlayerPad.h"
+
 
 Player::Player()
 {
@@ -24,6 +26,11 @@ Player::~Player()
 {
 	DeleteGO(m_Magnet);
 	DeleteGO(m_ThisNumSprite);
+}
+
+void Player::InitPad(PlayerPad* pad)
+{
+	m_Pad = pad;
 }
 
 void Player::ReSpown()
@@ -157,7 +164,7 @@ void Player::SpawnPole()
 	m_forward = { mrot.m[2][0],mrot.m[2][1],mrot.m[2][2] };
 	m_forward.Normalize();
 	//NSpawn
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonRB1))
+	if (m_Pad->IsMagShotN())
 	{
 		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool {
 			DeleteGO(m_pole);
@@ -172,7 +179,7 @@ void Player::SpawnPole()
 		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonLB1))
+	if (m_Pad->IsMagShotS())
 	{
 		QueryGOs< SPole>("spole", [&](SPole* m_pole)->bool {
 			DeleteGO(m_pole);
@@ -195,7 +202,7 @@ void Player::Move()
 	movespeed.x = 0.0f;
 	movespeed.z = 0.0f;
 	//¶‰E‚ÌˆÚ“®
-	movespeed.x = g_Pad[m_PlayerNum].GetLStickXF() * -10.0f;
+	movespeed.x = m_Pad->MoveX() * -10.0f;
 	const float junpPower = 15.0f;
 	float Volume;
 	if (m_characon.IsJump() &&
@@ -206,8 +213,8 @@ void Player::Move()
 	}
 	if (m_characon.IsOnGround())
 	{
-		Volume = fabsf(g_Pad[m_PlayerNum].GetLStickXF());
-		if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)) {
+		Volume = fabsf(m_Pad->MoveX());
+		if (m_Pad->IsJump()) {
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
 				m_Se2.Play(false);
@@ -220,7 +227,7 @@ void Player::Move()
 	}
 	const float gravity = 0.8f;		//d—Í
 	movespeed.y -= gravity;
-	Volume = fabsf(g_Pad[m_PlayerNum].GetLStickXF());
+	Volume = fabsf(m_Pad->MoveX());
 	if (movespeed.y >= 0.0f) {
 		Volume -= 0.1f;
 	}
@@ -245,11 +252,11 @@ void Player::Move()
 
 
 	m_position = m_characon.Execute(1.0f, movespeed);
-	if (g_Pad[m_PlayerNum].GetLStickXF() > 0.0f)
+	if (m_Pad->MoveX() > 0.0f)
 	{
 		dir = Dir::L;
 	}
-	if (g_Pad[m_PlayerNum].GetLStickXF() < 0.0f)
+	if (m_Pad->MoveX() < 0.0f)
 	{
 		dir = Dir::R;
 	}
@@ -270,13 +277,13 @@ void Player::Move()
 
 void Player::MyMagnet()
 {
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonX)) {
+	if (m_Pad->IsMagN()) {
 		m_Magnet->SetState(Magnet::State::NMode);
 	}
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonY)) {
+	if (m_Pad->IsMagS()) {
 		m_Magnet->SetState(Magnet::State::SMode);
 	}
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonB)) {
+	if (m_Pad->IsNoMag()) {
 		m_Magnet->SetState(Magnet::State::NoMode);
 	}
 }
@@ -288,7 +295,8 @@ void Player::SIBOU()				//OK
 		DeleteMO(m_Magnet);
 		HaveMagnet = false;
 	}
-	if (g_Pad[m_PlayerNum].IsTrigger(enButtonA)) {
+	//‚±‚±‚ ‚Æ‚ÅC³
+	if (m_Pad->IsNoMag()) {
 		ReSpown();
 	}
 }
