@@ -16,8 +16,8 @@ public:
 private:
 	StageSelect* stageSelect = nullptr;
 	void Move();
-	CVector3 m_pos = CVector3::Zero();
-	CVector3 m_target = CVector3::Zero();
+	CVector3 m_pos = CVector3::Zero();		//ç¿ïW
+	CVector3 m_target = CVector3::Zero();   //íçéãì_
 	int nowChoiceStage = 0;
 };
 

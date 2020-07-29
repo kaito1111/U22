@@ -12,42 +12,36 @@ PlayerData::~PlayerData()
 {
 }
 
-bool PlayerData::Start()
+void PlayerData::SavePlayerData()
 {
-	stage = FindGO<Stage>("stage");
-	//プレイヤーのインスタンスに名前を付ける
-	static const char PlayerMax = 2;//プレイヤーの最大数
+	//static const char PlayerMax = 2;//プレイヤーの最大数
+	
 	for (nowSavePlayer = 1;         //これから名付けるプレイヤーの番号
-		nowSavePlayer <= PlayerMax; //プレイヤーの最大数よりfor文が回ってないなら
+		nowSavePlayer <= g_PlayerNum; //プレイヤーの最大数よりfor文が回ってないなら
 		nowSavePlayer++) {			//回し続けるよ
 
 		char PlayerName[256] = {};//名前
-		sprintf(PlayerName, "player%d", nowSavePlayer + 1);
-		player[nowSavePlayer - 1] = FindGO<Player>(0, PlayerName);
+		sprintf(PlayerName, "player%d", nowSavePlayer );
+		player[nowSavePlayer - 1] = FindGO<Player>(PlayerName);
 	}
-
-	LoadPlayerData();
-
-	return true;
-}
-
-void PlayerData::SavePlayerData()
-{
 		//ファイルの保存
 		FILE* file = fopen("../PlayerData.text", "wb");
 		if (file != nullptr) {
 			//ファイルのオープンに失敗
 		}
+		stage = FindGO<Stage>("stage");
 		stageNum = stage->GetNowStage();
-		fwrite(&stageNum, sizeof(int),1, file);
-		fwrite(&player1Pos, sizeof(CVector3), 1, file);
+		player1Pos = player[0]->GetPosition();
+		player2Pos = player[1]->GetPosition();
+		fwrite(&stageNum, sizeof(int), 1, file);
+		fwrite(&player1Pos, sizeof(CVector3), 1, file);//引数の１はコピーされる数（なんじゃね？）
 		fwrite(&player2Pos, sizeof(CVector3), 1, file);
 		fclose(file);
 }
 
 void PlayerData::LoadPlayerData()
 {
-	//ファイルの保存
+	//ファイル天界
 	FILE* file = fopen("../PlayerData.text", "rb");
 	if (file != nullptr) {
 		//ファイルの読み込みに失敗
@@ -59,10 +53,10 @@ void PlayerData::LoadPlayerData()
 	
 }
 
-std::tuple<const CVector3&, const CVector3&> PlayerData::GetLastTimePos()
+std::tuple<const CVector3&, const CVector3&, const int> PlayerData::GetLastTimePos()
 {
 	LoadPlayerData();
-	return std::forward_as_tuple(player1Pos, player2Pos);
+	return std::forward_as_tuple(player1Pos, player2Pos, stageNum);
 	//受け取り方1例
 	//int a;
 	//int b;

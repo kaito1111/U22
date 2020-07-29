@@ -35,8 +35,9 @@ Game::~Game()
 	if (m_frameBufferRenderTargetView != nullptr) {
 		m_frameBufferRenderTargetView->Release();
 	}
-	delete m_task;
+	DeleteGO(m_task);
 	DeleteGO(goalPtr);
+	DeleteGO(stage);
 }
 
 bool Game::Start()
@@ -46,7 +47,8 @@ bool Game::Start()
 
 	//2”Ô–Ú
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
-	Stage* stage = NewGO<Stage>(0, "stage");
+	stage = NewGO<Stage>(0, "stage");
+	stage->setStageNum(StageNum);
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);		
 	CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
@@ -75,6 +77,10 @@ bool Game::Start()
 void Game::Update()
 {
 	if (goalPtr->IsClear()) {
+		DeleteGO(this);
+	}
+	if (g_Pad[0].IsTrigger(enButtonDown)) {
+		
 		DeleteGO(this);
 	}
 	Sample();

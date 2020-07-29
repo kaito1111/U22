@@ -25,7 +25,7 @@ Stage::Stage()
 
 Stage::~Stage()
 {
-
+	DeleteGO(generator);
 }
 
 bool Stage::Start()

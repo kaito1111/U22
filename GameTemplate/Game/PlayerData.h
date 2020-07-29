@@ -4,7 +4,6 @@ class Stage;
 class PlayerData : public IGameObject
 {
 private:
-	bool Start();
 	Player* player[2] = {};
 	CVector3 player1Pos = CVector3::Zero();
 	CVector3 player2Pos = CVector3::Zero();
@@ -14,14 +13,16 @@ public:
 	PlayerData();
 	~PlayerData();
 	Stage* stage = nullptr;
-	void SavePlayerData();
-	void  LoadPlayerData();
+	void SavePlayerData(); //セーブ
+	void  LoadPlayerData();//ロード
 	
 
 
 	//前回のプレイヤーの座標を返す処理
 	std::tuple<const CVector3&, //player1
-		const CVector3&>        //player2
+		const CVector3&,        //player2
+		const int>				//ステージ番号
 		GetLastTimePos();		//関数名
+	//前回のステージ番号を返す
 };
 

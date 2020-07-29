@@ -4,6 +4,8 @@
 #include"PlayerData.h"
 #include "Stage.h"
 #include"StageSelect/StageSelect.h"
+#include<tuple>
+#include"Game.h"
 NewOrContinue::NewOrContinue()
 {
 }
@@ -24,15 +26,20 @@ bool NewOrContinue::Start()
 
 void NewOrContinue::Update()
 {
-
+	int a = 0;
 	//最初から（ステージセレクト画面へ）。
 	if (g_Pad[0].IsTrigger(enButtonA)) {
 		NewGO<StageSelect>(0, "stageSelect");
 		DeleteGO(this);
 	}
 	//続きから（プレイヤーの座標とステージ番号をロード）
-	//if (g_Pad[0].IsTrigger(enButtonA)) {
-	//	//前回のステージとプレイヤーの座標をロード
-
-	//}
+	if (g_Pad[0].IsTrigger(enButtonB) && padB == true) {
+		//前回のステージとプレイヤーの座標をロード
+		GetLastTimePos();
+		NewGO<Game>(0, "game");
+		DeleteGO(this);
+	}
+	if (!g_Pad[0].IsTrigger(enButtonB)) {
+		padB = true;
+	}
 }

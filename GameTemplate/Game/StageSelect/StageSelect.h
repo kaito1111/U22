@@ -20,6 +20,7 @@ public:
 		return m_pos[0];
 	}
 private:
+	void Draw();
 	Sprite m_copyMainRtToFrameBufferSprite;	//‚È‚ñ‚©—v‚éƒ„ƒc
 	SkinModel m_stage[g_StageMAX] = {};
 	CVector3 m_pos[g_StageMAX] = {};
