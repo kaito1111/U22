@@ -27,7 +27,7 @@ public:
 	/// ネットワークパッドの取得
 	/// </summary>
 	/// <returns></returns>
-	const NetworkPad* GetNPad()
+	NetworkPad* GetNPad()
 	{
 		return m_networkPad;
 	}

@@ -24,6 +24,16 @@ KaitoTask::KaitoTask()
 		m_Player[i++]->SetPlayerNum(i);
 	}
 
+	if (m_Player[0]->GetPlayerNum() - 1 == 0) {
+		//ƒvƒŒƒCƒ„[1
+		m_Player[0]->InitPad(twoP_Pad().GetPPad());
+		m_Player[1]->InitPad(twoP_Pad().GetNPad());
+	}
+	else {
+		m_Player[0]->InitPad(twoP_Pad().GetNPad());
+		m_Player[1]->InitPad(twoP_Pad().GetPPad());
+	}
+
 
 	//m_Player[0]->
 }

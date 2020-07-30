@@ -14,8 +14,8 @@ TwoP_Pad::TwoP_Pad()
 	//パッド番号の識別
 	m_PlayerPadNum = NetworkLogic::GetInstance().GetLBL()->GetPlayerNum();
 	//各Padのインスタンス化
-	m_playerPad = NewGO<PlayerPad>(0, "playerPad");
-	m_networkPad = NewGO<NetworkPad>(0, "networkPad");
+	m_playerPad = new PlayerPad;
+	m_networkPad = new NetworkPad;
 	//パッドの識別＆初期化
 	if (m_PlayerPadNum == 1) {
 		//player1だった
@@ -65,7 +65,8 @@ void TwoP_Pad::PostRender()
 
 void TwoP_Pad::Update()
 {
-	
+	m_playerPad->Update();
+	m_networkPad->Update();
 	if (m_playerPad->IsTriStart())
 	{
 		if (m_Manual_W == 0.0f)

@@ -54,8 +54,8 @@ private:
 	SoundSource	m_se;										//サウンドソース
 	Effect* effect = nullptr;								//エフェクト
 	RenderTarget m_mainRenderTarget;						//メインレンダーターゲット
-	ID3D11RenderTargetView* m_frameBufferRenderTargetView;	//フレームRTV
-	ID3D11DepthStencilView* m_frameBufferDepthStencilView;	//フレームDSV
+	ID3D11RenderTargetView* m_frameBufferRenderTargetView = nullptr;	//フレームRTV
+	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームDSV
 	D3D11_VIEWPORT m_frameBufferViewports;					//フレームビューポート
 	myEngine::PostEffect m_postEffect;								//ブルーム
 	KaitoTask* m_task = nullptr;
