@@ -197,7 +197,7 @@ void Player::Move()
 	//¶‰E‚ÌˆÚ“®
 	movespeed.x = g_Pad[m_PlayerNum].GetLStickXF() * -10.0f;
 	const float junpPower = 15.0f;
-	float Volume;
+	float Volume = 0.0f;
 	if (m_characon.IsJump() &&
 		g_Pad[m_PlayerNum].IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
@@ -220,10 +220,6 @@ void Player::Move()
 	}
 	const float gravity = 0.8f;		//d—Í
 	movespeed.y -= gravity;
-	Volume = fabsf(g_Pad[m_PlayerNum].GetLStickXF());
-	if (movespeed.y >= 0.0f) {
-		Volume -= 0.1f;
-	}
 	m_Asioto.SetVolume(Volume);
 
 	if (fabsf(movespeed.x) > 0.0f
@@ -242,7 +238,6 @@ void Player::Move()
 	if (m_characon.IsOnGround() && movespeed.y < 0.0f) {
 		movespeed.y = 0;
 	}
-
 
 	m_position = m_characon.Execute(1.0f, movespeed);
 	if (g_Pad[m_PlayerNum].GetLStickXF() > 0.0f)

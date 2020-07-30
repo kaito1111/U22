@@ -51,6 +51,7 @@ bool Game::Start()
 	stage = NewGO<Stage>(0, "stage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);		
+	return true;
 }
 
 void Game::Update()

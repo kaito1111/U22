@@ -188,6 +188,12 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	CVector3 addPos = moveSpeed;
 	addPos *= deltaTime;
 	nextPosition += addPos;
+
+	if (moveSpeed.y > 0.0f) {
+		//吹っ飛び中にする。
+		m_isJump = true;
+		m_isOnGround = false;
+	}
 	/*ここから追加分
 	上方向の移動処理*/
 	{
@@ -240,14 +246,62 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			}
 		}
 	}
-	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
-	return m_position;
-	if (moveSpeed.y > 0.0f) {
-		//吹っ飛び中にする。
-		m_isJump = true;
-		m_isOnGround = false;
-	}
 
+	//下方向を調べる。
+	{
+		CVector3 addPos;
+		addPos.Subtract(nextPosition, m_position);
+		//addPos = nextPosition - m_position;
+
+		//m_position = nextPosition;	//移動の仮確定。
+									//レイを作成する。
+		btTransform start, end;
+		start.setIdentity();
+		end.setIdentity();
+		//始点はカプセルコライダーの中心。
+		/*変更点
+		start.setOrigin(btVector3(nextPosition.x, m_position.y + m_height * 0.5f + m_radius, nextPosition.z));*/
+		start.setOrigin(btVector3(m_position.x, nextPosition.y + m_height * 0.5f + m_radius, m_position.z));
+		//終点は地面上にいない場合は1m下を見る。
+		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
+		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
+		CVector3 endPos;
+		endPos.Set(start.getOrigin());
+		if (m_isOnGround == false) {
+			if (addPos.y > 0.0f) {
+				//ジャンプ中とかで上昇中。
+				//上昇中でもXZに移動した結果めり込んでいる可能性があるので下を調べる。
+				endPos.y -= addPos.y;
+			}
+			else {
+				//落下している場合はそのまま下を調べる。
+				endPos.y += addPos.y * 0.01f;
+			}
+		}
+		else {
+			//地面上にいる場合は1m下を見る。
+			endPos.y -= 1.0f;
+		}
+		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
+		SweepResultGround callback;
+		callback.me = m_rigidBody.GetBody();
+		callback.startPos.Set(start.getOrigin());
+		//衝突検出。
+		if (fabsf(endPos.y - callback.startPos.y) > FLT_EPSILON) {
+			g_physics.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
+			if (callback.isHit) {
+				//当たった。
+				moveSpeed.y = 0.0f;
+				m_isJump = false;
+				m_isOnGround = true;
+				nextPosition.y = callback.hitPos.y + addPos.y * 0.01f;
+			}
+			else {
+				//地面上にいない。
+				m_isOnGround = false;
+			}
+		}
+	}
 	CVector3 originalXZDir = addPos;
 	originalXZDir.y = 0.0f;
 	originalXZDir.Normalize();
@@ -259,7 +313,8 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			CVector3 addPos;
 			addPos.Subtract(nextPosition, m_position);
 			float addPosX = addPos.x;
-			if (fabsf(addPosX) < FLT_EPSILON) {
+
+			if ((fabsf(addPosX) < FLT_EPSILON)) {
 				//XZ平面で動きがないので調べる必要なし。
 				//FLT_EPSILONは1より大きい、最小の値との差分を表す定数。
 				//とても小さい値のことです。
@@ -339,61 +394,6 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	//XZの移動は確定。
 	m_position.x = nextPosition.x;
 	m_position.z = nextPosition.z;
-	//下方向を調べる。
-	{
-		CVector3 addPos;
-		addPos.Subtract(nextPosition, m_position);
-		//addPos = nextPosition - m_position;
-
-		//m_position = nextPosition;	//移動の仮確定。
-									//レイを作成する。
-		btTransform start, end;
-		start.setIdentity();
-		end.setIdentity();
-		//始点はカプセルコライダーの中心。
-		/*変更点
-		start.setOrigin(btVector3(nextPosition.x, m_position.y + m_height * 0.5f + m_radius, nextPosition.z));*/
-		start.setOrigin(btVector3(m_position.x, nextPosition.y + m_height * 0.5f + m_radius, m_position.z));
-		//終点は地面上にいない場合は1m下を見る。
-		//地面上にいなくてジャンプで上昇中の場合は上昇量の0.01倍下を見る。
-		//地面上にいなくて降下中の場合はそのまま落下先を調べる。
-		CVector3 endPos;
-		endPos.Set(start.getOrigin());
-		if (m_isOnGround == false) {
-			if (addPos.y > 0.0f) {
-				//ジャンプ中とかで上昇中。
-				//上昇中でもXZに移動した結果めり込んでいる可能性があるので下を調べる。
-				endPos.y -= addPos.y;
-			}
-			else {
-				//落下している場合はそのまま下を調べる。
-				endPos.y += addPos.y * 0.01f;
-			}
-		}
-		else {
-			//地面上にいる場合は1m下を見る。
-			endPos.y -= 1.0f;
-		}
-		end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
-		SweepResultGround callback;
-		callback.me = m_rigidBody.GetBody();
-		callback.startPos.Set(start.getOrigin());
-		//衝突検出。
-		if (fabsf(endPos.y - callback.startPos.y) > FLT_EPSILON) {
-			g_physics.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
-			if (callback.isHit) {
-				//当たった。
-				moveSpeed.y = 0.0f;
-				m_isJump = false;
-				m_isOnGround = true;
-				nextPosition.y = callback.hitPos.y + addPos.y * 0.01f;
-			}
-			else {
-				//地面上にいない。
-				m_isOnGround = false;
-			}
-		}
-	}
 	//移動確定。
 	m_position = nextPosition;
 	btRigidBody* btBody = m_rigidBody.GetBody();
@@ -402,6 +402,8 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	btTransform& trans = btBody->getWorldTransform();
 	//剛体の位置を更新。
 	trans.setOrigin(btVector3(m_position.x, m_position.y, m_position.z));
+	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
+	return m_position;
 }
 /*!
 * @brief	死亡したことを通知。
