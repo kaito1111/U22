@@ -37,6 +37,9 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include "DirectXTK/Inc/SpriteFont.h"
 #include "DirectXTK/Inc/DDSTextureLoader.h"
 
+#include "photon/Common-cpp/inc/Common.h"
+#include "photon/LoadBalancing-cpp/inc/Client.h"
+
 #include "physics/Physics.h"
 #include "HID/Pad.h"
 
@@ -64,10 +67,10 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include "GameObject/IGameObject.h"
 #include "SkinModelRender.h"
 
+#include "Shadow/ShadowMap.h"
+
 //#include "photon/LoadBalancing-cpp/inc/friendinfo.h"
 //#include "Photon-cpp/Inc/PhotonPeer.h"
-#include "photon/Common-cpp/inc/Common.h"
-#include "photon/LoadBalancing-cpp/inc/Client.h"
 
 #include "Magnet/MagnetManager.h"
 

@@ -1,7 +1,8 @@
 #pragma once
 //class TitleStage;
+
+#include "Player.h"
 class GameCamera;
-class Player;
 class KaitoTask : public IGameObject
 {
 public:
@@ -21,5 +22,6 @@ public:
 private:
 	//TitleStage*7
 	GameCamera* m_GameCamera = nullptr;
-	Player* m_Player[2] = {};
+    GamePlayer* m_Player[2] = {};
+
 };

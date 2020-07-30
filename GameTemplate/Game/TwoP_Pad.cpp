@@ -6,13 +6,28 @@
 
 TwoP_Pad::TwoP_Pad() 
 {
+	//for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
+	//{
+	//	g_Pad[i].Init(i);
+	//}
 
-
-
-	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
-	{
-		g_Pad[i].Init(i);
+	//パッド番号の識別
+	m_PlayerPadNum = NetworkLogic::GetInstance().GetLBL()->GetPlayerNum();
+	//各Padのインスタンス化
+	m_playerPad = NewGO<PlayerPad>(0, "playerPad");
+	m_networkPad = NewGO<NetworkPad>(0, "networkPad");
+	//パッドの識別＆初期化
+	if (m_PlayerPadNum == 1) {
+		//player1だった
+		m_playerPad->Init(m_PlayerPadNum - 1);
+		m_networkPad->Init(m_PlayerPadNum);
 	}
+	else if (m_PlayerPadNum == 2) {
+		//player2だった
+		m_playerPad->Init(m_PlayerPadNum);
+		m_networkPad->Init(m_PlayerPadNum - 1);
+	}
+
 	m_ManualSprite = NewGO<SpriteRender>(4);
 	m_ManualSprite->Init(L"Assets/sprite/manual.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 	m_ManualSprite->SetW(m_Manual_W);
@@ -50,15 +65,8 @@ void TwoP_Pad::PostRender()
 
 void TwoP_Pad::Update()
 {
-	int PlayerPad = 0;
-	g_Pad[PlayerPad].Update();
-
 	
-
-	//if (i < g_PlayerNum) {
-	if (g_Pad[PlayerPad].IsTrigger(enButtonStart)
-		//&&player[i]->GetUpdate()
-		)
+	if (m_playerPad->IsTriStart())
 	{
 		if (m_Manual_W == 0.0f)
 		{
@@ -73,10 +81,5 @@ void TwoP_Pad::Update()
 			//player[i]->SetUpdate(true);
 		}
 	}
-	//}
-	bool IsAllPad[EnButton::enButtonNum + 1] = {};
-	IsAllPad[EnButton::enButtonNum] = 1;
-
-	g_Pad[1].Update();
 }
-//}
+

@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject/IGameObject.h"
 #include "character/CharacterController.h"
-class Player;
+class GamePlayer;
 class stageObject1 : public IGameObject
 {
 	//ドッスン棘やで。
@@ -18,7 +18,7 @@ public:
 	}
 private:
 
-	Player* player[4] = {};
+	GamePlayer* player[4] = {};
 	int MaxPlayer;//プレイヤーの最大数
 	int PadNum;
 

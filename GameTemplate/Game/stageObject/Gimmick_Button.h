@@ -26,7 +26,7 @@ private:
 	PhysicsStaticObject m_physicsOcject;
 
 	SoundSource m_Se;
-	Player* m_Player[2] = {};
+	GamePlayer* m_Player[2] = {};
 
 	bool isOn = false;
 };

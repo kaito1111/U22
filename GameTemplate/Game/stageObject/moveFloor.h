@@ -2,7 +2,7 @@
 #include"physics/RigidBody.h"
 #include"physics/PhysicsStaticObject.h"
 #include"Gimmick_Button.h"
-class Player;
+class GamePlayer;
 class moveFloor : public IGameObject
 {
 	//ÉTÉCÉY200*200*20

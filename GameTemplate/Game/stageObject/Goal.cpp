@@ -2,6 +2,7 @@
 #include "Goal.h"
 #include "Player.h"
 #include "light/DirectionLight.h"
+#include "../GemeLoop.h"
 
 Goal::Goal(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 {
@@ -21,8 +22,8 @@ bool Goal::Start()
 	m_ClearSprite->SetW(0.0f);
 	m_SkinRender = NewGO<SkinModelRender>(0);
 	m_SkinRender->Init(L"Assets/modelData/Goal.cmo");
-	m_player[0] = FindGO<Player>("player1");
-	m_player[1] = FindGO<Player>("player2");
+	m_player[0] = FindGO<GamePlayer>("player1");
+	m_player[1] = FindGO<GamePlayer>("player2");
 
 	return true;
 }
@@ -46,6 +47,7 @@ void Goal::Update()
 		if (i == clearNum) {
 			isClear = true;
 			m_ClearSprite->SetW(1.0f);
+			NewGO<GameLoop>(1, "gameloop");
 			m_Se.Play();
 		}
 	}

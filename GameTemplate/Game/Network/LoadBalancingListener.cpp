@@ -122,11 +122,8 @@ void LoadBalancingListener::serverErrorReturn(int errorCode)
 
 void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>& playernrs, const Player& player)
 {
+	m_playerNum = playerNr;
 	Console::get().writeLine(JString("player ") + playerNr + L" " + player.getName() + L" has joined the game");
-	if (m_playerNum == 20) 
-	{ 
-		m_playerNum = playerNr; 
-	}
 }
 
 void LoadBalancingListener::leaveRoomEventAction(int playerNr, bool isInactive)

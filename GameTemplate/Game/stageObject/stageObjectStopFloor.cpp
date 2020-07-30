@@ -19,8 +19,8 @@ stageObjectStopFloor::~stageObjectStopFloor()
 bool stageObjectStopFloor::Start()
 {
 	floor = NewGO<Floor>(1);
-	m_player[0] = FindGO<Player>("player1");
-	m_player[1] = FindGO<Player>("player2");
+	m_player[0] = FindGO<GamePlayer>("player1");
+	m_player[1] = FindGO<GamePlayer>("player2");
 	m_model.Init(L"Assets/modelData/aStopFloor");//’Ê‚é‘O‚Ìƒ‚ƒfƒ‹
 	return true;
 }

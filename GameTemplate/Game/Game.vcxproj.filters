@@ -118,9 +118,9 @@
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="SampleScene.cpp" />
     <ClCompile Include="SampleGround.cpp" />
-    <ClCompile Include="PlayerData.cpp" />
-    <ClCompile Include="NewOrContinue.cpp" />
-  </ItemGroup>
+<ClCompile Include="GemeLoop.cpp" />
+    <ClCompile Include="character\BoxCharactorController.cpp" /> <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="NewOrContinue.cpp" />  </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\bg.fbx" />
@@ -262,9 +262,10 @@
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="SampleScene.h" />
     <ClInclude Include="SampleGround.h" />
-    <ClInclude Include="PlayerData.h" />
-    <ClInclude Include="NewOrContinue.h" />
-  </ItemGroup>
+    <ClInclude Include="PlayerPad.h" />
+    <ClInclude Include="GemeLoop.h" />
+    <ClInclude Include="character\BoxCharactorController.h" /> <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="NewOrContinue.h" />  </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
   </ItemGroup>

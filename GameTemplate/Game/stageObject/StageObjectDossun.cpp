@@ -16,8 +16,8 @@ StageObjectDossun::~StageObjectDossun()
 
 bool StageObjectDossun::Start()
 {
-	player1 = FindGO<Player>("player1");
-	player2 = FindGO<Player>("player2");
+	player1 = FindGO<GamePlayer>("player1");
+	player2 = FindGO<GamePlayer>("player2");
 	m_model.Init(L"Assets/modelData/Dossun.cmo");
 	m_pos.y = 200.0f;
 	startPos = m_pos;

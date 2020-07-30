@@ -17,8 +17,8 @@ bool RorlingRock::Start()
 	m_model.Init(L"Assets/modelData/RorlingRock.cmo");
 	charaCon.Init(1.0f, 1.0f, m_pos);//ƒLƒƒƒ‰ƒRƒ“‚Ì‰Šú‰»
 
-	player1 = FindGO<Player>("player1");
-	player2 = FindGO<Player>("player2");
+	player1 = FindGO<GamePlayer>("player1");
+	player2 = FindGO<GamePlayer>("player2");
 	return true;
 }
 

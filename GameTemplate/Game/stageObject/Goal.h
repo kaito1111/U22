@@ -20,7 +20,7 @@ private:
 	bool isClear = false;
 	SkinModelRender* m_SkinRender = nullptr;
 	CVector3 m_Position = CVector3::Zero();
-	Player* m_player[2] = {};
+	GamePlayer* m_player[2] = {};
 	CQuaternion m_rot = CQuaternion::Identity();
 	SpriteRender* m_ClearSprite = nullptr;
 	SoundSource m_Se;

@@ -17,7 +17,7 @@ Title::Title()
 	}
 
 	printf("ƒ‹[ƒ€‚É“üê‚µ‚Ü‚µ‚½B\n");
-	m_Sprite = NewGO<SpriteRender>(0);
+	m_Sprite = NewGO<SpriteRender>(5);
 	m_Sprite->Init(L"Assets/sprite/Title.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 	m_copyMainRtToFrameBufferSprite.Init(
 		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),

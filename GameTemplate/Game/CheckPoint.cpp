@@ -11,8 +11,8 @@ CheckPoint::~CheckPoint()
 
 bool CheckPoint::Start()
 {
-	m_player[0] = FindGO<Player>("player1");
-	m_player[1] = FindGO<Player>("player2");
+	m_player[0] = FindGO<GamePlayer>("player1");
+	m_player[1] = FindGO<GamePlayer>("player2");
 	return true;
 }
 

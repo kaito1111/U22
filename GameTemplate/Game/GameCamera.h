@@ -1,5 +1,5 @@
 #pragma once
-#include "Player.h"
+class GamePlayer;
 
 class GameCamera : public IGameObject
 {
@@ -14,6 +14,6 @@ private:
 	int	m_PlayerNum			= 0;
 	bool Start()override;
 	void Update()override;
-	Player*	m_Player[4]			= {};
+	GamePlayer*	m_Player[4]			= {};
 	float Decline				= 0.0f;		//‰º‚ÌŒÀŠE
 };

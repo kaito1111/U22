@@ -25,7 +25,7 @@ bool stageObject1::Start()
 		char pl[256];
 		sprintf(pl, "player%d", PadNum+1);
 
-		player[PadNum] = FindGO<Player>(pl);
+		player[PadNum] = FindGO<GamePlayer>(pl);
 	}
 	return true;
 }
