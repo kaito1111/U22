@@ -18,7 +18,6 @@ public:
 	void Init(int PadNum);
 	/// <summary>
 	/// 更新
-	/// <para>GameObjectManager下で管理されているので呼び出さないでください。</para>
 	/// </summary>
 	virtual void Update() override;
 	/// <summary>

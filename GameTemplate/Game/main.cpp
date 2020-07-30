@@ -26,6 +26,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	g_camera3D.SetNear(10.0f);
 	g_camera3D.Update();
 
+	printf("ルームに入場もしくは、作成を行っています。\n");
+	NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
+	printf("ルームに入場しました。\n");
+
 	//タイトルセレクト作ってます。
 	//タイトルに変えて欲しみがマリアナ海溝
 	//NewGO<StageSelect>(1, "game");
