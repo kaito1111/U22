@@ -47,8 +47,8 @@ private:
 	float m_Manual_W = 0.0f;
 	SpriteRender* m_ButtonSprite = nullptr;
 
-	PlayerPad* m_playerPad;			//プレイヤーのパッド
-	NetworkPad* m_networkPad;		//ネットワークのパッド
+	PlayerPad* m_playerPad = nullptr;			//プレイヤーのパッド
+	NetworkPad* m_networkPad = nullptr;		//ネットワークのパッド
 };
 
 /// <summary>

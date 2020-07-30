@@ -13,10 +13,11 @@ public:
 		return nowChoiceStage;
 	}
 private:
-GamePlayer* player = nullptr;
+	GamePlayer* player[g_PlayerNum];
 	CVector3 m_pos = CVector3::Zero();
 void Move();
-	CVector3 m_pos = CVector3::Zero();		//ç¿ïW
+	//CVector3 m_pos = CVector3::Zero();		//ç¿ïW
 	CVector3 m_target = CVector3::Zero();   //íçéãì_
-	int nowChoiceStage = 0;};
+	int nowChoiceStage = 0;
+};
 

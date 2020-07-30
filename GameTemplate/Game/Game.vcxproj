@@ -107,6 +107,7 @@
     <ClCompile Include="CheckPointgenerator.cpp" />
     <ClCompile Include="NewOrContinue.cpp" />
     <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="PlayerPad.cpp" />
     <ClCompile Include="SampleGround.cpp" />
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="GemeLoop.cpp" />
@@ -215,7 +216,9 @@
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
     <ClInclude Include="NewOrContinue.h" />
+    <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="PlayerPad.h" />
     <ClInclude Include="SampleGround.h" />
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="GemeLoop.h" />

@@ -37,6 +37,7 @@ private:
 	/// </summary>
 	void PostRender();
 private:
+	bool Continue = false;
 	Stage* stage = nullptr;
 	PlayerData* playerData = nullptr;
 	Goal* goalPtr = nullptr;

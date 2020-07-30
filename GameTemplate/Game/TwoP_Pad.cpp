@@ -1,15 +1,16 @@
 #include "stdafx.h"
 #include "TwoP_Pad.h"
 #include "Player.h"
+#include "PlayerPad.h"
 #include "Network/NetworkLogic.h"
 
 
 TwoP_Pad::TwoP_Pad() 
 {
-	//for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
-	//{
-	//	g_Pad[i].Init(i);
-	//}
+	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
+	{
+		g_Pad[i].Init(i);
+	}
 
 	//ƒpƒbƒh”Ô†‚ÌŽ¯•Ê
 	m_PlayerPadNum = NetworkLogic::GetInstance().GetLBL()->GetPlayerNum();
@@ -65,7 +66,9 @@ void TwoP_Pad::PostRender()
 
 void TwoP_Pad::Update()
 {
-	
+	for (int i = 0; i < g_PlayerNum; i++) {
+		g_Pad[i].Update();
+	}
 	if (m_playerPad->IsTriStart())
 	{
 		if (m_Manual_W == 0.0f)

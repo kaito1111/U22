@@ -1,10 +1,10 @@
 #pragma once
-class Player;
+class GamePlayer;
 class Stage;
 class PlayerData : public IGameObject
 {
 private:
-	Player* player[2] = {};
+	GamePlayer* player[g_PlayerNum] = {};
 	CVector3 player1Pos = CVector3::Zero();
 	CVector3 player2Pos = CVector3::Zero();
 	int nowSavePlayer = 0;//for•¶‚Å‰ñ‚·‚½‚ß‚ÉŽg‚¤‚â‚Â

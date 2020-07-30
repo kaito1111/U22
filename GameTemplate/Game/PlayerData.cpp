@@ -22,7 +22,7 @@ void PlayerData::SavePlayerData()
 
 		char PlayerName[256] = {};//名前
 		sprintf(PlayerName, "player%d", nowSavePlayer );
-		player[nowSavePlayer - 1] = FindGO<Player>(PlayerName);
+		player[nowSavePlayer - 1] = FindGO<GamePlayer>(PlayerName);
 	}
 		//ファイルの保存
 		FILE* file = fopen("../PlayerData.text", "wb");
