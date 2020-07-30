@@ -15,7 +15,7 @@ void PlayerPad::Init(int PadNum)
 void PlayerPad::Update()
 {
 	//パッドの更新
-	g_Pad[0].Update();
+	g_Pad[m_PadNum].Update();
 }
 
 bool PlayerPad::IsJump()
