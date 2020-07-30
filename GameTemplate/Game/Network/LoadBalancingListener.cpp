@@ -122,7 +122,10 @@ void LoadBalancingListener::serverErrorReturn(int errorCode)
 
 void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>& playernrs, const Player& player)
 {
-	m_playerNum = playerNr;
+	if (m_once == false) {
+		m_playerNum = playerNr;
+	}
+
 	Console::get().writeLine(JString("player ") + playerNr + L" " + player.getName() + L" has joined the game");
 }
 
@@ -227,7 +230,6 @@ void LoadBalancingListener::joinRoomReturn(int localPlayerNr, const Hashtable& g
 
 void LoadBalancingListener::joinRandomRoomReturn(int localPlayerNr, const Hashtable& gameProperties, const Hashtable& playerProperties, int errorCode, const JString& errorString)
 {
-	m_playerNum = localPlayerNr;
 	updateState();
 	if (errorCode == ErrorCode::NO_MATCH_FOUND)
 		createRoom();
