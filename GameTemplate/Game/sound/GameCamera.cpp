@@ -16,7 +16,7 @@ bool GameCamera::Start()
 	for (int i = 0; i < m_PlayerNum + 1; i++) {
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", m_PlayerNum + 1);
-		QueryGOs<Player>(PlayerNo, [&](Player* player)->bool {
+		QueryGOs<GamePlayer>(PlayerNo, [&](GamePlayer* player)->bool {
 			m_Player[m_PlayerNum] = player;
 			m_PlayerNum++;
 			return true;

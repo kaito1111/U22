@@ -20,8 +20,8 @@ bool Goal::Start()
 	m_ClearSprite->SetW(0.0f);
 	m_SkinRender = NewGO<SkinModelRender>(0);
 	m_SkinRender->Init(L"Assets/modelData/Goal.cmo");
-	m_player[0] = FindGO<Player>("player1");
-	m_player[1] = FindGO<Player>("player2");
+	m_player[0] = FindGO<GamePlayer>("player1");
+	m_player[1] = FindGO<GamePlayer>("player2");
 
 	return true;
 }

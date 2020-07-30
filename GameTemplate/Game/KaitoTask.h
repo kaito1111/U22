@@ -22,6 +22,6 @@ public:
 private:
 	//TitleStage*7
 	GameCamera* m_GameCamera = nullptr;
-    Player* m_Player[2] = {};
+    GamePlayer* m_Player[2] = {};
 
 };

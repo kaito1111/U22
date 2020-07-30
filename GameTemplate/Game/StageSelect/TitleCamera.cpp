@@ -19,7 +19,7 @@ bool TitleCamera::Start()
 	g_camera3D.SetFar(10000.0f);
 	g_camera3D.SetNear(1.0f);
 	g_camera3D.Update();
-	player = FindGO<Player>("player1");
+	player = FindGO<GamePlayer>("player1");
 	return true;
 }
 

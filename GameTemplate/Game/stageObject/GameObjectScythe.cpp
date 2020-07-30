@@ -21,8 +21,8 @@ GameObjectScythe::~GameObjectScythe()
 bool GameObjectScythe::Start()
 {
 	//ÉvÉåÉCÉÑÅ[ÇÃåüçı
-	player1 = FindGO<Player>("player1");
-	player2 = FindGO<Player>("player2");
+	player1 = FindGO<GamePlayer>("player1");
+	player2 = FindGO<GamePlayer>("player2");
 	m_pos.y += 490.0f;
 	m_model.Init(L"Assets/modelData/Huriko.cmo");
 	m_rot.SetRotationDeg(CVector3::AxisX(), -90.0f);

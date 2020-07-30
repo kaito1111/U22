@@ -1,6 +1,6 @@
 #pragma once
 #include"physics/PhysicsStaticObject.h"
-class Player;
+class GamePlayer;
 class Floor;
 class stageObjectStopFloor : public IGameObject
 {
@@ -15,7 +15,7 @@ public:
 	}
 private:
 	Floor* floor = nullptr;
-	Player* m_player[2] = {};//プレイヤークラスの初期化
+	GamePlayer* m_player[2] = {};//プレイヤークラスの初期化
 	SkinModel m_model;        //通る前のモデル
 	CVector3 playerPosition1 = CVector3::Zero();//player1の座標
 	CVector3 playerPosition2 = CVector3::Zero();//player2の座標

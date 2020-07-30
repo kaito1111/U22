@@ -4,11 +4,11 @@
 #include "Magnet/Magnet.h"
 class PlayerPad;
 
-class Player : public IGameObject
+class GamePlayer : public IGameObject
 {
 public:
-	Player();
-	~Player();
+	GamePlayer();
+	~GamePlayer();
 	CVector3 GetPosition() { 
 		return m_position; 
 	}

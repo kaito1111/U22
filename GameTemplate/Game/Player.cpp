@@ -6,7 +6,7 @@
 #include "PlayerPad.h"
 
 
-Player::Player()
+GamePlayer::GamePlayer()
 {
 	//cmoファイルの読み込み。
 	m_model.Init(L"Assets/modelData/Player.cmo");
@@ -22,18 +22,18 @@ Player::Player()
 }
 
 
-Player::~Player()
+GamePlayer::~GamePlayer()
 {
 	DeleteGO(m_Magnet);
 	DeleteGO(m_ThisNumSprite);
 }
 
-void Player::InitPad(PlayerPad* pad)
+void GamePlayer::InitPad(PlayerPad* pad)
 {
 	m_Pad = pad;
 }
 
-void Player::ReSpown()
+void GamePlayer::ReSpown()
 {
 		m_position = m_CheckPoint;
 		GameCamera* camera = FindGO<GameCamera>("camera");
@@ -47,11 +47,11 @@ void Player::ReSpown()
 	
 }
 
-void Player::SetCheckPoint(CVector3 spownPoint)
+void GamePlayer::SetCheckPoint(CVector3 spownPoint)
 {
 	m_CheckPoint = spownPoint;
 }
-bool Player::Start()
+bool GamePlayer::Start()
 {
 	m_ThisNumSprite = NewGO<SpriteRender>(0);
 	wchar_t spriteName[256] = {};
@@ -81,7 +81,7 @@ bool Player::Start()
 	return true;
 }
 
-void Player::Update()
+void GamePlayer::Update()
 {
 	//シャドウ関連の更新処理
 	{
@@ -113,7 +113,7 @@ void Player::Update()
 	m_BuckModel.UpdateWorldMatrix(m_position, m_ReverseDefeatRot, m_Scale);
 	m_FrontModel.UpdateWorldMatrix(m_position, m_DefeatRot, m_Scale);
 }
-void Player::Draw()
+void GamePlayer::Draw()
 {
 	if (!m_PlayerCut) {
 		//シルエット用の描画
@@ -157,7 +157,7 @@ void Player::Draw()
 }
 
 
-void Player::SpawnPole()
+void GamePlayer::SpawnPole()
 {
 	CMatrix mrot = CMatrix::Identity();
 	mrot.MakeRotationFromQuaternion(m_rot);
@@ -196,7 +196,7 @@ void Player::SpawnPole()
 	}
 }
 
-void Player::Move()
+void GamePlayer::Move()
 {
 	//ジャンプ判定
 	movespeed.x = 0.0f;
@@ -275,7 +275,7 @@ void Player::Move()
 	m_rot.SetRotationDeg(CVector3::AxisY(), m_rotAngle);
 }
 
-void Player::MyMagnet()
+void GamePlayer::MyMagnet()
 {
 	if (m_Pad->IsMagN()) {
 		m_Magnet->SetState(Magnet::State::NMode);
@@ -288,7 +288,7 @@ void Player::MyMagnet()
 	}
 }
 
-void Player::SIBOU()				//OK
+void GamePlayer::SIBOU()				//OK
 {
 	m_characon.RemoveRigidBoby();
 	if (HaveMagnet) {
@@ -301,14 +301,14 @@ void Player::SIBOU()				//OK
 	}
 }
 
-void Player::MagumaDead()				//OK
+void GamePlayer::MagumaDead()				//OK
 {
 	m_position.y -= 1.0f;
 	m_IsSi = true;
 
 }
 
-void Player::Cut()						//OK
+void GamePlayer::Cut()						//OK
 {
 	m_PlayerCut = true;
 	rate += 2.0f;
@@ -333,7 +333,7 @@ void Player::Cut()						//OK
 	m_IsSi = true;
 }
 
-void Player::Press()					//OK
+void GamePlayer::Press()					//OK
 {
 	if (m_IsSi == false) {
 		SoundSource m_bleeding;
