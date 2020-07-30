@@ -137,7 +137,11 @@ namespace {
 			//上方向と法線のなす角度を求める。
 			float angle = hitNormalTmp.Dot(CVector3::Up());
 			angle = fabsf(acosf(angle));
-			if (angle > CMath::PI * 0.7f		//地面の傾斜が126度よりでかいので天井とみなす。
+			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character) {
+				isHit = true;
+				//CVector3 hi
+			}
+			if (angle > CMath::PI * 0.7f		//天井の傾斜が126度よりでかいので天井とみなす。
 				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Ground //もしくはコリジョン属性が地面と指定されている。
 				) {
 				//衝突している。

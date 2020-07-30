@@ -124,6 +124,7 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 {
 	if (m_once == false) {
 		m_playerNum = playerNr;
+		m_once = true;
 	}
 
 	Console::get().writeLine(JString("player ") + playerNr + L" " + player.getName() + L" has joined the game");
