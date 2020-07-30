@@ -29,6 +29,16 @@ namespace {
 			}
 			//衝突点の法線を引っ張ってくる。
 			CVector3 hitNormalTmp = *(CVector3*)&convexResult.m_hitNormalLocal;
+			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character) {
+				isHit = true;
+				CVector3 hitPosNorm = hitNormalTmp;
+				hitPosNorm.Normalize();
+				hitPosNorm *= -1.0f;
+				CVector3 hitPosTmp = *(CVector3*)&convexResult.m_hitPointLocal;
+				hitPos = hitPosTmp;
+				hitNormal = *(CVector3*)&convexResult.m_hitNormalLocal;
+				return 0.0f;
+			}
 			//上方向と法線のなす角度を求める。
 			float angle = hitNormalTmp.Dot(CVector3::Up());
 			angle = fabsf(acosf(angle));
@@ -74,7 +84,7 @@ namespace {
 			hitNormalTmp.Set(convexResult.m_hitNormalLocal);
 			//上方向と衝突点の法線のなす角度を求める。
 			float angle = fabsf(acosf(hitNormalTmp.Dot(CVector3::Up())));
-			if (angle >= CMath::PI * 0.2f && angle <= CMath::PI * 0.7f		//地面の傾斜が54度以上、126度以下なので壁とみなす。
+			if (angle >= CMath::PI * 0.3f && angle <= CMath::PI * 0.7f		//地面の傾斜が54度以上、162度以下なので壁とみなす。
 				) {
 				isHit = true;
 				CVector3 hitPosTmp;
@@ -139,11 +149,15 @@ namespace {
 			angle = fabsf(acosf(angle));
 			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character) {
 				isHit = true;
-				//CVector3 hi
+				CVector3 hitPosTmp = *(CVector3*)&convexResult.m_hitPointLocal;
+				hitPos = hitPosTmp;
+				hitNormal = *(CVector3*)&convexResult.m_hitNormalLocal;
+				return 0.0f;
 			}
-			if (angle > CMath::PI * 0.7f		//天井の傾斜が126度よりでかいので天井とみなす。
+			else if (angle > CMath::PI * 0.7f		//天井の傾斜が162度よりでかいので天井とみなす。
 				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Ground //もしくはコリジョン属性が地面と指定されている。
-				) {
+				) 
+			{
 				//衝突している。
 				isHit = true;
 				CVector3 hitPosTmp = *(CVector3*)&convexResult.m_hitPointLocal;
@@ -245,8 +259,16 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			if (callback.isHit) {
 				//当たった。
 				moveSpeed.y = 0.0f;
+				float angle = callback.hitNormal.Dot(CVector3::Up());
+				CQuaternion m_Rot;
+				m_Rot.SetRotation(CVector3::Up(), -angle);
+				CVector3 sphereHitPos = callback.hitPos;
+				sphereHitPos.y - (m_radius + m_height);
+				CVector3 a = sphereHitPos;
+				m_Rot.Multiply(a);
 				//nextPosition.y = callback.hitPos.y - (m_height + m_radius + m_height * 0.5);
-				nextPosition.y = callback.hitPos.y - (m_height + m_radius * 2.0f/*+ 8.0f*/);
+				nextPosition.y = a.y - (m_height + m_radius * 2.0f/*+ 8.0f*/);
+
 			}
 		}
 	}
@@ -353,7 +375,8 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 				nextPosition.x += callback.hitNormal.x * m_radius;
 				//nextPosition.z += callback.hitNormal.z * m_radius;
 #else
-				CVector3 vT0, vT1;
+				C
+					Vector3 vT0, vT1;
 				//XZ平面上での移動後の座標をvT0に、交点の座標をvT1に設定する。
 				vT0.Set(nextPosition.x, 0.0f, nextPosition.z);
 				vT1.Set(callback.hitPos.x, 0.0f, callback.hitPos.z);
@@ -382,9 +405,9 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 					nextPosition.x = m_position.x;
 					nextPosition.z = m_position.z;
 					break;
-				}
-#endif
 			}
+#endif
+		}
 			else {
 				//どことも当たらないので終わり。
 				break;
@@ -393,8 +416,8 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 			if (loopCount == 5) {
 				break;
 			}
-		}
 	}
+}
 	//XZの移動は確定。
 	m_position.x = nextPosition.x;
 	m_position.z = nextPosition.z;

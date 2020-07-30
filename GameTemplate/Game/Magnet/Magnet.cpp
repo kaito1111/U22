@@ -32,10 +32,10 @@ CVector3 Magnet::MagnetMove()
 	float maganetLen = 300.0f;				//磁力が働く距離
 	int MagnetNum = 0;
 	QueryMO([&](Magnet* mag)->bool {
-		QueryMO([&](Magnet* mag)->bool {
-			MagnetNum++;
-			return true;
-		}); 
+		MagnetNum++;
+		return true;
+	});
+	QueryMO([&](Magnet* mag)->bool {
 
 		//自分は計算しない
 		if (mag == this) {
@@ -46,7 +46,7 @@ CVector3 Magnet::MagnetMove()
 		diff.z = 0.0f;
 		float diffLen = diff.Length();
 		float a = 0;					//マグネットの力が遠いほど弱くなるやつ
-		a =( maganetLen - diffLen);
+		a = (maganetLen - diffLen);
 		CVector3 MagnetForce = diff;
 		MagnetForce.Normalize();
 		switch (state)
@@ -148,7 +148,7 @@ void MyMagnet::Magnet::Update()
 		}
 		break;
 	case Magnet::NMode:
-		SeVolume+=0.01f;
+		SeVolume += 0.01f;
 		if (SeVolume >= 1.0f) {
 			SeVolume = 1.0f;
 		}
@@ -166,7 +166,7 @@ void MyMagnet::Magnet::Update()
 		}
 		break;
 	default:
-		SeVolume-=0.01f;
+		SeVolume -= 0.01f;
 		if (SeVolume <= 0.0f) {
 			SeVolume = 0.0f;
 		}

@@ -69,7 +69,6 @@ bool GamePlayer::Start()
 	LearnMO(m_Magnet); 
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
-	m_Magnet->SetPad(&g_Pad[m_PlayerNum]);
 
 	m_characon.Init(40.0f, 20.0f, m_position);
 	m_AnimeClip[enAniCli::Run].Load(L"Assets/animData/PlayerRun.tka");
@@ -204,7 +203,7 @@ void GamePlayer::Move()
 	//¶‰E‚ÌˆÚ“®
 	movespeed.x = m_Pad->MoveX() * -10.0f;
 	const float junpPower = 15.0f;
-	float Volume;
+	float Volume = 0.0f;
 	if (m_characon.IsJump() &&
 		g_Pad[m_PlayerNum].IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
@@ -227,7 +226,7 @@ void GamePlayer::Move()
 	}
 	const float gravity = 0.8f;		//d—Í
 	movespeed.y -= gravity;
-	Volume = fabsf(m_Pad->MoveX());
+	//Volume = fabsf(m_Pad->MoveX());
 	if (movespeed.y >= 0.0f) {
 		Volume -= 0.1f;
 	}
