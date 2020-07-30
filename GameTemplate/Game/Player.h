@@ -39,6 +39,11 @@ public:
 	{
 		m_PlayerNum = n;
 	}
+
+	int& GetPlayerNum()
+	{
+		return m_PlayerNum;
+	}
 	void ReSpown();
 	void SetCheckPoint(CVector3 spownPoint);
 private:

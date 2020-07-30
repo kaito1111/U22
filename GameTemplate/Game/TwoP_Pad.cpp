@@ -1,22 +1,21 @@
 #include "stdafx.h"
 #include "TwoP_Pad.h"
 #include "Player.h"
-#include "PlayerPad.h"
 #include "Network/NetworkLogic.h"
 
 
 TwoP_Pad::TwoP_Pad() 
 {
-	for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
-	{
-		g_Pad[i].Init(i);
-	}
+	//for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
+	//{
+	//	g_Pad[i].Init(i);
+	//}
 
 	//パッド番号の識別
 	m_PlayerPadNum = NetworkLogic::GetInstance().GetLBL()->GetPlayerNum();
 	//各Padのインスタンス化
-	m_playerPad = NewGO<PlayerPad>(0, "playerPad");
-	m_networkPad = NewGO<NetworkPad>(0, "networkPad");
+	m_playerPad = new PlayerPad;
+	m_networkPad = new NetworkPad;
 	//パッドの識別＆初期化
 	if (m_PlayerPadNum == 1) {
 		//player1だった
@@ -66,9 +65,8 @@ void TwoP_Pad::PostRender()
 
 void TwoP_Pad::Update()
 {
-	for (int i = 0; i < g_PlayerNum; i++) {
-		g_Pad[i].Update();
-	}
+	m_playerPad->Update();
+	m_networkPad->Update();
 	if (m_playerPad->IsTriStart())
 	{
 		if (m_Manual_W == 0.0f)

@@ -6,7 +6,7 @@
 #include "HID/Pad.h"
 #include "GameObject/IGameObject.h"
 
-class IPad : public IGameObject{
+class IPad /*: public IGameObject*/{
 public:
 	/// <summary>
 	/// çXêV

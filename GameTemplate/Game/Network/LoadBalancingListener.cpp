@@ -227,6 +227,7 @@ void LoadBalancingListener::joinRoomReturn(int localPlayerNr, const Hashtable& g
 
 void LoadBalancingListener::joinRandomRoomReturn(int localPlayerNr, const Hashtable& gameProperties, const Hashtable& playerProperties, int errorCode, const JString& errorString)
 {
+	m_playerNum = localPlayerNr;
 	updateState();
 	if (errorCode == ErrorCode::NO_MATCH_FOUND)
 		createRoom();
