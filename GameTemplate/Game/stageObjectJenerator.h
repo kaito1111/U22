@@ -48,6 +48,7 @@ private:
 	moveFloor* moveFloorPtr = nullptr;
 	MoveFloor2* moveFloor2Ptr = nullptr; 
 	float Floor2PosX = 0.0f;
+	Goal* m_goalPtr = nullptr;
 	/*std::list< stageObjectStopFloor*> stopFloorList;
 	std::list<Goal*> goalList;
 	std::list<Iwa*> IwaList;
