@@ -9,6 +9,8 @@
 #include "level/Level.h"
 #include "StageSelect/StageSelect.h"
 #include "CheckPointgenerator.h"
+#include "Network/NetworkLogic.h"
+
 StageSelect;
 Game::Game()
 {

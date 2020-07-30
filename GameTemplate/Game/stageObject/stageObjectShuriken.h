@@ -1,7 +1,7 @@
 #pragma once
 class stageObjectShuriken : public IGameObject
 {
-	class Player;
+	//class Player;
 		//ÉTÉCÉY200*200*20
 	public:
 		stageObjectShuriken();

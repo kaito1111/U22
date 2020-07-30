@@ -1,7 +1,9 @@
 #include "stdafx.h"
+#include "Player.h"
 #include "KaitoTask.h"
 #include "GameCamera.h"
-#include "Player.h"
+#include "TwoP_Pad.h"
+#include "Network/NetworkLogic.h"
 
 //#include "TitleStage.h"
 //#include "TwoP_Pad.h"
@@ -17,11 +19,13 @@ KaitoTask::KaitoTask()
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", i + 1);
 		//優先度をステージより早く
-		m_Player[i] = NewGO<Player>(0, PlayerNo);
+		m_Player[i] = NewGO<GamePlayer>(0, PlayerNo);
 		m_Player[i]->SetPosition(SpownPos);
 		m_Player[i++]->SetPlayerNum(i);
 	}
-	//NewGO<Goal>(1, "goal");
+
+
+	//m_Player[0]->
 }
 
 void KaitoTask::PreRender()

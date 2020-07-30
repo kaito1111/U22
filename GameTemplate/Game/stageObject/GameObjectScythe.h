@@ -1,5 +1,5 @@
 #pragma once
-class Player;
+class GamePlayer;
 class GameObjectScythe : public IGameObject
 {
 public:
@@ -15,8 +15,8 @@ public:
 		m_pos = pos;
 	};
 private:
-	Player* player1 = nullptr;
-	Player* player2 = nullptr;
+	GamePlayer* player1 = nullptr;
+	GamePlayer* player2 = nullptr;
 	SkinModel m_model;							 //スキンモデル
 	CVector3 m_pos = CVector3::Zero();			 //座標
 	CQuaternion m_rot = CQuaternion::Identity(); //回転量

@@ -17,8 +17,8 @@ StageObjectMagma::~StageObjectMagma()
 
 bool StageObjectMagma::Start()
 {
-	player1 = FindGO<Player>("player1");
-	player2 = FindGO<Player>("player2");
+	player1 = FindGO<GamePlayer>("player1");
+	player2 = FindGO<GamePlayer>("player2");
 	m_pos.y -= 400.0f;
 	m_model.Init(L"Assets/modelData/magma.cmo");
 	return true;

@@ -17,7 +17,7 @@ bool Gimmick_Button::Start()
 	for (int p = 0; p < g_PlayerNum;p++) {
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", p + 1);
-		m_Player[p] = FindGO<Player>(PlayerNo);
+		m_Player[p] = FindGO<GamePlayer>(PlayerNo);
 	}
 	m_Skin = NewGO<SkinModelRender>(0);
 	m_Skin->Init(L"Assets/modelData/Gimmick_Button.cmo", nullptr);

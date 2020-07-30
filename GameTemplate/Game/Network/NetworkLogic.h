@@ -1,10 +1,9 @@
 #pragma once
 #include "LoadBalancingListener.h"
-#include "LoadBalancing-cpp/inc/Client.h"
 #include "TestView.h"
 
-class TestView;
-
+//class TestView;
+#include "TwoP_Pad.h"
 
 class NetworkLogic// : Noncopyable
 {

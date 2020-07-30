@@ -20,7 +20,7 @@ private:
 	CVector3 m_CheckPoint = CVector3::Zero();
 	bool Start();
 	void Update();
-	Player* m_player[2];
+	GamePlayer* m_player[2];
 	bool m_IsCurrent = true;				//このチェックポイントで復活するかどうか
 											//複数ある時などに使用する	
 	CheckPoint* m_point = nullptr;

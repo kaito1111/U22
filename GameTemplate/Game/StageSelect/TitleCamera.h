@@ -1,5 +1,5 @@
 #pragma once
-class Player;
+class GamePlayer;
 class TitleCamera :public IGameObject
 
 {
@@ -11,7 +11,7 @@ public:
 	void Update();
 
 private:
-	Player* player = nullptr;
+	GamePlayer* player = nullptr;
 	CVector3 m_pos = CVector3::Zero();
 };
 

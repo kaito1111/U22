@@ -25,8 +25,8 @@ bool StageSelect::Start()
 
 	titleCamera = NewGO<TitleCamera>(1);
 	titleStage = NewGO<TitleStage>(1);
-	player1 = FindGO<Player>("player1");
-	player2 = FindGO<Player>("player2");
+	player1 = FindGO<GamePlayer>("player1");
+	player2 = FindGO<GamePlayer>("player2");
 	return true;
 }
 
