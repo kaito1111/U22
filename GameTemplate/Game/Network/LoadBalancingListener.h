@@ -121,46 +121,28 @@ public:
 	/// <param name="i">キー</param>
 	/// <param name="f">送る値(float)</param>
 	void putData(nByte i, bool b);
-
-	int GetplayerNum() {
-		return m_playerNum;
-	}
 	/// <summary>
-	/// パッドの値をとる
+	/// プレイヤー番号
 	/// </summary>
-	/// <param name="padNo">ほしいパッドの番号</param>
-	/// <returns>パッドの値</returns>
-	int GetPlayerPadData(int padNo) {
-		return Trigger[padNo];
-	}
-	int GetPlayerStickLXData() {
-		if (padLX != 0) {
-			printf("tyu");
-		}
-		return padLX;
-	}
-	int GetPlayerStickLYData() {
-		return padLY;
-	}
-	int GetPlayerStickRXData() {
-		if (padRX != 0) {
-			printf("tyu");
-		}
-		return padRX;
-	}
-	int GetPlayerStickRYData() {
-		return padRY;
-	}
+	/// <returns></returns>
 	int& GetPlayerNum() {
 		return m_playerNum;
 	}
 	/// <summary>
-	/// ユーザーのネームを取得
+	/// X軸の移動
 	/// </summary>
 	/// <returns></returns>
-	const JString& GetUser(int playerNo)
+	float& GetMoveX()
 	{
-		return m_UserData[playerNo].getUserID();
+		return m_moveX;
+	}
+	/// <summary>
+	/// Z軸の移動
+	/// </summary>
+	/// <returns></returns>
+	float& GetMoveZ()
+	{
+		return m_moveZ;
 	}
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;
@@ -171,10 +153,8 @@ private:
 	int m_maxPlayer = 2;
 	unsigned long lastUpdateTime;
 	int m_playerNum = 0;					//フォトンの最大参加人数、これが自分の参加番号になる
-	//padの入力
-	float padLX = 0, padLY = 0, padRX = 0, padRY = 0;
 	bool m_once = false;		//一度のみ
-	//トリガー
-	int Trigger[16] = {};
+	float m_moveX = 0;
+	float m_moveZ = 0;					//移動
 };
 

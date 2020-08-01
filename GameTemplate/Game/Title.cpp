@@ -29,6 +29,7 @@ Title::~Title()
 
 void Title::Update()
 {
+	g_Pad->Update();
 	//ルームの作成　そのルームが作成済みなら参加
 	//キーボードのSpace g_Padの44行目参照
 	if (g_Pad->IsTrigger(enButtonSelect)) {

@@ -124,7 +124,14 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 {
 	if (m_once == false) {
 		m_playerNum = playerNr;
+		m_once = true;
 	}
+
+	if (playerNr > 3)
+	{
+		throw;
+	}
+
 
 	Console::get().writeLine(JString("player ") + playerNr + L" " + player.getName() + L" has joined the game");
 }
@@ -156,12 +163,13 @@ void LoadBalancingListener::onAvailableRegions(const ExitGames::Common::JVector<
 void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, const Object& eventContentObj)
 {
 	ExitGames::Common::Hashtable eventContent = ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContentObj).getDataCopy();
+	nByte Key;
+	ExitGames::Common::Hashtable hashData;
 
 	switch (eventCode) {
 	case 0:
-		nByte Key = 1;
+		Key = 1;
 		int blueTeamScore, orangeTeamScore;
-		ExitGames::Common::Hashtable hashData;
 		hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
 		if (eventContent.getValue(Key)) {
@@ -177,11 +185,26 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
 		}
 		break;
-	//case 1:
+	case 1:
+		Key = 2;
+		hashData = playerData;
 		/*
 		padデータ（ボタン、pad入力）を送信側から受け取る処理。
 		*/
-		//break;
+		hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
+		if (eventContent.getValue(Key)) {
+			hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
+			if (hashData.getValue(7)) {
+				//X移動取得
+				m_moveX = ValueObject<nByte>(hashData.getValue(7)).getDataCopy();
+			}
+			if (hashData.getValue(8)) {
+				//Z移動取得
+				m_moveZ = ValueObject<nByte>(playerData.getValue(8)).getDataCopy();
+			}
+		}
+
+		break;
 	}
 }
 
@@ -402,7 +425,7 @@ void LoadBalancingListener::RaisePlayerData()
 	Hashtable ev;
 
 	//コンテナにplayerデータの情報を積む
-	ev.put((nByte)1, playerData);
+	ev.put((nByte)2, playerData);
 
 	//データの送信
 	//customEventActionが呼ばれる

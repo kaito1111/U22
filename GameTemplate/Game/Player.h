@@ -3,6 +3,8 @@
 #include "graphics/2D/SpriteRender.h"
 #include "Magnet/Magnet.h"
 class PlayerPad;
+class NetworkPad;
+class IPad;
 
 class GamePlayer : public IGameObject
 {
@@ -30,6 +32,7 @@ public:
 	/// </summary>
 	/// <param name="pad">パッド</param>
 	void InitPad(PlayerPad* pad);
+	void InitPad(NetworkPad* pad);
 	void SIBOU();						
 	void Press();						//何度も呼ぶ
 	void MagumaDead();					//何度も呼ぶ
@@ -101,6 +104,6 @@ private:
 	void MyMagnet();
 	SoundSource m_Asioto;
 
-	PlayerPad* m_Pad = nullptr;
+	IPad* m_Pad = nullptr;
 };
 

@@ -19,6 +19,8 @@ public:
 	/// </remarks>
 	void PreRender();
 
+	void Update();
+
 private:
 	//TitleStage*7
 	GameCamera* m_GameCamera = nullptr;

@@ -4,6 +4,7 @@
 #include "SPole.h"
 #include "GameCamera.h"
 #include "PlayerPad.h"
+#include "NetworkPad.h"
 
 
 GamePlayer::GamePlayer()
@@ -30,21 +31,33 @@ GamePlayer::~GamePlayer()
 
 void GamePlayer::InitPad(PlayerPad* pad)
 {
+	//ポリモーフィズムを使用して
+	//初期化された方のPadの関数を呼び出す。
+	//こっちならNetworkPadを呼び出し。
+	IPad* iPad = pad;
+	m_Pad = pad;
+}
+
+void GamePlayer::InitPad(NetworkPad* pad)
+{
+	//ポリモーフィズムを使用して
+	//初期化された方のPadの関数を呼び出す。
+	//こっちならNetworkPadを呼び出し。
+	IPad* iPad = pad;
 	m_Pad = pad;
 }
 
 void GamePlayer::ReSpown()
 {
-		m_position = m_CheckPoint;
-		GameCamera* camera = FindGO<GameCamera>("camera");
-		camera->SetDec(0.0f);
-		m_IsSi = false;
-		m_characon.Init(40.0f, 20.0f, m_position);
-		LearnMO(m_Magnet);
-		HaveMagnet = true;
-		m_Magnet->SetPosition(&m_position);
-		m_Scale.z = 1.0f;
-	
+	m_position = m_CheckPoint;
+	GameCamera* camera = FindGO<GameCamera>("camera");
+	camera->SetDec(0.0f);
+	m_IsSi = false;
+	m_characon.Init(40.0f, 20.0f, m_position);
+	LearnMO(m_Magnet);
+	HaveMagnet = true;
+	m_Magnet->SetPosition(&m_position);
+	m_Scale.z = 1.0f;
 }
 
 void GamePlayer::SetCheckPoint(CVector3 spownPoint)
@@ -83,6 +96,7 @@ bool GamePlayer::Start()
 
 void GamePlayer::Update()
 {
+	m_Pad->Update();
 	//シャドウ関連の更新処理
 	{
 

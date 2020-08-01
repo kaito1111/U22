@@ -3,6 +3,7 @@
 #include "KaitoTask.h"
 #include "GameCamera.h"
 #include "TwoP_Pad.h"
+#include "PlayerPad.h"
 #include "Network/NetworkLogic.h"
 
 //#include "TitleStage.h"
@@ -24,7 +25,7 @@ KaitoTask::KaitoTask()
 		m_Player[i++]->SetPlayerNum(i);
 	}
 
-	if (m_Player[0]->GetPlayerNum() - 1 == 0) {
+	if (INetworkLogic().GetLBL()->GetPlayerNum() - 1 == 0) {
 		//ƒvƒŒƒCƒ„[1
 		m_Player[0]->InitPad(twoP_Pad().GetPPad());
 		m_Player[1]->InitPad(twoP_Pad().GetNPad());
@@ -45,6 +46,11 @@ void KaitoTask::PreRender()
 	for (int i = 0; i < g_PlayerNum;) {
 		shadowMap->RegistShdowCaster(m_Player[i++]->GetModel());
 	}
+}
+
+void KaitoTask::Update()
+{
+	twoP_Pad().Update();
 }
 
 KaitoTask::~KaitoTask()

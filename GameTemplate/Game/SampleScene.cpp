@@ -20,6 +20,12 @@ SampleScene::~SampleScene()
 
 bool SampleScene::Start()
 {
+	m_copyMainRtToFrameBufferSprite.Init(
+		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
+		FRAME_BUFFER_W,
+		FRAME_BUFFER_H
+	);
+
 	//オブジェクトのインスタンス化
 	m_ground = NewGO<SampleGround>(0, "groundObj");
 	m_debugMan = NewGO<DebugMan>(0, "debugManObj");
@@ -33,4 +39,10 @@ bool SampleScene::Start()
 void SampleScene::Update()
 {
 	
+}
+
+void SampleScene::PostRender()
+{
+	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
+	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
 }
