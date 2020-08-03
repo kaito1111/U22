@@ -39,7 +39,7 @@ void GamePlayer::ReSpown()
 		GameCamera* camera = FindGO<GameCamera>("camera");
 		camera->SetDec(0.0f);
 		m_IsSi = false;
-		m_characon.Init(40.0f, 20.0f, m_position);
+		m_characon.Init(30.0f, 20.0f, m_position);
 		LearnMO(m_Magnet);
 		HaveMagnet = true;
 		m_Magnet->SetPosition(&m_position);
