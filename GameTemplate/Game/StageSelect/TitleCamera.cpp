@@ -19,14 +19,14 @@ bool TitleCamera::Start()
 	g_camera3D.SetFar(10000.0f);
 	g_camera3D.SetNear(1.0f);
 	g_camera3D.Update();
-	player = FindGO<GamePlayer>("player1");
+	//player = FindGO<GamePlayer>("player1");
 	return true;
 }
 
 void TitleCamera::Update()
 {
-	CVector3 Target = player->GetPosition();
-	CVector3 pos = player->GetPosition();
+	CVector3 Target = CVector3::Zero();
+	CVector3 pos = Target;
 	pos.y += 500.0f;
 	pos.z += 500.0f;
 	g_camera3D.SetTarget(Target);

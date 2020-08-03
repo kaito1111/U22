@@ -5,6 +5,7 @@
 #include "SampleScene.h"
 #include "Network/NetworkLogic.h"
 #include "Network/LoadBalancingListener.h"
+#include "StageSelect/StageSelect.h"
 
 Title::Title()
 {
@@ -44,7 +45,7 @@ void Title::Update()
 	}
 	//サンプルステージ
 	if (GetAsyncKeyState('Y')) {
-		NewGO<SampleScene>(0, "ground");
+		NewGO<StageSelect>(0, "stageselect");
 		DeleteGO(this);
 	}
 	if (DeleteTitle) {
