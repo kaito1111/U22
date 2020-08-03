@@ -70,7 +70,6 @@ bool GamePlayer::Start()
 	LearnMO(m_Magnet); 
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
-	m_Magnet->SetPad(&g_Pad[m_PlayerNum]);
 
 	m_characon.Init(40.0f, 20.0f, m_position);
 	m_AnimeClip[enAniCli::Run].Load(L"Assets/animData/PlayerRun.tka");
