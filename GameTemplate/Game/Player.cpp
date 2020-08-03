@@ -4,6 +4,7 @@
 #include "SPole.h"
 #include "GameCamera.h"
 #include "PlayerPad.h"
+#include "NetworkPad.h"
 
 
 GamePlayer::GamePlayer()
@@ -28,23 +29,23 @@ GamePlayer::~GamePlayer()
 	DeleteGO(m_ThisNumSprite);
 }
 
-void GamePlayer::InitPad(PlayerPad* pad)
+void GamePlayer::SetPad(IPad* pad)
 {
+	//PlayerPad or NetworkPad ÇÃê›íË
 	m_Pad = pad;
 }
 
 void GamePlayer::ReSpown()
 {
-		m_position = m_CheckPoint;
-		GameCamera* camera = FindGO<GameCamera>("camera");
-		camera->SetDec(0.0f);
-		m_IsSi = false;
-		m_characon.Init(30.0f, 20.0f, m_position);
-		LearnMO(m_Magnet);
-		HaveMagnet = true;
-		m_Magnet->SetPosition(&m_position);
-		m_Scale.z = 1.0f;
-	
+	m_position = m_CheckPoint;
+	GameCamera* camera = FindGO<GameCamera>("camera");
+	camera->SetDec(0.0f);
+	m_IsSi = false;
+	m_characon.Init(40.0f, 20.0f, m_position);
+	LearnMO(m_Magnet);
+	HaveMagnet = true;
+	m_Magnet->SetPosition(&m_position);
+	m_Scale.z = 1.0f;
 }
 
 void GamePlayer::SetCheckPoint(CVector3 spownPoint)
@@ -69,6 +70,7 @@ bool GamePlayer::Start()
 	LearnMO(m_Magnet); 
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
+	m_Magnet->SetPad(&g_Pad[m_PlayerNum]);
 
 	m_characon.Init(40.0f, 20.0f, m_position);
 	m_AnimeClip[enAniCli::Run].Load(L"Assets/animData/PlayerRun.tka");
@@ -203,7 +205,7 @@ void GamePlayer::Move()
 	//ç∂âEÇÃà⁄ìÆ
 	movespeed.x = m_Pad->MoveX() * -10.0f;
 	const float junpPower = 15.0f;
-	float Volume = 0.0f;
+	float Volume;
 	if (m_characon.IsJump() &&
 		g_Pad[m_PlayerNum].IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
@@ -226,7 +228,7 @@ void GamePlayer::Move()
 	}
 	const float gravity = 0.8f;		//èdóÕ
 	movespeed.y -= gravity;
-	//Volume = fabsf(m_Pad->MoveX());
+	Volume = fabsf(m_Pad->MoveX());
 	if (movespeed.y >= 0.0f) {
 		Volume -= 0.1f;
 	}

@@ -119,6 +119,8 @@
     <ClCompile Include="SampleGround.cpp" />
     <ClCompile Include="GemeLoop.cpp" />
     <ClCompile Include="character\BoxCharactorController.cpp" />
+    <ClCompile Include="PlayerPad.cpp" />
+    <ClCompile Include="NetworkPad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -263,6 +265,9 @@
     <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="GemeLoop.h" />
     <ClInclude Include="character\BoxCharactorController.h" />
+    <ClInclude Include="IPad.h" />
+    <ClInclude Include="PlayerPad.h" />
+    <ClInclude Include="NetworkPad.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

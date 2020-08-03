@@ -3,6 +3,8 @@
 #include "graphics/2D/SpriteRender.h"
 #include "Magnet/Magnet.h"
 class PlayerPad;
+class NetworkPad;
+class IPad;
 
 class GamePlayer : public IGameObject
 {
@@ -26,10 +28,18 @@ public:
 	}
 
 	/// <summary>
-	/// パッドの初期化
+	/// padの初期化
+	/// <para>ポリモーフィズムしていないIPadを送らないこと。</para>
 	/// </summary>
-	/// <param name="pad">パッド</param>
-	void InitPad(PlayerPad* pad);
+	/// <remarks>
+	/// ---padの処理について---
+	/// 1.twoP_PadでPadの識別(対応した型にポリモーフィズム)と初期化をして、
+	/// 2.kaitoTask(プレイヤーのインスタンス作成時)で、どのPadを使って操作するかの設定。
+	/// ---exp---
+	/// ポリモーフィズムすることで関数を一つに集約
+	/// </remarks>
+	/// <param name="pad">ポリモーフィズムされたIPad</param>
+	void SetPad(IPad* pad);
 	void SIBOU();						
 	void Press();						//何度も呼ぶ
 	void MagumaDead();					//何度も呼ぶ
@@ -101,6 +111,6 @@ private:
 	void MyMagnet();
 	SoundSource m_Asioto;
 
-	PlayerPad* m_Pad = nullptr;
+	IPad* m_Pad = nullptr;
 };
 

@@ -123,9 +123,17 @@ void LoadBalancingListener::serverErrorReturn(int errorCode)
 void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>& playernrs, const Player& player)
 {
 	if (m_once == false) {
+		//ゲームを立ち上げて一回のみよばれる。
 		m_playerNum = playerNr;
 		m_once = true;
 	}
+
+	if (playerNr >=  3)
+	{
+		//プレイ人数がおかしい
+		throw;
+	}
+
 
 	Console::get().writeLine(JString("player ") + playerNr + L" " + player.getName() + L" has joined the game");
 }
@@ -156,13 +164,15 @@ void LoadBalancingListener::onAvailableRegions(const ExitGames::Common::JVector<
 //opRaiseEventでイベントが送信されるとこの関数が呼ばれる
 void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, const Object& eventContentObj)
 {
+	//送られてきたデータ
 	ExitGames::Common::Hashtable eventContent = ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContentObj).getDataCopy();
+	nByte Key;
+	ExitGames::Common::Hashtable hashData;
 
 	switch (eventCode) {
 	case 0:
-		nByte Key = 1;
+		Key = 1;
 		int blueTeamScore, orangeTeamScore;
-		ExitGames::Common::Hashtable hashData;
 		hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
 
 		if (eventContent.getValue(Key)) {
@@ -178,11 +188,29 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
 		}
 		break;
-	//case 1:
+	case 1:
 		/*
 		padデータ（ボタン、pad入力）を送信側から受け取る処理。
 		*/
-		//break;
+		//キー初期化
+		Key = 2;
+		//データ初期化
+		hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
+
+		if (eventContent.getValue(Key)) {
+			hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
+			if (hashData.getValue((nByte)7)) {
+				//X移動取得
+				m_moveX = ValueObject<nByte>(hashData.getValue(7)).getDataCopy();
+			}
+			if (hashData.getValue((nByte)8)) {
+				//Z移動取得
+				m_moveZ = ValueObject<nByte>(hashData.getValue(8)).getDataCopy();
+			}
+			printf("custom event action called, m_moveX %d, m_moveZ %d", m_moveX, m_moveZ);
+		}
+
+		break;
 	}
 }
 
@@ -403,7 +431,7 @@ void LoadBalancingListener::RaisePlayerData()
 	Hashtable ev;
 
 	//コンテナにplayerデータの情報を積む
-	ev.put((nByte)1, playerData);
+	ev.put((nByte)2, playerData);
 
 	//データの送信
 	//customEventActionが呼ばれる

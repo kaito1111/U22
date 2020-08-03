@@ -3,6 +3,7 @@
 #include "KaitoTask.h"
 #include "GameCamera.h"
 #include "TwoP_Pad.h"
+#include "PlayerPad.h"
 #include "Network/NetworkLogic.h"
 
 //#include "TitleStage.h"
@@ -19,19 +20,20 @@ KaitoTask::KaitoTask()
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", i + 1);
 		//優先度をステージより早く
-		m_Player[i] = NewGO<GamePlayer>(0, PlayerNo);
+		m_Player[i] = NewGO<GamePlayer>(1, PlayerNo);
 		m_Player[i]->SetPosition(SpownPos);
 		m_Player[i++]->SetPlayerNum(i);
 	}
 
-	if (m_Player[0]->GetPlayerNum() - 1 == 0) {
+	if (INetworkLogic().GetLBL()->GetPlayerNum() - 1 == 0) {
 		//プレイヤー1
-		m_Player[0]->InitPad(twoP_Pad().GetPPad());
-		m_Player[1]->InitPad(twoP_Pad().GetNPad());
+		m_Player[0]->SetPad(twoP_Pad().GetPPad());
+		m_Player[1]->SetPad(twoP_Pad().GetNPad());
 	}
 	else {
-		m_Player[0]->InitPad(twoP_Pad().GetNPad());
-		m_Player[1]->InitPad(twoP_Pad().GetPPad());
+		//プレイヤー2
+		m_Player[0]->SetPad(twoP_Pad().GetNPad());
+		m_Player[1]->SetPad(twoP_Pad().GetPPad());
 	}
 
 
@@ -45,6 +47,11 @@ void KaitoTask::PreRender()
 	for (int i = 0; i < g_PlayerNum;) {
 		shadowMap->RegistShdowCaster(m_Player[i++]->GetModel());
 	}
+}
+
+void KaitoTask::Update()
+{
+	twoP_Pad().Update();
 }
 
 KaitoTask::~KaitoTask()

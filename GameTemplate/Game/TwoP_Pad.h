@@ -1,12 +1,16 @@
 #pragma once
-#include "PlayerPad.h"
+class PlayerPad;
+class NetworkPad;
+class IPad;
 
 class TwoP_Pad: public IGameObject
 {
-	using NetworkPad = PlayerPad;
+	//using NetworkPad = PlayerPad;
 public:
 	TwoP_Pad();
 	~TwoP_Pad();
+
+	void Update() override;
 
 	//シングルトン
 	static TwoP_Pad& GetInstance()
@@ -19,7 +23,7 @@ public:
 	/// プレイヤーパッドの取得
 	/// </summary>
 	/// <returns></returns>
-	PlayerPad* GetPPad()
+	IPad* GetPPad()
 	{
 		return m_playerPad;
 	}
@@ -27,12 +31,22 @@ public:
 	/// ネットワークパッドの取得
 	/// </summary>
 	/// <returns></returns>
-	NetworkPad* GetNPad()
+	IPad* GetNPad()
 	{
 		return m_networkPad;
 	}
 
 private:
+	enum KeyState
+	{
+		Jump,
+		MagN,
+		MagS,
+		NoMag,
+		ShotN,
+		ShotS,
+		Start
+	};
 	void PostRender();
 	Sprite m_copyMainRtToFrameBufferSprite;	//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 	SpriteRender* m_ManualSprite = nullptr;
@@ -42,13 +56,12 @@ private:
 	int m_PlayerPadNum = 0;
 
 	//bool Start()override;
-	void Update()override;
 	bool NewGOPlayer = false;		//プレイヤーをNewGOするかどうか
 	float m_Manual_W = 0.0f;
 	SpriteRender* m_ButtonSprite = nullptr;
 
-	PlayerPad* m_playerPad;			//プレイヤーのパッド
-	NetworkPad* m_networkPad;		//ネットワークのパッド
+	IPad* m_playerPad;		//プレイヤーのパッド
+	IPad* m_networkPad;		//ネットワークのパッド
 };
 
 /// <summary>
