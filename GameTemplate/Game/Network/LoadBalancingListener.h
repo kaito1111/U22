@@ -154,7 +154,7 @@ private:
 	unsigned long lastUpdateTime;
 	int m_playerNum = 0;					//フォトンの最大参加人数、これが自分の参加番号になる
 	bool m_once = false;		//一度のみ
-	float m_moveX = 0;
+	float m_moveX = 1.0f;
 	float m_moveZ = 0;					//移動
 };
 

@@ -84,7 +84,6 @@ bool GamePlayer::Start()
 
 void GamePlayer::Update()
 {
-	m_Pad->Update();
 	//シャドウ関連の更新処理
 	{
 

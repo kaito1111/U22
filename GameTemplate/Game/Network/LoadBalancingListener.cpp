@@ -128,7 +128,7 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 		m_once = true;
 	}
 
-	if (playerNr > 3)
+	if (playerNr >=  3)
 	{
 		//プレイ人数がおかしい
 		throw;
@@ -164,6 +164,7 @@ void LoadBalancingListener::onAvailableRegions(const ExitGames::Common::JVector<
 //opRaiseEventでイベントが送信されるとこの関数が呼ばれる
 void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, const Object& eventContentObj)
 {
+	//送られてきたデータ
 	ExitGames::Common::Hashtable eventContent = ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContentObj).getDataCopy();
 	nByte Key;
 	ExitGames::Common::Hashtable hashData;
@@ -188,22 +189,25 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		}
 		break;
 	case 1:
-		Key = 2;
-		hashData = playerData;
 		/*
 		padデータ（ボタン、pad入力）を送信側から受け取る処理。
 		*/
+		//キー初期化
+		Key = 2;
+		//データ初期化
 		hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
+
 		if (eventContent.getValue(Key)) {
 			hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
-			if (hashData.getValue(7)) {
+			if (hashData.getValue((nByte)7)) {
 				//X移動取得
 				m_moveX = ValueObject<nByte>(hashData.getValue(7)).getDataCopy();
 			}
-			if (hashData.getValue(8)) {
+			if (hashData.getValue((nByte)8)) {
 				//Z移動取得
-				m_moveZ = ValueObject<nByte>(playerData.getValue(8)).getDataCopy();
+				m_moveZ = ValueObject<nByte>(hashData.getValue(8)).getDataCopy();
 			}
+			printf("custom event action called, m_moveX %d, m_moveZ %d", m_moveX, m_moveZ);
 		}
 
 		break;

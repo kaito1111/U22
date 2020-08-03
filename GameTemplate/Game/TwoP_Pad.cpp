@@ -17,8 +17,8 @@ TwoP_Pad::TwoP_Pad()
 	m_PlayerPadNum = NetworkLogic::GetInstance().GetLBL()->GetPlayerNum();
 	//各Padのインスタンス化
 	//padのポリモーフィズム
-	m_playerPad = new PlayerPad;
-	m_networkPad = new NetworkPad;
+	m_playerPad = NewGO<PlayerPad>(0);
+	m_networkPad = NewGO<NetworkPad>(0);
 	//パッドの識別をして初期化
 	if (m_PlayerPadNum == 1) {
 		//player1だった
