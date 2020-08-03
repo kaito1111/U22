@@ -19,7 +19,7 @@ void PlayerPad::Update()
 		LBL->putData(4, Y);
 		LBL->putData(5, RB1);
 		LBL->putData(6, LB1);
-		LBL->putData(7, 1.0f);
+		LBL->putData(7, vX);
 	}
 	else if (LBL->GetPlayerNum() == 2) {
 		//player2‚¾‚Á‚½
@@ -30,7 +30,7 @@ void PlayerPad::Update()
 		LBL->putData(11, Y);
 		LBL->putData(12, RB1);
 		LBL->putData(13, LB1);
-		LBL->putData(14, 1.0f);
+		LBL->putData(14, vX);
 	}
 	LBL->putData(8, vZ);
 	//‘—M

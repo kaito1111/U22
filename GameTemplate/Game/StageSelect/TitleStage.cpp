@@ -21,7 +21,8 @@ bool TitleStage::Start()
 	);
 	//ステージその他モデル
 	m_floorModel.Init(L"Assets/modelData/serectStage.cmo");//床
-	
+	skyModel = NewGO<SkinModelRender>(0);
+	skyModel->Init(L"Assets/modelData/Player.cmo");
 	return true;
 }
 

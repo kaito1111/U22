@@ -55,7 +55,7 @@ public:
 private:
 	PhysicsStaticObject physics;
 	//‹óB‚Â‚Ü‚è”wŒi
-	SkinModel skyModel;
+	SkinModelRender* skyModel=nullptr;
 	//°
 	SkinModel m_floorModel;
 	CVector3 m_floorPos = CVector3::Zero();
