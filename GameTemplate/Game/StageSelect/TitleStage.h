@@ -55,9 +55,11 @@ public:
 private:
 	PhysicsStaticObject physics;
 	//空。つまり背景
-	SkinModel skyModel;
+	SkinModelRender* skyModel=nullptr;
 	//床
 	SkinModel m_floorModel;
+	SpriteRender* m_Stage1Sprite = nullptr;
+	SpriteRender* m_Stage2Sprite = nullptr;
 	CVector3 m_floorPos = CVector3::Zero();
 	//ステージ１
 	SkinModel m_model;
