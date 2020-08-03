@@ -7,6 +7,7 @@
 #include "TestView.h"
 #include "common-cpp/inc/object.h"
 #include "PlayerPad.h"
+#include "IPad.h"
 #include <fstream>
 #include <string>
 
@@ -125,7 +126,7 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 {
 	if (m_once == false) {
 		//ゲームを立ち上げて一回のみよばれる。
-		m_playerNum = playerNr;
+		m_playerNum = 2;
 		m_once = true;
 	}
 
@@ -219,7 +220,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 					m_moveX = ValueObject<nByte>(hashData.getValue(14)).getDataCopy();
 				}
 			}
-			printf("custom event action called, m_moveX %d, m_moveZ %d", m_moveX, m_moveZ);
+			//printf("custom event action called, m_moveX %d, m_moveZ %d", m_moveX, m_moveZ);
 		}
 
 		break;

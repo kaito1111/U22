@@ -97,15 +97,11 @@ public:
 		return vZ;
 	}
 
-	int getPlayerNum()
+	int& getPlayerNum()
 	{
-		if (m_PadNum == 0) {
-			return 1;
-		}
-		else {
-			return 2;
-		}
+		return m_PadNum;
 	}
+
 
 	//Œp³‚µ‚Ä‚é‚â‚Â‚Å‚Íg‚¦‚é‚æ‚¤‚É
 	//GetŠÖ”ì‚Á‚½•û‚ª‚¢‚¢H
