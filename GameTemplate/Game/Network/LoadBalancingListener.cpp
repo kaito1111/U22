@@ -6,6 +6,7 @@
 #include "Console.h"
 #include "TestView.h"
 #include "common-cpp/inc/object.h"
+#include "PlayerPad.h"
 #include <fstream>
 #include <string>
 
@@ -200,8 +201,8 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		if (eventContent.getValue(Key)) {
 			hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
 
-			if (INetworkLogic().GetLBL()->GetPlayerNum() == 1) {
-				//プレイヤー1だった場合
+			if (twoP_Pad().GetPPad()->getPlayerNum() == 1) {
+				//プレイヤー1だった
 				if (hashData.getValue((nByte)7)) {
 					//X移動取得
 					m_moveX = ValueObject<nByte>(hashData.getValue(7)).getDataCopy();
@@ -211,7 +212,8 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 					m_moveZ = ValueObject<nByte>(hashData.getValue(8)).getDataCopy();
 				}
 			}
-			if (INetworkLogic().GetLBL()->GetPlayerNum() == 2) {
+			if (twoP_Pad().GetPPad()->getPlayerNum() == 2) {
+				//プレイヤー2だった
 				if (hashData.getValue((nByte)13)) {
 					//Z移動取得
 					m_moveX = ValueObject<nByte>(hashData.getValue(13)).getDataCopy();

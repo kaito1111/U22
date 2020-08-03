@@ -11,6 +11,7 @@ class PlayerPad : public IPad
 public:
 	//コンストラクタ
 	PlayerPad();
+
 	/// <summary>
 	/// 更新
 	/// <para>photonにデータ転送</para>
