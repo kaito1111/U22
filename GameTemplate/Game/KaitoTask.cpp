@@ -27,12 +27,13 @@ KaitoTask::KaitoTask()
 
 	if (INetworkLogic().GetLBL()->GetPlayerNum() - 1 == 0) {
 		//プレイヤー1
-		m_Player[0]->InitPad(twoP_Pad().GetPPad());
-		m_Player[1]->InitPad(twoP_Pad().GetNPad());
+		m_Player[0]->SetPad(twoP_Pad().GetPPad());
+		m_Player[1]->SetPad(twoP_Pad().GetNPad());
 	}
 	else {
-		m_Player[0]->InitPad(twoP_Pad().GetNPad());
-		m_Player[1]->InitPad(twoP_Pad().GetPPad());
+		//プレイヤー2
+		m_Player[0]->SetPad(twoP_Pad().GetNPad());
+		m_Player[1]->SetPad(twoP_Pad().GetPPad());
 	}
 
 

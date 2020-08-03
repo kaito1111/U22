@@ -1,5 +1,6 @@
 /// <summary>
 /// Playerパッド
+/// 拡張 : photonサーバーにPadデータを送る必要性。
 /// </summary>
 
 #pragma once
@@ -12,6 +13,7 @@ public:
 	PlayerPad();
 	/// <summary>
 	/// 更新
+	/// <para>photonにデータ転送</para>
 	/// </summary>
 	virtual void Update() override;
 };

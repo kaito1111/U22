@@ -29,21 +29,9 @@ GamePlayer::~GamePlayer()
 	DeleteGO(m_ThisNumSprite);
 }
 
-void GamePlayer::InitPad(PlayerPad* pad)
+void GamePlayer::SetPad(IPad* pad)
 {
-	//ポリモーフィズムを使用して
-	//初期化された方のPadの関数を呼び出す。
-	//こっちならNetworkPadを呼び出し。
-	IPad* iPad = pad;
-	m_Pad = pad;
-}
-
-void GamePlayer::InitPad(NetworkPad* pad)
-{
-	//ポリモーフィズムを使用して
-	//初期化された方のPadの関数を呼び出す。
-	//こっちならNetworkPadを呼び出し。
-	IPad* iPad = pad;
+	//PlayerPad or NetworkPad の設定
 	m_Pad = pad;
 }
 

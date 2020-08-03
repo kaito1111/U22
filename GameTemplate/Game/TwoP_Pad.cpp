@@ -13,12 +13,13 @@ TwoP_Pad::TwoP_Pad()
 	//	g_Pad[i].Init(i);
 	//}
 
-	//パッド番号の識別
+	//パッド番号の取得
 	m_PlayerPadNum = NetworkLogic::GetInstance().GetLBL()->GetPlayerNum();
 	//各Padのインスタンス化
+	//padのポリモーフィズム
 	m_playerPad = new PlayerPad;
 	m_networkPad = new NetworkPad;
-	//パッドの識別＆初期化
+	//パッドの識別をして初期化
 	if (m_PlayerPadNum == 1) {
 		//player1だった
 		m_playerPad->Init(m_PlayerPadNum - 1);

@@ -123,12 +123,14 @@ void LoadBalancingListener::serverErrorReturn(int errorCode)
 void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>& playernrs, const Player& player)
 {
 	if (m_once == false) {
+		//ゲームを立ち上げて一回のみよばれる。
 		m_playerNum = playerNr;
 		m_once = true;
 	}
 
 	if (playerNr > 3)
 	{
+		//プレイ人数がおかしい
 		throw;
 	}
 

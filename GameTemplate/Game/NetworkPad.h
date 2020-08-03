@@ -1,3 +1,8 @@
+/// <summary>
+/// ネットワークパッド
+/// 拡張 : photonサーバーからPadデータを受信。
+/// </summary>
+
 #pragma once
 #include "IPad.h"
 class NetworkPad : public IPad

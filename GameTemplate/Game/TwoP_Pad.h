@@ -1,6 +1,7 @@
 #pragma once
 class PlayerPad;
 class NetworkPad;
+class IPad;
 
 class TwoP_Pad: public IGameObject
 {
@@ -22,7 +23,7 @@ public:
 	/// プレイヤーパッドの取得
 	/// </summary>
 	/// <returns></returns>
-	PlayerPad* GetPPad()
+	IPad* GetPPad()
 	{
 		return m_playerPad;
 	}
@@ -30,7 +31,7 @@ public:
 	/// ネットワークパッドの取得
 	/// </summary>
 	/// <returns></returns>
-	NetworkPad* GetNPad()
+	IPad* GetNPad()
 	{
 		return m_networkPad;
 	}
@@ -59,8 +60,8 @@ private:
 	float m_Manual_W = 0.0f;
 	SpriteRender* m_ButtonSprite = nullptr;
 
-	PlayerPad* m_playerPad;			//プレイヤーのパッド
-	NetworkPad* m_networkPad;		//ネットワークのパッド
+	IPad* m_playerPad;		//プレイヤーのパッド
+	IPad* m_networkPad;		//ネットワークのパッド
 };
 
 /// <summary>
