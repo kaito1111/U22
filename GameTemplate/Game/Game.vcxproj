@@ -366,6 +366,7 @@
     <ImageContentTask Include="Assets\sprite\LoadScreen(Up).png" />
     <ImageContentTask Include="Assets\sprite\1P_Pointer(Dead).png" />
     <ImageContentTask Include="Assets\sprite\2P_Pointer(Dead).png" />
+    <Image Include="Assets\sprite\Corse1_image.png" />
     <Image Include="Assets\sprite\ProvisionalTitle.png" />
     <Image Include="Assets\sprite\stage1.png" />
     <Image Include="Assets\sprite\stage2.png" />

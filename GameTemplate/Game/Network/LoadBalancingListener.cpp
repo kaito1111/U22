@@ -212,13 +212,9 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 				}
 			}
 			if (INetworkLogic().GetLBL()->GetPlayerNum() == 2) {
-				if (hashData.getValue((nByte)13)) {
-					//Z移動取得
-					m_moveX = ValueObject<nByte>(hashData.getValue(13)).getDataCopy();
-				}
 				if (hashData.getValue((nByte)14)) {
-					//Z移動取得
-					m_moveZ = ValueObject<nByte>(hashData.getValue(14)).getDataCopy();
+					//X移動取得
+					m_moveX = ValueObject<nByte>(hashData.getValue(14)).getDataCopy();
 				}
 			}
 			printf("custom event action called, m_moveX %d, m_moveZ %d", m_moveX, m_moveZ);

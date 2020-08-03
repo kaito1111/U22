@@ -13,7 +13,7 @@ TitleStage::~TitleStage()
 
 bool TitleStage::Start()
 {
-	
+
 	m_copymainRendrTarget.Init(
 		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
 		FRAME_BUFFER_W,
@@ -23,7 +23,11 @@ bool TitleStage::Start()
 	m_floorModel.Init(L"Assets/modelData/serectStage.cmo");//è∞
 	skyModel = NewGO<SkinModelRender>(0);
 	skyModel->Init(L"Assets/modelData/Player.cmo");
-	return true;
+	m_Stage1Sprite = NewGO<SpriteRender>(0);
+	m_Stage1Sprite->Init(L"Assets/sprite/Corse1_image.dds", 300.0f, 300.0f);
+	//m_Stage2Sprite = NewGO<SpriteRender>(0);
+	//m_Stage2Sprite->Init(L"Assets/sprite/")
+		return true;
 }
 
 void TitleStage::Update()
@@ -40,10 +44,10 @@ void TitleStage::Draw()
 	m_model2.UpdateWorldMatrix(m_pos2, CQuaternion::Identity(), m_scale2);*/
 
 	m_floorModel.Draw(
-	g_camera3D.GetViewMatrix(),
+		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),
 		0
-		);
+	);
 	/*m_model.Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),

@@ -25,9 +25,9 @@ bool TitleCamera::Start()
 
 void TitleCamera::Update()
 {
-	CVector3 Target = CVector3::Zero();
+	CVector3 Target = { 0.0f,100.0f,0.0f };
 	CVector3 pos = Target;
-	pos.y += 500.0f;
+	pos.y += 200.0f;
 	pos.z += 500.0f;
 	g_camera3D.SetTarget(Target);
 	g_camera3D.SetPosition(pos);
