@@ -173,8 +173,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 	nByte Key;
 	ExitGames::Common::Hashtable hashData;
 
-	switch (eventCode) {
-	case 0:
+	if (eventCode == 0) {
 		Key = 1;
 		int blueTeamScore, orangeTeamScore;
 		hashData = (ExitGames::Common::ValueObject<ExitGames::Common::Hashtable>(eventContent.getValue(Key))).getDataCopy();
@@ -191,8 +190,8 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			}
 			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
 		}
-		break;
-	case 1:
+	}
+	else if (eventCode == (m_playerNum == 1 ? 2 : 1)) {
 		/*
 		padデータ（ボタン、pad入力）を送信側から受け取る処理。
 		*/
@@ -234,7 +233,6 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			//準備ＯＫ、通信いくぞ！！
 			//IsReady = true;
 		}*/
-		break;
 	}
 }
 
@@ -482,6 +480,9 @@ void LoadBalancingListener::RaisePadData()
 	//データの送信
 	//customEventActionが呼ばれる
 	//送信なので自分のcustomEventActionは呼ばれない。
-	mpLbc->opRaiseEvent(false, hash, 1);
+	bool result = mpLbc->opRaiseEvent(false, hash, m_playerNum);
+	if (result == false) {
+		printf("送信失敗\n");
+	}
 	//printf("playerdata raise event\n");
 }
