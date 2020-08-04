@@ -14,8 +14,11 @@ public:
 	CVector3 GetPosition() { 
 		return m_position; 
 	}
-	void SetPosition(CVector3 pos) {
-		m_position = pos;
+	void SetPosition(CVector3 pos, CVector3 moveSpeed = CVector3::Zero()) {
+		m_characon.SetPosition(pos);
+		if (moveSpeed.Length() > 1.0f) {
+			m_position = m_characon.Execute(1.0f, moveSpeed);
+		}
 	}
 	CVector3 GetForward() {
 		return m_forward;

@@ -19,6 +19,9 @@
     <ImageContentTask Include="Assets\sprite\Clear.png" />
     <ImageContentTask Include="Assets\modelData\a.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />
+    <ImageContentTask Include="Assets\sprite\Yellow.png" />
+    <ImageContentTask Include="Assets\sprite\Corse1_image.png" />
+    <ImageContentTask Include="Assets\sprite\Corse2_image.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
@@ -121,6 +124,7 @@
     <ClCompile Include="character\BoxCharactorController.cpp" />
     <ClCompile Include="PlayerPad.cpp" />
     <ClCompile Include="NetworkPad.cpp" />
+    <ClCompile Include="physics\BoxCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -160,6 +164,8 @@
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
     <MeshContentTask Include="Assets\modelData\Doragon.fbx" />
+    <MeshContentTask Include="Assets\modelData\MagnetObject.fbx" />
+    <MeshContentTask Include="Assets\modelData\Magnet_Box.FBX" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
@@ -268,6 +274,7 @@
     <ClInclude Include="IPad.h" />
     <ClInclude Include="PlayerPad.h" />
     <ClInclude Include="NetworkPad.h" />
+    <ClInclude Include="physics\BoxCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
@@ -285,7 +292,6 @@
     <Image Include="Assets\modelData\metal_00078.jpg" />
     <Image Include="Assets\modelData\stage1.jpg" />
     <Image Include="Assets\modelData\stone_00010.jpg" />
-    <Image Include="Assets\sprite\Corse1_image.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\Corse_Level_1.tkl" />

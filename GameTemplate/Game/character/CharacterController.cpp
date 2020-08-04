@@ -18,7 +18,6 @@ namespace {
 		CVector3 hitNormal = CVector3::Zero();				//衝突点の法線。
 		btCollisionObject* me = nullptr;					//自分自身。自分自身との衝突を除外するためのメンバ。
 		float dist = FLT_MAX;								//衝突点までの距離。一番近い衝突点を求めるため。FLT_MAXは単精度の浮動小数点が取りうる最大の値。
-		bool chara = false;
 		//衝突したときに呼ばれるコールバック関数。
 		virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 		{
@@ -32,7 +31,6 @@ namespace {
 			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character
 				//キャラクタ属性のコリジョンと衝突した。
 				) {
-				chara = true;
 				isHit = true;
 				CVector3 hitPosTmp = *(CVector3*)&convexResult.m_hitPointLocal;
 				hitPos = hitPosTmp;
@@ -324,38 +322,33 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 		if (fabsf(endPos.y - callback.startPos.y) > FLT_EPSILON) {
 			g_physics.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callback);
 			if (callback.isHit) {
-				if (callback.chara == false) {
-					//地面に当たった。
-					m_isJump = false;
-					m_isOnGround = true;
-					nextPosition.y = callback.hitPos.y;
-				}
-				else {
-					//	btTransform start, end;
-					//	CVector3 hitPos = callback.hitPos;
-					//	start.setOrigin(btVector3(hitPos.x, hitPos.y, 0.0f));
-					//	hitPos.x -= 1.0f;
-					//	end.setOrigin(btVector3(hitPos.x, hitPos.y, 0.0f));
-					//	SweepResultGround callBack;
-					//	callBack.me = m_rigidBody.GetBody();
-					//	callBack.startPos.Set(start.getOrigin());
-					//	g_physics.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callBack);
-					//	if (callBack.isHit) {
-					//		//右に障害物がある
-					//		if (addPos.Length() > FLT_EPSILON) {//動いてない
-					//			nextPosition.x = 1.0f;
-					//		}
-					//		addPos *= 1.1f;
-					//	}
-					//	else {
-					//		//左に障害物がある
-					//		if (addPos.Length() > FLT_EPSILON) {//動いてない
-					//			nextPosition.x = -1.0f;
-					//		}
-					//		addPos *= 1.1f;
-					//	}
-					nextPosition.y = callback.hitPos.y;
-				}
+				//地面に当たった。
+				m_isJump = false;
+				m_isOnGround = true;
+				//	btTransform start, end;
+				//	CVector3 hitPos = callback.hitPos;
+				//	start.setOrigin(btVector3(hitPos.x, hitPos.y, 0.0f));
+				//	hitPos.x -= 1.0f;
+				//	end.setOrigin(btVector3(hitPos.x, hitPos.y, 0.0f));
+				//	SweepResultGround callBack;
+				//	callBack.me = m_rigidBody.GetBody();
+				//	callBack.startPos.Set(start.getOrigin());
+				//	g_physics.ConvexSweepTest((const btConvexShape*)m_collider.GetBody(), start, end, callBack);
+				//	if (callBack.isHit) {
+				//		//右に障害物がある
+				//		if (addPos.Length() > FLT_EPSILON) {//動いてない
+				//			nextPosition.x = 1.0f;
+				//		}
+				//		addPos *= 1.1f;
+				//	}
+				//	else {
+				//		//左に障害物がある
+				//		if (addPos.Length() > FLT_EPSILON) {//動いてない
+				//			nextPosition.x = -1.0f;
+				//		}
+				//		addPos *= 1.1f;
+				//	}
+				nextPosition.y = callback.hitPos.y;
 
 				moveSpeed.y = 0.0f;
 				/*+ addPos.y * 0.01f*/

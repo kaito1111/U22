@@ -56,10 +56,20 @@ private:
 	PhysicsStaticObject physics;
 	//空。つまり背景
 	SkinModelRender* skyModel=nullptr;
+	SpriteRender* m_SelectSprite = nullptr;
 	//床
 	SkinModel m_floorModel;
+
 	SpriteRender* m_Stage1Sprite = nullptr;
+	CVector3 m_Sprite1Pos = { 0.0f,170.0f,0.0f };
+
 	SpriteRender* m_Stage2Sprite = nullptr;
+	CVector3 m_Sprite2Pos = { -800.0f,670.0f,0.0f };
+	CVector3 m_SpriteScale = CVector3::Zero();
+
+	bool m_IsClear1 = false;
+	//Iwa* m_Iwa = nullptr;
+
 	CVector3 m_floorPos = CVector3::Zero();
 	//ステージ１
 	SkinModel m_model;

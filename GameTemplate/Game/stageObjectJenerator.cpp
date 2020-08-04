@@ -23,6 +23,7 @@ stageObjectJenerator::~stageObjectJenerator()
 
 bool stageObjectJenerator::Start()
 {
+	CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
 	//enumバグったからとりあえずintで引数渡してセレクトさせます。0番目から始まるよ
 	if (StageNum == 0) {
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
@@ -64,7 +65,6 @@ bool stageObjectJenerator::Start()
 			{
 				return true;
 			}
-			CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
 			PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
 
 			return false;
@@ -89,8 +89,38 @@ bool stageObjectJenerator::Start()
 				Goal* goalPtr = NewGO<Goal>(0, "Goal");
 				goalPtr->SetPosition(objData.position);
 			}
-			CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
 			PointGenerator->Load(L"Assets/level/stageDossun.tkl");
+		});
+	}
+
+	if (StageNum == 2) {
+		PointGenerator->Load(L"Assets/level/Corse_Level_2.tkl");
+		level.Init(L"Assets/level/Corse_Level_2.tkl", [&](const auto& objData) {
+			if (wcscmp(objData.name, L"MagnetObject") == 0) {
+				Iwa* iwa = NewGO<Iwa>(0, "iwa");
+				iwa->SetPosition(objData.position);
+			}
+			return true;
+		});
+		return true;
+	}
+	if (StageNum == 3) {
+
+		level.Init(L"Assets/level/debug_test.tkl", [&](const auto& objData) {
+			//動く床
+			if (wcscmp(objData.name, L"moveFloor") == 0) {
+				moveFloorPtr = NewGO<moveFloor>(0, "movefloor");
+				moveFloorPtr->SetPosition(objData.position);
+				//float型です。動かしたい量を入れてね。
+				moveFloorPtr->SetMoveLimit(300.0f);
+				//moveFloorPtr->SetUpdate(false);
+				return true;
+			}
+			if (wcsstr(objData.name, L"CheckPoint") != NULL)
+			{
+				return true;
+			}
+			return true;
 		});
 	}
 	return true;
@@ -100,18 +130,16 @@ bool stageObjectJenerator::Start()
 
 void stageObjectJenerator::Update()
 {
-	if (moveButtonPtr->IsOn()) {
-		if (moveFloor2Ptr->GetPosition().x > Floor2PosX) {
-			moveFloor2Ptr->SetUpdate(true);
-			moveFloorPtr->SetUpdate(true);
-		}
-		else {
-			moveFloor2Ptr->SetUpdate(false);
+	if (moveButtonPtr != nullptr) {
+		if (moveButtonPtr->IsOn()) {
+			if (moveFloor2Ptr->GetPosition().x > Floor2PosX) {
+				moveFloor2Ptr->SetUpdate(true);
+				moveFloorPtr->SetUpdate(true);
+			}
+			else {
+				moveFloor2Ptr->SetUpdate(false);
+			}
 		}
 	}
 	
-}
-
-void stageObjectJenerator::Draw()
-{
 }

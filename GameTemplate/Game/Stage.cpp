@@ -15,6 +15,9 @@ Stage::Stage()
 	if (nowStage == 2) {
 		m_model.Init(L"Assets/modelData/Course_Level2.cmo");
 	}
+	if (nowStage == 3) {
+		m_model.Init(L"Assets/modelData/Course_Level1.cmo");
+	}
 	//シャドウレシーバーとする
 	m_model.SetShadowReciever(true);
 	m_phyStaticObuject.CreateMeshObject(m_model, CVector3::Zero(), CQuaternion::Identity());

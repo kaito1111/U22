@@ -31,12 +31,6 @@ public:
 		return m_position;
 	}
 
-	//座標を設定。
-	void SetPosition(const CVector3& pos)
-	{
-		m_position = pos;
-	}
-
 	//ジャンプ中か判定
 	bool IsJump() const
 	{
@@ -63,6 +57,15 @@ public:
 	//剛体を物理エンジンから削除。。
 	void RemoveRigidBody();
 
+	float GetWide() {
+		return m_wide;
+	}
+	float GetHight() {
+		return m_height;
+	}
+	float GetDepth() {
+		return m_depth;
+	}
 private:
 	CVector3 m_position = CVector3::Zero();
 	bool m_isJump = false;				//ジャンプ中？
