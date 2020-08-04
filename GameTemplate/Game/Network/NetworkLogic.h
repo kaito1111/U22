@@ -55,7 +55,7 @@ public:
 	/// サーバーの更新処理
 	/// </summary>
 	void Update();
-	void UpateListener();
+	
 	/// <summary>
 	/// リスナーの取得
 	/// </summary>

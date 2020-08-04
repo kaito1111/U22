@@ -101,13 +101,9 @@ void NetworkLogic::Start() {
 
 
 void NetworkLogic::Update() {
-	
+	//クライアントの更新
+	mpLbc->service();
 	//リスナーの更新
 	mpLbl->service();
 }
 
-void NetworkLogic::UpateListener()
-{
-	//クライアントの更新
-	mpLbc->service();
-}
