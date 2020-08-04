@@ -3,10 +3,12 @@
 #include "TwoP_Pad.h"
 #include "Title.h"
 #include "Network/NetworkLogic.h"
+#include "util/tkStopwatch.h"
 
 extern bool g_getNetPadData;
 extern bool g_isStartGame;
 
+const DWORD TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -40,43 +42,72 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	NewGO<Title>(1, "title");
 	//カメラの初期化
 	g_camera2D.Update2D();
-
+	CStopwatch sw;
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
+		sw.Start();
 		//描画開始。
 		g_graphicsEngine->BegineRender();
 		//物理エンジンの更新。
 		g_physics.Update();
 		//サウンドエンジンの更新
 		Engine().GetSoundEngine().Update();
-		//パッドの更新
-		g_Pad[0].Update();
 		
 		static int frameNo = 0;
 		//ネットワークの更新
 		if (g_isStartGame) {
+			while (g_Pad[0].GetNumBufferringXInputData() < 30) {
+				//このループはゲーム開始時にしか入らないはず。
+				g_Pad[0].XInputStateBufferring();
+				//バッファリングした内容を相手に送る。
+				//パッド情報を相手に送る。
+				auto LBL = INetworkLogic().GetLBL();
+				LBL->RaisePadData();
+				//1フレーム分寝る。
+				Sleep(TIME_ONE_FRAME);
+			}
+			//ネットワークパッドのバッファリング。
+			while (g_Pad[1].GetNumBufferringXInputData() < 30) {
+				//ここは足りなくなることがあるはずなので、ゲーム中も入る可能性がある。
+				NetworkLogic::GetInstance().Update();
+				if (g_getNetPadData == false) {
+					Sleep(TIME_ONE_FRAME);
+				}
+				else {
+					
+					g_getNetPadData = false;
+				}
+			}
+			//バッファリングされた情報を使ってゲームを進行させる。
+			//まず新しいパッド情報をバッファリングする。
+			g_Pad[0].XInputStateBufferring();
+			//バッファリングした内容を相手に送る。
 			//パッド情報を相手に送る。
 			auto LBL = INetworkLogic().GetLBL();
 			LBL->RaisePadData();
-			//ゲームが開始されたらパッドで同期をとる。
-			while (true) {
-				NetworkLogic::GetInstance().Update();
-				if (g_getNetPadData == false) {
-					//Sleep(10);
-				}
-				else {
-					break;
-				}
+			//続いてネットワークパッド。
+			NetworkLogic::GetInstance().Update();
+			if (g_getNetPadData == true) {
+				
+				g_getNetPadData = false;
 			}
+			else {
+				//このフレーム間に合わなかったとしても無視。待たない。
+				//ネットワークパッドはバッファリングが枯渇したら貯める。
+			}
+			//バッファリングされた情報をもとにパッド情報を更新する。
+			g_Pad[0].Update(true);
 			g_Pad[1].UpdateFromNetPadData();
 			printf("frameNo = %d\n", frameNo);
 			frameNo++;
 		}
 		else {
+			//パッドの更新
+			g_Pad[0].Update(false);
 			NetworkLogic::GetInstance().Update();
 		}
-		//g_Pad[1].Update()
+		
 		g_getNetPadData = false;
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
 		gameObjectManager().Start();
@@ -84,6 +115,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		gameObjectManager().ExecuteFromGameThread();
 		//描画終了。
 		g_graphicsEngine->EndRender();
+		sw.Stop();
+		DWORD sleepTime = max(0, TIME_ONE_FRAME - sw.GetElapsedMillisecond());
+		Sleep(sleepTime);
 	}
 
 	//ネットワークからの切断

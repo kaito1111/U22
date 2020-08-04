@@ -73,7 +73,6 @@ void TwoP_Pad::Update()
 	//	//‚»‚±‚Ü‚Å‚â‚ÅBB
 	//	INetworkLogic().GetLBL()->SetReady(false);
 	//}
-	g_Pad->Update();
 	//m_playerPad->Update();
 
 	//INetworkLogic().GetLBL()->putData(Jump, m_playerPad->IsJump());

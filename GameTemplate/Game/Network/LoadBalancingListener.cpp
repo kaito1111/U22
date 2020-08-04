@@ -205,34 +205,9 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		g_netPadState.Gamepad.wButtons = (WORD)ValueObject<int>(eventContent.getValue(5)).getDataCopy();
 		g_netPadState.Gamepad.bLeftTrigger = ValueObject<BYTE>(eventContent.getValue(6)).getDataCopy();
 		g_netPadState.Gamepad.bRightTrigger = ValueObject<BYTE>(eventContent.getValue(7)).getDataCopy();
-
-		//右スティックの入力量を取得。
-		/*	hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
-
-			if (twoP_Pad().getPlayerNum() == 1) {
-				//プレイヤー1だった
-				auto h = hashData.getValue((nByte)1);
-				if (hashData.getValue((nByte)1)) {
-					//X移動取得
-					m_moveX = ValueObject<nByte>(hashData.getValue((nByte)1)).getDataCopy();
-				}
-				//if (hashData.getValue((nByte)8)) {
-				//	//Z移動取得
-				//	m_moveZ = ValueObject<nByte>(hashData.getValue(8)).getDataCopy();
-				//}
-			}
-			if (twoP_Pad().getPlayerNum() == 2) {
-				//プレイヤー2だった
-				if (hashData.getValue((nByte)2)) {
-					//Z移動取得
-					m_moveX = ValueObject<nByte>(hashData.getValue(2)).getDataCopy();
-				}
-			}
-			//printf("custom event action called, m_moveX %d, m_moveZ %d", m_moveX, m_moveZ);
-			printf("Custom EventAction Raised\n");
-			//準備ＯＫ、通信いくぞ！！
-			//IsReady = true;
-		}*/
+		//ネットワークからとってきたパッド情報をバッファリングする。
+		g_Pad[1].XInputStateBufferringFromNetPadData();
+		
 	}
 }
 

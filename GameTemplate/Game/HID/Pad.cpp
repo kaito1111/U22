@@ -195,9 +195,22 @@ void Pad::UpdateAnalogStickInput()
 }
 extern XINPUT_STATE g_netPadState;
 
+void Pad::XInputStateBufferring()
+{
+	XINPUT_STATE xInputState;
+	DWORD result = XInputGetState(m_padNo, &xInputState);
+	//キューに積む
+	m_xinputStateQueue.push(xInputState);
+}
+void Pad::XInputStateBufferringFromNetPadData()
+{
+	//キューに積む
+	m_xinputStateQueue.push(g_netPadState);
+}
 void Pad::UpdateFromNetPadData()
 {
-	UpdateFromXInputData(g_netPadState);
+	UpdateFromXInputData(m_xinputStateQueue.front());
+	m_xinputStateQueue.pop();
 }
 void Pad::UpdateFromXInputData(XINPUT_STATE xInputState)
 {
@@ -215,11 +228,21 @@ void Pad::UpdateFromXInputData(XINPUT_STATE xInputState)
 /*!
 *@brief	パッドの入力を更新。
 */
-void Pad::Update()
+void Pad::Update(bool isUseQueue)
 {
 	//XInputGetState関数を使って、ゲームパッドの入力状況を取得する。
 	XINPUT_STATE xInputState;
-	DWORD result = XInputGetState(m_padNo, &xInputState);
+	DWORD result;
+	if (isUseQueue) {
+		//バッファリングされたパッド情報を使う。
+		xInputState = m_xinputStateQueue.front();
+		//使った情報は捨てる。
+		m_xinputStateQueue.pop();
+		result = ERROR_SUCCESS;
+	}
+	else {
+		result = XInputGetState(m_padNo, &xInputState);
+	}
 	if (result == ERROR_SUCCESS) {
 		//ゲームパッドが接続されている
 		UpdateFromXInputData(xInputState);

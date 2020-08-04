@@ -6,6 +6,7 @@
 
  //XInputのヘッダーファイル。
 #include <Xinput.h>
+#include <queue>
 
 /*!
  *@brief	仮想ボタン定義。
@@ -59,13 +60,18 @@ public:
 	{
 		m_padNo = padNo;
 	}
+	/// <summary>
+	/// XInputステートをバッファリングする。
+	/// </summary>
+	void XInputStateBufferring();
+	void XInputStateBufferringFromNetPadData();
 	/*!
 	*@brief	更新。
 	*@details
 	* １フレームに一度呼び出してください。
 	* 複数回呼び出すと、トリガー入力が取れなくなるよ！！！
 	*/
-	void Update();
+	void Update( bool isUseQueue);
 	/*!
 	 *@brief	ボタンのトリガー判定。
 	 *@param[in]	button		調べたいボタン。enum EnButtonを参照。
@@ -214,9 +220,14 @@ public:
 	}
 	XINPUT_STATE& GetXInputPadState()
 	{
-		return m_state.xInputState;
+		return m_xinputStateQueue.front();
 	}
 	void UpdateFromNetPadData();
+	//どれだけバッファリングできているか取得する。
+	size_t GetNumBufferringXInputData() const
+	{
+		return m_xinputStateQueue.size();
+	}
 private:
 	/*!
 	*@brief	ボタンの入力情報を更新。
@@ -229,6 +240,7 @@ private:
 	void UpdateFromXInputData(XINPUT_STATE xInputState);
 
 private:
+	std::queue<XINPUT_STATE> m_xinputStateQueue;	//XInputから引っ張ってきた情報のキュー。
 	PAD_STATE m_state;	//!<パッドステート。
 	int m_padNo = 0;			//!<パッド番号。
 	int m_trigger[enButtonNum];	//!<トリガー入力のフラグ。
