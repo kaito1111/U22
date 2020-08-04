@@ -194,23 +194,27 @@ void Pad::UpdateAnalogStickInput()
 	}
 }
 extern XINPUT_STATE g_netPadState;
+extern int g_frameNo;
 
 void Pad::XInputStateBufferring()
 {
 	XINPUT_STATE xInputState;
 	DWORD result = XInputGetState(m_padNo, &xInputState);
 	//キューに積む
-	m_xinputStateQueue.push(xInputState);
+	m_xinputStateQueue.push_back({ g_frameNo, xInputState });
 }
-void Pad::XInputStateBufferringFromNetPadData()
+void Pad::XInputStateBufferringFromNetPadData(int frameNo)
 {
 	//キューに積む
-	m_xinputStateQueue.push(g_netPadState);
+	m_xinputStateQueue.push_back({ frameNo, g_netPadState });
+	auto func = [&](const XINPUT_STATE_WITH_FRAME_NO& lhs, const XINPUT_STATE_WITH_FRAME_NO& rhs) {	return lhs.first < rhs.first; };
+	//フレーム番号でソートする。
+	m_xinputStateQueue.sort(func);
 }
 void Pad::UpdateFromNetPadData()
 {
-	UpdateFromXInputData(m_xinputStateQueue.front());
-	m_xinputStateQueue.pop();
+	UpdateFromXInputData(m_xinputStateQueue.front().second);
+	m_xinputStateQueue.pop_front();
 }
 void Pad::UpdateFromXInputData(XINPUT_STATE xInputState)
 {
@@ -235,9 +239,9 @@ void Pad::Update(bool isUseQueue)
 	DWORD result;
 	if (isUseQueue) {
 		//バッファリングされたパッド情報を使う。
-		xInputState = m_xinputStateQueue.front();
+		xInputState = m_xinputStateQueue.front().second;
 		//使った情報は捨てる。
-		m_xinputStateQueue.pop();
+		m_xinputStateQueue.pop_front();
 		result = ERROR_SUCCESS;
 	}
 	else {

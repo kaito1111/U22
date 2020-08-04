@@ -7,7 +7,7 @@
 
 extern bool g_getNetPadData;
 extern bool g_isStartGame;
-int frameNo = 0;
+int g_frameNo = 0;
 
 const DWORD TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
 const int MAX_BUFFERRING = 5;
@@ -66,7 +66,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 				//パッド情報を相手に送る。
 				auto LBL = INetworkLogic().GetLBL();
 				LBL->RaisePadData();
-				frameNo++;
+				g_frameNo++;
 				//1フレーム分寝る。
 				Sleep(TIME_ONE_FRAME);
 			}
@@ -82,6 +82,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					g_getNetPadData = false;
 				}
 			}
+			
 			//バッファリングされた情報を使ってゲームを進行させる。
 			//まず新しいパッド情報をバッファリングする。
 			g_Pad[0].XInputStateBufferring();
@@ -102,8 +103,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			//バッファリングされた情報をもとにパッド情報を更新する。
 			g_Pad[0].Update(true);
 			g_Pad[1].UpdateFromNetPadData();
-			printf("frameNo = %d\n", frameNo);
-			frameNo++;
+
+			g_frameNo++;
 		}
 		else {
 			//パッドの更新

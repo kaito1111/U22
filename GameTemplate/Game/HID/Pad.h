@@ -64,7 +64,7 @@ public:
 	/// XInputステートをバッファリングする。
 	/// </summary>
 	void XInputStateBufferring();
-	void XInputStateBufferringFromNetPadData();
+	void XInputStateBufferringFromNetPadData(int frameNo);
 	/*!
 	*@brief	更新。
 	*@details
@@ -220,7 +220,7 @@ public:
 	}
 	XINPUT_STATE& GetXInputPadState()
 	{
-		return m_xinputStateQueue.front();
+		return m_xinputStateQueue.front().second;
 	}
 	void UpdateFromNetPadData();
 	//どれだけバッファリングできているか取得する。
@@ -240,7 +240,8 @@ private:
 	void UpdateFromXInputData(XINPUT_STATE xInputState);
 
 private:
-	std::queue<XINPUT_STATE> m_xinputStateQueue;	//XInputから引っ張ってきた情報のキュー。
+	using XINPUT_STATE_WITH_FRAME_NO = std::pair<int, XINPUT_STATE>;
+	std::list<XINPUT_STATE_WITH_FRAME_NO> m_xinputStateQueue;	//XInputから引っ張ってきた情報のキュー。
 	PAD_STATE m_state;	//!<パッドステート。
 	int m_padNo = 0;			//!<パッド番号。
 	int m_trigger[enButtonNum];	//!<トリガー入力のフラグ。
