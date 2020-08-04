@@ -61,7 +61,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			LBL->RaisePadData();
 			//ゲームが開始されたらパッドで同期をとる。
 			while (true) {
-				NetworkLogic::GetInstance().UpateListener();
+				NetworkLogic::GetInstance().Update();
 				if (g_getNetPadData == false) {
 					//Sleep(10);
 				}
@@ -69,13 +69,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 					break;
 				}
 			}
-			
 			g_Pad[1].UpdateFromNetPadData();
 		}
 		else {
-			NetworkLogic::GetInstance().UpateListener();
+			NetworkLogic::GetInstance().Update();
 		}
-		NetworkLogic::GetInstance().Update();
 		//g_Pad[1].Update()
 		g_getNetPadData = false;
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
