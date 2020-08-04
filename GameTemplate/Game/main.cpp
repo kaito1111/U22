@@ -63,7 +63,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			while (true) {
 				NetworkLogic::GetInstance().Update();
 				if (g_getNetPadData == false) {
-					Sleep(10);
+					//Sleep(10);
 				}
 				else {
 					break;
