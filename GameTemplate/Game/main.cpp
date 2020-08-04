@@ -7,6 +7,7 @@
 
 extern bool g_getNetPadData;
 extern bool g_isStartGame;
+int frameNo = 0;
 
 const DWORD TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
 const int MAX_BUFFERRING = 5;
@@ -55,7 +56,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//サウンドエンジンの更新
 		Engine().GetSoundEngine().Update();
 		
-		static int frameNo = 0;
+		
 		//ネットワークの更新
 		if (g_isStartGame) {
 			while (g_Pad[0].GetNumBufferringXInputData() < MAX_BUFFERRING) {
@@ -65,6 +66,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 				//パッド情報を相手に送る。
 				auto LBL = INetworkLogic().GetLBL();
 				LBL->RaisePadData();
+				frameNo++;
 				//1フレーム分寝る。
 				Sleep(TIME_ONE_FRAME);
 			}

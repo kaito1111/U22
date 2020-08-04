@@ -205,6 +205,8 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		g_netPadState.Gamepad.wButtons = (WORD)ValueObject<int>(eventContent.getValue(5)).getDataCopy();
 		g_netPadState.Gamepad.bLeftTrigger = ValueObject<BYTE>(eventContent.getValue(6)).getDataCopy();
 		g_netPadState.Gamepad.bRightTrigger = ValueObject<BYTE>(eventContent.getValue(7)).getDataCopy();
+		int frameNo = ValueObject<int>(eventContent.getValue(8)).getDataCopy();
+		printf("frameNo = %d\n", frameNo);
 		//ネットワークからとってきたパッド情報をバッファリングする。
 		g_Pad[1].XInputStateBufferringFromNetPadData();
 		
@@ -436,6 +438,8 @@ void LoadBalancingListener::RaisePlayerData(float Vx)
 	mpLbc->opRaiseEvent(false, hash, 1);
 	//printf("playerdata raise event\n");
 }
+
+extern int frameNo;
 void LoadBalancingListener::RaisePadData()
 {
 	//送るデータのコンテナ(eventContent)
@@ -450,6 +454,7 @@ void LoadBalancingListener::RaisePadData()
 	hash.put(5, (int)xInputState.Gamepad.wButtons);
 	hash.put(6, xInputState.Gamepad.bLeftTrigger);
 	hash.put(7, xInputState.Gamepad.bRightTrigger);
+	hash.put(8, frameNo);
 
 
 	//データの送信
