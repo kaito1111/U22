@@ -108,6 +108,6 @@ public:
 protected:
 	int m_PadNum = 0;		//Pad番号 0=p1 1=p2
 	bool A, B, X, Y, RB1, LB1;	//ボタン 初期化したほうがいいけどGet呼ばれるまで値使わんでしょ( ﾟДﾟ)
-	float vX = 0;
-	float vZ = 0;
+	float vX = 0.0f;
+	float vZ = 0.0f;
 };

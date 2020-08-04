@@ -193,23 +193,36 @@ void Pad::UpdateAnalogStickInput()
 		}
 	}
 }
+extern XINPUT_STATE g_netPadState;
+
+void Pad::UpdateFromNetPadData()
+{
+	UpdateFromXInputData(g_netPadState);
+}
+void Pad::UpdateFromXInputData(XINPUT_STATE xInputState)
+{
+	m_state.xInputState = xInputState;
+	//ゲームパッドが接続されている
+		//接続されている。
+	m_state.bConnected = true;
+
+	//ボタンの入力情報を更新。
+	UpdateButtonInput();
+
+	//アナログスティックの入力情報を更新。
+	UpdateAnalogStickInput();
+}
 /*!
 *@brief	パッドの入力を更新。
 */
 void Pad::Update()
 {
 	//XInputGetState関数を使って、ゲームパッドの入力状況を取得する。
-	DWORD result = XInputGetState(m_padNo, &m_state.xInputState);
+	XINPUT_STATE xInputState;
+	DWORD result = XInputGetState(m_padNo, &xInputState);
 	if (result == ERROR_SUCCESS) {
 		//ゲームパッドが接続されている
-		//接続されている。
-		m_state.bConnected = true;
-
-		//ボタンの入力情報を更新。
-		UpdateButtonInput();
-
-		//アナログスティックの入力情報を更新。
-		UpdateAnalogStickInput();
+		UpdateFromXInputData(xInputState);
 	}
 	else {
 		//ゲームパッドが接続されていない。

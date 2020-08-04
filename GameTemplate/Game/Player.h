@@ -55,7 +55,7 @@ private:
 	bool Start();
 	void Update();
 	void Draw();
-
+	int GetPadNo() const;
 	SkinModel m_model;										//スキンモデル。
 	SkinModel m_FrontModel;									//スキンモデル。
 	SkinModel m_BuckModel;									//スキンモデル。

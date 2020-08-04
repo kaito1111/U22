@@ -20,6 +20,7 @@
 /// </remarks>
 
 //TODO : Raise系で重複した処理をまとめる
+XINPUT_STATE g_netPadState;
 
 const JString PeerStatesStr[] = {
 	L"Uninitialized",
@@ -126,7 +127,7 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 {
 	if (m_once == false) {
 		//ゲームを立ち上げて一回のみよばれる。
-		m_playerNum = 2;
+		m_playerNum = playerNr;
 		m_once = true;
 	}
 
@@ -163,6 +164,7 @@ void LoadBalancingListener::onAvailableRegions(const ExitGames::Common::JVector<
 	mpLbc->selectRegion("jp");
 }
 
+bool g_getNetPadData = false;
 //opRaiseEventでイベントが送信されるとこの関数が呼ばれる
 void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, const Object& eventContentObj)
 {
@@ -195,34 +197,43 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		padデータ（ボタン、pad入力）を送信側から受け取る処理。
 		*/
 		//キー初期化
-		Key = 2;
-		//データ初期化
-		hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
+		g_getNetPadData = true;
+		
+		g_netPadState.Gamepad.sThumbLX = ValueObject<SHORT>(eventContent.getValue(1)).getDataCopy();
+		g_netPadState.Gamepad.sThumbLY = ValueObject<SHORT>(eventContent.getValue(2)).getDataCopy();
+		g_netPadState.Gamepad.sThumbRX = ValueObject<SHORT>(eventContent.getValue(3)).getDataCopy();
+		g_netPadState.Gamepad.sThumbRY = ValueObject<SHORT>(eventContent.getValue(4)).getDataCopy();
+		g_netPadState.Gamepad.wButtons = (WORD)ValueObject<int>(eventContent.getValue(5)).getDataCopy();
+		g_netPadState.Gamepad.bLeftTrigger = ValueObject<BYTE>(eventContent.getValue(6)).getDataCopy();
+		g_netPadState.Gamepad.bRightTrigger = ValueObject<BYTE>(eventContent.getValue(7)).getDataCopy();
 
-		if (eventContent.getValue(Key)) {
-			hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
+		//右スティックの入力量を取得。
+		/*	hashData = ValueObject<Hashtable>(eventContent.getValue(Key)).getDataCopy();
 
-			if (twoP_Pad().GetPPad()->getPlayerNum() == 1) {
+			if (twoP_Pad().getPlayerNum() == 1) {
 				//プレイヤー1だった
-				if (hashData.getValue((nByte)7)) {
+				auto h = hashData.getValue((nByte)1);
+				if (hashData.getValue((nByte)1)) {
 					//X移動取得
-					m_moveX = ValueObject<nByte>(hashData.getValue(7)).getDataCopy();
+					m_moveX = ValueObject<nByte>(hashData.getValue((nByte)1)).getDataCopy();
 				}
-				if (hashData.getValue((nByte)8)) {
-					//Z移動取得
-					m_moveZ = ValueObject<nByte>(hashData.getValue(8)).getDataCopy();
-				}
+				//if (hashData.getValue((nByte)8)) {
+				//	//Z移動取得
+				//	m_moveZ = ValueObject<nByte>(hashData.getValue(8)).getDataCopy();
+				//}
 			}
-			if (twoP_Pad().GetPPad()->getPlayerNum() == 2) {
+			if (twoP_Pad().getPlayerNum() == 2) {
 				//プレイヤー2だった
-				if (hashData.getValue((nByte)14)) {
+				if (hashData.getValue((nByte)2)) {
 					//Z移動取得
-					m_moveX = ValueObject<nByte>(hashData.getValue(14)).getDataCopy();
+					m_moveX = ValueObject<nByte>(hashData.getValue(2)).getDataCopy();
 				}
 			}
 			//printf("custom event action called, m_moveX %d, m_moveZ %d", m_moveX, m_moveZ);
-		}
-
+			printf("Custom EventAction Raised\n");
+			//準備ＯＫ、通信いくぞ！！
+			//IsReady = true;
+		}*/
 		break;
 	}
 }
@@ -430,25 +441,47 @@ void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	printf("data raise event\n");
 }
 
-void LoadBalancingListener::putData(nByte i, float f) {
-	playerData.put(i, f);
+void LoadBalancingListener::putData(int i, float f) {
+	playerData.put((nByte)i, (nByte)f);
 }
 
 void LoadBalancingListener::putData(nByte i, bool b) {
 	playerData.put(i, b);
 }
 
-void LoadBalancingListener::RaisePlayerData()
+void LoadBalancingListener::RaisePlayerData(float Vx)
 {
 	//送るデータのコンテナ(eventContent)
-	Hashtable ev;
+	Hashtable hash;
 
-	//コンテナにplayerデータの情報を積む
-	ev.put((nByte)2, playerData);
+	//右スティックの移動量を送る。
+	hash.put(1, Vx);
 
 	//データの送信
 	//customEventActionが呼ばれる
 	//送信なので自分のcustomEventActionは呼ばれない。
-	mpLbc->opRaiseEvent(false, ev, 1);
+	mpLbc->opRaiseEvent(false, hash, 1);
+	//printf("playerdata raise event\n");
+}
+void LoadBalancingListener::RaisePadData()
+{
+	//送るデータのコンテナ(eventContent)
+	Hashtable hash;
+
+	XINPUT_STATE& xInputState = g_Pad[0].GetXInputPadState();
+	////右スティックの移動量を送る。
+	hash.put(1, xInputState.Gamepad.sThumbLX);
+	hash.put(2, xInputState.Gamepad.sThumbLY);
+	hash.put(3, xInputState.Gamepad.sThumbRX);
+	hash.put(4, xInputState.Gamepad.sThumbRY);
+	hash.put(5, (int)xInputState.Gamepad.wButtons);
+	hash.put(6, xInputState.Gamepad.bLeftTrigger);
+	hash.put(7, xInputState.Gamepad.bRightTrigger);
+
+
+	//データの送信
+	//customEventActionが呼ばれる
+	//送信なので自分のcustomEventActionは呼ばれない。
+	mpLbc->opRaiseEvent(false, hash, 1);
 	//printf("playerdata raise event\n");
 }

@@ -4,6 +4,9 @@
 #include "Title.h"
 #include "Network/NetworkLogic.h"
 
+extern bool g_getNetPadData;
+extern bool g_isStartGame;
+
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -47,8 +50,32 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		g_physics.Update();
 		//サウンドエンジンの更新
 		Engine().GetSoundEngine().Update();
+		//パッドの更新
+		g_Pad[0].Update();
+		
+
 		//ネットワークの更新
-		NetworkLogic::GetInstance().Update();
+		if (g_isStartGame) {
+			//パッド情報を相手に送る。
+			auto LBL = INetworkLogic().GetLBL();
+			LBL->RaisePadData();
+			//ゲームが開始されたらパッドで同期をとる。
+			while (true) {
+				NetworkLogic::GetInstance().Update();
+				if (g_getNetPadData == false) {
+					Sleep(10);
+				}
+				else {
+					break;
+				}
+			}
+			g_Pad[1].UpdateFromNetPadData();
+		}
+		else {
+			NetworkLogic::GetInstance().Update();
+		}
+		//g_Pad[1].Update()
+		g_getNetPadData = false;
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
 		gameObjectManager().Start();
 		//ゲームオブジェクトマネージャーでする処理の呼び出し

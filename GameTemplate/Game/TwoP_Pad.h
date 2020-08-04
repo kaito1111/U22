@@ -35,6 +35,15 @@ public:
 	{
 		return m_networkPad;
 	}
+	/// <summary>
+	/// 自分のプレイヤー番号
+	/// <para>PlayerPad側になる方の番号を取得</para>
+	/// </summary>
+	/// <returns></returns>
+	int& getPlayerNum()
+	{
+		return m_PlayerPadNum;
+	}
 
 private:
 	enum KeyState
@@ -53,7 +62,7 @@ private:
 
 	//Player* player[2] = {};
 	bool UpdateStop = true;			//Updateを止めるフラグfalseでUpdateする。
-	int m_PlayerPadNum = 0;
+	int m_PlayerPadNum = 0;			//playerPadになるpadの番号
 
 	//bool Start()override;
 	bool NewGOPlayer = false;		//プレイヤーをNewGOするかどうか

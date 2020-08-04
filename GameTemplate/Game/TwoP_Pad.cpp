@@ -22,13 +22,13 @@ TwoP_Pad::TwoP_Pad()
 	//パッドの識別をして初期化
 	if (m_PlayerPadNum == 1) {
 		//player1だった
-		m_playerPad->Init(m_PlayerPadNum - 1);
-		m_networkPad->Init(m_PlayerPadNum);
+		m_playerPad->Init(0);
+		m_networkPad->Init(1);
 	}
 	else if (m_PlayerPadNum == 2) {
 		//player2だった
-		m_playerPad->Init(m_PlayerPadNum - 2);
-		m_networkPad->Init(m_PlayerPadNum - 1);
+		m_playerPad->Init(0);
+		m_networkPad->Init(1);
 	}
 
 	m_ManualSprite = NewGO<SpriteRender>(4);
@@ -68,10 +68,15 @@ void TwoP_Pad::PostRender()
 
 void TwoP_Pad::Update()
 {
+	//if (INetworkLogic().GetLBL()->GetReady()) {
+	//	//通信の準備ＯＫや　PadのUpdateかいしぃ！
+	//	//そこまでやで。。
+	//	INetworkLogic().GetLBL()->SetReady(false);
+	//}
 	g_Pad->Update();
 	//m_playerPad->Update();
 
-	INetworkLogic().GetLBL()->putData(Jump, m_playerPad->IsJump());
+	//INetworkLogic().GetLBL()->putData(Jump, m_playerPad->IsJump());
 	if (m_playerPad->IsTriStart())
 	{
 		if (m_Manual_W == 0.0f)

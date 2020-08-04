@@ -212,6 +212,11 @@ public:
 	void SetStickLY(float ly) {
 		m_lStickY = ly;
 	}
+	XINPUT_STATE& GetXInputPadState()
+	{
+		return m_state.xInputState;
+	}
+	void UpdateFromNetPadData();
 private:
 	/*!
 	*@brief	ボタンの入力情報を更新。
@@ -221,7 +226,7 @@ private:
 	*@brief	アナログスティックの入力情報を更新。
 	*/
 	void UpdateAnalogStickInput();
-
+	void UpdateFromXInputData(XINPUT_STATE xInputState);
 
 private:
 	PAD_STATE m_state;	//!<パッドステート。
