@@ -65,10 +65,10 @@ bool stageObjectJenerator::Start()
 			{
 				return true;
 			}
-			PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
 
 			return false;
 		});
+			PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
 	}
 
 
@@ -89,8 +89,8 @@ bool stageObjectJenerator::Start()
 				Goal* goalPtr = NewGO<Goal>(0, "Goal");
 				goalPtr->SetPosition(objData.position);
 			}
-			PointGenerator->Load(L"Assets/level/stageDossun.tkl");
 		});
+			PointGenerator->Load(L"Assets/level/stageDossun.tkl");
 	}
 
 	if (StageNum == 2) {
