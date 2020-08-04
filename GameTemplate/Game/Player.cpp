@@ -92,7 +92,7 @@ void GamePlayer::Update()
 		SIBOU();
 	}
 	else {
-		if (g_Pad[m_PlayerNum].IsTrigger(enButtonLB2)) {
+		if (g_Pad[GetPadNo()].IsTrigger(enButtonLB2)) {
 			m_position = m_CheckPoint;
 			m_characon.SetPosition(m_CheckPoint);
 			movespeed.y = 0.0f;
@@ -183,7 +183,7 @@ void GamePlayer::SpawnPole()
 		});
 		NPole* npole = NewGO<NPole>(1, "npole");
 		npole->SetPlayer(this);
-		CVector3 SpawnDir = { g_Pad[GetPadNo()].GetRStickXF() * -1.0f , g_Pad[m_PlayerNum].GetRStickYF() , 0.0f };
+		CVector3 SpawnDir = { g_Pad[GetPadNo()].GetRStickXF() * -1.0f , g_Pad[GetPadNo()].GetRStickYF() , 0.0f };
 		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = CVector3::Up();
 		}
@@ -198,7 +198,7 @@ void GamePlayer::SpawnPole()
 		});
 		SPole* spole = NewGO< SPole>(1, "spole");
 		spole->SetPlayer(this);
-		CVector3 MoveDir = { g_Pad[m_PlayerNum].GetRStickXF() * -1.0f , g_Pad[m_PlayerNum].GetRStickYF() , 0.0f };
+		CVector3 MoveDir = { g_Pad[GetPadNo()].GetRStickXF() * -1.0f , g_Pad[GetPadNo()].GetRStickYF() , 0.0f };
 		if (MoveDir.Length() < 0.01f) {
 			MoveDir = CVector3::Up();
 		}
@@ -217,7 +217,7 @@ void GamePlayer::Move()
 	const float junpPower = 15.0f;
 	float Volume;
 	if (m_characon.IsJump() &&
-		g_Pad[m_PlayerNum].IsPress(enButtonA) &&
+		g_Pad[GetPadNo()].IsPress(enButtonA) &&
 		JumpTimer < 1.0f) {
 		movespeed.y = junpPower;
 		JumpTimer += 0.5f;
