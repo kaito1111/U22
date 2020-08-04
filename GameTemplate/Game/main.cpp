@@ -9,6 +9,7 @@ extern bool g_getNetPadData;
 extern bool g_isStartGame;
 
 const DWORD TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
+const int MAX_BUFFERRING = 5;
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -57,7 +58,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		static int frameNo = 0;
 		//ネットワークの更新
 		if (g_isStartGame) {
-			while (g_Pad[0].GetNumBufferringXInputData() < 30) {
+			while (g_Pad[0].GetNumBufferringXInputData() < MAX_BUFFERRING) {
 				//このループはゲーム開始時にしか入らないはず。
 				g_Pad[0].XInputStateBufferring();
 				//バッファリングした内容を相手に送る。
@@ -68,7 +69,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 				Sleep(TIME_ONE_FRAME);
 			}
 			//ネットワークパッドのバッファリング。
-			while (g_Pad[1].GetNumBufferringXInputData() < 30) {
+			while (g_Pad[1].GetNumBufferringXInputData() < MAX_BUFFERRING) {
 				//ここは足りなくなることがあるはずなので、ゲーム中も入る可能性がある。
 				NetworkLogic::GetInstance().Update();
 				if (g_getNetPadData == false) {
