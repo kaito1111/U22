@@ -97,21 +97,17 @@ public:
 		return vZ;
 	}
 
-	int getPlayerNum()
+	int& getPlayerNum()
 	{
-		if (m_PadNum == 0) {
-			return 1;
-		}
-		else {
-			return 2;
-		}
+		return m_PadNum;
 	}
+
 
 	//継承してるやつでは使えるように
 	//Get関数作った方がいい？
 protected:
 	int m_PadNum = 0;		//Pad番号 0=p1 1=p2
 	bool A, B, X, Y, RB1, LB1;	//ボタン 初期化したほうがいいけどGet呼ばれるまで値使わんでしょ( ﾟДﾟ)
-	float vX = 0;
-	float vZ = 0;
+	float vX = 0.0f;
+	float vZ = 0.0f;
 };

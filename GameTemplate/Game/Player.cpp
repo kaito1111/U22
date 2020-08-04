@@ -5,6 +5,7 @@
 #include "GameCamera.h"
 #include "PlayerPad.h"
 #include "NetworkPad.h"
+#include "Network/NetworkLogic.h"
 
 
 GamePlayer::GamePlayer()
@@ -156,7 +157,17 @@ void GamePlayer::Draw()
 
 }
 
-
+int GamePlayer::GetPadNo() const
+{
+	if (INetworkLogic().GetLBL()->GetPlayerNum() == m_PlayerNum + 1) {
+		//©•ª‚ª‘€ì‚µ‚Ä‚¢‚éPad‚¾‚Á‚½
+		return 0;
+	}
+	else {
+		//‘€ì‚µ‚Ä‚¢‚È‚¢‚Ù‚¤‚ÌPad
+		return 1;
+	}
+}
 void GamePlayer::SpawnPole()
 {
 	CMatrix mrot = CMatrix::Identity();
@@ -172,7 +183,7 @@ void GamePlayer::SpawnPole()
 		});
 		NPole* npole = NewGO<NPole>(1, "npole");
 		npole->SetPlayer(this);
-		CVector3 SpawnDir = { g_Pad[m_PlayerNum].GetRStickXF() * -1.0f , g_Pad[m_PlayerNum].GetRStickYF() , 0.0f };
+		CVector3 SpawnDir = { g_Pad[GetPadNo()].GetRStickXF() * -1.0f , g_Pad[m_PlayerNum].GetRStickYF() , 0.0f };
 		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = CVector3::Up();
 		}

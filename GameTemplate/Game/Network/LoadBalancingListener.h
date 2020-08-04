@@ -58,8 +58,8 @@ public:
 	/// <summary>
 	/// プレイヤーの情報を転送
 	/// </summary>
-	void RaisePlayerData();
-
+	void RaisePlayerData(float vX);
+	void RaisePadData();
 public:
 
 	//From Common::BaseListener
@@ -114,7 +114,7 @@ public:
 	/// </summary>
 	/// <param name="i">キー</param>
 	/// <param name="f">送る値(float)</param>
-	void putData(nByte i, float f);
+	void putData(int i, float f);
 	/// <summary>
 	/// リストに積む
 	/// </summary>
@@ -144,6 +144,22 @@ public:
 	{
 		return m_moveZ;
 	}
+	/// <summary>
+	/// Pad情報の受け取り準備フラグ
+	/// </summary>
+	/// <returns></returns>
+	bool GetReady()
+	{
+		return IsReady;
+	}
+	/// <summary>
+	/// Pad情報の受け取り準備フラグ設定
+	/// </summary>
+	/// <param name="Ready"></param>
+	void SetReady(bool Ready)
+	{
+		IsReady = Ready;
+	}
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;
 	int m_Num = 0;
@@ -156,5 +172,6 @@ private:
 	bool m_once = false;		//一度のみ
 	float m_moveX = 1.0f;
 	float m_moveZ = 0;					//移動
+	bool IsReady = false;				//通信準備OK?
 };
 
