@@ -53,7 +53,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//パッドの更新
 		g_Pad[0].Update();
 		
-
+		static int frameNo = 0;
 		//ネットワークの更新
 		if (g_isStartGame) {
 			//パッド情報を相手に送る。
@@ -70,6 +70,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 				}
 			}
 			g_Pad[1].UpdateFromNetPadData();
+			printf("frameNo = %d\n", frameNo);
+			frameNo++;
 		}
 		else {
 			NetworkLogic::GetInstance().Update();

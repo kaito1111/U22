@@ -81,7 +81,7 @@ void NetworkLogic::Start() {
 	//lbリスナーの作成
 	mpLbl = new LoadBalancingListener(&m_testview);
 	//クライアントの作成
-	mpLbc = new Client(*mpLbl, appID, appVersion, ExitGames::Photon::ConnectionProtocol::UDP,true, RegionSelectionMode::BEST);
+	mpLbc = new Client(*mpLbl, appID, appVersion, ExitGames::Photon::ConnectionProtocol::TCP,true, RegionSelectionMode::BEST);
 	//デバッグ出力レベルの設定？
 	mpLbc->setDebugOutputLevel(DEBUG_RELEASE(ExitGames::Common::DebugLevel::INFO, ExitGames::Common::DebugLevel::WARNINGS));
 	//ベースリスナーの設定
