@@ -451,6 +451,7 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	//移動確定。
 	m_position = nextPosition;
 	
+	m_doExecute = true;
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 	return m_position;
 }
@@ -463,10 +464,13 @@ void CharacterController::RemoveRigidBoby()
 }
 void CharacterController::ApplyPositionToRigidbody()
 {
-	btRigidBody* btBody = m_rigidBody.GetBody();
-	//剛体を動かす。
-	//btBody->setActivationState(DISABLE_DEACTIVATION);
-	btTransform& trans = btBody->getWorldTransform();
-	//剛体の位置を更新。
-	trans.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
+	if (m_doExecute) {
+		btRigidBody* btBody = m_rigidBody.GetBody();
+		//剛体を動かす。
+		btBody->setActivationState(DISABLE_DEACTIVATION);
+		btTransform& trans = btBody->getWorldTransform();
+		//剛体の位置を更新。
+		trans.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
+	}
+	m_doExecute = false;
 }

@@ -111,10 +111,15 @@ void GamePlayer::Update()
 	m_model.UpdateWorldMatrix(m_position, m_rot, m_Scale);
 	m_BuckModel.UpdateWorldMatrix(m_position, m_ReverseDefeatRot, m_Scale);
 	m_FrontModel.UpdateWorldMatrix(m_position, m_DefeatRot, m_Scale);
+
+	//m_characon.ApplyPositionToRigidbody();
+}
+void GamePlayer::PreRender()
+{
+	m_characon.ApplyPositionToRigidbody();
 }
 void GamePlayer::Draw()
 {
-	m_characon.ApplyPositionToRigidbody();
 	if (!m_PlayerCut) {
 		//シルエット用の描画
 		m_model.Draw(

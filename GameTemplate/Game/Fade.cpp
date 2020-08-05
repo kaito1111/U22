@@ -10,9 +10,9 @@ Fade::Fade()
 	);
 	int FadeRenderTurn = 6;
 	m_LoadUp = NewGO<SpriteRender>(FadeRenderTurn);
-	m_LoadUp->Init(L"Assets/sprite/LoadScreen(Up).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H);
+	m_LoadUp->Init(L"Assets/sprite/LoadScreen(Up).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H,  true);
 	m_LoadDown = NewGO<SpriteRender>(FadeRenderTurn);
-	m_LoadDown->Init(L"Assets/sprite/LoadScreen(Down).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H);
+	m_LoadDown->Init(L"Assets/sprite/LoadScreen(Down).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H,true);
 	m_SSprite = NewGO<SpriteRender>(FadeRenderTurn);
 	m_SSprite->Init(L"Assets/sprite/LoadS.dds", 200.0f, 200.0f);
 	m_SSprite->SetPosition(m_SPos);
