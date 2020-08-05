@@ -214,11 +214,13 @@ void Pad::XInputStateBufferringFromNetPadData(int frameNo)
 void Pad::UpdateFromNetPadData()
 {
 	UpdateFromXInputData(m_xinputStateQueue.front().second);
+	printf("GPad frameNo = %d\n", m_xinputStateQueue.front().first);
 	m_xinputStateQueue.pop_front();
 }
 void Pad::UpdateFromXInputData(XINPUT_STATE xInputState)
 {
 	m_state.xInputState = xInputState;
+	
 	//ゲームパッドが接続されている
 		//接続されている。
 	m_state.bConnected = true;
@@ -240,6 +242,7 @@ void Pad::Update(bool isUseQueue)
 	if (isUseQueue) {
 		//バッファリングされたパッド情報を使う。
 		xInputState = m_xinputStateQueue.front().second;
+		printf("GPad frameNo = %d\n", m_xinputStateQueue.front().first);
 		//使った情報は捨てる。
 		m_xinputStateQueue.pop_front();
 		result = ERROR_SUCCESS;
