@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "physics/Physics.h"
 #include "Physics/RigidBody.h"
-
+#include "BulletCollision\CollisionDispatch\btSimulationIslandManager.h"
 
 PhysicsWorld g_physics;
 
@@ -47,10 +47,10 @@ void PhysicsWorld::Init()
 		);
 
 	dynamicWorld->setGravity(btVector3(0, -10, 0));
+	dynamicWorld->getSimulationIslandManager()->setSplitIslands(false);
 }
 void PhysicsWorld::Update()
 {
-	constraintSolver->setRandSeed(0);
 	dynamicWorld->stepSimulation(1.0f/60.0f);
 }
 void PhysicsWorld::AddRigidBody(RigidBody& rb)
