@@ -38,7 +38,7 @@ void PhysicsWorld::Init()
 
 	///the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
 	constraintSolver = new btSequentialImpulseConstraintSolver;
-
+	
 	dynamicWorld = new btDiscreteDynamicsWorld(
 		collisionDispatcher,
 		overlappingPairCache,
@@ -50,6 +50,7 @@ void PhysicsWorld::Init()
 }
 void PhysicsWorld::Update()
 {
+	constraintSolver->setRandSeed(0);
 	dynamicWorld->stepSimulation(1.0f/60.0f);
 }
 void PhysicsWorld::AddRigidBody(RigidBody& rb)
