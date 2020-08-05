@@ -50,7 +50,7 @@ void PhysicsWorld::Init()
 }
 void PhysicsWorld::Update()
 {
-	//dynamicWorld->stepSimulation(1.0f/60.0f);
+	dynamicWorld->stepSimulation(1.0f/60.0f);
 }
 void PhysicsWorld::AddRigidBody(RigidBody& rb)
 {
