@@ -34,7 +34,6 @@ public:
 		*@return 移動後のキャラクターの座標。
 		*/
 	const CVector3& Execute(float deltaTime, CVector3& moveSpeed);
-	void ApplyPositionToRigidbody();
 	/*!
 		* @brief	座標を取得。
 		*/
@@ -96,5 +95,4 @@ private:
 	RigidBody m_rigidBody;					//剛体。
 	
 	bool MagnetTask = false;
-	bool m_doExecute = false;		//Execute関数を実行した？
 };

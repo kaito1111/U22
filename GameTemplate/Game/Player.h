@@ -57,7 +57,6 @@ public:
 private:
 	bool Start();
 	void Update();
-	void PreRender() override;
 	void Draw();
 	int GetPadNo() const;
 	SkinModel m_model;										//スキンモデル。
