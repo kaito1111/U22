@@ -197,6 +197,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		*/
 		//キー初期化
 		g_getNetPadData = true;
+		m_NetworkReady = true;
 		
 		g_netPadState.Gamepad.sThumbLX = ValueObject<SHORT>(eventContent.getValue(1)).getDataCopy();
 		g_netPadState.Gamepad.sThumbLY = ValueObject<SHORT>(eventContent.getValue(2)).getDataCopy();
