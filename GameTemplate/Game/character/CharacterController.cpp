@@ -21,8 +21,7 @@ namespace {
 		//衝突したときに呼ばれるコールバック関数。
 		virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 		{
-			if (convexResult.m_hitCollisionObject == me 
-				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character
+			if (convexResult.m_hitCollisionObject == me
 				) {
 				//自分に衝突した。
 				return 0.0f;
@@ -83,7 +82,7 @@ namespace {
 			//上方向と衝突点の法線のなす角度を求める。
 			float angle = fabsf(acosf(hitNormalTmp.Dot(CVector3::Up())));
 			if (angle >= CMath::PI * 0.3f && angle <= CMath::PI * 0.7f		//地面の傾斜が54度以上、162度以下なので壁とみなす。
-				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_BoxCharacter
+				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character
 				) {
 				isHit = true;
 				CVector3 hitPosTmp;
@@ -146,7 +145,7 @@ namespace {
 			//上方向と法線のなす角度を求める。
 			float angle = hitNormalTmp.Dot(CVector3::Up());
 			angle = fabsf(acosf(angle));
-			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_BoxCharacter) {
+			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character) {
 				isHit = true;
 				CVector3 hitPosTmp = *(CVector3*)&convexResult.m_hitPointLocal;
 				CVector3 vDist;
@@ -451,8 +450,12 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	m_position.z = nextPosition.z;
 	//移動確定。
 	m_position = nextPosition;
-	
-	m_doExecute = true;
+	btRigidBody* btBody = m_rigidBody.GetBody();
+	//剛体を動かす。
+	btBody->setActivationState(DISABLE_DEACTIVATION);
+	btTransform& trans = btBody->getWorldTransform();
+	//剛体の位置を更新。
+	trans.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 	return m_position;
 }
@@ -462,16 +465,4 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 void CharacterController::RemoveRigidBoby()
 {
 	g_physics.RemoveRigidBody(m_rigidBody);
-}
-void CharacterController::ApplyPositionToRigidbody()
-{
-	if (m_doExecute) {
-		btRigidBody* btBody = m_rigidBody.GetBody();
-		//剛体を動かす。
-		btBody->setActivationState(DISABLE_DEACTIVATION);
-		btTransform& trans = btBody->getWorldTransform();
-		//剛体の位置を更新。
-		trans.setOrigin(btVector3(m_position.x, m_position.y + m_height * 0.5f + m_radius, m_position.z));
-	}
-	m_doExecute = false;
 }
