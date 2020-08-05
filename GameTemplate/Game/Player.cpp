@@ -84,10 +84,8 @@ bool GamePlayer::Start()
 
 void GamePlayer::Update()
 {
-	//シャドウ関連の更新処理
-	{
-
-	}
+	printf("player %d Updated\n", m_PlayerNum);
+	
 	if (m_IsSi) {
 		SIBOU();
 	}
