@@ -150,7 +150,7 @@ public:
 	/// <returns></returns>
 	bool GetReady()
 	{
-		return NetworkReady;
+		return m_NetworkReady;
 	}
 	/// <summary>
 	/// Pad情報の受け取り準備フラグ設定
@@ -158,7 +158,7 @@ public:
 	/// <param name="Ready"></param>
 	void SetReady(bool Ready)
 	{
-		NetworkReady = Ready;
+		m_NetworkReady = Ready;
 	}
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;
@@ -172,6 +172,6 @@ private:
 	bool m_once = false;		//一度のみ
 	float m_moveX = 1.0f;
 	float m_moveZ = 0;					//移動
-	bool NetworkReady = false;				//通信準備OK?
+	bool m_NetworkReady = false;				//通信準備OK?
 };
 
