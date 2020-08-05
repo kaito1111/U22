@@ -83,8 +83,8 @@ void LoadBalancingListener::setLBC(ExitGames::LoadBalancing::Client* pLbc)
 
 void LoadBalancingListener::connect(const JString& userName)
 {
-	//mpLbc->connect(AuthenticationValues().setUserID(JString() + GETTIMEMS()), userName);
-	mpLbc->connect(m_UserData[m_Num++].setUserID(JString() + GETTIMEMS()), userName);
+	mpLbc->connect(AuthenticationValues().setUserID(JString() + GETTIMEMS()), userName);
+	//mpLbc->connect(m_UserData[m_Num++].setUserID(JString() + GETTIMEMS()), userName);
 }
 
 void LoadBalancingListener::disconnect() {
@@ -126,17 +126,27 @@ void LoadBalancingListener::serverErrorReturn(int errorCode)
 void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>& playernrs, const Player& player)
 {
 	if (m_once == false) {
+		printf("your playerID is %d.\n", playerNr);
 		//ゲームを立ち上げて一回のみよばれる。
-		m_playerNum = playerNr;
+		m_playerNum = playerNr;;
 		m_once = true;
 	}
 
-	if (playerNr == 2){
+	if (playerNr == 1) {
+		//最初のひとり
+		printf("Created room.\n");
+		printf("waiting for other player.\n");
+	}
+	if (playerNr == 2) {
+		printf("joined room\n");
+	}
+	if (playerNr == m_maxPlayer){
 		//全員そろった。
 		m_NetworkReady = true;
+		printf("GameStart.\n");
 	}
-
-	if (playerNr >= 3) {
+	if (playerNr > m_maxPlayer) {
+		printf("playerCount is invalid.\n");
 		//プレイヤーの人数不正
 		throw;
 	}
@@ -166,8 +176,8 @@ void LoadBalancingListener::onAvailableRegions(const ExitGames::Common::JVector<
 	mpLbc->selectRegion("jp");
 }
 
-bool g_getNetPadData = false;
 //opRaiseEventでイベントが送信されるとこの関数が呼ばれる
+bool g_getNetPadData;
 void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, const Object& eventContentObj)
 {
 	//送られてきたデータ
@@ -199,7 +209,6 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		*/
 		//キー初期化
 		g_getNetPadData = true;
-		m_NetworkReady = true;
 		
 		g_netPadState.Gamepad.sThumbLX = ValueObject<SHORT>(eventContent.getValue(1)).getDataCopy();
 		g_netPadState.Gamepad.sThumbLY = ValueObject<SHORT>(eventContent.getValue(2)).getDataCopy();

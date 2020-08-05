@@ -129,23 +129,7 @@ public:
 		return m_playerNum;
 	}
 	/// <summary>
-	/// X軸の移動
-	/// </summary>
-	/// <returns></returns>
-	float& GetMoveX()
-	{
-		return m_moveX;
-	}
-	/// <summary>
-	/// Z軸の移動
-	/// </summary>
-	/// <returns></returns>
-	float& GetMoveZ()
-	{
-		return m_moveZ;
-	}
-	/// <summary>
-	/// Pad情報の受け取り準備フラグ
+	/// ゲームできる状態かのフラグを取得
 	/// </summary>
 	/// <returns></returns>
 	bool GetReady()
@@ -153,25 +137,31 @@ public:
 		return m_NetworkReady;
 	}
 	/// <summary>
-	/// Pad情報の受け取り準備フラグ設定
+	/// ネットワークパッドのデータを受信したかのフラグを設定。
 	/// </summary>
-	/// <param name="Ready"></param>
-	void SetReady(bool Ready)
+	/// <param name="flag"></param>
+	void SetReceiveFlag(bool flag)
 	{
-		m_NetworkReady = Ready;
+		m_isReceiveNetPadData = flag;
+	}
+	/// <summary>
+	/// ネットワークパッドのデータを受信したかのフラグを取得。
+	/// </summary>
+	/// <returns></returns>
+	bool getReceiveFlag()
+	{
+		return m_isReceiveNetPadData;
 	}
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;
-	int m_Num = 0;
-	AuthenticationValues m_UserData[2];	//Userのデータ(番号)
-	Hashtable playerData;				//プレイヤー情報格納用
+	AuthenticationValues m_UserData[2];		//Userのデータ(番号)
+	Hashtable playerData;					//プレイヤー情報格納用
 	BaseView* mpView;
-	int m_maxPlayer = 2;
-	unsigned long lastUpdateTime;
-	int m_playerNum = 0;					//フォトンの最大参加人数、これが自分の参加番号になる
-	bool m_once = false;		//一度のみ
-	float m_moveX = 1.0f;
-	float m_moveZ = 0;					//移動
-	bool m_NetworkReady = false;				//通信準備OK?
+	int m_maxPlayer = 2;					//最大人数
+	unsigned long lastUpdateTime;			//前フレームのUpdateにかかた時間
+	int m_playerNum = 0;					//自分のネットでの参加番号 1～スタートなので注意
+	bool m_once = false;					//一度のみ	
+	bool m_NetworkReady = false;			//通信準備OK?
+	bool m_isReceiveNetPadData = false;		//ネットワークパッドのデータ受け取り完了したか。
 };
 

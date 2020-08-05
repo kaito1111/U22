@@ -32,6 +32,24 @@ private:
 	/// ポストレンダー
 	/// </summary>
 	void PostRender();
+public:
+	/// <summary>
+	/// ゲームのインスタンス取得
+	/// </summary>
+	/// <returns></returns>
+	static Game& getGameInstance()
+	{
+		static Game Instance;
+		return Instance;
+	}
+	/// <summary>
+	/// ゲーム開始フラグの取得
+	/// </summary>
+	/// <returns></returns>
+	bool getGameStartFlag() const
+	{
+		return m_isGameStart;
+	}
 private:
 	SpriteRender* m_test = nullptr;							//スプライトレンダー
 	Sprite m_copyMainRtToFrameBufferSprite;					//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
@@ -42,6 +60,12 @@ private:
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームDSV
 	D3D11_VIEWPORT m_frameBufferViewports;					//フレームビューポート
 	myEngine::PostEffect m_postEffect;								//ブルーム
-	KaitoTask* m_task = nullptr;
-	Stage* stage = nullptr;
+	KaitoTask* m_task = nullptr;							//プレイヤー作ってるクラス。
+	Stage* stage = nullptr;									//ステージ
+	bool m_isGameStart = false;								//ゲームが開始されているかどうか
 };
+
+static inline Game& GameObj()
+{
+	return Game::getGameInstance();
+}

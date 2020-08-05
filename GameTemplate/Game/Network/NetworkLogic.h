@@ -82,3 +82,8 @@ private:
 static inline NetworkLogic& INetworkLogic() {
 	return NetworkLogic::GetInstance();
 }
+
+static inline LoadBalancingListener* GetLBLobj()
+{
+	return INetworkLogic().GetLBL();
+}
