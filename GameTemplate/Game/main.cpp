@@ -59,6 +59,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		
 		//ネットワークの更新
 		if (g_isStartGame) {
+			//ゲームが開始されている
 			while (g_Pad[0].GetNumBufferringXInputData() < MAX_BUFFERRING) {
 				//このループはゲーム開始時にしか入らないはず。
 				g_Pad[0].XInputStateBufferring();
@@ -107,6 +108,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		}
 		else {
 			//パッドの更新
+			//ゲームが開始されていない。
 			g_Pad[0].Update(false);
 			NetworkLogic::GetInstance().Update();
 		}

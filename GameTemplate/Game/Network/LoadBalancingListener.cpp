@@ -131,13 +131,15 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 		m_once = true;
 	}
 
-	if (playerNr >=  3)
-	{
-		//プレイ人数がおかしい
-		throw;
+	if (playerNr == 2){
+		//全員そろった。
+		m_NetworkReady = true;
 	}
 
-
+	if (playerNr >= 3) {
+		//プレイヤーの人数不正
+		throw;
+	}
 	Console::get().writeLine(JString("player ") + playerNr + L" " + player.getName() + L" has joined the game");
 }
 
