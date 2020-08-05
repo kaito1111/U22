@@ -28,6 +28,7 @@ Title::~Title()
 	DeleteGO(m_Sprite);
 }
 
+extern bool g_getNetPadData;
 void Title::Update()
 {
 	//ルームの作成　そのルームが作成済みなら参加
@@ -38,7 +39,8 @@ void Title::Update()
 	g_camera2D.Update2D();
 	g_camera3D.Update();
 	if (g_Pad->IsPress(enButtonA)&&
-		!DeleteTitle) {
+		!DeleteTitle &&
+		g_getNetPadData == true) {
 		m_fade = NewGO<Fade>(0, "fade");
 		DeleteTitle = true;
 	}
