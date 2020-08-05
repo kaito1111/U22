@@ -114,6 +114,7 @@ void GamePlayer::Update()
 }
 void GamePlayer::Draw()
 {
+	m_characon.ApplyPositionToRigidbody();
 	if (!m_PlayerCut) {
 		//シルエット用の描画
 		m_model.Draw(

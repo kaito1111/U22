@@ -34,6 +34,7 @@ public:
 		*@return 移動後のキャラクターの座標。
 		*/
 	const CVector3& Execute(float deltaTime, CVector3& moveSpeed);
+	void ApplyPositionToRigidbody();
 	/*!
 		* @brief	座標を取得。
 		*/
