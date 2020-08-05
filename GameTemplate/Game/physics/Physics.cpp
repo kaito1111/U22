@@ -47,11 +47,10 @@ void PhysicsWorld::Init()
 		);
 
 	dynamicWorld->setGravity(btVector3(0, -10, 0));
-	dynamicWorld->getSimulationIslandManager()->setSplitIslands(false);
 }
 void PhysicsWorld::Update()
 {
-	dynamicWorld->stepSimulation(1.0f/60.0f);
+	//dynamicWorld->stepSimulation(1.0f/60.0f);
 }
 void PhysicsWorld::AddRigidBody(RigidBody& rb)
 {
