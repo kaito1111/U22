@@ -84,7 +84,7 @@ namespace {
 			//上方向と衝突点の法線のなす角度を求める。
 			float angle = fabsf(acosf(hitNormalTmp.Dot(CVector3::Up())));
 			if (angle >= CMath::PI * 0.3f && angle <= CMath::PI * 0.7f		//地面の傾斜が54度以上、162度以下なので壁とみなす。
-				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character
+				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_BoxCharacter
 				) {
 				isHit = true;
 				CVector3 hitPosTmp;
@@ -148,7 +148,7 @@ namespace {
 			//上方向と法線のなす角度を求める。
 			float angle = hitNormalTmp.Dot(CVector3::Up());
 			angle = fabsf(acosf(angle));
-			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character) {
+			if (convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_BoxCharacter) {
 				isHit = true;
 				CVector3 hitPosTmp = *(CVector3*)&convexResult.m_hitPointLocal;
 				CVector3 vDist;
