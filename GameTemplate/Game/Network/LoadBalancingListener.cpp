@@ -206,7 +206,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		g_netPadState.Gamepad.bLeftTrigger = ValueObject<BYTE>(eventContent.getValue(6)).getDataCopy();
 		g_netPadState.Gamepad.bRightTrigger = ValueObject<BYTE>(eventContent.getValue(7)).getDataCopy();
 		int frameNo = ValueObject<int>(eventContent.getValue(8)).getDataCopy();
-		printf("frameNo = %d\n", frameNo);
+		//printf("frameNo = %d\n", frameNo);
 		//ネットワークからとってきたパッド情報をバッファリングする。
 		g_Pad[1].XInputStateBufferringFromNetPadData(frameNo);
 		
