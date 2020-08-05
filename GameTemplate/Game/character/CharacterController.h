@@ -96,4 +96,5 @@ private:
 	RigidBody m_rigidBody;					//„‘ÌB
 	
 	bool MagnetTask = false;
+	bool m_doExecute = false;		//ExecuteŠÖ”‚ğÀs‚µ‚½H
 };
