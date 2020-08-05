@@ -212,6 +212,10 @@ const CVector3& CharacterController::Execute(float deltaTime, CVector3& moveSpee
 	addPos *= deltaTime;
 	nextPosition += addPos;
 
+	nextPosition.y = m_position.y;
+	m_position = nextPosition;
+	return nextPosition;
+
 	if (moveSpeed.y > 0.0f) {
 		//‚Á”ò‚Ñ’†‚É‚·‚éB
 		m_isJump = true;
