@@ -100,10 +100,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 				//このフレーム間に合わなかったとしても無視。待たない。
 				//ネットワークパッドはバッファリングが枯渇したら貯める。
 			}
+			printf("Pad::Update Start\n");
 			//バッファリングされた情報をもとにパッド情報を更新する。
 			g_Pad[0].Update(true);
 			g_Pad[1].UpdateFromNetPadData();
-
+			printf("Pad::Update End\n");
 			g_frameNo++;
 		}
 		else {
