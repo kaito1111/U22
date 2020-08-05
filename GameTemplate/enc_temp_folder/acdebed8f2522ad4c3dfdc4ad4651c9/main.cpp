@@ -92,6 +92,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			//続いてネットワークパッド。
 			NetworkLogic::GetInstance().Update();
 			if (g_getNetPadData == true) {
+				INetworkLogic().GetLBL()->SetReady(true);
 				g_getNetPadData = false;
 			}
 			else {
