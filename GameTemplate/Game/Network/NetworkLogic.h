@@ -83,7 +83,7 @@ static inline NetworkLogic& INetworkLogic() {
 	return NetworkLogic::GetInstance();
 }
 
-static inline LoadBalancingListener* GetLBLobj()
+static inline LoadBalancingListener* LBLobj()
 {
 	return INetworkLogic().GetLBL();
 }
