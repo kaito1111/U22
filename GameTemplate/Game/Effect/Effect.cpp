@@ -30,16 +30,18 @@ namespace myEngine {
 	{
 		//ハッシュの作成
 		int nameKey = Util::MakeHash(filePath);
+		//リソースにエフェクトが登録されているかの検索
 		m_effect = GetResource(nameKey);
 		if (m_effect == nullptr) {
+			//登録されていなかった
 			//エフェクトの作成
 			m_effect = Effekseer::Effect::Create(g_graphicsEngine->GetEffekseerManager(), (const EFK_CHAR*)filePath );
-			//ロード失敗！！
-			//？？ファイルパス間違えてない？？
 			if (m_effect == nullptr) {
+				//ロード失敗！！
+				//？？ファイルパス間違えてない？？
 				throw;
 			}
-			//これいる？
+			//エフェクトをリソースに登録
 			RegistResource(nameKey, m_effect);
 		}
 		m_handle = g_graphicsEngine->GetEffekseerManager()->Play(m_effect, 0, 0, 0);
