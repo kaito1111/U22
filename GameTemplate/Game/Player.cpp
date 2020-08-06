@@ -7,7 +7,7 @@
 #include "NetworkPad.h"
 #include "Network/NetworkLogic.h"
 
-
+//コンストラクタ
 GamePlayer::GamePlayer()
 {
 	//cmoファイルの読み込み。
@@ -23,38 +23,44 @@ GamePlayer::GamePlayer()
 	m_Asioto.SetVolume(0.0f);
 }
 
-
+//デストラクタ
 GamePlayer::~GamePlayer()
 {
 	DeleteGO(m_Magnet);
 	DeleteGO(m_ThisNumSprite);
 }
 
+//コントローラーを受け取る
 void GamePlayer::SetPad(IPad* pad)
 {
 	//PlayerPad or NetworkPad の設定
 	m_Pad = pad;
 }
 
+
 void GamePlayer::ReSpown()
 {
+	//プレイヤーをチェックポイントまで戻す
 	m_position = m_CheckPoint;
+	//カメラも
 	GameCamera* camera = FindGO<GameCamera>("camera");
 	camera->SetDec(0.0f);
+	//死亡フラグを消す
 	m_IsSi = false;
+	//キャラコンをリセット
 	m_characon.Init(40.0f, 20.0f, m_position);
+	//磁極をリセット
 	LearnMO(m_Magnet);
+	//磁極を持ちました
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
+	//プレス用
 	m_Scale.z = 1.0f;
 }
 
-void GamePlayer::SetCheckPoint(CVector3 spownPoint)
-{
-	m_CheckPoint = spownPoint;
-}
 bool GamePlayer::Start()
 {
+	//プレイヤーNoの絵を出す
 	m_ThisNumSprite = NewGO<SpriteRender>(0);
 	wchar_t spriteName[256] = {};
 	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum--);
@@ -66,13 +72,17 @@ bool GamePlayer::Start()
 	CQuaternion Rot;
 	Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
 	m_ThisNumSprite->SetRotation(Rot);
+	
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet); 
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
 
+	//キャラコンをセット
 	m_characon.Init(40.0f, 20.0f, m_position);
+
+	//アニメーションをロード
 	m_AnimeClip[enAniCli::Run].Load(L"Assets/animData/PlayerRun.tka");
 	m_AnimeClip[enAniCli::Run].SetLoopFlag(true);
 	m_AnimeClip[enAniCli::Wait].Load(L"Assets/animData/wait.tka");
@@ -84,23 +94,31 @@ bool GamePlayer::Start()
 
 void GamePlayer::Update()
 {
+	//あぷでーどlog
 	printf("player %d Updated\n", m_PlayerNum);
 	
+	//しんだ?
 	if (m_IsSi) {
 		SIBOU();
 	}
 	else {
+		//デバッグ用簡易リスポーン
 		if (g_Pad[GetPadNo()].IsTrigger(enButtonLB2)) {
 			m_position = m_CheckPoint;
 			m_characon.SetPosition(m_CheckPoint);
 			movespeed.y = 0.0f;
 		}
+		//移動
 		Move();
+		//磁力変更
 		MyMagnet();
+		//磁極を作成
 		SpawnPole();
+		//アニメーションをアップデート
 		m_Animetion.Update(1.0f / 60.0f);
 	}
 	{
+		//何Pの絵を動かす
 		CVector3 ThisNumSpritePos = m_position;
 		ThisNumSpritePos.y += 150.0f;
 		float diff = fabsf(g_camera3D.GetTarget().x) - ThisNumSpritePos.x;
@@ -168,19 +186,19 @@ int GamePlayer::GetPadNo() const
 }
 void GamePlayer::SpawnPole()
 {
-	CMatrix mrot = CMatrix::Identity();
-	mrot.MakeRotationFromQuaternion(m_rot);
-	m_forward = { mrot.m[2][0],mrot.m[2][1],mrot.m[2][2] };
-	m_forward.Normalize();
 	//NSpawn
 	if (m_Pad->IsMagShotN())
 	{
+		//Game上のN極をすべて消す
 		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool {
 			DeleteGO(m_pole);
 			return true;
 		});
+		//N極を出す
 		NPole* npole = NewGO<NPole>(1, "npole");
-		npole->SetPlayer(this);
+		//出る位置を伝える
+		npole->SetSpownPos(m_position);
+		//方向を設定
 		CVector3 SpawnDir = { g_Pad[GetPadNo()].GetRStickXF() * -1.0f , g_Pad[GetPadNo()].GetRStickYF() , 0.0f };
 		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = CVector3::Up();
@@ -190,12 +208,15 @@ void GamePlayer::SpawnPole()
 	//SSpawn
 	if (m_Pad->IsMagShotS())
 	{
+		//Game上のS極をすべて消す
 		QueryGOs< SPole>("spole", [&](SPole* m_pole)->bool {
 			DeleteGO(m_pole);
 			return true;
 		});
+		//S極を出す
 		SPole* spole = NewGO< SPole>(1, "spole");
-		spole->SetPlayer(this);
+		//出る位置を伝える
+		spole->SetSpownPos(m_position);
 		CVector3 MoveDir = { g_Pad[GetPadNo()].GetRStickXF() * -1.0f , g_Pad[GetPadNo()].GetRStickYF() , 0.0f };
 		if (MoveDir.Length() < 0.01f) {
 			MoveDir = CVector3::Up();
@@ -214,12 +235,6 @@ void GamePlayer::Move()
 	movespeed.x = m_Pad->MoveX() * -10.0f;
 	const float junpPower = 15.0f;
 	float Volume;
-	if (m_characon.IsJump() &&
-		g_Pad[GetPadNo()].IsPress(enButtonA) &&
-		JumpTimer < 1.0f) {
-		movespeed.y = junpPower;
-		JumpTimer += 0.5f;
-	}
 	if (m_characon.IsOnGround())
 	{
 		Volume = fabsf(m_Pad->MoveX());
@@ -229,9 +244,6 @@ void GamePlayer::Move()
 				m_Se2.Play(false);
 			}
 			m_Se.Play(false);
-		}
-		else {
-			JumpTimer = 0.0f;
 		}
 	}
 	const float gravity = 0.8f;		//重力
