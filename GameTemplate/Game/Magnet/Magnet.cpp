@@ -112,7 +112,17 @@ CVector3 Magnet::MagnetMove()
 			break;
 		}
 		MagnetForce.z = 0;
-		MagnetForce /= MagnetNum;
+		if (fabsf(MagnetForce.Length()) > FLT_EPSILON) {
+			MagnetForce /= MagnetNum;
+		} 
+		else {
+			MagnetForce = CVector3::Zero();
+		}
+		CVector3 diff = mag->GetPosition() - *m_Position;
+		if (diff.Length() < MagnetForce.Length()) {
+			MagnetForce = diff;
+		}
+
 		m_MagnetForce += MagnetForce;
 		return true;
 	});
@@ -138,13 +148,16 @@ void MyMagnet::Magnet::Update()
 		//if (m_Pad->IsTrigger(enButtonUp)) {
 		//	SeVolume += 0.1f;
 		//}
-		if (SEffect->IsPlay() == false
+		if (NEffect->IsPlay() == false
 			&& m_Se.IsPlaying() == false) {
 			NEffect = NewGO<Effect>(1);
 			NEffect->Play(L"Assets/effect/SMode.efk");
 			NEffect->SetPosition(*m_Position);
 			NEffect->SetScale(CVector3::One() * 2.75f);
 			m_Se.Play();
+		}
+		if (NEffect != nullptr) {
+			NEffect->SetPosition(*m_Position);
 		}
 		break;
 	case Magnet::NMode:
@@ -163,6 +176,9 @@ void MyMagnet::Magnet::Update()
 			SEffect->SetPosition(*m_Position);
 			SEffect->SetScale(CVector3::One() * 2.75f);
 			m_Se.Play();
+		}
+		if (SEffect != nullptr) {
+			SEffect->SetPosition(*m_Position);
 		}
 		break;
 	default:
