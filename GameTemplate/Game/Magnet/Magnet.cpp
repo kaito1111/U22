@@ -118,7 +118,7 @@ CVector3 Magnet::MagnetMove()
 		else {
 			MagnetForce = CVector3::Zero();
 		}
-		CVector3 diff = mag->GetPosition() - *m_Position;
+		diff = mag->GetPosition() - *m_Position;
 		if (diff.Length() < MagnetForce.Length()) {
 			MagnetForce = diff;
 		}
