@@ -177,7 +177,6 @@ void LoadBalancingListener::onAvailableRegions(const ExitGames::Common::JVector<
 }
 
 //opRaiseEventでイベントが送信されるとこの関数が呼ばれる
-bool g_getNetPadData;
 void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, const Object& eventContentObj)
 {
 	//送られてきたデータ
@@ -207,20 +206,20 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		/*
 		padデータ（ボタン、pad入力）を送信側から受け取る処理。
 		*/
-		//キー初期化
-		g_getNetPadData = true;
-		
-		g_netPadState.Gamepad.sThumbLX = ValueObject<SHORT>(eventContent.getValue(1)).getDataCopy();
-		g_netPadState.Gamepad.sThumbLY = ValueObject<SHORT>(eventContent.getValue(2)).getDataCopy();
-		g_netPadState.Gamepad.sThumbRX = ValueObject<SHORT>(eventContent.getValue(3)).getDataCopy();
-		g_netPadState.Gamepad.sThumbRY = ValueObject<SHORT>(eventContent.getValue(4)).getDataCopy();
-		g_netPadState.Gamepad.wButtons = (WORD)ValueObject<int>(eventContent.getValue(5)).getDataCopy();
+		//ネットワークパッドにデータを入れていく。
+		g_netPadState.Gamepad.sThumbLX = ValueObject<SHORT>(eventContent.getValue(1)).getDataCopy();		//左スティックのX軸
+		g_netPadState.Gamepad.sThumbLY = ValueObject<SHORT>(eventContent.getValue(2)).getDataCopy();		//左スティックのY軸
+		g_netPadState.Gamepad.sThumbRX = ValueObject<SHORT>(eventContent.getValue(3)).getDataCopy();		//右スティックのX軸
+		g_netPadState.Gamepad.sThumbRY = ValueObject<SHORT>(eventContent.getValue(4)).getDataCopy();		//右スティックのY軸
+		g_netPadState.Gamepad.wButtons = (WORD)ValueObject<int>(eventContent.getValue(5)).getDataCopy();	//XYBA
 		g_netPadState.Gamepad.bLeftTrigger = ValueObject<BYTE>(eventContent.getValue(6)).getDataCopy();
 		g_netPadState.Gamepad.bRightTrigger = ValueObject<BYTE>(eventContent.getValue(7)).getDataCopy();
 		int frameNo = ValueObject<int>(eventContent.getValue(8)).getDataCopy();
-		//printf("frameNo = %d\n", frameNo);
+		//photonからパッドデータを取得した。
+		m_isReceiveNetPadData = true;
 		//ネットワークからとってきたパッド情報をバッファリングする。
 		g_Pad[1].XInputStateBufferringFromNetPadData(frameNo);
+		//printf("frameNo = %d\n", frameNo);
 		
 	}
 }

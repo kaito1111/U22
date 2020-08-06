@@ -6,7 +6,6 @@
 #include "util/tkStopwatch.h"
 #include "Game.h"
 
-extern bool g_getNetPadData;
 int g_frameNo = 0;
 
 const DWORD TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
@@ -65,8 +64,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 				g_Pad[0].XInputStateBufferring();
 				//バッファリングした内容を相手に送る。
 				//パッド情報を相手に送る。
-				auto LBL = INetworkLogic().GetLBL();
-				LBL->RaisePadData();
+				LBLobj()->RaisePadData();
 				g_frameNo++;
 				//1フレーム分寝る。
 				Sleep(TIME_ONE_FRAME);
@@ -75,11 +73,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			while (g_Pad[1].GetNumBufferringXInputData() < MAX_BUFFERRING) {
 				//ここは足りなくなることがあるはずなので、ゲーム中も入る可能性がある。
 				NetworkLogic::GetInstance().Update();
-				if (g_getNetPadData == false) {
+				if (LBLobj()->getReceiveFlag() == false) {
+					//まだネットワークパッドのデータを受信できていない。
+					//1フレーム待機。
 					Sleep(TIME_ONE_FRAME);
 				}
 				else {
-					g_getNetPadData = false;
+					//ネットワークパッドのデータを受信した。
+					LBLobj()->SetReceiveFlag(false);
 				}
 			}
 			
@@ -88,12 +89,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			g_Pad[0].XInputStateBufferring();
 			//バッファリングした内容を相手に送る。
 			//パッド情報を相手に送る。
-			auto LBL = INetworkLogic().GetLBL();
-			LBL->RaisePadData();
+			LBLobj()->RaisePadData();
 			//続いてネットワークパッド。
 			NetworkLogic::GetInstance().Update();
-			if (g_getNetPadData == true) {
-				g_getNetPadData = false;
+			if (LBLobj()->getReceiveFlag() == true) {
+				LBLobj()->SetReceiveFlag(false);
 			}
 			else {
 				//このフレーム間に合わなかったとしても無視。待たない。
@@ -113,7 +113,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 			NetworkLogic::GetInstance().Update();
 		}
 		
-		g_getNetPadData = false;
+		LBLobj()->SetReceiveFlag(false);
 		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
 		gameObjectManager().Start();
 		//ゲームオブジェクトマネージャーでする処理の呼び出し

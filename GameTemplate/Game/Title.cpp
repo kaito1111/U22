@@ -28,7 +28,6 @@ Title::~Title()
 	DeleteGO(m_Sprite);
 }
 
-extern bool g_getNetPadData;
 void Title::Update()
 {
 	//ルームの作成　そのルームが作成済みなら参加
