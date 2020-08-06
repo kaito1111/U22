@@ -12,7 +12,6 @@
 #include "Network/NetworkLogic.h"
 
 StageSelect;
-bool g_isStartGame = false;
 Game::Game()
 {
 	//ƒTƒEƒ“ƒh‚Ì‰Šú‰»
@@ -54,7 +53,6 @@ bool Game::Start()
 	stage = NewGO<Stage>(0, "stage");
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);		
-	g_isStartGame = true;
 	return true;
 }
 

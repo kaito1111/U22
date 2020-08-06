@@ -38,8 +38,9 @@ void Title::Update()
 
 	g_camera2D.Update2D();
 	g_camera3D.Update();
-	if (g_Pad->IsPress(enButtonA)&&
+	if (INetworkLogic().GetLBL()->GetReady() &&
 		!DeleteTitle ) {
+		//ネットワークの準備が整った
 		m_fade = NewGO<Fade>(0, "fade");
 		DeleteTitle = true;
 	}
