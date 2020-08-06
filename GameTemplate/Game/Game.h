@@ -42,14 +42,6 @@ public:
 		static Game Instance;
 		return Instance;
 	}
-	/// <summary>
-	/// ゲーム開始フラグの取得
-	/// </summary>
-	/// <returns></returns>
-	bool getGameStartFlag() const
-	{
-		return m_isGameStart;
-	}
 private:
 	SpriteRender* m_test = nullptr;							//スプライトレンダー
 	Sprite m_copyMainRtToFrameBufferSprite;					//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
@@ -62,7 +54,6 @@ private:
 	myEngine::PostEffect m_postEffect;								//ブルーム
 	KaitoTask* m_task = nullptr;							//プレイヤー作ってるクラス。
 	Stage* stage = nullptr;									//ステージ
-	bool m_isGameStart = false;								//ゲームが開始されているかどうか
 };
 
 static inline Game& GameObj()

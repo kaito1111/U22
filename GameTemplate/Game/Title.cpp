@@ -38,7 +38,7 @@ void Title::Update()
 
 	g_camera2D.Update2D();
 	g_camera3D.Update();
-	if (INetworkLogic().GetLBL()->GetReady()&&
+	if (INetworkLogic().GetLBL()->GetReady() &&
 		!DeleteTitle ) {
 		//ネットワークの準備が整った
 		m_fade = NewGO<Fade>(0, "fade");

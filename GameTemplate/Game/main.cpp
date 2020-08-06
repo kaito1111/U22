@@ -4,9 +4,9 @@
 #include "Title.h"
 #include "Network/NetworkLogic.h"
 #include "util/tkStopwatch.h"
+#include "Game.h"
 
 extern bool g_getNetPadData;
-extern bool g_isStartGame;
 int g_frameNo = 0;
 
 const DWORD TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
@@ -58,7 +58,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		
 		
 		//ネットワークの更新
-		if (g_isStartGame) {
+		if (INetworkLogic().GetLBL()->GetReady()) {
 			//ゲームが開始されている
 			while (g_Pad[0].GetNumBufferringXInputData() < MAX_BUFFERRING) {
 				//このループはゲーム開始時にしか入らないはず。
