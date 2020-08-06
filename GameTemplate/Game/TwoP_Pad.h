@@ -58,7 +58,6 @@ private:
 	};
 	void PostRender();
 	Sprite m_copyMainRtToFrameBufferSprite;	//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
-	SpriteRender* m_ManualSprite = nullptr;
 
 	//Player* player[2] = {};
 	bool UpdateStop = true;			//Updateを止めるフラグfalseでUpdateする。
@@ -66,8 +65,6 @@ private:
 
 	//bool Start()override;
 	bool NewGOPlayer = false;		//プレイヤーをNewGOするかどうか
-	float m_Manual_W = 0.0f;
-	SpriteRender* m_ButtonSprite = nullptr;
 
 	IPad* m_playerPad;		//プレイヤーのパッド
 	IPad* m_networkPad;		//ネットワークのパッド

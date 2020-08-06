@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "system/system.h"
-#include "TwoP_Pad.h"
+#include "Manual.h"
 #include "Title.h"
 #include "Network/NetworkLogic.h"
 #include "util/tkStopwatch.h"
@@ -41,6 +41,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//タイトルに変えて欲しみがマリアナ海溝
 	//NewGO<StageSelect>(1, "game");
 	//NewGO<Game>(1, "game");
+	NewGO<Manual>(0, "manual");
 	NewGO<Title>(1, "title");
 	//カメラの初期化
 	g_camera2D.Update2D();

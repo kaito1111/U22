@@ -105,6 +105,7 @@
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
+    <ClCompile Include="Manual.cpp" />
     <ClCompile Include="NetworkPad.cpp" />
     <ClCompile Include="physics\BoxCollider.cpp" />
     <ClCompile Include="PlayerPad.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
     <ClInclude Include="IPad.h" />
+    <ClInclude Include="Manual.h" />
     <ClInclude Include="NetworkPad.h" />
     <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="physics\BoxCollider.h" />

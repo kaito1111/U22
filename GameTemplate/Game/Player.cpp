@@ -56,23 +56,26 @@ void GamePlayer::ReSpown()
 	m_Magnet->SetPosition(&m_position);
 	//プレス用
 	m_Scale.z = 1.0f;
+	//切断用
+	m_PlayerCut = false;
 }
 
 bool GamePlayer::Start()
 {
 	//プレイヤーNoの絵を出す
-	m_ThisNumSprite = NewGO<SpriteRender>(0);
-	wchar_t spriteName[256] = {};
-	swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum--);
-	m_ThisNumSprite->Init(spriteName, 100.0f, 100.0f, true);
-	CVector3 ThisNumSpritePos = m_position;
-	ThisNumSpritePos.y += 150.0f;
-	ThisNumSpritePos.x -= 50.0f;
-	m_ThisNumSprite->SetPosition(ThisNumSpritePos);
-	CQuaternion Rot;
-	Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
-	m_ThisNumSprite->SetRotation(Rot);
-	
+	{
+		m_ThisNumSprite = NewGO<SpriteRender>(0);
+		wchar_t spriteName[256] = {};
+		swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum--);
+		m_ThisNumSprite->Init(spriteName, 100.0f, 100.0f, true);
+		CVector3 ThisNumSpritePos = m_position;
+		ThisNumSpritePos.y += 150.0f;
+		ThisNumSpritePos.x -= 50.0f;
+		m_ThisNumSprite->SetPosition(ThisNumSpritePos);
+		CQuaternion Rot;
+		Rot.SetRotationDeg(CVector3::AxisY(), 180.0f);
+		m_ThisNumSprite->SetRotation(Rot);
+	}
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
 	LearnMO(m_Magnet); 
@@ -203,6 +206,9 @@ void GamePlayer::SpawnPole()
 		if (SpawnDir.Length() < 0.01f) {
 			SpawnDir = CVector3::Up();
 		}
+		//方向を正規化
+		SpawnDir.Normalize();
+		//方向をセット
 		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
@@ -217,27 +223,28 @@ void GamePlayer::SpawnPole()
 		SPole* spole = NewGO< SPole>(1, "spole");
 		//出る位置を伝える
 		spole->SetSpownPos(m_position);
+		//方向を設定
 		CVector3 MoveDir = { g_Pad[GetPadNo()].GetRStickXF() * -1.0f , g_Pad[GetPadNo()].GetRStickYF() , 0.0f };
 		if (MoveDir.Length() < 0.01f) {
 			MoveDir = CVector3::Up();
 		}
+		//方向を正規化
 		MoveDir.Normalize();
+		//方向をセット
 		spole->SetMoveDir(MoveDir);
 	}
 }
 
 void GamePlayer::Move()
 {
-	//ジャンプ判定
 	movespeed.x = 0.0f;
 	movespeed.z = 0.0f;
 	//左右の移動
 	movespeed.x = m_Pad->MoveX() * -10.0f;
 	const float junpPower = 15.0f;
-	float Volume;
+	//ジャンプ判定
 	if (m_characon.IsOnGround())
 	{
-		Volume = fabsf(m_Pad->MoveX());
 		if (m_Pad->IsJump()) {
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
@@ -246,56 +253,78 @@ void GamePlayer::Move()
 			m_Se.Play(false);
 		}
 	}
-	const float gravity = 0.8f;		//重力
-	movespeed.y -= gravity;
-	Volume = fabsf(m_Pad->MoveX());
-	if (movespeed.y >= 0.0f) {
-		Volume -= 0.1f;
+	{
+		const float gravity = 0.8f;		//重力
+		movespeed.y -= gravity;
 	}
-	m_Asioto.SetVolume(Volume);
+	{
+		//音の設定
+		float Volume = fabsf(m_Pad->MoveX());
+		if (movespeed.y >= 0.0f) {
+			Volume -= 0.1f;
+		}
+		m_Asioto.SetVolume(Volume);
+	}
+	//どのアニメーションを流すか指定する
 
-	if (fabsf(movespeed.x) > 0.0f
-		&&m_characon.IsOnGround()
+	if (fabsf(movespeed.x) > 0.0f//横に動いていて
+		&&m_characon.IsOnGround()//飛んでないなら
 		) {
+		//走る
 		m_Animetion.Play(enAniCli::Run, 0.3f);
 	}
-	else if (m_characon.IsOnGround()) {
+	else if (m_characon.IsOnGround()//突っ立ってるだけなら
+		) {
+		//棒立ち
 		m_Animetion.Play(enAniCli::Wait, 0.3f);
 	}
-	if (movespeed.y > 0.0f) {
+	if (movespeed.y > 0.0f//上に飛んでるなら
+		) {
+		//飛ぶ
 		m_Animetion.Play(enAniCli::Junp, 0.3f);
 	}
 	//磁石の移動
 	movespeed += m_Magnet->MagnetMove();
+
+	//地面についているのに下へ向かうのはおかしいので
+	//ｙ方向は０に
 	if (m_characon.IsOnGround() && movespeed.y < 0.0f) {
 		movespeed.y = 0;
 	}
 
-
+	//移動を確定
 	m_position = m_characon.Execute(1.0f, movespeed);
+
+	//左にスティックが傾いた
 	if (m_Pad->MoveX() > 0.0f)
 	{
 		dir = Dir::L;
 	}
+	//右にスティックが傾いた
 	if (m_Pad->MoveX() < 0.0f)
 	{
 		dir = Dir::R;
 	}
-	if (dir == Dir::L) {
-		m_rotAngle -= 45.0f;
-		if (m_rotAngle < -90.0f) {
-			m_rotAngle = -90.0f;
+	//回転量を制限
+	{
+		if (dir == Dir::L) {
+			m_rotAngle -= 45.0f;
+			if (m_rotAngle < -90.0f) {
+				m_rotAngle = -90.0f;
+			}
+		}
+		if (dir == Dir::R) {
+			m_rotAngle += 45.0f;
+			if (m_rotAngle > 90.0f) {
+				m_rotAngle = 90.0f;
+			}
 		}
 	}
-	if (dir == Dir::R) {
-		m_rotAngle += 45.0f;
-		if (m_rotAngle > 90.0f) {
-			m_rotAngle = 90.0f;
-		}
-	}
+	//回転をセット
 	m_rot.SetRotationDeg(CVector3::AxisY(), m_rotAngle);
 }
 
+//磁極を変更できる
 void GamePlayer::MyMagnet()
 {
 	if (m_Pad->IsMagN()) {
@@ -309,27 +338,31 @@ void GamePlayer::MyMagnet()
 	}
 }
 
-void GamePlayer::SIBOU()				//OK
+void GamePlayer::SIBOU()
 {
+	//当たり判定を一度放棄
 	m_characon.RemoveRigidBoby();
+	//磁力も無くす
 	if (HaveMagnet) {
 		DeleteMO(m_Magnet);
 		HaveMagnet = false;
 	}
-	//ここあとで修正
-	if (m_Pad->IsNoMag()) {
+	//修正しました
+	if (m_Pad->IsJump()) {
 		ReSpown();
 	}
 }
 
-void GamePlayer::MagumaDead()				//OK
+//沈んで死ぬ
+void GamePlayer::MagumaDead()
 {
 	m_position.y -= 1.0f;
 	m_IsSi = true;
 
 }
 
-void GamePlayer::Cut()						//OK
+//切断処理
+void GamePlayer::Cut()
 {
 	m_PlayerCut = true;
 	rate += 2.0f;
@@ -354,7 +387,8 @@ void GamePlayer::Cut()						//OK
 	m_IsSi = true;
 }
 
-void GamePlayer::Press()					//OK
+//圧殺
+void GamePlayer::Press()
 {
 	if (m_IsSi == false) {
 		SoundSource m_bleeding;

@@ -52,8 +52,8 @@ public:
 
 	virtual bool IsNoMag()
 	{
-		if (g_Pad[m_PadNum].IsPress(enButtonA)) {
-			//A
+		if (g_Pad[m_PadNum].IsPress(enButtonB)) {
+			//B
 			return true;
 		}
 		return false;
