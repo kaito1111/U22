@@ -43,9 +43,13 @@ void Title::Update()
 		m_fade = NewGO<Fade>(0, "fade");
 		DeleteTitle = true;
 	}
-	//サンプルステージ
 	if (GetAsyncKeyState('Y')) {
 		NewGO<StageSelect>(0, "stageselect");
+		DeleteGO(this);
+	}
+	//サンプルステージ
+	if (GetAsyncKeyState('H')) {
+		NewGO<SampleScene>(0, "stageselect");
 		DeleteGO(this);
 	}
 	if (DeleteTitle) {

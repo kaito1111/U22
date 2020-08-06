@@ -63,6 +63,5 @@ namespace myEngine {
 		};
 		Animation m_animation;							//アニメーション
 		AnimationClip m_animClip[enAnimClip_Num];		//アニメーションクリップ
-
 	};
 }

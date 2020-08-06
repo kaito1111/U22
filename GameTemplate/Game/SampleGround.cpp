@@ -13,7 +13,7 @@ bool SampleGround::Start()
 {
 	//モデル初期化
 	skin = NewGO<SkinModelRender>(0);
-	skin->Init(L"Assets/modelData/testGround.cmo");
+	skin->Init(L"testGround.cmo");
 	//シャドウレシーバーに設定
 	skin->GetSkinModel().SetShadowReciever(true);
 	//当たり判定作成
