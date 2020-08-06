@@ -74,6 +74,7 @@ namespace {
 		virtual	btScalar	addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace)
 		{
 			if (convexResult.m_hitCollisionObject == me				//Ž©•ª‚ÉÕ“Ë‚µ‚½B
+				|| convexResult.m_hitCollisionObject->getUserIndex() == enCollisionAttr_Character
 				) {
 				return 0.0f;
 			}
