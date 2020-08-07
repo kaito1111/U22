@@ -92,6 +92,27 @@ bool GamePlayer::Start()
 	m_AnimeClip[enAniCli::Wait].SetLoopFlag(true);
 	m_AnimeClip[enAniCli::Junp].Load(L"Assets/animData/kirarajunp.tka");
 	m_Animetion.Init(m_model, m_AnimeClip, enAniCli::AnimaitionNum);
+
+	//デバッグ用のスプライトを作成
+	m_SpriteBase = NewGO<SpriteRender>(3);
+	m_SpriteBase->Init(L"Assets/sprite/PadBase.dds", 250.0f, 250.0f);
+	m_SpriteBase->SetPosition({ 500.0f,-250.0f,0.0f });
+	m_SpriteDel = NewGO<SpriteRender>(4);
+	m_SpriteDel->Init(L"Assets/sprite/del.dds", 500.0f,500.0f);
+	m_SpriteDel->SetPosition({ 550.0f,-250,0.0f });
+	m_SpriteDel->SetW(0.0f);
+	m_SpriteJump = NewGO<SpriteRender>(4);
+	m_SpriteJump->Init(L"Assets/sprite/jump.dds", 500.0f,500.0f);
+	m_SpriteJump->SetPosition({ 500.0f,-300.0f,0.0 });
+	m_SpriteJump->SetW(0.0f);
+	m_SpriteN = NewGO<SpriteRender>(4);
+	m_SpriteN->Init(L"Assets/sprite/N.dds", 500.0f, 500.0f);
+	m_SpriteN->SetPosition({ 450.0f,-250.0f,0.0 });
+	m_SpriteN->SetW(0.0f);
+	m_SpriteS = NewGO<SpriteRender>(4);
+	m_SpriteS->Init(L"Assets/sprite/S.dds", 500.0f, 500.0f);
+	m_SpriteS->SetPosition({ 500.0f,-200.0f,0.0f });
+	m_SpriteS->SetW(0.0f);
 	return true;
 }
 
@@ -99,7 +120,10 @@ void GamePlayer::Update()
 {
 	//あぷでーどlog
 	printf("player %d Updated\n", m_PlayerNum);
-	
+	m_SpriteJump->SetW(0.0f);
+	m_SpriteDel->SetW(0.0f);
+	m_SpriteN->SetW(0.0f);
+	m_SpriteS->SetW(0.0f);
 	//しんだ?
 	if (m_IsSi) {
 		SIBOU();
@@ -246,6 +270,7 @@ void GamePlayer::Move()
 	if (m_characon.IsOnGround())
 	{
 		if (m_Pad->IsJump()) {
+			m_SpriteJump->SetW(1.0f);
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
 				m_Se2.Play(false);
@@ -260,6 +285,8 @@ void GamePlayer::Move()
 	{
 		//音の設定
 		float Volume = fabsf(m_Pad->MoveX());
+		//右スティック量を書き出す
+		printf(" LスティックX ", m_Pad->MoveX());
 		if (movespeed.y >= 0.0f) {
 			Volume -= 0.1f;
 		}
@@ -328,12 +355,15 @@ void GamePlayer::Move()
 void GamePlayer::MyMagnet()
 {
 	if (m_Pad->IsMagN()) {
+		m_SpriteN->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::NMode);
 	}
 	if (m_Pad->IsMagS()) {
+		m_SpriteS->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::SMode);
 	}
 	if (m_Pad->IsNoMag()) {
+		m_SpriteDel->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::NoMode);
 	}
 }

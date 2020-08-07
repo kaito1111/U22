@@ -22,6 +22,11 @@
     <ImageContentTask Include="Assets\sprite\Yellow.png" />
     <ImageContentTask Include="Assets\sprite\Corse1_image.png" />
     <ImageContentTask Include="Assets\sprite\Corse2_image.png" />
+    <ImageContentTask Include="Assets\sprite\del.png" />
+    <ImageContentTask Include="Assets\sprite\jump.png" />
+    <ImageContentTask Include="Assets\sprite\N.png" />
+    <ImageContentTask Include="Assets\sprite\PadBase.png" />
+    <ImageContentTask Include="Assets\sprite\S.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />

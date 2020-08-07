@@ -9,8 +9,6 @@ public:
 		return m_DiffLengh;
 	}
 private:
-	void PostRender();
-	Sprite m_copyMainRtToFrameBufferSprite;	//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 	void Update();
 	SpriteRender* m_SSprite = nullptr;
 	SpriteRender* m_NSprite = nullptr;
