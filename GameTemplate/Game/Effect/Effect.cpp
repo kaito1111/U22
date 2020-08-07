@@ -84,11 +84,11 @@ namespace myEngine {
 	//すべてのエフェクトを描いた後にEndRenderingを実行するように使用変更してね！
 	void Effect::PostRender()
 	{
-		//ブレンドステートの保存
-		g_graphicsEngine->GetEffekseerRenderer()->BeginRendering();
-		//描画
+		////ブレンドステートの保存
+		//g_graphicsEngine->GetEffekseerRenderer()->BeginRendering();
+		////描画
  		g_graphicsEngine->GetEffekseerManager()->Draw();
-		//ブレンドステートをもとに戻す
-		g_graphicsEngine->GetEffekseerRenderer()->EndRendering();
+		////ブレンドステートをもとに戻す
+		//g_graphicsEngine->GetEffekseerRenderer()->EndRendering();
 	}
 }
