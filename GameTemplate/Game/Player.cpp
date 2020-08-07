@@ -286,7 +286,7 @@ void GamePlayer::Move()
 		//音の設定
 		float Volume = fabsf(m_Pad->MoveX());
 		//右スティック量を書き出す
-		printf(" LスティックX %f", m_Pad->MoveX());
+		printf(" LスティックX %f \n ", m_Pad->MoveX());
 		if (movespeed.y >= 0.0f) {
 			Volume -= 0.1f;
 		}
