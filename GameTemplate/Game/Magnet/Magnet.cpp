@@ -65,9 +65,13 @@ CVector3 Magnet::MagnetMove()
 			case Magnet::SMode:							//引き合う
 				if (diffLen < maganetLen) {				//磁力が働く距離内
 					MagnetForce *= (MagnetPower * a);
-					if (diff.Length() < MagnetForce.Length()) {		//磁力で移動する距離よりターゲットの距離が近い
-																	//つまり余分に移動しようとしている
-						MagnetForce = diff;							//移動するのはターゲットの距離まででいい
+					if (mag->GetPosition().x < MagnetForce.x) {		//磁力で移動する距離よりターゲットのxが距離が近い
+														//つまり余分に移動しようとしている
+						MagnetForce.x = mag->GetPosition().x;			//移動するのはターゲットの距離まででいい
+					}
+					if (mag->GetPosition().z < MagnetForce.z) {		//磁力で移動する距離よりターゲットのzが距離が近い
+														//つまり余分に移動しようとしている
+						MagnetForce.z = mag->GetPosition().z;			//移動するのはターゲットの距離まででいい
 					}
 				}
 				else {									//距離外
@@ -84,9 +88,13 @@ CVector3 Magnet::MagnetMove()
 			case Magnet::NMode:							//引き合う
 				if (diffLen < maganetLen) {				//磁力が働く距離内
 					MagnetForce *= (MagnetPower * a);
-					if (diff.Length() < MagnetForce.Length()) {		//磁力で移動する距離よりターゲットの距離が近い
-																	//つまり余分に移動しようとしている
-						MagnetForce = diff;							//移動するのはターゲットの距離まででいい
+					if (fabsf(mag->GetPosition().x) < MagnetForce.x) {		//磁力で移動する距離よりターゲットのxが距離が近い
+														//つまり余分に移動しようとしている
+						MagnetForce.x = mag->GetPosition().x;			//移動するのはターゲットの距離まででいい
+					}
+					if (fabsf(mag->GetPosition().z) < MagnetForce.z) {		//磁力で移動する距離よりターゲットのzが距離が近い
+														//つまり余分に移動しようとしている
+						MagnetForce.z = mag->GetPosition().z;			//移動するのはターゲットの距離まででいい
 					}
 				}
 				else {									//距離外
@@ -115,12 +123,6 @@ CVector3 Magnet::MagnetMove()
 			break;
 		}
 		MagnetForce.z = 0;								//zには動かなくていい
-		if (fabsf(MagnetForce.Length()) > FLT_EPSILON) {//MagnetForceが1.0f以上なら
-			MagnetForce /= MagnetNum;					//マグネットの数分割る
-		} 
-		else {											//動かなくていい
-			MagnetForce = CVector3::Zero();
-		}
 		if (mag->GetMove().y > 0.0f&&					//ターゲットが上に向かっているかつ
 			MagnetForce.y > 0.0f						//自分も上に向かっているのはおかしいから
 			) {
@@ -159,9 +161,6 @@ void MyMagnet::Magnet::Update()
 			NEffect->SetScale(CVector3::One() * 2.75f);
 			m_Se.Play();
 		}
-		if (NEffect != nullptr) {
-			NEffect->SetPosition(*m_Position);
-		}
 		break;
 	case Magnet::NMode:
 		SeVolume += 0.01f;
@@ -180,9 +179,6 @@ void MyMagnet::Magnet::Update()
 			SEffect->SetScale(CVector3::One() * 2.75f);
 			m_Se.Play();
 		}
-		if (SEffect != nullptr) {
-			SEffect->SetPosition(*m_Position);
-		}
 		break;
 	default:
 		SeVolume -= 0.01f;
@@ -195,6 +191,12 @@ void MyMagnet::Magnet::Update()
 		m_NMagSprite->SetW(0.0f);*/
 		//CoolTime = 0;
 		break;
+	}
+	if (NEffect != nullptr) {
+		NEffect->SetPosition(*m_Position);
+	}
+	if (SEffect != nullptr) {
+		SEffect->SetPosition(*m_Position);
 	}
 	//m_NMagSprite->SetPosition(*m_Position);
 	//m_NMagSprite->Update();

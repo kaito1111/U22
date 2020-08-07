@@ -280,13 +280,13 @@ void Pad::Update(bool isUseQueue)
 		else if (GetAsyncKeyState(VK_DOWN)) {
 			m_rStickY = -1.0f;
 		}
-		//スティックの入力量を正規化。
+		//スティックの入力量を正規化。　
 		float t = fabsf(m_rStickX) + fabsf(m_rStickY);
 		if (t > 0.0f) {
 			m_rStickX /= t;
 			m_rStickY /= t;
 		}
-
+		
 		if (GetAsyncKeyState('A')) {
 			m_lStickX = -1.0f;
 		}
@@ -305,7 +305,7 @@ void Pad::Update(bool isUseQueue)
 			m_lStickX /= t;
 			m_lStickY /= t;
 		}
-
+		
 		for (const VirtualPadToKeyboard& vPadToKeyboard : vPadToKeyboardTable) {
 			if (GetAsyncKeyState(vPadToKeyboard.keyCoord)) {
 				m_trigger[vPadToKeyboard.vButton] = 1 ^ m_press[vPadToKeyboard.vButton];
