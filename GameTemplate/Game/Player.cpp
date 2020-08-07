@@ -107,11 +107,11 @@ bool GamePlayer::Start()
 	m_SpriteJump->SetW(0.0f);
 	m_SpriteN = NewGO<SpriteRender>(4);
 	m_SpriteN->Init(L"Assets/sprite/N.dds", 500.0f, 500.0f);
-	m_SpriteN->SetPosition({ 450.0f,-250.0f,0.0 });
+	m_SpriteN->SetPosition({ 500.0f,-200.0f,0.0f });
 	m_SpriteN->SetW(0.0f);
 	m_SpriteS = NewGO<SpriteRender>(4);
 	m_SpriteS->Init(L"Assets/sprite/S.dds", 500.0f, 500.0f);
-	m_SpriteS->SetPosition({ 500.0f,-200.0f,0.0f });
+	m_SpriteS->SetPosition({ 450.0f,-250.0f,0.0 });
 	m_SpriteS->SetW(0.0f);
 	return true;
 }
@@ -286,7 +286,7 @@ void GamePlayer::Move()
 		//音の設定
 		float Volume = fabsf(m_Pad->MoveX());
 		//右スティック量を書き出す
-		printf(" LスティックX ", m_Pad->MoveX());
+		printf(" LスティックX %f", m_Pad->MoveX());
 		if (movespeed.y >= 0.0f) {
 			Volume -= 0.1f;
 		}
