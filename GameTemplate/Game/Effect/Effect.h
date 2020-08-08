@@ -1,5 +1,6 @@
 /// <summary>
 /// エフェクト
+/// 描画はエフェクトエンジンがまとまて行う。	
 /// </summary>
 
 #pragma once
@@ -57,16 +58,12 @@ namespace myEngine {
 		/// <returns>再生中/停止中</returns>
 		bool IsPlay() const
 		{
-			return g_graphicsEngine->GetEffekseerManager()->GetShown(m_handle);
+			return EffectEngineObj().GetEffekseerManager()->GetShown(m_handle);
 		}
 		/// <summary>
 		/// 更新
 		/// </summary>
 		void Update(); //override;
-		/// <summary>
-		/// 一番最後の描画
-		/// </summary>
-		void PostRender();
 		/// <summary>
 		/// 
 		/// </summary>
@@ -94,8 +91,6 @@ namespace myEngine {
 		Effekseer::Effect*				m_effect = nullptr;			//エフェクト
 		Effekseer::Handle				m_handle = -1;				//ハンドル
 		std::map<int, Effekseer::Effect*>		m_resourceMap;
-		//Effekseer::Manager*				m_manager;					//マネージャー
-		//EffekseerRenderer::Renderer*	m_effekseerRenderer;
 		CVector3 m_position =			CVector3::Zero();			//座標
 		CQuaternion m_rotation =		CQuaternion::Identity();	//回転
 		CVector3 m_scale =				CVector3::One();			//拡大率

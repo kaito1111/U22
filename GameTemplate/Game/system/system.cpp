@@ -88,10 +88,6 @@ void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, in
 	//DirectXの初期化。
 	g_graphicsEngine = new GraphicsEngine();
 	g_graphicsEngine->Init(g_hWnd);
-	
-	//エフェクト関連いろいろの初期化
-	g_graphicsEngine->InitEffekseer();
-	
 	//サウンドエンジンの初期化
 	Engine().GetSoundEngine().Init();
 

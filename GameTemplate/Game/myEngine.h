@@ -9,6 +9,7 @@
 #pragma once
 #include "graphics/GraphicsEngine.h"
 #include "Sound/SoundEngine.h"
+#include "CEffectEngine.h"
 
 namespace myEngine {
 	class CEngine
@@ -48,11 +49,21 @@ namespace myEngine {
 		{
 			return m_soundEngine;
 		}
+		/// <summary>
+		/// エフェクトエンジン取得。
+		/// </summary>
+		/// <returns></returns>
+		CEffectEngine& GetEffectEngine()
+		{
+			return m_effectEngine;
+		}
 
 	private:
 		GraphicsEngine			m_graphicsEngine;	//グラフィックエンジン
 		SoundEngine				m_soundEngine;		//サウンドエンジン
+		CEffectEngine			m_effectEngine;		//エフェクトエンジン
 	};	
+
 	/// <summary>
 	/// エンジンを取得
 	/// </summary>
@@ -76,6 +87,14 @@ namespace myEngine {
 	static inline SoundEngine& soundEngine()
 	{
 		return Engine().GetSoundEngine();
+	}
+	/// <summary>
+	/// エフェクトエンジン取得
+	/// </summary>
+	/// <returns></returns>
+	static inline CEffectEngine& EffectEngineObj()
+	{
+		return Engine().GetEffectEngine();
 	}
 }
 

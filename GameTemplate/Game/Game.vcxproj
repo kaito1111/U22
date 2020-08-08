@@ -101,6 +101,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
+    <ClCompile Include="CEffectEngine.cpp" />
     <ClCompile Include="character\BoxCharactorController.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
@@ -212,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
+    <ClInclude Include="CEffectEngine.h" />
     <ClInclude Include="character\BoxCharactorController.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />

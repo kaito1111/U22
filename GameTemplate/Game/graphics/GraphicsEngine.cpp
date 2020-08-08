@@ -230,26 +230,6 @@ void GraphicsEngine::Init(HWND hWnd)
 
 void GraphicsEngine::InitEffekseer()
 {
-	//レンダラーを初期化。
-	m_effekseerRenderer = EffekseerRendererDX11::Renderer::Create(
-		g_graphicsEngine->GetD3DDevice(),					//D3Dデバイス。
-		g_graphicsEngine->GetD3DDeviceContext(),			//D3Dデバイスコンテキスト。	
-		2000												//板ポリの最大数。
-	);
-	//エフェクトマネージャを初期化。
-	m_manager = Effekseer::Manager::Create(10000);
-
-	// 描画用インスタンスから描画機能を設定
-	m_manager->SetSpriteRenderer(m_effekseerRenderer->CreateSpriteRenderer());
-	m_manager->SetRibbonRenderer(m_effekseerRenderer->CreateRibbonRenderer());
-	m_manager->SetRingRenderer(m_effekseerRenderer->CreateRingRenderer());
-	m_manager->SetTrackRenderer(m_effekseerRenderer->CreateTrackRenderer());
-	m_manager->SetModelRenderer(m_effekseerRenderer->CreateModelRenderer());
-
-	// 描画用インスタンスからテクスチャの読込機能を設定
-	// 独自拡張可能、現在はファイルから読み込んでいる。
-	m_manager->SetTextureLoader(m_effekseerRenderer->CreateTextureLoader());
-	m_manager->SetModelLoader(m_effekseerRenderer->CreateModelLoader());
 }
 
 void GraphicsEngine::ChangeRenderTarget(ID3D11DeviceContext* dc, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* dsv, D3D11_VIEWPORT* vp)

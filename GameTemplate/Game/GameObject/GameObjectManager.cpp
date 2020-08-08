@@ -88,6 +88,10 @@ namespace myEngine {
 			g_graphicsEngine->GetShadowMap()->SendShadowParam();
 			//通常描画
 			Draw();
+			//エフェクト更新
+			//EffectEngineObj().Update();
+			//エフェクト描画
+			EffectEngineObj().Render();
 			//ポストレンダーターゲットに変える
 			g_graphicsEngine->PostRenderTarget();
 			//ポストレンダー

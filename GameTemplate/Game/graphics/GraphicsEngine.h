@@ -88,22 +88,6 @@ public:
 		return m_backBuffer;
 	}
 	/// <summary>
-	/// エフェクサーマネージャの取得
-	/// </summary>
-	/// <returns></returns>
-	Effekseer::Manager* GetEffekseerManager()
-	{
-		return m_manager;
-	}
-	/// <summary>
-	/// エフェクサーレンダーの取得
-	/// </summary>
-	/// <returns></returns>
-	EffekseerRenderer::Renderer* GetEffekseerRenderer()
-	{
-		return m_effekseerRenderer;
-	}
-	/// <summary>
 	/// ライトマネージャーの取得
 	/// </summary>
 	/// <returns></returns>
@@ -151,9 +135,7 @@ private:
 	ID3D11RasterizerState*	m_rasterizerState = NULL;					//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;						//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;					//デプスステンシルビュー。
-	EffekseerRenderer::Renderer* m_effekseerRenderer = nullptr;			//エフェクサーレンダー
-	Effekseer::Manager* m_manager = nullptr;							//エフェクトマネジャー
-	myEngine::LightManager* m_ligManager;								//ライトマネージャー グラフィックエンジンでNewGOしてる
+	myEngine::LightManager* m_ligManager = nullptr;								//ライトマネージャー グラフィックエンジンでNewGOしてる
 	myEngine::ShadowMap* m_shadowMap;												//シャドウマップ
 
 	//汚かったグラフィックエンジンから取り除いた変数一覧
