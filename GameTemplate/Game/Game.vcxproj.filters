@@ -284,6 +284,7 @@
     <ClInclude Include="physics\BoxCollider.h" />
     <ClInclude Include="Manual.h" />
     <ClInclude Include="CEffectEngine.h" />
+    <ClInclude Include="ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

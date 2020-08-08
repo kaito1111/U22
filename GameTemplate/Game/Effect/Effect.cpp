@@ -29,7 +29,7 @@ namespace myEngine {
 		//ハッシュの作成
 		int nameKey = Util::MakeHash(filePath);
 		//リソースにエフェクトが登録されているかの検索
-		m_effect = GetResource(nameKey);
+		m_effect = EffectEngineObj().GetEffectResourceManager().GetResource(nameKey);
 		if (m_effect == nullptr) {
 			//登録されていなかった
 			//エフェクトの作成
@@ -40,7 +40,7 @@ namespace myEngine {
 				throw;
 			}
 			//エフェクトをリソースに登録
-			RegistResource(nameKey, m_effect);
+			EffectEngineObj().GetEffectResourceManager().RegistResource(nameKey, m_effect);
 		}
 		m_handle = EffectEngineObj().GetEffekseerManager()->Play(m_effect, 0, 0, 0);
 	}

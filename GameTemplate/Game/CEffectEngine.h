@@ -5,8 +5,11 @@
 
 #pragma once
 #include "Noncopyable.h"
+#include "ResourceManager.h";
 
 namespace myEngine {
+	//エフェクト用のリソースマネージャー
+	using CEffectResourceManager = TResourceManager<Effekseer::Effect>;
 	class CEffectEngine : Noncopyable
 	{
 	public:
@@ -57,14 +60,26 @@ namespace myEngine {
 		{
 			return *&m_manager;
 		}
-
-		EffekseerRenderer::Renderer*& GetEffekseerRenderer()
+		/// <summary>
+		/// エフェクサーのレンダラー取得。
+		/// </summary>
+		/// <returns></returns>
+		EffekseerRenderer::Renderer*& GetEffekseerRenderer() 
 		{
 			return *&m_effekseerRenderer;
+		}
+		/// <summary>
+		/// エフェクトリソースマネージャーの取得。
+		/// </summary>
+		/// <returns></returns>
+		CEffectResourceManager& GetEffectResourceManager()
+		{
+			return m_effectResourceManager;
 		}
 	private:
 		EffekseerRenderer::Renderer* m_effekseerRenderer = nullptr;			//エフェクサーレンダー
 		Effekseer::Manager* m_manager = nullptr;							//エフェクトマネジャー
+		CEffectResourceManager m_effectResourceManager;						//エフェクトリソースマネジャー
 	};
 }
 

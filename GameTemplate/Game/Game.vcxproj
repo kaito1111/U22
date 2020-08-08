@@ -224,6 +224,7 @@
     <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="physics\BoxCollider.h" />
     <ClInclude Include="PlayerPad.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SampleGround.h" />
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="GemeLoop.h" />
