@@ -33,19 +33,6 @@ namespace myEngine {
 	{
 		//移動処理
 		Move();
-
-		//エフェクト
-		if (g_Pad[0].IsTrigger(enButtonX))
-		{
-			Effect* effect = NewGO<Effect>(0);
-			effect->Play(L"Assets/effect/test.efk");
-			effect->SetPosition({100, 0, 0});
-			effect->SetScale(CVector3::One() * 10.0f);
-			Effect* effect1 = NewGO<Effect>(0);
-			effect1->Play(L"Assets/effect/test.efk");
-			effect1->SetPosition({200, 0, 0 });
-			effect1->SetScale(CVector3::One() * 10.0f);
-		}
 		//アニメーションアップデート
 		m_animation.Update(1.0f / 60.0f);
 	}

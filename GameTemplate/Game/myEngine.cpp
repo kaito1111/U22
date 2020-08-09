@@ -10,3 +10,8 @@ CEngine::CEngine()
 CEngine::~CEngine()
 {
 }
+
+void CEngine::Update()
+{
+
+}

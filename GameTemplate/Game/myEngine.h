@@ -18,12 +18,12 @@ namespace myEngine {
 		CEngine();
 		~CEngine();
 		/// <summary>
+		/// 更新
+		/// </summary>
+		void Update();
+		/// <summary>
 		/// エンジンのシングルトンです。
 		/// </summary>
-		/// <returns>エンジン</returns>
-		/// <remarks>
-		/// エンジンのインスタンスは一個しか作れないようになってます。
-		/// </remarks>
 		static CEngine& GetInstance()
 		{
 			//シングルトンの処理

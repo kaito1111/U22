@@ -16,6 +16,7 @@ enum EnRenderMode {
 
 #include "light/LightManager.h"
 #include "Shadow/ShadowMap.h"
+#include "2D/Sprite.h"
 
 class GraphicsEngine
 {
@@ -60,7 +61,7 @@ public:
 	/// /// <summary>
 	/// フォワードレンダーターゲット
 	/// </summary>
-	void ForwardRenderTarget(); 
+	void OffScreenRenderTarget();
 	/// <summary>
 	/// ポストレンダーターゲット
 	/// </summary>
@@ -111,8 +112,6 @@ public:
 	{
 		return m_mainRenderTarget;
 	}
-
-	void a();
 	/*!
 	 *@brief	描画開始。
 	 */
@@ -135,8 +134,9 @@ private:
 	ID3D11RasterizerState*	m_rasterizerState = NULL;					//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;						//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;					//デプスステンシルビュー。
-	myEngine::LightManager* m_ligManager = nullptr;								//ライトマネージャー グラフィックエンジンでNewGOしてる
-	myEngine::ShadowMap* m_shadowMap;												//シャドウマップ
+	myEngine::Sprite* m_copyMainRtToFrameBufferSprite;					//オフスクリーンレンダリング用のスプライト
+	myEngine::LightManager* m_ligManager = nullptr;						//ライトマネージャー グラフィックエンジンでNewGOしてる
+	myEngine::ShadowMap* m_shadowMap;									//シャドウマップ
 
 	//汚かったグラフィックエンジンから取り除いた変数一覧
 	/*

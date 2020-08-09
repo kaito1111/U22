@@ -82,14 +82,12 @@ namespace myEngine {
 			ShadowDraw();
 			//レンダーターゲットのバックアップ
 			g_graphicsEngine->oldTarget();
-			//フォワードレンダーターゲットに変える
-			g_graphicsEngine->ForwardRenderTarget();
+			//オフスクリーンレンダリング
+			g_graphicsEngine->OffScreenRenderTarget();
 			//GPUにシャドウのパラメーターを送る
 			g_graphicsEngine->GetShadowMap()->SendShadowParam();
 			//通常描画
 			Draw();
-			//エフェクト更新
-			//EffectEngineObj().Update();
 			//エフェクト描画
 			EffectEngineObj().Render();
 			//ポストレンダーターゲットに変える

@@ -55,8 +55,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		g_physics.Update();
 		//サウンドエンジンの更新
 		Engine().GetSoundEngine().Update();
-		
-		
+			
 		//ネットワークの更新
 		if (INetworkLogic().GetLBL()->GetReady()) {
 			//ゲームが開始されている
