@@ -18,6 +18,10 @@ namespace myEngine {
 		CEngine();
 		~CEngine();
 		/// <summary>
+		/// ‰Šú‰»
+		/// </summary>
+		void Init();
+		/// <summary>
 		/// XV
 		/// </summary>
 		void Update();

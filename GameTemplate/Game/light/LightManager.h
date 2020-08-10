@@ -33,6 +33,7 @@ namespace myEngine
 		void Update();
 
 	private:
-		myEngine::DirectionLight m_dirLig;		//ディレクションライト
+		std::list<DirectionLight> m_directionLights;	//ディレクションライトのリスト
+		myEngine::DirectionLight m_dirLig;				//ディレクションライト
 	};
 }

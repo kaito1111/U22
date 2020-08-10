@@ -79,17 +79,14 @@ void DirectionLight::InitDirectionLight()
 	m_dirLight.active = true; 
 }
 
-void DirectionLight::PreRender()
+void DirectionLight::sendLightParamToGPU()
 {
 	//デバコンの取得
 	auto dc = g_graphicsEngine->GetD3DDeviceContext();
-
 	//視点の取得
 	m_dirLight.eyePos = g_camera3D.GetPosition();
-
 	//ライト用の定数バッファの更新
 	dc->UpdateSubresource(m_lightCb, 0, nullptr, &m_dirLight, 0, 0);
-
 	//ライト用の定数バッファをシェーダースロットに設定
 	dc->PSSetConstantBuffers(1, 1, &m_lightCb);
 }

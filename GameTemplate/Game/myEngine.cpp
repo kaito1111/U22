@@ -11,6 +11,11 @@ CEngine::~CEngine()
 {
 }
 
+void CEngine::Init()
+{
+
+}
+
 void CEngine::Update()
 {
 

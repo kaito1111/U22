@@ -1,11 +1,9 @@
 /// <summary>
 /// リソースの管理者
-/// 使用方法
 /// </summary>
 
-#pragma once7
+#pragma once
 #include <map>
-//class Noncopyable;
 
 namespace myEngine {
 	template<class T>

@@ -132,6 +132,7 @@
     <ClCompile Include="physics\BoxCollider.cpp" />
     <ClCompile Include="Manual.cpp" />
     <ClCompile Include="CEffectEngine.cpp" />
+    <ClCompile Include="LightBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -285,6 +286,7 @@
     <ClInclude Include="Manual.h" />
     <ClInclude Include="CEffectEngine.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="LightBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
