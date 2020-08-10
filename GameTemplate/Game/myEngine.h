@@ -10,6 +10,7 @@
 #include "graphics/GraphicsEngine.h"
 #include "Sound/SoundEngine.h"
 #include "CEffectEngine.h"
+#include "util/tkStopwatch.h"
 
 namespace myEngine {
 	class CEngine
@@ -18,6 +19,11 @@ namespace myEngine {
 		CEngine();
 		~CEngine();
 		/// <summary>
+		/// スタート
+		/// </summary>
+		/// <returns></returns>
+		bool Start();
+		/// <summary>
 		/// 初期化
 		/// </summary>
 		void Init();
@@ -25,6 +31,10 @@ namespace myEngine {
 		/// 更新
 		/// </summary>
 		void Update();
+		/// <summary>
+		/// エンジン終了処理
+		/// </summary>
+		void Final();
 		/// <summary>
 		/// エンジンのシングルトンです。
 		/// </summary>
@@ -61,12 +71,27 @@ namespace myEngine {
 		{
 			return m_effectEngine;
 		}
+		/// <summary>
+		/// 現在のフレーム番号取得。
+		/// </summary>
+		/// <returns></returns>
+		int& getFrameNo() 
+		{
+			return m_frameNo;
+		}
 
 	private:
-		GraphicsEngine			m_graphicsEngine;	//グラフィックエンジン
-		SoundEngine				m_soundEngine;		//サウンドエンジン
-		CEffectEngine			m_effectEngine;		//エフェクトエンジン
-	};	
+		//エンジン関連
+		GraphicsEngine			m_graphicsEngine;		//グラフィックエンジン
+		SoundEngine				m_soundEngine;			//サウンドエンジン
+		CEffectEngine			m_effectEngine;			//エフェクトエンジン
+		//ネットワーク関連
+		int						m_frameNo = 0;			//プレイできる状態だった、フレームの数
+		const DWORD				TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
+		const int				MAX_BUFFERRING = 5;		//バッファリングする数
+		//
+		CStopwatch				m_sw;					//ストップウォッチ
+	};		
 
 	/// <summary>
 	/// エンジンを取得

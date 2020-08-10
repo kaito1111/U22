@@ -81,19 +81,22 @@ void InitWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, 
 
 
 //ゲームの初期化。
-void InitGame(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, const TCHAR* appName)
+void InitGameWindow(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLine, int nCmdShow, const TCHAR* appName)
 {
 	//ウィンドウを初期化。
 	InitWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow, appName);
+}
+
+void InitGame()
+{
 	//DirectXの初期化。
+	//グラフィックスの初期化。
 	g_graphicsEngine = new GraphicsEngine();
 	g_graphicsEngine->Init(g_hWnd);
-	//サウンドエンジンの初期化
+	//全エンジン初期化
 	Engine().GetSoundEngine().Init();
-
-	//ゲームパッドの初期化。
-	//最大４つのコントローラーを接続できるようにしましょう。
-
+	Engine().GetEffectEngine().Init();
+	//物理ワールドの初期化
 	g_physics.Init();
 }
 //ウィンドウメッセージをディスパッチ。falseが返ってきたら、ゲーム終了。

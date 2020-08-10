@@ -5,8 +5,6 @@ namespace myEngine {
 
 	CEffectEngine::CEffectEngine()
 	{
-		//‰Šú‰»
-		Init();
 	}
 
 	CEffectEngine::~CEffectEngine()
