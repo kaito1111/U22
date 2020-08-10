@@ -32,7 +32,7 @@ void DirectionLight::CreateLightCB()
 	bufferDesc.ByteWidth = Raundup(bufferSize);
 	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bufferDesc.CPUAccessFlags = 0;
-	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_lightCb);
+	Engine().GetGraphicsEngine().GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_lightCb);
 }
 
 void DirectionLight::InitDirectionLight()
@@ -82,7 +82,7 @@ void DirectionLight::InitDirectionLight()
 void DirectionLight::sendLightParamToGPU()
 {
 	//デバコンの取得
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 	//視点の取得
 	m_dirLight.eyePos = g_camera3D.GetPosition();
 	//ライト用の定数バッファの更新

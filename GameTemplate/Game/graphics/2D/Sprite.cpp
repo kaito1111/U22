@@ -84,7 +84,7 @@ namespace myEngine {
 		dese.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 		//サンプラーステートの作成処理
 		//ここでSpriteクラスのサンプラーステートにポインタが入るよ！
-		g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&dese, &SamplerState);
+		Engine().GetGraphicsEngine().GetD3DDevice()->CreateSamplerState(&dese, &SamplerState);
 
 
 		//ブレンドステートの設定
@@ -96,7 +96,7 @@ namespace myEngine {
 		BLEND_DETE.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
 		
 		//ブレンドステートの作成 & 初期化
-		auto Device = g_graphicsEngine->GetD3DDevice(); 
+		auto Device = Engine().GetGraphicsEngine().GetD3DDevice();
 		Device->CreateBlendState(&BLEND_DETE, &BlendState);
 	}
 	void Sprite::Update(const CVector3& trans, const CQuaternion& rot, const CVector3& scale, const CVector2& pivot)
@@ -143,7 +143,7 @@ namespace myEngine {
 
 		//proj.MakeOrthoProjectionMatrix(1280.0f, 720.0f, 0.1f, 2.0f);
 
-		ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
+		ID3D11DeviceContext* d3dDeviceContext = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 		/*
 		if (m_isInited == false) {
@@ -179,8 +179,8 @@ namespace myEngine {
 		//d3dDeviceContext->OMSetBlendState(BlendState, nullptr, 0xffffffff);
 		d3dDeviceContext->IASetInputLayout(m_vs.GetInputLayout());
 
-		g_graphicsEngine->GetD3DDeviceContext()->VSSetSamplers(0, 1, &SamplerState);
-		g_graphicsEngine->GetD3DDeviceContext()->PSSetSamplers(0, 1, &SamplerState);
+		Engine().GetGraphicsEngine().GetD3DDeviceContext()->VSSetSamplers(0, 1, &SamplerState);
+		Engine().GetGraphicsEngine().GetD3DDeviceContext()->PSSetSamplers(0, 1, &SamplerState);
 
 		m_primitive.Draw(*d3dDeviceContext);
 	}

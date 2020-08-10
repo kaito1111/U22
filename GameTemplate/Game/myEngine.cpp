@@ -39,7 +39,7 @@ void CEngine::Update()
 	//スタート
 	m_sw.Start();
 	//描画開始。
-	g_graphicsEngine->BegineRender();
+	Engine().GetGraphicsEngine().BegineRender();
 	//物理エンジンの更新。
 	g_physics.Update();
 	//サウンドエンジンの更新
@@ -113,7 +113,7 @@ void CEngine::Update()
 	//ゲームオブジェクトマネージャーでする処理の呼び出し
 	gameObjectManager().ExecuteFromGameThread();
 	//描画終了。
-	g_graphicsEngine->EndRender();
+	Engine().GetGraphicsEngine().EndRender();
 	//ストップ
 	m_sw.Stop();
 	DWORD sleepTime = max(0, TIME_ONE_FRAME - m_sw.GetElapsedMillisecond());

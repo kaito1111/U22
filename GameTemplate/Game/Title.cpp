@@ -12,11 +12,6 @@ Title::Title()
 	//NetworkLogic::GetInstance().Start();
 	m_Sprite = NewGO<SpriteRender>(5);
 	m_Sprite->Init(L"Assets/sprite/Title.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
-	m_copyMainRtToFrameBufferSprite.Init(
-		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
-		FRAME_BUFFER_W,
-		FRAME_BUFFER_H
-	); 
 	m_bgm.Play("Title_bgm.wav");
 }
 
@@ -72,10 +67,4 @@ void Title::NetworkUpdate()
 	//NetworkLogic::GetInstance().Update();
 
 	//NetworkLogic::GetInstance().GetLBL()->RaiseInputPad(g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->IsTrigger());
-}
-
-void Title::PostRender()
-{
-	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
-	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
 }

@@ -57,7 +57,7 @@ void Stage::Draw()
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),
 		enRenderMode_Normal,
-		g_graphicsEngine->GetShadowMap()->GetLightViewMatirx(),
-		g_graphicsEngine->GetShadowMap()->GetLightProjMatirx()
+		Engine().GetGraphicsEngine().GetShadowMap()->GetLightViewMatirx(),
+		Engine().GetGraphicsEngine().GetShadowMap()->GetLightProjMatirx()
 	);
 }

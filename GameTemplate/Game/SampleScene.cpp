@@ -25,7 +25,7 @@ bool SampleScene::Start()
 	m_debugMan = NewGO<DebugMan>(0, "debugManObj");
 
 	//ƒ‰ƒCƒgƒJƒƒ‰‚Ì•ûŒüÝ’è
-	g_graphicsEngine->GetShadowMap()->SetLightCameraRotation(CVector3{ 0.5f,-1.0f,0.0f });
+	Engine().GetGraphicsEngine().GetShadowMap()->SetLightCameraRotation(CVector3{ 0.5f,-1.0f,0.0f });
 
 	return true;
 }

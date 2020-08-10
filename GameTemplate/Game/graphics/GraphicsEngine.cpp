@@ -214,7 +214,7 @@ void GraphicsEngine::Init(HWND hWnd)
 		//オフスクリーンレンダリング用のスプライト作成
 		m_copyMainRtToFrameBufferSprite = new Sprite;
 		m_copyMainRtToFrameBufferSprite->Init(
-			g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
+			Engine().GetGraphicsEngine().GetOffScreenRenderTarget()->GetRenderTargetSRV(),
 			FRAME_BUFFER_W,
 			FRAME_BUFFER_H
 		);
@@ -255,7 +255,7 @@ void GraphicsEngine::ChangeRenderTarget(ID3D11DeviceContext* dc, RenderTarget* r
 
 void GraphicsEngine::oldTarget()
 {
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 	//バックアップの処理
 	{
 		//レンダーターゲットのバックアップ
@@ -272,10 +272,10 @@ void GraphicsEngine::oldTarget()
 
 void GraphicsEngine::OffScreenRenderTarget()
 {
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 	//レンダーターゲットをセット
-	g_graphicsEngine->ChangeRenderTarget(dc, m_mainRenderTarget, &m_frameBufferViewports);
+	Engine().GetGraphicsEngine().ChangeRenderTarget(dc, m_mainRenderTarget, &m_frameBufferViewports);
 
 	//メインレンダリングターゲットをクリア
 	float clearColor[] = { 0.5f,0.5f,0.5f,1.0f };
@@ -287,10 +287,10 @@ void GraphicsEngine::OffScreenRenderTarget()
 
 void GraphicsEngine::PostRenderTarget()
 {
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 	//ターゲットをフレームバッファに
-	g_graphicsEngine->ChangeRenderTarget(
+	Engine().GetGraphicsEngine().ChangeRenderTarget(
 		dc,
 		m_frameBufferRenderTargetView,
 		m_frameBufferDepthStencilView,

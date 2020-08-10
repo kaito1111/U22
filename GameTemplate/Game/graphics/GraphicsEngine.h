@@ -147,5 +147,3 @@ private:
 	D3D11_FEATURE_DATA_THREADING m_featureDataThreading;
 	*/
 };
-
-extern GraphicsEngine* g_graphicsEngine;			//グラフィックスエンジン

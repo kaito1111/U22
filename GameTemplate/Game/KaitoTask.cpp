@@ -42,7 +42,7 @@ KaitoTask::KaitoTask()
 
 void KaitoTask::PreRender()
 {
-	auto shadowMap = g_graphicsEngine->GetShadowMap();
+	auto shadowMap = Engine().GetGraphicsEngine().GetShadowMap();
 	//プレイヤー人数分シャドウキャスターとして登録
 	for (int i = 0; i < g_PlayerNum;) {
 		shadowMap->RegistShdowCaster(m_Player[i++]->GetModel());

@@ -29,8 +29,8 @@ namespace myEngine {
 	{
 		//レンダラーを初期化。
 		m_effekseerRenderer = EffekseerRendererDX11::Renderer::Create(
-			g_graphicsEngine->GetD3DDevice(),					//D3Dデバイス。
-			g_graphicsEngine->GetD3DDeviceContext(),			//D3Dデバイスコンテキスト。	
+			Engine().GetGraphicsEngine().GetD3DDevice(),					//D3Dデバイス。
+			Engine().GetGraphicsEngine().GetD3DDeviceContext(),			//D3Dデバイスコンテキスト。	
 			2000												//板ポリの最大数。
 		);
 		//エフェクトマネージャを初期化。

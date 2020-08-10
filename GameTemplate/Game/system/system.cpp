@@ -2,7 +2,6 @@
 #include "system.h"
 
 HWND			g_hWnd = NULL;				//ウィンドウハンドル。
-GraphicsEngine* g_graphicsEngine = NULL;	//グラフィックスエンジン。
 
 ///////////////////////////////////////////////////////////////////
 // DirectXの終了処理。
@@ -91,9 +90,9 @@ void InitGame()
 {
 	//DirectXの初期化。
 	//グラフィックスの初期化。
-	g_graphicsEngine = new GraphicsEngine();
-	g_graphicsEngine->Init(g_hWnd);
+
 	//全エンジン初期化
+	Engine().GetGraphicsEngine().Init(g_hWnd);
 	Engine().GetSoundEngine().Init();
 	Engine().GetEffectEngine().Init();
 	//物理ワールドの初期化

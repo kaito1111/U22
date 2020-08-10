@@ -28,7 +28,7 @@ bool SampleGround::Start()
 
 void SampleGround::Update()
 {
-	auto m_shadowMap = g_graphicsEngine->GetShadowMap();
+	auto m_shadowMap = Engine().GetGraphicsEngine().GetShadowMap();
 
 	m_effect1->SetPosition({ 100, 10, 0 });
 	m_effect1->SetScale(CVector3::One() * 10.0f);

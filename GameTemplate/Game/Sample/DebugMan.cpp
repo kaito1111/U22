@@ -15,7 +15,7 @@ namespace myEngine {
 		AnimInit();
 	
 		//グラフィックスエンジンからシャドウマップを取得
-		m_shadowMap = g_graphicsEngine->GetShadowMap();
+		m_shadowMap = Engine().GetGraphicsEngine().GetShadowMap();
 
 	}
 	

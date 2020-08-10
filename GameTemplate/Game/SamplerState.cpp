@@ -11,7 +11,7 @@ namespace myEngine {
 		//ˆê‰ž‰ð•ú
 		//Release();
 		//hr‚Åì‚ê‚Ä‚é‚©‚ÌŠm”F
-		HRESULT hr = g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&desc, &m_samplerState);
+		HRESULT hr = Engine().GetGraphicsEngine().GetD3DDevice()->CreateSamplerState(&desc, &m_samplerState);
 		//Ž¸”s
 		/*
 			****throw****
