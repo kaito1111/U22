@@ -4,8 +4,8 @@
 /// <remarks>カメラのカラー、方向、生データを返す程度のクラス</remarks>
 
 #include "stdafx.h"
-#include "DirectionLight.h"
-#include "light.h"
+#include "bDirectionLight.h"
+#include "blight.h"
 
 namespace myEngine {
 	DirectionLight::DirectionLight()

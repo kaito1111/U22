@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Light.h"
+#include "bLight.h"
 #include "GPUBuffer/StructuredBuffer.h"
 #include "GPUBuffer/ConstantBuffer.h"
 
@@ -16,10 +16,6 @@ namespace myEngine {
 	/// <summary>
 	/// ライトの管理者
 	/// </summary>
-	/// <remarks>
-	/// 1.ライトのバッファーの初期化
-	/// 2.ライトのリスト管理
-	/// </remarks>
 	class LightManager
 	{
 	public:
@@ -45,9 +41,9 @@ namespace myEngine {
 		/// </summary>
 		void Update();
 		/// <summary>
-		/// 描画設定
+		/// ライトのパラメーターをGPUに送信。
 		/// </summary>
-		void Render();
+		void SendLightParamToGPU();
 		/// <summary>
 		/// 描画終了
 		/// </summary>
@@ -60,16 +56,21 @@ namespace myEngine {
 		void InitDirectionLightStructuredBuffer();
 	private:
 		static const int MAX_DIRECTION_LIGHT = 8;		//ディレクションライトの最大個数
+		/// <summary>
+		/// ライトの基本情報。
+		/// 変えたらShader側も変えること。
+		/// </summary>
 		struct SLightParam {
 			CVector3 eyePos;			//視点の位置
 			int numDirectionLight;		//ディレクションライトの数
-			CVector4	screenParam;	//スクリーンパラメーター
 		};
-	public:
-		SLightParam							m_lightParam;		//ライトの情報		
-		ConstantBuffer						m_lightParamCB;		//GPUで使用するライト用のパラメータ定数バッファ
-		SDirectionLight						m_rawDirectionLights[MAX_DIRECTION_LIGHT];	//ディレクションライトの生データ
-		std::list<DirectionLight*>			m_directionLights;	//ディレクションライトのリスト
-		StructuredBuffer					m_directionLightSB;	//ディレクションライトのストラクチャーバッファー
+	private:
+		SLightParam							m_lightParam;								//ライトの基盤パラメーター	
+		ConstantBuffer						m_lightParamCB;								//GPUで使用するライト用のパラメータ定数バッファ
+		//ディレクションライト//
+		std::list<DirectionLight*>			m_directionLights;							//ディレクションライトのリスト
+		StructuredBuffer					m_directionLightSB;							//ディレクションライトのストラクチャーバッファー
+		SDirectionLight						m_rawDirectionLights[MAX_DIRECTION_LIGHT];	//ディレクションライトのパラメーター
+
 	};
 }
