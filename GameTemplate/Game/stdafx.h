@@ -53,6 +53,7 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 
 #include "graphics/SkinModel.h"
 #include "graphics/Skeleton.h"
+#include "graphics/SkinModelShaderConst.h"
 
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
