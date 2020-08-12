@@ -15,5 +15,7 @@ private:
 	CQuaternion qRot = CQuaternion::Identity();
 	SkinModelRender* skin;						//スキンモデル
 	PhysicsStaticObject physicsGround;			//当たり判定
+	Effect* m_effect1 = nullptr;				//サンプルエフェクト1
+	Effect* m_effect2 = nullptr;				//サンプルエフェクト2
 };
 

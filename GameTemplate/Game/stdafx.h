@@ -56,6 +56,8 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
+
+#include "util/tkStopwatch.h"
 #include "graphics/Camera.h"
 
 #include "Effect/Effect.h"

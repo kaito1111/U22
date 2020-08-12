@@ -49,9 +49,9 @@ namespace myEngine {
 		/// </summary>
 		void Update();
 		/// <summary>
-		/// 描画設定
+		/// ライトのパラメーターをGPUに転送
 		/// </summary>
-		void PreRender();
+		void sendLightParamToGPU();
 		/// <summary>
 		/// 定数バッファの作成
 		/// </summary>

@@ -60,7 +60,7 @@ namespace myEngine {
 		InitData.pSysMem = pSrcIndexBuffer;
 
 		//ƒGƒ‰[ŒŸo‚µ‚Â‚ÂCreate
-		HRESULT hr = g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_indexBuffer);
+		HRESULT hr = Engine().GetGraphicsEngine().GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_indexBuffer);
 		if (FAILED(hr)) {
 			//Ž¸”s
 			return false;

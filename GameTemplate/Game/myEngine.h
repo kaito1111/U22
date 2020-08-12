@@ -9,6 +9,8 @@
 #pragma once
 #include "graphics/GraphicsEngine.h"
 #include "Sound/SoundEngine.h"
+#include "CEffectEngine.h"
+#include "util/tkStopwatch.h"
 
 namespace myEngine {
 	class CEngine
@@ -17,12 +19,25 @@ namespace myEngine {
 		CEngine();
 		~CEngine();
 		/// <summary>
+		/// スタート
+		/// </summary>
+		/// <returns></returns>
+		bool Start();
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		void Init();
+		/// <summary>
+		/// 更新
+		/// </summary>
+		void Update();
+		/// <summary>
+		/// エンジン終了処理
+		/// </summary>
+		void Final();
+		/// <summary>
 		/// エンジンのシングルトンです。
 		/// </summary>
-		/// <returns>エンジン</returns>
-		/// <remarks>
-		/// エンジンのインスタンスは一個しか作れないようになってます。
-		/// </remarks>
 		static CEngine& GetInstance()
 		{
 			//シングルトンの処理
@@ -48,11 +63,36 @@ namespace myEngine {
 		{
 			return m_soundEngine;
 		}
+		/// <summary>
+		/// エフェクトエンジン取得。
+		/// </summary>
+		/// <returns></returns>
+		CEffectEngine& GetEffectEngine()
+		{
+			return m_effectEngine;
+		}
+		/// <summary>
+		/// 現在のフレーム番号取得。
+		/// </summary>
+		/// <returns></returns>
+		int& getFrameNo() 
+		{
+			return m_frameNo;
+		}
 
 	private:
-		GraphicsEngine			m_graphicsEngine;	//グラフィックエンジン
-		SoundEngine				m_soundEngine;		//サウンドエンジン
-	};	
+		//エンジン関連
+		GraphicsEngine			m_graphicsEngine;		//グラフィックエンジン
+		SoundEngine				m_soundEngine;			//サウンドエンジン
+		CEffectEngine			m_effectEngine;			//エフェクトエンジン
+		//ネットワーク関連
+		int						m_frameNo = 0;			//プレイできる状態だった、フレームの数
+		const DWORD				TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
+		const int				MAX_BUFFERRING = 5;		//バッファリングする数
+		//
+		CStopwatch				m_sw;					//ストップウォッチ
+	};		
+
 	/// <summary>
 	/// エンジンを取得
 	/// </summary>
@@ -76,6 +116,14 @@ namespace myEngine {
 	static inline SoundEngine& soundEngine()
 	{
 		return Engine().GetSoundEngine();
+	}
+	/// <summary>
+	/// エフェクトエンジン取得
+	/// </summary>
+	/// <returns></returns>
+	static inline CEffectEngine& EffectEngineObj()
+	{
+		return Engine().GetEffectEngine();
 	}
 }
 

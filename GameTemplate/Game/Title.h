@@ -7,12 +7,10 @@ public:
 	~Title();
 
 private:
-	void PostRender();
 	/// <summary>
 	/// ネットワーク関連
 	/// </summary>
 	void NetworkUpdate();
-	Sprite m_copyMainRtToFrameBufferSprite;	//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 	void Update()override;
 	SpriteRender* m_Sprite = nullptr;
 	Fade* m_fade = nullptr;

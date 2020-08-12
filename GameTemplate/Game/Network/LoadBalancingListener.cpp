@@ -450,7 +450,6 @@ void LoadBalancingListener::RaisePlayerData(float Vx)
 	//printf("playerdata raise event\n");
 }
 
-extern int g_frameNo;
 void LoadBalancingListener::RaisePadData()
 {
 	//送るデータのコンテナ(eventContent)
@@ -465,7 +464,7 @@ void LoadBalancingListener::RaisePadData()
 	hash.put(5, (int)xInputState.Gamepad.wButtons);
 	hash.put(6, xInputState.Gamepad.bLeftTrigger);
 	hash.put(7, xInputState.Gamepad.bRightTrigger);
-	hash.put(8, g_frameNo);
+	hash.put(8, Engine().getFrameNo());
 
 
 	//データの送信

@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include "light.h"
+#include "blight.h"
 #include "LightBase.h"
 
 namespace myEngine {

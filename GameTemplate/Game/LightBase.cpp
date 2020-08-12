@@ -12,11 +12,11 @@
 
 bool LightBase::Start()
 {
-	g_graphicsEngine->GetLightManager().AddLight(this);
+	Engine().GetGraphicsEngine().GetLightManager().AddLight(this);
 	return true;//StartSub();
 }
 
 LightBase::~LightBase()
 {
-	g_graphicsEngine->GetLightManager().RemoveLight(this);
+	Engine().GetGraphicsEngine().GetLightManager().RemoveLight(this);
 }

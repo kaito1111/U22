@@ -2,14 +2,12 @@
 #include "system/system.h"
 #include "Manual.h"
 #include "Title.h"
-#include "Network/NetworkLogic.h"
-#include "util/tkStopwatch.h"
-#include "Game.h"
 
-int g_frameNo = 0;
+/*
+	8/10~ mainでエンジン関連の初期化まで行うのは、違うと感じたので
+	Engineクラスの方に、処理を移しました。
+*/
 
-const DWORD TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
-const int MAX_BUFFERRING = 5;
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
 ///////////////////////////////////////////////////////////////////
@@ -20,21 +18,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	AllocConsole();
 	freopen("CON", "r", stdin);
 	freopen("CON", "w", stdout);
-	//ゲームの初期化。
-	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
-
-	//ネットワークの初期化関連処理 InitGameの中入れてもいいかも？
-	NetworkLogic::GetInstance().Start();
-	//カメラを初期化。
-	g_camera3D.SetPosition({ 00.0f, 100.0f, 500.0f });
-	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
-	g_camera3D.SetFar(1000.0f);
-	g_camera3D.SetNear(10.0f);
-	g_camera3D.Update();
-
-	printf("ルームに入場もしくは、作成を行っています。\n");
-	NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
-	printf("ルームに入場しました。\n");
+	//ウィンドウの初期化。
+	InitGameWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
+	//エンジンの初期化。
+	Engine().Init();
+	//エンジンスタート。
+	Engine().Start();
 
 	//タイトルセレクト作ってます。
 	//タイトルに変えて欲しみがマリアナ海溝
@@ -42,92 +31,23 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//NewGO<Game>(1, "game");
 	NewGO<Manual>(0, "manual");
 	NewGO<Title>(1, "title");
-	//カメラの初期化
-	g_camera2D.Update2D();
-	CStopwatch sw;
-	//ゲームループ。
+
+	/*
+	ここでのカメラ初期化おかしい。
+	Gameとかで使うんだから、そこですべきなのでは？
+	*/
+	g_camera3D.SetPosition({ 00.0f, 100.0f, 500.0f });
+	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
+	g_camera3D.SetFar(1000.0f);
+	g_camera3D.SetNear(10.0f);
+
 	while (DispatchWindowMessage() == true)
 	{
-		sw.Start();
-		//描画開始。
-		g_graphicsEngine->BegineRender();
-		//物理エンジンの更新。
-		g_physics.Update();
-		//サウンドエンジンの更新
-		Engine().GetSoundEngine().Update();
-		
-		
-		//ネットワークの更新
-		if (INetworkLogic().GetLBL()->GetReady()) {
-			//ゲームが開始されている
-			while (g_Pad[0].GetNumBufferringXInputData() < MAX_BUFFERRING) {
-				//このループはゲーム開始時にしか入らないはず。
-				g_Pad[0].XInputStateBufferring();
-				//バッファリングした内容を相手に送る。
-				//パッド情報を相手に送る。
-				LBLobj()->RaisePadData();
-				g_frameNo++;
-				//1フレーム分寝る。
-				Sleep(TIME_ONE_FRAME);
-			}
-			//ネットワークパッドのバッファリング。
-			while (g_Pad[1].GetNumBufferringXInputData() < MAX_BUFFERRING) {
-				//ここは足りなくなることがあるはずなので、ゲーム中も入る可能性がある。
-				NetworkLogic::GetInstance().Update();
-				if (LBLobj()->getReceiveFlag() == false) {
-					//まだネットワークパッドのデータを受信できていない。
-					//1フレーム待機。
-					Sleep(TIME_ONE_FRAME);
-				}
-				else {
-					//ネットワークパッドのデータを受信した。
-					LBLobj()->SetReceiveFlag(false);
-				}
-			}
-			
-			//バッファリングされた情報を使ってゲームを進行させる。
-			//まず新しいパッド情報をバッファリングする。
-			g_Pad[0].XInputStateBufferring();
-			//バッファリングした内容を相手に送る。
-			//パッド情報を相手に送る。
-			LBLobj()->RaisePadData();
-			//続いてネットワークパッド。
-			NetworkLogic::GetInstance().Update();
-			if (LBLobj()->getReceiveFlag() == true) {
-				LBLobj()->SetReceiveFlag(false);
-			}
-			else {
-				//このフレーム間に合わなかったとしても無視。待たない。
-				//ネットワークパッドはバッファリングが枯渇したら貯める。
-			}
-			printf("Pad::Update Start\n");
-			//バッファリングされた情報をもとにパッド情報を更新する。
-			g_Pad[0].Update(true);
-			g_Pad[1].UpdateFromNetPadData();
-			printf("Pad::Update End\n");
-			g_frameNo++;
-		}
-		else {
-			//パッドの更新
-			//ゲームが開始されていない。
-			g_Pad[0].Update(false);
-			NetworkLogic::GetInstance().Update();
-		}
-		
-		LBLobj()->SetReceiveFlag(false);
-		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
-		gameObjectManager().Start();
-		//ゲームオブジェクトマネージャーでする処理の呼び出し
-		gameObjectManager().ExecuteFromGameThread();
-		//描画終了。
-		g_graphicsEngine->EndRender();
-		sw.Stop();
-		DWORD sleepTime = max(0, TIME_ONE_FRAME - sw.GetElapsedMillisecond());
-		Sleep(sleepTime);
+		//起動準備OK
+		//エンジンの更新を開始。
+		Engine().Update();
 	}
+	//エンジン終了処理。
+	Engine().Final();
 
-	//ネットワークからの切断
-	NetworkLogic::GetInstance().Disconnect();
-	NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
-	printf("disconnect\n");
 }

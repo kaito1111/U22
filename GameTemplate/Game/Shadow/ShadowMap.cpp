@@ -286,7 +286,7 @@ void ShadowMap::Update()
 void ShadowMap::BiginRender()
 {
 	//デバコン取得
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 	//RTVとDSVのバックアップ
 	dc->OMGetRenderTargets(
 		1,
@@ -303,7 +303,7 @@ void ShadowMap::BiginRender()
 
 void ShadowMap::SendShadowParam()
 {
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 	//リソース更新
 	dc->UpdateSubresource(m_shadowCb.GetBody(), 0, NULL, &m_shadowCbEntity, 0, 0);
 	//定数バッファの設定
@@ -319,7 +319,7 @@ void ShadowMap::RenderToShadowMap()
 {
 
 	//デバコン取得
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 	for (int i = 0; i < NUM_SHADOW_MAP; i++) {
 		//ビューの取得
@@ -355,7 +355,7 @@ void ShadowMap::RenderToShadowMap()
 void ShadowMap::EndRender()
 {
 	//デバイスコンテキストの取得
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 	//もとに戻す
 	dc->OMSetRenderTargets(

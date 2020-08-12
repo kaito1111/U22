@@ -28,10 +28,10 @@ namespace myEngine {
 			D3D11_SUBRESOURCE_DATA InitData;
 			//初期化ポインタ
 			InitData.pSysMem = pInitData;
-			hr = g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, &InitData, &m_gpuBuffer);
+			hr = Engine().GetGraphicsEngine().GetD3DDevice()->CreateBuffer(&bufferDesc, &InitData, &m_gpuBuffer);
 		}
 		else {
-			hr = g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_gpuBuffer);
+			hr = Engine().GetGraphicsEngine().GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_gpuBuffer);
 		}
 		if (FAILED(hr)) {
 			//エラー

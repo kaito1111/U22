@@ -194,14 +194,12 @@ void Pad::UpdateAnalogStickInput()
 	}
 }
 extern XINPUT_STATE g_netPadState;
-extern int g_frameNo;
-
 void Pad::XInputStateBufferring()
 {
 	XINPUT_STATE xInputState;
 	DWORD result = XInputGetState(m_padNo, &xInputState);
 	//ÉLÉÖÅ[Ç…êœÇﬁ
-	m_xinputStateQueue.push_back({ g_frameNo, xInputState });
+	m_xinputStateQueue.push_back({ Engine().getFrameNo(), xInputState });
 }
 void Pad::XInputStateBufferringFromNetPadData(int frameNo)
 {

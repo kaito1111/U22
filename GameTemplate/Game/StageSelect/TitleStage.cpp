@@ -18,11 +18,6 @@ TitleStage::~TitleStage()
 bool TitleStage::Start()
 {
 
-	m_copymainRendrTarget.Init(
-		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
-		FRAME_BUFFER_W,
-		FRAME_BUFFER_H
-	);
 	//ステージその他モデル
 	m_floorModel.Init(L"Assets/modelData/serectStage.cmo");//床
 	
@@ -105,10 +100,4 @@ void TitleStage::Draw()
 		0
 	);*/
 
-}
-
-void TitleStage::PostRender()
-{
-	m_copymainRendrTarget.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
-	m_copymainRendrTarget.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix());
 }

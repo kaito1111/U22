@@ -68,7 +68,7 @@ void SkinModel::InitConstantBuffer()
 	bufferDesc.CPUAccessFlags = 0;								//CPU アクセスのフラグです。
 																//CPUアクセスが不要な場合は0。
 	//作成。
-	g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_cb);
+	Engine().GetGraphicsEngine().GetD3DDevice()->CreateBuffer(&bufferDesc, NULL, &m_cb);
 }
 void SkinModel::Update(const CVector3 & trans, const CQuaternion & rot, const CVector3 & scale)
 {
@@ -83,7 +83,7 @@ void SkinModel::InitSamplerState()
 	desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 	desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&desc, &m_samplerState);
+	Engine().GetGraphicsEngine().GetD3DDevice()->CreateSamplerState(&desc, &m_samplerState);
 }
 void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVector3 scale)
 {
@@ -113,8 +113,8 @@ void SkinModel::UpdateWorldMatrix(CVector3 position, CQuaternion rotation, CVect
 void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 {
 	
-		ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
-		DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
+		ID3D11DeviceContext* d3dDeviceContext = Engine().GetGraphicsEngine().GetD3DDeviceContext();
+		DirectX::CommonStates state(Engine().GetGraphicsEngine().GetD3DDevice());
 
 		//定数バッファの内容を更新。
 		SVSConstantBuffer vsCb;
@@ -131,7 +131,7 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 		m_skeleton.SendBoneMatrixArrayToGPU();
 
 		//ライト用の描画設定
-		g_graphicsEngine->GetLigManager()->GetDirLig().PreRender();
+		Engine().GetGraphicsEngine().GetLigManager()->GetDirLig().sendLightParamToGPU();
 
 		//描画。
 		m_modelDx->Draw(
@@ -147,8 +147,8 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix)
 void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode, CMatrix m_LViewMatrix, CMatrix m_LProjMatrix)
 {
 
-	ID3D11DeviceContext* d3dDeviceContext = g_graphicsEngine->GetD3DDeviceContext();
-	DirectX::CommonStates state(g_graphicsEngine->GetD3DDevice());
+	ID3D11DeviceContext* d3dDeviceContext = Engine().GetGraphicsEngine().GetD3DDeviceContext();
+	DirectX::CommonStates state(Engine().GetGraphicsEngine().GetD3DDevice());
 
 	//定数バッファの内容を更新。
 	SVSConstantBuffer vsCb;
@@ -183,7 +183,7 @@ void SkinModel::Draw(CMatrix viewMatrix, CMatrix projMatrix, int RenderMode, CMa
 	m_skeleton.SendBoneMatrixArrayToGPU();
 
 	//ライト用の描画設定
-	g_graphicsEngine->GetLigManager()->GetDirLig().PreRender();
+	Engine().GetGraphicsEngine().GetLigManager()->GetDirLig().sendLightParamToGPU();
 
 	//レンダーモードのセット
 	m_modelDx->UpdateEffects([&](DirectX::IEffect* material) {

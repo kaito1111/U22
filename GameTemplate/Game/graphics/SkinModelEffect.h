@@ -50,7 +50,7 @@ public:
 	void InitDepthStensliState()
 	{
 		//デバイス取得
-		auto dv = g_graphicsEngine->GetD3DDevice();
+		auto dv = Engine().GetGraphicsEngine().GetD3DDevice();
 		//深度ステンシルステートの定義を設定
 		D3D11_DEPTH_STENCIL_DESC desc = { 0 };
 		desc.DepthEnable = true;							//Zテスト有効

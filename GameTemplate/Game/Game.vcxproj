@@ -101,6 +101,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
+    <ClCompile Include="LightBase.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="CEffectEngine.cpp" />
     <ClCompile Include="character\BoxCharactorController.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
@@ -212,6 +217,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
+    <ClInclude Include="LightBase.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="CEffectEngine.h" />
     <ClInclude Include="character\BoxCharactorController.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />
@@ -222,6 +232,7 @@
     <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="physics\BoxCollider.h" />
     <ClInclude Include="PlayerPad.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SampleGround.h" />
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="GemeLoop.h" />

@@ -24,7 +24,7 @@ void __cdecl ModelEffect::Apply(ID3D11DeviceContext* deviceContext)
 		//};
 		//deviceContext->PSSetShaderResources(0, 2, srvArray);
 		deviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_albedoTex);
-		m_shadowMap = g_graphicsEngine->GetShadowMap()->GetShadowMapSRV();
+		m_shadowMap = Engine().GetGraphicsEngine().GetShadowMap()->GetShadowMapSRV();
 		//deviceContext->PSSetShaderResources(2, 1, &m_shadowMap);
 	}
 		break;

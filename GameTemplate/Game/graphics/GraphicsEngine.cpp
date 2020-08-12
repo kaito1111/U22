@@ -200,27 +200,25 @@ void GraphicsEngine::Init(HWND hWnd)
 		MemoryBarrier();
 	}
 
-
-	//メインレンダーターゲットの作成
-	//m_mainRenderTarget->Create(
-	//	FRAME_BUFFER_W,
-	//	FRAME_BUFFER_H,
-	//	DXGI_FORMAT_R8G8B8A8_UNORM
-	//);
-
 	//Getの都合上ここでNew　tkEngineに合わせたいねぇ(願望)
 	//実態をGraphicsEngineで作るとdv,dcが初期化されてないのでダメー！
+	//ここ適当すぎる、後で直そう。
 	{
 		//ライトマネージャーの作成　※改善の余地あり
 		m_ligManager = NewGO<LightManager>(0);
 		//シャドウマップの作成
 		m_shadowMap = new ShadowMap;
-		//レンダーターゲットの作成
+		//オフスクリーンレンダーターゲットの作成
 		m_mainRenderTarget = new RenderTarget;
+		m_mainRenderTarget->Create(FRAME_BUFFER_W, FRAME_BUFFER_H, DXGI_FORMAT_R16G16B16A16_FLOAT);
+		//オフスクリーンレンダリング用のスプライト作成
+		m_copyMainRtToFrameBufferSprite = new Sprite;
+		m_copyMainRtToFrameBufferSprite->Init(
+			Engine().GetGraphicsEngine().GetOffScreenRenderTarget()->GetRenderTargetSRV(),
+			FRAME_BUFFER_W,
+			FRAME_BUFFER_H
+		);
 	}
-
-	//レンダーターゲットの作成
-	m_mainRenderTarget->Create(FRAME_BUFFER_W, FRAME_BUFFER_H, DXGI_FORMAT_R16G16B16A16_FLOAT);
 
 	m_pd3dDeviceContext->RSSetViewports(1, &viewport);
 	m_pd3dDeviceContext->RSSetState(m_rasterizerState);
@@ -230,26 +228,6 @@ void GraphicsEngine::Init(HWND hWnd)
 
 void GraphicsEngine::InitEffekseer()
 {
-	//レンダラーを初期化。
-	m_effekseerRenderer = EffekseerRendererDX11::Renderer::Create(
-		g_graphicsEngine->GetD3DDevice(),					//D3Dデバイス。
-		g_graphicsEngine->GetD3DDeviceContext(),			//D3Dデバイスコンテキスト。	
-		2000												//板ポリの最大数。
-	);
-	//エフェクトマネージャを初期化。
-	m_manager = Effekseer::Manager::Create(10000);
-
-	// 描画用インスタンスから描画機能を設定
-	m_manager->SetSpriteRenderer(m_effekseerRenderer->CreateSpriteRenderer());
-	m_manager->SetRibbonRenderer(m_effekseerRenderer->CreateRibbonRenderer());
-	m_manager->SetRingRenderer(m_effekseerRenderer->CreateRingRenderer());
-	m_manager->SetTrackRenderer(m_effekseerRenderer->CreateTrackRenderer());
-	m_manager->SetModelRenderer(m_effekseerRenderer->CreateModelRenderer());
-
-	// 描画用インスタンスからテクスチャの読込機能を設定
-	// 独自拡張可能、現在はファイルから読み込んでいる。
-	m_manager->SetTextureLoader(m_effekseerRenderer->CreateTextureLoader());
-	m_manager->SetModelLoader(m_effekseerRenderer->CreateModelLoader());
 }
 
 void GraphicsEngine::ChangeRenderTarget(ID3D11DeviceContext* dc, ID3D11RenderTargetView* rtv, ID3D11DepthStencilView* dsv, D3D11_VIEWPORT* vp)
@@ -277,7 +255,7 @@ void GraphicsEngine::ChangeRenderTarget(ID3D11DeviceContext* dc, RenderTarget* r
 
 void GraphicsEngine::oldTarget()
 {
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 	//バックアップの処理
 	{
 		//レンダーターゲットのバックアップ
@@ -292,12 +270,12 @@ void GraphicsEngine::oldTarget()
 	}
 }
 
-void GraphicsEngine::ForwardRenderTarget()
+void GraphicsEngine::OffScreenRenderTarget()
 {
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 	//レンダーターゲットをセット
-	g_graphicsEngine->ChangeRenderTarget(dc, m_mainRenderTarget, &m_frameBufferViewports);
+	Engine().GetGraphicsEngine().ChangeRenderTarget(dc, m_mainRenderTarget, &m_frameBufferViewports);
 
 	//メインレンダリングターゲットをクリア
 	float clearColor[] = { 0.5f,0.5f,0.5f,1.0f };
@@ -309,29 +287,10 @@ void GraphicsEngine::ForwardRenderTarget()
 
 void GraphicsEngine::PostRenderTarget()
 {
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
-
-	//CD3D11_DEFAULT defalt;
-	//CD3D11_BLEND_DESC bd(defalt);
-
-	//bd.RenderTarget[0].BlendEnable = true;
-	//bd.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-	//bd.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-	//bd.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-
-	//auto dv = g_graphicsEngine->GetD3DDevice();
-	//dv->CreateBlendState(&bd, &m_blendState);
-
-	//float blendFactor[] = { 0.0f, 0.0f , 0.0f, 0.0f };
-
-	//dc->OMSetBlendState(
-	//	m_blendState,
-	//	blendFactor,
-	//	0xffffffff
-	//);
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 	//ターゲットをフレームバッファに
-	g_graphicsEngine->ChangeRenderTarget(
+	Engine().GetGraphicsEngine().ChangeRenderTarget(
 		dc,
 		m_frameBufferRenderTargetView,
 		m_frameBufferDepthStencilView,
@@ -354,20 +313,12 @@ void GraphicsEngine::PostRenderTarget()
 	m_pd3dDevice->CreateBlendState(&BLEND_DETE, &BlendState);
 	m_pd3dDeviceContext->OMSetBlendState(BlendState, nullptr, 0xFFFFFFFF);
 
-	//クリア
-	//dc->ClearDepthStencilView(m_frameBufferDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	//オフスクリーンレンダリング用のスプライトDraw
+	//関数名的にここでかくべきじゃないけど、応急処置
+	m_copyMainRtToFrameBufferSprite->Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
+	m_copyMainRtToFrameBufferSprite->Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
 
 	//あとでEndRenderにでも追加
 	m_frameBufferRenderTargetView->Release();
 	m_frameBufferDepthStencilView->Release();
-}
-
-void GraphicsEngine::a()
-{
-	g_graphicsEngine->ChangeRenderTarget(
-		m_pd3dDeviceContext,
-		m_frameBufferRenderTargetView,
-		m_frameBufferDepthStencilView,
-		&m_frameBufferViewports
-	);
 }
