@@ -36,6 +36,7 @@ bool moveFloor::Start()
 	//up = m_pos.y + 100;
 	//down = m_pos.y - 100;
 	m_BoxCharaCon.Init(100.0f, 20.0f, 1.0f, m_pos);//箱オブジェクト
+	m_BoxCharaCon.SetAffected(false);
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), CVector3::One());
 	return true;
@@ -113,9 +114,10 @@ void moveFloor::move2()
 {
 	const float movespeed = 4;
 	float y = m_pos.y;
+	CVector3 MoveSpeed = CVector3::Zero();
 	//上昇
 	if (y <= up && udlimit == false) {
-		y += movespeed;
+		MoveSpeed = { 0.0f,movespeed,0.0f };
 	}
 	if (y >= up) {
 		m_Se.Play(true);
@@ -123,14 +125,12 @@ void moveFloor::move2()
 	}
 	//下降
 	if (y >= down && udlimit == true) {
-		y -= movespeed;
+		MoveSpeed = { 0.0f,-movespeed,0.0f };
 	}
 	if (down >= y) {
 		m_Se.Play(true);
 		udlimit = false;
 	}
-	CVector3 MoveSpeed = { 0.0f,y,0.0f };
-	//m_pos.y = y;
 	playerMove();
 	m_pos = m_BoxCharaCon.Execute(1.0f, MoveSpeed);
 

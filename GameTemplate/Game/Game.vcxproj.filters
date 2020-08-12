@@ -226,7 +226,6 @@
     <ClInclude Include="math\kMath.h" />
     <ClInclude Include="math\Matrix.h" />
     <ClInclude Include="math\Vector.h" />
-    <ClInclude Include="stageObject\moveFloor.h" />
     <ClInclude Include="stageObject\MoveFloor2.h" />
     <ClInclude Include="myEngine.h" />
     <ClInclude Include="myListener.h" />
@@ -282,6 +281,7 @@
     <ClInclude Include="NetworkPad.h" />
     <ClInclude Include="physics\BoxCollider.h" />
     <ClInclude Include="Manual.h" />
+    <ClInclude Include="stageObject\moveFloor.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

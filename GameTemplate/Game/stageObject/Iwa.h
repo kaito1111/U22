@@ -8,6 +8,7 @@ public:
 	Iwa();
 	~Iwa();
 
+	bool Start();
 	void Update();
 
 	void SetPosition(const CVector3 pos) {

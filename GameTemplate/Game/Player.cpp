@@ -78,7 +78,7 @@ bool GamePlayer::Start()
 	}
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
-	LearnMO(m_Magnet); 
+	LearnMO(m_Magnet);
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
 
@@ -98,11 +98,11 @@ bool GamePlayer::Start()
 	m_SpriteBase->Init(L"Assets/sprite/PadBase.dds", 250.0f, 250.0f);
 	m_SpriteBase->SetPosition({ 500.0f,-250.0f,0.0f });
 	m_SpriteDel = NewGO<SpriteRender>(4);
-	m_SpriteDel->Init(L"Assets/sprite/del.dds", 500.0f,500.0f);
+	m_SpriteDel->Init(L"Assets/sprite/del.dds", 500.0f, 500.0f);
 	m_SpriteDel->SetPosition({ 550.0f,-250,0.0f });
 	m_SpriteDel->SetW(0.0f);
 	m_SpriteJump = NewGO<SpriteRender>(4);
-	m_SpriteJump->Init(L"Assets/sprite/jump.dds", 500.0f,500.0f);
+	m_SpriteJump->Init(L"Assets/sprite/jump.dds", 500.0f, 500.0f);
 	m_SpriteJump->SetPosition({ 500.0f,-300.0f,0.0 });
 	m_SpriteJump->SetW(0.0f);
 	m_SpriteN = NewGO<SpriteRender>(4);
@@ -264,11 +264,11 @@ void GamePlayer::Move()
 	movespeed.x = 0.0f;
 	movespeed.z = 0.0f;
 	//左右の移動
-	movespeed.x = m_Pad->MoveX() * -10.0f;
+	movespeed.x = g_Pad[GetPadNo()].GetLStickXF() * -10.0f;
 	const float junpPower = 15.0f;
 	//ジャンプ判定
-	if (m_characon.IsOnGround())
-	{
+	//if (m_characon.IsOnGround())
+	//{
 		if (m_Pad->IsJump()) {
 			m_SpriteJump->SetW(1.0f);
 			movespeed.y = junpPower;
@@ -277,7 +277,7 @@ void GamePlayer::Move()
 			}
 			m_Se.Play(false);
 		}
-	}
+	//}
 	{
 		const float gravity = 0.8f;		//重力
 		movespeed.y -= gravity;
@@ -286,7 +286,7 @@ void GamePlayer::Move()
 		//音の設定
 		float Volume = fabsf(m_Pad->MoveX());
 		//右スティック量を書き出す
-		printf(" LスティックX %f \n ", m_Pad->MoveX());
+		printf(" LスティックX %f \n ", g_Pad[GetPadNo()].GetLStickXF());
 		if (movespeed.y >= 0.0f) {
 			Volume -= 0.1f;
 		}

@@ -14,13 +14,13 @@ public:
 	CVector3 GetPosition() { //位置を返す
 		return m_position; 
 	}
-	void SetPosition(CVector3 pos, CVector3 moveSpeed = CVector3::Zero()) 
 	/// <summary>
 	/// 位置を決める
 	/// </summary>
 	/// <param name="pos">		プレイヤーの移動先を入れる</param>
 	/// <param name="moveSpeed">プレイヤーの移動量を決める。
 	///							あまり使わない</param>
+	void SetPosition(CVector3 pos, CVector3 moveSpeed = CVector3::Zero()) 
 	{
 		m_characon.SetPosition(pos);
 		if (moveSpeed.Length() > 1.0f) {
