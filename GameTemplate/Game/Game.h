@@ -2,16 +2,26 @@
 #include "graphics/2D/Sprite.h"
 #include "graphics/2D/SpriteRender.h"
 #include "stageObject/Goal.h"
+#include "PlayerData.h"
 class KaitoTask;
 class PlayerData;
 class Stage;
-class Game : public IGameObject
+class Game : public PlayerData
 {
 public:
 	Game();
 	~Game();
 	void SetStage(int num) {
 		StageNum = num;
+	}
+	void setCon(bool con)
+	{
+		Continue = con;
+	}
+	void setAll(CVector3 pl1, CVector3 pl2, int sNum) {
+		player1Pos = pl1;
+		player2Pos = pl2;
+		StageNum = sNum;
 	}
 private:
 	/// <summary>
@@ -39,6 +49,8 @@ private:
 private:
 	bool Continue = false;
 	Stage* stage = nullptr;
+	CVector3 player1Pos = CVector3::Zero();
+	CVector3 player2Pos = CVector3::Zero();
 	PlayerData* playerData = nullptr;
 	Goal* goalPtr = nullptr;
 	int StageNum = 0;

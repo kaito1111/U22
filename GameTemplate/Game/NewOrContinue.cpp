@@ -26,17 +26,21 @@ bool NewOrContinue::Start()
 
 void NewOrContinue::Update()
 {
-	int a = 0;
+	//int a = 0;
 	//最初から（ステージセレクト画面へ）。
-	if (g_Pad[0].IsTrigger(enButtonA)) {
+	if (g_Pad[0].IsPress(enButtonA)) {
 		NewGO<StageSelect>(0, "stageSelect");
 		DeleteGO(this);
 	}
 	//続きから（プレイヤーの座標とステージ番号をロード）
-	if (g_Pad[0].IsTrigger(enButtonB) && padB == true) {
+	if (g_Pad[0].IsPress(enButtonX) && padB == true) {
+		
 		//前回のステージとプレイヤーの座標をロード
-		GetLastTimePos();
-		NewGO<Game>(0, "game");
+		LoadPlayerData();
+		game = NewGO<Game>(0, "game");
+		Continue = true;
+		game->setCon(Continue);
+		game->setAll(player1(), player2(), GetStage());
 		DeleteGO(this);
 	}
 	if (!g_Pad[0].IsTrigger(enButtonB)) {

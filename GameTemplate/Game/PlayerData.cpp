@@ -3,6 +3,12 @@
 #include "Player.h"
 #include "Stage.h"
 #include<tuple>
+#include <fstream>
+bool PlayerData::Start()
+{
+	
+	return true;
+}
 PlayerData::PlayerData()
 {
 }
@@ -25,7 +31,7 @@ void PlayerData::SavePlayerData()
 		player[nowSavePlayer - 1] = FindGO<GamePlayer>(PlayerName);
 	}
 		//ファイルの保存
-		FILE* file = fopen("../PlayerData.text", "wb");
+		FILE* file = fopen("../PlayerData.txt", "wb");
 		if (file != nullptr) {
 			//ファイルのオープンに失敗
 		}
@@ -41,8 +47,20 @@ void PlayerData::SavePlayerData()
 
 void PlayerData::LoadPlayerData()
 {
+	/////////////////////////////////////////////////////////////////////////////////////////////////
+	//ファイルに初期値を保存しておくためだけのもの。１回通せたら消す。
+	//ファイルの保存
+	//FILE* files = fopen("../PlayerData.txt", "wb");
+	//if (files != nullptr) {
+	//	//ファイルのオープンに失敗
+	//}
+	//fwrite(&stageNum, sizeof(int), 1, files);
+	//fwrite(&player1Pos, sizeof(CVector3), 1, files);//引数の１はコピーされる数（なんじゃね？）
+	//fwrite(&player2Pos, sizeof(CVector3), 1, files);
+	//fclose(files);
+	//////////////////////////////////////////////////////////////////////////////////////////////
 	//ファイル天界
-	FILE* file = fopen("../PlayerData.text", "rb");
+	FILE* file = fopen("../PlayerData.txt", "rb");
 	if (file != nullptr) {
 		//ファイルの読み込みに失敗
 	}
@@ -53,14 +71,5 @@ void PlayerData::LoadPlayerData()
 	
 }
 
-std::tuple<const CVector3&, const CVector3&, const int> PlayerData::GetLastTimePos()
-{
-	LoadPlayerData();
-	return std::forward_as_tuple(player1Pos, player2Pos, stageNum);
-	//受け取り方1例
-	//int a;
-	//int b;
-	//std::tie(a,b) = GetPos();
-}
 
 

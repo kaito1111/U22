@@ -38,6 +38,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	//ゲームループ。
 	while (DispatchWindowMessage() == true)
 	{
+		int a = 0;
 		//描画開始。
 		g_graphicsEngine->BegineRender();
 		//物理エンジンの更新。
@@ -53,7 +54,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 		//描画終了。
 		g_graphicsEngine->EndRender();
 	}
-
+	int b = 0;
 	//ネットワークからの切断
 	NetworkLogic::GetInstance().Disconnect();
 	NetworkLogic::GetInstance().GetLBL()->disconnectReturn();

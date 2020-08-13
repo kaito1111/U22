@@ -9,6 +9,7 @@
 #include "level/Level.h"
 #include "StageSelect/StageSelect.h"
 #include "CheckPointgenerator.h"
+#include "Player.h"
 StageSelect;
 Game::Game()
 {
@@ -35,6 +36,7 @@ Game::~Game()
 	if (m_frameBufferRenderTargetView != nullptr) {
 		m_frameBufferRenderTargetView->Release();
 	}
+	SavePlayerData();
 	DeleteGO(m_task);
 	DeleteGO(goalPtr);
 	DeleteGO(stage);
@@ -70,6 +72,13 @@ bool Game::Start()
 			}
 			return false;
 		});
+		
+	}
+	if (Continue) {
+		GamePlayer* pl1 = FindGO<GamePlayer>("player1");
+		GamePlayer* pl2 = FindGO<GamePlayer>("player2");
+		pl1->SetPosition(player1Pos);
+		pl2->SetPosition(player2Pos);
 	}
 	return true;
 }

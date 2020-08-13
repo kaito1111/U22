@@ -62,7 +62,7 @@ bool StageSelect::Start()
 void StageSelect::Update()
 {
 	//ステージとKaitoTaskクラスをNewGOする。つかゲーム画面に移行する。
-	if (g_Pad->IsTrigger(enButtonA))
+	if (g_Pad->IsPress(enButtonA))
 	{
 		game = NewGO<Game>(0, "game");
 		game->SetStage(titleCamera->GetChoiceStageNum());

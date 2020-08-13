@@ -50,7 +50,7 @@ void Title::Update()
 		DeleteTitle = true;
 	}
 	//ステージセレクト画面へ
-	if (g_Pad->IsTrigger(enButtonB)&&
+	if (g_Pad->IsPress(enButtonB)&&
 		!DeleteTitle) {
 		NewGO<NewOrContinue>(0,"stageSelect");
 		m_fade = NewGO<Fade>(0, "fade");
