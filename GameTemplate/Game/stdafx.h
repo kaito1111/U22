@@ -69,7 +69,7 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include "graphics/Camera.h"
 
 #include "Effect/Effect.h"
-#include "Font.h"
+#include "graphics/2D/Font.h"
 #include "PostEffect/PostEffect.h"
 
 #include "sound/SoundSource.h"

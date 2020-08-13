@@ -9,9 +9,9 @@
 #pragma once
 #include "graphics/GraphicsEngine.h"
 #include "sound/soundengine.h"
-#include "CEffectEngine.h"
+#include "Effect/CEffectEngine.h"
 #include "util/tkStopwatch.h"
-#include "Font.h"
+#include "graphics/2D/Font.h"
 #include "TwoP_Pad.h"
 
 namespace myEngine {
