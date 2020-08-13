@@ -102,7 +102,7 @@
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="LightBase.cpp">
+    <ClCompile Include="botuLight\LightBase.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -112,9 +112,7 @@
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
     <ClCompile Include="Manual.cpp" />
-    <ClCompile Include="NetworkPad.cpp" />
     <ClCompile Include="physics\BoxCollider.cpp" />
-    <ClCompile Include="PlayerPad.cpp" />
     <ClCompile Include="SampleGround.cpp" />
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="GemeLoop.cpp" />
@@ -219,7 +217,7 @@
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
     <ClInclude Include="Font.h" />
-    <ClInclude Include="LightBase.h">
+    <ClInclude Include="botuLight\LightBase.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
@@ -228,12 +226,9 @@
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
-    <ClInclude Include="IPad.h" />
     <ClInclude Include="Manual.h" />
-    <ClInclude Include="NetworkPad.h" />
     <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="physics\BoxCollider.h" />
-    <ClInclude Include="PlayerPad.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SampleGround.h" />
     <ClInclude Include="Sample\DebugMan.h" />

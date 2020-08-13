@@ -51,10 +51,24 @@ public:
 	void Press();						//何度も呼ぶ
 	void MagumaDead();					//何度も呼ぶ
 	void Cut();							//何度も呼ぶ
-
-	void SetPlayerNum(int n)//何Pか決める
+	/// <summary>
+	/// プレイヤー番号の設定。
+	/// </summary>
+	/// <remarks>
+	/// kaitoTaskでplayerNumの初期化。
+	/// </remarks>
+	/// <param name="n"></param>
+	void SetPlayerNum(int n)
 	{
 		m_PlayerNum = n;
+	}
+	/// <summary>
+	/// プレイヤー番号の取得。
+	/// </summary>
+	/// <returns></returns>
+	int& GetPlayerNum() 
+	{
+		return m_PlayerNum;
 	}
 
 	void ReSpown();//リスポーン地点で復活する

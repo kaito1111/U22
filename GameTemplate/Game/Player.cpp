@@ -3,8 +3,6 @@
 #include "NPole.h"
 #include "SPole.h"
 #include "GameCamera.h"
-#include "PlayerPad.h"
-#include "NetworkPad.h"
 #include "Network/NetworkLogic.h"
 
 //コンストラクタ
@@ -214,7 +212,7 @@ int GamePlayer::GetPadNo() const
 void GamePlayer::SpawnPole()
 {
 	//NSpawn
-	if (m_Pad->IsMagShotN())
+	if (g_Pad[GetPadNo()].IsPress(enButtonRB1))
 	{
 		//Game上のN極をすべて消す
 		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool {
@@ -236,7 +234,7 @@ void GamePlayer::SpawnPole()
 		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
-	if (m_Pad->IsMagShotS())
+	if (g_Pad[GetPadNo()].IsPress(enButtonLB1))
 	{
 		//Game上のS極をすべて消す
 		QueryGOs< SPole>("spole", [&](SPole* m_pole)->bool {
@@ -264,12 +262,12 @@ void GamePlayer::Move()
 	movespeed.x = 0.0f;
 	movespeed.z = 0.0f;
 	//左右の移動
-	movespeed.x = m_Pad->MoveX() * -10.0f;
+	movespeed.x = g_Pad[GetPadNo()].GetLStickXF()* -10.0f;
 	const float junpPower = 15.0f;
 	//ジャンプ判定
 	if (m_characon.IsOnGround())
 	{
-		if (m_Pad->IsJump()) {
+		if (g_Pad[GetPadNo()].IsPress(enButtonA)) {
 			m_SpriteJump->SetW(1.0f);
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
@@ -284,9 +282,9 @@ void GamePlayer::Move()
 	}
 	{
 		//音の設定
-		float Volume = fabsf(m_Pad->MoveX());
+		float Volume = fabsf(g_Pad[GetPadNo()].GetLStickXF());
 		//右スティック量を書き出す
-		printf(" LスティックX ", m_Pad->MoveX());
+		printf(" LスティックX ", g_Pad[GetPadNo()].GetLStickXF());
 		if (movespeed.y >= 0.0f) {
 			Volume -= 0.1f;
 		}
@@ -323,12 +321,12 @@ void GamePlayer::Move()
 	m_position = m_characon.Execute(1.0f, movespeed);
 
 	//左にスティックが傾いた
-	if (m_Pad->MoveX() > 0.0f)
+	if (g_Pad[GetPadNo()].GetLStickXF() > 0.0f)
 	{
 		dir = Dir::L;
 	}
 	//右にスティックが傾いた
-	if (m_Pad->MoveX() < 0.0f)
+	if (g_Pad[GetPadNo()].GetLStickXF() < 0.0f)
 	{
 		dir = Dir::R;
 	}
@@ -354,15 +352,15 @@ void GamePlayer::Move()
 //磁極を変更できる
 void GamePlayer::MyMagnet()
 {
-	if (m_Pad->IsMagN()) {
+	if (g_Pad[GetPadNo()].IsPress(enButtonX)) {
 		m_SpriteN->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::NMode);
 	}
-	if (m_Pad->IsMagS()) {
+	if (g_Pad[GetPadNo()].IsPress(enButtonY)) {
 		m_SpriteS->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::SMode);
 	}
-	if (m_Pad->IsNoMag()) {
+	if (g_Pad[GetPadNo()].IsPress(enButtonB)) {
 		m_SpriteDel->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::NoMode);
 	}
@@ -378,7 +376,7 @@ void GamePlayer::SIBOU()
 		HaveMagnet = false;
 	}
 	//修正しました
-	if (m_Pad->IsJump()) {
+	if (g_Pad[GetPadNo()].IsPress(enButtonA)) {
 		ReSpown();
 	}
 }

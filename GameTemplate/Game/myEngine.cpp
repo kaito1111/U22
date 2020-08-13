@@ -49,66 +49,10 @@ void CEngine::Update()
 	g_camera3D.Update();
 	g_camera2D.Update2D();
 
-	//ネットワークの更新
-	//このパッドのバッファリング処理、Player2つのパッド関連だから
-	//twoP_Padで書くべき。
-	if (INetworkLogic().GetLBL()->GetReady()) {
-		//ゲームが開始されている
-		while (g_Pad[0].GetNumBufferringXInputData() < MAX_BUFFERRING) {
-			//このループはゲーム開始時にしか入らないはず。
-			g_Pad[0].XInputStateBufferring();
-			//バッファリングした内容を相手に送る。
-			//パッド情報を相手に送る。
-			LBLobj()->RaisePadData();
-			m_frameNo++;
-			//1フレーム分寝る。
-			Sleep(TIME_ONE_FRAME);
-		}
-		//ネットワークパッドのバッファリング。
-		while (g_Pad[1].GetNumBufferringXInputData() < MAX_BUFFERRING) {
-			//ここは足りなくなることがあるはずなので、ゲーム中も入る可能性がある。
-			NetworkLogic::GetInstance().Update();
-			if (LBLobj()->getReceiveFlag() == false) {
-				//まだネットワークパッドのデータを受信できていない。
-				//1フレーム待機。
-				Sleep(TIME_ONE_FRAME);
-			}
-			else {
-				//ネットワークパッドのデータを受信した。
-				LBLobj()->SetReceiveFlag(false);
-			}
-		}
+	//２プレイヤー分のパッドのアップデート
+	//バッファリングとかしてる。
+	m_twoP_Pad.Update();
 
-		//バッファリングされた情報を使ってゲームを進行させる。
-		//まず新しいパッド情報をバッファリングする。
-		g_Pad[0].XInputStateBufferring();
-		//バッファリングした内容を相手に送る。
-		//パッド情報を相手に送る。
-		LBLobj()->RaisePadData();
-		//続いてネットワークパッド。
-		NetworkLogic::GetInstance().Update();
-		if (LBLobj()->getReceiveFlag() == true) {
-			LBLobj()->SetReceiveFlag(false);
-		}
-		else {
-			//このフレーム間に合わなかったとしても無視。待たない。
-			//ネットワークパッドはバッファリングが枯渇したら貯める。
-		}
-		printf("Pad::Update Start\n");
-		//バッファリングされた情報をもとにパッド情報を更新する。
-		g_Pad[0].Update(true);
-		g_Pad[1].UpdateFromNetPadData();
-		printf("Pad::Update End\n");
-		m_frameNo++;
-	}
-	else {
-		//パッドの更新
-		//ゲームが開始されていない。
-		g_Pad[0].Update(false);
-		NetworkLogic::GetInstance().Update();
-	}
-
-	LBLobj()->SetReceiveFlag(false);
 	//Engineクラスとかにまとめた後、tkEngineに処理合わせます
 	gameObjectManager().Start();
 	//ゲームオブジェクトマネージャーでする処理の呼び出し
