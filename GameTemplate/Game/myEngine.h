@@ -8,9 +8,10 @@
 
 #pragma once
 #include "graphics/GraphicsEngine.h"
-#include "Sound/SoundEngine.h"
+#include "sound/soundengine.h"
 #include "CEffectEngine.h"
 #include "util/tkStopwatch.h"
+#include "Font.h"
 
 namespace myEngine {
 	class CEngine
@@ -79,18 +80,32 @@ namespace myEngine {
 		{
 			return m_frameNo;
 		}
+		/// <summary>
+		/// ストップウォッチ取得。
+		/// </summary>
+		/// <returns></returns>
+		CStopwatch& getSW()
+		{
+			return m_sw;
+		}
 
 	private:
 		//エンジン関連
 		GraphicsEngine			m_graphicsEngine;		//グラフィックエンジン
 		SoundEngine				m_soundEngine;			//サウンドエンジン
 		CEffectEngine			m_effectEngine;			//エフェクトエンジン
+		//共通
+		CStopwatch				m_sw;					//ストップウォッチ
+	private:
 		//ネットワーク関連
 		int						m_frameNo = 0;			//プレイできる状態だった、フレームの数
 		const DWORD				TIME_ONE_FRAME = 32;	//1フレームの時間(単位:ミリ秒)。
 		const int				MAX_BUFFERRING = 5;		//バッファリングする数
-		//
-		CStopwatch				m_sw;					//ストップウォッチ
+		//fps表示関連
+		float					m_timeTotal = 0;		//合計時間。
+		float					m_fps = 0;				//FPS
+		std::unique_ptr<CFont>	m_font;					//フォント。
+
 	};		
 
 	/// <summary>

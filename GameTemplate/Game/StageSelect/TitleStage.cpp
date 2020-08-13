@@ -24,7 +24,7 @@ bool TitleStage::Start()
 	m_SpriteScale = CVector3::One() * 0.8f;
 
 	skyModel = NewGO<SkinModelRender>(3);
-	skyModel->Init(L"Assets/modelData/Player.cmo");
+	skyModel->Init(L"Player.cmo");
 	
 	float SWAH = 300.0f;
 	m_Stage1Sprite = NewGO<SpriteRender>(2);

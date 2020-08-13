@@ -133,6 +133,7 @@
     <ClCompile Include="Manual.cpp" />
     <ClCompile Include="CEffectEngine.cpp" />
     <ClCompile Include="LightBase.cpp" />
+    <ClCompile Include="Font.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -287,6 +288,7 @@
     <ClInclude Include="CEffectEngine.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="LightBase.h" />
+    <ClInclude Include="Font.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

@@ -112,6 +112,25 @@ public:
 	{
 		return m_mainRenderTarget;
 	}
+	/// <summary>
+	/// スプライトバッチ取得。
+	/// </summary>
+	/// <returns></returns>
+	DirectX::SpriteBatch* GetSpriteBatch() const
+	{
+		//m_spriteBatchのポインタ。
+		return m_spriteBatch.get();
+	}
+	/// <summary>
+	/// スプライトフォント取得。
+	/// </summary>
+	/// <returns></returns>
+	DirectX::SpriteFont* GetSpriteFont() const
+	{
+		//m_spriteFontのポインタ。
+		return m_spriteFont.get();
+	}
+
 	/*!
 	 *@brief	描画開始。
 	 */
@@ -120,6 +139,27 @@ public:
 	 *@brief	描画終了。
 	 */
 	void EndRender();
+
+	void PushRenderState()
+	{
+		m_renderStateStack.push(m_currentRenderState);
+	}
+
+	void SetRenderState()
+	{
+		m_currentRenderState = m_renderStateStack.top();
+		m_renderStateStack.pop();
+		m_pd3dDeviceContext->OMSetBlendState(m_currentRenderState.blendState, 0, 0xFFFFFFFF);
+		m_pd3dDeviceContext->RSSetState(m_currentRenderState.rasterrizerState);
+		m_pd3dDeviceContext->OMSetDepthStencilState(m_currentRenderState.depthStencilState, 0);
+	}
+
+private:
+	struct SRenderState{
+		ID3D11DepthStencilState*	depthStencilState = nullptr;	//!<現在のデプスステンシルステート。
+		ID3D11RasterizerState*		rasterrizerState = nullptr;		//!<現在のラスタライザステート。
+		ID3D11BlendState*			blendState = nullptr;			//!<現在のブレンドステート。
+	};
 private:
 	D3D_FEATURE_LEVEL		m_featureLevel;								//Direct3D デバイスのターゲットとなる機能セット。
 	ID3D11Device*			m_pd3dDevice = NULL;						//D3D11デバイス。
@@ -129,15 +169,18 @@ private:
 	RenderTarget* m_mainRenderTarget = NULL;							//メインレンダーターゲット
 	ID3D11RenderTargetView* m_frameBufferRenderTargetView;				//フレームRTV
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView;				//フレームDSV
-	ID3D11BlendState*		m_blendState = nullptr;								//ブレンドステート（テスト）
+	//ID3D11BlendState*		m_blendState = nullptr;								//ブレンドステート（テスト）
 	D3D11_VIEWPORT m_frameBufferViewports;								//フレームビューポート
-	ID3D11RasterizerState*	m_rasterizerState = NULL;					//ラスタライザステート。
+	//ID3D11RasterizerState*	m_rasterizerState = NULL;					//ラスタライザステート。
 	ID3D11Texture2D*		m_depthStencil = NULL;						//デプスステンシル。
 	ID3D11DepthStencilView* m_depthStencilView = NULL;					//デプスステンシルビュー。
+	std::stack<SRenderState> m_renderStateStack;						//レンダーステートのスタック
+	SRenderState			m_currentRenderState;						//レンダーステート
 	myEngine::Sprite* m_copyMainRtToFrameBufferSprite;					//オフスクリーンレンダリング用のスプライト
 	myEngine::LightManager* m_ligManager = nullptr;						//ライトマネージャー グラフィックエンジンでNewGOしてる
 	myEngine::ShadowMap* m_shadowMap;									//シャドウマップ
-
+	std::unique_ptr<DirectX::SpriteBatch>	m_spriteBatch;				//スプライトバッチ。
+	std::unique_ptr<DirectX::SpriteFont>	m_spriteFont;				//スプライトフォント。
 	//汚かったグラフィックエンジンから取り除いた変数一覧
 	/*
 	D3D11_VIEWPORT m_frameBufferViewports;								//フレームバッファビューポート

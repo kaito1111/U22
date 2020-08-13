@@ -17,6 +17,7 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include <map>
 #include <functional>
 #include <algorithm>
+#include <stack>
 //オーディオのインクルード
 #include <xaudio2.h>
 #include <x3daudio.h>
@@ -51,24 +52,27 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include "graphics/GraphicsEngine.h"
 #include "Sound/SoundEngine.h"
 
+#include "util/tkStopwatch.h"
+
 #include "graphics/SkinModel.h"
 #include "graphics/Skeleton.h"
 #include "graphics/SkinModelShaderConst.h"
 
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
+#include "SkinModelRender.h"
 
-#include "util/tkStopwatch.h"
-#include "graphics/Camera.h"
-
-#include "Effect/Effect.h"
-#include "PostEffect/PostEffect.h"
-
-#include "sound/SoundSource.h"
 
 #include "GameObject/GameObjectManager.h"
 #include "GameObject/IGameObject.h"
-#include "SkinModelRender.h"
+
+#include "graphics/Camera.h"
+
+#include "Effect/Effect.h"
+#include "Font.h"
+#include "PostEffect/PostEffect.h"
+
+#include "sound/SoundSource.h"
 
 #include "Shadow/ShadowMap.h"
 

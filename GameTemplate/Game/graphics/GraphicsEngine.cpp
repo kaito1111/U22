@@ -32,9 +32,9 @@ void GraphicsEngine::EndRender()
 }
 void GraphicsEngine::Release()
 {
-	if (m_rasterizerState != NULL) {
-		m_rasterizerState->Release();
-		m_rasterizerState = NULL;
+	if (m_currentRenderState.rasterrizerState != NULL) {
+		m_currentRenderState.rasterrizerState->Release();
+		m_currentRenderState.rasterrizerState = NULL;
 	}
 	if (m_depthStencil != NULL) {
 		m_depthStencil->Release();
@@ -149,7 +149,7 @@ void GraphicsEngine::Init(HWND hWnd)
 	desc.MultisampleEnable = true;
 
 	//ラスタライザとビューポートを初期化。
-	m_pd3dDevice->CreateRasterizerState(&desc, &m_rasterizerState);
+	m_pd3dDevice->CreateRasterizerState(&desc, &m_currentRenderState.rasterrizerState);
 	D3D11_VIEWPORT viewport;
 	viewport.Width = FRAME_BUFFER_W;
 	viewport.Height = FRAME_BUFFER_H;
@@ -194,9 +194,8 @@ void GraphicsEngine::Init(HWND hWnd)
 
 		desc.BackFace = desc.FrontFace;
 
-		ID3D11DepthStencilState* depthStencilState;
-		m_pd3dDevice->CreateDepthStencilState(&desc, &depthStencilState);
-		m_pd3dDeviceContext->OMSetDepthStencilState(depthStencilState, 0);
+		m_pd3dDevice->CreateDepthStencilState(&desc, &m_currentRenderState.depthStencilState);
+		m_pd3dDeviceContext->OMSetDepthStencilState(m_currentRenderState.depthStencilState, 0);
 		MemoryBarrier();
 	}
 
@@ -220,8 +219,12 @@ void GraphicsEngine::Init(HWND hWnd)
 		);
 	}
 
+	//フォントデーター初期化。
+	m_spriteBatch = std::make_unique<DirectX::SpriteBatch>(m_pd3dDeviceContext);
+	m_spriteFont = std::make_unique<DirectX::SpriteFont>(m_pd3dDevice, L"Assets/font/myfile.spritefont");
+
 	m_pd3dDeviceContext->RSSetViewports(1, &viewport);
-	m_pd3dDeviceContext->RSSetState(m_rasterizerState);
+	m_pd3dDeviceContext->RSSetState(m_currentRenderState.rasterrizerState);
 }
 #else
 #endif
@@ -299,7 +302,6 @@ void GraphicsEngine::PostRenderTarget()
 
 	//ブレンドステート設定
 	D3D11_BLEND_DESC BLEND_DETE;
-	ID3D11BlendState* BlendState;
 	BLEND_DETE.AlphaToCoverageEnable = false;
 	BLEND_DETE.IndependentBlendEnable = false;
 	BLEND_DETE.RenderTarget[0].BlendEnable = true;
@@ -310,8 +312,8 @@ void GraphicsEngine::PostRenderTarget()
 	BLEND_DETE.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
 	BLEND_DETE.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	BLEND_DETE.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	m_pd3dDevice->CreateBlendState(&BLEND_DETE, &BlendState);
-	m_pd3dDeviceContext->OMSetBlendState(BlendState, nullptr, 0xFFFFFFFF);
+	m_pd3dDevice->CreateBlendState(&BLEND_DETE, &m_currentRenderState.blendState);
+	m_pd3dDeviceContext->OMSetBlendState(m_currentRenderState.blendState, nullptr, 0xFFFFFFFF);
 
 	//オフスクリーンレンダリング用のスプライトDraw
 	//関数名的にここでかくべきじゃないけど、応急処置
