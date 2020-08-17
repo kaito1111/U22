@@ -71,13 +71,14 @@ public:
 		return m_PlayerNum;
 	}
 
-	void ReSpown();//リスポーン地点で復活する
+	void StartPos();
 	
 	void SetCheckPoint(CVector3 spownPoint)//リスポーン地点を決める
 	{
 		m_CheckPoint = spownPoint;
 	}
 private:
+	void ReSpown();//リスポーン地点で復活する
 	bool Start();//すたーと
 	void Update();//あぷでーど
 	void Draw();//どろー
@@ -110,8 +111,7 @@ private:
 	SpriteRender* m_ThisNumSprite = nullptr;				//何Pかを表す絵
 	int	m_PlayerNum = 0;									//何P？
 	SpriteRender* m_DieSprite = nullptr;					//死んだら赤くなる
-
-	MyMagnet::Magnet* m_Magnet = nullptr;					//磁力
+	Magnet* m_Magnet = nullptr;								//磁力
 	bool HaveMagnet = false;								//磁力を持っているかどうか
 	CVector3 movespeed = CVector3::Zero();					//移動量
 //	ShadowMap* m_shadowMap = nullptr;				//シャドウマップ

@@ -36,6 +36,7 @@ void GamePlayer::SetPad(IPad* pad)
 }
 
 
+
 void GamePlayer::ReSpown()
 {
 	//プレイヤーをチェックポイントまで戻す
@@ -79,7 +80,7 @@ bool GamePlayer::Start()
 	LearnMO(m_Magnet); 
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
-
+	m_Magnet->SetChange(false);
 	//キャラコンをセット
 	m_characon.Init(40.0f, 20.0f, m_position);
 
@@ -129,9 +130,7 @@ void GamePlayer::Update()
 	else {
 		//デバッグ用簡易リスポーン
 		if (g_Pad[GetPadNo()].IsTrigger(enButtonLB2)) {
-			m_position = m_CheckPoint;
-			m_characon.SetPosition(m_CheckPoint);
-			movespeed.y = 0.0f;
+			StartPos();
 		}
 		//移動
 		Move();
@@ -198,6 +197,13 @@ void GamePlayer::Draw()
 
 }
 
+void GamePlayer::StartPos()
+{
+	m_position = m_CheckPoint;
+	m_characon.SetPosition(m_CheckPoint);
+	movespeed.y = 0.0f;
+}
+
 int GamePlayer::GetPadNo() const
 {
 	if (INetworkLogic().GetLBL()->GetPlayerNum() == m_PlayerNum + 1) {
@@ -212,7 +218,7 @@ int GamePlayer::GetPadNo() const
 void GamePlayer::SpawnPole()
 {
 	//NSpawn
-	if (g_Pad[GetPadNo()].IsPress(enButtonRB1))
+	if (g_Pad[GetPadNo()].IsTrigger(enButtonRB1))
 	{
 		//Game上のN極をすべて消す
 		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool {
@@ -234,7 +240,7 @@ void GamePlayer::SpawnPole()
 		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
-	if (g_Pad[GetPadNo()].IsPress(enButtonLB1))
+	if (g_Pad[GetPadNo()].IsTrigger(enButtonLB1))
 	{
 		//Game上のS極をすべて消す
 		QueryGOs< SPole>("spole", [&](SPole* m_pole)->bool {
