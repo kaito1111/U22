@@ -16,21 +16,32 @@ namespace MyMagnet {
 			SMode,
 			Num,
 		};
-		const State GetState() {
+		const State GetState() const
+		{
 			return state;
 		}
-		const CVector3 GetPosition() {
+		const CVector3 GetPosition() const
+		{
 			return *m_Position;
 		}
 		//磁力で動いていく方向をとる
-		const CVector3 GetMove() {
+		const CVector3 GetMove() const
+		{
 			return m_MagnetForce;
 		}
-		const void SetState(State s) {
+		const void SetState(const State& s) {
 			state = s;
 		}
-		const void SetPosition(CVector3* pos) {
+		void SetPosition(CVector3* pos) {
 			m_Position = pos;
+		}
+		void SetChange(bool change)//変更できるかを設定する
+		{
+			Change = change;
+		}
+		bool IsChenge() //変更できる？
+		{
+			return Change;
 		}
 	private:
 		bool Start();
@@ -47,5 +58,6 @@ namespace MyMagnet {
 		SoundSource m_Se;
 		float SeVolume = 1.0f;
 		friend class MagnetManager;
+		bool Change = true;		//変更できるか。
 	};
 }

@@ -9,6 +9,9 @@ Iwa::Iwa()
 
 Iwa::~Iwa()
 {
+	DeleteMO(m_magnet);
+	DeleteGO(m_magnet);
+	DeleteGO(m_model);
 }
 
 bool Iwa::Start()
@@ -24,7 +27,10 @@ bool Iwa::Start()
 
 void Iwa::Update()
 {
-	m_pos = m_magnet->MagnetMove();
+	m_moveSpeed.x = 0.0f;
+	m_moveSpeed.z = 0.0f;
+	m_moveSpeed += m_magnet->MagnetMove();
+	m_pos = m_CharaCon.Execute(1.0f, m_moveSpeed);
 	m_model->SetPosition(m_pos);
 	m_model->SetRotation(m_rot);
 	m_model->SetScale(CVector3::One());

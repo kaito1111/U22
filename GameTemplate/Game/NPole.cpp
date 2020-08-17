@@ -56,7 +56,9 @@ void NPole::SetNPole() {
 		CVector3 Diff = m_Magnet->GetPosition() - m_position;
 		float ModeJudge = 100.0f;
 		if (Diff.Length() < ModeJudge) {
-			m_Magnet->SetState(Magnet::State::NMode);
+			if (m_Magnet->IsChenge() == true) {
+				m_Magnet->SetState(Magnet::State::NMode);
+			}
 		}
 		return true;
 	});

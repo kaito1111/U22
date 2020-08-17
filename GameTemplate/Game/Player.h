@@ -52,18 +52,19 @@ public:
 	void MagumaDead();					//何度も呼ぶ
 	void Cut();							//何度も呼ぶ
 
-	void SetPlayerNum(int n)//何Pか決める
+	void SetPlayerNum(int n)//プレイヤー番号を決める
 	{
 		m_PlayerNum = n;
 	}
 
-	void ReSpown();//リスポーン地点で復活する
+	void StartPos();
 	
 	void SetCheckPoint(CVector3 spownPoint)//リスポーン地点を決める
 	{
 		m_CheckPoint = spownPoint;
 	}
 private:
+	void ReSpown();//リスポーン地点で復活する
 	bool Start();//すたーと
 	void Update();//あぷでーど
 	void Draw();//どろー

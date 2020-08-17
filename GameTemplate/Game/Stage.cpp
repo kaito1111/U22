@@ -5,6 +5,7 @@
 
 Stage::Stage()
 {
+	nowStage = 2;
 	//cmoファイルの読み込み。
 	if (nowStage == 0) {
 		m_model.Init(L"Assets/modelData/Course_Level1.cmo");

@@ -20,4 +20,5 @@ private:
 	CVector3 m_pos = CVector3::Zero();
 	CQuaternion m_rot = CQuaternion::Identity();
 	BoxCharactorController m_CharaCon;
+	CVector3 m_moveSpeed = CVector3::Zero();
 };

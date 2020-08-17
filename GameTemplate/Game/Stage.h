@@ -17,7 +17,7 @@ public:
 		nowStage = num;
 	}
 private:
-	int nowStage = 0;
+	int nowStage = 2;
 	int count = 0;
 	bool newStage = false;
                    //ƒQ[ƒ€ƒNƒ‰ƒX
