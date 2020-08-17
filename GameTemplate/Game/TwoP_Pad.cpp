@@ -1,70 +1,78 @@
 #include "stdafx.h"
 #include "TwoP_Pad.h"
-#include "Player.h"
-#include "PlayerPad.h"
-#include "NetworkPad.h"
 #include "Network/NetworkLogic.h"
 
 
 TwoP_Pad::TwoP_Pad() 
 {
-	//for (int i = 0; i < Pad::CONNECT_PAD_MAX; i++)
-	//{
-	//	g_Pad[i].Init(i);
-	//}
-
-	//パッド番号の取得
-	m_PlayerPadNum = NetworkLogic::GetInstance().GetLBL()->GetPlayerNum();
-	//各Padのインスタンス化
-	//padのポリモーフィズム
-	m_playerPad = NewGO<PlayerPad>(0);
-	m_networkPad = NewGO<NetworkPad>(0);
-	//パッドの識別をして初期化
-	if (m_PlayerPadNum == 1) {
-		//player1だった
-		m_playerPad->Init(0);
-		m_networkPad->Init(1);
-	}
-	else if (m_PlayerPadNum == 2) {
-		//player2だった
-		m_playerPad->Init(0);
-		m_networkPad->Init(1);
-	}
 
 }
 TwoP_Pad::~TwoP_Pad()
 {
-	//for (int i = 0; i < g_PlayerNum;i++) {
-	//	DeleteGO(player[i]);
-	//}
 }
 
-void TwoP_Pad::PostRender()
-{
-	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
-	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
-}
-
-//bool TwoP_Pad::Start()
-//{
-//
-//		return true;
-//	
-//	return false;
-//}
 
 void TwoP_Pad::Update()
 {
-	//if (INetworkLogic().GetLBL()->GetReady()) {
-	//	//通信の準備ＯＫや　PadのUpdateかいしぃ！
-	//	//そこまでやで。。
-	//	INetworkLogic().GetLBL()->SetReady(false);
-	//}
-	//m_playerPad->Update();
+	//ネットワークの更新
+	//このパッドのバッファリング処理、Player2つのパッド関連だから
+	//twoP_Padで書くべき。
+	if (INetworkLogic().GetLBL()->GetReady()) {
+		//ゲームが開始されている
+		while (g_Pad[0].GetNumBufferringXInputData() < MAX_BUFFERRING) {
+			//このループはゲーム開始時にしか入らないはず。
+			g_Pad[0].XInputStateBufferring();
+			//バッファリングした内容を相手に送る。
+			//パッド情報を相手に送る。
+			LBLobj()->RaisePadData();
+			m_frameNo++;
+			//1フレーム分寝る。
+			Sleep(TIME_ONE_FRAME);
+		}
+		//ネットワークパッドのバッファリング。
+		while (g_Pad[1].GetNumBufferringXInputData() < MAX_BUFFERRING) {
+			//ここは足りなくなることがあるはずなので、ゲーム中も入る可能性がある。
+			NetworkLogic::GetInstance().Update();
+			if (LBLobj()->getReceiveFlag() == false) {
+				//まだネットワークパッドのデータを受信できていない。
+				//1フレーム待機。
+				Sleep(TIME_ONE_FRAME);
+			}
+			else {
+				//ネットワークパッドのデータを受信した。
+				LBLobj()->SetReceiveFlag(false);
+			}
+		}
 
-	//INetworkLogic().GetLBL()->putData(Jump, m_playerPad->IsJump());
-	if (m_playerPad->IsTriStart())
-	{
+		//バッファリングされた情報を使ってゲームを進行させる。
+		//まず新しいパッド情報をバッファリングする。
+		g_Pad[0].XInputStateBufferring();
+		//バッファリングした内容を相手に送る。
+		//パッド情報を相手に送る。
+		LBLobj()->RaisePadData();
+		//続いてネットワークパッド。
+		NetworkLogic::GetInstance().Update();
+		if (LBLobj()->getReceiveFlag() == true) {
+			LBLobj()->SetReceiveFlag(false);
+		}
+		else {
+			//このフレーム間に合わなかったとしても無視。待たない。
+			//ネットワークパッドはバッファリングが枯渇したら貯める。
+		}
+		printf("Pad::Update Start\n");
+		//バッファリングされた情報をもとにパッド情報を更新する。
+		g_Pad[0].Update(true);
+		g_Pad[1].UpdateFromNetPadData();
+		printf("Pad::Update End\n");
+		m_frameNo++;
 	}
+	else {
+		//パッドの更新
+		//ゲームが開始されていない。
+		g_Pad[0].Update(false);
+		NetworkLogic::GetInstance().Update();
+	}
+
+	LBLobj()->SetReceiveFlag(false);
 }
 

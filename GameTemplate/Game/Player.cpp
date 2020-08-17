@@ -3,8 +3,6 @@
 #include "NPole.h"
 #include "SPole.h"
 #include "GameCamera.h"
-#include "PlayerPad.h"
-#include "NetworkPad.h"
 #include "Network/NetworkLogic.h"
 
 //コンストラクタ
@@ -26,8 +24,6 @@ GamePlayer::GamePlayer()
 //デストラクタ
 GamePlayer::~GamePlayer()
 {
-	DeleteMO(m_Magnet);
-	HaveMagnet = false;
 	DeleteGO(m_Magnet);
 	DeleteGO(m_ThisNumSprite);
 }
@@ -80,10 +76,10 @@ bool GamePlayer::Start()
 	}
 	//プレイヤーに磁力を持たせる
 	m_Magnet = NewGO<Magnet>(1, "Magnet");
-	LearnMO(m_Magnet);
+	LearnMO(m_Magnet); 
 	HaveMagnet = true;
 	m_Magnet->SetPosition(&m_position);
-	m_Magnet->SetChange(false);
+
 	//キャラコンをセット
 	m_characon.Init(40.0f, 20.0f, m_position);
 
@@ -100,24 +96,21 @@ bool GamePlayer::Start()
 	m_SpriteBase->Init(L"Assets/sprite/PadBase.dds", 250.0f, 250.0f);
 	m_SpriteBase->SetPosition({ 500.0f,-250.0f,0.0f });
 	m_SpriteDel = NewGO<SpriteRender>(4);
-	m_SpriteDel->Init(L"Assets/sprite/del.dds", 500.0f, 500.0f);
+	m_SpriteDel->Init(L"Assets/sprite/del.dds", 500.0f,500.0f);
 	m_SpriteDel->SetPosition({ 550.0f,-250,0.0f });
 	m_SpriteDel->SetW(0.0f);
 	m_SpriteJump = NewGO<SpriteRender>(4);
-	m_SpriteJump->Init(L"Assets/sprite/jump.dds", 500.0f, 500.0f);
+	m_SpriteJump->Init(L"Assets/sprite/jump.dds", 500.0f,500.0f);
 	m_SpriteJump->SetPosition({ 500.0f,-300.0f,0.0 });
 	m_SpriteJump->SetW(0.0f);
 	m_SpriteN = NewGO<SpriteRender>(4);
 	m_SpriteN->Init(L"Assets/sprite/N.dds", 500.0f, 500.0f);
-	m_SpriteN->SetPosition({ 500.0f,-200.0f,0.0f });
+	m_SpriteN->SetPosition({ 450.0f,-250.0f,0.0 });
 	m_SpriteN->SetW(0.0f);
 	m_SpriteS = NewGO<SpriteRender>(4);
 	m_SpriteS->Init(L"Assets/sprite/S.dds", 500.0f, 500.0f);
-	m_SpriteS->SetPosition({ 450.0f,-250.0f,0.0 });
+	m_SpriteS->SetPosition({ 500.0f,-200.0f,0.0f });
 	m_SpriteS->SetW(0.0f);
-
-	//初期位置を更新
-	m_position = m_CheckPoint;
 	return true;
 }
 
@@ -136,7 +129,9 @@ void GamePlayer::Update()
 	else {
 		//デバッグ用簡易リスポーン
 		if (g_Pad[GetPadNo()].IsTrigger(enButtonLB2)) {
-			StartPos();
+			m_position = m_CheckPoint;
+			m_characon.SetPosition(m_CheckPoint);
+			movespeed.y = 0.0f;
 		}
 		//移動
 		Move();
@@ -203,13 +198,6 @@ void GamePlayer::Draw()
 
 }
 
-void GamePlayer::StartPos()
-{
-	m_position = m_CheckPoint;
-	m_characon.SetPosition(m_CheckPoint);
-	movespeed.y = 0.0f;
-}
-
 int GamePlayer::GetPadNo() const
 {
 	if (INetworkLogic().GetLBL()->GetPlayerNum() == m_PlayerNum + 1) {
@@ -224,7 +212,7 @@ int GamePlayer::GetPadNo() const
 void GamePlayer::SpawnPole()
 {
 	//NSpawn
-	if (m_Pad->IsMagShotN())
+	if (g_Pad[GetPadNo()].IsPress(enButtonRB1))
 	{
 		//Game上のN極をすべて消す
 		QueryGOs<NPole>("npole", [&](NPole* m_pole)->bool {
@@ -246,7 +234,7 @@ void GamePlayer::SpawnPole()
 		npole->SetMoveDir(SpawnDir);
 	}
 	//SSpawn
-	if (m_Pad->IsMagShotS())
+	if (g_Pad[GetPadNo()].IsPress(enButtonLB1))
 	{
 		//Game上のS極をすべて消す
 		QueryGOs< SPole>("spole", [&](SPole* m_pole)->bool {
@@ -274,19 +262,19 @@ void GamePlayer::Move()
 	movespeed.x = 0.0f;
 	movespeed.z = 0.0f;
 	//左右の移動
-	movespeed.x = g_Pad[GetPadNo()].GetLStickXF() * -10.0f;
+	movespeed.x = g_Pad[GetPadNo()].GetLStickXF()* -10.0f;
 	const float junpPower = 15.0f;
 	//ジャンプ判定
 	if (m_characon.IsOnGround())
 	{
-	if (m_Pad->IsJump()) {
-		m_SpriteJump->SetW(1.0f);
-		movespeed.y = junpPower;
-		if (m_Se.IsPlaying()) {
-			m_Se2.Play(false);
+		if (g_Pad[GetPadNo()].IsPress(enButtonA)) {
+			m_SpriteJump->SetW(1.0f);
+			movespeed.y = junpPower;
+			if (m_Se.IsPlaying()) {
+				m_Se2.Play(false);
+			}
+			m_Se.Play(false);
 		}
-		m_Se.Play(false);
-	}
 	}
 	{
 		const float gravity = 0.8f;		//重力
@@ -294,9 +282,9 @@ void GamePlayer::Move()
 	}
 	{
 		//音の設定
-		float Volume = fabsf(m_Pad->MoveX());
+		float Volume = fabsf(g_Pad[GetPadNo()].GetLStickXF());
 		//右スティック量を書き出す
-		printf(" LスティックX %f \n ", g_Pad[GetPadNo()].GetLStickXF());
+		printf(" LスティックX ", g_Pad[GetPadNo()].GetLStickXF());
 		if (movespeed.y >= 0.0f) {
 			Volume -= 0.1f;
 		}
@@ -333,12 +321,12 @@ void GamePlayer::Move()
 	m_position = m_characon.Execute(1.0f, movespeed);
 
 	//左にスティックが傾いた
-	if (m_Pad->MoveX() > 0.0f)
+	if (g_Pad[GetPadNo()].GetLStickXF() > 0.0f)
 	{
 		dir = Dir::L;
 	}
 	//右にスティックが傾いた
-	if (m_Pad->MoveX() < 0.0f)
+	if (g_Pad[GetPadNo()].GetLStickXF() < 0.0f)
 	{
 		dir = Dir::R;
 	}
@@ -364,15 +352,15 @@ void GamePlayer::Move()
 //磁極を変更できる
 void GamePlayer::MyMagnet()
 {
-	if (m_Pad->IsMagN()) {
+	if (g_Pad[GetPadNo()].IsPress(enButtonX)) {
 		m_SpriteN->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::NMode);
 	}
-	if (m_Pad->IsMagS()) {
+	if (g_Pad[GetPadNo()].IsPress(enButtonY)) {
 		m_SpriteS->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::SMode);
 	}
-	if (m_Pad->IsNoMag()) {
+	if (g_Pad[GetPadNo()].IsPress(enButtonB)) {
 		m_SpriteDel->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::NoMode);
 	}
@@ -388,7 +376,7 @@ void GamePlayer::SIBOU()
 		HaveMagnet = false;
 	}
 	//修正しました
-	if (m_Pad->IsJump()) {
+	if (g_Pad[GetPadNo()].IsPress(enButtonA)) {
 		ReSpown();
 	}
 }
@@ -426,7 +414,6 @@ void GamePlayer::Cut()
 	}
 	m_IsSi = true;
 }
-
 
 //圧殺
 void GamePlayer::Press()

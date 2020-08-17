@@ -2,7 +2,7 @@
 #include "Title.h"
 #include "Game.h"
 #include "Fade.h"
-#include "SampleScene.h"
+#include "Sample/SampleScene.h"
 #include "Network/NetworkLogic.h"
 #include "Network/LoadBalancingListener.h"
 #include "StageSelect/StageSelect.h"

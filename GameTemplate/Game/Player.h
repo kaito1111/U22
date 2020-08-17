@@ -14,13 +14,13 @@ public:
 	CVector3 GetPosition() { //位置を返す
 		return m_position; 
 	}
+	void SetPosition(CVector3 pos, CVector3 moveSpeed = CVector3::Zero()) 
 	/// <summary>
 	/// 位置を決める
 	/// </summary>
 	/// <param name="pos">		プレイヤーの移動先を入れる</param>
 	/// <param name="moveSpeed">プレイヤーの移動量を決める。
 	///							あまり使わない</param>
-	void SetPosition(CVector3 pos, CVector3 moveSpeed = CVector3::Zero()) 
 	{
 		m_characon.SetPosition(pos);
 		if (moveSpeed.Length() > 1.0f) {
@@ -51,20 +51,33 @@ public:
 	void Press();						//何度も呼ぶ
 	void MagumaDead();					//何度も呼ぶ
 	void Cut();							//何度も呼ぶ
-
-	void SetPlayerNum(int n)//プレイヤー番号を決める
+	/// <summary>
+	/// プレイヤー番号の設定。
+	/// </summary>
+	/// <remarks>
+	/// kaitoTaskでplayerNumの初期化。
+	/// </remarks>
+	/// <param name="n"></param>
+	void SetPlayerNum(int n)
 	{
 		m_PlayerNum = n;
 	}
+	/// <summary>
+	/// プレイヤー番号の取得。
+	/// </summary>
+	/// <returns></returns>
+	int& GetPlayerNum() 
+	{
+		return m_PlayerNum;
+	}
 
-	void StartPos();
+	void ReSpown();//リスポーン地点で復活する
 	
 	void SetCheckPoint(CVector3 spownPoint)//リスポーン地点を決める
 	{
 		m_CheckPoint = spownPoint;
 	}
 private:
-	void ReSpown();//リスポーン地点で復活する
 	bool Start();//すたーと
 	void Update();//あぷでーど
 	void Draw();//どろー

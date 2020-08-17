@@ -199,7 +199,7 @@ void Pad::XInputStateBufferring()
 	XINPUT_STATE xInputState;
 	DWORD result = XInputGetState(m_padNo, &xInputState);
 	//ÉLÉÖÅ[Ç…êœÇﬁ
-	m_xinputStateQueue.push_back({ Engine().getFrameNo(), xInputState });
+	m_xinputStateQueue.push_back({ Engine().GetTwoP_Pad().GetFrameNum(), xInputState });
 }
 void Pad::XInputStateBufferringFromNetPadData(int frameNo)
 {

@@ -168,17 +168,15 @@ namespace myEngine {
 
 		d3dDeviceContext->UpdateSubresource(m_cb.GetBody(), 0, NULL, &cb, 0, 0);
 
-		d3dDeviceContext->VSSetConstantBuffers(0, 1, &m_cb.GetBody());
-		d3dDeviceContext->PSSetConstantBuffers(0, 1, &m_cb.GetBody());
-		d3dDeviceContext->VSSetShaderResources(0, 1, &m_textureSRV);
-		d3dDeviceContext->PSSetShaderResources(0, 1, &m_textureSRV);
+		d3dDeviceContext->VSSetConstantBuffers(enSkinModelCBReg_VSPS, 1, &m_cb.GetBody());
+		d3dDeviceContext->PSSetConstantBuffers(enSkinModelCBReg_VSPS, 1, &m_cb.GetBody());
+		d3dDeviceContext->VSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_textureSRV);
+		d3dDeviceContext->PSSetShaderResources(enSkinModelSRVReg_AlbedoTexture, 1, &m_textureSRV);
 		d3dDeviceContext->PSSetShader((ID3D11PixelShader*)m_ps.GetBody(), NULL, 0);
 		d3dDeviceContext->VSSetShader((ID3D11VertexShader*)m_vs.GetBody(), NULL, 0);
-		//grapgicsEngineのPostRenderのBlendStateを使う
-		//2Dでバグが出たら、たぶんこいつ
-		//d3dDeviceContext->OMSetBlendState(BlendState, nullptr, 0xffffffff);
 		d3dDeviceContext->IASetInputLayout(m_vs.GetInputLayout());
 
+		//サンプラーステートのセット
 		Engine().GetGraphicsEngine().GetD3DDeviceContext()->VSSetSamplers(0, 1, &SamplerState);
 		Engine().GetGraphicsEngine().GetD3DDeviceContext()->PSSetSamplers(0, 1, &SamplerState);
 

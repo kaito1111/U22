@@ -6,8 +6,6 @@
 #include "Console.h"
 #include "TestView.h"
 #include "common-cpp/inc/object.h"
-#include "PlayerPad.h"
-#include "IPad.h"
 #include <fstream>
 #include <string>
 
@@ -464,7 +462,7 @@ void LoadBalancingListener::RaisePadData()
 	hash.put(5, (int)xInputState.Gamepad.wButtons);
 	hash.put(6, xInputState.Gamepad.bLeftTrigger);
 	hash.put(7, xInputState.Gamepad.bRightTrigger);
-	hash.put(8, Engine().getFrameNo());
+	hash.put(8, Engine().GetTwoP_Pad().GetFrameNum());
 
 
 	//データの送信

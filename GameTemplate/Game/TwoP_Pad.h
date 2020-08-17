@@ -1,48 +1,17 @@
 #pragma once
-class PlayerPad;
-class NetworkPad;
-class IPad;
 
-class TwoP_Pad: public IGameObject
+class TwoP_Pad
 {
 	//using NetworkPad = PlayerPad;
 public:
 	TwoP_Pad();
 	~TwoP_Pad();
 
-	void Update() override;
+	void Update();
 
-	//シングルトン
-	static TwoP_Pad& GetInstance()
+	int& GetFrameNum()
 	{
-		static TwoP_Pad Instance;
-		return Instance;
-	}
-
-	/// <summary>
-	/// プレイヤーパッドの取得
-	/// </summary>
-	/// <returns></returns>
-	IPad* GetPPad()
-	{
-		return m_playerPad;
-	}
-	/// <summary>
-	/// ネットワークパッドの取得
-	/// </summary>
-	/// <returns></returns>
-	IPad* GetNPad()
-	{
-		return m_networkPad;
-	}
-	/// <summary>
-	/// 自分のプレイヤー番号
-	/// <para>PlayerPad側になる方の番号を取得</para>
-	/// </summary>
-	/// <returns></returns>
-	int& getPlayerNum()
-	{
-		return m_PlayerPadNum;
+		return m_frameNo;
 	}
 
 private:
@@ -56,25 +25,7 @@ private:
 		ShotS,
 		Start
 	};
-	void PostRender();
-	Sprite m_copyMainRtToFrameBufferSprite;	//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 
-	//Player* player[2] = {};
-	bool UpdateStop = true;			//Updateを止めるフラグfalseでUpdateする。
-	int m_PlayerPadNum = 0;			//playerPadになるpadの番号
-
-	//bool Start()override;
-	bool NewGOPlayer = false;		//プレイヤーをNewGOするかどうか
-
-	IPad* m_playerPad;		//プレイヤーのパッド
-	IPad* m_networkPad;		//ネットワークのパッド
+	const int				MAX_BUFFERRING = 5;		//バッファリングする数
+	int						m_frameNo = 0;			//プレイできる状態だった、フレームの数
 };
-
-/// <summary>
-/// TwoP_Padのインスタンス取得
-/// </summary>
-/// <returns></returns>
-static inline TwoP_Pad& twoP_Pad()
-{
-	return TwoP_Pad::GetInstance();
-}
