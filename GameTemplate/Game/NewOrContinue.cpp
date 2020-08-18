@@ -18,7 +18,7 @@ NewOrContinue::~NewOrContinue()
 
 bool NewOrContinue::Start()
 {
-	
+	//‰Šú‰»
 	m_spriteRender = NewGO<SpriteRender>(1, "sprite");
 	m_spriteRender->Init(L"Assets/sprite/‰‚ß‚©‚çor‘±‚«‚©‚ç.dds",1280,720);
 	return true;

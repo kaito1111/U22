@@ -22,9 +22,10 @@ void PlayerData::SavePlayerData()
 {
 	//static const char PlayerMax = 2;//プレイヤーの最大数
 	
-	for (nowSavePlayer = 1;         //これから名付けるプレイヤーの番号
-		nowSavePlayer <= g_PlayerNum; //プレイヤーの最大数よりfor文が回ってないなら
-		nowSavePlayer++) {			//回し続けるよ
+	//プレイヤーに名前つけてる
+	for (nowSavePlayer = 1;         
+		nowSavePlayer <= g_PlayerNum;
+		nowSavePlayer++) {			
 
 		char PlayerName[256] = {};//名前
 		sprintf(PlayerName, "player%d", nowSavePlayer );

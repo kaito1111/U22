@@ -24,6 +24,7 @@ GamePlayer::GamePlayer()
 
 GamePlayer::~GamePlayer()
 {
+	SavePlayerData();
 	DeleteGO(m_Magnet);
 	DeleteGO(m_ThisNumSprite);
 }
