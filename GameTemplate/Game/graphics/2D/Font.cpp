@@ -61,8 +61,8 @@ namespace myEngine {
 		DirectX::XMFLOAT2 tkFloat2Zero(0, 0);
 		//À•WŒvŽZ
 		CVector2 position = pos;
-		position.x += FRAME_BUFFER_W;
-		position.y = -position.y + FRAME_BUFFER_H;
+		position.x += FRAME_BUFFER_W * 0.5f;
+		position.y = -position.y + FRAME_BUFFER_H * 0.5f;
 		//•`‰æ
 		m_spriteFont->DrawString(
 			m_spriteBatch,

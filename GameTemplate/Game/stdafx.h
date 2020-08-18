@@ -69,8 +69,10 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include "graphics/Camera.h"
 
 #include "Effect/Effect.h"
-#include "graphics/2D/Font.h"
 #include "PostEffect/PostEffect.h"
+
+#include "graphics/2D/Font.h"
+#include "graphics/2D/FontRender.h"
 
 #include "sound/SoundSource.h"
 
@@ -81,10 +83,10 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 
 #include "Magnet/MagnetManager.h"
 
-const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
-const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。
-const int	g_PlayerNum = 2;						//プレイヤーの数
-const DWORD	TIME_ONE_FRAME = 32;					//1フレームの時間(単位:ミリ秒)。
+const float FRAME_BUFFER_W = 1280.0f;					//フレームバッファの幅。
+const float FRAME_BUFFER_H = 720.0f;					//フレームバッファの高さ。
+const int	g_PlayerNum = 2;							//プレイヤーの数
+const DWORD	TIME_ONE_FRAME = 32;						//1フレームの時間(単位:ミリ秒)。
 
 static const int MAX_BONE = 512;	//!<ボーンの最大数。
 

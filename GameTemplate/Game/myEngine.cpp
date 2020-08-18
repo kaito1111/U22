@@ -76,13 +76,13 @@ void CEngine::Update()
 	m_font->Draw(
 		fps,
 		{
-			FRAME_BUFFER_W * -0.18f,
-			FRAME_BUFFER_H 
+			FRAME_BUFFER_W * 0.49f,
+			FRAME_BUFFER_H * 0.5f
 		},
 		{0.0f,0.0f,0.0f,1.0f},
 		0.0f,
 		1.0f,
-		{0.0f, 1.0f}
+		{1.0f, 1.0f}
 	);
 	m_font->End();
 	//•`‰æI—¹B

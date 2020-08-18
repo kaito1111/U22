@@ -14,13 +14,11 @@ TwoP_Pad::~TwoP_Pad()
 
 void TwoP_Pad::Update()
 {
-	//ネットワークの更新
-	//このパッドのバッファリング処理、Player2つのパッド関連だから
-	//twoP_Padで書くべき。
 	if (INetworkLogic().GetLBL()->GetReady()) {
 		//ゲームが開始されている
 		while (g_Pad[0].GetNumBufferringXInputData() < MAX_BUFFERRING) {
 			//このループはゲーム開始時にしか入らないはず。
+			//バッファリングする。
 			g_Pad[0].XInputStateBufferring();
 			//バッファリングした内容を相手に送る。
 			//パッド情報を相手に送る。
@@ -69,6 +67,7 @@ void TwoP_Pad::Update()
 	else {
 		//パッドの更新
 		//ゲームが開始されていない。
+		//自分のパッドなのでバッファリング情報は使わない。
 		g_Pad[0].Update(false);
 		NetworkLogic::GetInstance().Update();
 	}

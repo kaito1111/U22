@@ -101,6 +101,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
+    <ClCompile Include="graphics\2D\FontRender.cpp" />
     <ClCompile Include="graphics\2D\Font.cpp" />
     <ClCompile Include="botuLight\LightBase.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -215,6 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
+    <ClInclude Include="graphics\2D\FontRender.h" />
     <ClInclude Include="graphics\2D\Font.h" />
     <ClInclude Include="botuLight\LightBase.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
