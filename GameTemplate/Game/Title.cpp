@@ -13,6 +13,10 @@ Title::Title()
 	m_Sprite = NewGO<SpriteRender>(5);
 	m_Sprite->Init(L"Assets/sprite/Title.dds", FRAME_BUFFER_W, FRAME_BUFFER_H);
 	m_bgm.Play("Title_bgm.wav");
+	m_fontRender = NewGO<CFontRender>(0);
+	m_fontRender->SetScale(1.0f);
+	m_fontRender->SetPosition(m_fontPos);
+	swprintf(m_text, L"マッチング中");
 }
 
 Title::~Title()
@@ -21,6 +25,7 @@ Title::~Title()
 	//NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
 	//printf("disconnect");
 	DeleteGO(m_Sprite);
+	DeleteGO(m_fontRender);
 }
 
 void Title::Update()
@@ -30,13 +35,13 @@ void Title::Update()
 	if (g_Pad->IsTrigger(enButtonSelect)) {
 	}
 
-	g_camera2D.Update2D();
-	g_camera3D.Update();
+
 	if (INetworkLogic().GetLBL()->GetReady() &&
 		!DeleteTitle ) {
 		//ネットワークの準備が整った
 		m_fade = NewGO<Fade>(0, "fade");
 		DeleteTitle = true;
+		swprintf(m_text, L"ゲームを開始します。");
 	}
 	if (GetAsyncKeyState('Y')) {
 		NewGO<StageSelect>(0, "stageselect");
@@ -44,10 +49,13 @@ void Title::Update()
 	}
 	//サンプルステージ
 	if (GetAsyncKeyState('H')) {
-		NewGO<SampleScene>(0, "stageselect");
+		NewGO<SampleScene>(0, "SampleScene");
 		DeleteGO(this);
 	}
 	if (DeleteTitle) {
+		if (m_fade->GetLengh() < 700.0f) {
+			m_fontRender->SetColor({0.0f, 0.0f, 0.0f, 0.0f});
+		}
 		if (m_fade->GetLengh() < 210.0f) {
 			NewGO<Game>(0, "game");
 			DeleteGO(this);
@@ -59,12 +67,7 @@ void Title::Update()
 		//サンプル
 		NetworkLogic::GetInstance().GetLBL()->RaiseGameScore(100, 200);
 	}
+
+	m_fontRender->SetTextUnsafe(m_text);
 }
 
-void Title::NetworkUpdate()
-{
-	//Network Test
-	//NetworkLogic::GetInstance().Update();
-
-	//NetworkLogic::GetInstance().GetLBL()->RaiseInputPad(g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->GetLStickXF(), g_Pad->IsTrigger());
-}

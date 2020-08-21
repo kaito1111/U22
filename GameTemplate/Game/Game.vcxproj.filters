@@ -131,6 +131,7 @@
     <ClCompile Include="Sample\SampleGround.cpp" />
     <ClCompile Include="Sample\SampleScene.cpp" />
     <ClCompile Include="Effect\CEffectEngine.cpp" />
+    <ClCompile Include="graphics\2D\FontRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -282,6 +283,7 @@
     <ClInclude Include="Sample\SampleGround.h" />
     <ClInclude Include="Sample\SampleScene.h" />
     <ClInclude Include="Effect\CEffectEngine.h" />
+    <ClInclude Include="graphics\2D\FontRender.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

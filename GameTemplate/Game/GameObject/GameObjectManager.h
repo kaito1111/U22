@@ -80,7 +80,7 @@ namespace myEngine {
 			return newObject;
 		}
 		/// <summary>
-		/// オブジェクトの削除</para>
+		/// オブジェクトの削除
 		/// </summary>
 		void DeleteGameObject(IGameObject* gameObject)
 		{
@@ -88,6 +88,7 @@ namespace myEngine {
 			{
 				//リストに追加
 				m_deleteObjectArray[m_currentDeleteObjectBufferNo].at(gameObject->GetPriority()).push_back(gameObject);
+				gameObject->m_isDead = true;
 				gameObject = nullptr;
 			}
 		}

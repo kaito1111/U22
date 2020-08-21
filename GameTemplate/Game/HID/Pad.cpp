@@ -196,7 +196,9 @@ void Pad::UpdateAnalogStickInput()
 extern XINPUT_STATE g_netPadState;
 void Pad::XInputStateBufferring()
 {
+	//パッドのボタンの状態。
 	XINPUT_STATE xInputState;
+	//全パッドの状態。
 	DWORD result = XInputGetState(m_padNo, &xInputState);
 	//キューに積む
 	m_xinputStateQueue.push_back({ Engine().GetTwoP_Pad().GetFrameNum(), xInputState });

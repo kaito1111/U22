@@ -459,6 +459,7 @@ void LoadBalancingListener::RaisePadData()
 	hash.put(2, xInputState.Gamepad.sThumbLY);
 	hash.put(3, xInputState.Gamepad.sThumbRX);
 	hash.put(4, xInputState.Gamepad.sThumbRY);
+	//ボタンの情報を送る。
 	hash.put(5, (int)xInputState.Gamepad.wButtons);
 	hash.put(6, xInputState.Gamepad.bLeftTrigger);
 	hash.put(7, xInputState.Gamepad.bRightTrigger);
