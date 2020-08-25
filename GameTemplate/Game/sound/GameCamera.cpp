@@ -50,8 +50,10 @@ void GameCamera::Update()
 	}*/
 
 	//ƒvƒŒƒCƒ„[‚ðŽE‚·
-	if (m_Player[0]->GetPosition().y < Target.y - 500.0f) {
-		m_Player[0]->SIBOU();
+	for (int i = 0; i < m_PlayerNum; i++) {
+		if (m_Player[i]->GetPosition().y < Target.y - 500.0f) {
+			m_Player[i]->SIBOU();
+		}
 	}
 
 	if (Target.x > 300.0f) {

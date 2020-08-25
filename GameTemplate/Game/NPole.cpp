@@ -47,6 +47,7 @@ void NPole::deleteRange()
 void NPole::Move()
 {
 	m_move.Normalize();
+	m_move *= 5.0f;
 	m_position += m_move;
 }
 

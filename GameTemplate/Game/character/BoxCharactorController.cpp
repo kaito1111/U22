@@ -238,7 +238,7 @@ const CVector3 & BoxCharactorController::Execute(float deltaTime, CVector3& move
 					nextPosition.x = callback.hitPos.x;
 					//nextPosition.z = callback.hitPos.z;
 					//法線の方向に半径分押し戻す。
-					nextPosition.x += callback.hitNormal.x + m_Bottom;
+					nextPosition.x += callback.hitNormal.x * m_Bottom;
 					//nextPosition.z += callback.hitNormal.z * m_radius;
 #else
 					CVector3 vT0, vT1;
@@ -376,7 +376,7 @@ const CVector3 & BoxCharactorController::Execute(float deltaTime, CVector3& move
 			}
 			else
 			{
-				endPos.y += 1.0f;
+				endPos.y += 0.1f;
 			}
 			//endPos.Add(addPos);
 			end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
@@ -402,7 +402,7 @@ const CVector3 & BoxCharactorController::Execute(float deltaTime, CVector3& move
 	btBody->setActivationState(DISABLE_DEACTIVATION);
 	btTransform& trans = btBody->getWorldTransform();
 	//剛体の位置を更新。
-	trans.setOrigin(btVector3(m_position.x, m_position.y, m_position.z));
+	trans.setOrigin(btVector3(m_position.x, m_position.y + (m_height*0.5f), m_position.z));
 	//@todo 未対応。 trans.setRotation(btQuaternion(rotation.x, rotation.y, rotation.z));
 	return m_position;
 

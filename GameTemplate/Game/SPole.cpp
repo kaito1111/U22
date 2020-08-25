@@ -48,6 +48,7 @@ void SPole::deleteRange()
 void SPole::idou()
 {
 	m_move.Normalize();
+	m_move *= 5.0f;
 	m_position += m_move;
 }
 
