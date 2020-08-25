@@ -101,12 +101,12 @@ private:
 	bool m_IsSi = false;									//死亡しているかどうか
 	CVector3 m_Scale	 = CVector3::One();					//大きさ
 	bool m_PlayerCut	= false;							//切られたかどうか
-	CQuaternion	m_DefeatRot	 = CQuaternion::Identity();	//倒れているときの回転率(前側)
+	CQuaternion	m_DefeatRot	 = CQuaternion::Identity();		//倒れているときの回転率(前側)
 	CQuaternion	m_ReverseDefeatRot = CQuaternion::Identity(); //倒れているときの回転率(後側)
 	float rate = 0.0f;										//切られたときに倒れる角度
-	CVector3 m_CheckPoint = { 0.0f,0.0f,0.0f };		//リスポーン地点
-	SoundSource m_Se;					//ジャンプ音
-	SoundSource m_Se2;					//m_Seが流れているときに流れるサブ音声
+	CVector3 m_CheckPoint = { 0.0f,0.0f,0.0f };				//リスポーン地点
+	SoundSource m_Se;										//ジャンプ音
+	SoundSource m_Se2;										//m_Seが流れているときに流れるサブ音声
 
 	SpriteRender* m_ThisNumSprite = nullptr;				//何Pかを表す絵
 	int	m_PlayerNum = 0;									//何P？
@@ -114,7 +114,7 @@ private:
 	Magnet* m_Magnet = nullptr;								//磁力
 	bool HaveMagnet = false;								//磁力を持っているかどうか
 	CVector3 movespeed = CVector3::Zero();					//移動量
-//	ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
+//	ShadowMap* m_shadowMap = nullptr;						//シャドウマップ
 
 	enum enAniCli {
 		Wait,

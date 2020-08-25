@@ -18,7 +18,7 @@ SkinModel::~SkinModel()
 void SkinModel::Init(const wchar_t* filePath, EnFbxUpAxis enFbxUpAxis)
 {
 	//スケルトンのデータを読み込む。
-	InitSkeleton(filePath);
+	InitSkeleton(filePa th);
 
 	//定数バッファの作成。
 	InitConstantBuffer();

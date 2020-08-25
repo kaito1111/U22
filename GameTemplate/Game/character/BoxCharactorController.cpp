@@ -376,7 +376,7 @@ const CVector3 & BoxCharactorController::Execute(float deltaTime, CVector3& move
 			}
 			else
 			{
-				endPos.y += 0.1f;
+				endPos.y += 0.01f;
 			}
 			//endPos.Add(addPos);
 			end.setOrigin(btVector3(endPos.x, endPos.y, endPos.z));
