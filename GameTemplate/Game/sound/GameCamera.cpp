@@ -13,6 +13,7 @@ GameCamera::~GameCamera()
 
 bool GameCamera::Start()
 {
+	m_CharaCon.Init(30.0f, 30.0f, m_Pos);
 	for (int i = 0; i < m_PlayerNum + 1; i++) {
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", m_PlayerNum + 1);
@@ -65,10 +66,11 @@ void GameCamera::Update()
 	if (Target.y < 190.0f) {
 		Target.y = 190.0f;
 	}
-	CVector3 pos = Target;
-	pos.z += 500.0f;
+	CVector3 move = Target;
+	move.z += 500.0f;
+	m_Pos = m_CharaCon.Execute(1.0f, move);
 	g_camera3D.SetTarget(Target);
-	g_camera3D.SetPosition(pos);
+	g_camera3D.SetPosition(m_Pos);
 	//カメラの更新。
 	g_camera3D.Update();    
 
