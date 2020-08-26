@@ -1,3 +1,12 @@
+/// <summary>
+/// フォント
+/// </summary>
+/// <remarks>
+/// フォントの描画処理。
+/// 基本はフォントレンダーを使って描画すること。
+/// こいつでDrawする場合は、Begin→Draw→Endの順番で呼び出してください。
+/// </remarks>
+
 #pragma once
 
 namespace myEngine {

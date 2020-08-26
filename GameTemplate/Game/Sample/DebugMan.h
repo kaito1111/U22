@@ -48,12 +48,13 @@ namespace myEngine {
 		}
 	private:
 		CVector3 m_pos = CVector3::Zero();				//デバッグマンの位置
+		CVector3 m_moveSpeed = CVector3::Zero();		//速度
 		CVector3 m_scale = CVector3::One();				//デバッグマンの拡大率
 		CQuaternion m_rot = CQuaternion::Identity();	//デバッグマンの回転軸
 		SkinModel m_skinModel;							//デバッグマンのスキンモデル
 		ShadowMap* m_shadowMap = nullptr;				//シャドウマップ
 		CharacterController m_charaCon;					//キャラコン
-		const float m_moveSpeed = -2.5f;				//基礎移動速度
+		const float PLAYER_MOVE_SPEED = -1.0;				//基礎移動速度
 		//アニメーション系 マジックナンバーダメ絶対
 		enum EnAnimationClip {
 			enAnimClip_idle,	//ひまやなぁアニメーション

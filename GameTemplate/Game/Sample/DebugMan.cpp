@@ -72,23 +72,39 @@ namespace myEngine {
 
 	void DebugMan::Move()
 	{
-		//移動量
-		CVector3 moveSpeed;
-		moveSpeed.x = g_Pad[0].GetLStickXF() * m_moveSpeed;
-		moveSpeed.z = g_Pad[0].GetLStickYF() * m_moveSpeed;
+		//加速度
+		CVector3 acc;
+		acc.x = g_Pad[0].GetLStickXF();
+		acc.z = g_Pad[0].GetLStickYF();
+		acc.y = 0.0f;
+
+		//移動量加算
+		m_moveSpeed += acc * PLAYER_MOVE_SPEED;
+
+		//摩擦力
+		m_moveSpeed -= m_moveSpeed * 0.1;
+
 		//重力
-		moveSpeed.y = GRAVITY;
+		m_moveSpeed.y = GRAVITY;
 
 		//移動
-		m_pos = m_charaCon.Execute(1.0f, moveSpeed);
+		m_pos = m_charaCon.Execute(1.0f, m_moveSpeed);
 
 		//向き計算
-		if (moveSpeed.Length() > 0.0f) {
+		if (m_moveSpeed.Length() > 1.0f) {
+			//走ってる
+			//アニメーションながすお
+			m_animation.Play(enAnimClip_run, 0.2f);
+			//向き計算するおー
+			float t = atan2(m_moveSpeed.x, m_moveSpeed.z);
+			m_rot.SetRotation(CVector3::AxisY(), t);
+		}
+		else if (m_moveSpeed.Length() > 0.1f) {
 			//動いてる
 			//アニメーションながすおー
 			m_animation.Play(enAnimClip_walk, 0.2f);
 			//向き計算するおー
-			float t = atan2(moveSpeed.x, moveSpeed.z);
+			float t = atan2(m_moveSpeed.x, m_moveSpeed.z);
 			m_rot.SetRotation(CVector3::AxisY(), t);
 		}
 		else {

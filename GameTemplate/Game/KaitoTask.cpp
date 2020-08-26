@@ -20,8 +20,15 @@ KaitoTask::KaitoTask()
 		sprintf(PlayerNo, "player%d", i + 1);
 		//優先度をステージより早く
 		m_Player[i] = NewGO<GamePlayer>(1, PlayerNo);
-		m_Player[i]->SetPosition(SpownPos);
-		m_Player[i++]->SetPlayerNum(i);
+		m_Player[i++]->SetPosition(SpownPos);
+	}
+	if (LBLobj()->GetPlayerNum() == 1) {
+		m_Player[0]->SetPlayerNum(1);
+		m_Player[1]->SetPlayerNum(2);
+	}
+	else {
+		m_Player[1]->SetPlayerNum(1);
+		m_Player[0]->SetPlayerNum(2);
 	}
 }
 

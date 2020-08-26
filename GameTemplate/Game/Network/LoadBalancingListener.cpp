@@ -71,6 +71,8 @@ LoadBalancingListener::LoadBalancingListener(BaseView* pView)
 
 LoadBalancingListener::~LoadBalancingListener(void)
 {
+	//ファイルを閉じる。
+	fclose(fp);
 	//delete mpView;
 }
 
@@ -130,13 +132,21 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 		m_once = true;
 	}
 
-	if (playerNr == 1) {
+	if (m_playerNum == 1) {
 		//最初のひとり
 		printf("Created room.\n");
 		printf("waiting for other player.\n");
+		fp = fopen("Assets/log/Plog.txt", "w");
+		char text[64];
+		sprintf(text, "record Start\n");
+		fputs(text, fp);
 	}
-	if (playerNr == 2) {
+	if (m_playerNum == 2) {
 		printf("joined room\n");
+		fp = fopen("Assets/log/Nlog.txt", "w");
+		char text[64];
+		sprintf(text, "record Start\n");
+		fputs(text, fp);
 	}
 	if (playerNr == m_maxPlayer){
 		//全員そろった。
@@ -217,8 +227,47 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		m_isReceiveNetPadData = true;
 		//ネットワークからとってきたパッド情報をバッファリングする。
 		g_Pad[1].XInputStateBufferringFromNetPadData(frameNo);
-		//printf("frameNo = %d\n", frameNo);
+		//パッドデータをバッファリングした時の、フレーム数。
+		printf("Buffering NetworkPadState frameNo = %d\n", frameNo);
 		
+		if (fp != nullptr) {
+			char text[4096];
+			if (m_playerNum == 1) {
+				//p1
+				sprintf(
+					text,
+					"P1:xInputState.Gamepad.sThumbLX = %x receved \n"
+					"P1:xInputState.Gamepad.wButtons = %x receved \n"
+					"P1:xInputState.Gamepad.bLeftTrigger = %x receved \n"
+					"P1:xInputState.Gamepad.bRightTrigger = %x receved \n"
+					"FrameNo = %d\n",
+					&g_netPadState.Gamepad.sThumbLX,
+					&g_netPadState.Gamepad.wButtons,
+					&g_netPadState.Gamepad.bLeftTrigger,
+					&g_netPadState.Gamepad.bRightTrigger,
+					frameNo
+				);
+			}
+			else {
+				//p2
+				sprintf(
+					text,
+					"P2:xInputState.Gamepad.sThumbLX = %x receved \n"
+					"P2:xInputState.Gamepad.wButtons = %x receved \n"
+					"P2:xInputState.Gamepad.bLeftTrigger = %x receved \n"
+					"P2:xInputState.Gamepad.bRightTrigger = %x receved \n"
+					"FrameNo = %d\n",
+					&g_netPadState.Gamepad.sThumbLX,
+					&g_netPadState.Gamepad.wButtons,
+					&g_netPadState.Gamepad.bLeftTrigger,
+					&g_netPadState.Gamepad.bRightTrigger,
+					frameNo
+				);
+			}
+
+			//文字列かきこみ。
+			fputs(text, fp);
+		}
 	}
 }
 
@@ -453,8 +502,11 @@ void LoadBalancingListener::RaisePadData()
 	//送るデータのコンテナ(eventContent)
 	Hashtable hash;
 
+	//自パッドのデータ送信。
 	XINPUT_STATE& xInputState = g_Pad[0].GetXInputPadState();
 	////右スティックの移動量を送る。
+	printf("xInputState.Gamepad.sThumbLX = %x\n", xInputState.Gamepad.sThumbLX);
+	printf("xInputState.Gamepad.sThumbLY = %x\n", xInputState.Gamepad.sThumbLY);
 	hash.put(1, xInputState.Gamepad.sThumbLX);
 	hash.put(2, xInputState.Gamepad.sThumbLY);
 	hash.put(3, xInputState.Gamepad.sThumbRX);
@@ -464,6 +516,46 @@ void LoadBalancingListener::RaisePadData()
 	hash.put(6, xInputState.Gamepad.bLeftTrigger);
 	hash.put(7, xInputState.Gamepad.bRightTrigger);
 	hash.put(8, Engine().GetTwoP_Pad().GetFrameNum());
+
+
+	if (fp != nullptr) {
+		char text[4096];
+		if (m_playerNum == 1) {
+			//p1
+			sprintf(
+				text,
+				"P1:xInputState.Gamepad.sThumbLX = %x sent \n"
+				"P1:xInputState.Gamepad.wButtons = %x sent \n"
+				"P1:xInputState.Gamepad.bLeftTrigger = %x sent \n"
+				"P1:xInputState.Gamepad.bRightTrigger = %x sent \n"
+				"FrameNo = %d\n",
+				&xInputState.Gamepad.sThumbLX,
+				&xInputState.Gamepad.wButtons,
+				&xInputState.Gamepad.bLeftTrigger,
+				&xInputState.Gamepad.bRightTrigger,
+				Engine().GetTwoP_Pad().GetFrameNum()
+			);
+		}
+		else {
+			//p2
+			sprintf(
+				text,
+				"P2:xInputState.Gamepad.sThumbLX = %x sent \n"
+				"P2:xInputState.Gamepad.wButtons = %x sent \n"
+				"P2:xInputState.Gamepad.bLeftTrigger = %x sent \n"
+				"P2:xInputState.Gamepad.bRightTrigger = %x sent \n"
+				"FrameNo = %d\n",
+				&xInputState.Gamepad.sThumbLX,
+				&xInputState.Gamepad.wButtons,
+				&xInputState.Gamepad.bLeftTrigger,
+				&xInputState.Gamepad.bRightTrigger,
+				Engine().GetTwoP_Pad().GetFrameNum()
+			);
+		}
+
+		//文字列かきこみ。
+		fputs(text, fp);
+	}
 
 
 	//データの送信
