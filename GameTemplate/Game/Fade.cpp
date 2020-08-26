@@ -3,11 +3,6 @@
 
 Fade::Fade()
 {
-	m_copyMainRtToFrameBufferSprite.Init(
-		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
-		FRAME_BUFFER_W,
-		FRAME_BUFFER_H
-	);
 	int FadeRenderTurn = 6;
 	m_LoadUp = NewGO<SpriteRender>(FadeRenderTurn);
 	m_LoadUp->Init(L"Assets/sprite/LoadScreen(Up).dds", FRAME_BUFFER_W*1.1f, FRAME_BUFFER_H);
@@ -75,9 +70,4 @@ void Fade::Update()
 	m_LoadDown->SetPosition(LoadDownPos);
 	CVector3 SNDiff = m_SPos - m_NPos;
 	m_DiffLengh = SNDiff.Length();
-}
-void Fade::PostRender()
-{
-	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
-	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
 }

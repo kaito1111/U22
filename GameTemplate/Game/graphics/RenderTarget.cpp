@@ -38,7 +38,7 @@ void RenderTarget::Release()
 void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 {
 	//デバイス取得
-	auto dv = g_graphicsEngine->GetD3DDevice();
+	auto dv = Engine().GetGraphicsEngine().GetD3DDevice();
 
 	//レンダリングターゲットとなるテクスチャ作成
 	D3D11_TEXTURE2D_DESC texDesc = { 0 };
@@ -152,7 +152,7 @@ void RenderTarget::Create(unsigned int w, unsigned int h, DXGI_FORMAT texFormat)
 void RenderTarget::ClearRenderTarget(float* clearColor)
 {
 	//デバイス取得
-	auto dc = g_graphicsEngine->GetD3DDeviceContext();
+	auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 	//クリア
 	dc->ClearRenderTargetView(m_renderTargetView, clearColor);

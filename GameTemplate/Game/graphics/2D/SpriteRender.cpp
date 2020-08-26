@@ -30,6 +30,9 @@ namespace myEngine {
 		//テクスチャの更新
 		m_sprite.SetTextrue(m_texture.GetBody());
 		//ワールド座標の更新とピボットの更新
+		if (m_isDraw3D) {
+			m_rotation.SetRotationDeg(CVector3::AxisY(), 180.0);
+		}
 		m_sprite.Update(m_position, m_rotation, m_scale, m_pivot);
 	}
 	//void SpriteRender::PreRender()
@@ -44,7 +47,7 @@ namespace myEngine {
 			m_sprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), m_w);
 		}
 		else {
-			m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), m_w);
+			m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), m_w);
 		}
 	}
 

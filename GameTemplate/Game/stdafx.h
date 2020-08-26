@@ -17,6 +17,7 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include <map>
 #include <functional>
 #include <algorithm>
+#include <stack>
 //オーディオのインクルード
 #include <xaudio2.h>
 #include <x3daudio.h>
@@ -51,21 +52,29 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 #include "graphics/GraphicsEngine.h"
 #include "Sound/SoundEngine.h"
 
+#include "util/tkStopwatch.h"
+
 #include "graphics/SkinModel.h"
 #include "graphics/Skeleton.h"
+#include "graphics/SkinModelShaderConst.h"
 
 #include "graphics/animation/Animation.h"
 #include "graphics/animation/AnimationClip.h"
+#include "SkinModelRender.h"
+
+
+#include "GameObject/GameObjectManager.h"
+#include "GameObject/IGameObject.h"
+
 #include "graphics/Camera.h"
 
 #include "Effect/Effect.h"
 #include "PostEffect/PostEffect.h"
 
-#include "sound/SoundSource.h"
+#include "graphics/2D/Font.h"
+#include "graphics/2D/FontRender.h"
 
-#include "GameObject/GameObjectManager.h"
-#include "GameObject/IGameObject.h"
-#include "SkinModelRender.h"
+#include "sound/SoundSource.h"
 
 #include "Shadow/ShadowMap.h"
 
@@ -74,10 +83,17 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 
 #include "Magnet/MagnetManager.h"
 
+<<<<<<< HEAD
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。
 const int g_PlayerNum = 2;							//プレイヤーの数。
 const int g_StageMAX = 3;							//ステージの最大数。
+=======
+const float FRAME_BUFFER_W = 1280.0f;					//フレームバッファの幅。
+const float FRAME_BUFFER_H = 720.0f;					//フレームバッファの高さ。
+const int	g_PlayerNum = 2;							//プレイヤーの数
+const DWORD	TIME_ONE_FRAME = 32;						//1フレームの時間(単位:ミリ秒)。
+>>>>>>> 825d87f71ee442e3c193d816933c4cbe44c7546c
 
 static const int MAX_BONE = 512;	//!<ボーンの最大数。
 

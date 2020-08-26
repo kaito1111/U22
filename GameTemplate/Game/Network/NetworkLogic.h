@@ -55,7 +55,7 @@ public:
 	/// サーバーの更新処理
 	/// </summary>
 	void Update();
-
+	
 	/// <summary>
 	/// リスナーの取得
 	/// </summary>
@@ -81,4 +81,9 @@ private:
 
 static inline NetworkLogic& INetworkLogic() {
 	return NetworkLogic::GetInstance();
+}
+
+static inline LoadBalancingListener* LBLobj()
+{
+	return INetworkLogic().GetLBL();
 }

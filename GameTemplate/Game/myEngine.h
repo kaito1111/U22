@@ -8,7 +8,11 @@
 
 #pragma once
 #include "graphics/GraphicsEngine.h"
-#include "Sound/SoundEngine.h"
+#include "sound/soundengine.h"
+#include "Effect/CEffectEngine.h"
+#include "util/tkStopwatch.h"
+#include "graphics/2D/Font.h"
+#include "TwoP_Pad.h"
 
 namespace myEngine {
 	class CEngine
@@ -17,12 +21,25 @@ namespace myEngine {
 		CEngine();
 		~CEngine();
 		/// <summary>
+		/// スタート
+		/// </summary>
+		/// <returns></returns>
+		bool Start();
+		/// <summary>
+		/// 初期化
+		/// </summary>
+		void Init();
+		/// <summary>
+		/// 更新
+		/// </summary>
+		void Update();
+		/// <summary>
+		/// エンジン終了処理
+		/// </summary>
+		void Final();
+		/// <summary>
 		/// エンジンのシングルトンです。
 		/// </summary>
-		/// <returns>エンジン</returns>
-		/// <remarks>
-		/// エンジンのインスタンスは一個しか作れないようになってます。
-		/// </remarks>
 		static CEngine& GetInstance()
 		{
 			//シングルトンの処理
@@ -48,11 +65,47 @@ namespace myEngine {
 		{
 			return m_soundEngine;
 		}
+		/// <summary>
+		/// エフェクトエンジン取得。
+		/// </summary>
+		/// <returns></returns>
+		CEffectEngine& GetEffectEngine()
+		{
+			return m_effectEngine;
+		}
+		/// <summary>
+		/// ストップウォッチ取得。
+		/// </summary>
+		/// <returns></returns>
+		CStopwatch& getSW()
+		{
+			return m_sw;
+		}
+		/// <summary>
+		/// 2つのパッドの取得。
+		/// </summary>
+		/// <returns></returns>
+		TwoP_Pad& GetTwoP_Pad()
+		{
+			return m_twoP_Pad;
+		}
 
 	private:
-		GraphicsEngine			m_graphicsEngine;	//グラフィックエンジン
-		SoundEngine				m_soundEngine;		//サウンドエンジン
-	};	
+		//エンジン関連
+		GraphicsEngine			m_graphicsEngine;		//グラフィックエンジン
+		SoundEngine				m_soundEngine;			//サウンドエンジン
+		CEffectEngine			m_effectEngine;			//エフェクトエンジン
+		//共通
+		CStopwatch				m_sw;					//ストップウォッチ
+		TwoP_Pad				m_twoP_Pad;				//２プレイヤーのパッドの管理オブジェクト(にしたいﾖﾃｲ）
+	private:
+		//fps表示関連
+		float					m_timeTotal = 0;		//合計時間。
+		float					m_fps = 0;				//FPS
+		std::unique_ptr<CFont>	m_font;					//フォント。
+
+	};		
+
 	/// <summary>
 	/// エンジンを取得
 	/// </summary>
@@ -76,6 +129,14 @@ namespace myEngine {
 	static inline SoundEngine& soundEngine()
 	{
 		return Engine().GetSoundEngine();
+	}
+	/// <summary>
+	/// エフェクトエンジン取得
+	/// </summary>
+	/// <returns></returns>
+	static inline CEffectEngine& EffectEngineObj()
+	{
+		return Engine().GetEffectEngine();
 	}
 }
 

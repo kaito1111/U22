@@ -15,6 +15,9 @@ Stage::Stage()
 	if (nowStage == 2) {
 		m_model.Init(L"Assets/modelData/Course_Level2.cmo");
 	}
+	if (nowStage == 3) {
+		m_model.Init(L"Assets/modelData/Course_Level1.cmo");
+	}
 	//シャドウレシーバーとする
 	m_model.SetShadowReciever(true);
 	m_phyStaticObuject.CreateMeshObject(m_model, CVector3::Zero(), CQuaternion::Identity());
@@ -54,7 +57,7 @@ void Stage::Draw()
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),
 		enRenderMode_Normal,
-		g_graphicsEngine->GetShadowMap()->GetLightViewMatirx(),
-		g_graphicsEngine->GetShadowMap()->GetLightProjMatirx()
+		Engine().GetGraphicsEngine().GetShadowMap()->GetLightViewMatirx(),
+		Engine().GetGraphicsEngine().GetShadowMap()->GetLightProjMatirx()
 	);
 }

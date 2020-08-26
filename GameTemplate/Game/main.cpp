@@ -1,8 +1,12 @@
 #include "stdafx.h"
 #include "system/system.h"
-#include "TwoP_Pad.h"
+#include "Manual.h"
 #include "Title.h"
-#include "Network/NetworkLogic.h"
+
+/*
+	8/10~ mainでエンジン関連の初期化まで行うのは、違うと感じたので
+	Engineクラスの方に、処理を移しました。
+*/
 
 ///////////////////////////////////////////////////////////////////
 // ウィンドウプログラムのメイン関数。
@@ -14,49 +18,36 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	AllocConsole();
 	freopen("CON", "r", stdin);
 	freopen("CON", "w", stdout);
-	//ゲームの初期化。
-	InitGame(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
-
-	//ネットワークの初期化関連処理 InitGameの中入れてもいいかも？
-	NetworkLogic::GetInstance().Start();
-	//カメラを初期化。
-	g_camera3D.SetPosition({ 00.0f, 100.0f, 500.0f });
-	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
-	g_camera3D.SetFar(1000.0f);
-	g_camera3D.SetNear(10.0f);
-	g_camera3D.Update();
+	//ウィンドウの初期化。
+	InitGameWindow(hInstance, hPrevInstance, lpCmdLine, nCmdShow, "Game");
+	//エンジンの初期化。
+	Engine().Init();
+	//エンジンスタート。
+	Engine().Start();
 
 	//タイトルセレクト作ってます。
 	//タイトルに変えて欲しみがマリアナ海溝
 	//NewGO<StageSelect>(1, "game");
 	//NewGO<Game>(1, "game");
-	NewGO<TwoP_Pad>(1, "twop_pad");
+	NewGO<Manual>(0, "manual");
 	NewGO<Title>(1, "title");
-	//カメラの初期化
-	g_camera2D.Update2D();
 
-	//ゲームループ。
+	/*
+	ここでのカメラ初期化おかしい。
+	Gameとかで使うんだから、そこですべきなのでは？
+	*/
+	g_camera3D.SetPosition({ 00.0f, 100.0f, 500.0f });
+	g_camera3D.SetTarget({ 0.0f, 100.0f, 0.0f });
+	g_camera3D.SetFar(1000.0f);
+	g_camera3D.SetNear(10.0f);
+
 	while (DispatchWindowMessage() == true)
 	{
-		int a = 0;
-		//描画開始。
-		g_graphicsEngine->BegineRender();
-		//物理エンジンの更新。
-		g_physics.Update();
-		//サウンドエンジンの更新
-		Engine().GetSoundEngine().Update();
-		//ネットワークの更新
-		NetworkLogic::GetInstance().Update();
-		//Engineクラスとかにまとめた後、tkEngineに処理合わせます
-		gameObjectManager().Start();
-		//ゲームオブジェクトマネージャーでする処理の呼び出し
-		gameObjectManager().ExecuteFromGameThread();
-		//描画終了。
-		g_graphicsEngine->EndRender();
+		//起動準備OK
+		//エンジンの更新を開始。
+		Engine().Update();
 	}
-	int b = 0;
-	//ネットワークからの切断
-	NetworkLogic::GetInstance().Disconnect();
-	NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
-	printf("disconnect\n");
+	//エンジン終了処理。
+	Engine().Final();
+
 }

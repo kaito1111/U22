@@ -57,11 +57,11 @@ namespace myEngine {
 	void GameObjectManager::ShadowDraw()
 	{
 		//レンダーターゲットのバックアップ
-		g_graphicsEngine->GetShadowMap()->BiginRender();
+		Engine().GetGraphicsEngine().GetShadowMap()->BiginRender();
 		//描画
-		g_graphicsEngine->GetShadowMap()->RenderToShadowMap();
+		Engine().GetGraphicsEngine().GetShadowMap()->RenderToShadowMap();
 		//もとに戻す。
-		g_graphicsEngine->GetShadowMap()->EndRender();
+		Engine().GetGraphicsEngine().GetShadowMap()->EndRender();
 	}
 
 	/// <summary>
@@ -72,7 +72,7 @@ namespace myEngine {
 		/// 更新系処理
 		{
 			Update();
-			g_graphicsEngine->GetShadowMap()->Update();
+			Engine().GetGraphicsEngine().GetShadowMap()->Update();
 		}
 		/// 描画系処理
 		{
@@ -81,15 +81,17 @@ namespace myEngine {
 			//シャドウ描画
 			ShadowDraw();
 			//レンダーターゲットのバックアップ
-			g_graphicsEngine->oldTarget();
-			//フォワードレンダーターゲットに変える
-			g_graphicsEngine->ForwardRenderTarget();
+			Engine().GetGraphicsEngine().oldTarget();
+			//オフスクリーンレンダリング
+			Engine().GetGraphicsEngine().OffScreenRenderTarget();
 			//GPUにシャドウのパラメーターを送る
-			g_graphicsEngine->GetShadowMap()->SendShadowParam();
+			Engine().GetGraphicsEngine().GetShadowMap()->SendShadowParam();
 			//通常描画
 			Draw();
+			//エフェクト描画
+			EffectEngineObj().Render();
 			//ポストレンダーターゲットに変える
-			g_graphicsEngine->PostRenderTarget();
+			Engine().GetGraphicsEngine().PostRenderTarget();
 			//ポストレンダー
 			PostRender();
 		}

@@ -58,8 +58,8 @@ public:
 	/// <summary>
 	/// プレイヤーの情報を転送
 	/// </summary>
-	void RaisePlayerData();
-
+	void RaisePlayerData(float vX);
+	void RaisePadData();
 public:
 
 	//From Common::BaseListener
@@ -114,66 +114,55 @@ public:
 	/// </summary>
 	/// <param name="i">キー</param>
 	/// <param name="f">送る値(float)</param>
-	void putData(nByte i, float f);
+	void putData(int i, float f);
 	/// <summary>
 	/// リストに積む
 	/// </summary>
 	/// <param name="i">キー</param>
 	/// <param name="f">送る値(float)</param>
 	void putData(nByte i, bool b);
-
-	int GetplayerNum() {
-		return m_playerNum;
-	}
 	/// <summary>
-	/// パッドの値をとる
+	/// プレイヤー番号
 	/// </summary>
-	/// <param name="padNo">ほしいパッドの番号</param>
-	/// <returns>パッドの値</returns>
-	int GetPlayerPadData(int padNo) {
-		return Trigger[padNo];
-	}
-	int GetPlayerStickLXData() {
-		if (padLX != 0) {
-			printf("tyu");
-		}
-		return padLX;
-	}
-	int GetPlayerStickLYData() {
-		return padLY;
-	}
-	int GetPlayerStickRXData() {
-		if (padRX != 0) {
-			printf("tyu");
-		}
-		return padRX;
-	}
-	int GetPlayerStickRYData() {
-		return padRY;
-	}
+	/// <returns></returns>
 	int& GetPlayerNum() {
 		return m_playerNum;
 	}
 	/// <summary>
-	/// ユーザーのネームを取得
+	/// ゲームできる状態かのフラグを取得
 	/// </summary>
 	/// <returns></returns>
-	const JString& GetUser(int playerNo)
+	bool GetReady()
 	{
-		return m_UserData[playerNo].getUserID();
+		return m_NetworkReady;
+	}
+	/// <summary>
+	/// ネットワークパッドのデータを受信したかのフラグを設定。
+	/// </summary>
+	/// <param name="flag"></param>
+	void SetReceiveFlag(bool flag)
+	{
+		m_isReceiveNetPadData = flag;
+	}
+	/// <summary>
+	/// ネットワークパッドのデータを受信したかのフラグを取得。
+	/// </summary>
+	/// <returns></returns>
+	bool getReceiveFlag()
+	{
+		return m_isReceiveNetPadData;
 	}
 private:
 	ExitGames::LoadBalancing::Client* mpLbc;
-	int m_Num = 0;
-	AuthenticationValues m_UserData[2];	//Userのデータ(番号)
-	Hashtable playerData;				//プレイヤー情報格納用
+	AuthenticationValues m_UserData[2];		//Userのデータ(番号)
+	Hashtable playerData;					//プレイヤー情報格納用
 	BaseView* mpView;
-	int m_maxPlayer = 2;
-	unsigned long lastUpdateTime;
-	int m_playerNum = 0;					//フォトンの最大参加人数、これが自分の参加番号になる
-	//padの入力
-	float padLX = 0, padLY = 0, padRX = 0, padRY = 0;
-	//トリガー
-	int Trigger[16] = {};
+	int m_maxPlayer = 2;					//最大人数
+	unsigned long lastUpdateTime;			//前フレームのUpdateにかかた時間
+	int m_playerNum = 0;					//自分のネットでの参加番号 1～スタートなので注意
+	bool m_once = false;					//一度のみ	
+	bool m_NetworkReady = false;			//通信準備OK?
+	bool m_isReceiveNetPadData = false;		//ネットワークパッドのデータ受け取り完了したか。
+	FILE* fp;
 };
 

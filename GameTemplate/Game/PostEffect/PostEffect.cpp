@@ -83,12 +83,12 @@ namespace myEngine {
 
 		//第二引数は初期化データなので上で定義したVertexでm_vertexBuffer初期化？
 		//頂点バッファの作成
-		g_graphicsEngine->GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_vertexBuffer);
+		Engine().GetGraphicsEngine().GetD3DDevice()->CreateBuffer(&bd, &InitData, &m_vertexBuffer);
 	}
 
 	void PostEffect::DrawFullScreenQuadPrimitive(Shader& vsShader, Shader& psShader)
 	{
-		auto dc = g_graphicsEngine->GetD3DDeviceContext();
+		auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 		//トポロジー(どうやって描画するか的な）をトライアングルストリップに設定
 		dc->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 		//頂点サイズ

@@ -32,9 +32,6 @@ namespace MyMagnet {
 		const void SetPosition(CVector3* pos) {
 			m_Position = pos;
 		}
-		void SetPad(Pad* pad) {
-			m_Pad = pad;
-		}
 	private:
 		bool Start();
 		void Update();
@@ -49,7 +46,6 @@ namespace MyMagnet {
 		myEngine::Effect* NEffect = nullptr;
 		SoundSource m_Se;
 		float SeVolume = 1.0f;
-		Pad* m_Pad = nullptr;
 		friend class MagnetManager;
 	};
 }

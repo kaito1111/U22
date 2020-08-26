@@ -19,32 +19,30 @@ KaitoTask::KaitoTask()
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", i + 1);
 		//優先度をステージより早く
-		m_Player[i] = NewGO<GamePlayer>(0, PlayerNo);
-		m_Player[i]->SetPosition(SpownPos);
-		m_Player[i++]->SetPlayerNum(i);
+		m_Player[i] = NewGO<GamePlayer>(1, PlayerNo);
+		m_Player[i++]->SetPosition(SpownPos);
 	}
-
-	if (m_Player[0]->GetPlayerNum() - 1 == 0) {
-		//プレイヤー1
-		m_Player[0]->InitPad(twoP_Pad().GetPPad());
-		m_Player[1]->InitPad(twoP_Pad().GetNPad());
+	if (LBLobj()->GetPlayerNum() == 1) {
+		m_Player[0]->SetPlayerNum(1);
+		m_Player[1]->SetPlayerNum(2);
 	}
 	else {
-		m_Player[0]->InitPad(twoP_Pad().GetNPad());
-		m_Player[1]->InitPad(twoP_Pad().GetPPad());
+		m_Player[1]->SetPlayerNum(1);
+		m_Player[0]->SetPlayerNum(2);
 	}
-
-
-	//m_Player[0]->
 }
 
 void KaitoTask::PreRender()
 {
-	auto shadowMap = g_graphicsEngine->GetShadowMap();
+	auto shadowMap = Engine().GetGraphicsEngine().GetShadowMap();
 	//プレイヤー人数分シャドウキャスターとして登録
 	for (int i = 0; i < g_PlayerNum;) {
 		shadowMap->RegistShdowCaster(m_Player[i++]->GetModel());
 	}
+}
+
+void KaitoTask::Update()
+{
 }
 
 KaitoTask::~KaitoTask()

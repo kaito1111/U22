@@ -7,8 +7,8 @@
 /// </remarks>
 
 #include "stdafx.h"
-#include "LightManager.h"
-#include "DirectionLight.h"
+#include "bLightManager.h"
+#include "bDirectionLight.h"
 
 namespace myEngine {
 	LightManager::LightManager()
@@ -108,24 +108,26 @@ namespace myEngine {
 		//ライトの数の初期化
 		ligNo = 0;
 
-		//安全な型変換？
+		//安全な型変換
 		m_lightParam.numDirectionLight = static_cast<int>(numDirLig);
 	}
-	void LightManager::Render()
+	void LightManager::SendLightParamToGPU()
 	{
 		//デバイスコンテキスト
-		auto dc = g_graphicsEngine->GetD3DDeviceContext();
-		//ストラクチャーバッファの更新
-		dc->UpdateSubresource(m_directionLightSB.GetBody(), 0, NULL, m_rawDirectionLights, 0, 0);
-
+		auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
+		//ライトの基盤情報の送信。
 		dc->UpdateSubresource(m_lightParamCB.GetBody(), 0, NULL, &m_lightParam, 0, 0);
-		dc->PSSetShaderResources(0, 1, &m_directionLightSB.GetSRV().GetBody());
-		dc->PSSetConstantBuffers(0, 1, &m_lightParamCB.GetBody());
+		//ディレクションライトのパラメーターを送信。
+		dc->UpdateSubresource(m_directionLightSB.GetBody(), 0, NULL, m_rawDirectionLights, 0, 0);
+		//リソース設定。
+		dc->PSSetShaderResources(enSkinModelSRVReg_Light, 1, &m_directionLightSB.GetSRV().GetBody());
+		//定数バッファ設定。
+		dc->PSSetConstantBuffers(enSkinModelCBReg_Light, 1, &m_lightParamCB.GetBody());
 	}
 	void LightManager::EndRender()
 	{
 		//デバイスコンテキスト
-		auto dc = g_graphicsEngine->GetD3DDeviceContext();
+		auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 		//レンダー設定をもどす？
 		dc->PSSetShaderResources(100, 1, NULL);
 	}

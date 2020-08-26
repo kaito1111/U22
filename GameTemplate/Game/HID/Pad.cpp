@@ -193,23 +193,69 @@ void Pad::UpdateAnalogStickInput()
 		}
 	}
 }
+extern XINPUT_STATE g_netPadState;
+void Pad::XInputStateBufferring()
+{
+	//パッドのボタンの状態。
+	XINPUT_STATE xInputState;
+	//全パッドの状態。
+	DWORD result = XInputGetState(m_padNo, &xInputState);
+	//キューに積む
+	m_xinputStateQueue.push_back({ Engine().GetTwoP_Pad().GetFrameNum(), xInputState });
+}
+void Pad::XInputStateBufferringFromNetPadData(int frameNo)
+{
+	//キューに積む
+	m_xinputStateQueue.push_back({ frameNo, g_netPadState });
+	auto func = [&](const XINPUT_STATE_WITH_FRAME_NO& lhs, const XINPUT_STATE_WITH_FRAME_NO& rhs) {	return lhs.first < rhs.first; };
+	//フレーム番号でソートする。
+	m_xinputStateQueue.sort(func);
+}
+void Pad::UpdateFromNetPadData()
+{
+	//value(KeyState)側の取得。
+	UpdateFromXInputData(m_xinputStateQueue.back().second);
+	printf("NetPad frameNo on Buffering = %d\n", m_xinputStateQueue.front().first);
+	m_xinputStateQueue.pop_front();
+}
+void Pad::UpdateFromXInputData(XINPUT_STATE xInputState)
+{
+	m_state.xInputState = xInputState;
+	
+	//ゲームパッドが接続されている
+		//接続されている。
+	m_state.bConnected = true;
+
+	//ボタンの入力情報を更新。
+	UpdateButtonInput();
+
+	//アナログスティックの入力情報を更新。
+	UpdateAnalogStickInput();
+
+}
 /*!
 *@brief	パッドの入力を更新。
 */
-void Pad::Update()
+void Pad::Update(bool isUseQueue)
 {
 	//XInputGetState関数を使って、ゲームパッドの入力状況を取得する。
-	DWORD result = XInputGetState(m_padNo, &m_state.xInputState);
+	XINPUT_STATE xInputState;
+	DWORD result;
+	if (isUseQueue) {
+		//バッファリングされたパッド情報を使う。
+		xInputState = m_xinputStateQueue.front().second;
+		//パッド情報がバッファリングされた時の、フレーム数
+		printf("GPad frameNo on Buffering = %d\n", m_xinputStateQueue.front().first);
+		//使った情報は捨てる。
+		m_xinputStateQueue.pop_front();
+		result = ERROR_SUCCESS;
+	}
+	else {
+		result = XInputGetState(m_padNo, &xInputState);
+	}
 	if (result == ERROR_SUCCESS) {
 		//ゲームパッドが接続されている
-		//接続されている。
-		m_state.bConnected = true;
-
-		//ボタンの入力情報を更新。
-		UpdateButtonInput();
-
-		//アナログスティックの入力情報を更新。
-		UpdateAnalogStickInput();
+		UpdateFromXInputData(xInputState);
 	}
 	else {
 		//ゲームパッドが接続されていない。
@@ -237,13 +283,13 @@ void Pad::Update()
 		else if (GetAsyncKeyState(VK_DOWN)) {
 			m_rStickY = -1.0f;
 		}
-		//スティックの入力量を正規化。
+		//スティックの入力量を正規化。　
 		float t = fabsf(m_rStickX) + fabsf(m_rStickY);
 		if (t > 0.0f) {
 			m_rStickX /= t;
 			m_rStickY /= t;
 		}
-
+		
 		if (GetAsyncKeyState('A')) {
 			m_lStickX = -1.0f;
 		}
@@ -262,7 +308,7 @@ void Pad::Update()
 			m_lStickX /= t;
 			m_lStickY /= t;
 		}
-
+		
 		for (const VirtualPadToKeyboard& vPadToKeyboard : vPadToKeyboardTable) {
 			if (GetAsyncKeyState(vPadToKeyboard.keyCoord)) {
 				m_trigger[vPadToKeyboard.vButton] = 1 ^ m_press[vPadToKeyboard.vButton];

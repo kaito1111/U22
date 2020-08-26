@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "physics/Physics.h"
 #include "Physics/RigidBody.h"
-
+#include "BulletCollision\CollisionDispatch\btSimulationIslandManager.h"
 
 PhysicsWorld g_physics;
 
@@ -38,7 +38,7 @@ void PhysicsWorld::Init()
 
 	///the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
 	constraintSolver = new btSequentialImpulseConstraintSolver;
-
+	
 	dynamicWorld = new btDiscreteDynamicsWorld(
 		collisionDispatcher,
 		overlappingPairCache,
@@ -47,6 +47,7 @@ void PhysicsWorld::Init()
 		);
 
 	dynamicWorld->setGravity(btVector3(0, -10, 0));
+	
 }
 void PhysicsWorld::Update()
 {

@@ -73,7 +73,7 @@ namespace myEngine {
 		CD3D11_BLEND_DESC blendDesc(defalut);
 		
 		//デバイスの取得
-		auto dv = g_graphicsEngine->GetD3DDevice();
+		auto dv = Engine().GetGraphicsEngine().GetD3DDevice();
 
 		//αを無効にするブレンドステートを作成
 		dv->CreateBlendState(&blendDesc, &m_disableBlendState);
@@ -103,7 +103,7 @@ namespace myEngine {
 		//CPUアクセスしない
 		desc.CPUAccessFlags = 0;
 		//作成
-		g_graphicsEngine->GetD3DDevice()->CreateBuffer(&desc, NULL, &m_blurParamCB);
+		Engine().GetGraphicsEngine().GetD3DDevice()->CreateBuffer(&desc, NULL, &m_blurParamCB);
 	}
 
 	void Bloom::InitSamplerState()
@@ -119,7 +119,7 @@ namespace myEngine {
 		//縮小、拡大、サンプリングに線形補間使用
 		desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 		//作成
-		g_graphicsEngine->GetD3DDevice()->CreateSamplerState(&desc, &m_samplerState);
+		Engine().GetGraphicsEngine().GetD3DDevice()->CreateSamplerState(&desc, &m_samplerState);
 	}
 
 	void Bloom::Update()
@@ -144,12 +144,12 @@ namespace myEngine {
 	void Bloom::Draw(PostEffect& postEfferct)
 	{
 		//デバコン取得
-		auto dc = g_graphicsEngine->GetD3DDeviceContext();
+		auto dc = Engine().GetGraphicsEngine().GetD3DDeviceContext();
 
 		//dc->PSGetSamplers(0, 1, &m_samplerState);
 
 		//バックアップ
-		g_graphicsEngine->oldTarget();
+		Engine().GetGraphicsEngine().oldTarget();
 
 		//サンプラーステートのセット
 		dc->PSSetSamplers(0, 1, &m_samplerState);
@@ -163,14 +163,14 @@ namespace myEngine {
 			dc->OMSetBlendState(m_disableBlendState, blendFactor, 0xffffffff);
 
 			//輝度抽出用のレンダーターゲットに変更 ChangeRenderTargetの引数dcいらねぇよなぁ！？
-			g_graphicsEngine->ChangeRenderTarget(dc, &m_luminaceRT, m_luminaceRT.GetViewport());
+			Engine().GetGraphicsEngine().ChangeRenderTarget(dc, &m_luminaceRT, m_luminaceRT.GetViewport());
 
 			//レンダーターゲットのクリア
 			float clearColor[] = { 0.0f,0.0f,0.0f,1.0f };
 			m_luminaceRT.ClearRenderTarget(clearColor);
 
 			//シーンをテクスチャに。
-			auto mainRTTexSRV = g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV();
+			auto mainRTTexSRV = Engine().GetGraphicsEngine().GetOffScreenRenderTarget()->GetRenderTargetSRV();
 			dc->PSSetShaderResources(0, 1, &mainRTTexSRV);
 
 			//フルスクリーン描画
@@ -180,7 +180,7 @@ namespace myEngine {
 		//輝度を抽出したテクスチャにXブラーをかける
 		{
 			//Xブラー用のレンダリングターゲットに変更する。
-			g_graphicsEngine->ChangeRenderTarget(dc, &m_downSamplingRT[0], m_downSamplingRT[0].GetViewport());
+			Engine().GetGraphicsEngine().ChangeRenderTarget(dc, &m_downSamplingRT[0], m_downSamplingRT[0].GetViewport());
 
 			//輝度テクスチャをt0レジスタに設定
 			//輝度テクスチャの取得
@@ -207,7 +207,7 @@ namespace myEngine {
 		//Xブラーをかけたテクスチャに、Yブラーをかける。
 		{
 			//Yブラー用のレンダリングターゲットに変更
-			g_graphicsEngine->ChangeRenderTarget(dc, &m_downSamplingRT[1], m_downSamplingRT[1].GetViewport());
+			Engine().GetGraphicsEngine().ChangeRenderTarget(dc, &m_downSamplingRT[1], m_downSamplingRT[1].GetViewport());
 
 			//Xブラーをかけたテクスチャをt0レジスタに設定
 			auto xBlurSRV = m_downSamplingRT[0].GetRenderTargetSRV();
@@ -228,8 +228,8 @@ namespace myEngine {
 		//最後にぼかした絵を加算合成でメインレンダリングターゲットに合成して終わり
 		{
 			//メインレンダリングターゲットに変更
-			auto mainRT = g_graphicsEngine->GetOffScreenRenderTarget();
-			g_graphicsEngine->ChangeRenderTarget(dc, mainRT, mainRT->GetViewport());
+			auto mainRT = Engine().GetGraphicsEngine().GetOffScreenRenderTarget();
+			Engine().GetGraphicsEngine().ChangeRenderTarget(dc, mainRT, mainRT->GetViewport());
 
 			//XYブラーをかけたテクスチャをt0レジスタに設定
 			auto srv = m_downSamplingRT[1].GetRenderTargetSRV();
@@ -248,6 +248,6 @@ namespace myEngine {
 			dc->OMSetBlendState(m_disableBlendState, blendFactor, 0xffffffff);
 		}
 		//ターゲットをもとに戻す
-		g_graphicsEngine->PostRenderTarget();
+		Engine().GetGraphicsEngine().PostRenderTarget();
 	}
 }

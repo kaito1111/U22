@@ -14,7 +14,7 @@ NPole::~NPole()
 
 bool NPole::Start()
 {
-	m_position = m_player->GetPosition();
+	m_position = m_SpownPos;
 	m_position.y += 50.0f;
 	return true;
 }
@@ -38,7 +38,7 @@ void NPole::Draw()
 
 void NPole::deleteRange()
 {
-	CVector3 playerDir = m_player->GetPosition() - m_position;
+	CVector3 playerDir = m_SpownPos - m_position;
 	if (playerDir.Length() > 200.0f) {
 		DeleteGO(this);
 	}

@@ -82,7 +82,7 @@ namespace myEngine {
 		//これも恐らく全部初期化
 		//DirectX...もHRESULT型だから通る
 		HRESULT hr = DirectX::CreateDDSTextureFromFileEx(
-			g_graphicsEngine->GetD3DDevice(),	//D3DDevice tkEngineと少しインスタンスの取り方が違います
+			Engine().GetGraphicsEngine().GetD3DDevice(),	//D3DDevice tkEngineと少しインスタンスの取り方が違います
 			fileName,							//ファイル名
 			0,									//サイズ
 			D3D11_USAGE_DEFAULT,				//CPUがGPUがアクセス可能かどうかのフラグ

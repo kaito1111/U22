@@ -1,5 +1,6 @@
 #pragma once
 class Fade;
+
 class Title : public IGameObject
 {
 public:
@@ -7,15 +8,12 @@ public:
 	~Title();
 
 private:
-	void PostRender();
-	/// <summary>
-	/// ネットワーク関連
-	/// </summary>
-	void NetworkUpdate();
-	Sprite m_copyMainRtToFrameBufferSprite;	//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 	void Update()override;
 	SpriteRender* m_Sprite = nullptr;
 	Fade* m_fade = nullptr;
 	SoundSource m_bgm;
+	CFontRender* m_fontRender = nullptr;	//フォントレンダー
+	wchar_t m_text[32];						//フォント用のテキスト
+	CVector2 m_fontPos = { 0.0f, -80.0f };
 	bool DeleteTitle = false;
 };

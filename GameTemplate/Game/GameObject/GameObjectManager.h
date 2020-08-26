@@ -80,7 +80,7 @@ namespace myEngine {
 			return newObject;
 		}
 		/// <summary>
-		/// オブジェクトの削除</para>
+		/// オブジェクトの削除
 		/// </summary>
 		void DeleteGameObject(IGameObject* gameObject)
 		{
@@ -88,6 +88,7 @@ namespace myEngine {
 			{
 				//リストに追加
 				m_deleteObjectArray[m_currentDeleteObjectBufferNo].at(gameObject->GetPriority()).push_back(gameObject);
+				gameObject->m_isDead = true;
 				gameObject = nullptr;
 			}
 		}
@@ -198,14 +199,13 @@ namespace myEngine {
 
 	};
 	/*
-	関数をラップしているだけです
-	ここで値の初期化をしてやるといちいち引数で渡さなくてもよくなります。
+		いちいちgameObjectManager().NewGameObject...みたいなの書くの面倒だから
+		static inline化　→　こいつが呼び出された位置でコードを展開、コンパイルが通るようにする。
 	*/
 	/// <summary>
-	/// シングルトン インスタンス返してるんだな程度の理解で多分大丈夫
-	/// <para>ゲームオブジェクトマネージャ関連の関数呼び出しをラップするのに使ってね</para>
+	/// ゲームオブジェクトマネージャー取得。
 	/// </summary>
-	/// <returns>マネージャーのインスタンス</returns>
+	/// <returns></returns>
 	static inline GameObjectManager& gameObjectManager()
 	{
 		return GameObjectManager::Instance();

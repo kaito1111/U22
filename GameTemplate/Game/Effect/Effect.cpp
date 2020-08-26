@@ -9,8 +9,6 @@
 namespace myEngine {
 	Effect::Effect()
 	{
-		//エフェクサーの初期化
-		//g_graphicsEngine->InitEffekseer();
 	}
 	Effect::~Effect()
 	{
@@ -21,7 +19,7 @@ namespace myEngine {
 	void Effect::Release()
 	{
 		if (m_handle != -1) {
-			g_graphicsEngine->GetEffekseerManager()->StopEffect(m_handle);
+			EffectEngineObj().GetEffekseerManager()->StopEffect(m_handle);
 			m_handle = -1;
 		}
 	}
@@ -30,36 +28,25 @@ namespace myEngine {
 	{
 		//ハッシュの作成
 		int nameKey = Util::MakeHash(filePath);
-		m_effect = GetResource(nameKey);
+		//リソースにエフェクトが登録されているかの検索
+		m_effect = EffectEngineObj().GetEffectResourceManager().GetResource(nameKey);
 		if (m_effect == nullptr) {
+			//登録されていなかった
 			//エフェクトの作成
-			m_effect = Effekseer::Effect::Create(g_graphicsEngine->GetEffekseerManager(), (const EFK_CHAR*)filePath );
-			//ロード失敗！！
-			//？？ファイルパス間違えてない？？
+			m_effect = Effekseer::Effect::Create(EffectEngineObj().GetEffekseerManager(), (const EFK_CHAR*)filePath );
 			if (m_effect == nullptr) {
+				//ロード失敗！！
+				//？？ファイルパス間違えてない？？
 				throw;
 			}
-			//これいる？
-			RegistResource(nameKey, m_effect);
+			//エフェクトをリソースに登録
+			EffectEngineObj().GetEffectResourceManager().RegistResource(nameKey, m_effect);
 		}
-		m_handle = g_graphicsEngine->GetEffekseerManager()->Play(m_effect, 0, 0, 0);
+		m_handle = EffectEngineObj().GetEffekseerManager()->Play(m_effect, 0, 0, 0);
 	}
 
 	void Effect::Update()
 	{
-		//g_cameraからカメラ行列とプロジェクション行列をコピー
-		Effekseer::Matrix44 efCameraMat;
-		g_camera3D.GetViewMatrix().CopyTo(efCameraMat);
-		Effekseer::Matrix44 efProjMat;
-		g_camera3D.GetProjectionMatrix().CopyTo(efProjMat);
-
-		//カメラ行列とプロジェクション行列を設定。
-		g_graphicsEngine->GetEffekseerRenderer()->SetCameraMatrix(efCameraMat);
-		g_graphicsEngine->GetEffekseerRenderer()->SetProjectionMatrix(efProjMat);
-		
-		//Effekseerを更新。
-		g_graphicsEngine->GetEffekseerManager()->Update();
-
 		//各行列定義
 		CMatrix mTrans, mRot, mScale, mBase;
 		mTrans.MakeTranslation(m_position);
@@ -69,24 +56,13 @@ namespace myEngine {
 		mBase = mScale * mRot;
 		mBase = mBase * mTrans;
 		
-		//CMatrixいじって変換できるようにしてるよ
-		g_graphicsEngine->GetEffekseerManager()->SetBaseMatrix(m_handle, mBase);
+		//エフェクトの座標を設定。
+		EffectEngineObj().GetEffekseerManager()->SetBaseMatrix(m_handle, mBase);
 
 		if (IsPlay() == false) {
 			//再生が終了したら削除
 			DeleteGO(this);
 		}
 
-	}
-
-	//すべてのエフェクトを描いた後にEndRenderingを実行するように使用変更してね！
-	void Effect::PostRender()
-	{
-		//ブレンドステートの保存
-		g_graphicsEngine->GetEffekseerRenderer()->BeginRendering();
-		//描画
- 		g_graphicsEngine->GetEffekseerManager()->Draw();
-		//ブレンドステートをもとに戻す
-		g_graphicsEngine->GetEffekseerRenderer()->EndRendering();
 	}
 }
