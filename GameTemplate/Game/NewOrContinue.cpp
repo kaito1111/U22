@@ -36,6 +36,7 @@ void NewOrContinue::Update()
 	if (g_Pad[0].IsPress(enButtonX) && padB == true) {
 		
 		//前回のステージとプレイヤーの座標をロード
+		//プレイしていない状態で選択すると、ステージ１と初期位置をロードします
 		LoadPlayerData();
 		game = NewGO<Game>(0, "game");
 		Continue = true;
