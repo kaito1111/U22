@@ -57,17 +57,17 @@ void TwoP_Pad::Update()
 			//このフレーム間に合わなかったとしても無視。待たない。
 			//ネットワークパッドはバッファリングが枯渇したら貯める。
 		}
-		printf("Pad::Update Start\n");
+		//printf("Pad::Update Start\n");
 		//バッファリングされた情報をもとにパッド情報を更新する。
 		g_Pad[0].Update(true);
 		g_Pad[1].UpdateFromNetPadData();
-		printf("Pad::Update End\n");
+		//printf("Pad::Update End\n");
 		m_frameNo++;
 	}
 	else {
 		//パッドの更新
 		//ゲームが開始されていない。
-		//自分のパッドなのでバッファリング情報は使わない。
+		//ゲーム始まってないので、バッファリング情報は使用しない。
 		g_Pad[0].Update(false);
 		NetworkLogic::GetInstance().Update();
 	}

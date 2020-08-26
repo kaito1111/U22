@@ -8,8 +8,7 @@
 //コンストラクタ
 GamePlayer::GamePlayer()
 {
-	//cmoファイルの読み込み。
-	m_model.Init(L"Assets/modelData/Player.cmo");
+	m_model.Init(L"Assets/modelData/player.cmo");
 	m_FrontModel.Init(L"Assets/modelData/player(front).cmo");
 	m_BuckModel.Init(L"Assets/modelData/player(Back).cmo");
 	m_Se.Init(L"Assets/sound/jump.wav");
@@ -65,7 +64,7 @@ bool GamePlayer::Start()
 	{
 		m_ThisNumSprite = NewGO<SpriteRender>(0);
 		wchar_t spriteName[256] = {};
-		swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum--);
+		swprintf_s(spriteName, L"Assets/sprite/%dP_Pointer.dds", m_PlayerNum);
 		m_ThisNumSprite->Init(spriteName, 100.0f, 100.0f, true);
 		CVector3 ThisNumSpritePos = m_position;
 		ThisNumSpritePos.y += 150.0f;
@@ -206,7 +205,7 @@ void GamePlayer::StartPos()
 
 int GamePlayer::GetPadNo() const
 {
-	if (INetworkLogic().GetLBL()->GetPlayerNum() == m_PlayerNum + 1) {
+	if (INetworkLogic().GetLBL()->GetPlayerNum() == m_PlayerNum) {
 		//自分が操作しているPadだった
 		return 0;
 	}
@@ -290,7 +289,13 @@ void GamePlayer::Move()
 		//音の設定
 		float Volume = fabsf(g_Pad[GetPadNo()].GetLStickXF());
 		//右スティック量を書き出す
-		printf(" LスティックX ", g_Pad[GetPadNo()].GetLStickXF());
+		if (GetPadNo() == 1) {
+			printf("プレイヤーパッドLスティックX %f\n", g_Pad[GetPadNo()].GetLStickXF());
+		}
+		else {
+			printf("ネットワークパッドLスティックX %f\n", g_Pad[GetPadNo()].GetLStickXF());
+		}
+
 		if (movespeed.y >= 0.0f) {
 			Volume -= 0.1f;
 		}

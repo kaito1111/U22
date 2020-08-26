@@ -163,5 +163,6 @@ private:
 	bool m_once = false;					//一度のみ	
 	bool m_NetworkReady = false;			//通信準備OK?
 	bool m_isReceiveNetPadData = false;		//ネットワークパッドのデータ受け取り完了したか。
+	FILE* fp;
 };
 

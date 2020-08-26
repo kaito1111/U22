@@ -213,8 +213,9 @@ void Pad::XInputStateBufferringFromNetPadData(int frameNo)
 }
 void Pad::UpdateFromNetPadData()
 {
-	UpdateFromXInputData(m_xinputStateQueue.front().second);
-	printf("GPad frameNo = %d\n", m_xinputStateQueue.front().first);
+	//value(KeyState)側の取得。
+	UpdateFromXInputData(m_xinputStateQueue.back().second);
+	printf("NetPad frameNo on Buffering = %d\n", m_xinputStateQueue.front().first);
 	m_xinputStateQueue.pop_front();
 }
 void Pad::UpdateFromXInputData(XINPUT_STATE xInputState)
@@ -230,6 +231,7 @@ void Pad::UpdateFromXInputData(XINPUT_STATE xInputState)
 
 	//アナログスティックの入力情報を更新。
 	UpdateAnalogStickInput();
+
 }
 /*!
 *@brief	パッドの入力を更新。
@@ -242,7 +244,8 @@ void Pad::Update(bool isUseQueue)
 	if (isUseQueue) {
 		//バッファリングされたパッド情報を使う。
 		xInputState = m_xinputStateQueue.front().second;
-		printf("GPad frameNo = %d\n", m_xinputStateQueue.front().first);
+		//パッド情報がバッファリングされた時の、フレーム数
+		printf("GPad frameNo on Buffering = %d\n", m_xinputStateQueue.front().first);
 		//使った情報は捨てる。
 		m_xinputStateQueue.pop_front();
 		result = ERROR_SUCCESS;

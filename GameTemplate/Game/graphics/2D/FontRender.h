@@ -43,6 +43,7 @@ namespace myEngine {
 		/// ローカル変数で引数に渡すの定義したら、バグるよ。
 		/// 意味わからない場合は、通常版使ってください。
 		/// メンバ変数に書いておかしくなったら、教えてください。
+		/// UpdateでSetTextしない場合は、変数の寿命の都合上Unsafe使わない方がいいかも。
 		/// </remarks>
 		/// <param name="text"></param>
 		void SetTextUnsafe(const wchar_t* text)
@@ -69,8 +70,9 @@ namespace myEngine {
 		}
 		/// <summary>
 		/// フォントの色を設定。
+		/// <para>α設定できる方。</para>
 		/// </summary>
-		/// <param name="color"></param>
+		/// <param name="color">カラー</param>
 		void SetColor(const CVector4& color)
 		{
 			m_color = color;
@@ -78,7 +80,7 @@ namespace myEngine {
 		/// <summary>
 		/// 回転を設定。
 		/// </summary>
-		/// <param name="rot"></param>
+		/// <param name="rot">回転。</param>
 		void SetRotation(float rot)
 		{
 			m_rotation = rot;
@@ -86,7 +88,7 @@ namespace myEngine {
 		/// <summary>
 		/// 拡大率。
 		/// </summary>
-		/// <param name="scale"></param>
+		/// <param name="scale">スケール。</param>
 		void SetScale(float scale)
 		{
 			m_scale = scale;
@@ -94,7 +96,7 @@ namespace myEngine {
 		/// <summary>
 		/// ピボットの設定。
 		/// </summary>
-		/// <param name="pivot"></param>
+		/// <param name="pivot">ピボット。</param>
 		void SetPivot(const CVector2& pivot)
 		{
 			m_pivot = pivot;
