@@ -1,5 +1,5 @@
 #pragma once
-#include "PlayerPad.h"
+//#include "PlayerPad.h"
 
 class TwoP_Pad: public IGameObject
 {

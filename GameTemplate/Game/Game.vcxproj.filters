@@ -122,7 +122,6 @@
     <ClCompile Include="character\BoxCharactorController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="NewOrContinue.cpp" />
-    <ClCompile Include="PlayerPad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -269,7 +268,6 @@
     <ClInclude Include="character\BoxCharactorController.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="NewOrContinue.h" />
-    <ClInclude Include="PlayerPad.h" />
     <ClInclude Include="Noncopyable.h" />
   </ItemGroup>
   <ItemGroup>
