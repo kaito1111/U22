@@ -19,7 +19,7 @@ Game::Game()
 	//メインレンダーターゲットにかかれた絵を
 	//フレームバッファにコピーするためにスプライトを初期化
 	m_copyMainRtToFrameBufferSprite.Init(
-		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
+		Engine().GetGraphicsEngine().GetOffScreenRenderTarget()->GetRenderTargetSRV(),
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
 	);
@@ -129,7 +129,7 @@ void Game::PostRender()
 	//ポストエフェクト描画
 	//m_postEffect.Draw();
 
-	auto a = g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV();
+	auto a = Engine().GetGraphicsEngine().GetOffScreenRenderTarget()->GetRenderTargetSRV();
 
 	//ドロー
 	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());

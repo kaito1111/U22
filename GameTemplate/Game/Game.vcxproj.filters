@@ -81,7 +81,6 @@
     <ClCompile Include="math\Vector.cpp" />
     <ClCompile Include="stageObject\moveFloor.cpp" />
     <ClCompile Include="myEngine.cpp" />
-    <ClCompile Include="myListener.cpp" />
     <ClCompile Include="NPole.cpp" />
     <ClCompile Include="physics\MeshCollider.cpp" />
     <ClCompile Include="physics\Physics.cpp" />
@@ -116,12 +115,17 @@
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="Sample\DebugMan.cpp" />
-    <ClCompile Include="SampleScene.cpp" />
-    <ClCompile Include="SampleGround.cpp" />
     <ClCompile Include="GemeLoop.cpp" />
-    <ClCompile Include="character\BoxCharactorController.cpp" />
     <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="NewOrContinue.cpp" />
+    <ClCompile Include="Sample\SampleGround.cpp" />
+    <ClCompile Include="Sample\SampleScene.cpp" />
+    <ClCompile Include="graphics\2D\Font.cpp" />
+    <ClCompile Include="graphics\2D\FontRender.cpp" />
+    <ClCompile Include="Effect\CEffectEngine.cpp" />
+    <ClCompile Include="character\BoxCharactorController.cpp" />
+    <ClCompile Include="physics\BoxCollider.cpp" />
+    <ClCompile Include="Manual.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -219,7 +223,6 @@
     <ClInclude Include="stageObject\moveFloor.h" />
     <ClInclude Include="stageObject\MoveFloor2.h" />
     <ClInclude Include="myEngine.h" />
-    <ClInclude Include="myListener.h" />
     <ClInclude Include="NPole.h" />
     <ClInclude Include="PhysicsGhostObject.h" />
     <ClInclude Include="physics\ICollider.h" />
@@ -262,13 +265,18 @@
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="Sample\DebugMan.h" />
-    <ClInclude Include="SampleScene.h" />
-    <ClInclude Include="SampleGround.h" />
     <ClInclude Include="GemeLoop.h" />
-    <ClInclude Include="character\BoxCharactorController.h" />
     <ClInclude Include="PlayerData.h" />
     <ClInclude Include="NewOrContinue.h" />
     <ClInclude Include="Noncopyable.h" />
+    <ClInclude Include="Sample\SampleGround.h" />
+    <ClInclude Include="Sample\SampleScene.h" />
+    <ClInclude Include="graphics\2D\Font.h" />
+    <ClInclude Include="graphics\2D\FontRender.h" />
+    <ClInclude Include="Effect\CEffectEngine.h" />
+    <ClInclude Include="character\BoxCharactorController.h" />
+    <ClInclude Include="physics\BoxCollider.h" />
+    <ClInclude Include="Manual.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

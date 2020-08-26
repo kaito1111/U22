@@ -12,7 +12,7 @@
 StageSelect::StageSelect()
 {
 	m_copyMainRtToFrameBufferSprite.Init(
-		g_graphicsEngine->GetOffScreenRenderTarget()->GetRenderTargetSRV(),
+		Engine().GetGraphicsEngine().GetOffScreenRenderTarget()->GetRenderTargetSRV(),
 		FRAME_BUFFER_W,
 		FRAME_BUFFER_H
 	);
