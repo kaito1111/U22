@@ -30,7 +30,7 @@ void TwoP_Pad::Update()
 		//ネットワークパッドのバッファリング。
 		while (g_Pad[1].GetNumBufferringXInputData() < MAX_BUFFERRING) {
 			//ここは足りなくなることがあるはずなので、ゲーム中も入る可能性がある。
-			NetworkLogic::GetInstance().Update();
+			//NetworkLogic::GetInstance().Update();
 			if (LBLobj()->getReceiveFlag() == false) {
 				//まだネットワークパッドのデータを受信できていない。
 				//1フレーム待機。

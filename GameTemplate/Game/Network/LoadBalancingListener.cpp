@@ -562,6 +562,7 @@ void LoadBalancingListener::RaisePadData()
 	//customEventActionが呼ばれる
 	//送信なので自分のcustomEventActionは呼ばれない。
 	bool result = mpLbc->opRaiseEvent(false, hash, m_playerNum);
+	printf("%dtimes send\n", ++m_sentTimes);
 	if (result == false) {
 		printf("送信失敗\n");
 	}

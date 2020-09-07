@@ -27,5 +27,8 @@ private:
 	};
 
 	const int				MAX_BUFFERRING = 5;		//バッファリングする数
+	std::size_t				MAX_BUFFERRING_T = 5;
+	int m_listSize = 0;
 	int						m_frameNo = 0;			//プレイできる状態だった、フレームの数
+	int Bufferinged;
 };

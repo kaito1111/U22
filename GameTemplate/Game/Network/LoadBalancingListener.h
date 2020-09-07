@@ -164,5 +164,6 @@ private:
 	bool m_NetworkReady = false;			//通信準備OK?
 	bool m_isReceiveNetPadData = false;		//ネットワークパッドのデータ受け取り完了したか。
 	FILE* fp;
+	int m_sentTimes = 0;
 };
 

@@ -207,14 +207,16 @@ void Pad::XInputStateBufferringFromNetPadData(int frameNo)
 {
 	//キューに積む
 	m_xinputStateQueue.push_back({ frameNo, g_netPadState });
+	//ソート用の関数オブジェクト。
+	//ラムダ式 [&] = 引数を参照使用。
 	auto func = [&](const XINPUT_STATE_WITH_FRAME_NO& lhs, const XINPUT_STATE_WITH_FRAME_NO& rhs) {	return lhs.first < rhs.first; };
-	//フレーム番号でソートする。
+	//フレーム番号でソート(昇順)する。
 	m_xinputStateQueue.sort(func);
 }
 void Pad::UpdateFromNetPadData()
 {
 	//value(KeyState)側の取得。
-	UpdateFromXInputData(m_xinputStateQueue.back().second);
+	UpdateFromXInputData(m_xinputStateQueue.front().second);
 	printf("NetPad frameNo on Buffering = %d\n", m_xinputStateQueue.front().first);
 	m_xinputStateQueue.pop_front();
 }
