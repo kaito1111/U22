@@ -240,8 +240,8 @@ private:
 	void UpdateFromXInputData(XINPUT_STATE xInputState);
 
 private:
-	using XINPUT_STATE_WITH_FRAME_NO = std::pair<int, XINPUT_STATE>;
-	std::list<XINPUT_STATE_WITH_FRAME_NO> m_xinputStateQueue;	//XInputから引っ張ってきた情報のキュー。
+	using XINPUT_STATE_WITH_FRAME_NO = std::pair<int, XINPUT_STATE>;	//フレーム番号と、パッドステート
+	std::list<XINPUT_STATE_WITH_FRAME_NO> m_xinputStateQueue;			//XInputから引っ張ってきた情報のキュー。
 	PAD_STATE m_state;	//!<パッドステート。
 	int m_padNo = 0;			//!<パッド番号。
 	int m_trigger[enButtonNum];	//!<トリガー入力のフラグ。

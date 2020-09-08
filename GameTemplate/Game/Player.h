@@ -131,6 +131,7 @@ private:
 	SoundSource m_Asioto;									//‘«‰¹
 
 	IPad* m_Pad = nullptr;									//ƒpƒbƒh
+	int times = 0;
 
 	SpriteRender* m_SpriteN = nullptr;
 	SpriteRender* m_SpriteS = nullptr;
