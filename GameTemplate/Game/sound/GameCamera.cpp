@@ -66,9 +66,15 @@ void GameCamera::Update()
 	if (Target.y < 190.0f) {
 		Target.y = 190.0f;
 	}
-	CVector3 move = Target;
-	move.z += 500.0f;
-	m_Pos = m_CharaCon.Execute(1.0f, move);
+	CVector3 NextPosition = Target;
+	NextPosition.z += 500.0f;
+	CVector3 move = m_Pos - NextPosition;
+	if (move.Length() > 0.01f) {
+		m_Pos = m_CharaCon.Execute(1.0f, move);
+	}
+	else {
+		m_Pos = move;
+	}
 	g_camera3D.SetTarget(Target);
 	g_camera3D.SetPosition(m_Pos);
 	//カメラの更新。
