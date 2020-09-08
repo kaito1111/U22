@@ -228,7 +228,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		//ネットワークからとってきたパッド情報をバッファリングする。
 		g_Pad[1].XInputStateBufferringFromNetPadData(frameNo);
 		//パッドデータをバッファリングした時の、フレーム数。
-		printf("Buffering NetworkPadState frameNo = %d\n", frameNo);
+		//printf("Buffering NetworkPadState frameNo = %d\n", frameNo);
 		
 		if (fp != nullptr) {
 			char text[4096];
@@ -505,8 +505,8 @@ void LoadBalancingListener::RaisePadData()
 	//自パッドのデータ送信。
 	XINPUT_STATE& xInputState = g_Pad[0].GetXInputPadState();
 	////右スティックの移動量を送る。
-	printf("xInputState.Gamepad.sThumbLX = %x\n", xInputState.Gamepad.sThumbLX);
-	printf("xInputState.Gamepad.sThumbLY = %x\n", xInputState.Gamepad.sThumbLY);
+	//printf("xInputState.Gamepad.sThumbLX = %x\n", xInputState.Gamepad.sThumbLX);
+	//printf("xInputState.Gamepad.sThumbLY = %x\n", xInputState.Gamepad.sThumbLY);
 	hash.put(1, xInputState.Gamepad.sThumbLX);
 	hash.put(2, xInputState.Gamepad.sThumbLY);
 	hash.put(3, xInputState.Gamepad.sThumbRX);
@@ -562,7 +562,7 @@ void LoadBalancingListener::RaisePadData()
 	//customEventActionが呼ばれる
 	//送信なので自分のcustomEventActionは呼ばれない。
 	bool result = mpLbc->opRaiseEvent(false, hash, m_playerNum);
-	printf("%dtimes send\n", ++m_sentTimes);
+	//printf("%dtimes send\n", ++m_sentTimes);
 	if (result == false) {
 		printf("送信失敗\n");
 	}
