@@ -117,7 +117,7 @@ bool GamePlayer::Start()
 void GamePlayer::Update()
 {
 	//あぷでーどlog
-	printf("player %d Updated\n", m_PlayerNum);
+	//printf("player %d Updated\n", m_PlayerNum);
 	m_SpriteJump->SetW(0.0f);
 	m_SpriteDel->SetW(0.0f);
 	m_SpriteN->SetW(0.0f);
@@ -149,6 +149,7 @@ void GamePlayer::Update()
 		m_ThisNumSprite->SetPosition(ThisNumSpritePos);
 	}
 	//ワールド行列の更新。
+	printf("player %d 's position is %f\n frameNo is %d\n", GetPadNo() + 1, m_position.x, ++times);
 	m_model.UpdateWorldMatrix(m_position, m_rot, m_Scale);
 	m_BuckModel.UpdateWorldMatrix(m_position, m_ReverseDefeatRot, m_Scale);
 	m_FrontModel.UpdateWorldMatrix(m_position, m_DefeatRot, m_Scale);
@@ -290,10 +291,10 @@ void GamePlayer::Move()
 		float Volume = fabsf(g_Pad[GetPadNo()].GetLStickXF());
 		//右スティック量を書き出す
 		if (GetPadNo() == 1) {
-			printf("プレイヤーパッドLスティックX %f\n", g_Pad[GetPadNo()].GetLStickXF());
+			//printf("プレイヤーパッドLスティックX %f\n", g_Pad[GetPadNo()].GetLStickXF());
 		}
 		else {
-			printf("ネットワークパッドLスティックX %f\n", g_Pad[GetPadNo()].GetLStickXF());
+			//printf("ネットワークパッドLスティックX %f\n", g_Pad[GetPadNo()].GetLStickXF());
 		}
 
 		if (movespeed.y >= 0.0f) {

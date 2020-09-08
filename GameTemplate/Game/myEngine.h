@@ -89,7 +89,6 @@ namespace myEngine {
 		{
 			return m_twoP_Pad;
 		}
-
 	private:
 		//エンジン関連
 		GraphicsEngine			m_graphicsEngine;		//グラフィックエンジン
@@ -101,7 +100,7 @@ namespace myEngine {
 	private:
 		//fps表示関連
 		float					m_timeTotal = 0;		//合計時間。
-		float					m_fps = 0;				//FPS
+		float					m_fps = 0;				//FPS。
 		std::unique_ptr<CFont>	m_font;					//フォント。
 
 	};		
