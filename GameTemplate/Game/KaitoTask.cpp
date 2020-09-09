@@ -14,21 +14,24 @@ KaitoTask::KaitoTask()
 {
 	//NewGO<TitleStage>(5, "TitleStage");
 	m_GameCamera = NewGO<GameCamera>(1, "camera");
-	for (int i = 0; i < g_PlayerNum;) {
-		CVector3 SpownPos = { 100.0f * i,0.0f,0.0f };
-		char PlayerNo[256] = {};
-		sprintf(PlayerNo, "player%d", i + 1);
-		//優先度をステージより早く
-		m_Player[i] = NewGO<GamePlayer>(1, PlayerNo);
-		m_Player[i++]->SetPosition(SpownPos);
-	}
 	if (LBLobj()->GetPlayerNum() == 1) {
+		//Update順番の調整のためにNewGOのタイミングを調整。
+		//必ずp1からUpdateされるように。
+		m_Player[0] = NewGO<GamePlayer>(1, "player1");
+		m_Player[1] = NewGO<GamePlayer>(1, "player2");
 		m_Player[0]->SetPlayerNum(1);
+		m_Player[0]->SetPosition({ 100.0f, 0.0f, 0.0f });
 		m_Player[1]->SetPlayerNum(2);
+		m_Player[1]->SetPosition({ 200.0f, 0.0f, 0.0f });
 	}
 	else {
+		//Update順番の調整のためにNewGOのタイミングを調整。
+		m_Player[1] = NewGO<GamePlayer>(1, "player2");
+		m_Player[0] = NewGO<GamePlayer>(1, "player1");
 		m_Player[1]->SetPlayerNum(1);
+		m_Player[1]->SetPosition({ 200.0f, 0.0f, 0.0f });
 		m_Player[0]->SetPlayerNum(2);
+		m_Player[0]->SetPosition({ 100.0f, 0.0f, 0.0f });
 	}
 }
 
