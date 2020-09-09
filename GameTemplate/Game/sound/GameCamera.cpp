@@ -13,6 +13,7 @@ GameCamera::~GameCamera()
 
 bool GameCamera::Start()
 {
+	m_CharaCon.Init(30.0f, 30.0f, m_Pos);
 	for (int i = 0; i < m_PlayerNum + 1; i++) {
 		char PlayerNo[256] = {};
 		sprintf(PlayerNo, "player%d", m_PlayerNum + 1);
@@ -50,8 +51,10 @@ void GameCamera::Update()
 	}*/
 
 	//プレイヤーを殺す
-	if (m_Player[0]->GetPosition().y < Target.y - 500.0f) {
-		m_Player[0]->SIBOU();
+	for (int i = 0; i < m_PlayerNum; i++) {
+		if (m_Player[i]->GetPosition().y < Target.y - 500.0f) {
+			m_Player[i]->SIBOU();
+		}
 	}
 
 	if (Target.x > 300.0f) {
@@ -63,10 +66,19 @@ void GameCamera::Update()
 	if (Target.y < 190.0f) {
 		Target.y = 190.0f;
 	}
-	CVector3 pos = Target;
-	pos.z += 500.0f;
+	CVector3 NextPosition = Target;
+	NextPosition.z += 500.0f;
+	CVector3 move = m_Pos - NextPosition;
+	//if (move.Length() > 0.01f) {
+	//	m_Pos = m_CharaCon.Execute(1.0f, move);
+	//}
+	//else {
+	//	m_Pos = move;
+	//}
+	//m_Pos.z += 500.0f;
+	m_Pos = NextPosition;
 	g_camera3D.SetTarget(Target);
-	g_camera3D.SetPosition(pos);
+	g_camera3D.SetPosition(m_Pos);
 	//カメラの更新。
 	g_camera3D.Update();    
 

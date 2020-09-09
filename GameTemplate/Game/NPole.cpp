@@ -47,6 +47,7 @@ void NPole::deleteRange()
 void NPole::Move()
 {
 	m_move.Normalize();
+	m_move *= 5.0f;
 	m_position += m_move;
 }
 
@@ -56,7 +57,9 @@ void NPole::SetNPole() {
 		CVector3 Diff = m_Magnet->GetPosition() - m_position;
 		float ModeJudge = 100.0f;
 		if (Diff.Length() < ModeJudge) {
-			m_Magnet->SetState(Magnet::State::NMode);
+			if (m_Magnet->IsChenge() == true) {
+				m_Magnet->SetState(Magnet::State::NMode);
+			}
 		}
 		return true;
 	});

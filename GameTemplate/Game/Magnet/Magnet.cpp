@@ -36,7 +36,12 @@ CVector3 Magnet::MagnetMove()
 		if (mag == this) {
 			return true;
 		}
-		MagnetNum++;						//磁石をカウント
+		CVector3 Diff = mag->GetPosition() - *m_Position;
+		float len = Diff.Length();
+		if (len < maganetLen &&
+			!(mag->GetState() == NoMode)) {
+			MagnetNum++;						//磁石をカウント
+		}
 		return true;
 	});
 	QueryMO([&](Magnet* mag)->bool {
