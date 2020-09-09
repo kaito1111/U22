@@ -13,7 +13,7 @@ public:
 	void SetPosition(const CVector3& pos) {
 		m_pos = pos;
 	}
-	void SetMoveLimit(const float& limit) {
+	void SetMoveLimit(float limit) {
 		up =  m_pos.y + limit;
 		down =m_pos.y -  limit;
 	}

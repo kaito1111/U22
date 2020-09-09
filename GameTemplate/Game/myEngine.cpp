@@ -68,7 +68,7 @@ void CEngine::Update()
 		m_timeTotal = 0.0f;
 		count = 0;
 	}
-	//FPSの表示。
+	////FPSの表示。
 	m_font->Begin();
 	wchar_t fps[256];
 	swprintf_s(fps, L"FPS = %.1f", m_fps);

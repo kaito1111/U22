@@ -15,7 +15,6 @@ bool GameLoop::Start()
 	m_game = FindGO<Game>("game");
 	m_camera = FindGO<GameCamera>("camera");
 	m_fade = NewGO<Fade>(0, "fade");
-	m_goal = FindGO<Goal>(0, "goal");
 	return true;
 }
 

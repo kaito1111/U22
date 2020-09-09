@@ -66,6 +66,9 @@ public:
 	float GetDepth() {
 		return m_depth;
 	}
+	void SetAffected(bool af) {
+		IsAffected = af;
+	}
 private:
 	CVector3 m_position = CVector3::Zero();
 	bool m_isJump = false;				//ジャンプ中？
@@ -76,5 +79,5 @@ private:
 	float m_depth = 0.0f;
 	float m_Bottom = 0.0f;
 	RigidBody m_rigidBody;					//剛体。
-
+	bool IsAffected = true;				//ほかのキャラコンから影響を受けるかどうか
 };

@@ -12,5 +12,5 @@ private:
 	bool Start();
 	CheckPoint* m_point[10] = {};
 	Level level;
-	wchar_t m_filePass[256];
+	wchar_t m_filePass[256] = {};
 };
