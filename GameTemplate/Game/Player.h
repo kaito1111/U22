@@ -131,7 +131,7 @@ private:
 	SoundSource m_Asioto;									//足音
 
 	IPad* m_Pad = nullptr;									//パッド
-	int times = 0;
+	int times = 0;											//playerのUpdateに何回入ったか。
 
 	SpriteRender* m_SpriteN = nullptr;
 	SpriteRender* m_SpriteS = nullptr;

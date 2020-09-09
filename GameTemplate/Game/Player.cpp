@@ -117,6 +117,7 @@ bool GamePlayer::Start()
 void GamePlayer::Update()
 {
 	//あぷでーどlog
+	times++;
 	//printf("player %d Updated\n", m_PlayerNum);
 	m_SpriteJump->SetW(0.0f);
 	m_SpriteDel->SetW(0.0f);
@@ -151,7 +152,48 @@ void GamePlayer::Update()
 		m_ThisNumSprite->SetPosition(ThisNumSpritePos);
 	}
 	//ワールド行列の更新。
-	printf("player %d 's position is %f\n frameNo is %d\n", GetPadNo() + 1, m_position.x, ++times);
+	if (INetworkLogic().GetLBL()->GetPlayerNum() == 1) {
+		if (GetPadNo() == 0) {
+			//player1
+			//ポジション確認
+			//printf("player %d 's position is %f\n frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum(), m_position.x, times);
+			//パッドの入力量(送信)
+			//printf("playerPadState Sent. value is %f\n", g_Pad[GetPadNo()].GetLStickXF());
+			//Aボタン入力(送信）
+			//if (g_Pad[GetPadNo()].IsTrigger(enButtonA)) {
+			//	printf("Sent AButton Presed. %d times.\n", times);
+			//}
+			//Update確認
+			printf("p1 Updated. %d.\n", times);
+		}
+		else
+		{
+			//net(p2)
+			//printf("player %d 's position is %f\n frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum() + 1, m_position.x, times);
+			printf("p2 Updated. %d.\n", times);
+		}
+
+	}
+	else {
+		if (GetPadNo() == 0) {
+			//player2
+			//printf("player %d 's position is %f\n frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum(), m_position.x, times);
+			printf("p2 Updated. %d.\n", times);
+		}
+		else
+		{
+			//net(p1)
+			//printf("player %d 's position is %f\n frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum() - 1, m_position.x, times);
+			//パッドの入力量(受け取り)
+			//printf("playerPadState Receved. value is %f\n", g_Pad[GetPadNo()].GetLStickXF());
+			//Aボタン入力(受け取り)
+			//if (g_Pad[GetPadNo()].IsTrigger(enButtonA)) {
+			//	printf("Receved AButton Presed. %d times.\n", times);
+			//}
+			printf("p1 Updated. %d.\n", times);
+		}
+	}
+
 	m_model.UpdateWorldMatrix(m_position, m_rot, m_Scale);
 	m_BuckModel.UpdateWorldMatrix(m_position, m_ReverseDefeatRot, m_Scale);
 	m_FrontModel.UpdateWorldMatrix(m_position, m_DefeatRot, m_Scale);
@@ -268,7 +310,7 @@ void GamePlayer::Move()
 	//ジャンプ判定
 	if (m_characon.IsOnGround())
 	{
-		if (g_Pad[GetPadNo()].IsPress(enButtonA)) {
+		if (g_Pad[GetPadNo()].IsTrigger(enButtonA)) {
 			m_SpriteJump->SetW(1.0f);
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
