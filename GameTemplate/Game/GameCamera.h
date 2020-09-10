@@ -15,7 +15,7 @@ private:
 	int	m_PlayerNum			= 0;
 	bool Start()override;
 	void Update()override;
-	GamePlayer*	m_Player[4]			= {};
+	GamePlayer*	m_Player[2]			= {};
 	float Decline				= 0.0f;		//‰º‚ÌŒÀŠE
 	CVector3 m_Pos = CVector3::Zero();
 };

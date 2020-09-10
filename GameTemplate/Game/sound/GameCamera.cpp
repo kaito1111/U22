@@ -15,7 +15,7 @@ bool GameCamera::Start()
 {
 	m_CharaCon.Init(30.0f, 30.0f, m_Pos);
 	for (int i = 0; i < m_PlayerNum + 1; i++) {
-		char PlayerNo[256] = {};
+		char PlayerNo[256] = {}; 
 		sprintf(PlayerNo, "player%d", m_PlayerNum + 1);
 		QueryGOs<GamePlayer>(PlayerNo, [&](GamePlayer* player)->bool {
 			m_Player[m_PlayerNum] = player;
@@ -32,8 +32,8 @@ void GameCamera::Update()
 
 	//PlayerNumが0だからこれ入ってない
 	for (int i = 0; i < m_PlayerNum; i++) {
-		Target += m_Player[i]->GetPosition();
-		Target.y += 100.0f;
+		CVector3 m_PlPos = m_Player[i]->GetPosition();
+		Target += m_PlPos;
 	}
 	//上でカメラの位置が調整されてないので無理やり調整
 	//上直したら消してね
@@ -41,6 +41,7 @@ void GameCamera::Update()
 
 	//プレイヤーが2人以上いるから真ん中をとる
 	Target /= m_PlayerNum;
+	Target.y += 100.0f;
 
 	//下の限界を更新
 	/*if (Decline < Target.y) {
@@ -57,17 +58,17 @@ void GameCamera::Update()
 		}
 	}*/
 
-	if (Target.x > 300.0f) {
-		Target.x = 300.0f;
-	}
-	if (Target.x < 200.0f) {
-		Target.x = 200.0f;
-	}
-	if (Target.y < 190.0f) {
-		Target.y = 190.0f;
-	}
+	//if (Target.x > 300.0f) {
+	//	Target.x = 300.0f;
+	//}
+	//if (Target.x < 200.0f) {
+	//	Target.x = 200.0f;
+	//}
+	//if (Target.y < 190.0f) {
+	//	Target.y = 190.0f;
+	//}
 	m_Pos = Target;
-	m_Pos .z = 500.0f;
+	m_Pos.z = 500.0f;
 	//CVector3 move = m_Pos - NextPosition;
 	//if (move.Length() > 0.01f) {
 	//	m_Pos = m_CharaCon.Execute(1.0f, move);
