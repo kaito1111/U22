@@ -48,11 +48,8 @@ private:
 	void PostRender();
 private:
 	bool Continue = false;
-	Stage* stage = nullptr;
 	CVector3 player1Pos = CVector3::Zero();
 	CVector3 player2Pos = CVector3::Zero();
-	PlayerData* playerData = nullptr;
-	Goal* goalPtr = nullptr;
 	int StageNum = 0;
 	SpriteRender* m_test = nullptr;							//スプライトレンダー
 	Sprite m_copyMainRtToFrameBufferSprite;					//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト

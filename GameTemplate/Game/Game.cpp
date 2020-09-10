@@ -38,7 +38,6 @@ Game::~Game()
 	}
 	SavePlayerData();//1âÒì¸Ç¡ÇΩ
 	DeleteGO(m_task);//1âÒ
-	DeleteGO(goalPtr);//1âÒ
 }
 
 bool Game::Start()
@@ -48,31 +47,12 @@ bool Game::Start()
 
 	//2î‘ñ⁄
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
-	stage = NewGO<Stage>(0, "stage");
+	Stage* stage = NewGO<Stage>(0, "stage");
 	stage->setStageNum(StageNum);
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);		
 	CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
-	PointGenerator->Load(L"Assets/level/debug_test.tkl");
-	Level level;
-
-	if (StageNum == 0) {
-		level.Init(L"Assets/level/debug_test.tkl", [&](const auto& objData)
-		{
-			//ÉSÅ[Éã
-			if (wcscmp(objData.name, L"Goal") == 0) {
-				goalPtr = NewGO<Goal>(0, "Goal");
-				goalPtr->SetPosition(objData.position);
-				return true;
-			}
-			if (wcsstr(objData.name, L"CheckPoint") != NULL)
-			{
-				return true;
-			}
-			return false;
-		});
-		
-	}
+	PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
 	if (Continue) {
 		GamePlayer* pl1 = FindGO<GamePlayer>("player1");
 		GamePlayer* pl2 = FindGO<GamePlayer>("player2");
@@ -84,13 +64,10 @@ bool Game::Start()
 
 void Game::Update()
 {
-	if (goalPtr->IsClear()) {
-		//DeleteGO(this);
-	}
-	if (g_Pad[0].IsTrigger(enButtonDown)) {
-		
-		DeleteGO(this);
-	}
+	//if (g_Pad[0].IsTrigger(enButtonDown)) {
+	//	
+	//	DeleteGO(this);
+	//}
 	Sample();
 	m_postEffect.Update();
 }
