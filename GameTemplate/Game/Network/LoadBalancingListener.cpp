@@ -136,14 +136,14 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 		//最初のひとり
 		printf("Created room.\n");
 		printf("waiting for other player.\n");
-		fp = fopen("Assets/log/Plog.txt", "w");
+		fp = fopen("Assets/log/Plog.log", "w");
 		char text[64];
 		sprintf(text, "record Start\n");
 		fputs(text, fp);
 	}
 	if (m_playerNum == 2) {
 		printf("joined room\n");
-		fp = fopen("Assets/log/Nlog.txt", "w");
+		fp = fopen("Assets/log/Nlog.log", "w");
 		char text[64];
 		sprintf(text, "record Start\n");
 		fputs(text, fp);
