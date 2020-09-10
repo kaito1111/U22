@@ -23,18 +23,14 @@ void TwoP_Pad::Update()
 			//バッファリングした内容を相手に送る。
 			//パッド情報を相手に送る。
 			LBLobj()->RaisePadData();
-			m_frameNo++;
-			//1フレーム分寝る。
-			//Sleep(TIME_ONE_FRAME);
 		}
 		//ネットワークパッドのバッファリング。
 		while (g_Pad[1].GetNumBufferringXInputData() < MAX_BUFFERRING) {
 			//ここは足りなくなることがあるはずなので、ゲーム中も入る可能性がある。
+			//ネットワークのアップデート。
 			NetworkLogic::GetInstance().Update();
 			if (LBLobj()->getReceiveFlag() == false) {
 				//まだネットワークパッドのデータを受信できていない。
-				//1フレーム待機。
-				//Sleep(TIME_ONE_FRAME);
 			}
 			else {
 				//ネットワークパッドのデータを受信した。
@@ -42,7 +38,6 @@ void TwoP_Pad::Update()
 			}
 		}
 
-		//バッファリングされた情報を使ってゲームを進行させる。
 		//まず新しいパッド情報をバッファリングする。
 		if (g_Pad[0].GetNumBufferringXInputData() == MAX_BUFFERRING - 1) {
 			//バッファリングデータが足りない。
@@ -54,14 +49,7 @@ void TwoP_Pad::Update()
 			NetworkLogic::GetInstance().Update();
 		}
 
-		//if (LBLobj()->getReceiveFlag() == true) {
-		//	LBLobj()->SetReceiveFlag(false);
-		//}
-		//else {
-		//	//このフレーム間に合わなかったとしても無視。待たない。
-		//	//ネットワークパッドはバッファリングが枯渇したら貯める。
-		//}
-		//printf("Pad::Update Start\n");
+		//バッファリングされた情報を使ってゲームを進行させる。
 		//バッファリングされた情報をもとにパッド情報を更新する。
 		g_Pad[0].Update(true);
 		g_Pad[1].UpdateFromNetPadData();
