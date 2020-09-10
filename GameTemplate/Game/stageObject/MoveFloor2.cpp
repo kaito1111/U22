@@ -102,7 +102,7 @@ void MoveFloor2::Move()
 
 void MoveFloor2::Move2()
 {
-	const float movespeed = 4;
+	const float movespeed = 8.0f;
 	float y = m_pos.y;
 	//è„è∏
 	if (y <= up && udlimit == false) {

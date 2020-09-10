@@ -36,9 +36,9 @@ Game::~Game()
 	if (m_frameBufferRenderTargetView != nullptr) {
 		m_frameBufferRenderTargetView->Release();
 	}
+	//SavePlayerData();
 	DeleteGO(m_task);
 	DeleteGO(goalPtr);
-	DeleteGO(stage);
 }
 
 bool Game::Start()
@@ -84,16 +84,12 @@ bool Game::Start()
 
 void Game::Update()
 {
-	
 	if (goalPtr->IsClear()) {
 		DeleteGO(this);
 	}
 	if (g_Pad[0].IsTrigger(enButtonDown)) {
 		
 		DeleteGO(this);
-	}
-	if (goalPtr->IsClear() == false) {
-		SavePlayerData();
 	}
 	Sample();
 	m_postEffect.Update();
