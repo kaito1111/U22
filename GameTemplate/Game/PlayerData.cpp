@@ -19,11 +19,11 @@ PlayerData::~PlayerData()
 {
 }
 
-void PlayerData::SavePlayerData(GamePlayer* playerptr)
+void PlayerData::SavePlayerData(/*GamePlayer* playerptr*/)
 {
 	//static const char PlayerMax = 2;//プレイヤーの最大数
 
-	////プレイヤーに名前つけてる
+	//プレイヤーに名前つけてる
 	//for (nowSavePlayer = 1;
 	//	nowSavePlayer <= g_PlayerNum;
 	//	nowSavePlayer++) {
@@ -38,13 +38,21 @@ void PlayerData::SavePlayerData(GamePlayer* playerptr)
 		//ファイルのオープンに失敗
 		return;
 	}
+	player[0] = FindGO<GamePlayer>("player1");
+	player1Pos = player[0]->GetPosition();
+	player[1] = FindGO<GamePlayer>("player2");
+	player2Pos = player[1]->GetPosition();
+
 	stage = FindGO<Stage>("stage");
 	stageNum = stage->GetNowStage();
-	player1Pos = playerptr->GetPosition();
+	//player1Pos = playerptr->GetPosition();
+	
 	fwrite(&stageNum, sizeof(int), 1, file);
 	fwrite(&player1Pos, sizeof(CVector3), 1, file);//引数の１はコピーされる数（なんじゃね？）
 	fwrite(&player2Pos, sizeof(CVector3), 1, file);
 	fclose(file);
+	DeleteGO(player[0]);
+	DeleteGO(player[1]);
 	DeleteGO(stage);
 }
 

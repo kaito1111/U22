@@ -2,11 +2,10 @@
 #include "GameObject/IGameObject.h"
 #include "character/CharacterController.h"
 #include"physics/PhysicsStaticObject.h"
-#include"PlayerData.h"
 class stageObjectJenerator;
 class Game;
 class Goal;
-class Stage : public PlayerData
+class Stage : public IGameObject
 {
 public:
 	Stage();
@@ -15,7 +14,6 @@ public:
 	void Update();
 	void Draw();
 	void setStageNum(const int& num) {
-		SaveStageData();
 		nowStage = num;
 	}
 	const int& GetNowStage() const
