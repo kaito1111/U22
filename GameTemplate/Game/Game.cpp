@@ -36,15 +36,15 @@ Game::~Game()
 	if (m_frameBufferRenderTargetView != nullptr) {
 		m_frameBufferRenderTargetView->Release();
 	}
-	SavePlayerData();
-	DeleteGO(m_task);
-	DeleteGO(goalPtr);
+	SavePlayerData();//1‰ñ“ü‚Á‚½
+	DeleteGO(m_task);//1‰ñ
+	DeleteGO(goalPtr);//1‰ñ
 }
 
 bool Game::Start()
 {
 	//1”Ô–Ú
-	m_task = NewGO<KaitoTask>(0);
+	m_task = NewGO<KaitoTask>(0,"kaitoTask");
 
 	//2”Ô–Ú
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
@@ -85,7 +85,7 @@ bool Game::Start()
 void Game::Update()
 {
 	if (goalPtr->IsClear()) {
-		DeleteGO(this);
+		//DeleteGO(this);
 	}
 	if (g_Pad[0].IsTrigger(enButtonDown)) {
 		
