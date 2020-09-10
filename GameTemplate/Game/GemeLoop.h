@@ -17,5 +17,5 @@ private:
 	Game* m_game = nullptr;
 	GameCamera* m_camera = nullptr;
 	Fade* m_fade = nullptr;
-	StageSelect* select = nullptr;
+	//StageSelect* select = nullptr;
 };

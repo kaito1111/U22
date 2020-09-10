@@ -374,7 +374,7 @@ void GamePlayer::Move()
 	if (m_characon.IsOnGround() && movespeed.y < 0.0f) {
 		movespeed.y = 0;
 	}
-
+	movespeed.z = 0.0f;
 	//ˆÚ“®‚ðŠm’è
 	m_position = m_characon.Execute(1.0f, movespeed);
 
