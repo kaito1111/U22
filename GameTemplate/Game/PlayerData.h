@@ -14,6 +14,7 @@ public:
 	PlayerData();
 	~PlayerData();
 	Stage* stage = nullptr;
+	void SaveStageData(); //ステージのセーブ。ステージをロードしたタイミングで保存する
 	void SavePlayerData(); //セーブ
 	void  LoadPlayerData();//ロード
 	CVector3 player1(){
