@@ -29,7 +29,7 @@ private:
 	//enum stageNum{ stage1, stage2, stage3};
 	//オブジェクト
 	
-	/*stageObjectStopFloor* stopFloor = nullptr;
+	stageObjectStopFloor* stopFloor = nullptr;
 	Goal* goal = nullptr;
 	StageObjectMagma* magma = nullptr;
 	moveFloor* movefloor = nullptr;
@@ -37,7 +37,7 @@ private:
 	RorlingRock* rorlingRock = nullptr;
 	Iwa* iwa = nullptr;
 	GameObjectScythe* scythe = nullptr;
-	StageObjectDossun* dossun = nullptr;*/
+	StageObjectDossun* dossun = nullptr;
 
 	void Update();
 	bool Start();
@@ -47,13 +47,16 @@ private:
 	moveFloor* moveFloorPtr = nullptr;
 	MoveFloor2* moveFloor2Ptr = nullptr; 
 	float Floor2PosX = 0.0f;
-	Goal* m_goalPtr = nullptr;
-	/*std::list< stageObjectStopFloor*> stopFloorList;
+
+	//リスト
+	std::list<IGameObject*> GameObjList;
+
+	std::list< stageObjectStopFloor*> stopFloorList;
 	std::list<Goal*> goalList;
 	std::list<Iwa*> IwaList;
 	std::list<moveFloor*> moveFloorList;
 	std::list<GameObjectScythe*> GameObjectScytheList;
 	std::list<StageObjectDossun*> StageObjectDossunList;
-	std::list<StageObjectMagma*> StageObjectMagmaList;*/
+	std::list<StageObjectMagma*> StageObjectMagmaList;
 };
 

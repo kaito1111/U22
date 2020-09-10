@@ -19,13 +19,11 @@
     <ImageContentTask Include="Assets\sprite\Clear.png" />
     <ImageContentTask Include="Assets\modelData\a.png" />
     <ImageContentTask Include="Assets\modelData\dummy.png" />
-    <ImageContentTask Include="Assets\sprite\Yellow.png" />
-    <ImageContentTask Include="Assets\sprite\Corse1_image.png" />
-    <ImageContentTask Include="Assets\sprite\Corse2_image.png" />
+    <ImageContentTask Include="Assets\sprite\初めからor続きから.png" />
+    <ImageContentTask Include="Assets\sprite\PadBase.png" />
     <ImageContentTask Include="Assets\sprite\del.png" />
     <ImageContentTask Include="Assets\sprite\jump.png" />
     <ImageContentTask Include="Assets\sprite\N.png" />
-    <ImageContentTask Include="Assets\sprite\PadBase.png" />
     <ImageContentTask Include="Assets\sprite\S.png" />
   </ItemGroup>
   <ItemGroup>
@@ -122,15 +120,16 @@
     <ClCompile Include="sound\WaveFileBank.cpp" />
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="GemeLoop.cpp" />
+    <ClCompile Include="PlayerData.cpp" />
+    <ClCompile Include="NewOrContinue.cpp" />
+    <ClCompile Include="Sample\SampleGround.cpp" />
+    <ClCompile Include="Sample\SampleScene.cpp" />
+    <ClCompile Include="graphics\2D\Font.cpp" />
+    <ClCompile Include="graphics\2D\FontRender.cpp" />
+    <ClCompile Include="Effect\CEffectEngine.cpp" />
     <ClCompile Include="character\BoxCharactorController.cpp" />
     <ClCompile Include="physics\BoxCollider.cpp" />
     <ClCompile Include="Manual.cpp" />
-    <ClCompile Include="botuLight\LightBase.cpp" />
-    <ClCompile Include="graphics\2D\Font.cpp" />
-    <ClCompile Include="Sample\SampleGround.cpp" />
-    <ClCompile Include="Sample\SampleScene.cpp" />
-    <ClCompile Include="Effect\CEffectEngine.cpp" />
-    <ClCompile Include="graphics\2D\FontRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -170,8 +169,7 @@
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
     <MeshContentTask Include="Assets\modelData\Doragon.fbx" />
-    <MeshContentTask Include="Assets\modelData\MagnetObject.fbx" />
-    <MeshContentTask Include="Assets\modelData\Magnet_Box.FBX" />
+    <MeshContentTask Include="Assets\modelData\titleStage2.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
@@ -270,18 +268,18 @@
     <ClInclude Include="sound\WaveFile.h" />
     <ClInclude Include="sound\WaveFileBank.h" />
     <ClInclude Include="Sample\DebugMan.h" />
-    <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="GemeLoop.h" />
+    <ClInclude Include="PlayerData.h" />
+    <ClInclude Include="NewOrContinue.h" />
+    <ClInclude Include="Noncopyable.h" />
+    <ClInclude Include="Sample\SampleGround.h" />
+    <ClInclude Include="Sample\SampleScene.h" />
+    <ClInclude Include="graphics\2D\Font.h" />
+    <ClInclude Include="graphics\2D\FontRender.h" />
+    <ClInclude Include="Effect\CEffectEngine.h" />
     <ClInclude Include="character\BoxCharactorController.h" />
     <ClInclude Include="physics\BoxCollider.h" />
     <ClInclude Include="Manual.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="botuLight\LightBase.h" />
-    <ClInclude Include="graphics\2D\Font.h" />
-    <ClInclude Include="Sample\SampleGround.h" />
-    <ClInclude Include="Sample\SampleScene.h" />
-    <ClInclude Include="Effect\CEffectEngine.h" />
-    <ClInclude Include="graphics\2D\FontRender.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

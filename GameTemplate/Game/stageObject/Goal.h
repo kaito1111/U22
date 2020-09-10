@@ -1,5 +1,5 @@
 #pragma once
-#include "Player.h"
+class GamePlayer;
 class Goal : public IGameObject
 {
 public:
@@ -23,7 +23,7 @@ private:
 	bool isClear = false;
 	SkinModelRender* m_SkinRender = nullptr;
 	CVector3 m_Position = CVector3::Zero();
-	GamePlayer* m_player[2] = {};
+	GamePlayer* m_player[g_PlayerNum] = {};
 	CQuaternion m_rot = CQuaternion::Identity();
 	SpriteRender* m_ClearSprite = nullptr;
 	SoundSource m_Se;

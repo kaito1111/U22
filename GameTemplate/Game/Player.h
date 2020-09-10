@@ -2,11 +2,12 @@
 #include "character/CharacterController.h"
 #include "graphics/2D/SpriteRender.h"
 #include "Magnet/Magnet.h"
+#include "PlayerData.h"
 class PlayerPad;
 class NetworkPad;
 class IPad;
 
-class GamePlayer : public IGameObject
+class GamePlayer : public PlayerData
 {
 public:
 	GamePlayer();//コンストラクタ

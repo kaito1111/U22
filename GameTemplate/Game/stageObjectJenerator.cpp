@@ -19,6 +19,9 @@ stageObjectJenerator::stageObjectJenerator()
 
 stageObjectJenerator::~stageObjectJenerator()
 {
+	for (auto ptr : GameObjList) {
+		DeleteGO(ptr);
+	}
 }
 
 bool stageObjectJenerator::Start()
@@ -32,6 +35,7 @@ bool stageObjectJenerator::Start()
 			if (wcscmp(objData.name, L"Gimmick_Button") == 0) {
 				moveButtonPtr = NewGO<Gimmick_Button>(0, "gimmick_button");
 				moveButtonPtr->SetPosition(objData.position);
+				GameObjList.push_back(moveButtonPtr);
 				return true;
 			}
 			//動く床
@@ -41,6 +45,7 @@ bool stageObjectJenerator::Start()
 				//float型です。動かしたい量を入れてね。
 				moveFloorPtr->SetMoveLimit(300.0f);
 				moveFloorPtr->SetUpdate(false);
+				GameObjList.push_back(moveFloorPtr);
 				return true;
 			}
 			//動く床左右バージョン
@@ -52,13 +57,15 @@ bool stageObjectJenerator::Start()
 				moveFloor2Ptr->SetUpdate(false);
 				Floor2PosX = moveFloor2Ptr->GetPosition().x;
 				Floor2PosX -= 200.0f;
+				GameObjList.push_back(moveFloor2Ptr);
 				return true;
 			}
 
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				m_goalPtr = NewGO<Goal>(0, "Goal");
+				auto m_goalPtr = NewGO<Goal>(0, "Goal");
 				m_goalPtr->SetPosition(objData.position);
+				GameObjList.push_back(m_goalPtr);
 				return true;
 			}
 			if (wcsstr(objData.name, L"CheckPoint") != NULL)
@@ -82,12 +89,14 @@ bool stageObjectJenerator::Start()
 			if (wcscmp(objData.name, L"Dossun") == 0) {
 				StageObjectDossun* dossunPtr = NewGO< StageObjectDossun>(0, "Dossun");
 				dossunPtr->SetPosition(objData.position);
+				GameObjList.push_back(dossunPtr);
 				return true;
 			}
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
 				Goal* goalPtr = NewGO<Goal>(0, "Goal");
 				goalPtr->SetPosition(objData.position);
+				GameObjList.push_back(goalPtr);
 			}
 		});
 		PointGenerator->Load(L"Assets/level/stageDossun.tkl");
@@ -99,6 +108,7 @@ bool stageObjectJenerator::Start()
 			if (wcscmp(objData.name, L"MagnetObject") == 0) {
 				Iwa* iwa = NewGO<Iwa>(0, "iwa");
 				iwa->SetPosition(objData.position);
+				GameObjList.push_back(iwa);
 			}
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
@@ -121,6 +131,8 @@ bool stageObjectJenerator::Start()
 				//float型です。動かしたい量を入れてね。
 				moveFloorPtr->SetMoveLimit(300.0f);
 				//moveFloorPtr->SetUpdate(false);
+				GameObjList.push_back(moveFloorPtr);
+				
 				return true;
 			}
 			if (wcsstr(objData.name, L"CheckPoint") != NULL)

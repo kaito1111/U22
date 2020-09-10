@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Goal.h"
+#include "Player.h"
 #include "light/DirectionLight.h"
 #include "../GemeLoop.h"
 

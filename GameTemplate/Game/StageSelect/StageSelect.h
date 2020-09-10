@@ -4,7 +4,8 @@ class TitleStage;
 class TitleCamera;
 class Game;
 class Stage;
-class GamePlayer;
+//class Player;
+
 class StageSelect : public IGameObject
 {
 public:
@@ -12,14 +13,23 @@ public:
 	~StageSelect();
 	bool Start();
 	void Update();
-	void stageSelect();
+	void PostRender();
+
+	CVector3 GetPos() const
+	{
+		return m_pos[0];
+	}
 private:
-	//GamePlayer* player1 = nullptr;
-	//GamePlayer* player2 = nullptr;
+	void Draw();
+	Sprite m_copyMainRtToFrameBufferSprite;	//なんか要るヤツ
+	SkinModel m_stage[g_StageMAX] = {};
+	CVector3 m_pos[g_StageMAX] = {};
+	/*Player* player1 = nullptr;
+	Player* player2 = nullptr;*/
 	Stage* stage = nullptr;
 	Game* game = nullptr;
-	TitleCamera* titleCamera = nullptr;
-	TitleStage* titleStage = nullptr;
+	TitleCamera* titleCamera = 000000000000;
+	//TitleStage* titleStage = nullptr;
 	stageObjectJenerator* generator;
 	SpriteRender m_sprite;             //スプライト
 	CVector2 m_spritePos;              //スプライトの座標。

@@ -101,20 +101,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bloom\Bloom.cpp" />
-    <ClCompile Include="graphics\2D\FontRender.cpp" />
-    <ClCompile Include="graphics\2D\Font.cpp" />
-    <ClCompile Include="botuLight\LightBase.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Effect\CEffectEngine.cpp" />
     <ClCompile Include="character\BoxCharactorController.cpp" />
     <ClCompile Include="character\CharacterController.cpp" />
     <ClCompile Include="CheckPoint.cpp" />
     <ClCompile Include="CheckPointgenerator.cpp" />
+    <ClCompile Include="Effect\CEffectEngine.cpp" />
+    <ClCompile Include="graphics\2D\Font.cpp" />
+    <ClCompile Include="graphics\2D\FontRender.cpp" />
     <ClCompile Include="Manual.cpp" />
+    <ClCompile Include="NewOrContinue.cpp" />
     <ClCompile Include="physics\BoxCollider.cpp" />
-    <ClCompile Include="Sample\SampleGround.cpp" />
+    <ClCompile Include="PlayerData.cpp" />
     <ClCompile Include="Sample\DebugMan.cpp" />
     <ClCompile Include="GemeLoop.cpp" />
     <ClCompile Include="light\DirectionLight.cpp" />
@@ -127,8 +124,9 @@
     <ClCompile Include="Network\NetworkLogic.cpp" />
     <ClCompile Include="Network\OutputListener.cpp" />
     <ClCompile Include="Network\TestView.cpp" />
-    <ClCompile Include="Sample\SampleScene.cpp" />
     <ClCompile Include="SamplerState.cpp" />
+    <ClCompile Include="Sample\SampleGround.cpp" />
+    <ClCompile Include="Sample\SampleScene.cpp" />
     <ClCompile Include="stageObject\GameObjectScythe.cpp" />
     <ClCompile Include="stageObject\Gimmick_Button.cpp" />
     <ClCompile Include="stageObject\Goal.cpp" />
@@ -215,22 +213,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />
-    <ClInclude Include="graphics\2D\FontRender.h" />
-    <ClInclude Include="graphics\2D\Font.h" />
-    <ClInclude Include="botuLight\LightBase.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Effect\CEffectEngine.h" />
     <ClInclude Include="character\BoxCharactorController.h" />
     <ClInclude Include="character\CharacterController.h" />
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="CheckPointgenerator.h" />
+    <ClInclude Include="Effect\CEffectEngine.h" />
+    <ClInclude Include="graphics\2D\Font.h" />
+    <ClInclude Include="graphics\2D\FontRender.h" />
     <ClInclude Include="Manual.h" />
+    <ClInclude Include="NewOrContinue.h" />
     <ClInclude Include="Noncopyable.h" />
     <ClInclude Include="physics\BoxCollider.h" />
-    <ClInclude Include="ResourceManager.h" />
-    <ClInclude Include="Sample\SampleGround.h" />
+    <ClInclude Include="PlayerData.h" />
     <ClInclude Include="Sample\DebugMan.h" />
     <ClInclude Include="GemeLoop.h" />
     <ClInclude Include="light\DirectionLight.h" />
@@ -244,8 +238,9 @@
     <ClInclude Include="Network\OutputListener.h" />
     <ClInclude Include="Network\TestView.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Sample\SampleScene.h" />
     <ClInclude Include="SamplerState.h" />
+    <ClInclude Include="Sample\SampleGround.h" />
+    <ClInclude Include="Sample\SampleScene.h" />
     <ClInclude Include="stageObject\GameObjectScythe.h" />
     <ClInclude Include="stageObject\Gimmick_Button.h" />
     <ClInclude Include="stageObject\Goal.h" />
@@ -343,8 +338,6 @@
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
-    <MeshContentTask Include="Assets\modelData\MagnetObject.fbx" />
-    <MeshContentTask Include="Assets\modelData\Magnet_Box.FBX" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />
@@ -366,27 +359,26 @@
     <MeshContentTask Include="Assets\modelData\testGround.fbx" />
     <MeshContentTask Include="Assets\modelData\titleFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\titleStage1.fbx" />
+    <MeshContentTask Include="Assets\modelData\titleStage2.fbx" />
     <MeshContentTask Include="Assets\modelData\titleStage3.fbx" />
     <MeshContentTask Include="Assets\modelData\TogeToge.FBX" />
     <MeshContentTask Include="Assets\modelData\unityChan.fbx" />
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
   </ItemGroup>
   <ItemGroup>
-    <ImageContentTask Include="Assets\sprite\Yellow.png" />
+    <ImageContentTask Include="Assets\sprite\初めからor続きから.png" />
     <ImageContentTask Include="Assets\sprite\LoadN.png" />
     <ImageContentTask Include="Assets\sprite\LoadS.png" />
     <ImageContentTask Include="Assets\sprite\LoadScreen(Down).png" />
     <ImageContentTask Include="Assets\sprite\LoadScreen(Up).png" />
     <ImageContentTask Include="Assets\sprite\1P_Pointer(Dead).png" />
     <ImageContentTask Include="Assets\sprite\2P_Pointer(Dead).png" />
-    <ImageContentTask Include="Assets\sprite\Corse1_image.png" />
-    <ImageContentTask Include="Assets\sprite\Corse2_image.png" />
+    <ImageContentTask Include="Assets\sprite\PadBase.png" />
     <ImageContentTask Include="Assets\sprite\del.png" />
     <ImageContentTask Include="Assets\sprite\jump.png" />
     <ImageContentTask Include="Assets\sprite\N.png" />
-    <ImageContentTask Include="Assets\sprite\PadBase.png" />
-    <ImageContentTask Include="Assets\sprite\S.png" />
     <Image Include="Assets\sprite\ProvisionalTitle.png" />
+    <ImageContentTask Include="Assets\sprite\S.png" />
     <Image Include="Assets\sprite\stage1.png" />
     <Image Include="Assets\sprite\stage2.png" />
     <ImageContentTask Include="Assets\sprite\Title.png" />
