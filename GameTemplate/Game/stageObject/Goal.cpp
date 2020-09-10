@@ -12,6 +12,8 @@ Goal::Goal(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 
 Goal::~Goal()
 {
+	DeleteGO(m_ClearSprite);
+	DeleteGO(m_SkinRender);
 }
 
 bool Goal::Start()
@@ -23,7 +25,6 @@ bool Goal::Start()
 	m_SkinRender->Init(L"Goal.cmo");
 	m_player[0] = FindGO<GamePlayer>("player1");
 	m_player[1] = FindGO<GamePlayer>("player2");
-
 	return true;
 }
 
@@ -45,8 +46,14 @@ void Goal::Update()
 		}
 		if (i == clearNum) {
 			isClear = true;
-			m_ClearSprite->SetW(1.0f);
-			NewGO<GameLoop>(1, "gameloop");
+			if (!Last) {
+				m_ClearSprite->SetW(1.0f);
+				NewGO<GameLoop>(1, "gameloop");
+			}
+			else {
+				m_FinishFont = NewGO<CFontRender>(0);
+				m_FinishFont->SetText(L"Finish");
+			}
 			m_Se.Play();
 		}
 	}

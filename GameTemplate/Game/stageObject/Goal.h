@@ -16,6 +16,9 @@ public:
 	bool IsClear() {
 		return isClear;
 	}
+	void SetLast(bool Is) {
+		Last = Is;
+	}
 private:	
 	bool isClear = false;
 	SkinModelRender* m_SkinRender = nullptr;
@@ -24,4 +27,6 @@ private:
 	CQuaternion m_rot = CQuaternion::Identity();
 	SpriteRender* m_ClearSprite = nullptr;
 	SoundSource m_Se;
+	CFontRender* m_FinishFont = nullptr;
+	bool Last = false;
 };

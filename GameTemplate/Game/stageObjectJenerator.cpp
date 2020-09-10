@@ -13,7 +13,7 @@
 #include "CheckPointgenerator.h"
 stageObjectJenerator::stageObjectJenerator()
 {
-	
+
 }
 
 
@@ -68,7 +68,7 @@ bool stageObjectJenerator::Start()
 
 			return false;
 		});
-			PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
+		PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
 	}
 
 
@@ -90,7 +90,7 @@ bool stageObjectJenerator::Start()
 				goalPtr->SetPosition(objData.position);
 			}
 		});
-			PointGenerator->Load(L"Assets/level/stageDossun.tkl");
+		PointGenerator->Load(L"Assets/level/stageDossun.tkl");
 	}
 
 	if (StageNum == 2) {
@@ -99,6 +99,13 @@ bool stageObjectJenerator::Start()
 			if (wcscmp(objData.name, L"MagnetObject") == 0) {
 				Iwa* iwa = NewGO<Iwa>(0, "iwa");
 				iwa->SetPosition(objData.position);
+			}
+			//ÉSÅ[Éã
+			if (wcscmp(objData.name, L"Goal") == 0) {
+				m_goalPtr = NewGO<Goal>(0, "Goal");
+				m_goalPtr->SetPosition(objData.position);
+				m_goalPtr->SetLast(true);
+				return true;
 			}
 			return true;
 		});
@@ -141,5 +148,5 @@ void stageObjectJenerator::Update()
 			}
 		}
 	}
-	
+
 }

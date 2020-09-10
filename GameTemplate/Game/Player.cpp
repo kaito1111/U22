@@ -23,6 +23,9 @@ GamePlayer::GamePlayer()
 //デストラクタ
 GamePlayer::~GamePlayer()
 {
+	if (HaveMagnet) {
+		DeleteMO(m_Magnet); 
+	}
 	DeleteGO(m_Magnet);
 	DeleteGO(m_ThisNumSprite);
 }
