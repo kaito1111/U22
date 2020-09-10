@@ -315,7 +315,7 @@ void GamePlayer::Move()
 	movespeed.z = 0.0f;
 	//¶‰E‚ÌˆÚ“®
 	movespeed.x = g_Pad[GetPadNo()].GetLStickXF()* -10.0f;
-	const float junpPower = 15.0f;
+	const float junpPower = 40.0f;
 	//ƒWƒƒƒ“ƒv”»’è
 	if (m_characon.IsOnGround())
 	{

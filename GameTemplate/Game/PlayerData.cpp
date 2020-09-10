@@ -5,11 +5,7 @@
 #include<tuple>
 #include <fstream>
 #include "Player.h"
-bool PlayerData::Start()
-{
-
-	return true;
-}
+#include"GameCamera.h"
 PlayerData::PlayerData()
 {
 }
@@ -21,36 +17,41 @@ PlayerData::~PlayerData()
 
 void PlayerData::SavePlayerData(/*GamePlayer* playerptr*/)
 {
-	//static const char PlayerMax = 2;//プレイヤーの最大数
-
-	//プレイヤーに名前つけてる
-	//for (nowSavePlayer = 1;
-	//	nowSavePlayer <= g_PlayerNum;
-	//	nowSavePlayer++) {
-
-	//	char PlayerName[256] = {};//名前
-	//	sprintf(PlayerName, "player%d", nowSavePlayer);
-	//	player[nowSavePlayer - 1] = FindGO<GamePlayer>(PlayerName);
-	//}
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	//ファイルに初期値を保存しておくためだけのもの。１回通せたら消す。
 	//ファイルの保存
-	FILE* file = fopen("../PlayerData.txt", "wb");
-	if (file != nullptr) {
+	//FILE* files = fopen("../PlayerData.txt", "wb");
+	//if (files != nullptr) {
+	//	return;
+	//	//ファイルのオープンに失敗
+	//}
+	//fwrite(&stageNum, sizeof(int), 1, files);
+	//fwrite(&player1Pos, sizeof(CVector3), 1, files);//引数の１はコピーされる数（なんじゃね？）
+	//fwrite(&player2Pos, sizeof(CVector3), 1, files);
+	//fclose(files);
+	////////////////////////////////////////////////////////////////////////////////////////////
+	//ファイルの保存
+	FILE* files = fopen("../PlayerData.txt", "wb");
+	if (files != nullptr) {
 		//ファイルのオープンに失敗
-		return;
+		//return;
 	}
 	player[0] = FindGO<GamePlayer>("player1");
-	player1Pos = player[0]->GetPosition();
 	player[1] = FindGO<GamePlayer>("player2");
+	stage	  =	FindGO<Stage>("stage");
+	gCamera	  = FindGO<GameCamera>("camera");
+	player1Pos = player[0]->GetPosition();
 	player2Pos = player[1]->GetPosition();
 
-	stage = FindGO<Stage>("stage");
+
 	stageNum = stage->GetNowStage();
 	//player1Pos = playerptr->GetPosition();
 	
-	fwrite(&stageNum, sizeof(int), 1, file);
-	fwrite(&player1Pos, sizeof(CVector3), 1, file);//引数の１はコピーされる数（なんじゃね？）
-	fwrite(&player2Pos, sizeof(CVector3), 1, file);
-	fclose(file);
+	fwrite(&stageNum, sizeof(int), 1, files);
+	fwrite(&player1Pos, sizeof(CVector3), 1, files);//引数の１はコピーされる数（なんじゃね？）
+	fwrite(&player2Pos, sizeof(CVector3), 1, files);
+	fclose(files);
+	DeleteGO(gCamera);
 	DeleteGO(player[0]);
 	DeleteGO(player[1]);
 	DeleteGO(stage);

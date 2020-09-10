@@ -2,7 +2,7 @@
 #include "stageObject/Goal.h"
 #include "GemeLoop.h"
 #include "Stage.h"
-
+#include "StageSelect/StageSelect.h"
 GameLoop::GameLoop()
 {
 }
@@ -24,6 +24,7 @@ void GameLoop::Update()
 	if (m_fade->GetLengh() < 210.0f) {
 		DeleteGO(m_game);
 		DeleteGO(this);
+		select = NewGO<StageSelect>(0, "stageselect");
 	}
 	if (m_fade->GetLengh() < 200.0f) {
 		Stage* stage = NewGO<Stage>(0, "stage");
