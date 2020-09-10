@@ -1,6 +1,7 @@
 #pragma once
 class GamePlayer;
 class Stage;
+class KaitoTask;
 class PlayerData : public IGameObject
 {
 private:
@@ -10,10 +11,12 @@ private:
 	CVector3 player2Pos = CVector3::Zero();
 	int nowSavePlayer = 0;//for文で回すために使うやつ
 	int stageNum = 0; //保存したりするステージの番号
+	Stage* stage = nullptr;
+	KaitoTask* kaitotTask = nullptr;
 public:
 	PlayerData();
 	~PlayerData();
-	Stage* stage = nullptr;
+
 	void SavePlayerData(/*GamePlayer* playerptr*/); //セーブ
 	void  LoadPlayerData();//ロード
 	CVector3 player1(){
