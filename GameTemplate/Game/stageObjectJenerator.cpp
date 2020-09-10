@@ -112,9 +112,10 @@ bool stageObjectJenerator::Start()
 			}
 			//ÉSÅ[Éã
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				m_goalPtr = NewGO<Goal>(0, "Goal");
-				m_goalPtr->SetPosition(objData.position);
-				m_goalPtr->SetLast(true);
+				Goal* goalPtr = NewGO<Goal>(0, "Goal");
+				goalPtr->SetPosition(objData.position);
+				goalPtr->SetLast(true);
+				GameObjList.push_back(goalPtr);
 				return true;
 			}
 			return true;

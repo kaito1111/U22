@@ -36,10 +36,9 @@ Game::~Game()
 	if (m_frameBufferRenderTargetView != nullptr) {
 		m_frameBufferRenderTargetView->Release();
 	}
-	SavePlayerData();
+	//SavePlayerData();
 	DeleteGO(m_task);
 	DeleteGO(goalPtr);
-	DeleteGO(stage);
 }
 
 bool Game::Start()

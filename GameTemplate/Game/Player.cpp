@@ -23,6 +23,7 @@ GamePlayer::GamePlayer()
 //デストラクタ
 GamePlayer::~GamePlayer()
 {
+	//SavePlayerData(this);
 	if (HaveMagnet) {
 		DeleteMO(m_Magnet); 
 	}
