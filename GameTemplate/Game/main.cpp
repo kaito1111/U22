@@ -4,8 +4,8 @@
 #include "Title.h"
 
 /*
-	8/10~ mainでエンジン関連の初期化まで行うのは、違うと感じたので
-	Engineクラスの方に、処理を移しました。
+	8/10~ mainでエンジン関連の初期化まで行うのは、違うと思うので
+	Engineクラスの方に、処理を移譲しました。
 */
 
 ///////////////////////////////////////////////////////////////////
@@ -33,7 +33,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	NewGO<Title>(1, "title");
 
 	/*
-	ここでのカメラ初期化おかしい。
+	ここでのカメラ初期化おかしくない？
 	Gameとかで使うんだから、そこですべきなのでは？
 	*/
 	g_camera3D.SetPosition({ 00.0f, 100.0f, 500.0f });

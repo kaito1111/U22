@@ -95,6 +95,7 @@ void CEngine::Update()
 
 void CEngine::Final()
 {
+	//一応ここで切断・・・　遅い？
 	//ネットワークからの切断
 	NetworkLogic::GetInstance().Disconnect();
 	NetworkLogic::GetInstance().GetLBL()->disconnectReturn();

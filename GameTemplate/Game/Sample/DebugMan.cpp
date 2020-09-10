@@ -113,6 +113,6 @@ namespace myEngine {
 		//	m_animation.Play(enAnimClip_idle, 0.2);
 		//}
 
-		//m_skinModel.UpdateWorldMatrix(m_pos, m_rot, m_scale);
+		m_skinModel.UpdateWorldMatrix(m_pos, m_rot, m_scale);
 	}
 }
