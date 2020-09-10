@@ -39,7 +39,6 @@ Game::~Game()
 	SavePlayerData();
 	DeleteGO(m_task);
 	DeleteGO(goalPtr);
-	DeleteGO(stage);
 }
 
 bool Game::Start()
