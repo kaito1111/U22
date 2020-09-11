@@ -170,6 +170,7 @@
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
     <MeshContentTask Include="Assets\modelData\Doragon.fbx" />
     <MeshContentTask Include="Assets\modelData\titleStage2.fbx" />
+    <MeshContentTask Include="Assets\modelData\MagnetObject.fbx" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bloom\Bloom.h" />

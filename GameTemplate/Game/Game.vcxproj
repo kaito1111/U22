@@ -338,6 +338,7 @@
     <MeshContentTask Include="Assets\modelData\Huriko.fbx" />
     <MeshContentTask Include="Assets\modelData\iwa.fbx" />
     <MeshContentTask Include="Assets\modelData\magma.fbx" />
+    <MeshContentTask Include="Assets\modelData\MagnetObject.fbx" />
     <MeshContentTask Include="Assets\modelData\maruToge.FBX" />
     <MeshContentTask Include="Assets\modelData\moveFloor.fbx" />
     <MeshContentTask Include="Assets\modelData\moveFloor2.fbx" />

@@ -368,7 +368,9 @@ void GamePlayer::Move()
 	}
 	//Ž¥Î‚ÌˆÚ“®
 	movespeed += m_Magnet->MagnetMove();
-
+	if (movespeed.y > 15.0f) {
+		movespeed.y = 15;
+	}
 	//’n–Ê‚É‚Â‚¢‚Ä‚¢‚é‚Ì‚É‰º‚ÖŒü‚©‚¤‚Ì‚Í‚¨‚©‚µ‚¢‚Ì‚Å
 	//‚™•ûŒü‚Í‚O‚É
 	if (m_characon.IsOnGround() && movespeed.y < 0.0f) {
