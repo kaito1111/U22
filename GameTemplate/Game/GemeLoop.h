@@ -15,7 +15,7 @@ private:
 	void Update();
 	Goal* m_goal = nullptr;
 	Game* m_game = nullptr;
-	GameCamera* m_camera = nullptr;
+	//GameCamera* m_camera = nullptr;
 	Fade* m_fade = nullptr;
 	//StageSelect* select = nullptr;
 };

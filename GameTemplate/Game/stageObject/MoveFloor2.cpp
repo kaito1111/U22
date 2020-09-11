@@ -98,7 +98,8 @@ void MoveFloor2::Move()
 			}
 		}
 	}
-	m_pos = m_BoxCharaCon.Execute(1.0f, { moveSpeed,0.0f,0.0f });
+	CVector3 MoveSpeed = { moveSpeed,0.0f,0.0f };
+	m_pos = m_BoxCharaCon.Execute(1.0f, MoveSpeed);
 }
 
 void MoveFloor2::Move2()

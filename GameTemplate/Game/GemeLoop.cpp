@@ -8,12 +8,13 @@ GameLoop::GameLoop()
 
 GameLoop::~GameLoop()
 {
+
 }
 
 bool GameLoop::Start()
 {
 	m_game = FindGO<Game>("game");
-	m_camera = FindGO<GameCamera>("camera");
+	//m_camera = FindGO<GameCamera>("camera");
 	m_fade = NewGO<Fade>(0, "fade");
 	return true;
 }
@@ -21,6 +22,7 @@ bool GameLoop::Start()
 void GameLoop::Update()
 {
 	if (m_fade->GetLengh() < 210.0f) {
+		//DeleteGO(m_camera);
 		DeleteGO(m_game);
 		DeleteGO(this);
 		Game* game = NewGO<Game>(0, "game");

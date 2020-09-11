@@ -134,6 +134,10 @@ CVector3 Magnet::MagnetMove()
 			MagnetForce.y = 0.0f;						//Ž©•ª‚ÌˆÚ“®‚ðÁ‚·
 		}
 		m_MagnetForce += MagnetForce;					//ÅI“I‚ÈˆÚ“®—Ê‚ð‘«‚·
+		if (m_MagnetForce.Length() >= 7.5) {
+			MagnetForce.Normalize();
+			MagnetForce *= 7.5f;
+	}
 		return true;
 	});
 	return m_MagnetForce;
