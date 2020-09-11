@@ -27,6 +27,8 @@ bool MoveFloor2::Start()
 	int MaxPlayer = Pad::CONNECT_PAD_MAX;
 	StartPos = m_pos;
 
+	m_BoxCharaCon.Init(100.0f, 20.0f, 1.0f, m_pos);//箱オブジェクト
+	m_BoxCharaCon.SetAffected(false);
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), m_Scale);
 	return true;
@@ -36,7 +38,7 @@ void MoveFloor2::Update()
 {
 	//メッシュの云々。要するに当たり判定
 	Move();
-	m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
+	//m_phyStaticObject.CreateMeshObject(m_model, m_pos, m_rot);//静的物理オブジェクト
 	//ワールド行列の更新
 	m_model.UpdateWorldMatrix(m_pos, CQuaternion::Identity(), m_Scale);
 }
@@ -71,7 +73,6 @@ void MoveFloor2::Move()
 				moveSpeed = speedDownLimit;		//スピードを0に合わせる
 			}
 		}
-		m_pos.x += moveSpeed;
 	}
 
 	//右
@@ -96,8 +97,8 @@ void MoveFloor2::Move()
 				moveSpeed = speedDownLimit;
 			}
 		}
-		m_pos.x -= moveSpeed;
 	}
+	m_pos = m_BoxCharaCon.Execute(1.0f, { moveSpeed,0.0f,0.0f });
 }
 
 void MoveFloor2::Move2()
