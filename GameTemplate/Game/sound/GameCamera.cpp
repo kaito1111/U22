@@ -23,6 +23,7 @@ bool GameCamera::Start()
 			return true;
 		});
 	}
+
 	return true;
 }
 
@@ -30,7 +31,6 @@ void GameCamera::Update()
 {
 	CVector3 Target = CVector3::Zero();
 
-	//PlayerNum‚ª0‚¾‚©‚ç‚±‚ê“ü‚Á‚Ä‚È‚¢
 	for (int i = 0; i < m_PlayerNum; i++) {
 		CVector3 m_PlPos = m_Player[i]->GetPosition();
 		Target += m_PlPos;

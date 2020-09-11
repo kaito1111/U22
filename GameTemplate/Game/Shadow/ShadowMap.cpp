@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ShadowMap.h"
 #include "graphics/SkinModelShaderConst.h"
+#include "player.h"
 
 ShadowMap::ShadowMap()
 {
@@ -263,6 +264,12 @@ void ShadowMap::Update()
 		}
 		//プロジェクション行列
 		CMatrix proj;
+		auto camerapos = g_camera3D.GetPosition();
+		auto player = FindGO<GamePlayer>("player1", false);
+		CVector3 playerpos;
+		if (player != nullptr) {
+			playerpos = player->GetPosition();
+		}
 		//作成
 		proj.MakeOrthoProjectionMatrix(
 			w,

@@ -136,17 +136,17 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 		//最初のひとり
 		printf("Created room.\n");
 		printf("waiting for other player.\n");
-		fp = fopen("Assets/log/Plog.log", "w");
-		char text[64];
-		sprintf(text, "record Start\n");
-		fputs(text, fp);
+		//fp = fopen("Assets/log/Plog.log", "w");
+		//char text[64];
+		//sprintf(text, "record Start\n");
+		//fputs(text, fp);
 	}
 	if (m_playerNum == 2) {
 		printf("joined room\n");
-		fp = fopen("Assets/log/Nlog.log", "w");
-		char text[64];
-		sprintf(text, "record Start\n");
-		fputs(text, fp);
+		//fp = fopen("Assets/log/Nlog.log", "w");
+		//char text[64];
+		//sprintf(text, "record Start\n");
+		//fputs(text, fp);
 	}
 	if (playerNr == m_maxPlayer){
 		//全員そろった。
@@ -230,44 +230,44 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 		//パッドデータをバッファリングした時の、フレーム数。
 		//printf("Buffering NetworkPadState frameNo = %d\n", frameNo);
 		
-		if (fp != nullptr) {
-			char text[4096];
-			if (m_playerNum == 1) {
-				//p1
-				sprintf(
-					text,
-					"P1:xInputState.Gamepad.sThumbLX = %x receved \n"
-					"P1:xInputState.Gamepad.wButtons = %x receved \n"
-					"P1:xInputState.Gamepad.bLeftTrigger = %x receved \n"
-					"P1:xInputState.Gamepad.bRightTrigger = %x receved \n"
-					"FrameNo = %d\n",
-					&g_netPadState.Gamepad.sThumbLX,
-					&g_netPadState.Gamepad.wButtons,
-					&g_netPadState.Gamepad.bLeftTrigger,
-					&g_netPadState.Gamepad.bRightTrigger,
-					frameNo
-				);
-			}
-			else {
-				//p2
-				sprintf(
-					text,
-					"P2:xInputState.Gamepad.sThumbLX = %x receved \n"
-					"P2:xInputState.Gamepad.wButtons = %x receved \n"
-					"P2:xInputState.Gamepad.bLeftTrigger = %x receved \n"
-					"P2:xInputState.Gamepad.bRightTrigger = %x receved \n"
-					"FrameNo = %d\n",
-					&g_netPadState.Gamepad.sThumbLX,
-					&g_netPadState.Gamepad.wButtons,
-					&g_netPadState.Gamepad.bLeftTrigger,
-					&g_netPadState.Gamepad.bRightTrigger,
-					frameNo
-				);
-			}
+		//if (fp != nullptr) {
+		//	char text[4096];
+		//	if (m_playerNum == 1) {
+		//		//p1
+		//		sprintf(
+		//			text,
+		//			"P1:xInputState.Gamepad.sThumbLX = %x receved \n"
+		//			"P1:xInputState.Gamepad.wButtons = %x receved \n"
+		//			"P1:xInputState.Gamepad.bLeftTrigger = %x receved \n"
+		//			"P1:xInputState.Gamepad.bRightTrigger = %x receved \n"
+		//			"FrameNo = %d\n",
+		//			&g_netPadState.Gamepad.sThumbLX,
+		//			&g_netPadState.Gamepad.wButtons,
+		//			&g_netPadState.Gamepad.bLeftTrigger,
+		//			&g_netPadState.Gamepad.bRightTrigger,
+		//			frameNo
+		//		);
+		//	}
+		//	else {
+		//		//p2
+		//		sprintf(
+		//			text,
+		//			"P2:xInputState.Gamepad.sThumbLX = %x receved \n"
+		//			"P2:xInputState.Gamepad.wButtons = %x receved \n"
+		//			"P2:xInputState.Gamepad.bLeftTrigger = %x receved \n"
+		//			"P2:xInputState.Gamepad.bRightTrigger = %x receved \n"
+		//			"FrameNo = %d\n",
+		//			&g_netPadState.Gamepad.sThumbLX,
+		//			&g_netPadState.Gamepad.wButtons,
+		//			&g_netPadState.Gamepad.bLeftTrigger,
+		//			&g_netPadState.Gamepad.bRightTrigger,
+		//			frameNo
+		//		);
+		//	}
 
-			//文字列かきこみ。
-			fputs(text, fp);
-		}
+		//	//文字列かきこみ。
+		//	fputs(text, fp);
+		//}
 	}
 }
 
@@ -518,44 +518,44 @@ void LoadBalancingListener::RaisePadData()
 	hash.put(8, Engine().GetTwoP_Pad().GetFrameNum());
 
 
-	if (fp != nullptr) {
-		char text[4096];
-		if (m_playerNum == 1) {
-			//p1
-			sprintf(
-				text,
-				"P1:xInputState.Gamepad.sThumbLX = %x sent \n"
-				"P1:xInputState.Gamepad.wButtons = %x sent \n"
-				"P1:xInputState.Gamepad.bLeftTrigger = %x sent \n"
-				"P1:xInputState.Gamepad.bRightTrigger = %x sent \n"
-				"FrameNo = %d\n",
-				&xInputState.Gamepad.sThumbLX,
-				&xInputState.Gamepad.wButtons,
-				&xInputState.Gamepad.bLeftTrigger,
-				&xInputState.Gamepad.bRightTrigger,
-				Engine().GetTwoP_Pad().GetFrameNum()
-			);
-		}
-		else {
-			//p2
-			sprintf(
-				text,
-				"P2:xInputState.Gamepad.sThumbLX = %x sent \n"
-				"P2:xInputState.Gamepad.wButtons = %x sent \n"
-				"P2:xInputState.Gamepad.bLeftTrigger = %x sent \n"
-				"P2:xInputState.Gamepad.bRightTrigger = %x sent \n"
-				"FrameNo = %d\n",
-				&xInputState.Gamepad.sThumbLX,
-				&xInputState.Gamepad.wButtons,
-				&xInputState.Gamepad.bLeftTrigger,
-				&xInputState.Gamepad.bRightTrigger,
-				Engine().GetTwoP_Pad().GetFrameNum()
-			);
-		}
+	//if (fp != nullptr) {
+	//	char text[4096];
+	//	if (m_playerNum == 1) {
+	//		//p1
+	//		sprintf(
+	//			text,
+	//			"P1:xInputState.Gamepad.sThumbLX = %x sent \n"
+	//			"P1:xInputState.Gamepad.wButtons = %x sent \n"
+	//			"P1:xInputState.Gamepad.bLeftTrigger = %x sent \n"
+	//			"P1:xInputState.Gamepad.bRightTrigger = %x sent \n"
+	//			"FrameNo = %d\n",
+	//			&xInputState.Gamepad.sThumbLX,
+	//			&xInputState.Gamepad.wButtons,
+	//			&xInputState.Gamepad.bLeftTrigger,
+	//			&xInputState.Gamepad.bRightTrigger,
+	//			Engine().GetTwoP_Pad().GetFrameNum()
+	//		);
+	//	}
+	//	else {
+	//		//p2
+	//		sprintf(
+	//			text,
+	//			"P2:xInputState.Gamepad.sThumbLX = %x sent \n"
+	//			"P2:xInputState.Gamepad.wButtons = %x sent \n"
+	//			"P2:xInputState.Gamepad.bLeftTrigger = %x sent \n"
+	//			"P2:xInputState.Gamepad.bRightTrigger = %x sent \n"
+	//			"FrameNo = %d\n",
+	//			&xInputState.Gamepad.sThumbLX,
+	//			&xInputState.Gamepad.wButtons,
+	//			&xInputState.Gamepad.bLeftTrigger,
+	//			&xInputState.Gamepad.bRightTrigger,
+	//			Engine().GetTwoP_Pad().GetFrameNum()
+	//		);
+	//	}
 
-		//文字列かきこみ。
-		fputs(text, fp);
-	}
+	//	//文字列かきこみ。
+	//	fputs(text, fp);
+	//}
 
 
 	//データの送信

@@ -91,6 +91,9 @@ namespace myEngine {
 				gameObject->m_isDead = true;
 				gameObject = nullptr;
 			}
+			else {
+				//throw;
+			}
 		}
 		/// <summary>
 		/// ゲームオブジェクトの検索

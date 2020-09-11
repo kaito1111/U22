@@ -74,8 +74,8 @@ namespace myEngine {
 	{
 		////‰Á‘¬“x
 		//CVector3 acc;
-		//acc.x = g_Pad[0].GetLStickXF();
-		//acc.z = g_Pad[0].GetLStickYF();
+		m_moveSpeed.x = g_Pad[0].GetLStickXF();
+		m_moveSpeed.z = g_Pad[0].GetLStickYF();
 		//acc.y = 0.0f;
 
 		////ˆÚ“®—Ê‰ÁŽZ
@@ -88,7 +88,7 @@ namespace myEngine {
 		//m_moveSpeed.y = GRAVITY;
 
 		////ˆÚ“®
-		//m_pos = m_charaCon.Execute(1.0f, m_moveSpeed);
+		m_pos = m_charaCon.Execute(1.0f, m_moveSpeed);
 
 		////Œü‚«ŒvŽZ
 		//if (m_moveSpeed.Length() > 1.0f) {

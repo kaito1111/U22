@@ -94,7 +94,7 @@ void NetworkLogic::Start() {
 	//通信の状態をTrueに設定　通信開始の合図てきな？
 	mpLbc->setTrafficStatsEnabled(true);
 	//接続中
-	Console::get().writeLine(L"LBC: connecting...");
+//	Console::get().writeLine(L"LBC: connecting...");
 	//接続(PlayerID)
 	mpLbl->connect(JString(L"NV") + GETTIMEMS());
 }

@@ -32,6 +32,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	NewGO<Manual>(0, "manual");
 	NewGO<Title>(1, "title");
 
+
 	/*
 	ここでのカメラ初期化おかしくない？
 	Gameとかで使うんだから、そこですべきなのでは？
@@ -43,7 +44,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 
 	while (DispatchWindowMessage() == true)
 	{
-		//起動準備OK
+		//起動準備OK7
+		if (g_Pad[0].GetLStickXF() > 0.1f) {
+			printf("a");
+		}
 		//エンジンの更新を開始。
 		Engine().Update();
 	}
