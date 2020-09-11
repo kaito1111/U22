@@ -29,7 +29,7 @@ void Iwa::Update()
 {
 	m_moveSpeed.x = 0.0f;
 	m_moveSpeed.z = 0.0f;
-	m_moveSpeed.y -= 1.0f;
+	m_moveSpeed.y -= 2.0f;
 	m_moveSpeed += m_magnet->MagnetMove();
 	m_pos = m_CharaCon.Execute(1.0f, m_moveSpeed);
 	m_model->SetPosition(m_pos);

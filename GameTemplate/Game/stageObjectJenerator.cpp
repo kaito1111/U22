@@ -140,6 +140,14 @@ bool stageObjectJenerator::Start()
 			{
 				return true;
 			}
+			//ÉSÅ[Éã
+			if (wcscmp(objData.name, L"Goal") == 0) {
+				Goal* goalPtr = NewGO<Goal>(0, "Goal");
+				goalPtr->SetPosition(objData.position);
+				//goalPtr->SetLast(true);
+				GameObjList.push_back(goalPtr);
+				return true;
+			}
 			return true;
 		});
 	}

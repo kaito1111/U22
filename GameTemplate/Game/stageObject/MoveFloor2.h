@@ -1,6 +1,7 @@
 #pragma once
 #include"physics/PhysicsStaticObject.h"
 #include"Gimmick_Button.h"
+#include "character/BoxCharactorController.h"
 class MoveFloor2 : public IGameObject
 {
 //左右に動くヤツやで。
@@ -35,7 +36,8 @@ private:
 	bool speedDown = false;							//スピードを上げたり下げたりする
 	float moveSpeed = 0;                            //速度。上がったり下がったりする
 	bool sLimit = false;		    				//動いた量
-	PhysicsStaticObject m_phyStaticObject;          //静的物理オブジェクト
+	BoxCharactorController m_BoxCharaCon;          //静的物理オブジェクト
+	//PhysicsStaticObject m_phyStaticObject;          //静的物理オブジェクト
 	float up = 0;
 	float down = 0;
 	bool start = false;

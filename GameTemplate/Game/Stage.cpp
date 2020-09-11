@@ -5,7 +5,18 @@
 
 Stage::Stage()
 {
-	nowStage = 0;
+	
+
+}
+
+
+Stage::~Stage()
+{
+	DeleteGO(generator);
+}
+
+bool Stage::Start()
+{
 	//cmoファイルの読み込み。
 	if (nowStage == 0) {
 		m_model.Init(L"Assets/modelData/Course_Level1.cmo");
@@ -22,18 +33,6 @@ Stage::Stage()
 	//シャドウレシーバーとする
 	m_model.SetShadowReciever(true);
 	m_phyStaticObuject.CreateMeshObject(m_model, CVector3::Zero(), CQuaternion::Identity());
-	
-
-}
-
-
-Stage::~Stage()
-{
-	DeleteGO(generator);
-}
-
-bool Stage::Start()
-{
 	generator = NewGO<stageObjectJenerator>(1, "generator");
 	generator->setStageNum(nowStage);
 	return true;

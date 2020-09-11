@@ -33,6 +33,8 @@ void GameCamera::Update()
 
 	for (int i = 0; i < m_PlayerNum; i++) {
 		CVector3 m_PlPos = m_Player[i]->GetPosition();
+
+
 		Target += m_PlPos;
 	}
 	//ã‚ÅƒJƒƒ‰‚ÌˆÊ’u‚ª’²®‚³‚ê‚Ä‚È‚¢‚Ì‚Å–³—‚â‚è’²®
@@ -58,15 +60,15 @@ void GameCamera::Update()
 		}
 	}*/
 
-	//if (Target.x > 300.0f) {
-	//	Target.x = 300.0f;
-	//}
-	//if (Target.x < 200.0f) {
-	//	Target.x = 200.0f;
-	//}
-	//if (Target.y < 190.0f) {
-	//	Target.y = 190.0f;
-	//}
+	if (Target.x > 300.0f) {
+		Target.x = 300.0f;
+	}
+	if (Target.x < 200.0f) {
+		Target.x = 200.0f;
+	}
+	if (Target.y < 190.0f) {
+		Target.y = 190.0f;
+	}
 	m_Pos = Target;
 	m_Pos.z = 500.0f;
 	//CVector3 move = m_Pos - NextPosition;
