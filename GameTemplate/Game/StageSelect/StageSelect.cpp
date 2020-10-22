@@ -132,7 +132,7 @@ void StageSelect::PlayerMove()
 		m_angle -= 10.0f;
 	}
 	float jump = g_Pad[0].IsTrigger(enButtonA);
-	m_CharaCon.Execute(1.0f, { MoveX,0.0f,0.0f });
+	m_CharaCon.Execute(1.0f, CVector3( MoveX,0.0f,0.0f ));
 	m_PlayerRot.SetRotationDeg(CVector3::AxisY(), m_angle);
 	m_PlayerModel->SetPRS(m_PlayerPos, m_PlayerRot, CVector3::One());
 }
