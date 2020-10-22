@@ -99,11 +99,11 @@ namespace myEngine {
 		/// <summary>
 		/// 最後に呼ばれるDraw処理
 		/// </summary>
-		void Draw();
+		//void Draw();
 		/// <summary>
 		/// まだ実装されてないDraw処理
 		/// </summary>
-		//void PostRender();
+		void PostRender();
 	private:
 		bool m_isDraw3D = false;							//3D空間描画？
 		ShaderResourceView m_texture;						//テクスチャ

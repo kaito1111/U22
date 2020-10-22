@@ -13,8 +13,6 @@ Goal::Goal(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 
 Goal::~Goal()
 {
-	DeleteGO(m_ClearSprite);
-	DeleteGO(m_SkinRender);
 }
 
 bool Goal::Start()
@@ -59,4 +57,10 @@ void Goal::Update()
 		}
 	}
 	m_SkinRender->SetPosition(m_Position);
+}
+
+void Goal::OnDestroy()
+{
+	DeleteGO(m_ClearSprite);
+	DeleteGO(m_SkinRender);
 }

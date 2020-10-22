@@ -18,4 +18,5 @@ private:
 	//GameCamera* m_camera = nullptr;
 	Fade* m_fade = nullptr;
 	//StageSelect* select = nullptr;
+	bool m_DeleteGame = false;
 };

@@ -80,9 +80,10 @@ public:
 	}
 private:
 	void ReSpown();//リスポーン地点で復活する
-	bool Start();//すたーと
-	void Update();//あぷでーど
-	void Draw();//どろー
+	bool Start()override;//すたーと
+	void Update()override;//あぷでーど
+	void Draw()override;//どろー
+	void OnDestroy()override;
 	int GetPadNo() const;//コントローラーの番号を返す
 	SkinModel m_model;										//スキンモデル。
 	SkinModel m_FrontModel;									//スキンモデル。

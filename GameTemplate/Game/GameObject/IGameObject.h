@@ -80,6 +80,11 @@ namespace myEngine {
 		/// </summary>
 		virtual void Draw() {};
 		/// <summary>
+		/// íœˆ—
+		///DeleteGO‚ÉÏ‚Ü‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
+		/// </summary>
+		virtual void OnDestroy() {};
+		/// <summary>
 		/// —Dæ“xæ“¾
 		/// </summary>
 		/// <returns>—Dæ“x</returns>

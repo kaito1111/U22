@@ -8,6 +8,10 @@ Gimmick_Button::Gimmick_Button()
 
 Gimmick_Button::~Gimmick_Button()
 {
+}
+
+void Gimmick_Button::OnDestroy()
+{
 	DeleteGO(m_Skin);
 	DeleteGO(m_PushSkin);
 }

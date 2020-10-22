@@ -111,7 +111,6 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
-    <ClCompile Include="StageSelect\StageSelect.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="StageSelect\TitleCamera.cpp" />
     <ClCompile Include="StageSelect\TitleStage.cpp" />
@@ -130,6 +129,8 @@
     <ClCompile Include="character\BoxCharactorController.cpp" />
     <ClCompile Include="physics\BoxCollider.cpp" />
     <ClCompile Include="Manual.cpp" />
+    <ClCompile Include="StageSelect\StageSelect.cpp" />
+    <ClCompile Include="TitlePlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -281,6 +282,7 @@
     <ClInclude Include="character\BoxCharactorController.h" />
     <ClInclude Include="physics\BoxCollider.h" />
     <ClInclude Include="Manual.h" />
+    <ClInclude Include="TitlePlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />
@@ -298,6 +300,8 @@
     <Image Include="Assets\modelData\metal_00078.jpg" />
     <Image Include="Assets\modelData\stage1.jpg" />
     <Image Include="Assets\modelData\stone_00010.jpg" />
+    <Image Include="Assets\sprite\Corse2_image.png" />
+    <Image Include="Assets\sprite\Corse1_image.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\Corse_Level_1.tkl" />

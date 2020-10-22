@@ -41,8 +41,9 @@ namespace myEngine {
 	//		m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), m_w);
 	//	}
 	//}
-	void SpriteRender::Draw()
+	void SpriteRender::PostRender()
 	{
+		int a = 0;
 		if (m_isDraw3D == false) {
 			m_sprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), m_w);
 		}

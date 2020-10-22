@@ -24,8 +24,6 @@ Title::~Title()
 	//NetworkLogic::GetInstance().Disconnect();
 	//NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
 	//printf("disconnect");
-	DeleteGO(m_Sprite);
-	DeleteGO(m_fontRender);
 }
 
 void Title::Update()
@@ -69,5 +67,11 @@ void Title::Update()
 	}
 
 	m_fontRender->SetTextUnsafe(m_text);
+}
+
+void Title::OnDestroy()
+{
+	DeleteGO(m_Sprite);
+	DeleteGO(m_fontRender);
 }
 

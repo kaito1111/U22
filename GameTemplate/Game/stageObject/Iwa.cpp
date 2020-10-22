@@ -9,9 +9,6 @@ Iwa::Iwa()
 
 Iwa::~Iwa()
 {
-	DeleteMO(m_magnet);
-	DeleteGO(m_magnet);
-	DeleteGO(m_model);
 }
 
 bool Iwa::Start()
@@ -35,4 +32,11 @@ void Iwa::Update()
 	m_model->SetPosition(m_pos);
 	m_model->SetRotation(m_rot);
 	m_model->SetScale(CVector3::One());
+}
+
+void Iwa::OnDestroy()
+{
+	DeleteMO(m_magnet);
+	DeleteGO(m_magnet);
+	DeleteGO(m_model);
 }

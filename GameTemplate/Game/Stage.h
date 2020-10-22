@@ -21,6 +21,7 @@ public:
 		return nowStage;
 	}
 private:
+	void OnDestroy()override;
 	int nowStage = 0;
 	int count = 0;
 	bool newStage = false;

@@ -12,7 +12,6 @@ Stage::Stage()
 
 Stage::~Stage()
 {
-	DeleteGO(generator);
 }
 
 bool Stage::Start()
@@ -60,4 +59,9 @@ void Stage::Draw()
 		Engine().GetGraphicsEngine().GetShadowMap()->GetLightViewMatirx(),
 		Engine().GetGraphicsEngine().GetShadowMap()->GetLightProjMatirx()
 	);
+}
+
+void Stage::OnDestroy()
+{
+	DeleteGO(generator);
 }

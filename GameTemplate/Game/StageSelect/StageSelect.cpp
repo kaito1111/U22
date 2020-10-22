@@ -1,93 +1,138 @@
 #include "stdafx.h"
-#include "StageSelect/StageSelect.h"
+#include "StageSelect.h"
 #include "Game.h"
 #include "stageObjectJenerator.h"
-#include"StageSelect/TitleStage.h"
-#include"StageSelect/TitleCamera.h"
+#include"TitleStage.h"
+#include"TitleCamera.h"
 #include"Stage.h"
-#include<vector>
-#include "../CheckPointgenerator.h"
-#include <iostream>
-#include"Game.h"
 StageSelect::StageSelect()
 {
-	m_copyMainRtToFrameBufferSprite.Init(
-		Engine().GetGraphicsEngine().GetOffScreenRenderTarget()->GetRenderTargetSRV(),
-		FRAME_BUFFER_W,
-		FRAME_BUFFER_H
-	);
-	int a = 0;
 }
 
 StageSelect::~StageSelect()
 {
 	//DeleteGO(titleStage);
 	DeleteGO(titleCamera);
-	
 }
 
 bool StageSelect::Start()
 {
-	static const float width3 = 10000.0f;//横幅
-	static const float halfWidth = width3 /2;//半分
+	m_Stage1_sprite = NewGO<SpriteRender>(0);
+	m_Stage1_sprite->Init(L"Assets/sprite/Corse1_image.dds", 200.0f, 200.0f,true);
+	m_Stage1_sprite->SetPosition(m_Stage1_spritePos);
 
+	//m_Stage1_sprite = NewGO<SpriteRender>(0);
+	//m_Stage1_sprite->Init(L"Assets/sprite/Corse1_image.dds", 500.0f, 500.0f);
+	//m_Stage1_sprite->SetPosition(m_Stage1_spritePos);
+
+	m_StageModel = NewGO<SkinModelRender>(0);
+	m_StageModel->Init(L"serectStage.cmo");
+	m_StageModel->SetPosition(CVector3::Zero());
+	m_staticObj.CreateMeshObject(m_StageModel->GetSkinModel(), CVector3::Zero(), CQuaternion::Identity());
 	titleCamera = NewGO<TitleCamera>(1);
-	for (int nowInitStage = 0; nowInitStage < g_StageMAX; nowInitStage++)
-	{
-		//L""のLはwchar_t型がどうか判断するためのヤツ
 
-		//ステージのテクスチャ張った板ポリを出してます。
-			wchar_t stagePath[256] = {};
-			swprintf(stagePath, L"Assets/modelData/titleStage%d.cmo", nowInitStage + 1);
-			m_stage[nowInitStage].Init(stagePath);
-			if (nowInitStage == 0) {
-				m_pos[nowInitStage] = CVector3::Zero();
-				//m_pos[nowInitStage].x += halfWidth;
-			}
-			else {
-				m_pos[nowInitStage] = CVector3::Zero();
-				m_pos[nowInitStage].x -= width3 * nowInitStage;
-			}
-			int a = 0;
-			
-	}
-
-	/*titleStage = NewGO<TitleStage>(1);
-	player1 = FindGO<Player>("player1");
-	player2 = FindGO<Player>("player2");*/
-
+	m_PlayerModel = NewGO<SkinModelRender>(0);
+	m_PlayerModel->Init(L"Player.cmo");
+	m_CharaCon.Init(40.0f, 20.0f, m_PlayerPos);
+	//titleStage = NewGO<TitleStage>(1);
 	return true;
 }
 
 void StageSelect::Update()
 {
-	//ステージとKaitoTaskクラスをNewGOする。つかゲーム画面に移行する。
-	if (g_Pad->IsPress(enButtonA))
-	{
-		game = NewGO<Game>(0, "game");
-		game->SetStage(titleCamera->GetChoiceStageNum());
-		CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
-		wchar_t pointGeneratorNum[256] = {};
-		swprintf(pointGeneratorNum, L"Assets/level/Corse_Level_%d.tkl",titleCamera->GetChoiceStageNum()+1);
-		PointGenerator->Load(pointGeneratorNum);
-		DeleteGO(this);
-	}
+	//stageSelect();
+	PlayerMove();
+	//nowStageをジェネレーターに渡して、その数字に応じてNewGOさせる
+	//if (GetAsyncKeyState('K')) {
+	//	game = NewGO<Game>(1,"game");
+	//	stage = NewGO<Stage>(1,"stage");
+	//	stage->setStageNum(0);
+
+	//	DeleteGO(this);
+	//	
+	//}
 	
-	for (int i = 0; i < g_StageMAX; i++) {
-		m_stage[i].UpdateWorldMatrix(m_pos[i], CQuaternion::Identity(), CVector3::One()*10.0f);
-		m_stage[i].Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
-	}
 }
 
-void StageSelect::PostRender()
+void StageSelect::stageSelect()
 {
-	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
-	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
+	//const int stageMax = 2;			//ステージの数.上限
+	//const float LLimit = 4000;		//左端
+	//const float RLimit = 0;			//右端
+	//const float moveSpeed = 100;	//動く速度
+	//const CVector3 scaleChangeSpeed = {0.05, 0.05, 0.05};   //拡縮速度
+	
+	//count++;
+	//if (GetAsyncKeyState('D') && nowStage <stageMax&&count >= 120) {//ステージ切り替えのフラグ変更
+	//	RStageChange = true;
+	//	nowStage++;
+	//	count = 0;
+	//}
+	//if (GetAsyncKeyState('A')&&nowStage > 0 && count >= 120) {
+	//	LStageChange = true;
+	//	nowStage--;
+	//	count = 0;
+	//}
+	//ステージ番号が0より小さくなった時、０にする
+	//if (nowStage < 0) {
+	//	nowStage = 0;
+	//}
+	////ステージ番号が最大値より大きくなった時、最大値を突っ込む
+	//if (nowStage > stageMax) {
+	//	nowStage = stageMax;
+	//}
+
+	//ステージⅠ
+	//CVector3 pos1 = titleStage->GetPos();
+	//CVector3 scale1 = titleStage->GetScale();
+	
+	//if (nowStage == 0 && scale1.x<1) {
+	//	scale1 += scaleChangeSpeed;
+	//}
+	//if (nowStage != 0&&scale1.x>0) {
+	//	scale1 -= scaleChangeSpeed;
+	//}
+	//ステージⅡ
+	//CVector3 pos2 = titleStage->GetPos2();
+	//CVector3 scale2 = titleStage->GetScale2();
+	//if (nowStage == 1) {
+	//	scale2 += scaleChangeSpeed;
+	//}
+	//if (nowStage != 1) {
+	//	scale2 -= scaleChangeSpeed;
+	//}
+	////各ステージの情報を更新
+	////ステージ１
+	//titleStage->SetPos(pos1);
+	//titleStage->SetScale(scale1);
+	////ステージ2
+	//titleStage->SetPos2(pos2);
+	//titleStage->SetScale2(scale2);
 }
 
-void StageSelect::Draw()
+void StageSelect::PlayerMove()
 {
-	for (int i = 0; i < g_StageMAX; i++) {
-		m_stage[i].Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
+	float MoveX = g_Pad[0].GetLStickXF()* -10.0f;
+	m_PlayerPos.x += MoveX;
+	if (MoveX > 0.0001f) {
+		m_Right = false;
 	}
+	if (MoveX < 0.0001f) {
+		m_Right = true;
+	}
+	if (m_Right
+		&&m_angle<90.0f
+		) {
+		m_angle += 10.0f;
+	}
+	if(
+		!m_Right
+		&&m_angle>-90.0f
+		) {
+		m_angle -= 10.0f;
+	}
+	float jump = g_Pad[0].IsTrigger(enButtonA);
+	m_CharaCon.Execute(1.0f, { MoveX,0.0f,0.0f });
+	m_PlayerRot.SetRotationDeg(CVector3::AxisY(), m_angle);
+	m_PlayerModel->SetPRS(m_PlayerPos, m_PlayerRot, CVector3::One());
 }

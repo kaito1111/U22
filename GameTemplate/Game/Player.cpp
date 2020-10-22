@@ -23,12 +23,6 @@ GamePlayer::GamePlayer()
 //デストラクタ
 GamePlayer::~GamePlayer()
 {
-	//SavePlayerData(this);
-	if (HaveMagnet) {
-		DeleteMO(m_Magnet); 
-	}
-	DeleteGO(m_Magnet);
-	DeleteGO(m_ThisNumSprite);
 }
 
 //コントローラーを受け取る
@@ -102,19 +96,15 @@ bool GamePlayer::Start()
 	m_SpriteDel = NewGO<SpriteRender>(4);
 	m_SpriteDel->Init(L"Assets/sprite/del.dds", 500.0f,500.0f);
 	m_SpriteDel->SetPosition({ 550.0f,-250,0.0f });
-	m_SpriteDel->SetW(0.0f);
 	m_SpriteJump = NewGO<SpriteRender>(4);
 	m_SpriteJump->Init(L"Assets/sprite/jump.dds", 500.0f,500.0f);
 	m_SpriteJump->SetPosition({ 500.0f,-300.0f,0.0 });
-	m_SpriteJump->SetW(0.0f);
 	m_SpriteN = NewGO<SpriteRender>(4);
 	m_SpriteN->Init(L"Assets/sprite/N.dds", 500.0f, 500.0f);
 	m_SpriteN->SetPosition({ 450.0f,-250.0f,0.0 });
-	m_SpriteN->SetW(0.0f);
 	m_SpriteS = NewGO<SpriteRender>(4);
 	m_SpriteS->Init(L"Assets/sprite/S.dds", 500.0f, 500.0f);
 	m_SpriteS->SetPosition({ 500.0f,-200.0f,0.0f });
-	m_SpriteS->SetW(0.0f);
 	return true;
 }
 
@@ -123,10 +113,6 @@ void GamePlayer::Update()
 	//あぷでーどlog
 	times++;
 	//printf("player %d Updated\n", m_PlayerNum);
-	m_SpriteJump->SetW(0.0f);
-	m_SpriteDel->SetW(0.0f);
-	m_SpriteN->SetW(0.0f);
-	m_SpriteS->SetW(0.0f);
 	//しんだ?
 	if (m_IsSi) {
 		SIBOU();
@@ -243,6 +229,16 @@ void GamePlayer::Draw()
 
 }
 
+void GamePlayer::OnDestroy()
+{
+	//SavePlayerData(this);
+	if (HaveMagnet) {
+		DeleteMO(m_Magnet);
+	}
+	DeleteGO(m_Magnet);
+	DeleteGO(m_ThisNumSprite);
+}
+
 void GamePlayer::StartPos()
 {
 	m_position = m_CheckPoint;
@@ -320,7 +316,6 @@ void GamePlayer::Move()
 	if (m_characon.IsOnGround())
 	{
 		if (g_Pad[GetPadNo()].IsTrigger(enButtonA)) {
-			m_SpriteJump->SetW(1.0f);
 			movespeed.y = junpPower;
 			if (m_Se.IsPlaying()) {
 				m_Se2.Play(false);
@@ -413,15 +408,12 @@ void GamePlayer::Move()
 void GamePlayer::MyMagnet()
 {
 	if (g_Pad[GetPadNo()].IsPress(enButtonX)) {
-		m_SpriteN->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::NMode);
 	}
 	if (g_Pad[GetPadNo()].IsPress(enButtonY)) {
-		m_SpriteS->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::SMode);
 	}
 	if (g_Pad[GetPadNo()].IsPress(enButtonB)) {
-		m_SpriteDel->SetW(1.0f);
 		m_Magnet->SetState(Magnet::State::NoMode);
 	}
 }

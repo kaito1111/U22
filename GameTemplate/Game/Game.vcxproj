@@ -195,6 +195,7 @@
     <ClCompile Include="stageObject\stageObjectShuriken.cpp" />
     <ClCompile Include="stageObject\stageObjectStopFloor.cpp" />
     <ClCompile Include="stageObject\stageObjectYokoKonbou.cpp" />
+    <ClCompile Include="StageSelect\StageSelect.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -203,10 +204,10 @@
     <ClCompile Include="system\system.cpp" />
     <ClCompile Include="GPUView\UnorderedAccessView.cpp" />
     <ClCompile Include="GPUBuffer\vertexBuffer.cpp" />
-    <ClCompile Include="StageSelect\StageSelect.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="StageSelect\TitleCamera.cpp" />
     <ClCompile Include="StageSelect\TitleStage.cpp" />
+    <ClCompile Include="TitlePlayer.cpp" />
     <ClCompile Include="TwoP_Pad.cpp" />
     <ClCompile Include="sound\WaveFile.cpp" />
     <ClCompile Include="sound\WaveFileBank.cpp" />
@@ -319,6 +320,7 @@
     <ClInclude Include="Title.h" />
     <ClInclude Include="StageSelect\TitleCamera.h" />
     <ClInclude Include="StageSelect\TitleStage.h" />
+    <ClInclude Include="TitlePlayer.h" />
     <ClInclude Include="TwoP_Pad.h" />
     <ClInclude Include="util\Util.h" />
     <ClInclude Include="GPUBuffer\vertexBuffer.h" />
@@ -378,6 +380,8 @@
     <ImageContentTask Include="Assets\sprite\del.png" />
     <ImageContentTask Include="Assets\sprite\jump.png" />
     <ImageContentTask Include="Assets\sprite\N.png" />
+    <Image Include="Assets\sprite\Corse1_image.png" />
+    <Image Include="Assets\sprite\Corse2_image.png" />
     <Image Include="Assets\sprite\ProvisionalTitle.png" />
     <ImageContentTask Include="Assets\sprite\S.png" />
     <Image Include="Assets\sprite\stage1.png" />

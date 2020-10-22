@@ -19,9 +19,6 @@ stageObjectJenerator::stageObjectJenerator()
 
 stageObjectJenerator::~stageObjectJenerator()
 {
-	for (auto ptr : GameObjList) {
-		DeleteGO(ptr);
-	}
 }
 
 bool stageObjectJenerator::Start()
@@ -152,6 +149,13 @@ bool stageObjectJenerator::Start()
 		});
 	}
 	return true;
+}
+
+void stageObjectJenerator::OnDestroy()
+{
+	for (auto ptr : GameObjList) {
+		DeleteGO(ptr);
+	}
 }
 
 

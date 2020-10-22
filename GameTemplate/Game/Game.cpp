@@ -28,16 +28,6 @@ Game::Game()
 
 Game::~Game()
 {
-	//‰ð•ú
-	if (m_frameBufferDepthStencilView != nullptr) {
-		m_frameBufferDepthStencilView->Release();
-		m_frameBufferDepthStencilView = nullptr;
-	}
-	if (m_frameBufferRenderTargetView != nullptr) {
-		m_frameBufferRenderTargetView->Release();
-	}
-	SavePlayerData();//1‰ñ“ü‚Á‚½
-	DeleteGO(m_task);//1‰ñ
 }
 
 bool Game::Start()
@@ -70,6 +60,20 @@ void Game::Update()
 	//}
 	Sample();
 	m_postEffect.Update();
+}
+
+void Game::OnDestroy()
+{
+	//‰ð•ú
+	if (m_frameBufferDepthStencilView != nullptr) {
+		m_frameBufferDepthStencilView->Release();
+		m_frameBufferDepthStencilView = nullptr;
+	}
+	if (m_frameBufferRenderTargetView != nullptr) {
+		m_frameBufferRenderTargetView->Release();
+	}
+	SavePlayerData();//1‰ñ“ü‚Á‚½
+	DeleteGO(m_task);//1‰ñ
 }
 
 //‚¢‚ë‚¢‚ë‚ÈƒTƒ“ƒvƒ‹
