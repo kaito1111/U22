@@ -11,103 +11,54 @@ StageSelect::StageSelect()
 
 StageSelect::~StageSelect()
 {
-	//DeleteGO(titleStage);
-	DeleteGO(titleCamera);
+	DeleteGO(m_TitleCamera);
 }
 
 bool StageSelect::Start()
 {
-	m_Stage1_sprite = NewGO<SpriteRender>(0);
-	m_Stage1_sprite->Init(L"Assets/sprite/Corse1_image.dds", 200.0f, 200.0f,true);
-	m_Stage1_sprite->SetPosition(m_Stage1_spritePos);
-
-	//m_Stage1_sprite = NewGO<SpriteRender>(0);
-	//m_Stage1_sprite->Init(L"Assets/sprite/Corse1_image.dds", 500.0f, 500.0f);
-	//m_Stage1_sprite->SetPosition(m_Stage1_spritePos);
+	m_Stage1Sprite = NewGO<SpriteRender>(1);
+	m_Stage1Sprite->Init(L"Assets/sprite/Corse1_image.dds", 200.0f, 200.0f,true);
+	m_Stage1Sprite->SetPosition(m_Stage1SpritePos);
 
 	m_StageModel = NewGO<SkinModelRender>(0);
 	m_StageModel->Init(L"serectStage.cmo");
 	m_StageModel->SetPosition(CVector3::Zero());
 	m_staticObj.CreateMeshObject(m_StageModel->GetSkinModel(), CVector3::Zero(), CQuaternion::Identity());
-	titleCamera = NewGO<TitleCamera>(1);
+
+	m_TitleCamera = NewGO<TitleCamera>(1);
 
 	m_PlayerModel = NewGO<SkinModelRender>(0);
 	m_PlayerModel->Init(L"Player.cmo");
 	m_CharaCon.Init(40.0f, 20.0f, m_PlayerPos);
-	//titleStage = NewGO<TitleStage>(1);
+
+	m_SelectSprite = NewGO<SpriteRender>(0);
+	m_SelectSprite->Init(L"Assets/sprite/Yellow.dds", 250.0f, 250.0f);
+	m_SelectSprite->SetW(0.0f);
+
 	return true;
 }
 
 void StageSelect::Update()
 {
-	//stageSelect();
 	PlayerMove();
-	//nowStageをジェネレーターに渡して、その数字に応じてNewGOさせる
-	//if (GetAsyncKeyState('K')) {
-	//	game = NewGO<Game>(1,"game");
-	//	stage = NewGO<Stage>(1,"stage");
-	//	stage->setStageNum(0);
-
-	//	DeleteGO(this);
-	//	
-	//}
-	
+	SelectSprite();
+	SetCameraTarget();
+	stageSelect();
 }
 
 void StageSelect::stageSelect()
 {
-	//const int stageMax = 2;			//ステージの数.上限
-	//const float LLimit = 4000;		//左端
-	//const float RLimit = 0;			//右端
-	//const float moveSpeed = 100;	//動く速度
-	//const CVector3 scaleChangeSpeed = {0.05, 0.05, 0.05};   //拡縮速度
-	
-	//count++;
-	//if (GetAsyncKeyState('D') && nowStage <stageMax&&count >= 120) {//ステージ切り替えのフラグ変更
-	//	RStageChange = true;
-	//	nowStage++;
-	//	count = 0;
-	//}
-	//if (GetAsyncKeyState('A')&&nowStage > 0 && count >= 120) {
-	//	LStageChange = true;
-	//	nowStage--;
-	//	count = 0;
-	//}
-	//ステージ番号が0より小さくなった時、０にする
-	//if (nowStage < 0) {
-	//	nowStage = 0;
-	//}
-	////ステージ番号が最大値より大きくなった時、最大値を突っ込む
-	//if (nowStage > stageMax) {
-	//	nowStage = stageMax;
-	//}
-
-	//ステージⅠ
-	//CVector3 pos1 = titleStage->GetPos();
-	//CVector3 scale1 = titleStage->GetScale();
-	
-	//if (nowStage == 0 && scale1.x<1) {
-	//	scale1 += scaleChangeSpeed;
-	//}
-	//if (nowStage != 0&&scale1.x>0) {
-	//	scale1 -= scaleChangeSpeed;
-	//}
-	//ステージⅡ
-	//CVector3 pos2 = titleStage->GetPos2();
-	//CVector3 scale2 = titleStage->GetScale2();
-	//if (nowStage == 1) {
-	//	scale2 += scaleChangeSpeed;
-	//}
-	//if (nowStage != 1) {
-	//	scale2 -= scaleChangeSpeed;
-	//}
-	////各ステージの情報を更新
-	////ステージ１
-	//titleStage->SetPos(pos1);
-	//titleStage->SetScale(scale1);
-	////ステージ2
-	//titleStage->SetPos2(pos2);
-	//titleStage->SetScale2(scale2);
+	if (g_Pad[0].IsPress(enButtonB)) {
+		Game* m_Game = NewGO<Game>(0,"game");
+		CVector3 diff1 = m_PlayerPos - m_Stage1SpritePos;
+		CVector3 diff2 = m_PlayerPos - m_Stage2SpritePos;
+		if (diff1.Length() > m_SelectLen) {
+			m_Game->SetStage(0);
+		}
+		else if (diff2.Length() > m_SelectLen) {
+			m_Game->SetStage(2);
+		}
+	}
 }
 
 void StageSelect::PlayerMove()
@@ -131,8 +82,35 @@ void StageSelect::PlayerMove()
 		) {
 		m_angle -= 10.0f;
 	}
-	float jump = g_Pad[0].IsTrigger(enButtonA);
-	m_CharaCon.Execute(1.0f, CVector3( MoveX,0.0f,0.0f ));
+	float jump = 0;
+	if (m_CharaCon.IsOnGround()) {
+		jump = g_Pad[0].IsTrigger(enButtonA)*15.0f;
+	}
+	jump -= 0.8f;
+	m_CharaCon.Execute(1.0f, CVector3( MoveX, jump,0.0f ));
 	m_PlayerRot.SetRotationDeg(CVector3::AxisY(), m_angle);
 	m_PlayerModel->SetPRS(m_PlayerPos, m_PlayerRot, CVector3::One());
+}
+
+void StageSelect::SetCameraTarget()
+{
+	m_TitleCamera->SetTarget(m_PlayerPos);
+}
+
+void StageSelect::SelectSprite()
+{
+	//距離比較して選択している絵を出す
+	CVector3 diff1 = m_PlayerPos - m_Stage1SpritePos;
+	CVector3 diff2 = m_PlayerPos - m_Stage2SpritePos;
+	if (diff1.Length() > m_SelectLen) {
+		m_SelectSprite->SetPosition(m_Stage1SpritePos);
+		m_SelectSprite->SetW(1.0f);
+	}
+	else if (diff2.Length() > m_SelectLen) {
+		m_SelectSprite->SetPosition(m_Stage2SpritePos);
+		m_SelectSprite->SetW(1.0f);
+	}
+	else {
+		m_SelectSprite->SetW(0.0f);
+	}
 }

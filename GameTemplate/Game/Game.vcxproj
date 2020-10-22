@@ -369,6 +369,7 @@
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\sprite\Yellow.png" />
     <ImageContentTask Include="Assets\sprite\初めからor続きから.png" />
     <ImageContentTask Include="Assets\sprite\LoadN.png" />
     <ImageContentTask Include="Assets\sprite\LoadS.png" />

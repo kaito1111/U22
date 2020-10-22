@@ -302,6 +302,7 @@
     <Image Include="Assets\modelData\stone_00010.jpg" />
     <Image Include="Assets\sprite\Corse2_image.png" />
     <Image Include="Assets\sprite\Corse1_image.png" />
+    <Image Include="Assets\sprite\Yellow.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\level\Corse_Level_1.tkl" />
