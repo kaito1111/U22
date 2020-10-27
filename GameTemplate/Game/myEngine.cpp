@@ -11,6 +11,7 @@ CEngine::CEngine()
 
 CEngine::~CEngine()
 {
+	int a = 0;
 }
 
 void CEngine::Init()
@@ -25,9 +26,9 @@ void CEngine::Init()
 bool CEngine::Start()
 {
 	//ルームに入場
-	printf("ルームに入場もしくは、作成を行っています。\n");
+	//printf("ルームに入場もしくは、作成を行っています。\n");
 	NetworkLogic::GetInstance().CreateRoomOrJoin(L"TestRoom");
-	printf("ルームに入場しました。\n");
+	//printf("ルームに入場しました。\n");
 
 	//フォント作成。
 	m_font = std::make_unique<CFont>();
@@ -99,5 +100,5 @@ void CEngine::Final()
 	//ネットワークからの切断
 	NetworkLogic::GetInstance().Disconnect();
 	NetworkLogic::GetInstance().GetLBL()->disconnectReturn();
-	printf("disconnect\n");
+	//printf("disconnect\n");
 }

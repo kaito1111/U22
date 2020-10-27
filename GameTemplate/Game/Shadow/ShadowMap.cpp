@@ -95,6 +95,7 @@ CVector3 ShadowMap::CalcLightPosition(float lightHeight, CVector3 viewFrustomCen
 	ライトの座標 = 視錐台の中心座標 + ライトの方向 * a
 	*/
 	auto lightPos = viewFrustomCenterPosition + m_lightDirection * alpha;
+	//lightPos.z += 10000.0f;
 	//ライトの位置
 	return lightPos;
 }

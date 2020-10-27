@@ -8,8 +8,8 @@ SampleScene::SampleScene()
 	//ƒJƒƒ‰‚ÌˆÊ’uæ“¾
 	auto cameraPos = g_camera3D.GetPosition();
 	//’‹“_İ’è
-	g_camera3D.SetPosition(cameraPos);
-	g_camera3D.SetTarget(Target);
+	g_camera3D.SetPosition({ 0,100.0f,200.0f });
+	g_camera3D.SetTarget({0,0,0});
 	g_camera3D.SetFar(5000.0f);
 	g_camera3D.Update();
 }

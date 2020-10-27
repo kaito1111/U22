@@ -158,7 +158,7 @@ void GamePlayer::Update()
 		if (GetPadNo() == 0) {
 			//player1
 			//ポジション確認
-			printf("player %d 's position is %f frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum(), m_position.x, times);
+			//printf("player %d 's position is %f frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum(), m_position.x, times);
 			//パッドの入力量(送信)
 			//printf("playerPadState Sent. value is %f\n", g_Pad[GetPadNo()].GetLStickXF());
 			//Aボタン入力(送信）
@@ -171,7 +171,7 @@ void GamePlayer::Update()
 		else
 		{
 			//net(p2)
-			printf("player %d 's position is %f frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum() + 1, m_position.x, times);
+			//printf("player %d 's position is %f frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum() + 1, m_position.x, times);
 			//printf("p2 Updated. %d.\n", times);
 		}
 
@@ -179,13 +179,13 @@ void GamePlayer::Update()
 	else {
 		if (GetPadNo() == 0) {
 			//player2
-			printf("player %d 's position is %f frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum(), m_position.x, times);
+			//printf("player %d 's position is %f frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum(), m_position.x, times);
 			//printf("p2 Updated. %d.\n", times);
 		}
 		else
 		{
 			//net(p1)
-			printf("player %d 's position is %f frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum() - 1, m_position.x, times);
+			//printf("player %d 's position is %f frameNo is %d\n", INetworkLogic().GetLBL()->GetPlayerNum() - 1, m_position.x, times);
 			//パッドの入力量(受け取り)
 			//printf("playerPadState Receved. value is %f\n", g_Pad[GetPadNo()].GetLStickXF());
 			//Aボタン入力(受け取り)

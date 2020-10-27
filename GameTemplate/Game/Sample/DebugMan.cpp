@@ -74,8 +74,8 @@ namespace myEngine {
 	{
 		////加速度
 		//CVector3 acc;
-		m_moveSpeed.x = g_Pad[0].GetLStickXF();
-		m_moveSpeed.z = g_Pad[0].GetLStickYF();
+		m_moveSpeed.x = g_Pad[0].GetLStickXF() * 5.0f;
+		m_moveSpeed.z = g_Pad[0].GetLStickYF() * 5.0f;
 		//acc.y = 0.0f;
 
 		////移動量加算
@@ -90,29 +90,30 @@ namespace myEngine {
 		////移動
 		m_pos = m_charaCon.Execute(1.0f, m_moveSpeed);
 
-		////向き計算
-		//if (m_moveSpeed.Length() > 1.0f) {
-		//	//走ってる
-		//	//アニメーションながすお
-		//	m_animation.Play(enAnimClip_run, 0.2f);
-		//	//向き計算するおー
-		//	float t = atan2(m_moveSpeed.x, m_moveSpeed.z);
-		//	m_rot.SetRotation(CVector3::AxisY(), t);
-		//}
-		//else if (m_moveSpeed.Length() > 0.1f) {
-		//	//動いてる
-		//	//アニメーションながすおー
-		//	m_animation.Play(enAnimClip_walk, 0.2f);
-		//	//向き計算するおー
-		//	float t = atan2(m_moveSpeed.x, m_moveSpeed.z);
-		//	m_rot.SetRotation(CVector3::AxisY(), t);
-		//}
-		//else {
-		//	//動いてない
-		//	//アニメーションながすおー
-		//	m_animation.Play(enAnimClip_idle, 0.2);
-		//}
+		//向き計算
+		if (m_moveSpeed.Length() > 1.0f) {
+			//走ってる
+			//アニメーションながすお
+			//m_animation.Play(enAnimClip_run, 0.2f);
+			//向き計算するおー
+			float t = atan2(m_moveSpeed.x, m_moveSpeed.z);
+			m_rot.SetRotation(CVector3::AxisY(), t);
+		}
+		else if (m_moveSpeed.Length() > 0.1f) {
+			//動いてる
+			//アニメーションながすおー
+			m_animation.Play(enAnimClip_walk, 0.2f);
+			//向き計算するおー
+			float t = atan2(m_moveSpeed.x, m_moveSpeed.z);
+			m_rot.SetRotation(CVector3::AxisY(), t);
+		}
+		else {
+			//動いてない
+			//アニメーションながすおー
+			m_animation.Play(enAnimClip_idle, 0.2);
+		}
 
+		//m_rot.SetRotationDeg(CVector3::AxisX(), -90.0f);
 		m_skinModel.UpdateWorldMatrix(m_pos, m_rot, m_scale);
 	}
 }

@@ -36,5 +36,6 @@ void myEngine::SkinModelRender::Draw()
 	m_skinModel.Draw(
 		g_camera3D.GetViewMatrix(),
 		g_camera3D.GetProjectionMatrix(),
-		Silhouette);
+		Silhouette
+	);
 }

@@ -15,7 +15,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 {
 
 	//Console
-	AllocConsole();
+	//AllocConsole();
 	freopen("CON", "r", stdin);
 	freopen("CON", "w", stdout);
 	//ウィンドウの初期化。
@@ -46,7 +46,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmdLi
 	{
 		//起動準備OK7
 		if (g_Pad[0].GetLStickXF() > 0.1f) {
-			printf("a");
+			//printf("a");
 		}
 		//エンジンの更新を開始。
 		Engine().Update();

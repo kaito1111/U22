@@ -72,7 +72,7 @@ LoadBalancingListener::LoadBalancingListener(BaseView* pView)
 LoadBalancingListener::~LoadBalancingListener(void)
 {
 	//ファイルを閉じる。
-	fclose(fp);
+	//fclose(fp);
 	//delete mpView;
 }
 
@@ -126,7 +126,7 @@ void LoadBalancingListener::serverErrorReturn(int errorCode)
 void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>& playernrs, const Player& player)
 {
 	if (m_once == false) {
-		printf("your playerID is %d.\n", playerNr);
+		//printf("your playerID is %d.\n", playerNr);
 		//ゲームを立ち上げて一回のみよばれる。
 		m_playerNum = playerNr;;
 		m_once = true;
@@ -134,15 +134,15 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 
 	if (m_playerNum == 1) {
 		//最初のひとり
-		printf("Created room.\n");
-		printf("waiting for other player.\n");
+		//printf("Created room.\n");
+		//printf("waiting for other player.\n");
 		//fp = fopen("Assets/log/Plog.log", "w");
 		//char text[64];
 		//sprintf(text, "record Start\n");
 		//fputs(text, fp);
 	}
 	if (m_playerNum == 2) {
-		printf("joined room\n");
+		//printf("joined room\n");
 		//fp = fopen("Assets/log/Nlog.log", "w");
 		//char text[64];
 		//sprintf(text, "record Start\n");
@@ -151,10 +151,10 @@ void LoadBalancingListener::joinRoomEventAction(int playerNr, const JVector<int>
 	if (playerNr == m_maxPlayer){
 		//全員そろった。
 		m_NetworkReady = true;
-		printf("GameStart.\n");
+		//printf("GameStart.\n");
 	}
 	if (playerNr > m_maxPlayer) {
-		printf("playerCount is invalid.\n");
+		//printf("playerCount is invalid.\n");
 		//プレイヤーの人数不正
 		throw;
 	}
@@ -207,7 +207,7 @@ void LoadBalancingListener::customEventAction(int playerNr, nByte eventCode, con
 			if (hashData.getValue((nByte)2)) {
 				orangeTeamScore = (ExitGames::Common::ValueObject<nByte>(hashData.getValue((nByte)2))).getDataCopy();
 			}
-			printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
+			//printf("custom event action orange score %d, blue %d\n", orangeTeamScore, blueTeamScore);
 		}
 	}
 	else if (eventCode == (m_playerNum == 1 ? 2 : 1)) {
@@ -275,7 +275,7 @@ void LoadBalancingListener::disconnectReturn(void)
 {
 	updateState();
 	Console::get().writeLine(L"disconnected");
-	printf("disconnected\n");
+	//printf("disconnected\n");
 }
 
 void LoadBalancingListener::createRoomReturn(int localPlayerNr, const Hashtable& gameProperties, const Hashtable& playerProperties, int errorCode, const JString& errorString)
@@ -471,7 +471,7 @@ void LoadBalancingListener::RaiseGameScore(int blue, int orange) {
 	//customEventActionが呼ばれる
 	//送信なので自分のcustomEventActionは呼ばれない。
 	mpLbc->opRaiseEvent(false, ev, 0);
-	printf("data raise event\n");
+	//printf("data raise event\n");
 }
 
 void LoadBalancingListener::putData(int i, float f) {
@@ -564,7 +564,7 @@ void LoadBalancingListener::RaisePadData()
 	bool result = mpLbc->opRaiseEvent(false, hash, m_playerNum);
 	//printf("%dtimes send\n", ++m_sentTimes);
 	if (result == false) {
-		printf("送信失敗\n");
+		//printf("送信失敗\n");
 	}
 	//printf("playerdata raise event\n");
 }
