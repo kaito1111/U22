@@ -29,7 +29,7 @@ void EffectNodeRing::LoadRendererParameter(unsigned char*& pos, Setting* setting
 	memcpy( &type, pos, sizeof(int) );
 	pos += sizeof(int);
 	assert( type == GetType() );
-	EffekseerPrintDebug("Renderer : Ring\n");
+	//EffekseerPrintDebug("Renderer : Ring\n");
 
 	int32_t size = 0;
 

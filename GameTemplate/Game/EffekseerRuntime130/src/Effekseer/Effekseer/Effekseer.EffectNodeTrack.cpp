@@ -27,7 +27,7 @@ void EffectNodeTrack::LoadRendererParameter(unsigned char*& pos, Setting* settin
 	memcpy( &type, pos, sizeof(int) );
 	pos += sizeof(int);
 	assert( type == GetType() );
-	EffekseerPrintDebug("Renderer : Track\n");
+	//EffekseerPrintDebug("Renderer : Track\n");
 
 	int32_t size = 0;
 
@@ -48,12 +48,12 @@ void EffectNodeTrack::LoadRendererParameter(unsigned char*& pos, Setting* settin
 	AlphaBlend = RendererCommon.AlphaBlend;
 	TrackTexture = RendererCommon.ColorTextureIndex;
 
-	EffekseerPrintDebug("TrackColorLeft : %d\n", TrackColorLeft.type );
-	EffekseerPrintDebug("TrackColorLeftMiddle : %d\n", TrackColorLeftMiddle.type );
-	EffekseerPrintDebug("TrackColorCenter : %d\n", TrackColorCenter.type );
-	EffekseerPrintDebug("TrackColorCenterMiddle : %d\n", TrackColorCenterMiddle.type );
-	EffekseerPrintDebug("TrackColorRight : %d\n", TrackColorRight.type );
-	EffekseerPrintDebug("TrackColorRightMiddle : %d\n", TrackColorRightMiddle.type );
+	//EffekseerPrintDebug("TrackColorLeft : %d\n", TrackColorLeft.type );
+	//EffekseerPrintDebug("TrackColorLeftMiddle : %d\n", TrackColorLeftMiddle.type );
+	//EffekseerPrintDebug("TrackColorCenter : %d\n", TrackColorCenter.type );
+	//EffekseerPrintDebug("TrackColorCenterMiddle : %d\n", TrackColorCenterMiddle.type );
+	//EffekseerPrintDebug("TrackColorRight : %d\n", TrackColorRight.type );
+	//EffekseerPrintDebug("TrackColorRightMiddle : %d\n", TrackColorRightMiddle.type );
 
 	// 右手系左手系変換
 	if (setting->GetCoordinateSystem() == CoordinateSystem::LH)

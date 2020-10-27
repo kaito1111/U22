@@ -146,7 +146,7 @@ bool ClientImplemented::Start( char* host, uint16_t port )
 
 	m_threadRecv.Create( RecvAsync, this );
 
-	EffekseerPrintDebug("Client : Start\n");
+	//EffekseerPrintDebug("Client : Start\n");
 
 	return true;
 }
@@ -162,7 +162,7 @@ void ClientImplemented::Stop()
 	Socket::Close( m_socket );
 	m_running = false;
 
-	EffekseerPrintDebug("Client : Stop\n");
+	//EffekseerPrintDebug("Client : Stop\n");
 }
 
 //----------------------------------------------------------------------------------

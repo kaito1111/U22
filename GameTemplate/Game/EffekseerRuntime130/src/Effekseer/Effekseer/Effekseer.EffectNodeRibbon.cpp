@@ -27,7 +27,7 @@ void EffectNodeRibbon::LoadRendererParameter(unsigned char*& pos, Setting* setti
 	memcpy( &type, pos, sizeof(int) );
 	pos += sizeof(int);
 	assert( type == GetType() );
-	EffekseerPrintDebug("Renderer : Ribbon\n");
+	////EffekseerPrintDebug("Renderer : Ribbon\n");
 
 	int32_t size = 0;
 
@@ -46,7 +46,7 @@ void EffectNodeRibbon::LoadRendererParameter(unsigned char*& pos, Setting* setti
 	
 	memcpy( &RibbonAllColor.type, pos, sizeof(int) );
 	pos += sizeof(int);
-	EffekseerPrintDebug("RibbonColorAllType : %d\n", RibbonAllColor.type );
+	////EffekseerPrintDebug("RibbonColorAllType : %d\n", RibbonAllColor.type );
 
 	if( RibbonAllColor.type == RibbonAllColorParameter::Fixed )
 	{
@@ -64,7 +64,7 @@ void EffectNodeRibbon::LoadRendererParameter(unsigned char*& pos, Setting* setti
 
 	memcpy( &RibbonColor.type, pos, sizeof(int) );
 	pos += sizeof(int);
-	EffekseerPrintDebug("RibbonColorType : %d\n", RibbonColor.type );
+	////EffekseerPrintDebug("RibbonColorType : %d\n", RibbonColor.type );
 
 	if( RibbonColor.type == RibbonColor.Default )
 	{
@@ -77,7 +77,7 @@ void EffectNodeRibbon::LoadRendererParameter(unsigned char*& pos, Setting* setti
 
 	memcpy( &RibbonPosition.type, pos, sizeof(int) );
 	pos += sizeof(int);
-	EffekseerPrintDebug("RibbonPosition : %d\n", RibbonPosition.type );
+	////EffekseerPrintDebug("RibbonPosition : %d\n", RibbonPosition.type );
 
 	if( RibbonPosition.type == RibbonPosition.Default )
 	{

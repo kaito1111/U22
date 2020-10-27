@@ -348,7 +348,7 @@ ManagerImplemented::ManagerImplemented( int instance_max, bool autoFlip )
 	}
 
 	m_setting->SetEffectLoader(new DefaultEffectLoader());
-	//EffekseerPrintDebug("*** Create : Manager\n");
+	////EffekseerPrintDebug("*** Create : Manager\n");
 }
 
 //----------------------------------------------------------------------------------
