@@ -13,8 +13,6 @@ Goal::Goal(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*/)
 
 Goal::~Goal()
 {
-	DeleteGO(m_ClearSprite);
-	DeleteGO(m_SkinRender);
 }
 
 bool Goal::Start()
@@ -52,11 +50,17 @@ void Goal::Update()
 				NewGO<GameLoop>(1, "gameloop");
 			}
 			else {
-				m_FinishFont = NewGO<CFontRender>(0);
-				m_FinishFont->SetText(L"Finish");
+				m_ClearSprite->SetW(1.0f);
+				NewGO<GameLoop>(1, "gameloop");
 			}
 			m_Se.Play();
 		}
 	}
 	m_SkinRender->SetPosition(m_Position);
+}
+
+void Goal::OnDestroy()
+{
+	DeleteGO(m_ClearSprite);
+	DeleteGO(m_SkinRender);
 }

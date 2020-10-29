@@ -12,6 +12,19 @@
 
 KaitoTask::KaitoTask()
 {
+}
+
+void KaitoTask::PreRender()
+{
+	auto shadowMap = Engine().GetGraphicsEngine().GetShadowMap();
+	//プレイヤー人数分シャドウキャスターとして登録
+	for (int i = 0; i < g_PlayerNum;) {
+		shadowMap->RegistShdowCaster(m_Player[i++]->GetModel());
+	}
+}
+
+bool KaitoTask::Start()
+{
 	//NewGO<TitleStage>(5, "TitleStage");
 	if (LBLobj()->GetPlayerNum() == 1) {
 		//Update順番の調整のためにNewGOのタイミングを調整。
@@ -33,24 +46,20 @@ KaitoTask::KaitoTask()
 		m_Player[0]->SetPosition({ 100.0f, 0.0f, 0.0f });
 	}
 	m_GameCamera = NewGO<GameCamera>(2, "camera");
-}
-
-void KaitoTask::PreRender()
-{
-	auto shadowMap = Engine().GetGraphicsEngine().GetShadowMap();
-	//プレイヤー人数分シャドウキャスターとして登録
-	for (int i = 0; i < g_PlayerNum;) {
-		shadowMap->RegistShdowCaster(m_Player[i++]->GetModel());
-	}
+	return true;
 }
 
 void KaitoTask::Update()
 {
 }
 
+void KaitoTask::OnDestroy()
+{
+	DeleteGO(m_GameCamera);
+	DeleteGO(m_Player[0]);
+	DeleteGO(m_Player[1]);
+}
+
 KaitoTask::~KaitoTask()
 {
-	//DeleteGO(m_GameCamera);
-	//DeleteGO(m_Player[0]);
-	//DeleteGO(m_Player[1]);
 }

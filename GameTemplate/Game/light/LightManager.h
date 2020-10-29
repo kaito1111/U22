@@ -18,6 +18,10 @@ namespace myEngine
 	class LightManager : public IGameObject
 	{
 	public:
+		~LightManager()
+		{
+			int a = 0;
+		}
 		/// <summary>
 		/// ディレクションライトの取得
 		/// </summary>

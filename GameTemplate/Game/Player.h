@@ -13,7 +13,7 @@ public:
 	GamePlayer();//コンストラクタ
 	~GamePlayer();//デストラクタ
 	CVector3 GetPosition() { //位置を返す
-		return m_position; 
+		return m_Position; 
 	}
 	/// <summary>
 	/// 位置を決める
@@ -23,16 +23,17 @@ public:
 	///							あまり使わない</param>
 	void SetPosition(CVector3 pos, CVector3 moveSpeed = CVector3::Zero()) 
 	{
-		m_characon.SetPosition(pos);
+		m_Position = pos;
+		m_Characon.SetPosition(pos);
 		if (moveSpeed.Length() > 1.0f) {
-			m_position = m_characon.Execute(1.0f, moveSpeed);
+			m_Position = m_Characon.Execute(1.0f, moveSpeed);
 		}
 	}
 	void SetPoint(CVector3 point) {//リスポーン位置を設定
 		m_CheckPoint = point;
 	}
 	SkinModel* GetModel() {//モデルを返す
-		return &m_model;
+		return &m_Model;
 	}
 
 	/// <summary>
@@ -63,14 +64,14 @@ public:
 	{
 		m_PlayerNum = n;
 	}
-	/// <summary>
-	/// プレイヤー番号の取得。
-	/// </summary>
-	/// <returns></returns>
-	int& GetPlayerNum() 
-	{
-		return m_PlayerNum;
-	}
+	///// <summary>
+	///// プレイヤー番号の取得。
+	///// </summary>
+	///// <returns></returns>
+	//int& GetPlayerNum() 
+	//{
+	//	return m_PlayerNum;
+	//}
 
 	void StartPos();
 	
@@ -78,19 +79,25 @@ public:
 	{
 		m_CheckPoint = spownPoint;
 	}
+
+	void SetIsSi() {
+		m_IsSi = true;
+	}
 private:
 	void ReSpown();//リスポーン地点で復活する
-	bool Start();//すたーと
-	void Update();//あぷでーど
-	void Draw();//どろー
+	bool Start()override;//すたーと
+	void Update()override;//あぷでーど
+	void Draw()override;//どろー
+	void OnDestroy()override;
 	int GetPadNo() const;//コントローラーの番号を返す
-	SkinModel m_model;										//スキンモデル。
+	SkinModel m_Model;										//スキンモデル。
 	SkinModel m_FrontModel;									//スキンモデル。
 	SkinModel m_BuckModel;									//スキンモデル。
-	CharacterController m_characon;							//キャラコン
-	CVector3 m_position = CVector3::Zero();					//位置
-	CQuaternion	m_rot = CQuaternion::Identity();			//向き
-	float m_rotAngle = 0.0f;								//回転率
+	CharacterController m_Characon;							//キャラコン
+	CVector3 m_Position = CVector3::Zero();					//位置
+	CVector3 m_Movespeed = CVector3::Zero();					//移動量
+	CQuaternion	m_Rot = CQuaternion::Identity();			//向き
+	float m_RotAngle = 0.0f;								//回転率
 	enum Dir{//方向
 		L,//Left　左
 		R,//Right 右
@@ -98,13 +105,13 @@ private:
 		D,//Down  下
 		num
 	};
-	Dir dir = L;											//向いてる向き
+	Dir m_Dir = L;											//向いてる向き
 	bool m_IsSi = false;									//死亡しているかどうか
 	CVector3 m_Scale	 = CVector3::One();					//大きさ
 	bool m_PlayerCut	= false;							//切られたかどうか
 	CQuaternion	m_DefeatRot	 = CQuaternion::Identity();		//倒れているときの回転率(前側)
 	CQuaternion	m_ReverseDefeatRot = CQuaternion::Identity(); //倒れているときの回転率(後側)
-	float rate = 0.0f;										//切られたときに倒れる角度
+	float m_Rate = 0.0f;										//切られたときに倒れる角度
 	CVector3 m_CheckPoint = { 0.0f,0.0f,0.0f };				//リスポーン地点
 	SoundSource m_Se;										//ジャンプ音
 	SoundSource m_Se2;										//m_Seが流れているときに流れるサブ音声
@@ -112,9 +119,9 @@ private:
 	SpriteRender* m_ThisNumSprite = nullptr;				//何Pかを表す絵
 	int	m_PlayerNum = 0;									//何P？
 	SpriteRender* m_DieSprite = nullptr;					//死んだら赤くなる
+
 	Magnet* m_Magnet = nullptr;								//磁力
-	bool HaveMagnet = false;								//磁力を持っているかどうか
-	CVector3 movespeed = CVector3::Zero();					//移動量
+	bool m_HaveMagnet = false;								//磁力を持っているかどうか
 //	ShadowMap* m_shadowMap = nullptr;						//シャドウマップ
 
 	enum enAniCli {
@@ -131,11 +138,12 @@ private:
 	SoundSource m_Asioto;									//足音
 
 	IPad* m_Pad = nullptr;									//パッド
-	int times = 0;											//playerのUpdateに何回入ったか。
+	int m_Times = 0;											//playerのUpdateに何回入ったか。
 
-	SpriteRender* m_SpriteN = nullptr;
-	SpriteRender* m_SpriteS = nullptr;
-	SpriteRender* m_SpriteJump = nullptr;
-	SpriteRender* m_SpriteBase = nullptr;
-	SpriteRender* m_SpriteDel = nullptr;
+	SpriteRender* m_BottonSprite = nullptr;
+	//SpriteRender* m_SpriteN = nullptr;
+	//SpriteRender* m_SpriteS = nullptr;
+	//SpriteRender* m_SpriteJump = nullptr;
+	//SpriteRender* m_SpriteBase = nullptr;
+	//SpriteRender* m_SpriteDel = nullptr;
 };

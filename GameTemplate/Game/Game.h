@@ -34,6 +34,10 @@ private:
 	/// </summary>
 	void Update()override;
 	/// <summary>
+	/// 削除処理
+	/// </summary>
+	void OnDestroy()override;
+	/// <summary>
 	/// サンプル
 	/// <para>夢いっぱい、サンプルいっぱい</para>
 	/// </summary>
@@ -50,7 +54,7 @@ private:
 	bool Continue = false;
 	CVector3 player1Pos = CVector3::Zero();
 	CVector3 player2Pos = CVector3::Zero();
-	int StageNum = 0;
+	int StageNum = 3;
 	SpriteRender* m_test = nullptr;							//スプライトレンダー
 	Sprite m_copyMainRtToFrameBufferSprite;					//メインRTVに描かれた絵をフレームバッファにコピーするためのスプライト
 	SoundSource	m_se;										//サウンドソース
@@ -60,5 +64,6 @@ private:
 	ID3D11DepthStencilView* m_frameBufferDepthStencilView = nullptr;	//フレームDSV
 	D3D11_VIEWPORT m_frameBufferViewports;					//フレームビューポート
 	myEngine::PostEffect m_postEffect;								//ブルーム
+	Stage* m_Stage = nullptr;
 	KaitoTask* m_task = nullptr;
 };

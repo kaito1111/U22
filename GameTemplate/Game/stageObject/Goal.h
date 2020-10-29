@@ -20,6 +20,7 @@ public:
 		Last = Is;
 	}
 private:	
+	void OnDestroy()override;
 	bool isClear = false;
 	SkinModelRender* m_SkinRender = nullptr;
 	CVector3 m_Position = CVector3::Zero();

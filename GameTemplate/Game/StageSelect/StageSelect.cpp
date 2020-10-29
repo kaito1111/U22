@@ -1,93 +1,74 @@
 #include "stdafx.h"
-#include "StageSelect/StageSelect.h"
+#include "StageSelect.h"
 #include "Game.h"
-#include "stageObjectJenerator.h"
-#include"StageSelect/TitleStage.h"
-#include"StageSelect/TitleCamera.h"
-#include"Stage.h"
-#include<vector>
-#include "../CheckPointgenerator.h"
-#include <iostream>
-#include"Game.h"
+#include"TitleCamera.h"
+#include "Player.h"
+#include "Fade.h"
+#include "StageSelectSprite.h"
+
 StageSelect::StageSelect()
 {
-	m_copyMainRtToFrameBufferSprite.Init(
-		Engine().GetGraphicsEngine().GetOffScreenRenderTarget()->GetRenderTargetSRV(),
-		FRAME_BUFFER_W,
-		FRAME_BUFFER_H
-	);
-	int a = 0;
 }
 
 StageSelect::~StageSelect()
 {
-	//DeleteGO(titleStage);
-	DeleteGO(titleCamera);
-	
+	DeleteGO(m_Player[0]);
+	DeleteGO(m_Player[1]);
+	DeleteGO(m_TitleCamera);
+	DeleteGO(m_StageModel);
+	DeleteGO(m_Sprite);
 }
 
 bool StageSelect::Start()
 {
-	static const float width3 = 10000.0f;//横幅
-	static const float halfWidth = width3 /2;//半分
 
-	titleCamera = NewGO<TitleCamera>(1);
-	for (int nowInitStage = 0; nowInitStage < g_StageMAX; nowInitStage++)
-	{
-		//L""のLはwchar_t型がどうか判断するためのヤツ
+	m_StageModel = NewGO<SkinModelRender>(0);
+	m_StageModel->Init(L"serectStage.cmo");
+	m_StageModel->SetPosition(CVector3::Zero());
+	m_staticObj.CreateMeshObject(m_StageModel->GetSkinModel(), CVector3::Zero(), CQuaternion::Identity());
 
-		//ステージのテクスチャ張った板ポリを出してます。
-			wchar_t stagePath[256] = {};
-			swprintf(stagePath, L"Assets/modelData/titleStage%d.cmo", nowInitStage + 1);
-			m_stage[nowInitStage].Init(stagePath);
-			if (nowInitStage == 0) {
-				m_pos[nowInitStage] = CVector3::Zero();
-				//m_pos[nowInitStage].x += halfWidth;
-			}
-			else {
-				m_pos[nowInitStage] = CVector3::Zero();
-				m_pos[nowInitStage].x -= width3 * nowInitStage;
-			}
-			int a = 0;
-			
-	}
+	m_TitleCamera = NewGO<TitleCamera>(1);
 
-	/*titleStage = NewGO<TitleStage>(1);
-	player1 = FindGO<Player>("player1");
-	player2 = FindGO<Player>("player2");*/
+	m_Player[0] = NewGO<GamePlayer>(0,"player");
+	m_Player[0]->SetPosition(CVector3::Zero());
+	m_Player[0]->SetPlayerNum(1);
 
+	m_Player[1] = NewGO<GamePlayer>(0, "player");
+	m_Player[1]->SetPosition({ 150.0f,0.0f,0.0f });
+	m_Player[1]->SetPlayerNum(2);
+
+	m_Sprite = NewGO<StageSelectSprite>(0);
 	return true;
 }
 
 void StageSelect::Update()
 {
-	//ステージとKaitoTaskクラスをNewGOする。つかゲーム画面に移行する。
-	if (g_Pad->IsPress(enButtonA))
-	{
-		game = NewGO<Game>(0, "game");
-		game->SetStage(titleCamera->GetChoiceStageNum());
-		CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
-		wchar_t pointGeneratorNum[256] = {};
-		swprintf(pointGeneratorNum, L"Assets/level/Corse_Level_%d.tkl",titleCamera->GetChoiceStageNum()+1);
-		PointGenerator->Load(pointGeneratorNum);
-		DeleteGO(this);
+	SetCameraTarget();
+	if (g_Pad[0].IsPress(enButtonB)) {
+		//距離比較して選択している絵を出す
+		CVector3 diff1 = m_Player[0]->GetPosition() - m_Sprite->GetSpritePos1();
+		CVector3 diff2 = m_Player[0]->GetPosition() - m_Sprite->GetSpritePos2();
+		if (m_fade == nullptr) {
+			if (diff1.Length() < m_SelectLen) {
+				m_fade = NewGO<Fade>(0);
+				StageNo = 3;
+			}
+			else if (diff2.Length() < m_SelectLen) {
+				m_fade = NewGO<Fade>(0);
+				StageNo = 2;
+			}
+		}
 	}
-	
-	for (int i = 0; i < g_StageMAX; i++) {
-		m_stage[i].UpdateWorldMatrix(m_pos[i], CQuaternion::Identity(), CVector3::One()*10.0f);
-		m_stage[i].Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
-	}
+	if (m_fade != nullptr) {
+		if (m_fade->GetLengh() < 210.0f) {
+			Game* game = NewGO<Game>(0,"game");
+			game->SetStage(StageNo);
+			DeleteGO(this);
+		}
+	}	
 }
 
-void StageSelect::PostRender()
+void StageSelect::SetCameraTarget()
 {
-	m_copyMainRtToFrameBufferSprite.Update(CVector3::Zero(), CQuaternion::Identity(), CVector3::One());
-	m_copyMainRtToFrameBufferSprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), 1.0f);
-}
-
-void StageSelect::Draw()
-{
-	for (int i = 0; i < g_StageMAX; i++) {
-		m_stage[i].Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix());
-	}
+	m_TitleCamera->SetTarget(m_Player[0]->GetPosition());
 }

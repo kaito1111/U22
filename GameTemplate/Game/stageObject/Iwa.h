@@ -15,6 +15,7 @@ public:
 		m_pos = pos;
 	}
 private:
+	void OnDestroy()override;
 	Magnet* m_magnet = nullptr;
 	SkinModelRender* m_model = nullptr;
 	CVector3 m_pos = CVector3::Zero();

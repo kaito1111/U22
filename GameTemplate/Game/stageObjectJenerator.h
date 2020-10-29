@@ -12,6 +12,7 @@ class GameObjectScythe;
 class StageObjectDossun;
 class StageObjectMagma;
 class Gimmick_Button;
+class CheckPointgenerator;
 class stageObjectJenerator : public IGameObject
 {
 public:
@@ -41,6 +42,7 @@ private:
 
 	void Update();
 	bool Start();
+	void OnDestroy()override;
 	//今回はレベル君を使うぜ！
 	Level level;
 	Gimmick_Button* moveButtonPtr = nullptr;
@@ -58,5 +60,7 @@ private:
 	std::list<GameObjectScythe*> GameObjectScytheList;
 	std::list<StageObjectDossun*> StageObjectDossunList;
 	std::list<StageObjectMagma*> StageObjectMagmaList;
+
+	CheckPointgenerator* m_PointGenerator = nullptr;
 };
 

@@ -89,6 +89,7 @@ namespace myEngine {
 				//ƒŠƒXƒg‚É’Ç‰Á
 				m_deleteObjectArray[m_currentDeleteObjectBufferNo].at(gameObject->GetPriority()).push_back(gameObject);
 				gameObject->m_isDead = true;
+				gameObject->OnDestroy();
 				gameObject = nullptr;
 			}
 			else {

@@ -83,6 +83,8 @@ static constexpr int NUM_SHADOW_MAP = 3;			//シャドウマップの数
 
 #include "Magnet/MagnetManager.h"
 
+#include "physics/PhysicsStaticObject.h"
+#include "character/CharacterController.h"
 
 const float FRAME_BUFFER_W = 1280.0f;				//フレームバッファの幅。
 const float FRAME_BUFFER_H = 720.0f;				//フレームバッファの高さ。

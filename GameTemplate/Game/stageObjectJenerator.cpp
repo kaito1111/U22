@@ -19,16 +19,16 @@ stageObjectJenerator::stageObjectJenerator()
 
 stageObjectJenerator::~stageObjectJenerator()
 {
-	for (auto ptr : GameObjList) {
-		DeleteGO(ptr);
-	}
+	//DeleteGO(moveFloorPtr);
 }
 
 bool stageObjectJenerator::Start()
 {
-	CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
+	m_PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
 	//enumバグったからとりあえずintで引数渡してセレクトさせます。0番目から始まるよ
-	if (StageNum == 0) {
+	switch (StageNum)
+	{
+	case 0:
 		level.Init(L"Assets/level/Corse_Level_1.tkl", [&](const auto& objData)
 		{
 			//ギミック起動ボタン
@@ -63,9 +63,9 @@ bool stageObjectJenerator::Start()
 
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				auto m_goalPtr = NewGO<Goal>(0, "Goal");
-				m_goalPtr->SetPosition(objData.position);
-				GameObjList.push_back(m_goalPtr);
+				Goal* GoalPtr = NewGO<Goal>(0, "Goal");
+				GoalPtr->SetPosition(objData.position);
+				GameObjList.push_back(GoalPtr);
 				return true;
 			}
 			if (wcsstr(objData.name, L"CheckPoint") != NULL)
@@ -75,14 +75,9 @@ bool stageObjectJenerator::Start()
 
 			return false;
 		});
-		PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
-	}
-
-
-
-
-	//case stage2:
-	if (StageNum == 1) {
+		m_PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
+		break;
+	case 1:
 		//ドッスン
 		level.Init(L"Assets/level/stageDossun.tkl", [&](const auto& objData)
 		{
@@ -94,16 +89,15 @@ bool stageObjectJenerator::Start()
 			}
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				Goal* goalPtr = NewGO<Goal>(0, "Goal");
-				goalPtr->SetPosition(objData.position);
-				GameObjList.push_back(goalPtr);
+				Goal* m_GoalPtr = NewGO<Goal>(0, "Goal");
+				m_GoalPtr->SetPosition(objData.position);
+				GameObjList.push_back(m_GoalPtr);
 			}
 		});
-		PointGenerator->Load(L"Assets/level/stageDossun.tkl");
-	}
-
-	if (StageNum == 2) {
-		PointGenerator->Load(L"Assets/level/Corse_Level_2.tkl");
+		m_PointGenerator->Load(L"Assets/level/stageDossun.tkl");
+		break;
+	case 2:
+		m_PointGenerator->Load(L"Assets/level/Corse_Level_2.tkl");
 		level.Init(L"Assets/level/Corse_Level_2.tkl", [&](const auto& objData) {
 			if (wcscmp(objData.name, L"MagnetObject") == 0) {
 				Iwa* iwa = NewGO<Iwa>(0, "iwa");
@@ -112,18 +106,17 @@ bool stageObjectJenerator::Start()
 			}
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				Goal* goalPtr = NewGO<Goal>(0, "Goal");
-				goalPtr->SetPosition(objData.position);
-				goalPtr->SetLast(true);
-				GameObjList.push_back(goalPtr);
+				Goal* GoalPtr = NewGO<Goal>(0, "Goal");
+				GoalPtr->SetPosition(objData.position);
+				GoalPtr->SetLast(true);
+				GameObjList.push_back(GoalPtr);
 				return true;
 			}
 			return true;
 		});
-		return true;
-	}
-	if (StageNum == 3) {
+		break;
 
+	case 3:
 		level.Init(L"Assets/level/debug_test.tkl", [&](const auto& objData) {
 			//動く床
 			if (wcscmp(objData.name, L"moveFloor") == 0) {
@@ -131,9 +124,9 @@ bool stageObjectJenerator::Start()
 				moveFloorPtr->SetPosition(objData.position);
 				//float型です。動かしたい量を入れてね。
 				moveFloorPtr->SetMoveLimit(300.0f);
-				//moveFloorPtr->SetUpdate(false);
+				moveFloorPtr->SetUpdate(true);
 				GameObjList.push_back(moveFloorPtr);
-				
+
 				return true;
 			}
 			if (wcsstr(objData.name, L"CheckPoint") != NULL)
@@ -142,16 +135,26 @@ bool stageObjectJenerator::Start()
 			}
 			//ゴール
 			if (wcscmp(objData.name, L"Goal") == 0) {
-				Goal* goalPtr = NewGO<Goal>(0, "Goal");
-				goalPtr->SetPosition(objData.position);
-				//goalPtr->SetLast(true);
-				GameObjList.push_back(goalPtr);
+				Goal* GoalPtr = NewGO<Goal>(0, "Goal");
+				GoalPtr->SetPosition(objData.position);
+				//GoalPtr->SetLast(true);
+				GameObjList.push_back(GoalPtr);
 				return true;
 			}
 			return true;
 		});
+	default:
+		break;
 	}
 	return true;
+}
+
+void stageObjectJenerator::OnDestroy()
+{
+	for (auto ptr : GameObjList) {
+		DeleteGO(ptr);
+	}
+	DeleteGO(m_PointGenerator);
 }
 
 

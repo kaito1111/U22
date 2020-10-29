@@ -16,6 +16,7 @@ public:
 		return isOn;
 	}
 private:
+	void OnDestroy()override;
 	bool Start();
 	void Update();
 

@@ -13,6 +13,7 @@ moveFloor::moveFloor(/*const wchar_t * modelName, CVector3 pos, CQuaternion rot*
 
 moveFloor::~moveFloor()
 {
+	int a = 0;
 }
 
 void moveFloor::Draw()
@@ -22,7 +23,6 @@ void moveFloor::Draw()
 		g_camera3D.GetProjectionMatrix()
 	);
 }
-
 bool moveFloor::Start()
 {
 	m_player = FindGO<GamePlayer>("player1");

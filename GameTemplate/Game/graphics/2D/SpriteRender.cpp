@@ -35,19 +35,17 @@ namespace myEngine {
 		}
 		m_sprite.Update(m_position, m_rotation, m_scale, m_pivot);
 	}
-	//void SpriteRender::PreRender()
-	//{
-	//	if (m_isDraw3D == false) {
-	//		m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), m_w);
-	//	}
-	//}
 	void SpriteRender::Draw()
 	{
+		if(m_isDraw3D == true) {
+			m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), m_w);
+		}
+	}
+	void SpriteRender::PostRender()
+	{
+		int a = 0;
 		if (m_isDraw3D == false) {
 			m_sprite.Draw(g_camera2D.GetViewMatrix(), g_camera2D.GetProjectionMatrix(), m_w);
-		}
-		else {
-			m_sprite.Draw(g_camera3D.GetViewMatrix(), g_camera3D.GetProjectionMatrix(), m_w);
 		}
 	}
 
