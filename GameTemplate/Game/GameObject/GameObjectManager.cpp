@@ -119,7 +119,7 @@ namespace myEngine {
 				//みつけたら
 				if (it != goExecList.end()) {
 					//削除リストから除外された。
-					delete (*it);
+					delete (*it); 
 				}
 				//消す
 				goExecList.erase(it);

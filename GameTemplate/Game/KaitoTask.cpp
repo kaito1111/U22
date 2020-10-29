@@ -53,9 +53,13 @@ void KaitoTask::Update()
 {
 }
 
+void KaitoTask::OnDestroy()
+{
+	DeleteGO(m_GameCamera);
+	DeleteGO(m_Player[0]);
+	DeleteGO(m_Player[1]);
+}
+
 KaitoTask::~KaitoTask()
 {
-	//DeleteGO(m_GameCamera);
-	//DeleteGO(m_Player[0]);
-	//DeleteGO(m_Player[1]);
 }

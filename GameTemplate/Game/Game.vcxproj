@@ -195,6 +195,7 @@
     <ClCompile Include="stageObject\stageObjectShuriken.cpp" />
     <ClCompile Include="stageObject\stageObjectStopFloor.cpp" />
     <ClCompile Include="stageObject\stageObjectYokoKonbou.cpp" />
+    <ClCompile Include="StageSelectSprite.cpp" />
     <ClCompile Include="StageSelect\StageSelect.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -312,6 +313,7 @@
     <ClInclude Include="stageObject\stageObjectShuriken.h" />
     <ClInclude Include="stageObject\stageObjectStopFloor.h" />
     <ClInclude Include="stageObject\stageObjectYokoKonbou.h" />
+    <ClInclude Include="StageSelectSprite.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="GPUBuffer\StructuredBuffer.h" />
     <ClInclude Include="system\system.h" />

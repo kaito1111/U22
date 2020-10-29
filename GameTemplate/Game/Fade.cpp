@@ -70,4 +70,7 @@ void Fade::Update()
 	m_LoadDown->SetPosition(LoadDownPos);
 	CVector3 SNDiff = m_SPos - m_NPos;
 	m_DiffLengh = SNDiff.Length();
+	if (m_DiffLengh > 2000.0f) {
+		DeleteGO(this);
+	}
 }

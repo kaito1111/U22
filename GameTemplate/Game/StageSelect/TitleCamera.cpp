@@ -12,7 +12,7 @@ TitleCamera::~TitleCamera()
 
 bool TitleCamera::Start()
 {
-	m_Target.y += 100.0f;
+	m_Target.y += 50.0f;
 	m_Pos = m_Target;
 	m_Pos.z += 500.0f;
 	//ƒJƒƒ‰‚ğ‰Šú‰»B
@@ -36,7 +36,7 @@ void TitleCamera::Update()
 
 void TitleCamera::Move()
 {
-	m_Target.y = 100.0f;
+	m_Target.y += 100.0f;
 	m_Pos = m_Target;
 	m_Pos.z += 500.0f;
 }

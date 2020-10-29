@@ -41,21 +41,21 @@ void Title::Update()
 		DeleteTitle = true;
 		swprintf(m_text, L"ゲームを開始します。");
 	}
-	if (GetAsyncKeyState('Y')) {
-		NewGO<StageSelect>(0, "stageselect");
-		DeleteGO(this);
-	}
-	//サンプルステージ
-	if (GetAsyncKeyState('H')) {
-		NewGO<SampleScene>(0, "SampleScene");
-		DeleteGO(this);
-	}
+	//if (GetAsyncKeyState('Y')) {
+	//	NewGO<StageSelect>(0, "stageselect");
+	//	DeleteGO(this);
+	//}
+	////サンプルステージ
+	//if (GetAsyncKeyState('H')) {
+	//	NewGO<SampleScene>(0, "SampleScene");
+	//	DeleteGO(this);
+	//}
 	if (DeleteTitle) {
 		if (m_fade->GetLengh() < 700.0f) {
 			m_fontRender->SetColor({0.0f, 0.0f, 0.0f, 0.0f});
 		}
 		if (m_fade->GetLengh() < 210.0f) {
-			NewGO<Game>(0, "game");
+			StageSelect* stargeSelect = NewGO<StageSelect>(0, "stageselect");
 			DeleteGO(this);
 		}
 	}

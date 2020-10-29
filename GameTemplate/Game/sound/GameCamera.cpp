@@ -54,11 +54,11 @@ void GameCamera::Update()
 	}*/
 
 	//ƒvƒŒƒCƒ„[‚ğE‚·
-	/*for (int i = 0; i < m_PlayerNum; i++) {
+	for (int i = 0; i < m_PlayerNum; i++) {
 		if (m_Player[i]->GetPosition().y < Target.y - 500.0f) {
-			m_Player[i]->SIBOU();
+			m_Player[i]->SetIsSi();
 		}
-	}*/
+	}
 
 	if (Target.x > 300.0f) {
 		Target.x = 300.0f;

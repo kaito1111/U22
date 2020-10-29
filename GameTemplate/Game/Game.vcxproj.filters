@@ -131,6 +131,7 @@
     <ClCompile Include="Manual.cpp" />
     <ClCompile Include="StageSelect\StageSelect.cpp" />
     <ClCompile Include="TitlePlayer.cpp" />
+    <ClCompile Include="StageSelectSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Assets\modelData\aStopFloor.fbx" />
@@ -283,6 +284,7 @@
     <ClInclude Include="physics\BoxCollider.h" />
     <ClInclude Include="Manual.h" />
     <ClInclude Include="TitlePlayer.h" />
+    <ClInclude Include="StageSelectSprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc" />

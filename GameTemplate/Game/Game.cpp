@@ -10,7 +10,6 @@
 #include "StageSelect/StageSelect.h"
 #include "CheckPointgenerator.h"
 #include "Player.h"
-StageSelect;
 Game::Game()
 {
 	//サウンドの初期化
@@ -28,6 +27,7 @@ Game::Game()
 
 Game::~Game()
 {
+	DeleteGO(m_task);//1回
 }
 
 bool Game::Start()
@@ -37,18 +37,18 @@ bool Game::Start()
 
 	//2番目
 	//StageSelect* stage = NewGO<StageSelect>(0, "stageselect");
-	Stage* stage = NewGO<Stage>(0, "stage");
-	stage->setStageNum(StageNum);
+	m_Stage = NewGO<Stage>(0, "stage");
+	m_Stage->setStageNum(StageNum);
 	//NewGO<DirectionLight>(3, "light");
 	effect = NewGO<Effect>(1);		
-	CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
-	PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
-	if (Continue) {
-		GamePlayer* pl1 = FindGO<GamePlayer>("player1");
-		GamePlayer* pl2 = FindGO<GamePlayer>("player2");
-		pl1->SetPosition(player1Pos);
-		pl2->SetPosition(player2Pos);
-	}
+	//CheckPointgenerator* PointGenerator = NewGO< CheckPointgenerator>(0, "checkpointgenerator");
+	//PointGenerator->Load(L"Assets/level/Corse_Level_1.tkl");
+	//if (Continue) {
+	//	GamePlayer* pl1 = FindGO<GamePlayer>("player1");
+	//	GamePlayer* pl2 = FindGO<GamePlayer>("player2");
+	//	pl1->SetPosition(player1Pos);
+	//	pl2->SetPosition(player2Pos);
+	//}
 	return true;
 }
 
@@ -64,16 +64,7 @@ void Game::Update()
 
 void Game::OnDestroy()
 {
-	//解放
-	if (m_frameBufferDepthStencilView != nullptr) {
-		m_frameBufferDepthStencilView->Release();
-		m_frameBufferDepthStencilView = nullptr;
-	}
-	if (m_frameBufferRenderTargetView != nullptr) {
-		m_frameBufferRenderTargetView->Release();
-	}
-	SavePlayerData();//1回入った
-	DeleteGO(m_task);//1回
+	DeleteGO(m_Stage);
 }
 
 //いろいろなサンプル

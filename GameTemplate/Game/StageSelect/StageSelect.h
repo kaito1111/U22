@@ -1,13 +1,18 @@
 #pragma once
-class stageObjectJenerator;
-class TitleStage;
 class TitleCamera;
-class Game;
-class Stage;
 class GamePlayer;
+class Fade;
+class StageSelectSprite;
 
 class StageSelect : public IGameObject
 {
+	enum Dir {//方向
+		L,//Left　左
+		R,//Right 右
+		U,//Up    上
+		D,//Down  下
+		num
+	};
 public:
 	StageSelect();
 	~StageSelect();
@@ -15,29 +20,19 @@ public:
 	void Update();
 
 private:
-	void stageSelect();
-	void PlayerMove();
 	void SetCameraTarget();
-	void SelectSprite();
 
 	TitleCamera* m_TitleCamera = nullptr;
 
-	SpriteRender* m_Stage1Sprite = nullptr;             //スプライト
-	SpriteRender* m_Stage2Sprite = nullptr;
-	CVector3 m_Stage1SpritePos = { 0.0f,100.0f ,0.0f };              //スプライトの座標。
-	CVector3 m_Stage2SpritePos = { 0.0f,0.0f ,0.0f };
 
 	SkinModelRender* m_StageModel = nullptr;
 	PhysicsStaticObject m_staticObj;
 
-	SpriteRender* m_SelectSprite = nullptr;
-	CVector3 m_SelectSpritePos = CVector3::Zero();
-	float m_SelectLen = 20.0f;
+	GamePlayer* m_Player[2] = {};
 
-	SkinModelRender* m_PlayerModel = nullptr;
-	CVector3 m_PlayerPos = CVector3::Zero();
-	CQuaternion m_PlayerRot = CQuaternion::Identity();
-	float m_angle = 0.0f;
-	bool m_Right = true;
-	CharacterController m_CharaCon;
+	Fade* m_fade = nullptr;
+	int StageNo = 0;
+
+	StageSelectSprite* m_Sprite = nullptr;
+	float m_SelectLen = 300.0f;
 };

@@ -97,9 +97,9 @@ namespace myEngine {
 		/// </summary>
 		//void PreRender();
 		/// <summary>
-		/// ÅŒã‚ÉŒÄ‚Î‚ê‚éDrawˆ—
+		/// Draw
 		/// </summary>
-		//void Draw();
+		void Draw();
 		/// <summary>
 		/// ‚Ü‚¾À‘•‚³‚ê‚Ä‚È‚¢Drawˆ—
 		/// </summary>

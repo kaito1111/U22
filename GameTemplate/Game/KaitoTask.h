@@ -20,7 +20,7 @@ public:
 	void PreRender();
 	bool Start();
 	void Update();
-	
+	void OnDestroy()override;
 private:
 	//TitleStage*7
 	GameCamera* m_GameCamera = nullptr;

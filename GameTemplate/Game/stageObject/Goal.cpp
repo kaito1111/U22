@@ -50,8 +50,8 @@ void Goal::Update()
 				NewGO<GameLoop>(1, "gameloop");
 			}
 			else {
-				m_FinishFont = NewGO<CFontRender>(0);
-				m_FinishFont->SetText(L"Finish");
+				m_ClearSprite->SetW(1.0f);
+				NewGO<GameLoop>(1, "gameloop");
 			}
 			m_Se.Play();
 		}
