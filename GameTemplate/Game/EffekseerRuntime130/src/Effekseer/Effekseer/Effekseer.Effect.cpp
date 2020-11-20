@@ -278,7 +278,7 @@ float EffectImplemented::GetMaginification() const
 //----------------------------------------------------------------------------------
 bool EffectImplemented::Load( void* pData, int size, float mag, const EFK_CHAR* materialPath )
 {
-	EffekseerPrintDebug("** Create : Effect\n");
+	////EffekseerPrintDebug("** Create : Effect\n");
 
 	uint8_t* pos = (uint8_t*)pData;
 

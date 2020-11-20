@@ -184,7 +184,7 @@ void ServerImplemented::AcceptAsync( void* data )
 		/* 接続追加 */
 		server->AddClient( new InternalClient( socket_, server ) );
 
-		EffekseerPrintDebug("Server : AcceptClient\n");
+		//EffekseerPrintDebug("Server : AcceptClient\n");
 
 	}
 }
@@ -240,7 +240,7 @@ bool ServerImplemented::Start( uint16_t port )
 	m_port = port;
 	m_thread.Create( AcceptAsync, this );
 
-	EffekseerPrintDebug("Server : Start\n");
+	//EffekseerPrintDebug("Server : Start\n");
 
 	return true;
 }

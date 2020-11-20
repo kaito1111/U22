@@ -28,7 +28,7 @@ namespace Effekseer
 	memcpy( &type, pos, sizeof(int) );
 	pos += sizeof(int);
 	assert( type == GetType() );
-	EffekseerPrintDebug("Renderer : Model\n");
+	////EffekseerPrintDebug("Renderer : Model\n");
 
 	int32_t size = 0;
 
@@ -46,7 +46,7 @@ namespace Effekseer
 
 	memcpy( &NormalTextureIndex, pos, sizeof(int) );
 	pos += sizeof(int);
-	EffekseerPrintDebug("NormalTextureIndex : %d\n", NormalTextureIndex );
+	////EffekseerPrintDebug("NormalTextureIndex : %d\n", NormalTextureIndex );
 
 	int32_t lighting;
 	memcpy( &lighting, pos, sizeof(int) );

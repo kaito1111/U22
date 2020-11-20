@@ -122,7 +122,7 @@ void EffectNodeImplemented::LoadParameter(unsigned char*& pos, EffectNode* paren
 				TranslationFixed.Position.Z == 0.0f )
 			{
 				TranslationType = ParameterTranslationType_None;
-				EffekseerPrintDebug("LocationType Change None\n");
+				////EffekseerPrintDebug("LocationType Change None\n");
 			}
 		}
 		else if( TranslationType == ParameterTranslationType_PVA )
@@ -224,7 +224,7 @@ void EffectNodeImplemented::LoadParameter(unsigned char*& pos, EffectNode* paren
 
 		memcpy( &RotationType, pos, sizeof(int) );
 		pos += sizeof(int);
-		EffekseerPrintDebug("RotationType %d\n", RotationType);
+		////EffekseerPrintDebug("RotationType %d\n", RotationType);
 		if( RotationType == ParameterRotationType_Fixed )
 		{
 			memcpy( &size, pos, sizeof(int) );
@@ -239,7 +239,7 @@ void EffectNodeImplemented::LoadParameter(unsigned char*& pos, EffectNode* paren
 				RotationFixed.Position.Z == 0.0f )
 			{
 				RotationType = ParameterRotationType_None;
-				EffekseerPrintDebug("RotationType Change None\n");
+				////EffekseerPrintDebug("RotationType Change None\n");
 			}
 		}
 		else if( RotationType == ParameterRotationType_PVA )
@@ -285,7 +285,7 @@ void EffectNodeImplemented::LoadParameter(unsigned char*& pos, EffectNode* paren
 
 		memcpy( &ScalingType, pos, sizeof(int) );
 		pos += sizeof(int);
-		EffekseerPrintDebug("ScalingType %d\n", ScalingType);
+		////EffekseerPrintDebug("ScalingType %d\n", ScalingType);
 		if( ScalingType == ParameterScalingType_Fixed )
 		{
 			memcpy( &size, pos, sizeof(int) );
@@ -300,7 +300,7 @@ void EffectNodeImplemented::LoadParameter(unsigned char*& pos, EffectNode* paren
 				ScalingFixed.Position.Z == 1.0f)
 			{
 				ScalingType = ParameterScalingType_None;
-				EffekseerPrintDebug("ScalingType Change None\n");
+				////EffekseerPrintDebug("ScalingType Change None\n");
 			}
 		}
 		else if( ScalingType == ParameterScalingType_PVA )
@@ -507,7 +507,7 @@ void EffectNodeImplemented::LoadParameter(unsigned char*& pos, EffectNode* paren
 	int nodeCount = 0;
 	memcpy( &nodeCount, pos, sizeof(int) );
 	pos += sizeof( int );
-	EffekseerPrintDebug("ChildrenCount : %d\n", nodeCount );
+	////EffekseerPrintDebug("ChildrenCount : %d\n", nodeCount );
 	m_Nodes.resize( nodeCount );
 	for( size_t i = 0; i < m_Nodes.size(); i++ )
 	{
@@ -605,7 +605,7 @@ void EffectNodeImplemented::LoadRendererParameter(unsigned char*& pos, Setting* 
 	memcpy( &type, pos, sizeof(int) );
 	pos += sizeof(int);
 	assert( type == GetType() );
-	EffekseerPrintDebug("Renderer : None\n");
+	////EffekseerPrintDebug("Renderer : None\n");
 }
 
 //----------------------------------------------------------------------------------
@@ -731,37 +731,37 @@ EffectNodeImplemented* EffectNodeImplemented::Create(Effect* effect, EffectNode*
 
 	if( node_type == EFFECT_NODE_TYPE_ROOT )
 	{
-		EffekseerPrintDebug("* Create : EffectNodeRoot\n");
+		////EffekseerPrintDebug("* Create : EffectNodeRoot\n");
 		effectnode = new EffectNodeRoot( effect, pos );
 	}
 	else if( node_type == EFFECT_NODE_TYPE_NONE )
 	{
-		EffekseerPrintDebug("* Create : EffectNodeNone\n");
+		////EffekseerPrintDebug("* Create : EffectNodeNone\n");
 		effectnode = new EffectNodeImplemented(effect, pos);
 	}
 	else if( node_type == EFFECT_NODE_TYPE_SPRITE )
 	{
-		EffekseerPrintDebug("* Create : EffectNodeSprite\n");
+		////EffekseerPrintDebug("* Create : EffectNodeSprite\n");
 		effectnode = new EffectNodeSprite( effect, pos );
 	}
 	else if( node_type == EFFECT_NODE_TYPE_RIBBON )
 	{
-		EffekseerPrintDebug("* Create : EffectNodeRibbon\n");
+		////EffekseerPrintDebug("* Create : EffectNodeRibbon\n");
 		effectnode = new EffectNodeRibbon( effect, pos );
 	}
 	else if( node_type == EFFECT_NODE_TYPE_RING )
 	{
-		EffekseerPrintDebug("* Create : EffectNodeRing\n");
+		////EffekseerPrintDebug("* Create : EffectNodeRing\n");
 		effectnode = new EffectNodeRing( effect, pos );
 	}
 	else if( node_type == EFFECT_NODE_TYPE_MODEL )
 	{
-		EffekseerPrintDebug("* Create : EffectNodeModel\n");
+		////EffekseerPrintDebug("* Create : EffectNodeModel\n");
 		effectnode = new EffectNodeModel( effect, pos );
 	}
 	else if( node_type == EFFECT_NODE_TYPE_TRACK )
 	{
-		EffekseerPrintDebug("* Create : EffectNodeTrack\n");
+		////EffekseerPrintDebug("* Create : EffectNodeTrack\n");
 		effectnode = new EffectNodeTrack( effect, pos );
 	}
 	else

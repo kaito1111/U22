@@ -43,6 +43,7 @@ float CalcShadowPercent(Texture2D<float4> tex, float2 uv, float depth)
 {
 	//シャドウマップの深度情報
 	float shadow_val = tex.Sample(g_sampler, uv).r;
+	//return shadow_val;
 	//深度テスト
 	if (depth > shadow_val.r + 0.01f) {
 		//手前にあるのでシャドウを落とす。
@@ -250,6 +251,7 @@ float4 PSMain( PSInput In ) : SV_Target0
 		//影が落ちているのでライトの明かりを弱める。
 		lig *= 0.5f;
 	}
+	//lig *= f;
 
 	float4 finalColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 	finalColor.xyz = albedoColor.xyz * lig;

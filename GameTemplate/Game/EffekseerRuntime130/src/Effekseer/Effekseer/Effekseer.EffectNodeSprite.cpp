@@ -31,7 +31,7 @@ namespace Effekseer
 	memcpy(&type, pos, sizeof(int));
 	pos += sizeof(int);
 	assert(type == GetType());
-	EffekseerPrintDebug("Renderer : Sprite\n");
+	//EffekseerPrintDebug("Renderer : Sprite\n");
 
 	auto ef = (EffectImplemented*) m_effect;
 	int32_t size = 0;
@@ -54,11 +54,11 @@ namespace Effekseer
 	pos += sizeof(int);
 
 	SpriteAllColor.load(pos, m_effect->GetVersion());
-	EffekseerPrintDebug("SpriteColorAllType : %d\n", SpriteAllColor.type);
+	//EffekseerPrintDebug("SpriteColorAllType : %d\n", SpriteAllColor.type);
 
 	memcpy(&SpriteColor.type, pos, sizeof(int));
 	pos += sizeof(int);
-	EffekseerPrintDebug("SpriteColorType : %d\n", SpriteColor.type);
+	//EffekseerPrintDebug("SpriteColorType : %d\n", SpriteColor.type);
 
 	if (SpriteColor.type == SpriteColor.Default)
 	{
@@ -71,7 +71,7 @@ namespace Effekseer
 
 	memcpy(&SpritePosition.type, pos, sizeof(int));
 	pos += sizeof(int);
-	EffekseerPrintDebug("SpritePosition : %d\n", SpritePosition.type);
+	//EffekseerPrintDebug("SpritePosition : %d\n", SpritePosition.type);
 
 	if (SpritePosition.type == SpritePosition.Default)
 	{
