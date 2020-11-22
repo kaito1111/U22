@@ -371,7 +371,7 @@
     <MeshContentTask Include="Assets\modelData\YokoKonbou.fbx" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\sprite\Yellow.png" />
+    <ImageContentTask Include="Assets\sprite\Yellow.png" />
     <ImageContentTask Include="Assets\sprite\初めからor続きから.png" />
     <ImageContentTask Include="Assets\sprite\LoadN.png" />
     <ImageContentTask Include="Assets\sprite\LoadS.png" />
@@ -383,8 +383,8 @@
     <ImageContentTask Include="Assets\sprite\del.png" />
     <ImageContentTask Include="Assets\sprite\jump.png" />
     <ImageContentTask Include="Assets\sprite\N.png" />
-    <Image Include="Assets\sprite\Corse1_image.png" />
-    <Image Include="Assets\sprite\Corse2_image.png" />
+    <ImageContentTask Include="Assets\sprite\Corse1_image.png" />
+    <ImageContentTask Include="Assets\sprite\Corse2_image.png" />
     <Image Include="Assets\sprite\ProvisionalTitle.png" />
     <ImageContentTask Include="Assets\sprite\S.png" />
     <Image Include="Assets\sprite\stage1.png" />
