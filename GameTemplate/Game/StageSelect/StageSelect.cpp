@@ -44,14 +44,14 @@ bool StageSelect::Start()
 void StageSelect::Update()
 {
 	SetCameraTarget();
-	if (g_Pad[0].IsPress(enButtonB)) {
+	if (g_Pad[m_Player[0]->GetPadNo()].IsPress(enButtonB)) {
 		//‹——£”äŠr‚µ‚Ä‘I‘ð‚µ‚Ä‚¢‚éŠG‚ðo‚·
 		CVector3 diff1 = m_Player[0]->GetPosition() - m_Sprite->GetSpritePos1();
 		CVector3 diff2 = m_Player[0]->GetPosition() - m_Sprite->GetSpritePos2();
 		if (m_fade == nullptr) {
 			if (diff1.Length() < m_SelectLen) {
 				m_fade = NewGO<Fade>(0);
-				StageNo = 3;
+				StageNo = 1;
 			}
 			else if (diff2.Length() < m_SelectLen) {
 				m_fade = NewGO<Fade>(0);

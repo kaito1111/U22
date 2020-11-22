@@ -83,13 +83,13 @@ public:
 	void SetIsSi() {
 		m_IsSi = true;
 	}
+	int GetPadNo() const;//コントローラーの番号を返す
 private:
 	void ReSpown();//リスポーン地点で復活する
 	bool Start()override;//すたーと
 	void Update()override;//あぷでーど
 	void Draw()override;//どろー
 	void OnDestroy()override;
-	int GetPadNo() const;//コントローラーの番号を返す
 	SkinModel m_Model;										//スキンモデル。
 	SkinModel m_FrontModel;									//スキンモデル。
 	SkinModel m_BuckModel;									//スキンモデル。
