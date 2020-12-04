@@ -26,7 +26,7 @@ void KaitoTask::PreRender()
 bool KaitoTask::Start()
 {
 	//NewGO<TitleStage>(5, "TitleStage");
-	if (LBLobj()->GetPlayerNum() == 1) {
+	if (LBLobj()->GetPlayerNum() == 0) {
 		//Update順番の調整のためにNewGOのタイミングを調整。
 		//必ずp1からUpdateされるように。
 		m_Player[0] = NewGO<GamePlayer>(1, "player1");
