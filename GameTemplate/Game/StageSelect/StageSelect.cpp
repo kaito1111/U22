@@ -51,7 +51,7 @@ void StageSelect::Update()
 		if (m_fade == nullptr) {
 			if (diff1.Length() < m_SelectLen) {
 				m_fade = NewGO<Fade>(0);
-				StageNo = 1;
+				StageNo = 0;
 			}
 			else if (diff2.Length() < m_SelectLen) {
 				m_fade = NewGO<Fade>(0);
