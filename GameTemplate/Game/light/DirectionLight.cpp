@@ -53,10 +53,10 @@ void DirectionLight::InitDirectionLight()
 	m_dirLight.direction[3] = { 0.0f, 0.0f, -1.0f,1.0f };
 
 	//ライトのカラー
-	m_dirLight.color[0] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	m_dirLight.color[1] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	m_dirLight.color[2] = { 1.0f, 1.0f, 1.0f, 1.0f };
-	m_dirLight.color[3] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	m_dirLight.color[0] = { 1.1f, 1.1f, 1.1f, 1.0f };
+	m_dirLight.color[1] = { 1.1f, 1.1f, 1.1f, 1.0f };
+	m_dirLight.color[2] = { 1.1f, 1.1f, 1.1f, 1.0f };
+	m_dirLight.color[3] = { 1.1f, 1.1f, 1.1f, 1.0f };
 	//0.0f, 0.0f, 0.0f, 0.0f
 
 	m_dirLight.eyePos = CVector3::Zero();

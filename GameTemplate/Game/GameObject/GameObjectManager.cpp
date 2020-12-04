@@ -90,8 +90,11 @@ namespace myEngine {
 			Draw();
 			//エフェクト描画
 			EffectEngineObj().Render();
-			//ポストレンダーターゲットに変える
+			//ポストレンダーターゲットに変えて描画。
 			Engine().GetGraphicsEngine().PostRenderTarget();
+			m_postEffect.Update();
+			//ポストエフェクト。
+			m_postEffect.Draw();
 			//ポストレンダー
 			PostRender();
 		}

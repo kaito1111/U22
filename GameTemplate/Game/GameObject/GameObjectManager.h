@@ -4,6 +4,7 @@
 #pragma once
 #include "IGameObject.h"
 #include "util/Util.h"
+#include "PostEffect/PostEffect.h"
 
 namespace myEngine {
 	typedef unsigned char	GameObjectPrio;
@@ -200,7 +201,7 @@ namespace myEngine {
 		std::vector<GameObjectList>		m_gameObjectListArray;				//ゲームオブジェクトの優先度付きリスト	こっちは可変長配列じゃないから初期化してね	
 		std::vector<GameObjectList>		m_deleteObjectArray[2];				//削除するオブジェクトのリスト	削除処理中にDeleteGOがよばれる可能性があるからダブルバッファ化
 		int								m_currentDeleteObjectBufferNo = 0;	//削除中のバッファー番号
-
+		PostEffect						m_postEffect;						//ポストエフェクト。
 	};
 	/*
 		いちいちgameObjectManager().NewGameObject...みたいなの書くの面倒だから
